@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="../../../src/ui/core/Schema.xsd"
+>
+    <ESection id="SECTION" title="section">
+        <EText id="TEXT">Footer</EText>
+    </ESection>
+</Body>

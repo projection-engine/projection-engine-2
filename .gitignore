@@ -1,0 +1,21 @@
+# Ignore build output
+build/
+.vs/
+out/
+CMakeFiles/
+CMakeCache.txt
+CMakeScripts/
+cmake-build-debug-visual-studio
+/cmake-build-debug-visual-studio
+Makefile
+CMakeTmp/
+compile_commands.json
+vcpkg_installed/
+*.vcxproj
+*.vcxproj.filters
+*.log
+/x64
+x64
+*.sln
+
+cmake-build-debug
