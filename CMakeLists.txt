@@ -10,6 +10,7 @@ find_package(Catch2 REQUIRED)
 find_package(pugixml CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
 find_package(EnTT CONFIG REQUIRED)
+find_package(unofficial-webview2 CONFIG REQUIRED)
 
 set(COMMON_LIBRARIES
         glad::glad
@@ -21,6 +22,7 @@ set(COMMON_LIBRARIES
         spdlog::spdlog
         Catch2::Catch2WithMain
         EnTT::EnTT
+        unofficial::webview2::webview2
 )
 
 set(FILE_PATHS

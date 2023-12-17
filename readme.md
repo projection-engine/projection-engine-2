@@ -7,10 +7,10 @@
    > .\bootstrap-vcpkg.bat
    > vcpkg integrate install
 2. Setup toolchain CLion 
-   1. File -> Settings -> Build, Execution, Deployment -> Toolchains
-   2. Create a new toolchain using 
+   1. File -> Settings -> Build, Execution, Deployment -> CMake
+   2. Create a new configuration using 
       1. Build type: `Debug`
-      2. Toolchain: `Visual Studio`
+      2. Toolchain: `Visual Studio` (You need to create this toolchain first)
       3. Generator: `NMake Makefiles`
       4. CMake options: `-DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake`
 3. Go to `CMakeLists.txt` and click the debug button on the side of the first line
