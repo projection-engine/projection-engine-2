@@ -101,7 +101,7 @@ export default class GPUAPI {
 		})
 	}
 
-	static copyTexture(target: Framebuffer, source: Framebuffer, type = GPU.context.DEPTH_BUFFER_BIT, blitType = GPU.context.NEAREST) {
+	static copyTexture(target: Framebuffer, source: Framebuffer, type: number = GPU.context.DEPTH_BUFFER_BIT, blitType: number = GPU.context.NEAREST) {
 		const context = GPU.context
 		context.bindFramebuffer(context.READ_FRAMEBUFFER, source.FBO)
 		context.bindFramebuffer(context.DRAW_FRAMEBUFFER, target.FBO)

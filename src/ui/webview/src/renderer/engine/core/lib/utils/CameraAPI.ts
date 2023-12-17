@@ -14,23 +14,22 @@ import CameraResources from "../../resource-libs/CameraResources"
 import CameraSerialization from "../../static/CameraSerialization"
 import CameraNotificationDecoder from "../CameraNotificationDecoder"
 import Renderer from "../../Renderer"
+import cameraWorker from "../../workers/camera-worker";
 
 
 const TEMPLATE_CAMERA = new CameraComponent()
 export default class CameraAPI extends CameraResources {
 	static #dynamicAspectRatio = false
 	static metadata = new CameraEffects()
-	static #worker: Worker
 	static trackingEntity
 	static #initialized = false
 	static initialize() {
 		if (CameraAPI.#initialized)
 			return
 		CameraAPI.#initialized = true
-		CameraAPI.#worker = new Worker("./camera-worker.js")
 		CameraAPI.projectionBuffer[4] = 10
 		CameraNotificationDecoder.initialize(CameraAPI.notificationBuffers)
-		CameraAPI.#worker.postMessage([
+		cameraWorker([
 			CameraAPI.notificationBuffers,
 			CameraAPI.position,
 			CameraAPI.viewMatrix,
@@ -54,7 +53,7 @@ export default class CameraAPI extends CameraResources {
 
 	static syncThreads() {
 		CameraNotificationDecoder.elapsed = Renderer.elapsed
-		CameraAPI.#worker.postMessage(0)
+		cameraWorker()
 	}
 
 	static updateUBOs() {

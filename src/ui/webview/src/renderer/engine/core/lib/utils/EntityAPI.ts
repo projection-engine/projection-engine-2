@@ -56,7 +56,7 @@ export default class EntityAPI {
 			entity.parentID = undefined
 		}
 		Engine.entities.addBlock(entities, e => e.id)
-		EntityWorkerAPI.registerBlock(entities)
+		// EntityWorkerAPI.registerBlock(entities)
 		ResourceEntityMapper.addBlock(entities)
 	}
 

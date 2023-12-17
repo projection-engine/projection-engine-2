@@ -165,8 +165,8 @@ class CameraWorker {
 	}
 }
 
-self.onmessage = (event) => {
+export default function cameraWorker(event?: MutableObject) {
 	if (!CameraWorker.initialized)
-		CameraWorker.initialize(<Float32Array[]>event.data)
+		CameraWorker.initialize(<Float32Array[]>event)
 	CameraWorker.execute()
 }

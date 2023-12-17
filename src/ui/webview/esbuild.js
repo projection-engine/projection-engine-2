@@ -39,23 +39,29 @@ const frontend = (fileName, outputName) => ({
 
 start().catch(console.error)
 
-async function start(){
+async function start() {
     const contexts = []
     contexts.push(esbuild.context(worker("src/renderer/engine/core/workers/entity-worker.ts", "build/entity-worker.js")))
     contexts.push(esbuild.context(worker("src/renderer/engine/core/workers/camera-worker.ts", "build/camera-worker.js")))
     contexts.push(esbuild.context(worker("src/renderer/engine/core/workers/terrain-worker.ts", "build/terrain-worker.js")))
     contexts.push(esbuild.context(worker("src/renderer/engine/core/workers/image-worker.ts", "build/image-worker.js")))
     contexts.push(esbuild.context(frontend("/editor/editor-window.ts", "editor-window")))
-    contexts.push(esbuild.context(frontend("/projects/project-window.ts", "project-window")))
-    contexts.push(esbuild.context(frontend("/preferences/preferences-window.ts", "preferences-window")))
+    contexts.push(esbuild.context({
+        ...frontend("/projects/project-window.ts", "project-window"),
+        plugins: [
+            sveltePlugin({
+                preprocess: sveltePreprocess({typescript: {tsconfigFile: "tsconfig.json"}}),
+                filterWarnings: () => false
+            }),
+            copy({assets: [{from: ["./src/static/*"], to: ["./"]}]})]
+    }))
+
 
     const resolvedContexts = await Promise.all(contexts)
-    if (process.argv[2] === "watch")
-        resolvedContexts.forEach((context, i) => {
-            console.log("WATCHING CONTEXT " + i)
-            context.watch()
-        })
-    else
-        resolvedContexts.forEach(context => context.dispose())
+    resolvedContexts.forEach((context, i) => {
+        console.log("CONTEXT " + i)
+        context.watch()
+        context.dispose()
+    })
 
 }

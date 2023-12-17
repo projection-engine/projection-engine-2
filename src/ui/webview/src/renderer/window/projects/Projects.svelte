@@ -7,7 +7,6 @@
     import refreshProjects from "./utils/refresh-projects"
 
     import ToastNotificationSystem from "../shared/components/alert/ToastNotificationSystem"
-    import FrameWrapper from "../shared/components/frame/FrameWrapper.svelte"
     import ElectronResources from "../shared/lib/ElectronResources"
     import IPCRoutes from "../../../shared/enums/IPCRoutes"
     import FileTypes from "../../../shared/enums/FileTypes"
@@ -71,8 +70,6 @@
     	projectsToShow = projectsToShow
     }
 </script>
-
-<FrameWrapper/>
 <div class="wrapper">
     <Header
             defaultVersion={defaultVersion}

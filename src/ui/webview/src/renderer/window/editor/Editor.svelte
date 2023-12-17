@@ -8,7 +8,6 @@
     import FileSystemUtil from "../shared/FileSystemUtil"
     import LevelService from "./services/engine/LevelService"
     import HotKeysController from "../shared/lib/HotKeysController"
-    import WindowFrame from "./components/window-frame/WindowFrame.svelte"
     import Canvas from "./views/Canvas.svelte"
     import ToastNotificationSystem from "../shared/components/alert/ToastNotificationSystem"
     import ElectronResources from "../shared/lib/ElectronResources"
@@ -53,7 +52,6 @@
     <Canvas initializeEditor={() => isContextInitialized = true}/>
 {/if}
 {#if isMetadataReady && isContextInitialized && view !== undefined}
-    <WindowFrame/>
     <div class="wrapper" style={`--cube-size: ${cameraGizmoSize}px;`}>
         <div class="middle">
             <ViewsContainer

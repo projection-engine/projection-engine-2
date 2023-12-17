@@ -47,8 +47,8 @@ export default class Movable {
 	matrix = <Float32Array>ArrayBufferAPI.allocateMatrix(4, true)
 	baseTransformationMatrix = <Float32Array>ArrayBufferAPI.allocateMatrix(4, true)
 	previousModelMatrix = <Float32Array>ArrayBufferAPI.allocateMatrix(4, true)
-	__changedBuffer = new Uint8Array(new SharedArrayBuffer(3))
-	__cullingMetadata = new Float32Array(new SharedArrayBuffer(24))
+	__changedBuffer = new Uint8Array(new ArrayBuffer(3))
+	__cullingMetadata = new Float32Array(new ArrayBuffer(24))
 	lockedRotation = false
 	lockedTranslation = false
 	lockedScaling = false

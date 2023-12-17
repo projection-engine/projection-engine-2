@@ -44,7 +44,7 @@ export default class Entity extends ComponentResources {
 
     constructor(id?: string, isCollection?: boolean) {
     	super()
-    	this.#id = id ?? this.#id
+    	this.#id = (id ?? this.#id) as `${string}-${string}-${string}-${string}-${string}`
     	this.#isCollection = isCollection ?? false
 
     }

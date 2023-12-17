@@ -1,5 +1,4 @@
 <script>
-    import FrameWrapper from "../shared/components/frame/FrameWrapper.svelte"
     import {onMount} from "svelte"
     import ResizableBar from "../shared/components/resizable/ResizableBar.svelte"
     import ContentWrapper from "./components/content/ContentWrapper.svelte"
@@ -12,7 +11,6 @@
     onMount(() => StoreIPCListener.get())
 </script>
 
-<FrameWrapper noChangeTracking={true}/>
 
 <div class="wrapper">
     <div class="tabs">

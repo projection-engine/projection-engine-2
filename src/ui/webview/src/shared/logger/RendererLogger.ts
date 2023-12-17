@@ -27,13 +27,6 @@ export default class RendererLogger {
 		console.warn = RendererLogger.warn
 
 		RendererLogger.#isInitialized = true
-		const {ipcRenderer} = window.require("electron")
-		RendererLogger.#afterExecution = (messages, type) => {
-			RendererLogger.#originalConsoleMethods[type](...messages)
-			if (RendererLogger.#level !== LoggerTypes.SILENT) {
-				ipcRenderer.send("LOGGER", {message: messages, type, loggerLevel: RendererLogger.#level})
-			}
-		}
 	}
 
 	static log(...messages) {
