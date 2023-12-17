@@ -1,12 +1,21 @@
-node_modules
-/node_modules
+# Ignore build output
+build/
+.vs/
+out/
+CMakeFiles/
+CMakeCache.txt
+CMakeScripts/
+cmake-build-debug-visual-studio
+/cmake-build-debug-visual-studio
+Makefile
+CMakeTmp/
+compile_commands.json
+vcpkg_installed/
+*.vcxproj
+*.vcxproj.filters
+*.log
+/x64
+x64
+*.sln
 
-build
-/build
-
-/out
-out
-
-.idea
-yarn.lock
-yarn.error
+cmake-build-debug
