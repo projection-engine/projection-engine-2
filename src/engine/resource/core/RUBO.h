@@ -1,5 +1,5 @@
-#ifndef CATALYST_RUBO_H
-#define CATALYST_RUBO_H
+#ifndef PROJECTION_RUBO_H
+#define PROJECTION_RUBO_H
 
 #include "IResource.h"
 #include "../dto/UBODataDTO.h"

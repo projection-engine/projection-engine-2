@@ -1,5 +1,5 @@
-#ifndef CATALYST_IRESOURCE_H
-#define CATALYST_IRESOURCE_H
+#ifndef PROJECTION_IRESOURCE_H
+#define PROJECTION_IRESOURCE_H
 
 #include <string>
 #include "../ResourceType.h"

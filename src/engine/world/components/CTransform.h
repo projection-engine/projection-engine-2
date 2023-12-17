@@ -1,5 +1,5 @@
-#ifndef CATALYST_CTRANSFORM_H
-#define CATALYST_CTRANSFORM_H
+#ifndef PROJECTION_CTRANSFORM_H
+#define PROJECTION_CTRANSFORM_H
 
 #include "glm/glm.hpp"
 #include "IComponent.h"

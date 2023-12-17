@@ -1,5 +1,5 @@
-#ifndef CATALYST_IENTITY_H
-#define CATALYST_IENTITY_H
+#ifndef PROJECTION_IENTITY_H
+#define PROJECTION_IENTITY_H
 
 #include <string>
 #include "entt/entity/entity.hpp"

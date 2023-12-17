@@ -1,5 +1,5 @@
-#ifndef CATALYST_RUNTIMESYSTEM_H
-#define CATALYST_RUNTIMESYSTEM_H
+#ifndef PROJECTION_RUNTIMESYSTEM_H
+#define PROJECTION_RUNTIMESYSTEM_H
 
 #include <vector>
 #include "systems/ISystem.h"

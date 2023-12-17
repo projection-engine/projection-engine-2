@@ -1,5 +1,5 @@
-#ifndef CATALYST_RFBO_H
-#define CATALYST_RFBO_H
+#ifndef PROJECTION_RFBO_H
+#define PROJECTION_RFBO_H
 
 #include <glad/glad.h>
 #include <vector>

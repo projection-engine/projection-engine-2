@@ -1,5 +1,5 @@
-#ifndef CATALYST_LISTENER_H
-#define CATALYST_LISTENER_H
+#ifndef PROJECTION_LISTENER_H
+#define PROJECTION_LISTENER_H
 
 
 #include "../../../src/core/event/IListener.h"

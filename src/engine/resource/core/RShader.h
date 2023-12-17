@@ -1,5 +1,5 @@
-#ifndef CATALYST_RSHADER_H
-#define CATALYST_RSHADER_H
+#ifndef PROJECTION_RSHADER_H
+#define PROJECTION_RSHADER_H
 #include "../../../core/Definitions.h"
 #include "IResource.h"
 

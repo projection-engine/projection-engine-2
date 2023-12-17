@@ -29,7 +29,7 @@ set(SOURCES
         ui/store/SampleData.h
 )
 
-include_directories(../src/ui/windows/editor)
+include_directories(../src/ui/editor)
 include_directories(../src/core)
 
 file(GLOB XML_FILES

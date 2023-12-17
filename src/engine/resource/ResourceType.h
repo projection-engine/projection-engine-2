@@ -1,6 +1,6 @@
 
-#ifndef CATALYST_RESOURCETYPE_H
-#define CATALYST_RESOURCETYPE_H
+#ifndef PROJECTION_RESOURCETYPE_H
+#define PROJECTION_RESOURCETYPE_H
 namespace PEngine {
     enum ResourceType {
         FBO,

@@ -1,6 +1,6 @@
 #pragma once
-#ifndef CATALYST_TIMER_H
-#define CATALYST_TIMER_H
+#ifndef PROJECTION_TIMER_H
+#define PROJECTION_TIMER_H
 
 #include "ILoggable.h"
 #include <chrono>
@@ -32,4 +32,4 @@ namespace PEngine {
 
 }
 
-#endif //CATALYST_TIMER_H
+#endif //PROJECTION_TIMER_H

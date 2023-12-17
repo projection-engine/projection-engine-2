@@ -1,5 +1,5 @@
-#ifndef CATALYST_EXAMPLE_H
-#define CATALYST_EXAMPLE_H
+#ifndef PROJECTION_EXAMPLE_H
+#define PROJECTION_EXAMPLE_H
 
 
 #include "../../../src/ui/core/views/IView.h"

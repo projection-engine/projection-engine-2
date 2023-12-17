@@ -1,10 +1,10 @@
 #pragma once
-#ifndef CATALYST_IWINDOW_H
-#define CATALYST_IWINDOW_H
+#ifndef PROJECTION_IWINDOW_H
+#define PROJECTION_IWINDOW_H
 
 #include <imgui_impl_glfw.h>
 #include "imgui.h"
-#include "../../../core/debug/ILoggable.h"
+#include "../../core/debug/ILoggable.h"
 #include "document/Document.h"
 #include "../../core/Definitions.h"
 
@@ -41,4 +41,4 @@ namespace PEngine {
 
     };
 }
-#endif //CATALYST_IWINDOW_H
+#endif //PROJECTION_IWINDOW_H

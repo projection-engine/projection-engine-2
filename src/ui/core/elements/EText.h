@@ -1,6 +1,6 @@
 #pragma once
-#ifndef CATALYST_ETEXT_H
-#define CATALYST_ETEXT_H
+#ifndef PROJECTION_ETEXT_H
+#define PROJECTION_ETEXT_H
 
 #include <string>
 #include "AbstractSimpleElement.h"

@@ -1,5 +1,5 @@
-#ifndef CATALYST_ENGINE_LIST_H
-#define CATALYST_ENGINE_LIST_H
+#ifndef PROJECTION_ENGINE_LIST_H
+#define PROJECTION_ENGINE_LIST_H
 
 namespace PEngine {
     template<typename T>

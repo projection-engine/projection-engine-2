@@ -1,5 +1,5 @@
-#ifndef CATALYST_RESOURCESSYSTEM_H
-#define CATALYST_RESOURCESSYSTEM_H
+#ifndef PROJECTION_RESOURCESSYSTEM_H
+#define PROJECTION_RESOURCESSYSTEM_H
 
 #include "StaticResource.h"
 #include "core/IResource.h"

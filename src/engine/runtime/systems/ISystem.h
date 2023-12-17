@@ -1,5 +1,5 @@
-#ifndef CATALYST_ISYSTEM_H
-#define CATALYST_ISYSTEM_H
+#ifndef PROJECTION_ISYSTEM_H
+#define PROJECTION_ISYSTEM_H
 
 #include "../../../core/debug/ILoggable.h"
 

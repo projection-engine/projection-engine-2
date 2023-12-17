@@ -1,5 +1,5 @@
-#ifndef CATALYST_ETREENODE_H
-#define CATALYST_ETREENODE_H
+#ifndef PROJECTION_ETREENODE_H
+#define PROJECTION_ETREENODE_H
 
 #include "IElement.h"
 #include "AbstractSimpleElement.h"

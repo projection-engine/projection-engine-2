@@ -1,5 +1,5 @@
-#ifndef CATALYST_IRUNNER_H
-#define CATALYST_IRUNNER_H
+#ifndef PROJECTION_IRUNNER_H
+#define PROJECTION_IRUNNER_H
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>

@@ -1,5 +1,5 @@
-#ifndef CATALYST_ENGINE_H
-#define CATALYST_ENGINE_H
+#ifndef PROJECTION_ENGINE_H
+#define PROJECTION_ENGINE_H
 
 #include "entt/entity/registry.hpp"
 #include "world/WorldSystem.h"

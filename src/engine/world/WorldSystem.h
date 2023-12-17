@@ -1,6 +1,6 @@
 #pragma once
-#ifndef CATALYST_WORLDSYSTEM_H
-#define CATALYST_WORLDSYSTEM_H
+#ifndef PROJECTION_WORLDSYSTEM_H
+#define PROJECTION_WORLDSYSTEM_H
 
 #include "entt/entt.hpp"
 #include "../../core/debug/ILoggable.h"

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.26)
-project(catalyst)
+project(projection)
 set(CMAKE_CXX_STANDARD 23)
 
 find_package(glad REQUIRED)
@@ -29,12 +29,18 @@ set(FILE_PATHS
         src/engine/resource/static/direct_shadows.vs
         src/engine/resource/static/direct_shadows.fs
 
+        src/engine/resource/core/RUBO.cpp
+        src/engine/resource/core/RUBO.h
+        src/engine/resource/dto/UBODataDTO.h
+        src/engine/resource/UBOType.h
+        src/core/Definitions.h
+
         src/engine/external/IIOController.h
         src/engine/external/IFSController.h
-        src/ui/windows/editor/basic/IOController.cpp
-        src/ui/windows/editor/basic/IOController.h
-        src/ui/windows/editor/basic/FSController.cpp
-        src/ui/windows/editor/basic/FSController.h
+        src/ui/editor/basic/IOController.cpp
+        src/ui/editor/basic/IOController.h
+        src/ui/editor/basic/FSController.cpp
+        src/ui/editor/basic/FSController.h
         src/engine/external/IIOController.cpp
 
         src/engine/resource/core/IResource.h
@@ -70,16 +76,12 @@ set(FILE_PATHS
         src/engine/world/IEntity.h
 
         src/ui/core/store/IStore.h
-        src/ui/windows/editor/stores/SelectionState.cpp
-        src/ui/windows/editor/stores/SelectionState.h
         src/ui/core/elements/EInlineBlock.cpp
         src/ui/core/elements/EInlineBlock.h
         src/ui/core/elements/ETreeNode.cpp
         src/ui/core/elements/ETreeNode.h
         src/ui/core/elements/AbstractSimpleElement.cpp
         src/ui/core/elements/AbstractSimpleElement.h
-        src/ui/windows/editor/views/hierarchy/HierarchyList.cpp
-        src/ui/windows/editor/views/hierarchy/HierarchyList.h
         src/core/event/TypedEventPayload.h
         src/core/structures/List.h
         src/core/structures/Map.cpp
@@ -107,19 +109,16 @@ set(FILE_PATHS
         src/engine/Engine.h
         src/core/UUID.h
         src/core/UUID.cpp
-        src/ui/windows/editor/EditorWindow.cpp
-        src/ui/windows/editor/EditorWindow.h
-        src/ui/windows/editor/stores/SelectionStore.h
-        src/ui/windows/editor/runner/Runner.cpp
-        src/ui/windows/editor/runner/Runner.h
+        src/ui/editor/EditorWindow.cpp
+        src/ui/editor/EditorWindow.h
+        src/ui/editor/runner/Runner.cpp
+        src/ui/editor/runner/Runner.h
         src/ui/core/document/ElementController.cpp
         src/ui/core/document/ElementController.h
         src/ui/core/document/ElementController.h
         src/ui/core/document/ViewController.cpp
         src/ui/core/document/ViewController.h
-        src/ui/windows/editor/views/imgui_demo.cpp
-        src/ui/windows/editor/views/hierarchy/HierarchyView.cpp
-        src/ui/windows/editor/views/hierarchy/HierarchyView.h
+        src/ui/editor/views/imgui_demo.cpp
         src/ui/core/elements/ETree.cpp
         src/ui/core/elements/ETree.h
         src/ui/core/elements/EButton.cpp
@@ -136,8 +135,8 @@ set(FILE_PATHS
         src/core/StringUtils.h
         src/ui/core/elements/DynamicElement.cpp
         src/ui/core/elements/DynamicElement.h
-        src/ui/windows/editor/views/MainView.cpp
-        src/ui/windows/editor/views/MainView.h
+        src/ui/editor/views/MainView.cpp
+        src/ui/editor/views/MainView.h
         src/ui/core/elements/EIcon.cpp
         src/ui/core/elements/EIcon.h
         src/core/event/EventController.cpp
@@ -150,7 +149,7 @@ set(FILE_PATHS
         src/core/event/IEventPayload.h
 )
 
-set(CMAKE_TOOLCHAIN_FILE "C:/src/vcpkg/scripts/buildsystems/vcpkg.cmake")
+set(CMAKE_TOOLCHAIN_FILE "C:/vcpkg/scripts/buildsystems/vcpkg.cmake")
 set(VCPKG_JSON_PATH "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg.json")
 
 # Include vcpkg toolchain

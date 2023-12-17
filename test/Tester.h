@@ -1,5 +1,5 @@
-#ifndef CATALYST_TESTER_H
-#define CATALYST_TESTER_H
+#ifndef PROJECTION_TESTER_H
+#define PROJECTION_TESTER_H
 
 #include <string>
 #include <vector>

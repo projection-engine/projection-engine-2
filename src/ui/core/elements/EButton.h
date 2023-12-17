@@ -1,5 +1,5 @@
-#ifndef CATALYST_EBUTTON_H
-#define CATALYST_EBUTTON_H
+#ifndef PROJECTION_EBUTTON_H
+#define PROJECTION_EBUTTON_H
 
 #include "IElement.h"
 #include "AbstractTitledElement.h"

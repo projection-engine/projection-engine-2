@@ -1,5 +1,5 @@
-#ifndef CATALYST_EMENUBAR_H
-#define CATALYST_EMENUBAR_H
+#ifndef PROJECTION_EMENUBAR_H
+#define PROJECTION_EMENUBAR_H
 
 #include "IElement.h"
 

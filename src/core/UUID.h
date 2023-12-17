@@ -1,6 +1,6 @@
 #pragma once
-#ifndef CATALYST_UUID_H
-#define CATALYST_UUID_H
+#ifndef PROJECTION_UUID_H
+#define PROJECTION_UUID_H
 
 #include <random>
 #include <sstream>
@@ -17,4 +17,4 @@ namespace PEngine {
    };
 }
 
-#endif //CATALYST_UUID_H
+#endif //PROJECTION_UUID_H

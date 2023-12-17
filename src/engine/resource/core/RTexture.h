@@ -1,5 +1,5 @@
-#ifndef CATALYST_RTEXTURE_H
-#define CATALYST_RTEXTURE_H
+#ifndef PROJECTION_RTEXTURE_H
+#define PROJECTION_RTEXTURE_H
 
 #include "IResource.h"
 

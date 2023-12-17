@@ -1,5 +1,5 @@
-#ifndef CATALYST_IIOCONTROLLER_H
-#define CATALYST_IIOCONTROLLER_H
+#ifndef PROJECTION_IIOCONTROLLER_H
+#define PROJECTION_IIOCONTROLLER_H
 
 namespace PEngine {
     template<typename K, typename V>

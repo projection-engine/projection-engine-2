@@ -1,6 +1,6 @@
 #pragma once
-#ifndef CATALYST_IVIEW_H
-#define CATALYST_IVIEW_H
+#ifndef PROJECTION_IVIEW_H
+#define PROJECTION_IVIEW_H
 
 #include <string>
 #include "../elements/IElement.h"

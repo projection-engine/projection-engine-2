@@ -1,5 +1,5 @@
-#ifndef CATALYST_EMENU_H
-#define CATALYST_EMENU_H
+#ifndef PROJECTION_EMENU_H
+#define PROJECTION_EMENU_H
 
 #include "IElement.h"
 #include "AbstractTitledElement.h"

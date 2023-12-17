@@ -1,5 +1,5 @@
 {
-  "name" : "catalyst",
+  "name" : "projection",
   "version-string" : "0.0.1",
   "builtin-baseline" : "78ba9711d30c64a6b40462c72f356c681e2255f3",
   "dependencies" : [ {

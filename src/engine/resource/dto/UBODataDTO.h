@@ -1,5 +1,5 @@
-#ifndef CATALYST_UBODATADTO_H
-#define CATALYST_UBODATADTO_H
+#ifndef PROJECTION_UBODATADTO_H
+#define PROJECTION_UBODATADTO_H
 
 #include <string>
 #include "../UBOType.h"

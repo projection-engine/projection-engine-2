@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef CATALYST_ENGINE_MAP_H
-#define CATALYST_ENGINE_MAP_H
+#ifndef PROJECTION_ENGINE_MAP_H
+#define PROJECTION_ENGINE_MAP_H
 
 #include <vector>
 #include "unordered_map"

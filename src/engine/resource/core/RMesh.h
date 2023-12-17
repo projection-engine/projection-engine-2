@@ -1,5 +1,5 @@
-#ifndef CATALYST_RMESH_H
-#define CATALYST_RMESH_H
+#ifndef PROJECTION_RMESH_H
+#define PROJECTION_RMESH_H
 
 #include <vector>
 #include "IResource.h"

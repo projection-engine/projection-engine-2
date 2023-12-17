@@ -1,6 +1,6 @@
 #pragma once
-#ifndef CATALYST_ENGINE_DOCUMENT_H
-#define CATALYST_ENGINE_DOCUMENT_H
+#ifndef PROJECTION_ENGINE_DOCUMENT_H
+#define PROJECTION_ENGINE_DOCUMENT_H
 
 #include "ElementController.h"
 #include "pugixml.hpp"

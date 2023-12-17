@@ -1,5 +1,5 @@
-#ifndef CATALYST_ELEMENTCONTROLLER_H
-#define CATALYST_ELEMENTCONTROLLER_H
+#ifndef PROJECTION_ELEMENTCONTROLLER_H
+#define PROJECTION_ELEMENTCONTROLLER_H
 
 #include <string>
 #include "../../../core/debug/ILoggable.h"

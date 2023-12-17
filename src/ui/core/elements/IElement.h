@@ -1,6 +1,6 @@
 #pragma once
-#ifndef CATALYST_ENGINE_ICOMPONENT_H
-#define CATALYST_ENGINE_ICOMPONENT_H
+#ifndef PROJECTION_ENGINE_ICOMPONENT_H
+#define PROJECTION_ENGINE_ICOMPONENT_H
 
 #include <string>
 #include "pugixml.hpp"

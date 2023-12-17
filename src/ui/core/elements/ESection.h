@@ -1,6 +1,6 @@
 #pragma once
-#ifndef CATALYST_ESECTION_H
-#define CATALYST_ESECTION_H
+#ifndef PROJECTION_ESECTION_H
+#define PROJECTION_ESECTION_H
 
 
 #include "imgui.h"
@@ -89,7 +89,7 @@ namespace PEngine {
     };
 }
 
-#endif //CATALYST_ESECTION_H
+#endif //PROJECTION_ESECTION_H
 
 
 

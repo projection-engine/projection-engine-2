@@ -1,5 +1,5 @@
-#ifndef CATALYST_IFSCONTROLLER_H
-#define CATALYST_IFSCONTROLLER_H
+#ifndef PROJECTION_IFSCONTROLLER_H
+#define PROJECTION_IFSCONTROLLER_H
 namespace PEngine {
     class IFSController {
 

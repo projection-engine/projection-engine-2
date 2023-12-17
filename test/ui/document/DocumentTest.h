@@ -1,5 +1,5 @@
-#ifndef CATALYST_DOCUMENTTEST_H
-#define CATALYST_DOCUMENTTEST_H
+#ifndef PROJECTION_DOCUMENTTEST_H
+#define PROJECTION_DOCUMENTTEST_H
 
 class Tester;
 namespace PEngine::DocumentTest {

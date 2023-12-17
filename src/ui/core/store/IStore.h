@@ -1,5 +1,5 @@
-#ifndef CATALYST_ISTORE_H
-#define CATALYST_ISTORE_H
+#ifndef PROJECTION_ISTORE_H
+#define PROJECTION_ISTORE_H
 
 
 #include "../../../core/event/EventController.h"

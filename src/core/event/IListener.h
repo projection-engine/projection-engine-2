@@ -1,5 +1,5 @@
-#ifndef CATALYST_ILISTENER_H
-#define CATALYST_ILISTENER_H
+#ifndef PROJECTION_ILISTENER_H
+#define PROJECTION_ILISTENER_H
 
 #include <string>
 #include "../../core/debug/ILoggable.h"

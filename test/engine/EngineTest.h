@@ -1,5 +1,5 @@
-#ifndef CATALYST_ENGINETEST_H
-#define CATALYST_ENGINETEST_H
+#ifndef PROJECTION_ENGINETEST_H
+#define PROJECTION_ENGINETEST_H
 
 class Tester;
 namespace PEngine::EngineTest {

@@ -1,6 +1,6 @@
 #pragma once
-#ifndef CATALYST_ICOMPONENT_H
-#define CATALYST_ICOMPONENT_H
+#ifndef PROJECTION_ICOMPONENT_H
+#define PROJECTION_ICOMPONENT_H
 
 #include "entt/entt.hpp"
 #include "../IEntity.h"

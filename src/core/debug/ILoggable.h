@@ -1,5 +1,5 @@
-#ifndef CATALYST_ILOGGABLE_H
-#define CATALYST_ILOGGABLE_H
+#ifndef PROJECTION_ILOGGABLE_H
+#define PROJECTION_ILOGGABLE_H
 #define CONSOLE_ERROR(...) if(this->hasLogger()) this->getLogger()->error("{0}#{1}] {2}", __FUNCTION__, __LINE__, fmt::format(__VA_ARGS__)); else this->getLogger(typeid(*this).name())->error("{0}#{1}] {2}", __FUNCTION__, __LINE__, fmt::format(__VA_ARGS__));
 #define CONSOLE_WARN(...) if(this->hasLogger()) this->getLogger()->warn("{0}#{1}] {2}", __FUNCTION__, __LINE__, fmt::format(__VA_ARGS__)); else this->getLogger(typeid(*this).name())->warn("{0}#{1}] {2}", __FUNCTION__, __LINE__, fmt::format(__VA_ARGS__));
 #define CONSOLE_LOG(...) if(this->hasLogger()) this->getLogger()->info("{0}#{1}] {2}", __FUNCTION__, __LINE__, fmt::format(__VA_ARGS__)); else this->getLogger(typeid(*this).name())->info("{0}#{1}] {2}", __FUNCTION__, __LINE__, fmt::format(__VA_ARGS__));

@@ -1,5 +1,5 @@
-#ifndef CATALYST_UBOTYPE_H
-#define CATALYST_UBOTYPE_H
+#ifndef PROJECTION_UBOTYPE_H
+#define PROJECTION_UBOTYPE_H
 namespace PEngine {
     enum UBOType {
         FLOAT,
