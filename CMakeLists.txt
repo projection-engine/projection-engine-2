@@ -27,7 +27,8 @@ set(COMMON_LIBRARIES
 
 set(FILE_PATHS
         src/engine/resource/dto/FBOTextureDTO.h
-
+        src/ui/core/webview/WebViewWindow.cpp
+        src/ui/core/webview/WebViewWindow.h
         src/engine/resource/static/direct_shadows.vs
         src/engine/resource/static/direct_shadows.fs
 
@@ -120,7 +121,7 @@ set(FILE_PATHS
         src/ui/core/document/ElementController.h
         src/ui/core/document/ViewController.cpp
         src/ui/core/document/ViewController.h
-        src/ui/editor/views/imgui_demo.cpp
+        src/ui/editor/runner/imgui_demo.cpp
         src/ui/core/elements/ETree.cpp
         src/ui/core/elements/ETree.h
         src/ui/core/elements/EButton.cpp
@@ -137,8 +138,6 @@ set(FILE_PATHS
         src/core/StringUtils.h
         src/ui/core/elements/DynamicElement.cpp
         src/ui/core/elements/DynamicElement.h
-        src/ui/editor/views/MainView.cpp
-        src/ui/editor/views/MainView.h
         src/ui/core/elements/EIcon.cpp
         src/ui/core/elements/EIcon.h
         src/core/event/EventController.cpp
