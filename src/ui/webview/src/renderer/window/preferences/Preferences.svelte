@@ -2,7 +2,6 @@
     import FrameWrapper from "../shared/components/frame/FrameWrapper.svelte"
     import {onMount} from "svelte"
     import ResizableBar from "../shared/components/resizable/ResizableBar.svelte"
-    import GlobalSettings from "./components/GlobalSettings.svelte"
     import ContentWrapper from "./components/content/ContentWrapper.svelte"
     import Shortcuts from "./components/Shortcuts.svelte"
     import PREFERENCES from "./static/PREFERENCES"
@@ -27,9 +26,7 @@
     </div>
     <ResizableBar type="width"/>
     <div class="content">
-        {#if PREFERENCES[tab].type === "global"}
-            <GlobalSettings/>
-        {:else if PREFERENCES[tab].type === "shortcuts"}
+        {#if PREFERENCES[tab].type === "shortcuts"}
             <Shortcuts/>
         {:else}
             <ContentWrapper data={PREFERENCES[tab]}/>

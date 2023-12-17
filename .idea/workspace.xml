@@ -21,11 +21,28 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-1] Webview2 integration&#10;- SImple integration&#10;- Adding dependencies&#10;- Fixing clion setup tutorial">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-1] Webview2 integration&#10;- Created WebViewWindow class with essential methods&#10;- Integrating WebViewWindow with EditorWindow &#10;- Making window load html">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/editor/EditorWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/EditorWindow.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/editor/EditorWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/EditorWindow.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/esbuild.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/esbuild.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/main/ElectronWindowService.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/main/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/main/libs/ContextMenuListener.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/main/libs/FileImporterUtil.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/main/libs/FileSystemListener.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/main/libs/FileSystemUtil.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/main/libs/IPCListener.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/main/libs/IPCListenerUtil.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/main/libs/assimp/Assimp.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/main/libs/assimp/AssimpService.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/main/libs/gltf/GLTFAccessor.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/main/libs/gltf/GLTFBuffer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/main/libs/gltf/GLTFBuilderUtil.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/main/libs/gltf/GLTFLoaderUtil.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/main/static/DEFAULT_GLOBAL_SETTINGS.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/main/static/SETTINGS_PATH.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/renderer/window/preferences/Preferences.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/src/renderer/window/preferences/Preferences.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/renderer/window/preferences/components/GlobalSettings.svelte" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +112,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="CMake Application.projection">
+  <component name="RunManager" selected="npm.bdev">
     <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="CLION.EXTERNAL.BUILD" enabled="true" />
@@ -153,10 +170,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.bdev" />
         <item itemvalue="C/C++ File.main.cpp" />
         <item itemvalue="CMake Debug.projection" />
         <item itemvalue="npm.sdev" />
-        <item itemvalue="npm.bdev" />
       </list>
     </recent_temporary>
   </component>
@@ -168,7 +185,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1702814316508</updated>
-      <workItem from="1702814318459" duration="10453000" />
+      <workItem from="1702814318459" duration="11033000" />
     </task>
     <task id="LOCAL-00001" summary="[STD-1] Organizing project&#10;- removing unused C++ classes&#10;- Refactoring files&#10;- Renaming c++ namespaces and project &#10;- Moving future webview stuff">
       <option name="closed" value="true" />
@@ -186,7 +203,15 @@
       <option name="project" value="LOCAL" />
       <updated>1702818964479</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="[STD-1] Webview2 integration&#10;- Created WebViewWindow class with essential methods&#10;- Integrating WebViewWindow with EditorWindow &#10;- Making window load html">
+      <option name="closed" value="true" />
+      <created>1702827233464</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1702827233464</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -201,7 +226,8 @@
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="[STD-1] Organizing project&#10;- removing unused C++ classes&#10;- Refactoring files&#10;- Renaming c++ namespaces and project &#10;- Moving future webview stuff" />
     <MESSAGE value="[STD-1] Webview2 integration&#10;- SImple integration&#10;- Adding dependencies&#10;- Fixing clion setup tutorial" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-1] Webview2 integration&#10;- SImple integration&#10;- Adding dependencies&#10;- Fixing clion setup tutorial" />
+    <MESSAGE value="[STD-1] Webview2 integration&#10;- Created WebViewWindow class with essential methods&#10;- Integrating WebViewWindow with EditorWindow &#10;- Making window load html" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-1] Webview2 integration&#10;- Created WebViewWindow class with essential methods&#10;- Integrating WebViewWindow with EditorWindow &#10;- Making window load html" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

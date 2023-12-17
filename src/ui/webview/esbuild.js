@@ -48,15 +48,6 @@ async function start(){
     contexts.push(esbuild.context(frontend("/editor/editor-window.ts", "editor-window")))
     contexts.push(esbuild.context(frontend("/projects/project-window.ts", "project-window")))
     contexts.push(esbuild.context(frontend("/preferences/preferences-window.ts", "preferences-window")))
-    contexts.push(esbuild.context({
-        ...COMMON,
-        platform: "node",
-        entryPoints: ["./src/main/index.ts"],
-        format: "cjs",
-        external: ["electron", "sharp"],
-        outfile: "./build/index.js",
-        plugins: [copy({assets: [{from: ["./src/static/*"], to: ["./"]}]})]
-    }))
 
     const resolvedContexts = await Promise.all(contexts)
     if (process.argv[2] === "watch")
