@@ -5,7 +5,7 @@
 
 int main(int, char **) {
     PEngine::EditorWindow window;
-    window.onInitialize();
+    window.initialize();
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
         std::cout << "Failed to initialize GLAD" << std::endl;

@@ -1,10 +1,18 @@
 #include "IWindow.h"
-#include "document/Document.h"
 #include "runner/Runner.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
+#include "wtypes.h"
+#include "webview/WebViewWindow.h"
 
 namespace PEngine {
+    void IWindow::getDesktopResolution(int &horizontal, int &vertical) {
+        RECT desktop;
+        GetWindowRect(GetDesktopWindow(), &desktop);
+        horizontal = desktop.right;
+        vertical = desktop.bottom;
+    }
+
     void IWindow::createWindowIO() {
         IMGUI_CHECKVERSION();
         ImGui::CreateContext();
@@ -23,31 +31,6 @@ namespace PEngine {
         }
     }
 
-    IWindow::IWindow() {
-        CONSOLE_LOG("INITIALIZING...")
-        glfwSetErrorCallback(onError);
-        if (!glfwInit()) {
-            CONSOLE_ERROR("ERROR INITIALIZING GLFW")
-            return;
-        }
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
-
-        window = glfwCreateWindow(1280, 720, "Window", nullptr, nullptr);
-        if (window == nullptr) {
-            CONSOLE_ERROR("ERROR CREATING WINDOW")
-            return;
-        }
-
-        glfwMakeContextCurrent(window);
-        setVsyncEnabled(true);
-        createWindowIO();
-
-        ImGui_ImplGlfw_InitForOpenGL(window, true);
-        ImGui_ImplOpenGL3_Init(GLSL_VERSION);
-        CONSOLE_LOG("WINDOW CREATED")
-        ready = true;
-    }
 
     void IWindow::start() {
         if (!ready || runner == nullptr) {
@@ -63,20 +46,67 @@ namespace PEngine {
         glfwTerminate();
     }
 
-    Document &IWindow::getDocument() {
-        return document;
+    void IWindow::initialize() {
+        runner = createRunner();
     }
 
-    bool IWindow::isVsyncEnabled() const {
-        return vsyncEnabled;
+    IRunner *IWindow::createRunner() {
+        return nullptr;
     }
 
-    void IWindow::setVsyncEnabled(bool v) {
-        glfwSwapInterval(v ? 1 : 0);
-        IWindow::vsyncEnabled = v;
+    void IWindow::removeWebView(const std::string &id) {
+        if (webViews.contains(id)) {
+            webViews.erase(id);
+        }
     }
 
-    void IWindow::onInitialize() {
+    void IWindow::addWebView(const std::string &id, const std::string &filePath) {
+        webViews[id] = new WebViewWindow(filePath, window);
+    }
 
+    void IWindow::addWebViewEventListener(const std::string &id,
+                                          void (*action)(ICoreWebView2 *, ICoreWebView2WebMessageReceivedEventArgs *,IWindow *)) {
+        webViews[id]->addOnMessageListener(action, this);
+    }
+
+    void IWindow::postWebViewMessage(const std::string &id, std::string message) {
+        webViews[id]->postMessage(std::move(message));
+    }
+
+    IWindow::IWindow(const std::string &name) {
+        CONSOLE_LOG("Creating window")
+        glfwSetErrorCallback(onError);
+        if (!glfwInit()) {
+            CONSOLE_ERROR("Error initializing glfw")
+            return;
+        }
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+
+        int width;
+        int height;
+        getDesktopResolution(width, height);
+        window = glfwCreateWindow(width * scaleX, height * scaleY, name.c_str(), nullptr, nullptr);
+        if (window == nullptr) {
+            CONSOLE_ERROR("Error creating window")
+            return;
+        }
+
+        glfwMakeContextCurrent(window);
+        glfwSwapInterval(1);
+
+        createWindowIO();
+
+        ImGui_ImplGlfw_InitForOpenGL(window, true);
+        ImGui_ImplOpenGL3_Init(GLSL_VERSION);
+        CONSOLE_LOG("WINDOW CREATED")
+        ready = true;
+    }
+
+    IWindow::~IWindow() {
+        for (std::pair<const std::basic_string<char>, WebViewWindow *> entry: webViews) {
+            delete entry.second;
+        }
+        delete runner;
     }
 }

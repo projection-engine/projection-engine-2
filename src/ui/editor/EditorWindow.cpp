@@ -5,18 +5,13 @@
 #include "../core/webview/WebViewWindow.h"
 
 namespace PEngine {
-    void EditorWindow::onInitialize() {
-        webView = new WebViewWindow(onWebViewInitialized);
-        webView->initialize(window);
-
-    }
-
-    void EditorWindow::onWebViewInitialized(WebViewWindow *webView) {
-        webView->setHTML("project-window.html");
-    }
-
-    EditorWindow::EditorWindow() : IWindow() {
+    void EditorWindow::initialize() {
+        IWindow::initialize();
         document.setEngine(&engine);
-        runner = new Runner(window, document);
+        addWebView("TEST", "project-window.html");
+    }
+
+    IRunner *EditorWindow::createRunner() {
+        return new Runner(window, document);
     }
 }

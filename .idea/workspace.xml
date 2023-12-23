@@ -21,28 +21,16 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-1] Webview2 integration&#10;- Removing unused files">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-1] Webview2 integration&#10;- Removing unused componments from ui&#10;- Removing shared array buffer dependency">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/esbuild.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/esbuild.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/renderer/engine/core/instances/Entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/src/renderer/engine/core/instances/Entity.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/renderer/engine/core/instances/components/Movable.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/src/renderer/engine/core/instances/components/Movable.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/renderer/engine/core/lib/rendering/GPUAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/src/renderer/engine/core/lib/rendering/GPUAPI.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/renderer/engine/core/lib/utils/ArrayBufferAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/src/renderer/engine/core/lib/utils/ArrayBufferAPI.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/renderer/engine/core/lib/utils/CameraAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/src/renderer/engine/core/lib/utils/CameraAPI.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/renderer/engine/core/lib/utils/EntityAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/src/renderer/engine/core/lib/utils/EntityAPI.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/renderer/engine/core/lib/utils/EntityWorkerAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/src/renderer/engine/core/lib/utils/EntityWorkerAPI.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/renderer/engine/core/workers/camera-worker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/src/renderer/engine/core/workers/camera-worker.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/renderer/engine/core/workers/entity-worker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/src/renderer/engine/core/workers/entity-worker.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/renderer/window/editor/Editor.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/src/renderer/window/editor/Editor.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/renderer/window/editor/components/window-frame/WindowFrame.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/renderer/window/editor/components/window-frame/components/CreationController.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/renderer/window/editor/util/WindowFrameUtil.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/renderer/window/preferences/Preferences.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/src/renderer/window/preferences/Preferences.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/renderer/window/projects/Projects.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/src/renderer/window/projects/Projects.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/renderer/window/shared/components/frame/FrameWrapper.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/renderer/window/shared/components/frame/Logo.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/renderer/window/shared/components/frame/TrafficLights.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/shared/logger/RendererLogger.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/src/shared/logger/RendererLogger.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/core/IWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/core/IWindow.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/core/IWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/core/IWindow.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/core/webview/WebViewWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/core/webview/WebViewWindow.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/core/webview/WebViewWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/core/webview/WebViewWindow.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/editor/EditorWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/EditorWindow.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/editor/EditorWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/EditorWindow.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/editor/runner/imgui_demo.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/runner/imgui_demo.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +67,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "C/C++ File.main.cpp.executor": "Run",
-    "CMake Application.projection.executor": "Run",
+    "CMake Application.projection.executor": "Debug",
     "CMake Debug.projection.executor": "Debug",
     "CMake Debug.projectioncmake.executor": "Debug",
     "Catch.main_test.executor": "Run",
@@ -118,6 +106,11 @@
     </option>
   </component>
   <component name="RunManager" selected="CMake Application.projection">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="main_test" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="Debug-Visual Studio" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -127,15 +120,8 @@
     <configuration name="projectioncmake" type="CMakeListConfigurationType" factoryName="CMakeListConfigurationFactory" temporary="true">
       <method v="2" />
     </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="projection" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="projection" CONFIG_NAME="Debug-Visual Studio" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="projection">
       <method v="2">
-        <option name="RunConfigurationTask" enabled="true" run_configuration_name="dev-build" run_configuration_type="js.build_tools.npm" />
-        <option name="RunConfigurationTask" enabled="true" run_configuration_name="copy-files" run_configuration_type="ShConfigurationType" />
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
@@ -219,7 +205,8 @@
       <option name="presentableId" value="Default" />
       <updated>1702814316508</updated>
       <workItem from="1702814318459" duration="11420000" />
-      <workItem from="1702837001912" duration="3476000" />
+      <workItem from="1702837001912" duration="4275000" />
+      <workItem from="1703329594791" duration="6646000" />
     </task>
     <task id="LOCAL-00001" summary="[STD-1] Organizing project&#10;- removing unused C++ classes&#10;- Refactoring files&#10;- Renaming c++ namespaces and project &#10;- Moving future webview stuff">
       <option name="closed" value="true" />
@@ -261,7 +248,15 @@
       <option name="project" value="LOCAL" />
       <updated>1702827782890</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="[STD-1] Webview2 integration&#10;- Removing unused componments from ui&#10;- Removing shared array buffer dependency">
+      <option name="closed" value="true" />
+      <created>1702840812476</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1702840812476</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -279,7 +274,8 @@
     <MESSAGE value="[STD-1] Webview2 integration&#10;- Created WebViewWindow class with essential methods&#10;- Integrating WebViewWindow with EditorWindow &#10;- Making window load html" />
     <MESSAGE value="[STD-1] Webview2 integration&#10;- Removing electron stuff" />
     <MESSAGE value="[STD-1] Webview2 integration&#10;- Removing unused files" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-1] Webview2 integration&#10;- Removing unused files" />
+    <MESSAGE value="[STD-1] Webview2 integration&#10;- Removing unused componments from ui&#10;- Removing shared array buffer dependency" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-1] Webview2 integration&#10;- Removing unused componments from ui&#10;- Removing shared array buffer dependency" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

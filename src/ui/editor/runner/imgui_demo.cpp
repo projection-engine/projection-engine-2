@@ -4339,7 +4339,7 @@ static void ShowDemoWindowTables() {
         // Here we use ImGuiTableFlags_SizingFixedFit (even though _ScrollX is not set)
         // So columns will adopt the "Fixed" policy and will maintain a fixed width regardless of the whole available width (unless table is small)
         // If there is not enough available width to fit all columns, they will however be resized down.
-        // FIXME-TABLE: Providing a stretch-on-onInitialize would make sense especially for tables which don't have saved settings
+        // FIXME-TABLE: Providing a stretch-on-initialize would make sense especially for tables which don't have saved settings
         HelpMarker(
                 "Using _Resizable + _SizingFixedFit flags.\n"
                 "Fixed-width columns generally makes more sense if you want to use horizontal scrolling.\n\n"
