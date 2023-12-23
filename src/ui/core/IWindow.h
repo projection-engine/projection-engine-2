@@ -7,18 +7,33 @@
 #include "../../core/debug/ILoggable.h"
 #include "document/Document.h"
 #include "../../core/Definitions.h"
+#include <unordered_map>
+#include <string>
+
+
+class ICoreWebView2;
+
+class ICoreWebView2WebMessageReceivedEventArgs;
+
 
 namespace PEngine {
     class IRunner;
+
+    class WebViewWindow;
+
 
     class IWindow : public ILoggable {
     protected:
         GLFWwindow *window = nullptr;
         Document document;
         IRunner *runner = nullptr;
+        std::unordered_map<std::string, WebViewWindow *> webViews;
 
+        float scaleX = .5;
+        float scaleY = .5;
         bool ready = false;
-        bool vsyncEnabled = false;
+
+        static void getDesktopResolution(int &horizontal, int &vertical);
 
         static void onError(int error, const char *description) {
             fprintf(stderr, "GLFW Error %d: %s\n", error, description);
@@ -26,19 +41,27 @@ namespace PEngine {
 
         void createWindowIO();
 
+        virtual IRunner *createRunner();
+
+        void addWebView(const std::string &id, const std::string &filePath);
+
+        void removeWebView(const std::string &id);
+
     public:
-        explicit IWindow();
+        ~IWindow();
 
-        virtual void onInitialize();
+        explicit IWindow(const std::string &name);
 
-        bool isVsyncEnabled() const;
-
-        void setVsyncEnabled(bool vsyncEnabled);
+        virtual void initialize();
 
         void start();
 
-        Document &getDocument();
+        void addWebViewEventListener(const std::string &id,
+                                     void (*action)(ICoreWebView2 *,
+                                                    ICoreWebView2WebMessageReceivedEventArgs *,
+                                                    IWindow *));
 
+        void postWebViewMessage(const std::string &id, std::string message);
     };
 }
-#endif //PROJECTION_IWINDOW_H
+#endif

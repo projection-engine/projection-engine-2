@@ -8,16 +8,18 @@
 
 namespace PEngine {
     class WebViewWindow;
+
     class EditorWindow : public IWindow {
     private:
-        WebViewWindow *webView = nullptr;
         Engine engine = Engine(new IOController, new FSController);
-        static void onWebViewInitialized(WebViewWindow *webView);
+
+    protected:
+        IRunner *createRunner() override;
+
     public:
+        explicit EditorWindow() : IWindow("Project Editor"){}
 
-        explicit EditorWindow();
-
-        void onInitialize() override;
+        void initialize() override;
     };
 }
 
