@@ -15,22 +15,22 @@
       <config projectName="projection" targetName="projection" />
     </generated>
   </component>
-  <component name="CMakeSettings">
-    <configurations>
-      <configuration PROFILE_NAME="Debug-Visual Studio" ENABLED="true" CONFIG_NAME="Debug" TOOLCHAIN_NAME="Visual Studio" GENERATION_OPTIONS="-G &quot;NMake Makefiles&quot; -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake" />
-    </configurations>
+  <component name="CMakeSettings" AUTO_RELOAD="true">
+    <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-1] Webview2 integration&#10;- Removing unused componments from ui&#10;- Removing shared array buffer dependency">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-7] Implementing issue&#10;- Refactoring IWindow and EditorWindow&#10;- Adding integration with WebViewWindow to IWindow">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/core/IWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/core/IWindow.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/core/IWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/core/IWindow.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/core/webview/WebViewWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/core/webview/WebViewWindow.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/core/webview/WebViewWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/core/webview/WebViewWindow.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/editor/EditorWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/EditorWindow.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/editor/EditorWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/EditorWindow.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/editor/runner/imgui_demo.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/runner/imgui_demo.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/esbuild.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/esbuild.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/renderer/window/editor/Editor.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/src/renderer/window/editor/Editor.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/renderer/window/projects/Projects.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/src/renderer/window/projects/Projects.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/src/renderer/window/shared/WindowInitializer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/src/renderer/window/shared/WindowInitializer.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,8 +40,13 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug-Visual Studio" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:build" />
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="7-views-architecture-integrated-with-iwindow" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -78,7 +83,7 @@
     "Shell Script.copy-files.executor": "Run",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "1-webview2-migration",
+    "git-widget-placeholder": "8-c++-build-and-webview-build",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -111,7 +116,7 @@
         <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration name="main_test" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="Debug-Visual Studio" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_MODE="SUITE_TEST">
+    <configuration name="main_test" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="build" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
@@ -119,11 +124,6 @@
     </configuration>
     <configuration name="projectioncmake" type="CMakeListConfigurationType" factoryName="CMakeListConfigurationFactory" temporary="true">
       <method v="2" />
-    </configuration>
-    <configuration name="projection" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="projection" CONFIG_NAME="Debug-Visual Studio" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="projection">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
     </configuration>
     <configuration name="main.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection-engine-2" TARGET_NAME="main.cpp - Visual Studio" CONFIG_NAME="main.cpp">
       <option name="compilerOptions" value="-DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake" />
@@ -206,7 +206,7 @@
       <updated>1702814316508</updated>
       <workItem from="1702814318459" duration="11420000" />
       <workItem from="1702837001912" duration="4275000" />
-      <workItem from="1703329594791" duration="6646000" />
+      <workItem from="1703329594791" duration="10480000" />
     </task>
     <task id="LOCAL-00001" summary="[STD-1] Organizing project&#10;- removing unused C++ classes&#10;- Refactoring files&#10;- Renaming c++ namespaces and project &#10;- Moving future webview stuff">
       <option name="closed" value="true" />
@@ -256,7 +256,15 @@
       <option name="project" value="LOCAL" />
       <updated>1702840812476</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="[STD-7] Implementing issue&#10;- Refactoring IWindow and EditorWindow&#10;- Adding integration with WebViewWindow to IWindow">
+      <option name="closed" value="true" />
+      <created>1703338298057</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1703338298057</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -275,7 +283,19 @@
     <MESSAGE value="[STD-1] Webview2 integration&#10;- Removing electron stuff" />
     <MESSAGE value="[STD-1] Webview2 integration&#10;- Removing unused files" />
     <MESSAGE value="[STD-1] Webview2 integration&#10;- Removing unused componments from ui&#10;- Removing shared array buffer dependency" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-1] Webview2 integration&#10;- Removing unused componments from ui&#10;- Removing shared array buffer dependency" />
+    <MESSAGE value="[STD-7] Implementing issue&#10;- Refactoring IWindow and EditorWindow&#10;- Adding integration with WebViewWindow to IWindow" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-7] Implementing issue&#10;- Refactoring IWindow and EditorWindow&#10;- Adding integration with WebViewWindow to IWindow" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/ui/editor/EditorWindow.cpp</url>
+          <line>22</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

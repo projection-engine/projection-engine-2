@@ -62,6 +62,8 @@ namespace PEngine {
                                                     IWindow *));
 
         void postWebViewMessage(const std::string &id, std::string message);
+
+        GLFWwindow *getWindow() const;
     };
 }
 #endif

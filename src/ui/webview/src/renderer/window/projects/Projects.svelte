@@ -12,6 +12,7 @@
     import FileTypes from "../../../shared/enums/FileTypes"
     import FileSystemUtil from "../shared/FileSystemUtil"
     import StorageKeys from "../../../shared/enums/StorageKeys"
+    import MenuBar from "../shared/components/frame/MenuBar.svelte";
 
 
     let basePath
@@ -23,53 +24,61 @@
     const internalID = crypto.randomUUID()
 
     onMount(() => {
-    	ContextMenuService.getInstance().mount([
-    		{
-    			icon: "delete_forever",
-    			label: "Delete",
-    			onClick: async () => {
-    				await FileSystemUtil.rm(FileSystemUtil.resolvePath(localStorage.getItem(StorageKeys.ROOT_PATH) + FileSystemUtil.sep + selected), {
-    					recursive: true,
-    					force: true
-    				})
-    				projectsToShow = projectsToShow.filter(e => e.id !== selected)
-    			}
-    		},
-    		// {
-    		// 	icon: "folder",
-    		// 	label: "Open in explorer",
-    		// 	onClick: async () => ElectronResources.shell.showItemInFolder(localStorage.getItem(StorageKeys.ROOT_PATH) + FileSystemUtil.sep + selected)
-    		// },
-    	],
-    	internalID
-    	)
-    	ToastNotificationSystem.get()
+        ContextMenuService.getInstance().mount([
+                {
+                    icon: "delete_forever",
+                    label: "Delete",
+                    onClick: async () => {
+                        await FileSystemUtil.rm(FileSystemUtil.resolvePath(localStorage.getItem(StorageKeys.ROOT_PATH) + FileSystemUtil.sep + selected), {
+                            recursive: true,
+                            force: true
+                        })
+                        projectsToShow = projectsToShow.filter(e => e.id !== selected)
+                    }
+                },
+                // {
+                // 	icon: "folder",
+                // 	label: "Open in explorer",
+                // 	onClick: async () => ElectronResources.shell.showItemInFolder(localStorage.getItem(StorageKeys.ROOT_PATH) + FileSystemUtil.sep + selected)
+                // },
+            ],
+            internalID
+        )
+        ToastNotificationSystem.get()
 
-    	if (!localStorage.getItem(StorageKeys.ROOT_PATH))
-    		localStorage.setItem(StorageKeys.ROOT_PATH, FileSystemUtil.rootDir)
-    	basePath = localStorage.getItem(StorageKeys.ROOT_PATH)
+        if (!localStorage.getItem(StorageKeys.ROOT_PATH))
+            localStorage.setItem(StorageKeys.ROOT_PATH, FileSystemUtil.rootDir)
+        basePath = localStorage.getItem(StorageKeys.ROOT_PATH)
 
     })
     $: {
-    	if (basePath)
-    		refreshProjects(basePath).then(r => projectsToShow = r).catch(console.error)
+        if (basePath)
+            refreshProjects(basePath).then(r => projectsToShow = r).catch(console.error)
     }
     onDestroy(() => ContextMenuService.getInstance().destroy(internalID))
 
     async function onRename(newName, item) {
-    	const pathName = localStorage.getItem(StorageKeys.ROOT_PATH) + FileSystemUtil.sep + item.id + FileSystemUtil.sep + FileTypes.PROJECT//ElectronResources.path.resolve(localStorage.getItem(StorageKeys.ROOT_PATH) + FileSystemUtil.sep + item.id + FileSystemUtil.sep + FileTypes.PROJECT)
-    	const res = await FileSystemUtil.read(pathName)
-    	if (!res)
-    		return
-    	await FileSystemUtil.write(
-    		pathName,
-    		JSON.stringify({
-    			...JSON.parse(res.toString()),
-    			name: newName
-    		}))
-    	projectsToShow = projectsToShow
+        const pathName = localStorage.getItem(StorageKeys.ROOT_PATH) + FileSystemUtil.sep + item.id + FileSystemUtil.sep + FileTypes.PROJECT//ElectronResources.path.resolve(localStorage.getItem(StorageKeys.ROOT_PATH) + FileSystemUtil.sep + item.id + FileSystemUtil.sep + FileTypes.PROJECT)
+        const res = await FileSystemUtil.read(pathName)
+        if (!res)
+            return
+        await FileSystemUtil.write(
+            pathName,
+            JSON.stringify({
+                ...JSON.parse(res.toString()),
+                name: newName
+            }))
+        projectsToShow = projectsToShow
     }
 </script>
+
+<MenuBar options={[
+    {label: "Window", options: [{label: "Reload", onClick: () => {
+        console.trace("HERE")
+        window.chrome.webview.postMessage("RELOAD")
+    }}]}
+]}/>
+
 <div class="wrapper">
     <Header
             defaultVersion={defaultVersion}
@@ -105,7 +114,6 @@
             />
         </List>
     </div>
-
 </div>
 
 <style>
