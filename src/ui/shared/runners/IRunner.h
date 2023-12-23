@@ -1,8 +1,8 @@
 #ifndef PROJECTION_IRUNNER_H
 #define PROJECTION_IRUNNER_H
 
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include "glad/glad.h"
+#include "GLFW/glfw3.h"
 
 namespace PEngine {
     class Document;

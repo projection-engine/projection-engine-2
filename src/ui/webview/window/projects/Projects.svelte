@@ -1,118 +1,26 @@
-<script>
-    import {onDestroy, onMount} from "svelte"
-    import ContextMenuService from "../shared/lib/context-menu/ContextMenuService"
-    import List from "./components/List.svelte"
-    import Header from "./components/Header.svelte"
-    import ProjectRow from "./components/ProjectRow.svelte"
-    import refreshProjects from "./utils/refresh-projects"
-
+<script lang="ts">
+    import {onMount} from "svelte"
     import ToastNotificationSystem from "../shared/components/alert/ToastNotificationSystem"
-    import ElectronResources from "../shared/lib/ElectronResources"
-    import IPCRoutes from "../../shared/enums/IPCRoutes"
-    import FileTypes from "../../shared/enums/FileTypes"
-    import FileSystemUtil from "../shared/FileSystemUtil"
-    import StorageKeys from "../../shared/enums/StorageKeys"
     import MenuBar from "../shared/components/frame/MenuBar.svelte";
+    import LocalizationEN from "../../shared/enums/LocalizationEN";
+    import type ProjectDTO from "./lib/ProjectDTO";
+    import ProjectSystem from "./lib/ProjectSystem";
+    import WebViewSystem from "../shared/WebViewSystem";
 
-
-    let basePath
-    let inputValue = ""
-    let projectsToShow = []
-    let selected
-    let defaultVersion
-
-    const internalID = crypto.randomUUID()
+    let projectsToShow: ProjectDTO[] = []
 
     onMount(() => {
-        ContextMenuService.getInstance().mount([
-                {
-                    icon: "delete_forever",
-                    label: "Delete",
-                    onClick: async () => {
-                        await FileSystemUtil.rm(FileSystemUtil.resolvePath(localStorage.getItem(StorageKeys.ROOT_PATH) + FileSystemUtil.sep + selected), {
-                            recursive: true,
-                            force: true
-                        })
-                        projectsToShow = projectsToShow.filter(e => e.id !== selected)
-                    }
-                },
-                // {
-                // 	icon: "folder",
-                // 	label: "Open in explorer",
-                // 	onClick: async () => ElectronResources.shell.showItemInFolder(localStorage.getItem(StorageKeys.ROOT_PATH) + FileSystemUtil.sep + selected)
-                // },
-            ],
-            internalID
-        )
         ToastNotificationSystem.get()
-
-        if (!localStorage.getItem(StorageKeys.ROOT_PATH))
-            localStorage.setItem(StorageKeys.ROOT_PATH, FileSystemUtil.rootDir)
-        basePath = localStorage.getItem(StorageKeys.ROOT_PATH)
-
+        projectsToShow = ProjectSystem.readAllProjects()
     })
-    $: {
-        if (basePath)
-            refreshProjects(basePath).then(r => projectsToShow = r).catch(console.error)
-    }
-    onDestroy(() => ContextMenuService.getInstance().destroy(internalID))
-
-    async function onRename(newName, item) {
-        const pathName = localStorage.getItem(StorageKeys.ROOT_PATH) + FileSystemUtil.sep + item.id + FileSystemUtil.sep + FileTypes.PROJECT//ElectronResources.path.resolve(localStorage.getItem(StorageKeys.ROOT_PATH) + FileSystemUtil.sep + item.id + FileSystemUtil.sep + FileTypes.PROJECT)
-        const res = await FileSystemUtil.read(pathName)
-        if (!res)
-            return
-        await FileSystemUtil.write(
-            pathName,
-            JSON.stringify({
-                ...JSON.parse(res.toString()),
-                name: newName
-            }))
-        projectsToShow = projectsToShow
-    }
 </script>
 
-<MenuBar options={[
-    {label: "Window", options: [{label: "Reload", onClick: () => {
-        console.trace("HERE")
-        window.chrome.webview.postMessage("RELOAD")
-    }}]}
-]}/>
-
+<MenuBar
+        options={[{label: "Window", options: [{label: "Reload", onClick: () => WebViewSystem.sendMessage("RELOAD")   }]}]}/>
 <div class="wrapper">
-    <Header
-            defaultVersion={defaultVersion}
-            basePath={basePath}
-            setBasePath={v => basePath = v}
-            onChange={v => inputValue = v}
-            inputValue={inputValue}
-            projectsToShow={projectsToShow}
-            setProjectsToShow={v => projectsToShow = v}
-    />
-    <div
-            class="content"
-            id={internalID}
-            on:mousedown={e => {
-                    const found = document.elementsFromPoint(e.clientX, e.clientY).map(e => e.getAttribute("data-sveltecard")).filter(e => e != null)
-                    if(found != null)
-                        selected = found[0]
-                }}
-    >
-        <List
-                let:item
-                getLabel={e => e.meta.name}
-                items={projectsToShow}
-                favoriteKey={FileTypes.PROJECT}
-                getID={e => e.id}
-        >
-            <ProjectRow
+    <h3>{LocalizationEN.PROJECTS}</h3>
+    <div class="content">
 
-                    selected={selected}
-                    open={pathToProject => ElectronResources.ipcRenderer.send(IPCRoutes.SET_PROJECT_CONTEXT, pathToProject)}
-                    data={item}
-                    onRename={onRename}
-            />
-        </List>
     </div>
 </div>
 

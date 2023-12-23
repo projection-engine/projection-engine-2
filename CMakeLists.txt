@@ -77,7 +77,7 @@ set(FILE_PATHS
         src/engine/resource/ResourcesSystem.h
         src/engine/world/IEntity.cpp
         src/engine/world/IEntity.h
-
+        src/util/FileSystemUtil.h
         src/ui/shared/store/IStore.h
         src/ui/shared/elements/EInlineBlock.cpp
         src/ui/shared/elements/EInlineBlock.h
@@ -111,17 +111,16 @@ set(FILE_PATHS
         src/engine/Engine.cpp
         src/engine/Engine.h
         src/util/UUID.h
-        src/util/UUID.cpp
         src/ui/editor/EditorWindow.cpp
         src/ui/editor/EditorWindow.h
-        src/ui/editor/runner/Runner.cpp
-        src/ui/editor/runner/Runner.h
+        src/ui/shared/runners/Runner.cpp
+        src/ui/shared/runners/Runner.h
         src/ui/shared/document/ElementController.cpp
         src/ui/shared/document/ElementController.h
         src/ui/shared/document/ElementController.h
         src/ui/shared/document/ViewController.cpp
         src/ui/shared/document/ViewController.h
-        src/ui/editor/runner/imgui_demo.cpp
+        src/ui/shared/runners/imgui_demo.cpp
         src/ui/shared/elements/ETree.cpp
         src/ui/shared/elements/ETree.h
         src/ui/shared/elements/EButton.cpp
@@ -134,7 +133,6 @@ set(FILE_PATHS
         src/ui/shared/elements/EMenuBar.h
         src/ui/shared/elements/AbstractTitledElement.cpp
         src/ui/shared/elements/AbstractTitledElement.h
-        src/util/StringUtils.cpp
         src/util/StringUtils.h
         src/ui/shared/elements/DynamicElement.cpp
         src/ui/shared/elements/DynamicElement.h
