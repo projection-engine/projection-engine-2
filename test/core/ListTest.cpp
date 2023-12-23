@@ -1,7 +1,7 @@
 #include <catch2/catch_test_macros.hpp>
 
 #include "../Tester.h"
-#include "../../src/core/structures/List.h"
+#include "../../src/util/structures/List.h"
 
 namespace PEngine::ListTest {
 

@@ -27,8 +27,8 @@ set(COMMON_LIBRARIES
 
 set(FILE_PATHS
         src/engine/resource/dto/FBOTextureDTO.h
-        src/ui/core/webview/WebViewWindow.cpp
-        src/ui/core/webview/WebViewWindow.h
+        src/ui/shared/webview/WebViewWindow.cpp
+        src/ui/shared/webview/WebViewWindow.h
         src/engine/resource/static/direct_shadows.vs
         src/engine/resource/static/direct_shadows.fs
 
@@ -36,7 +36,7 @@ set(FILE_PATHS
         src/engine/resource/core/RUBO.h
         src/engine/resource/dto/UBODataDTO.h
         src/engine/resource/UBOType.h
-        src/core/Definitions.h
+        src/util/Definitions.h
 
         src/engine/external/IIOController.h
         src/engine/external/IFSController.h
@@ -70,7 +70,7 @@ set(FILE_PATHS
         src/engine/world/components/CTransform.cpp
         src/engine/world/components/CTransform.h
 
-        src/core/event/IEventTarget.h
+        src/util/event/IEventTarget.h
         src/engine/runtime/RuntimeSystem.cpp
         src/engine/runtime/RuntimeSystem.h
         src/engine/resource/ResourcesSystem.cpp
@@ -78,76 +78,76 @@ set(FILE_PATHS
         src/engine/world/IEntity.cpp
         src/engine/world/IEntity.h
 
-        src/ui/core/store/IStore.h
-        src/ui/core/elements/EInlineBlock.cpp
-        src/ui/core/elements/EInlineBlock.h
-        src/ui/core/elements/ETreeNode.cpp
-        src/ui/core/elements/ETreeNode.h
-        src/ui/core/elements/AbstractSimpleElement.cpp
-        src/ui/core/elements/AbstractSimpleElement.h
-        src/core/event/TypedEventPayload.h
-        src/core/structures/List.h
-        src/core/structures/Map.cpp
-        src/core/structures/Map.h
-        src/ui/core/elements/IElement.h
-        src/ui/core/elements/ESection.cpp
-        src/ui/core/elements/ESection.h
-        src/ui/core/elements/EText.cpp
-        src/ui/core/elements/EText.h
-        src/ui/core/document/Document.cpp
-        src/ui/core/document/Document.h
-        src/ui/core/IWindow.cpp
-        src/ui/core/IWindow.h
-        src/ui/core/views/IView.cpp
-        src/ui/core/views/IView.h
-        src/ui/core/elements/IElement.cpp
-        src/core/debug/ILoggable.cpp
-        src/core/debug/ILoggable.h
-        src/core/debug/Timer.cpp
-        src/core/debug/Timer.h
+        src/ui/shared/store/IStore.h
+        src/ui/shared/elements/EInlineBlock.cpp
+        src/ui/shared/elements/EInlineBlock.h
+        src/ui/shared/elements/ETreeNode.cpp
+        src/ui/shared/elements/ETreeNode.h
+        src/ui/shared/elements/AbstractSimpleElement.cpp
+        src/ui/shared/elements/AbstractSimpleElement.h
+        src/util/event/TypedEventPayload.h
+        src/util/structures/List.h
+        src/util/structures/Map.cpp
+        src/util/structures/Map.h
+        src/ui/shared/elements/IElement.h
+        src/ui/shared/elements/ESection.cpp
+        src/ui/shared/elements/ESection.h
+        src/ui/shared/elements/EText.cpp
+        src/ui/shared/elements/EText.h
+        src/ui/shared/document/Document.cpp
+        src/ui/shared/document/Document.h
+        src/ui/shared/IWindow.cpp
+        src/ui/shared/IWindow.h
+        src/ui/shared/views/IView.cpp
+        src/ui/shared/views/IView.h
+        src/ui/shared/elements/IElement.cpp
+        src/util/debug/ILoggable.cpp
+        src/util/debug/ILoggable.h
+        src/util/debug/Timer.cpp
+        src/util/debug/Timer.h
         src/engine/world/WorldSystem.cpp
         src/engine/world/WorldSystem.h
         src/engine/world/components/IComponent.h
         src/engine/Engine.cpp
         src/engine/Engine.h
-        src/core/UUID.h
-        src/core/UUID.cpp
+        src/util/UUID.h
+        src/util/UUID.cpp
         src/ui/editor/EditorWindow.cpp
         src/ui/editor/EditorWindow.h
         src/ui/editor/runner/Runner.cpp
         src/ui/editor/runner/Runner.h
-        src/ui/core/document/ElementController.cpp
-        src/ui/core/document/ElementController.h
-        src/ui/core/document/ElementController.h
-        src/ui/core/document/ViewController.cpp
-        src/ui/core/document/ViewController.h
+        src/ui/shared/document/ElementController.cpp
+        src/ui/shared/document/ElementController.h
+        src/ui/shared/document/ElementController.h
+        src/ui/shared/document/ViewController.cpp
+        src/ui/shared/document/ViewController.h
         src/ui/editor/runner/imgui_demo.cpp
-        src/ui/core/elements/ETree.cpp
-        src/ui/core/elements/ETree.h
-        src/ui/core/elements/EButton.cpp
-        src/ui/core/elements/EButton.h
-        src/ui/core/elements/EMenuItem.cpp
-        src/ui/core/elements/EMenuItem.h
-        src/ui/core/elements/EMenu.cpp
-        src/ui/core/elements/EMenu.h
-        src/ui/core/elements/EMenuBar.cpp
-        src/ui/core/elements/EMenuBar.h
-        src/ui/core/elements/AbstractTitledElement.cpp
-        src/ui/core/elements/AbstractTitledElement.h
-        src/core/StringUtils.cpp
-        src/core/StringUtils.h
-        src/ui/core/elements/DynamicElement.cpp
-        src/ui/core/elements/DynamicElement.h
-        src/ui/core/elements/EIcon.cpp
-        src/ui/core/elements/EIcon.h
-        src/core/event/EventController.cpp
-        src/core/event/EventController.h
-        src/core/event/IListener.cpp
-        src/core/event/IListener.h
-        src/core/event/ListenerWrapper.cpp
-        src/core/event/ListenerWrapper.h
-        src/core/event/IEventPayload.cpp
-        src/core/event/IEventPayload.h
+        src/ui/shared/elements/ETree.cpp
+        src/ui/shared/elements/ETree.h
+        src/ui/shared/elements/EButton.cpp
+        src/ui/shared/elements/EButton.h
+        src/ui/shared/elements/EMenuItem.cpp
+        src/ui/shared/elements/EMenuItem.h
+        src/ui/shared/elements/EMenu.cpp
+        src/ui/shared/elements/EMenu.h
+        src/ui/shared/elements/EMenuBar.cpp
+        src/ui/shared/elements/EMenuBar.h
+        src/ui/shared/elements/AbstractTitledElement.cpp
+        src/ui/shared/elements/AbstractTitledElement.h
+        src/util/StringUtils.cpp
+        src/util/StringUtils.h
+        src/ui/shared/elements/DynamicElement.cpp
+        src/ui/shared/elements/DynamicElement.h
+        src/ui/shared/elements/EIcon.cpp
+        src/ui/shared/elements/EIcon.h
+        src/util/event/EventController.cpp
+        src/util/event/EventController.h
+        src/util/event/IListener.cpp
+        src/util/event/IListener.h
+        src/util/event/ListenerWrapper.cpp
+        src/util/event/ListenerWrapper.h
+        src/util/event/IEventPayload.cpp
+        src/util/event/IEventPayload.h
 )
 
 set(CMAKE_TOOLCHAIN_FILE "C:/vcpkg/scripts/buildsystems/vcpkg.cmake")

@@ -1,7 +1,7 @@
 #ifndef PROJECTION_RUNNER_H
 #define PROJECTION_RUNNER_H
 
-#include "../../core/IRunner.h"
+#include "../../shared//IRunner.h"
 
 #define BACKGROUND_R .5
 #define BACKGROUND_G .5

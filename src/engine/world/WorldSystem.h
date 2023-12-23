@@ -3,8 +3,8 @@
 #define PROJECTION_WORLDSYSTEM_H
 
 #include "entt/entt.hpp"
-#include "../../core/debug/ILoggable.h"
-#include "../../core/structures/Map.h"
+#include "../../util/debug/ILoggable.h"
+#include "../../util/structures/Map.h"
 #include "components/IComponent.h"
 
 namespace PEngine {

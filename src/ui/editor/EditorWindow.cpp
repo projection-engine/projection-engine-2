@@ -2,7 +2,7 @@
 #include <iostream>
 #include "EditorWindow.h"
 #include "runner/Runner.h"
-#include "../core/webview/WebViewWindow.h"
+#include "../shared/webview/WebViewWindow.h"
 #include "WebView2.h"
 
 namespace PEngine {

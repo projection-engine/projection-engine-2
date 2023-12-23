@@ -1,7 +1,7 @@
 #ifndef PROJECTION_ISYSTEM_H
 #define PROJECTION_ISYSTEM_H
 
-#include "../../../core/debug/ILoggable.h"
+#include "../../../util/debug/ILoggable.h"
 
 namespace PEngine {
     class ResourcesSystem;

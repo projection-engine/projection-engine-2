@@ -2,7 +2,7 @@
 #define PROJECTION_EXAMPLE_H
 
 
-#include "../../../src/ui/core/views/IView.h"
+#include "../../../src/ui/shared/views/IView.h"
 
 namespace PEngine{
     class Example : public IView{

@@ -1,6 +1,6 @@
 #include "DocumentTest.h"
 #include "catch2/catch_all.hpp"
-#include "../../../src/ui/core/document/Document.h"
+#include "../../../src/ui/shared/document/Document.h"
 #include "../../Tester.h"
 #include "Example.h"
 

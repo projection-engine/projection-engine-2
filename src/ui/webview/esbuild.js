@@ -27,7 +27,7 @@ const worker = (fileName, outputFile) => ({
 const frontend = (fileName, outputName) => ({
     ...COMMON,
     platform: "browser",
-    entryPoints: ["./src/renderer/window" + fileName],
+    entryPoints: ["./window" + fileName],
     format: "iife",
     outfile: OUTPUT + outputName + ".js",
     plugins: [
@@ -42,10 +42,10 @@ start().catch(console.error)
 
 async function start() {
     const contexts = []
-    contexts.push(esbuild.context(worker("src/renderer/engine/core/workers/entity-worker.ts", "entity-worker")))
-    contexts.push(esbuild.context(worker("src/renderer/engine/core/workers/camera-worker.ts", "camera-worker")))
-    contexts.push(esbuild.context(worker("src/renderer/engine/core/workers/terrain-worker.ts", "terrain-worker")))
-    contexts.push(esbuild.context(worker("src/renderer/engine/core/workers/image-worker.ts", "image-worker")))
+    contexts.push(esbuild.context(worker("engine/core/workers/entity-worker.ts", "entity-worker")))
+    contexts.push(esbuild.context(worker("engine/core/workers/camera-worker.ts", "camera-worker")))
+    contexts.push(esbuild.context(worker("engine/core/workers/terrain-worker.ts", "terrain-worker")))
+    contexts.push(esbuild.context(worker("engine/core/workers/image-worker.ts", "image-worker")))
     contexts.push(esbuild.context(frontend("/editor/editor-window.ts", "editor-window")))
     contexts.push(esbuild.context({
         ...frontend("/projects/project-window.ts", "project-window"),
@@ -54,7 +54,7 @@ async function start() {
                 preprocess: sveltePreprocess({typescript: {tsconfigFile: "tsconfig.json"}}),
                 filterWarnings: () => false
             }),
-            copy({assets: [{from: ["./src/static/*"], to: ["./"]}]})]
+            copy({assets: [{from: ["./static/*"], to: ["./"]}]})]
     }))
 
 

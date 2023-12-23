@@ -2,8 +2,8 @@
 #include "catch2/catch_all.hpp"
 #include "../../Tester.h"
 #include "Listener.h"
-#include "../../../src/core/event/EventController.h"
-#include "../../../src/core/event/TypedEventPayload.h"
+#include "../../../src/util/event/EventController.h"
+#include "../../../src/util/event/TypedEventPayload.h"
 
 
 namespace PEngine::EventControllerTest {

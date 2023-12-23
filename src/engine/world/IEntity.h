@@ -3,7 +3,7 @@
 
 #include <string>
 #include "entt/entity/entity.hpp"
-#include "../../core/UUID.h"
+#include "../../util/UUID.h"
 
 namespace PEngine {
     class IEntity {

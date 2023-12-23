@@ -1,6 +1,6 @@
 #ifndef PROJECTION_RSHADER_H
 #define PROJECTION_RSHADER_H
-#include "../../../core/Definitions.h"
+#include "../../../util/Definitions.h"
 #include "IResource.h"
 
 namespace PEngine {

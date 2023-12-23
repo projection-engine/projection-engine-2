@@ -1,7 +1,7 @@
 #ifndef PROJECTION_EDITORWINDOW_H
 #define PROJECTION_EDITORWINDOW_H
 
-#include "../core/IWindow.h"
+#include "../shared//IWindow.h"
 #include "../../engine/Engine.h"
 #include "basic/IOController.h"
 #include "basic/FSController.h"
