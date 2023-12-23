@@ -16,6 +16,7 @@
     import EditorUtil from "./util/EditorUtil"
     import ContentBrowserUtil from "./util/ContentBrowserUtil"
     import StorageKeys from "../../../shared/enums/StorageKeys"
+    import MenuBar from "../shared/components/frame/MenuBar.svelte";
 
     const COMPONENT_ID = crypto.randomUUID()
     let isMetadataReady = false
@@ -25,29 +26,30 @@
     let currentViewIndex = 0
 
     onMount(() => {
-    	SettingsStore.getInstance().addListener(COMPONENT_ID, data => {
-    		view = data.views?.[data.currentView]
+        SettingsStore.getInstance().addListener(COMPONENT_ID, data => {
+            view = data.views?.[data.currentView]
             currentViewIndex = data.currentView
-    		cameraGizmoSize = data.cameraGizmoSize
-    	}, ["views", "currentView", "cameraGizmoSize"])
-    	EngineStore.getInstance().addListener(COMPONENT_ID, data => HotKeysController.blockActions = data.executingAnimation, ["executingAnimation"])
-    	StoreIPCListener.get()
-    	ToastNotificationSystem.get()
-    	ElectronResources.ipcRenderer.on(IPCRoutes.EDITOR_INITIALIZATION, (_, pathToProject) => {
-    		sessionStorage.setItem(StorageKeys.PROJECT_PATH, pathToProject)
-    		FileSystemUtil.initializeFolders(pathToProject).catch(console.error)
-    		LevelService.get(() => isMetadataReady = true)
-    		HotKeysController.initializeListener()
-    		ContentBrowserUtil.initializeContentBrowser()
-    	})
+            cameraGizmoSize = data.cameraGizmoSize
+        }, ["views", "currentView", "cameraGizmoSize"])
+        EngineStore.getInstance().addListener(COMPONENT_ID, data => HotKeysController.blockActions = data.executingAnimation, ["executingAnimation"])
+        StoreIPCListener.get()
+        ToastNotificationSystem.get()
+        ElectronResources.ipcRenderer.on(IPCRoutes.EDITOR_INITIALIZATION, (_, pathToProject) => {
+            sessionStorage.setItem(StorageKeys.PROJECT_PATH, pathToProject)
+            FileSystemUtil.initializeFolders(pathToProject).catch(console.error)
+            LevelService.get(() => isMetadataReady = true)
+            HotKeysController.initializeListener()
+            ContentBrowserUtil.initializeContentBrowser()
+        })
     })
 
     onDestroy(() => {
-    	EngineStore.getInstance().removeListener(COMPONENT_ID)
-    	SettingsStore.getInstance().removeListener(COMPONENT_ID)
+        EngineStore.getInstance().removeListener(COMPONENT_ID)
+        SettingsStore.getInstance().removeListener(COMPONENT_ID)
     })
 </script>
 
+<MenuBar/>
 {#if isMetadataReady}
     <Canvas initializeEditor={() => isContextInitialized = true}/>
 {/if}

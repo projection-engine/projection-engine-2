@@ -13,11 +13,15 @@ namespace PEngine {
     private:
         Engine engine = Engine(new IOController, new FSController);
 
+        static void onMessage(ICoreWebView2 *webView, ICoreWebView2WebMessageReceivedEventArgs *args, IWindow *window);
+
     protected:
+
         IRunner *createRunner() override;
 
     public:
-        explicit EditorWindow() : IWindow("Project Editor"){}
+
+        explicit EditorWindow() : IWindow("Project Editor") {}
 
         void initialize() override;
     };

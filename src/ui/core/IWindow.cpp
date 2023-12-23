@@ -61,12 +61,12 @@ namespace PEngine {
     }
 
     void IWindow::addWebView(const std::string &id, const std::string &filePath) {
-        webViews[id] = new WebViewWindow(filePath, window);
+        webViews[id] = new WebViewWindow(filePath, this);
     }
 
     void IWindow::addWebViewEventListener(const std::string &id,
                                           void (*action)(ICoreWebView2 *, ICoreWebView2WebMessageReceivedEventArgs *,IWindow *)) {
-        webViews[id]->addOnMessageListener(action, this);
+        webViews[id]->addMessageListener(action);
     }
 
     void IWindow::postWebViewMessage(const std::string &id, std::string message) {
@@ -108,5 +108,9 @@ namespace PEngine {
             delete entry.second;
         }
         delete runner;
+    }
+
+    GLFWwindow *IWindow::getWindow() const {
+        return window;
     }
 }

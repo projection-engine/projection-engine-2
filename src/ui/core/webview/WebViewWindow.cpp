@@ -1,6 +1,7 @@
 #include "WebViewWindow.h"
 #include <filesystem>
 #include <iostream>
+#include "../IWindow.h"
 
 #define GLFW_EXPOSE_NATIVE_WGL
 #define GLFW_EXPOSE_NATIVE_WIN32
@@ -37,6 +38,10 @@ namespace PEngine {
         CONSOLE_WARN("Navigating to: {0}", pathToFile)
         webview->Navigate(pathToFileW.c_str());
         CONSOLE_LOG("WebView2 context successfully initialized")
+        for (auto dto: listeners) {
+            addMessageListenerInternal(dto);
+        }
+        listeners.clear();
     }
 
 
@@ -49,11 +54,12 @@ namespace PEngine {
         webview->PostWebMessageAsString(std::wstring(message.begin(), message.end()).c_str());
     }
 
-    WebViewWindow::WebViewWindow(const std::string &pathToFile, GLFWwindow *window) {
+    WebViewWindow::WebViewWindow(const std::string &pathToFile, IWindow *window) {
+        this->window = window;
         this->pathToFile = "file:///" + std::filesystem::current_path().string() + "/" + pathToFile;
         CONSOLE_WARN("Creating WebView2 window")
-        nativeWindow = glfwGetWin32Window(window);
-        result = CreateCoreWebView2EnvironmentWithOptions(
+        nativeWindow = glfwGetWin32Window(this->window->getWindow());
+        CreateCoreWebView2EnvironmentWithOptions(
                 nullptr,
                 nullptr,
                 nullptr,
@@ -69,19 +75,27 @@ namespace PEngine {
                         }).Get());
     }
 
-    void WebViewWindow::addOnMessageListener(
-            void (*action)(BASE *, MSG_RECEIVED_ARGS *,
-                           IWindow *), IWindow *window) {
+    void WebViewWindow::addMessageListener(
+            void (*action)(BASE *, MSG_RECEIVED_ARGS *, IWindow *)) {
+        ListenerDTO dto(action);
         if (webview == nullptr) {
-            CONSOLE_ERROR("WebView not initialized")
+            CONSOLE_WARN("WebView not initialized, adding listener to queue")
+            listeners.push_back(dto);
             return;
         }
-        const Microsoft::WRL::ComPtr<MSG_RECEIVED_HANDLER> &messageHandler = Microsoft::WRL::Callback<MSG_RECEIVED_HANDLER>(
-                [&action, window](ICoreWebView2 *wv, MSG_RECEIVED_ARGS *args) -> HRESULT {
-                    action(wv, args, window);
-                    return S_OK;
-                });
-        webview->add_WebMessageReceived(messageHandler.Get(), &token);
+        addMessageListenerInternal(dto);
     }
 
+    void WebViewWindow::addMessageListenerInternal(ListenerDTO &listener) {
+        void (*callback)(ICoreWebView2 *, ICoreWebView2WebMessageReceivedEventArgs *, IWindow *) = listener.action;
+        webview->add_WebMessageReceived(
+                Microsoft::WRL::Callback<MSG_RECEIVED_HANDLER>(
+                        [callback, this](ICoreWebView2 *wv, MSG_RECEIVED_ARGS *args) -> HRESULT {
+                            CONSOLE_LOG("WebView message received")
+                            callback(wv, args, this->window);
+                            return S_OK;
+                        }).Get(),
+                &token);
+        CONSOLE_LOG("Adding message listener")
+    }
 }
