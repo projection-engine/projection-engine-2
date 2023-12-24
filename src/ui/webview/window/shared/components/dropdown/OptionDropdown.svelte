@@ -8,7 +8,7 @@
     export let label: string
     export let labelAsIcon: boolean
     export let autoClose: boolean
-    export let options: { id?: any, label: string, icon?: string, divider?: boolean, onClick: Function }[]
+    export let options: { id?: any, label: string, icon?: string, divider?: boolean, onClick: GenericVoidFunction }[]
     export let cleanLayout: boolean
     export let tooltip: string
     export let noPadding: boolean

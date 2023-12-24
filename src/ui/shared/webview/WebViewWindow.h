@@ -18,8 +18,10 @@
 namespace PEngine {
     class IWindow;
 
+    class WebViewPayload;
+
     struct ListenerDTO {
-        void (*action)(BASE *, MSG_RECEIVED_ARGS *, IWindow *);
+        void (*action)(WebViewPayload &);
     };
 
     class WebViewWindow : public ILoggable {
@@ -30,7 +32,7 @@ namespace PEngine {
         wil::com_ptr<ICoreWebView2Controller> webviewController = nullptr;
         wil::com_ptr<ICoreWebView2> webview = nullptr;
         IWindow *window;
-        std::vector<ListenerDTO> listeners;
+        std::unordered_map<std::string, ListenerDTO *> listeners;
 
         void prepareView(ICoreWebView2Controller *controller);
 
@@ -40,11 +42,11 @@ namespace PEngine {
 
         HWND__ *getNativeWindow() const;
 
-        void addMessageListener(void (*action)(BASE *webView, MSG_RECEIVED_ARGS *args, IWindow *window));
+        void addMessageListener(const std::string &listenerId, void (*action)(WebViewPayload &));
 
         void postMessage(std::string message);
 
-        void addMessageListenerInternal(ListenerDTO &listener);
+        HRESULT onMessage(ICoreWebView2WebMessageReceivedEventArgs *args);
     };
 
 }

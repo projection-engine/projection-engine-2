@@ -5,7 +5,7 @@
     import LocalizationEN from "../../shared/enums/LocalizationEN";
     import type ProjectDTO from "./lib/ProjectDTO";
     import ProjectSystem from "./lib/ProjectSystem";
-    import WebViewSystem from "../shared/WebViewSystem";
+    import WebViewSystem from "../shared/webview/WebViewSystem";
 
     let projectsToShow: ProjectDTO[] = []
 
@@ -16,7 +16,7 @@
 </script>
 
 <MenuBar
-        options={[{label: "Window", options: [{label: "Reload", onClick: () => WebViewSystem.sendMessage("RELOAD")   }]}]}/>
+        options={[{label: "Window", options: [{label: "Reload", onClick: () => WebViewSystem.sendMessage(null, "RELOAD")   }]}]}/>
 <div class="wrapper">
     <h3>{LocalizationEN.PROJECTS}</h3>
     <div class="content">

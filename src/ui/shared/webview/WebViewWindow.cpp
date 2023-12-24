@@ -6,7 +6,9 @@
 #define GLFW_EXPOSE_NATIVE_WGL
 #define GLFW_EXPOSE_NATIVE_WIN32
 
+#include <nlohmann/json.hpp>
 #include "GLFW/glfw3native.h"
+#include "WebViewPayload.h"
 
 namespace PEngine {
     HWND__ *WebViewWindow::getNativeWindow() const {
@@ -38,12 +40,37 @@ namespace PEngine {
         CONSOLE_WARN("Navigating to: {0}", pathToFile)
         webview->Navigate(pathToFileW.c_str());
         CONSOLE_LOG("WebView2 context successfully initialized")
-        for (auto dto: listeners) {
-            addMessageListenerInternal(dto);
-        }
-        listeners.clear();
+        webview->add_WebMessageReceived(
+                Microsoft::WRL::Callback<MSG_RECEIVED_HANDLER>(
+                        [this](ICoreWebView2 *wv, MSG_RECEIVED_ARGS *args) -> HRESULT {
+                            return onMessage(args);
+                        }).Get(),
+                &token);
     }
 
+    HRESULT WebViewWindow::onMessage(ICoreWebView2WebMessageReceivedEventArgs *args) {
+        wil::unique_cotaskmem_string message;
+        args->TryGetWebMessageAsString(&message);
+        std::wstring msg(message.get());
+
+        WebViewPayload payload;
+        try {
+            nlohmann::json payloadJson = nlohmann::json::parse(msg);
+            payload.id = payloadJson["id"].get<std::string>();
+            CONSOLE_LOG("WebView message received with ID: {0}", payload.id)
+            if (payloadJson["payload"].is_string()) {
+                payload.payload = payloadJson["payload"].get<std::string>().c_str();
+            }
+            payload.webview = webview;
+            payload.window = window;
+        } catch (nlohmann::json::parse_error &ex) {
+            CONSOLE_ERROR("Error parsing payload")
+        }
+        if (listeners.count(payload.id)) {
+            listeners[payload.id]->action(payload);
+        }
+        return S_OK;
+    }
 
     void WebViewWindow::postMessage(std::string message) {
         if (webview == nullptr) {
@@ -75,27 +102,7 @@ namespace PEngine {
                         }).Get());
     }
 
-    void WebViewWindow::addMessageListener(
-            void (*action)(BASE *, MSG_RECEIVED_ARGS *, IWindow *)) {
-        ListenerDTO dto(action);
-        if (webview == nullptr) {
-            CONSOLE_WARN("WebView not initialized, adding listener to queue")
-            listeners.push_back(dto);
-            return;
-        }
-        addMessageListenerInternal(dto);
-    }
-
-    void WebViewWindow::addMessageListenerInternal(ListenerDTO &listener) {
-        void (*callback)(ICoreWebView2 *, ICoreWebView2WebMessageReceivedEventArgs *, IWindow *) = listener.action;
-        webview->add_WebMessageReceived(
-                Microsoft::WRL::Callback<MSG_RECEIVED_HANDLER>(
-                        [callback, this](ICoreWebView2 *wv, MSG_RECEIVED_ARGS *args) -> HRESULT {
-                            CONSOLE_LOG("WebView message received")
-                            callback(wv, args, this->window);
-                            return S_OK;
-                        }).Get(),
-                &token);
-        CONSOLE_LOG("Adding message listener")
+    void WebViewWindow::addMessageListener(const std::string &listenerId, void (*action)(WebViewPayload &)) {
+        listeners[listenerId] = new ListenerDTO(action);
     }
 }

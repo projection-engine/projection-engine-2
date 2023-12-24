@@ -11,7 +11,7 @@ find_package(pugixml CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
 find_package(EnTT CONFIG REQUIRED)
 find_package(unofficial-webview2 CONFIG REQUIRED)
-
+find_package(nlohmann_json CONFIG REQUIRED)
 set(COMMON_LIBRARIES
         glad::glad
         glfw
@@ -23,6 +23,7 @@ set(COMMON_LIBRARIES
         Catch2::Catch2WithMain
         EnTT::EnTT
         unofficial::webview2::webview2
+        nlohmann_json::nlohmann_json
 )
 
 set(FILE_PATHS

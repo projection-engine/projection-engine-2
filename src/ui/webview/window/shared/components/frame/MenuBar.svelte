@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Dropdown from "../dropdown/Dropdown.svelte";
+    import OptionDropdown from "../dropdown/OptionDropdown.svelte";
 
     export let options: [{ label: string, options: [{ label: string, onClick: GenericVoidFunction }] }]
     console.trace("INITIALIZED")
@@ -7,18 +7,13 @@
 
 
 <div class="container">
-
     {#each options as option}
-        <Dropdown asButton={true}>
-            <span class="btn" slot="button">
-                {option.label}
-            </span>
-            {#each option.options as menuOption}
-                <button on:click={menuOption.onClick}>
-                    {menuOption.label}
-                </button>
-            {/each}
-        </Dropdown>
+        <OptionDropdown
+                cleanLayout={true}
+                options={option.options}
+                label={option.label}
+                buttonStyles="border: none !important; height: 25px !important;"
+                autoClose={true}/>
     {/each}
 </div>
 
@@ -29,12 +24,8 @@
         justify-content: flex-start;
         align-items: center;
         width: 100vw;
-        height: 30px;
-        padding: 4px;
+        height: 25px;
+        padding: 0 4px;
     }
-    .btn{
-        padding: 4px;
-        font-size: .7rem;
-        text-align: center;
-    }
+
 </style>

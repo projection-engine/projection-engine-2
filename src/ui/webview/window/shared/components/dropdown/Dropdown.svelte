@@ -3,7 +3,7 @@
     import "./css/dropdown.css"
     import Dialog from "../dialog/Dialog.svelte";
 
-    export let asButton
+    export let asButton = false
     export let noBackground = undefined
     export let width = undefined
     export let styles = undefined

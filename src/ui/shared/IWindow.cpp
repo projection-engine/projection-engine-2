@@ -4,6 +4,7 @@
 #include "imgui_impl_opengl3.h"
 #include "wtypes.h"
 #include "webview/WebViewWindow.h"
+#include "webview/WebViewPayload.h"
 
 namespace PEngine {
     void IWindow::getDesktopResolution(int &horizontal, int &vertical) {
@@ -64,13 +65,16 @@ namespace PEngine {
         webViews[id] = new WebViewWindow(filePath, this);
     }
 
-    void IWindow::addWebViewEventListener(const std::string &id,
-                                          void (*action)(ICoreWebView2 *, ICoreWebView2WebMessageReceivedEventArgs *,IWindow *)) {
-        webViews[id]->addMessageListener(action);
+    void IWindow::addWebViewEventListener(const std::string &webviewId, const std::string &listenerId, void (*action)(WebViewPayload &)) {
+        webViews[webviewId]->addMessageListener(listenerId, action);
     }
 
     void IWindow::postWebViewMessage(const std::string &id, std::string message) {
         webViews[id]->postMessage(std::move(message));
+    }
+
+    void IWindow::setWindowResizable(bool isResizable) {
+        glfwWindowHint(GLFW_RESIZABLE, isResizable ? GLFW_TRUE : GLFW_FALSE);
     }
 
     IWindow::IWindow(const std::string &name) {
@@ -82,6 +86,7 @@ namespace PEngine {
         }
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+//        glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
 
         int width;
         int height;

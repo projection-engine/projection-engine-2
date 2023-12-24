@@ -3,28 +3,23 @@
 #include "EditorWindow.h"
 #include "../shared/runners/Runner.h"
 #include "../shared/webview/WebViewWindow.h"
+#include "../shared/webview/WebViewPayload.h"
 #include "WebView2.h"
 
 namespace PEngine {
     void EditorWindow::initialize() {
         IWindow::initialize();
         document.setEngine(&engine);
-        const char *string = "TEST";
-        addWebView(string, "project-window.html");
-        addWebViewEventListener(string, onMessage);
+        const char *WEBVIEW_ID = "TEST";
+        addWebView(WEBVIEW_ID, "project-window.html");
+        addWebViewEventListener(WEBVIEW_ID, "RELOAD", onMessage);
     }
 
     IRunner *EditorWindow::createRunner() {
         return new Runner(window, document);
     }
 
-    void
-    EditorWindow::onMessage(ICoreWebView2 *webView, ICoreWebView2WebMessageReceivedEventArgs *args, IWindow *window) {
-        wil::unique_cotaskmem_string message;
-        args->TryGetWebMessageAsString(&message);
-        std::wstring msg(message.get());
-        if (msg == L"RELOAD") {
-            webView->Reload();
-        }
+    void EditorWindow::onMessage(WebViewPayload &payload) {
+        payload.webview->Reload();
     }
 }

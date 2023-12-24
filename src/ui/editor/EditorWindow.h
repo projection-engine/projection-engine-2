@@ -13,7 +13,7 @@ namespace PEngine {
     private:
         Engine engine = Engine(new IOController, new FSController);
 
-        static void onMessage(ICoreWebView2 *webView, ICoreWebView2WebMessageReceivedEventArgs *args, IWindow *window);
+        static void onMessage(WebViewPayload &payload);
 
     protected:
 

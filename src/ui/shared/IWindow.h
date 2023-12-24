@@ -21,6 +21,7 @@ namespace PEngine {
 
     class WebViewWindow;
 
+    class WebViewPayload;
 
     class IWindow : public ILoggable {
     protected:
@@ -56,14 +57,13 @@ namespace PEngine {
 
         void start();
 
-        void addWebViewEventListener(const std::string &id,
-                                     void (*action)(ICoreWebView2 *,
-                                                    ICoreWebView2WebMessageReceivedEventArgs *,
-                                                    IWindow *));
+        void addWebViewEventListener(const std::string &webviewId, const std::string &listenerId, void (*action)(WebViewPayload &));
 
         void postWebViewMessage(const std::string &id, std::string message);
 
         GLFWwindow *getWindow() const;
+
+        void setWindowResizable(bool isResizable);
     };
 }
 #endif
