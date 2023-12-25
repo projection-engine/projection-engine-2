@@ -27,6 +27,12 @@ set(COMMON_LIBRARIES
 )
 
 set(FILE_PATHS
+        src/ui/shared/webview/WebViewPayload.h
+        src/ui/projects/Projects.cpp
+        src/ui/projects/Projects.h
+        src/ui/WindowSystem.cpp
+        src/ui/WindowSystem.h
+
         src/engine/resource/dto/FBOTextureDTO.h
         src/ui/shared/webview/WebViewWindow.cpp
         src/ui/shared/webview/WebViewWindow.h
@@ -112,10 +118,10 @@ set(FILE_PATHS
         src/engine/Engine.cpp
         src/engine/Engine.h
         src/util/UUID.h
-        src/ui/editor/EditorWindow.cpp
-        src/ui/editor/EditorWindow.h
-        src/ui/shared/runners/Runner.cpp
-        src/ui/shared/runners/Runner.h
+        src/ui/editor/Editor.cpp
+        src/ui/editor/Editor.h
+        src/ui/editor/basic/Runner.cpp
+        src/ui/editor/basic/Runner.h
         src/ui/shared/document/ElementController.cpp
         src/ui/shared/document/ElementController.h
         src/ui/shared/document/ElementController.h

@@ -3,33 +3,47 @@
 
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
+#include "../../util/debug/ILoggable.h"
+#include "../shared/document/Document.h"
 
 namespace PEngine {
-    class Document;
-
-    class IRunner {
+    class IRunner : public ILoggable {
     protected:
-        GLFWwindow *window;
-        Document &document;
+        GLFWwindow *window = nullptr;
+        Document document;
+        bool isRunning = false;
+        int windowWidth = 0;
+        int windowHeight = 0;
+
+        virtual void update() {}
+
+        virtual void startNewFrame() {}
+
+        virtual void render() {}
+
+        virtual void drawNewFrame() {}
+
+        virtual void clearWindow() {}
+
+        virtual void updateViewports() {}
+
     public:
-        explicit IRunner(GLFWwindow *win, Document &doc) : window(win), document(doc) {}
 
-        virtual int getWindowWidth() const {
-            return 0;
+        explicit IRunner(GLFWwindow *w) {
+            window = w;
         }
 
-        virtual void setWindowWidth(int ww) {}
+        virtual ~IRunner() = default;
 
-        virtual int getWindowHeight() const {
-            return 0;
+        void run() {
+            update();
+            startNewFrame();
+            render();
+            drawNewFrame();
+            clearWindow();
+            updateViewports();
         }
-
-        virtual void setWindowHeight(int wh) {}
-
-        virtual void run() {}
-
     };
-
 }
 
 #endif

@@ -71,13 +71,13 @@ Index of this file:
 // - sub section: ShowDemoWindowTables()
 // - sub section: ShowDemoWindowInputs()
 // [SECTION] About IWindow / ShowAboutWindow()
-// [SECTION] Style EditorWindow / ShowStyleEditor()
+// [SECTION] Style Editor / ShowStyleEditor()
 // [SECTION] User Guide / ShowUserGuide()
 // [SECTION] Example App: MainView Menu Bar / ShowExampleAppMainMenuBar()
 // [SECTION] Example App: Debug ILoggable / ShowExampleAppConsole()
 // [SECTION] Example App: Debug Log / ShowExampleAppLog()
 // [SECTION] Example App: Simple Layout / ShowExampleAppLayout()
-// [SECTION] Example App: Property EditorWindow / ShowExampleAppPropertyEditor()
+// [SECTION] Example App: Property Editor / ShowExampleAppPropertyEditor()
 // [SECTION] Example App: Long EText / ShowExampleAppLongText()
 // [SECTION] Example App: Auto Resize / ShowExampleAppAutoResize()
 // [SECTION] Example App: Constrained Resize / ShowExampleAppConstrainedResize()
@@ -339,7 +339,7 @@ void ImGui::ShowDemoWindow(bool *p_open) {
 //    if (show_tool_id_stack_tool)
 //        ImGui::ShowIDStackToolWindow(&show_tool_id_stack_tool);
     if (show_tool_style_editor) {
-        ImGui::Begin("Dear ImGui Style EditorWindow", &show_tool_style_editor);
+        ImGui::Begin("Dear ImGui Style Editor", &show_tool_style_editor);
         ImGui::ShowStyleEditor();
         ImGui::End();
     }
@@ -435,7 +435,7 @@ void ImGui::ShowDemoWindow(bool *p_open) {
             ImGui::MenuItem("Metrics/Debugger", NULL, &show_tool_metrics, has_debug_tools);
             ImGui::MenuItem("Debug Log", NULL, &show_tool_debug_log, has_debug_tools);
             ImGui::MenuItem("ID Stack Tool", NULL, &show_tool_id_stack_tool, has_debug_tools);
-            ImGui::MenuItem("Style EditorWindow", NULL, &show_tool_style_editor);
+            ImGui::MenuItem("Style Editor", NULL, &show_tool_style_editor);
             ImGui::MenuItem("About Dear ImGui", NULL, &show_tool_about);
             ImGui::EndMenu();
         }
@@ -450,7 +450,7 @@ void ImGui::ShowDemoWindow(bool *p_open) {
         ImGui::SeparatorText("ABOUT THIS DEMO:");
         ImGui::BulletText("Sections below are demonstrating many aspects of the library.");
         ImGui::BulletText("The \"Examples\" menu above leads to more demo contents.");
-        ImGui::BulletText("The \"Tools\" menu above gives access to: About Box, Style EditorWindow,\n"
+        ImGui::BulletText("The \"Tools\" menu above gives access to: About Box, Style Editor,\n"
                           "and Metrics/Debugger (general purpose Dear ImGui debugging tool).");
 
         ImGui::SeparatorText("PROGRAMMER GUIDE:");
@@ -633,7 +633,7 @@ void ImGui::ShowDemoWindow(bool *p_open) {
         IMGUI_DEMO_MARKER("Configuration/Style");
         if (ImGui::TreeNode("Style")) {
             HelpMarker(
-                    "The same contents can be accessed in 'Tools->Style EditorWindow' or by calling the ShowStyleEditor() function.");
+                    "The same contents can be accessed in 'Tools->Style Editor' or by calling the ShowStyleEditor() function.");
             ImGui::ShowStyleEditor();
             ImGui::TreePop();
             ImGui::Spacing();
@@ -6495,7 +6495,7 @@ void ImGui::ShowAboutWindow(bool *p_open) {
 }
 
 //-----------------------------------------------------------------------------
-// [SECTION] Style EditorWindow / ShowStyleEditor()
+// [SECTION] Style Editor / ShowStyleEditor()
 //-----------------------------------------------------------------------------
 // - ShowFontSelector()
 // - ShowStyleSelector()
@@ -6550,7 +6550,7 @@ bool ImGui::ShowStyleSelector(const char *label) {
 }
 
 void ImGui::ShowStyleEditor(ImGuiStyle *ref) {
-    IMGUI_DEMO_MARKER("Tools/Style EditorWindow");
+    IMGUI_DEMO_MARKER("Tools/Style Editor");
     // You can pass in a reference ImGuiStyle structure to compare to, revert to and save to
     // (without a reference style pointer, we will use one compared locally as a reference)
     ImGuiStyle &style = ImGui::GetStyle();
@@ -7560,7 +7560,7 @@ static void ShowExampleAppLayout(bool *p_open) {
 }
 
 //-----------------------------------------------------------------------------
-// [SECTION] Example App: Property EditorWindow / ShowExampleAppPropertyEditor()
+// [SECTION] Example App: Property Editor / ShowExampleAppPropertyEditor()
 //-----------------------------------------------------------------------------
 
 static void ShowPlaceholderObject(const char *prefix, int uid) {
@@ -7614,7 +7614,7 @@ static void ShowExampleAppPropertyEditor(bool *p_open) {
         return;
     }
 
-    IMGUI_DEMO_MARKER("Examples/Property EditorWindow");
+    IMGUI_DEMO_MARKER("Examples/Property Editor");
     HelpMarker(
             "This example shows how you may implement a property ui using two columns.\n"
             "All objects/fields data are dummies here.\n");

@@ -21,18 +21,18 @@ namespace PEngine {
 
     class WebViewWindow;
 
+    class WindowSystem;
+
     class WebViewPayload;
 
     class IWindow : public ILoggable {
     protected:
         GLFWwindow *window = nullptr;
-        Document document;
-        IRunner *runner = nullptr;
         std::unordered_map<std::string, WebViewWindow *> webViews;
-
+        WindowSystem *windowSystem = nullptr;
+        std::string name;
         float scaleX = .5;
         float scaleY = .5;
-        bool ready = false;
 
         static void getDesktopResolution(int &horizontal, int &vertical);
 
@@ -42,28 +42,29 @@ namespace PEngine {
 
         void createWindowIO();
 
-        virtual IRunner *createRunner();
 
         void addWebView(const std::string &id, const std::string &filePath);
 
         void removeWebView(const std::string &id);
 
     public:
+
         ~IWindow();
 
         explicit IWindow(const std::string &name);
 
-        virtual void initialize();
+        virtual IRunner *initialize();
 
-        void start();
-
-        void addWebViewEventListener(const std::string &webviewId, const std::string &listenerId, void (*action)(WebViewPayload &));
+        void addWebViewEventListener(const std::string &webviewId, const std::string &listenerId,
+                                     void (*action)(WebViewPayload &));
 
         void postWebViewMessage(const std::string &id, std::string message);
 
         GLFWwindow *getWindow() const;
 
         void setWindowResizable(bool isResizable);
+
+        void setWindowSystem(WindowSystem *windowSystem);
     };
 }
 #endif

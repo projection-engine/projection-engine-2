@@ -4,7 +4,6 @@
     import SceneStats from "./components/SceneStats.svelte"
     import Icon from "../../../shared/components/icon/Icon.svelte"
     import ToolTip from "../../../shared/components/tooltip/ToolTip.svelte"
-    import ElectronResources from "../../../shared/lib/ElectronResources"
     import Engine from "../../../../engine/core/Engine"
     import {onDestroy, onMount} from "svelte"
     import EntityUpdateService from "../../services/engine/EntityUpdateService"

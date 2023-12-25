@@ -1,25 +1,24 @@
 #include <filesystem>
-#include <iostream>
-#include "EditorWindow.h"
-#include "../shared/runners/Runner.h"
+#include "Editor.h"
 #include "../shared/webview/WebViewWindow.h"
 #include "../shared/webview/WebViewPayload.h"
 #include "WebView2.h"
+#include "basic/Runner.h"
 
 namespace PEngine {
-    void EditorWindow::initialize() {
+    IRunner* Editor::initialize() {
         IWindow::initialize();
-        document.setEngine(&engine);
+        if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
+            CONSOLE_ERROR("Failed to initialize GLAD")
+            return nullptr;
+        }
         const char *WEBVIEW_ID = "TEST";
         addWebView(WEBVIEW_ID, "project-window.html");
         addWebViewEventListener(WEBVIEW_ID, "RELOAD", onMessage);
+        return new Runner(window);
     }
 
-    IRunner *EditorWindow::createRunner() {
-        return new Runner(window, document);
-    }
-
-    void EditorWindow::onMessage(WebViewPayload &payload) {
+    void Editor::onMessage(WebViewPayload &payload) {
         payload.webview->Reload();
     }
 }
