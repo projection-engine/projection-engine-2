@@ -1,13 +1,13 @@
 #include <glad/glad.h>
 #include "ResourcesSystem.h"
-#include "../../core/structures/Map.cpp"
+#include "../../util/structures/Map.cpp"
 #include "core/RMesh.h"
 
 namespace PEngine {
     void ResourcesSystem::registerResource(IResource *resource, StaticResource id) {
         CONSOLE_WARN("Creating {0}", std::to_string(id))
         if (staticResources.has(id)) {
-            CONSOLE_ERROR("Static core already exists {0}", std::to_string(id))
+            CONSOLE_ERROR("Static util already exists {0}", std::to_string(id))
             return;
         }
         staticResources.set(id, resource);
@@ -24,7 +24,7 @@ namespace PEngine {
     void ResourcesSystem::registerResource(IResource *resource, const char *id) {
         CONSOLE_WARN("Creating {0}", id)
         if (dynamicResources.has(id)) {
-            CONSOLE_ERROR("Dynamic core already exists {0}", id)
+            CONSOLE_ERROR("Dynamic util already exists {0}", id)
             return;
         }
         dynamicResources.set(id, resource);
@@ -33,7 +33,7 @@ namespace PEngine {
     void ResourcesSystem::deleteResource(const std::string &id) {
         CONSOLE_WARN("Deleting {0}", id)
         if (!dynamicResources.has(id)) {
-            CONSOLE_ERROR("Dynamic core doesn't exists {0}", id)
+            CONSOLE_ERROR("Dynamic util doesn't exists {0}", id)
             return;
         }
         IResource *pResource = dynamicResources.get(id);
@@ -44,7 +44,7 @@ namespace PEngine {
     void ResourcesSystem::deleteResource(StaticResource id) {
         CONSOLE_WARN("Deleting {0}", std::to_string(id))
         if (!staticResources.has(id)) {
-            CONSOLE_ERROR("Static core doesn't exists {0}", std::to_string(id))
+            CONSOLE_ERROR("Static util doesn't exists {0}", std::to_string(id))
             return;
         }
         IResource *pResource = staticResources.get(id);

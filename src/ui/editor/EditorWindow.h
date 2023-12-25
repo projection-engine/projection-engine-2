@@ -1,7 +1,7 @@
 #ifndef PROJECTION_EDITORWINDOW_H
 #define PROJECTION_EDITORWINDOW_H
 
-#include "../core/IWindow.h"
+#include "../shared//IWindow.h"
 #include "../../engine/Engine.h"
 #include "basic/IOController.h"
 #include "basic/FSController.h"
@@ -13,7 +13,7 @@ namespace PEngine {
     private:
         Engine engine = Engine(new IOController, new FSController);
 
-        static void onMessage(ICoreWebView2 *webView, ICoreWebView2WebMessageReceivedEventArgs *args, IWindow *window);
+        static void onMessage(WebViewPayload &payload);
 
     protected:
 

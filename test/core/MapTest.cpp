@@ -1,5 +1,5 @@
 #include <catch2/catch_all.hpp>
-#include "../../src/core/structures/Map.cpp"
+#include "../../src/util/structures/Map.cpp"
 #include "../Tester.h"
 
 namespace PEngine::MapTest {

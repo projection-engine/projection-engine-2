@@ -3,7 +3,7 @@
 
 #include <string>
 #include "../ResourceType.h"
-#include "../../../core/debug/ILoggable.h"
+#include "../../../util/debug/ILoggable.h"
 
 namespace PEngine {
     class ResourcesSystem;

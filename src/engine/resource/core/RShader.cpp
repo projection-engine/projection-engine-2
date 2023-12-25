@@ -1,6 +1,6 @@
 #include <glad/glad.h>
 #include "RShader.h"
-#include "../../../core/StringUtils.h"
+#include "../../../util/StringUtils.h"
 
 namespace PEngine {
     RShader *RShader::activeShader = nullptr;

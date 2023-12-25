@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "systems/ISystem.h"
-#include "../../core/structures/List.h"
+#include "../../util/structures/List.h"
 
 namespace PEngine {
     class Engine;

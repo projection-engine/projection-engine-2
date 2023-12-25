@@ -1,5 +1,5 @@
 #include <catch2/catch_all.hpp>
-#include "../../src/core/debug/ILoggable.h"
+#include "../../src/util/debug/ILoggable.h"
 #include "../Tester.h"
 
 namespace PEngine::LoggerTest {

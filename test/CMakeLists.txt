@@ -30,7 +30,7 @@ set(SOURCES
 )
 
 include_directories(../src/ui/editor)
-include_directories(../src/core)
+include_directories(../src/util)
 
 file(GLOB XML_FILES
         "ui/document/*.xml"
