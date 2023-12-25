@@ -1,16 +1,15 @@
 #include <iostream>
-#include "ui/editor/EditorWindow.h"
-#include "glad/glad.h"
-#include "GLFW/glfw3.h"
+#include "util/Definitions.h"
+#include "ui/WindowSystem.h"
+#include "ui/projects/Projects.h"
+#include "ui/editor/Editor.h"
 
 int main(int, char **) {
-    PEngine::EditorWindow window;
-    window.initialize();
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-    {
-        std::cout << "Failed to initialize GLAD" << std::endl;
-        return -1;
-    }
-    window.start();
+    PEngine::WindowSystem system;
+    system.createWindow<PEngine::Projects>(PROJECTS_WINDOW);
+    system.createWindow<PEngine::Editor>(EDITOR_WINDOW);
+
+    system.activateMainWindow(PROJECTS_WINDOW);
+
     return 0;
 }

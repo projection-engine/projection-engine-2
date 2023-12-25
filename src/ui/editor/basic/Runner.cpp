@@ -1,9 +1,8 @@
 #include "Runner.h"
-#include "../elements/IElement.h"
-#include "../views/IView.h"
-#include "../document/Document.h"
+#include "../../shared/elements/IElement.h"
+#include "../../shared/views/IView.h"
+#include "../../shared/document/Document.h"
 #include "imgui.h"
-#include "../../../engine/Engine.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 
@@ -30,22 +29,20 @@ namespace PEngine {
         }
     }
 
-    void Runner::updateViewports() const {
-        GLFWwindow *backup_current_context = glfwGetCurrentContext();
+    void Runner::updateViewports() {
         ImGui::UpdatePlatformWindows();
         ImGui::RenderPlatformWindowsDefault();
-        glfwMakeContextCurrent(backup_current_context);
+
     }
 
     void Runner::startNewFrame() {
-        glfwPollEvents();
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
     }
 
     void Runner::drawNewFrame() {
-        document.getEngine()->run();
+        engine.run();
         ImGui::Render();
         glfwGetFramebufferSize(window, &windowWidth, &windowHeight);
         glViewport(0, 0, windowWidth, windowHeight);
@@ -57,36 +54,15 @@ namespace PEngine {
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
     }
 
-    void Runner::run() {
-        if (isRunning) {
-            return;
-        }
-        isRunning = true;
-        while (!glfwWindowShouldClose(window)) {
-            update();
-            startNewFrame();
-            render();
-            drawNewFrame();
-            clearWindow();
-            updateViewports();
-            glfwSwapBuffers(window);
-        }
+    const Engine &Runner::getEngine() const {
+        return engine;
     }
 
-    int Runner::getWindowWidth() const {
-        return windowWidth;
-    }
-
-    void Runner::setWindowWidth(int ww) {
-        Runner::windowWidth = ww;
-    }
-
-    int Runner::getWindowHeight() const {
-        return windowHeight;
-    }
-
-    void Runner::setWindowHeight(int wh) {
-        Runner::windowHeight = wh;
+    Runner::~Runner() {
+        CONSOLE_LOG("SHUTTING DOWN")
+        ImGui_ImplOpenGL3_Shutdown();
+        ImGui_ImplGlfw_Shutdown();
+        ImGui::DestroyContext();
     }
 
 }

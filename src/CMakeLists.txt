@@ -7,8 +7,7 @@ foreach (WEB_VIEW_FILE ${WEB_VIEW})
 endforeach ()
 
 string(REPLACE "src/" "" SRC_PATHS "${FILE_PATHS}")
-add_executable(projection main.cpp ${SRC_PATHS}
-        ui/shared/webview/WebViewPayload.h)
+add_executable(projection main.cpp ${SRC_PATHS})
 
 target_link_libraries(projection PRIVATE ${COMMON_LIBRARIES})
 

@@ -11,14 +11,11 @@
 namespace PEngine {
     class Document;
 
-    class Engine;
-
     class IElement : public IListener {
     private:
         bool initialized = false;
         IElement *parent = nullptr;
         PEngine::List<IElement> children;
-        Engine *engine;
     protected:
         std::string id;
     public:
@@ -51,13 +48,11 @@ namespace PEngine {
 
         void renderChildren();
 
-        void initialize(Document *document, Engine *engine, IElement *parent, const char *pId);
+        void initialize(Document *document, IElement *parent, const char *pId);
 
         IElement *getChildElementById(std::string id);
 
         Document *getDocument();
-
-        Engine *getEngine();
 
         std::string getId();
 

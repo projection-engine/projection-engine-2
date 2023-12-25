@@ -17,13 +17,10 @@ namespace PEngine {
 
     class IView;
 
-    class Engine;
-
     class Document : public ILoggable {
     private:
         ElementController elementController;
         ViewController viewController;
-        Engine *engine = nullptr;
 
         IElement *addElementInternal(IElement *element, IElement *parentEl, const char *id);
 
@@ -64,9 +61,6 @@ namespace PEngine {
 
         IView *addView(const char *tag);
 
-        Engine *getEngine() const;
-
-        void setEngine(Engine *eg);
     };
 }
 

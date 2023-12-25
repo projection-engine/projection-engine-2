@@ -71,11 +71,10 @@ namespace PEngine {
         return parent;
     }
 
-    void IElement::initialize(Document *pDocument, Engine *pEngine, IElement *pParent, const char *pId) {
+    void IElement::initialize(Document *pDocument, IElement *pParent, const char *pId) {
         if (initialized) {
             return;
         }
-        engine = pEngine;
         document = pDocument;
         parent = pParent;
         if (pId != nullptr) {
@@ -88,7 +87,4 @@ namespace PEngine {
         IElement::id = id;
     }
 
-    Engine *IElement::getEngine() {
-        return engine;
-    }
 }

@@ -13,7 +13,7 @@ namespace PEngine {
     }
 
     IElement *Document::addElementInternal(IElement *element, IElement *parentEl, const char *id) {
-        if (element) element->initialize(this, engine, parentEl, id);
+        if (element) element->initialize(this, parentEl, id);
         return element;
     }
 
@@ -120,15 +120,5 @@ namespace PEngine {
 
     IView *Document::addView(const char *tag) {
         return addViewInternal(tag, nullptr, false);
-    }
-
-    Engine *Document::getEngine() const {
-        return engine;
-    }
-
-    void Document::setEngine(Engine *eg) {
-        if(engine == nullptr) {
-            engine = eg;
-        }
     }
 }

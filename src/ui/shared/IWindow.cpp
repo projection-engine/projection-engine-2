@@ -1,5 +1,5 @@
 #include "IWindow.h"
-#include "runners/Runner.h"
+#include "basic/Runner.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 #include "wtypes.h"
@@ -32,29 +32,6 @@ namespace PEngine {
         }
     }
 
-
-    void IWindow::start() {
-        if (!ready || runner == nullptr) {
-            return;
-        }
-        runner->run();
-        CONSOLE_LOG("SHUTTING DOWN")
-        ImGui_ImplOpenGL3_Shutdown();
-        ImGui_ImplGlfw_Shutdown();
-        ImGui::DestroyContext();
-
-        glfwDestroyWindow(window);
-        glfwTerminate();
-    }
-
-    void IWindow::initialize() {
-        runner = createRunner();
-    }
-
-    IRunner *IWindow::createRunner() {
-        return nullptr;
-    }
-
     void IWindow::removeWebView(const std::string &id) {
         if (webViews.contains(id)) {
             webViews.erase(id);
@@ -65,7 +42,8 @@ namespace PEngine {
         webViews[id] = new WebViewWindow(filePath, this);
     }
 
-    void IWindow::addWebViewEventListener(const std::string &webviewId, const std::string &listenerId, void (*action)(WebViewPayload &)) {
+    void IWindow::addWebViewEventListener(const std::string &webviewId, const std::string &listenerId,
+                                          void (*action)(WebViewPayload &)) {
         webViews[webviewId]->addMessageListener(listenerId, action);
     }
 
@@ -78,11 +56,29 @@ namespace PEngine {
     }
 
     IWindow::IWindow(const std::string &name) {
+        this->name = name;
+    }
+
+    IWindow::~IWindow() {
+        for (const std::pair<const std::basic_string<char>, WebViewWindow *>& entry: webViews) {
+            delete entry.second;
+        }
+    }
+
+    GLFWwindow *IWindow::getWindow() const {
+        return window;
+    }
+
+    void IWindow::setWindowSystem(WindowSystem *ws) {
+        this->windowSystem = ws;
+    }
+
+    IRunner *IWindow::initialize() {
         CONSOLE_LOG("Creating window")
         glfwSetErrorCallback(onError);
         if (!glfwInit()) {
             CONSOLE_ERROR("Error initializing glfw")
-            return;
+            return nullptr;
         }
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
@@ -94,7 +90,8 @@ namespace PEngine {
         window = glfwCreateWindow(width * scaleX, height * scaleY, name.c_str(), nullptr, nullptr);
         if (window == nullptr) {
             CONSOLE_ERROR("Error creating window")
-            return;
+            return nullptr;
+
         }
 
         glfwMakeContextCurrent(window);
@@ -105,17 +102,6 @@ namespace PEngine {
         ImGui_ImplGlfw_InitForOpenGL(window, true);
         ImGui_ImplOpenGL3_Init(GLSL_VERSION);
         CONSOLE_LOG("WINDOW CREATED")
-        ready = true;
-    }
-
-    IWindow::~IWindow() {
-        for (std::pair<const std::basic_string<char>, WebViewWindow *> entry: webViews) {
-            delete entry.second;
-        }
-        delete runner;
-    }
-
-    GLFWwindow *IWindow::getWindow() const {
-        return window;
+        return nullptr;
     }
 }
