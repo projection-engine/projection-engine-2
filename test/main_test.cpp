@@ -7,6 +7,7 @@
 #include "ui/document/DocumentTest.h"
 #include "ui/event/EventControllerTest.h"
 #include "ui/store/IStoreTest.h"
+#include "core/FileSystemTest.h"
 
 void run(int ind, bool all) {
     if (ind == 0 || all) {
@@ -37,6 +38,11 @@ void run(int ind, bool all) {
         Tester *tester = PEngine::IStoreTest::createTester();
         tester->run();
     }
+
+    if (ind == 7 || all) {
+        Tester *tester = PEngine::FileSystemTest::createTester();
+        tester->run();
+    }
 }
 
 TEST_CASE("Engine test", "[engine-test]") {
@@ -65,6 +71,10 @@ TEST_CASE("EventController test", "[event-controller-test]") {
 
 TEST_CASE("IStore test", "[istore-test]") {
     run(6, false);
+}
+
+TEST_CASE("File-system test", "[fs-test]") {
+    run(7, false);
 }
 
 TEST_CASE("Run all", "[RUN_ALL]") {

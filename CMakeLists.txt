@@ -27,6 +27,10 @@ set(COMMON_LIBRARIES
 )
 
 set(FILE_PATHS
+        src/services/FileSystemService.cpp
+        src/services/FileSystemService.h
+        src/ui/shared/webview/WebViewPayload.cpp
+
         src/ui/shared/webview/WebViewPayload.h
         src/ui/projects/Projects.cpp
         src/ui/projects/Projects.h

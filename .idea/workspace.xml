@@ -19,22 +19,16 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-13] WindowSystem&#10;- Created windowSystem&#10;- Improved Runner class&#10;- Created Projects window">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-6] Project window&#10;- Improving event system&#10;- Adding basic functions for project window">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/projects/Projects.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/projects/Projects.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewPayload.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewPayload.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/static/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/static/global.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/webview/window/projects/Projects.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/window/projects/Projects.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/projects/lib/ProjectDTO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/window/projects/lib/ProjectDTO.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/webview/window/projects/lib/ProjectSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/window/projects/lib/ProjectSystem.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/input/Input.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/window/shared/components/input/Input.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/webview/WebViewPayload.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/window/shared/webview/WebViewPayload.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/webview/WebViewSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/window/shared/webview/WebViewSystem.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/FileSystemUtil.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/FileSystemUtil.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/main_test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/main_test.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,10 +80,11 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "C/C++ File.main.cpp.executor": "Run",
-    "CMake Application.Projection.executor": "Debug",
+    "CMake Application.Projection.executor": "Run",
     "CMake Application.projection.executor": "Debug",
     "CMake Debug.projection.executor": "Debug",
     "CMake Debug.projectioncmake.executor": "Debug",
+    "Catch.Run all.executor": "Run",
     "Catch.main_test.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -98,7 +93,8 @@
     "Shell Script.copy-files.executor": "Run",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "13-window-architecture",
+    "git-widget-placeholder": "6-project-window",
+    "last_opened_file_path": "C:/Users/russi/WebstormProjects/projection-engine-2/test/core",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -113,6 +109,9 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\test\core" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\ui\editor\basic" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\ui\webview\window\shared\webview" />
@@ -130,9 +129,15 @@
     </option>
   </component>
   <component name="RunManager" selected="CMake Application.Projection">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+    <configuration name="Run all" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="build" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_CLASS="[RUN_ALL]" TEST_METHOD="Run all" TEST_MODE="SUITE_TEST">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="main.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main.cpp - Visual Studio" CONFIG_NAME="main.cpp">
@@ -180,6 +185,7 @@
     <list>
       <item itemvalue="C/C++ File.main.cpp" />
       <item itemvalue="Catch.main_test" />
+      <item itemvalue="Catch.Run all" />
       <item itemvalue="CMake Application.Projection" />
       <item itemvalue="CMake Debug.projectioncmake" />
       <item itemvalue="npm.bdev" />
@@ -189,6 +195,7 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Catch.Run all" />
         <item itemvalue="C/C++ File.main.cpp" />
         <item itemvalue="npm.sdev" />
       </list>
@@ -215,7 +222,8 @@
       <workItem from="1703506802279" duration="1969000" />
       <workItem from="1703528281905" duration="8635000" />
       <workItem from="1703717061701" duration="339000" />
-      <workItem from="1703942183869" duration="4112000" />
+      <workItem from="1703942183869" duration="4324000" />
+      <workItem from="1703970052994" duration="1260000" />
     </task>
     <task id="LOCAL-00001" summary="[STD-1] Organizing project&#10;- removing unused C++ classes&#10;- Refactoring files&#10;- Renaming c++ namespaces and project &#10;- Moving future webview stuff">
       <option name="closed" value="true" />
@@ -313,7 +321,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703542451825</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="[STD-6] Project window&#10;- Improving event system&#10;- Adding basic functions for project window">
+      <option name="closed" value="true" />
+      <created>1703948510001</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1703948510001</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -338,7 +354,8 @@
     <MESSAGE value="[STD-3] Project window&#10;- Removing old ui&#10;- Creating libs for integration with c++ backend&#10;- Starting project window" />
     <MESSAGE value="[STD-3] Project window&#10;- Improving event system structure" />
     <MESSAGE value="[STD-13] WindowSystem&#10;- Created windowSystem&#10;- Improved Runner class&#10;- Created Projects window" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-13] WindowSystem&#10;- Created windowSystem&#10;- Improved Runner class&#10;- Created Projects window" />
+    <MESSAGE value="[STD-6] Project window&#10;- Improving event system&#10;- Adding basic functions for project window" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-6] Project window&#10;- Improving event system&#10;- Adding basic functions for project window" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -360,13 +377,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/src/ui/projects/Projects.cpp</url>
-          <line>20</line>
+          <line>22</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/ui/webview/window/projects/lib/ProjectSystem.ts</url>
           <line>8</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>

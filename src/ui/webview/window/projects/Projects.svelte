@@ -22,6 +22,7 @@
     }
 
     function createProject(){
+        ProjectSystem.createAndOpenProject(projectName)
     }
 </script>
 

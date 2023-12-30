@@ -14,7 +14,7 @@ export default class ProjectSystem {
         })
     }
 
-    static createProject(dto: ProjectDTO) {
-
+    static createAndOpenProject(projectName: string) {
+        WebViewSystem.sendMessage(projectName, "CREATE_PROJECT")
     }
 }
