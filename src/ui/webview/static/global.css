@@ -433,3 +433,14 @@ font-size: .7rem;
     background: var(--pj-accent-color);
     color: white;
 }
+
+
+[data-svelteinput="-"] {
+    background: var(--pj-background-tertiary);
+    font-size: .7rem;
+    color: var(--pj-color-quaternary);
+    border: none;
+    outline: none;
+    width: 100%;
+    border-radius: 3px;
+}

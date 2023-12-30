@@ -19,25 +19,22 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-3] Project window&#10;- Improving event system structure">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-13] WindowSystem&#10;- Created windowSystem&#10;- Improved Runner class&#10;- Created Projects window">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/editor/EditorWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/editor/EditorWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/IWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/IWindow.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/IWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/IWindow.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/document/Document.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/document/Document.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/document/Document.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/document/Document.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/IElement.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/elements/IElement.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/IElement.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/elements/IElement.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/runners/IRunner.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/runners/IRunner.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/runners/Runner.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/basic/Runner.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/runners/Runner.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/basic/Runner.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/runners/imgui_demo.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/runners/imgui_demo.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/components/footer/Footer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/window/editor/components/footer/Footer.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/Definitions.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Definitions.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/projects/Projects.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/projects/Projects.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewPayload.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewPayload.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/static/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/static/global.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/projects/Projects.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/window/projects/Projects.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/projects/lib/ProjectDTO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/window/projects/lib/ProjectDTO.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/projects/lib/ProjectSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/window/projects/lib/ProjectSystem.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/input/Input.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/window/shared/components/input/Input.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/webview/WebViewPayload.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/window/shared/webview/WebViewPayload.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/webview/WebViewSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/window/shared/webview/WebViewSystem.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/FileSystemUtil.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/FileSystemUtil.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +86,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "C/C++ File.main.cpp.executor": "Run",
-    "CMake Application.Projection.executor": "Run",
+    "CMake Application.Projection.executor": "Debug",
     "CMake Application.projection.executor": "Debug",
     "CMake Debug.projection.executor": "Debug",
     "CMake Debug.projectioncmake.executor": "Debug",
@@ -216,7 +213,9 @@
       <workItem from="1703357477856" duration="2788000" />
       <workItem from="1703416218700" duration="5833000" />
       <workItem from="1703506802279" duration="1969000" />
-      <workItem from="1703528281905" duration="7712000" />
+      <workItem from="1703528281905" duration="8635000" />
+      <workItem from="1703717061701" duration="339000" />
+      <workItem from="1703942183869" duration="4112000" />
     </task>
     <task id="LOCAL-00001" summary="[STD-1] Organizing project&#10;- removing unused C++ classes&#10;- Refactoring files&#10;- Renaming c++ namespaces and project &#10;- Moving future webview stuff">
       <option name="closed" value="true" />
@@ -306,7 +305,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703421270891</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="[STD-13] WindowSystem&#10;- Created windowSystem&#10;- Improved Runner class&#10;- Created Projects window">
+      <option name="closed" value="true" />
+      <created>1703542451825</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1703542451825</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -330,7 +337,8 @@
     <MESSAGE value="[STD-3] Virtual file system&#10;- Refactoring webview files&#10;- Refactoring directory names" />
     <MESSAGE value="[STD-3] Project window&#10;- Removing old ui&#10;- Creating libs for integration with c++ backend&#10;- Starting project window" />
     <MESSAGE value="[STD-3] Project window&#10;- Improving event system structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-3] Project window&#10;- Improving event system structure" />
+    <MESSAGE value="[STD-13] WindowSystem&#10;- Created windowSystem&#10;- Improved Runner class&#10;- Created Projects window" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-13] WindowSystem&#10;- Created windowSystem&#10;- Improved Runner class&#10;- Created Projects window" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -341,11 +349,6 @@
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp</url>
-          <line>58</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/src/ui/editor/basic/Runner.h</url>
           <line>26</line>
           <option name="timeStamp" value="5" />
@@ -354,6 +357,17 @@
           <url>file://$PROJECT_DIR$/src/ui/editor/basic/Runner.h</url>
           <line>39</line>
           <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/ui/projects/Projects.cpp</url>
+          <line>20</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/ui/webview/window/projects/lib/ProjectSystem.ts</url>
+          <line>8</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

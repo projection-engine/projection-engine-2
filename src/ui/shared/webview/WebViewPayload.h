@@ -6,11 +6,15 @@
 namespace PEngine {
     class IWindow;
 
+    class WebViewWindow;
+
     struct WebViewPayload {
         std::string id;
         const char *payload = nullptr;
         IWindow *window = nullptr;
-        wil::com_ptr<ICoreWebView2> webview = nullptr;
+        WebViewWindow *webview = nullptr;
+
+        void resolve(const char *message) const;
     };
 }
 #endif

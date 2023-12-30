@@ -19,6 +19,6 @@ namespace PEngine {
     }
 
     void Editor::onMessage(WebViewPayload &payload) {
-        payload.webview->Reload();
+        payload.webview->getWebView()->Reload();
     }
 }

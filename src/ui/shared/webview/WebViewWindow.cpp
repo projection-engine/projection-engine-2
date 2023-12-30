@@ -9,6 +9,7 @@
 #include <nlohmann/json.hpp>
 #include "GLFW/glfw3native.h"
 #include "WebViewPayload.h"
+#include <unordered_map>
 
 namespace PEngine {
     HWND__ *WebViewWindow::getNativeWindow() const {
@@ -61,7 +62,7 @@ namespace PEngine {
             if (payloadJson["payload"].is_string()) {
                 payload.payload = payloadJson["payload"].get<std::string>().c_str();
             }
-            payload.webview = webview;
+            payload.webview = this;
             payload.window = window;
         } catch (nlohmann::json::parse_error &ex) {
             CONSOLE_ERROR("Error parsing payload")
@@ -72,13 +73,19 @@ namespace PEngine {
         return S_OK;
     }
 
-    void WebViewWindow::postMessage(std::string message) {
-        if (webview == nullptr) {
-            CONSOLE_ERROR("WebView not initialized")
-            return;
+    void WebViewWindow::postMessage(const std::string& message) {
+        postMessage(message.c_str(), "");
+    }
+
+    void WebViewWindow::postMessage(const char *message, const std::string& id) {
+        nlohmann::json jsonObj;
+        if(message != nullptr) {
+            jsonObj["message"] = message;
         }
+        jsonObj["id"] = id;
+        std::string messagePayload = jsonObj.dump();
         CONSOLE_WARN("Posting message")
-        webview->PostWebMessageAsString(std::wstring(message.begin(), message.end()).c_str());
+        webview->PostWebMessageAsString(std::wstring(messagePayload.begin(), messagePayload.end()).c_str());
     }
 
     WebViewWindow::WebViewWindow(const std::string &pathToFile, IWindow *window) {
@@ -104,5 +111,9 @@ namespace PEngine {
 
     void WebViewWindow::addMessageListener(const std::string &listenerId, void (*action)(WebViewPayload &)) {
         listeners[listenerId] = new ListenerDTO(action);
+    }
+
+    wil::com_ptr<ICoreWebView2> WebViewWindow::getWebView() {
+        return webview;
     }
 }

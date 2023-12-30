@@ -94,7 +94,6 @@
         outline: none;
         width: 100%;
         border-radius: 3px;
-
     }
 
     input:disabled {

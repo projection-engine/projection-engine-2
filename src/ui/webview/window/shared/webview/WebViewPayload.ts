@@ -7,6 +7,14 @@ export default class WebViewPayload {
         this.id = id;
     }
 
+    getId() {
+        return this.id;
+    }
+
+    getPayload() {
+        return this.payload;
+    }
+
     static of(data: string): WebViewPayload {
         const res = JSON.parse(data);
         return new WebViewPayload(res.id, res.payload)

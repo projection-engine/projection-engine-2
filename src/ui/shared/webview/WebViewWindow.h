@@ -44,9 +44,13 @@ namespace PEngine {
 
         void addMessageListener(const std::string &listenerId, void (*action)(WebViewPayload &));
 
-        void postMessage(std::string message);
+        void postMessage(const std::string& message);
 
         HRESULT onMessage(ICoreWebView2WebMessageReceivedEventArgs *args);
+
+        wil::com_ptr<ICoreWebView2> getWebView();
+
+        void postMessage(const char *message, const std::string& id);
     };
 
 }

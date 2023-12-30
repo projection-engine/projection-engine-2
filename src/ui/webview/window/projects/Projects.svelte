@@ -8,20 +8,51 @@
     import WebViewSystem from "../shared/webview/WebViewSystem";
 
     let projectsToShow: ProjectDTO[] = []
+    let isOnAddProject = false
+    let projectName = ""
 
     onMount(() => {
         ToastNotificationSystem.get()
-        projectsToShow = ProjectSystem.readAllProjects()
+        ProjectSystem.readAllProjects().then(r => projectsToShow = r)
     })
+
+    function toggleProjectCreation() {
+        isOnAddProject = !isOnAddProject
+        projectName = ""
+    }
+
+    function createProject(){
+    }
 </script>
 
 <MenuBar
         options={[{label: "Window", options: [{label: "Reload", onClick: () => WebViewSystem.sendMessage(null, "RELOAD")   }]}]}/>
 <div class="wrapper">
-    <h3>{LocalizationEN.PROJECTS}</h3>
-    <div class="content">
-
-    </div>
+    {#if isOnAddProject}
+        <div>
+            <input data-svelteinput="-" on:input={e => projectName = e.currentTarget.value} placeholder={LocalizationEN.NEW_PROJECT}/>
+            <div>
+                <button data-sveltebuttondefault="-" data-sveltehighlight="-" on:click={createProject} disabled={projectName.length === 0}>
+                    {LocalizationEN.CREATE}
+                </button>
+                <button data-sveltebuttondefault="-" on:click={toggleProjectCreation}>
+                    {LocalizationEN.CANCEL}
+                </button>
+            </div>
+        </div>
+    {:else}
+        <div>
+            <h3>{LocalizationEN.PROJECTS}</h3>
+            <button
+                    data-sveltebuttondefault="-"
+                    on:click={toggleProjectCreation}>
+                {LocalizationEN.NEW_PROJECT}
+            </button>
+        </div>
+        {#each projectsToShow as project}
+            {project.getName()}
+        {/each}
+    {/if}
 </div>
 
 <style>
