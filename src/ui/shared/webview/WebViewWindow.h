@@ -50,7 +50,7 @@ namespace PEngine {
 
         wil::com_ptr<ICoreWebView2> getWebView();
 
-        void postMessage(const char *message, const std::string& id);
+        void postMessage(const std::string& message, const std::string& id);
     };
 
 }

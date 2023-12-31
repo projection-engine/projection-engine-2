@@ -1,5 +1,5 @@
-#ifndef PROJECTION_WINDOWSYSTEM_H
-#define PROJECTION_WINDOWSYSTEM_H
+#ifndef PROJECTION_WINDOWREPOSITORY_H
+#define PROJECTION_WINDOWREPOSITORY_H
 
 #include <string>
 #include <unordered_map>
@@ -9,7 +9,7 @@ namespace PEngine {
 
     class IRunner;
 
-    class WindowSystem {
+    class WindowRepository {
     private:
         std::unordered_map<std::string, IWindow *> windows;
         std::string mainWindowId;
@@ -24,7 +24,8 @@ namespace PEngine {
             createWindowInternal(id, new W);
         }
 
-        void activateMainWindow(const std::string &id);
+        void setActiveWindow(const std::string &id);
+        IWindow *getActiveWindow();
     };
 
 }

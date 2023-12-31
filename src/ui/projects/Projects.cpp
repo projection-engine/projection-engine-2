@@ -3,6 +3,8 @@
 #include "../shared/webview/WebViewPayload.h"
 #include "WebView2.h"
 #include "../../util/FileSystemUtil.h"
+#include "nlohmann/json.hpp"
+#include "ProjectsService.h"
 
 #define RPC "READ_PROJECTS_CACHE"
 #define RELOAD "RELOAD"
@@ -20,13 +22,11 @@ namespace PEngine {
 
     void Projects::onMessage(WebViewPayload &payload) {
         if (payload.id == RPC) {
-            const char *result = FileSystemUtil::ReadFile(FileSystemUtil::GetCurrentPath() + "/projects-cache.json");
-            payload.resolve(result);
+            ProjectsService::readProjectsCache(payload);
         } else if (payload.id == CREATE_P) {
-            FileSystemUtil::CreateDirectory(FileSystemUtil::GetCurrentPath() + "/projects/" + payload.payload);
-            // TODO - SWITCH WINDOW
+            ProjectsService::createProject(payload);
         } else {
-            payload.webview->getWebView()->Reload();
+            ProjectsService::reload(payload);
         }
     }
 }

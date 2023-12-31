@@ -19,16 +19,21 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-6] Project window&#10;- Improving event system&#10;- Adding basic functions for project window">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-6] Project window&#10;- Creating &quot;create project&quot; callback">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/WindowSystem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/WindowRepository.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/WindowSystem.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/WindowRepository.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/projects/Projects.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/projects/Projects.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/projects/Projects.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/window/projects/Projects.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/projects/lib/ProjectSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/window/projects/lib/ProjectSystem.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/IWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/IWindow.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/IWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/IWindow.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/FileSystemUtil.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/FileSystemUtil.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/main_test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/main_test.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/core/FileSystemTest.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/core/FileSystemTest.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +58,20 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;FacoBackup&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="3e0a780f-eb47-497c-bf85-869c651e5983" />
+        <option name="url" value="https://github.com/projection-engine/projection-engine-2.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/ui/webview/esbuild.js" root0="SKIP_INSPECTION" />
@@ -84,6 +103,7 @@
     "CMake Application.projection.executor": "Debug",
     "CMake Debug.projection.executor": "Debug",
     "CMake Debug.projectioncmake.executor": "Debug",
+    "Catch.File-system test.executor": "Debug",
     "Catch.Run all.executor": "Run",
     "Catch.main_test.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
@@ -128,16 +148,22 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="CMake Application.Projection">
-    <configuration name="Run all" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="build" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_CLASS="[RUN_ALL]" TEST_METHOD="Run all" TEST_MODE="SUITE_TEST">
+  <component name="RunManager" selected="Catch.File-system test">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="File-system test" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="build" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_CLASS="[fs-test]" TEST_METHOD="File-system test" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+    <configuration name="Run all" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="build" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_CLASS="[RUN_ALL]" TEST_METHOD="Run all" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="main.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main.cpp - Visual Studio" CONFIG_NAME="main.cpp">
@@ -185,6 +211,7 @@
     <list>
       <item itemvalue="C/C++ File.main.cpp" />
       <item itemvalue="Catch.main_test" />
+      <item itemvalue="Catch.File-system test" />
       <item itemvalue="Catch.Run all" />
       <item itemvalue="CMake Application.Projection" />
       <item itemvalue="CMake Debug.projectioncmake" />
@@ -195,6 +222,7 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Catch.File-system test" />
         <item itemvalue="Catch.Run all" />
         <item itemvalue="C/C++ File.main.cpp" />
         <item itemvalue="npm.sdev" />
@@ -223,7 +251,8 @@
       <workItem from="1703528281905" duration="8635000" />
       <workItem from="1703717061701" duration="339000" />
       <workItem from="1703942183869" duration="4324000" />
-      <workItem from="1703970052994" duration="1260000" />
+      <workItem from="1703970052994" duration="1317000" />
+      <workItem from="1704028499781" duration="3559000" />
     </task>
     <task id="LOCAL-00001" summary="[STD-1] Organizing project&#10;- removing unused C++ classes&#10;- Refactoring files&#10;- Renaming c++ namespaces and project &#10;- Moving future webview stuff">
       <option name="closed" value="true" />
@@ -329,7 +358,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703948510001</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="[STD-6] Project window&#10;- Creating &quot;create project&quot; callback">
+      <option name="closed" value="true" />
+      <created>1703971371539</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1703971371539</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -355,14 +392,15 @@
     <MESSAGE value="[STD-3] Project window&#10;- Improving event system structure" />
     <MESSAGE value="[STD-13] WindowSystem&#10;- Created windowSystem&#10;- Improved Runner class&#10;- Created Projects window" />
     <MESSAGE value="[STD-6] Project window&#10;- Improving event system&#10;- Adding basic functions for project window" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-6] Project window&#10;- Improving event system&#10;- Adding basic functions for project window" />
+    <MESSAGE value="[STD-6] Project window&#10;- Creating &quot;create project&quot; callback" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-6] Project window&#10;- Creating &quot;create project&quot; callback" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/src/ui/editor/Editor.cpp</url>
-          <line>22</line>
+          <line>21</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
@@ -376,9 +414,14 @@
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/ui/projects/Projects.cpp</url>
-          <line>22</line>
-          <option name="timeStamp" value="11" />
+          <url>file://$PROJECT_DIR$/test/core/FileSystemTest.cpp</url>
+          <line>23</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/util/FileSystemUtil.h</url>
+          <line>50</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/ui/webview/window/projects/lib/ProjectSystem.ts</url>

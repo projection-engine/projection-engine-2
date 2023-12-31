@@ -73,15 +73,13 @@ namespace PEngine {
         return S_OK;
     }
 
-    void WebViewWindow::postMessage(const std::string& message) {
-        postMessage(message.c_str(), "");
+    void WebViewWindow::postMessage(const std::string &message) {
+        postMessage(message, "");
     }
 
-    void WebViewWindow::postMessage(const char *message, const std::string& id) {
+    void WebViewWindow::postMessage(const std::string &message, const std::string &id) {
         nlohmann::json jsonObj;
-        if(message != nullptr) {
-            jsonObj["message"] = message;
-        }
+        jsonObj["message"] = message;
         jsonObj["id"] = id;
         std::string messagePayload = jsonObj.dump();
         CONSOLE_WARN("Posting message")

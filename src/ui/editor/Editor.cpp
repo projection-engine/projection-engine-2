@@ -12,9 +12,8 @@ namespace PEngine {
             CONSOLE_ERROR("Failed to initialize GLAD")
             return nullptr;
         }
-        const char *WEBVIEW_ID = "TEST";
-        addWebView(WEBVIEW_ID, "project-window.html");
-        addWebViewEventListener(WEBVIEW_ID, "RELOAD", onMessage);
+        addWebView(EDITOR_WINDOW, "project-window.html");
+        addWebViewEventListener(EDITOR_WINDOW, "RELOAD", onMessage);
         return new Runner(window);
     }
 

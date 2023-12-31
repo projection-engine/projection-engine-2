@@ -47,8 +47,8 @@ namespace PEngine {
         webViews[webviewId]->addMessageListener(listenerId, action);
     }
 
-    void IWindow::postWebViewMessage(const std::string &id, std::string message) {
-        webViews[id]->postMessage(std::move(message));
+    void IWindow::postWebViewMessage(const std::string &webviewId, const std::string &listenerId, const std::string& message) {
+        webViews[webviewId]->postMessage(message, listenerId);
     }
 
     void IWindow::setWindowResizable(bool isResizable) {
@@ -69,8 +69,8 @@ namespace PEngine {
         return window;
     }
 
-    void IWindow::setWindowSystem(WindowSystem *ws) {
-        this->windowSystem = ws;
+    void IWindow::setWindowRepository(WindowRepository *wr) {
+        this->windowRepository = wr;
     }
 
     IRunner *IWindow::initialize() {
@@ -103,5 +103,9 @@ namespace PEngine {
         ImGui_ImplOpenGL3_Init(GLSL_VERSION);
         CONSOLE_LOG("WINDOW CREATED")
         return nullptr;
+    }
+
+    WindowRepository *IWindow::getWindowRepository() const {
+        return windowRepository;
     }
 }

@@ -21,7 +21,7 @@ namespace PEngine {
 
     class WebViewWindow;
 
-    class WindowSystem;
+    class WindowRepository;
 
     class WebViewPayload;
 
@@ -29,7 +29,7 @@ namespace PEngine {
     protected:
         GLFWwindow *window = nullptr;
         std::unordered_map<std::string, WebViewWindow *> webViews;
-        WindowSystem *windowSystem = nullptr;
+        WindowRepository *windowRepository = nullptr;
         std::string name;
         float scaleX = .5;
         float scaleY = .5;
@@ -58,13 +58,18 @@ namespace PEngine {
         void addWebViewEventListener(const std::string &webviewId, const std::string &listenerId,
                                      void (*action)(WebViewPayload &));
 
-        void postWebViewMessage(const std::string &id, std::string message);
+        void postWebViewMessage(const std::string &id, const std::string& message);
 
         GLFWwindow *getWindow() const;
 
         void setWindowResizable(bool isResizable);
 
-        void setWindowSystem(WindowSystem *windowSystem);
+        void setWindowRepository(WindowRepository *windowRepository);
+
+        WindowRepository *getWindowRepository() const;
+
+        void
+        postWebViewMessage(const std::string &webviewId, const std::string &listenerId, const std::string &message);
     };
 }
 #endif
