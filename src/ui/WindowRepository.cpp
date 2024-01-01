@@ -1,6 +1,7 @@
 #include "WindowRepository.h"
 #include "shared/IWindow.h"
 #include "shared/runners/IRunner.h"
+#include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include "shared/ImGuiContextUtil.h"
 

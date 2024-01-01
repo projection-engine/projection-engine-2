@@ -8,7 +8,7 @@
 #include "../../util/FS.h"
 #include "../../util/UUID.h"
 #include "../../util/JSON.h"
-#include "Editor.h"
+#include "../editor/Editor.h"
 
 #define CACHE_PATH FS::GetCurrentPath() + "/projects-cache.json"
 
@@ -36,7 +36,7 @@ namespace PEngine {
         WindowRepository *rep = window->getWindowRepository();
 
         rep->setActiveWindow(EDITOR_WINDOW);
-        Editor *currentWindow = dynamic_cast<Editor *>(rep->getActiveWindow());
+        auto *currentWindow = dynamic_cast<Editor *>(rep->getActiveWindow());
         currentWindow->setProject(pathToMetadata);
 
     }

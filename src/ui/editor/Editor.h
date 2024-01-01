@@ -2,13 +2,11 @@
 #define PROJECTION_EDITOR_H
 
 #include "../shared/IWindow.h"
-#include "../../engine/Engine.h"
-#include "basic/IOController.h"
-#include "basic/FSController.h"
-#include "../shared/runners/IRunner.h"
 
 namespace PEngine {
     class WebViewWindow;
+
+    class IRunner;
 
     class Editor : public IWindow {
     private:
@@ -17,9 +15,9 @@ namespace PEngine {
         std::string projectPath;
     public:
 
-        explicit Editor() : IWindow("Project Editor"){}
+        explicit Editor() : IWindow("Project Editor") {}
 
-        IRunner* initialize() override;
+        IRunner *initialize() override;
 
         void setProject(const std::string &pathToMetadata);
     };

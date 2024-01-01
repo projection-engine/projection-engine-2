@@ -19,28 +19,18 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-6] Project window&#10;- JSON util&#10;- JSON util tests">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-6] Project window&#10;- Completing createProject&#10;- Fixing bugs JSON and FS&#10;- Refactoring FileSystemUtil&#10;- Removing imgui stuff from IWindow">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/Engine.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/Engine.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/WindowRepository.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/WindowRepository.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/editor/basic/Runner.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/basic/Runner.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/editor/basic/Runner.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/basic/Runner.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/projects/Projects.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/projects/Projects.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/projects/ProjectsService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/projects/ProjectsService.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/IWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/IWindow.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/shared/IWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/IWindow.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/runners/IRunner.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/runners/IRunner.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/ImGuiContextUtil.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/ImGuiContextUtil.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/projects/lib/ProjectSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/window/projects/lib/ProjectSystem.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/webview/WebViewSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/window/shared/webview/WebViewSystem.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/FileSystemUtil.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/FS.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/JSON.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/JSON.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/core/FileSystemTest.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/core/FileSystemTest.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/core/JSONTest.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/core/JSONTest.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +96,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "C/C++ File.main.cpp.executor": "Run",
-    "CMake Application.Projection.executor": "Debug",
+    "CMake Application.Projection.executor": "Run",
     "CMake Application.projection.executor": "Debug",
     "CMake Debug.projection.executor": "Debug",
     "CMake Debug.projectioncmake.executor": "Debug",
@@ -173,11 +163,6 @@
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="main.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main.cpp - Visual Studio" CONFIG_NAME="main.cpp">
@@ -269,7 +254,8 @@
       <workItem from="1703942183869" duration="4324000" />
       <workItem from="1703970052994" duration="1317000" />
       <workItem from="1704028499781" duration="3699000" />
-      <workItem from="1704115277815" duration="9015000" />
+      <workItem from="1704115277815" duration="9076000" />
+      <workItem from="1704127431107" duration="1143000" />
     </task>
     <task id="LOCAL-00001" summary="[STD-1] Organizing project&#10;- removing unused C++ classes&#10;- Refactoring files&#10;- Renaming c++ namespaces and project &#10;- Moving future webview stuff">
       <option name="closed" value="true" />
@@ -399,7 +385,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704117632681</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="[STD-6] Project window&#10;- Completing createProject&#10;- Fixing bugs JSON and FS&#10;- Refactoring FileSystemUtil&#10;- Removing imgui stuff from IWindow">
+      <option name="closed" value="true" />
+      <created>1704124383074</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1704124383074</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -428,19 +422,20 @@
     <MESSAGE value="[STD-6] Project window&#10;- Creating &quot;create project&quot; callback" />
     <MESSAGE value="[STD-6] Project window&#10;- creating system for projects &#10;- Completing tests for file system&#10;- Continuing create project" />
     <MESSAGE value="[STD-6] Project window&#10;- JSON util&#10;- JSON util tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-6] Project window&#10;- JSON util&#10;- JSON util tests" />
+    <MESSAGE value="[STD-6] Project window&#10;- Completing createProject&#10;- Fixing bugs JSON and FS&#10;- Refactoring FileSystemUtil&#10;- Removing imgui stuff from IWindow" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-6] Project window&#10;- Completing createProject&#10;- Fixing bugs JSON and FS&#10;- Refactoring FileSystemUtil&#10;- Removing imgui stuff from IWindow" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/src/ui/editor/Editor.cpp</url>
-          <line>30</line>
+          <line>29</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/src/ui/editor/basic/Runner.h</url>
-          <line>27</line>
+          <line>30</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
@@ -450,7 +445,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/src/ui/WindowRepository.cpp</url>
-          <line>14</line>
+          <line>15</line>
           <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
@@ -462,11 +457,6 @@
           <url>file://$PROJECT_DIR$/src/ui/shared/runners/IRunner.h</url>
           <line>35</line>
           <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/ui/editor/basic/Runner.cpp</url>
-          <line>61</line>
-          <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/ui/webview/window/projects/lib/ProjectSystem.ts</url>

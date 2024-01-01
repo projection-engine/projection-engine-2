@@ -2,6 +2,7 @@
 #define PROJECTION_WEBVIEWWINDOW_H
 
 #include "WebView2.h"
+#include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include <wrl.h>
 #include "string"

@@ -2,11 +2,10 @@
 #ifndef PROJECTION_IWINDOW_H
 #define PROJECTION_IWINDOW_H
 
-#include <imgui_impl_glfw.h>
-#include "imgui.h"
 #include "../../util/debug/ILoggable.h"
-#include "document/Document.h"
 #include "../../util/Definitions.h"
+#include "glad/glad.h"
+#include "GLFW/glfw3.h"
 #include <unordered_map>
 #include <string>
 
