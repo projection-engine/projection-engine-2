@@ -60,7 +60,7 @@ namespace PEngine {
             JSON payloadJson = JSON::parse(msg);
             payload.id = payloadJson.get<std::string>("id", "");
             CONSOLE_LOG("WebView message received with ID: {0}", payload.id)
-            payload.payload = payloadJson.get<std::string>("payload", "").c_str();
+            payload.payload = payloadJson.get<std::string>("payload", "");
             payload.webview = this;
             payload.window = window;
         } catch (nlohmann::json::parse_error &ex) {

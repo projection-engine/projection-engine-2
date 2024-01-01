@@ -20,6 +20,8 @@ namespace PEngine {
         IRunner *initialize() override;
 
         void setProject(const std::string &pathToMetadata);
+
+        const std::string &getProject();
     };
 }
 

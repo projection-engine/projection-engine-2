@@ -17,6 +17,7 @@
     import ContentBrowserUtil from "./util/ContentBrowserUtil"
     import StorageKeys from "../../shared/enums/StorageKeys"
     import MenuBar from "../shared/components/frame/MenuBar.svelte";
+    import EditorSystem from "./lib/EditorSystem";
 
     const COMPONENT_ID = crypto.randomUUID()
     let isMetadataReady = false
@@ -34,13 +35,7 @@
         EngineStore.getInstance().addListener(COMPONENT_ID, data => HotKeysController.blockActions = data.executingAnimation, ["executingAnimation"])
         StoreIPCListener.get()
         ToastNotificationSystem.get()
-        ElectronResources.ipcRenderer.on(IPCRoutes.EDITOR_INITIALIZATION, (_, pathToProject) => {
-            sessionStorage.setItem(StorageKeys.PROJECT_PATH, pathToProject)
-            FileSystemUtil.initializeFolders(pathToProject).catch(console.error)
-            LevelService.get(() => isMetadataReady = true)
-            HotKeysController.initializeListener()
-            ContentBrowserUtil.initializeContentBrowser()
-        })
+        EditorSystem.loadProject().then(() => isMetadataReady = true)
     })
 
     onDestroy(() => {

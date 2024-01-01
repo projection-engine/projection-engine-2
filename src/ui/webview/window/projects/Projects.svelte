@@ -26,8 +26,7 @@
     }
 </script>
 
-<MenuBar
-        options={[{label: "Window", options: [{label: "Reload", onClick: () => WebViewSystem.sendMessage(null, "RELOAD")   }]}]}/>
+<MenuBar/>
 <div class="wrapper">
     {#if isOnAddProject}
         <div>

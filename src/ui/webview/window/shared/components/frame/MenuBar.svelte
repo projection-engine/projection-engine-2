@@ -1,13 +1,21 @@
 <script lang="ts">
     import OptionDropdown from "../dropdown/OptionDropdown.svelte";
+    import WebViewSystem from "../../webview/WebViewSystem";
 
-    export let options: [{ label: string, options: [{ label: string, onClick: GenericVoidFunction }] }]
-    console.trace("INITIALIZED")
+    export let options: { label: string, options: [{ label: string, onClick: GenericVoidFunction }] }[] = []
+
+    $: optionsMapped = [
+        ...options,
+        {
+            label: "Window",
+            options: [{label: "Reload", onClick: () => WebViewSystem.beam(null, "RELOAD")}]
+        }
+    ]
 </script>
 
 
 <div class="container">
-    {#each options as option}
+    {#each optionsMapped as option}
         <OptionDropdown
                 cleanLayout={true}
                 options={option.options}

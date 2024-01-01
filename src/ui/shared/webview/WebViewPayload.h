@@ -10,7 +10,7 @@ namespace PEngine {
 
     struct WebViewPayload {
         std::string id;
-        const char *payload = nullptr;
+        std::string payload;
         IWindow *window = nullptr;
         WebViewWindow *webview = nullptr;
 

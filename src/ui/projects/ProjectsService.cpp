@@ -26,7 +26,7 @@ namespace PEngine {
         FS::CreateDir(projectPath);
 
         JSON metadata{};
-        metadata.set("name", payload.payload);
+        metadata.set("name", payload.payload.c_str());
         metadata.set("id", projectId.c_str());
         const std::string &pathToMetadata = projectPath + "/" + "metadata.json";
         FS::WriteFile(pathToMetadata, metadata.stringify());

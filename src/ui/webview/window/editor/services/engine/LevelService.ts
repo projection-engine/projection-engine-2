@@ -30,15 +30,7 @@ import TabsStoreUtil from "../../util/TabsStoreUtil"
 export default class LevelService extends AbstractSingleton {
     #levelToLoad
 
-    constructor(resolvePromise: Function) {
-        super()
-        ElectronResources.ipcRenderer.once(
-            IPCRoutes.LOAD_PROJECT_METADATA,
-            (_, meta) => this.#onLoad(resolvePromise, meta))
-        ElectronResources.ipcRenderer.send(IPCRoutes.LOAD_PROJECT_METADATA)
-    }
-
-    #onLoad(resolvePromise, meta) {
+    static initialize(meta) {
         if (!meta) {
             ToastNotificationSystem.getInstance().error(LocalizationEN.ERROR_LOADING_PROJECT)
             return
@@ -57,8 +49,7 @@ export default class LevelService extends AbstractSingleton {
             isReady: true
         })
 
-        this.#levelToLoad = meta.level
-        resolvePromise()
+        this.get<LevelService>().#levelToLoad = meta.level
     }
 
     static getInstance(): LevelService {
