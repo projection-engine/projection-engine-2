@@ -29,6 +29,8 @@ set(SOURCES
         ui/store/SampleData.h
         core/FileSystemTest.cpp
         core/FileSystemTest.h
+        core/JSONTest.cpp
+        core/JSONTest.h
 )
 
 include_directories(../src/ui/editor)

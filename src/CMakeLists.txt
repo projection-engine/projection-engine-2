@@ -8,9 +8,7 @@ endforeach ()
 
 string(REPLACE "src/" "" SRC_PATHS "${FILE_PATHS}")
 string(REPLACE "src/" "" SRC_MAIN_PATHS "${MAIN_PATHS}")
-add_executable(projection main.cpp ${SRC_PATHS} ${SRC_MAIN_PATHS}
-        ui/projects/ProjectsService.cpp
-        ui/projects/ProjectsService.h)
+add_executable(projection main.cpp ${SRC_PATHS} ${SRC_MAIN_PATHS})
 
 target_link_libraries(projection PRIVATE ${COMMON_LIBRARIES})
 

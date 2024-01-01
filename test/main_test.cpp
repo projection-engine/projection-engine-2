@@ -8,6 +8,7 @@
 #include "ui/event/EventControllerTest.h"
 #include "ui/store/IStoreTest.h"
 #include "core/FileSystemTest.h"
+#include "core/JSONTest.h"
 
 void run(int ind, bool all) {
     if (ind == 0 || all) {
@@ -43,6 +44,11 @@ void run(int ind, bool all) {
         Tester *tester = PEngine::FileSystemTest::createTester();
         tester->run();
     }
+
+    if (ind == 8 || all) {
+        Tester *tester = PEngine::JSONTest::createTester();
+        tester->run();
+    }
 }
 
 TEST_CASE("Engine test", "[engine-test]") {
@@ -75,6 +81,10 @@ TEST_CASE("IStore test", "[istore-test]") {
 
 TEST_CASE("File-system test", "[fs-test]") {
     run(7, false);
+}
+
+TEST_CASE("JSON test", "[json-test]") {
+    run(8, false);
 }
 
 TEST_CASE("Run all", "[RUN_ALL]") {

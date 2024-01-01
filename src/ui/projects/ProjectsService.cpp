@@ -25,14 +25,14 @@ namespace PEngine {
         nlohmann::json metadata;
         metadata["name"] = payload.payload;
         metadata["id"] = projectId;
-        const std::string &pathToCache = projectPath + "/" + "metadata.json";
-        FileSystemUtil::WriteFile(pathToCache, metadata.dump());
+        const std::string &pathToMetadata = projectPath + "/" + "metadata.json";
+        FileSystemUtil::WriteFile(pathToMetadata, metadata.dump());
 
         IWindow *window = payload.window;
         WindowRepository *rep = window->getWindowRepository();
 
         rep->setActiveWindow(EDITOR_WINDOW);
-        rep->getActiveWindow()->postWebViewMessage(EDITOR_WINDOW, "LOAD_PROJECT", pathToCache);
+        rep->getActiveWindow()->postWebViewMessage(EDITOR_WINDOW, "LOAD_PROJECT", pathToMetadata);
 
         addToCache(projectPath, payload.payload, projectId);
     }
