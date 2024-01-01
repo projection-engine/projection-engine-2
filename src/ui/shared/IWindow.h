@@ -40,9 +40,6 @@ namespace PEngine {
             fprintf(stderr, "GLFW Error %d: %s\n", error, description);
         }
 
-        void createWindowIO();
-
-
         void addWebView(const std::string &id, const std::string &filePath);
 
         void removeWebView(const std::string &id);
@@ -57,8 +54,6 @@ namespace PEngine {
 
         void addWebViewEventListener(const std::string &webviewId, const std::string &listenerId,
                                      void (*action)(WebViewPayload &));
-
-        void postWebViewMessage(const std::string &id, const std::string& message);
 
         GLFWwindow *getWindow() const;
 

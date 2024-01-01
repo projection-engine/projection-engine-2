@@ -5,9 +5,13 @@ export default class ProjectSystem {
     static readAllProjects(): Promise<ProjectDTO[]> {
         return new Promise(resolve => {
             WebViewSystem.sendMessageWithCallback(null, "READ_PROJECTS_CACHE", result => {
-                if (result != null) {
-                    resolve(JSON.parse(result.getPayload()).map(ProjectDTO.of))
-                    return
+                if (result != null && result.getPayload() != null) {
+                    try{
+                        resolve(JSON.parse(result.getPayload()).map(ProjectDTO.of))
+                        return
+                    }catch (ex){
+                        console.error(ex)
+                    }
                 }
                 resolve([])
             })

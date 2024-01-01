@@ -9,6 +9,7 @@
 #include <nlohmann/json.hpp>
 #include "GLFW/glfw3native.h"
 #include "WebViewPayload.h"
+#include "../../../util/JSON.h"
 #include <unordered_map>
 
 namespace PEngine {
@@ -56,12 +57,10 @@ namespace PEngine {
 
         WebViewPayload payload;
         try {
-            nlohmann::json payloadJson = nlohmann::json::parse(msg);
-            payload.id = payloadJson["id"].get<std::string>();
+            JSON payloadJson = JSON::parse(msg);
+            payload.id = payloadJson.get<std::string>("id", "");
             CONSOLE_LOG("WebView message received with ID: {0}", payload.id)
-            if (payloadJson["payload"].is_string()) {
-                payload.payload = payloadJson["payload"].get<std::string>().c_str();
-            }
+            payload.payload = payloadJson.get<std::string>("payload", "").c_str();
             payload.webview = this;
             payload.window = window;
         } catch (nlohmann::json::parse_error &ex) {
@@ -71,10 +70,6 @@ namespace PEngine {
             listeners[payload.id]->action(payload);
         }
         return S_OK;
-    }
-
-    void WebViewWindow::postMessage(const std::string &message) {
-        postMessage(message, "");
     }
 
     void WebViewWindow::postMessage(const std::string &message, const std::string &id) {

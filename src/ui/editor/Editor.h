@@ -13,10 +13,15 @@ namespace PEngine {
     class Editor : public IWindow {
     private:
         static void onMessage(WebViewPayload &payload);
+
+        std::string projectPath;
     public:
+
         explicit Editor() : IWindow("Project Editor"){}
 
         IRunner* initialize() override;
+
+        void setProject(const std::string &pathToMetadata);
     };
 }
 

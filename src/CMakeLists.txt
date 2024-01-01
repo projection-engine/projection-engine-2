@@ -8,7 +8,9 @@ endforeach ()
 
 string(REPLACE "src/" "" SRC_PATHS "${FILE_PATHS}")
 string(REPLACE "src/" "" SRC_MAIN_PATHS "${MAIN_PATHS}")
-add_executable(projection main.cpp ${SRC_PATHS} ${SRC_MAIN_PATHS})
+add_executable(projection main.cpp ${SRC_PATHS} ${SRC_MAIN_PATHS}
+        ui/shared/ImGuiContextUtil.cpp
+        ui/shared/ImGuiContextUtil.h)
 
 target_link_libraries(projection PRIVATE ${COMMON_LIBRARIES})
 

@@ -2,6 +2,7 @@
 #include "shared/IWindow.h"
 #include "shared/runners/IRunner.h"
 #include "GLFW/glfw3.h"
+#include "shared/ImGuiContextUtil.h"
 
 namespace PEngine {
     void WindowRepository::createWindowInternal(const std::string &id, IWindow *window) {
@@ -15,6 +16,8 @@ namespace PEngine {
             GLFWwindow *oldWindow = windows[mainWindowId]->getWindow();
             glfwDestroyWindow(oldWindow);
             glfwTerminate();
+            runner->destroyContext();
+            ImGuiContextUtil::destroy();
             delete runner;
         }
         mainWindowId = id;

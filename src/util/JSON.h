@@ -25,7 +25,7 @@ namespace PEngine {
         }
 
         template<typename T>
-        void set(const std::string &key, T &value) {
+        void set(const std::string &key, T value) {
             if (value == nullptr) {
                 return;
             }
@@ -33,8 +33,10 @@ namespace PEngine {
         }
 
         bool has(const std::string &key) {
-            auto it = data.find(key);
-            return it != data.end();
+            if (data.find(key) != data.end()) {
+                return !data[key].is_null();
+            }
+            return false;
         }
 
         void erase(const std::string &key) {
@@ -47,8 +49,35 @@ namespace PEngine {
             return data.dump();
         }
 
-        static JSON *parse(const std::string &data) {
-            return new JSON(nlohmann::json::parse(data));
+        nlohmann::json &getData() {
+            return data;
+        }
+
+        bool isArray() {
+            return data.is_array();
+        }
+
+        static JSON parse(const std::string &data) {
+            try {
+                return JSON(nlohmann::json::parse(data));
+            } catch (const nlohmann::json::exception &e) {
+                return JSON{};
+            }
+        }
+
+        static JSON parse(const std::wstring &data) {
+            try {
+                return JSON(nlohmann::json::parse(data));
+            } catch (const nlohmann::json::exception &e) {
+                return JSON{};
+            }
+        }
+
+        explicit JSON() = default;
+
+        template<typename T>
+        void pushItem(T value) {
+            data.push_back(value);
         }
     };
 }

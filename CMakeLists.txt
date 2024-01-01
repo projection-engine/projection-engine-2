@@ -95,7 +95,8 @@ set(FILE_PATHS
         src/engine/resource/ResourcesSystem.h
         src/engine/world/IEntity.cpp
         src/engine/world/IEntity.h
-        src/util/FileSystemUtil.h
+        src/util/FS.h
+        src/util/FS.cpp
         src/util/event/TypedEventPayload.h
         src/util/structures/List.h
         src/util/structures/Map.cpp

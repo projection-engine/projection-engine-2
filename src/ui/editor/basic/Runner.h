@@ -19,6 +19,7 @@ namespace PEngine {
         Engine engine = Engine(new IOController, new FSController);
 
     protected:
+
         void update() override;
 
         void startNewFrame() override;
@@ -33,9 +34,10 @@ namespace PEngine {
 
     public:
 
-        explicit Runner(GLFWwindow *window) : IRunner(window) {}
+        explicit Runner(GLFWwindow *w) : IRunner(w) {
+        }
 
-        ~Runner() override;
+        void destroyContext() override;
 
         const Engine &getEngine() const;
     };

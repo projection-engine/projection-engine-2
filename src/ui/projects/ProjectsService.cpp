@@ -5,9 +5,12 @@
 #include "../shared/IWindow.h"
 #include "../WindowRepository.h"
 #include "WebView2.h"
-#include "../../util/FileSystemUtil.h"
-#include "nlohmann/json.hpp"
+#include "../../util/FS.h"
 #include "../../util/UUID.h"
+#include "../../util/JSON.h"
+#include "Editor.h"
+
+#define CACHE_PATH FS::GetCurrentPath() + "/projects-cache.json"
 
 namespace PEngine {
     void ProjectsService::reload(WebViewPayload &payload) {
@@ -15,34 +18,43 @@ namespace PEngine {
     }
 
     void ProjectsService::createProject(WebViewPayload &payload) {
-        std::string basePath = FileSystemUtil::GetCurrentPath() + "/projects";
-        FileSystemUtil::CreateDirectory(basePath);
+        std::string basePath = FS::GetCurrentPath() + "/projects";
+        FS::CreateDir(basePath);
 
         const std::string &projectId = UUID::v4();
         std::string projectPath = basePath + "/" + projectId;
-        FileSystemUtil::CreateDirectory(projectPath);
+        FS::CreateDir(projectPath);
 
-        nlohmann::json metadata;
-        metadata["name"] = payload.payload;
-        metadata["id"] = projectId;
+        JSON metadata{};
+        metadata.set("name", payload.payload);
+        metadata.set("id", projectId.c_str());
         const std::string &pathToMetadata = projectPath + "/" + "metadata.json";
-        FileSystemUtil::WriteFile(pathToMetadata, metadata.dump());
+        FS::WriteFile(pathToMetadata, metadata.stringify());
+        addToCache(projectPath, payload.payload, projectId);
 
         IWindow *window = payload.window;
         WindowRepository *rep = window->getWindowRepository();
 
         rep->setActiveWindow(EDITOR_WINDOW);
-        rep->getActiveWindow()->postWebViewMessage(EDITOR_WINDOW, "LOAD_PROJECT", pathToMetadata);
+        Editor *currentWindow = dynamic_cast<Editor *>(rep->getActiveWindow());
+        currentWindow->setProject(pathToMetadata);
 
-        addToCache(projectPath, payload.payload, projectId);
     }
 
     void ProjectsService::addToCache(const std::string &path, const std::string &name, const std::string &id) {
-        // TODO
+        JSON result = JSON::parse(FS::ReadFile(CACHE_PATH));
+        if (result.isArray()) {
+            JSON newItem{};
+            newItem.set("path", path.c_str());
+            newItem.set("name", name.c_str());
+            newItem.set("id", id.c_str());
+            result.pushItem(newItem.getData());
+        }
+        FS::WriteFile(CACHE_PATH, result.stringify());
     }
 
     void ProjectsService::readProjectsCache(WebViewPayload &payload) {
-        std::string result = FileSystemUtil::ReadFile(FileSystemUtil::GetCurrentPath() + "/projects-cache.json");
+        std::string result = FS::ReadFile(CACHE_PATH);
         payload.resolve(result.c_str());
     }
 }

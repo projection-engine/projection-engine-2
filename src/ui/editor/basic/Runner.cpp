@@ -1,10 +1,10 @@
 #include "Runner.h"
 #include "../../shared/elements/IElement.h"
 #include "../../shared/views/IView.h"
-#include "../../shared/document/Document.h"
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
+#include "../../shared/ImGuiContextUtil.h"
 
 
 namespace PEngine {
@@ -58,11 +58,7 @@ namespace PEngine {
         return engine;
     }
 
-    Runner::~Runner() {
+    void Runner::destroyContext() {
         CONSOLE_LOG("SHUTTING DOWN")
-        ImGui_ImplOpenGL3_Shutdown();
-        ImGui_ImplGlfw_Shutdown();
-        ImGui::DestroyContext();
     }
-
 }

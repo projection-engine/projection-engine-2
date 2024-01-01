@@ -33,7 +33,7 @@ namespace PEngine {
             window = w;
         }
 
-        virtual ~IRunner() = default;
+        virtual void destroyContext(){}
 
         void run() {
             update();

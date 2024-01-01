@@ -1,16 +1,11 @@
-#ifndef PROJECTION_FILESYSTEMUTIL_H
-#define PROJECTION_FILESYSTEMUTIL_H
-
+#include "FS.h"
 #include <iostream>
 #include <fstream>
 #include <filesystem>
-#include <string>
 #include <stdexcept>
 
-namespace fs = std::filesystem;
-
-namespace PEngine::FileSystemUtil {
-    void WriteFile(const std::string &filePath, const std::string &data) {
+namespace PEngine {
+    void FS::WriteFile(const std::string &filePath, const std::string &data) {
         std::ofstream outputFile(filePath);
         if (outputFile.is_open()) {
             outputFile << data;
@@ -21,7 +16,7 @@ namespace PEngine::FileSystemUtil {
         }
     }
 
-    void DeleteFileOrDir(const std::string &filePath) {
+    void FS::DeleteFileOrDir(const std::string &filePath) {
         if (std::filesystem::exists(filePath)) {
             try {
                 std::filesystem::remove_all(filePath);
@@ -34,11 +29,11 @@ namespace PEngine::FileSystemUtil {
         }
     }
 
-    std::string GetCurrentPath() {
-        return fs::current_path().string();
+    std::string FS::GetCurrentPath() {
+        return std::filesystem::current_path().string();
     }
 
-    std::string ReadFile(const std::string &filePath) {
+    std::string FS::ReadFile(const std::string &filePath) {
         if (std::filesystem::exists(filePath)) {
             std::ifstream file(filePath);
             if (!file.is_open()) {
@@ -55,17 +50,17 @@ namespace PEngine::FileSystemUtil {
         }
     }
 
-    bool Exists(const std::string &path) {
-        return fs::exists(path);
+    bool FS::Exists(const std::string &path) {
+        return std::filesystem::exists(path);
     }
 
-    bool CreateDirectory(const std::string &path) {
+    bool FS::CreateDir(const std::string &path) {
         if (!Exists(path)) {
             try {
-                fs::create_directory(path);
+                std::filesystem::create_directory(path);
                 std::cout << "Directory created: " << path << std::endl;
                 return true;
-            } catch (const fs::filesystem_error &e) {
+            } catch (const std::filesystem::filesystem_error &e) {
                 std::cerr << "Error creating directory: " << e.what() << std::endl;
                 return false;
             }
@@ -75,5 +70,3 @@ namespace PEngine::FileSystemUtil {
         }
     }
 }
-
-#endif

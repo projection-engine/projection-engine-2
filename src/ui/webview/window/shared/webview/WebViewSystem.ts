@@ -8,13 +8,17 @@ export default class WebViewSystem {
         if (!WebViewSystem.initialized) {
             // @ts-ignore
             window.chrome.webview.addEventListener('message', event => {
-                if (event.data == null) {
-                    return
-                }
-                const response = WebViewPayload.of(event.data);
-                if (this.listeners.has(response.getId())) {
-                    this.listeners.get(response.getId())(response)
-                    this.listeners.delete(response.getId())
+                try {
+                    if (event.data == null) {
+                        return
+                    }
+                    const response = WebViewPayload.of(event.data);
+                    if (this.listeners.has(response.getId())) {
+                        this.listeners.get(response.getId())(response)
+                        this.listeners.delete(response.getId())
+                    }
+                } catch (ex) {
+                    console.error(ex)
                 }
             })
             WebViewSystem.initialized = true

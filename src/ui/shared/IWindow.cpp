@@ -1,10 +1,9 @@
 #include "IWindow.h"
 #include "basic/Runner.h"
-#include "imgui_impl_glfw.h"
-#include "imgui_impl_opengl3.h"
 #include "wtypes.h"
 #include "webview/WebViewWindow.h"
 #include "webview/WebViewPayload.h"
+#include "ImGuiContextUtil.h"
 
 namespace PEngine {
     void IWindow::getDesktopResolution(int &horizontal, int &vertical) {
@@ -12,24 +11,6 @@ namespace PEngine {
         GetWindowRect(GetDesktopWindow(), &desktop);
         horizontal = desktop.right;
         vertical = desktop.bottom;
-    }
-
-    void IWindow::createWindowIO() {
-        IMGUI_CHECKVERSION();
-        ImGui::CreateContext();
-        ImGuiIO &io = ImGui::GetIO();
-        (void) io;
-        io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
-        io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
-        io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // Enable Docking
-        io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;       // Enable Multi-Viewport / Platform Windows
-
-        ImGui::StyleColorsDark();
-        ImGuiStyle &style = ImGui::GetStyle();
-        if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
-            style.WindowRounding = 0.0f;
-            style.Colors[ImGuiCol_WindowBg].w = 1.0f;
-        }
     }
 
     void IWindow::removeWebView(const std::string &id) {
@@ -97,10 +78,6 @@ namespace PEngine {
         glfwMakeContextCurrent(window);
         glfwSwapInterval(1);
 
-        createWindowIO();
-
-        ImGui_ImplGlfw_InitForOpenGL(window, true);
-        ImGui_ImplOpenGL3_Init(GLSL_VERSION);
         CONSOLE_LOG("WINDOW CREATED")
         return nullptr;
     }
