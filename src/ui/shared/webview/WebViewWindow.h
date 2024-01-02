@@ -17,7 +17,7 @@
 #define BASE ICoreWebView2
 
 namespace PEngine {
-    class IWindow;
+    class AbstractWindow;
 
     class WebViewPayload;
 
@@ -32,14 +32,14 @@ namespace PEngine {
         EventRegistrationToken token;
         wil::com_ptr<ICoreWebView2Controller> webviewController = nullptr;
         wil::com_ptr<ICoreWebView2> webview = nullptr;
-        IWindow *window;
+        AbstractWindow *window;
         std::unordered_map<std::string, ListenerDTO *> listeners;
 
         void prepareView(ICoreWebView2Controller *controller);
 
     public:
 
-        explicit WebViewWindow(const std::string &pathToFile, IWindow *window);
+        explicit WebViewWindow(AbstractWindow *window);
 
         HWND__ *getNativeWindow() const;
 
@@ -50,6 +50,8 @@ namespace PEngine {
         wil::com_ptr<ICoreWebView2> getWebView();
 
         void postMessage(const std::string& message, const std::string& id);
+
+        void setHTMLFile(const std::string &path);
     };
 
 }

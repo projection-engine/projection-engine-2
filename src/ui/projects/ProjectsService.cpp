@@ -2,7 +2,7 @@
 
 #include "../shared/webview/WebViewWindow.h"
 #include "../shared/webview/WebViewPayload.h"
-#include "../shared/IWindow.h"
+#include "../shared/AbstractWindow.h"
 #include "../WindowRepository.h"
 #include "WebView2.h"
 #include "../../util/FS.h"
@@ -32,7 +32,7 @@ namespace PEngine {
         FS::WriteFile(pathToMetadata, metadata.stringify());
         addToCache(projectPath, payload.payload, projectId);
 
-        IWindow *window = payload.window;
+        AbstractWindow *window = payload.window;
         WindowRepository *rep = window->getWindowRepository();
 
         rep->setActiveWindow(EDITOR_WINDOW);

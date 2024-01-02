@@ -3,21 +3,37 @@
 
 #include <string>
 #include <unordered_map>
+#include "GLFW/glfw3.h"
+#include "../util/debug/ILoggable.h"
 
 namespace PEngine {
-    class IWindow;
+    class AbstractWindow;
 
     class IRunner;
 
-    class WindowRepository {
+    class WebViewWindow;
+
+    class WindowRepository : public ILoggable {
     private:
-        std::unordered_map<std::string, IWindow *> windows;
+        static WindowRepository *singleton;
+        GLFWwindow *window = nullptr;
+        WebViewWindow *webView = nullptr;
+        IRunner *runner = nullptr;
+        std::unordered_map<std::string, AbstractWindow *> windows;
         std::string mainWindowId;
-        IRunner *runner;
 
-        void createWindowInternal(const std::string &id, IWindow *window);
+        void createWindowInternal(const std::string &id, AbstractWindow *window);
 
+        static void getDesktopResolution(int &horizontal, int &vertical);
+
+        static void onError(int error, const char *description);
     public:
+
+        static WindowRepository *get();
+
+        explicit WindowRepository();
+
+        ~WindowRepository();
 
         template<class W>
         void createWindow(const std::string &id) {
@@ -25,7 +41,13 @@ namespace PEngine {
         }
 
         void setActiveWindow(const std::string &id);
-        IWindow *getActiveWindow();
+
+        AbstractWindow *getActiveWindow();
+
+        GLFWwindow *getWindow() const;
+
+        WebViewWindow *getWebView() const;
+
     };
 
 }

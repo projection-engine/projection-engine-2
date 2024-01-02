@@ -4,14 +4,14 @@
 #include <string>
 
 namespace PEngine {
-    class IWindow;
+    class AbstractWindow;
 
     class WebViewWindow;
 
     struct WebViewPayload {
         std::string id;
         std::string payload;
-        IWindow *window = nullptr;
+        AbstractWindow *window = nullptr;
         WebViewWindow *webview = nullptr;
 
         void resolve(const char *message) const;

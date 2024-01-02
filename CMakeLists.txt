@@ -27,8 +27,8 @@ set(COMMON_LIBRARIES
 )
 
 set(MAIN_PATHS
-        src/ui/shared/IWindow.cpp
-        src/ui/shared/IWindow.h
+        src/ui/shared/AbstractWindow.cpp
+        src/ui/shared/AbstractWindow.h
         src/ui/editor/Editor.cpp
         src/ui/editor/Editor.h
         src/ui/editor/basic/Runner.cpp

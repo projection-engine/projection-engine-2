@@ -3,7 +3,6 @@
 #include "../shared/webview/WebViewWindow.h"
 #include "../shared/webview/WebViewPayload.h"
 #include "basic/Runner.h"
-#include "../shared/ImGuiContextUtil.h"
 #include "../../util/FS.h"
 
 #define RELOAD "RELOAD"
@@ -11,15 +10,13 @@
 
 namespace PEngine {
     IRunner *Editor::initialize() {
-        IWindow::initialize();
         if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
             CONSOLE_ERROR("Failed to initialize GLAD")
             return nullptr;
         }
-        addWebView(EDITOR_WINDOW, "editor-window.html");
-        addWebViewEventListener(EDITOR_WINDOW, RELOAD, onMessage);
-        addWebViewEventListener(EDITOR_WINDOW, LOAD_PROJECT, onMessage);
-        ImGuiContextUtil::initialize(window);
+        addWebView("editor-window.html");
+        addWebViewEventListener(RELOAD, onMessage);
+        addWebViewEventListener(LOAD_PROJECT, onMessage);
         return new Runner(window);
     }
 

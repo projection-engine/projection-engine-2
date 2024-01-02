@@ -63,14 +63,14 @@ Index of this file:
 
 // [SECTION] Forward Declarations
 // [SECTION] Helpers
-// [SECTION] Demo IWindow / ShowDemoWindow()
+// [SECTION] Demo AbstractWindow / ShowDemoWindow()
 // - ShowDemoWindow()
 // - sub section: ShowDemoWindowWidgets()
 // - sub section: ShowDemoWindowLayout()
 // - sub section: ShowDemoWindowPopups()
 // - sub section: ShowDemoWindowTables()
 // - sub section: ShowDemoWindowInputs()
-// [SECTION] About IWindow / ShowAboutWindow()
+// [SECTION] About AbstractWindow / ShowAboutWindow()
 // [SECTION] Style Editor / ShowStyleEditor()
 // [SECTION] User Guide / ShowUserGuide()
 // [SECTION] Example App: MainView Menu Bar / ShowExampleAppMainMenuBar()
@@ -271,7 +271,7 @@ void *GImGuiDemoMarkerCallbackUserData = NULL;
 #define IMGUI_DEMO_MARKER(section)  do { if (GImGuiDemoMarkerCallback != NULL) GImGuiDemoMarkerCallback(__FILE__, __LINE__, section, GImGuiDemoMarkerCallbackUserData); } while (0)
 
 //-----------------------------------------------------------------------------
-// [SECTION] Demo IWindow / ShowDemoWindow()
+// [SECTION] Demo AbstractWindow / ShowDemoWindow()
 //-----------------------------------------------------------------------------
 // - ShowDemoWindow()
 // - ShowDemoWindowWidgets()
@@ -657,8 +657,8 @@ void ImGui::ShowDemoWindow(bool *p_open) {
         }
     }
 
-    IMGUI_DEMO_MARKER("IWindow options");
-    if (ImGui::CollapsingHeader("IWindow options")) {
+    IMGUI_DEMO_MARKER("AbstractWindow options");
+    if (ImGui::CollapsingHeader("AbstractWindow options")) {
         if (ImGui::BeginTable("split", 3)) {
             ImGui::TableNextColumn();
             ImGui::Checkbox("No titlebar", &no_titlebar);
@@ -2732,8 +2732,8 @@ static void ShowDemoWindowWidgets() {
         ImGui::TreePop();
     }
 
-    IMGUI_DEMO_MARKER("Widgets/Querying IWindow Status (Focused,Hovered etc.)");
-    if (ImGui::TreeNode("Querying IWindow Status (Focused/Hovered etc.)")) {
+    IMGUI_DEMO_MARKER("Widgets/Querying AbstractWindow Status (Focused,Hovered etc.)");
+    if (ImGui::TreeNode("Querying AbstractWindow Status (Focused/Hovered etc.)")) {
         static bool embed_all_inside_a_child_window = false;
         ImGui::Checkbox("Embed everything inside a child windows for testing _RootWindow flag.",
                         &embed_all_inside_a_child_window);
@@ -3795,7 +3795,7 @@ static void ShowDemoWindowPopups() {
     IMGUI_DEMO_MARKER("Popups/Context menus");
     if (ImGui::TreeNode("Context menus")) {
         HelpMarker(
-                "\"Context\" functions are simple helpers to associate a Popup to a given Item or IWindow identifier.");
+                "\"Context\" functions are simple helpers to associate a Popup to a given Item or AbstractWindow identifier.");
 
         // BeginPopupContextItem() is a helper to provide common/simple popup behavior of essentially doing:
         //     if (id == 0)
@@ -6326,7 +6326,7 @@ static void ShowDemoWindowInputs() {
 }
 
 //-----------------------------------------------------------------------------
-// [SECTION] About IWindow / ShowAboutWindow()
+// [SECTION] About AbstractWindow / ShowAboutWindow()
 // Access from Dear ImGui Demo -> Tools -> About
 //-----------------------------------------------------------------------------
 
@@ -7712,7 +7712,7 @@ static void ShowExampleAppAutoResize(bool *p_open) {
 
     static int lines = 10;
     ImGui::TextUnformatted(
-            "IWindow will resize every-frame to the size of its content.\n"
+            "AbstractWindow will resize every-frame to the size of its content.\n"
             "Note that you probably don't want to query the windows size to\n"
             "output your content because that would loadView a feedback loop.");
     ImGui::SliderInt("Number of lines", &lines, 1, 20);
@@ -7818,7 +7818,7 @@ static void ShowExampleAppConstrainedResize(bool *p_open) {
             ImGui::SetNextItemWidth(ImGui::GetFontSize() * 20);
             ImGui::DragInt("Lines", &display_lines, 0.2f, 1, 100);
             ImGui::Checkbox("Auto-resize", &auto_resize);
-            ImGui::Checkbox("IWindow padding", &window_padding);
+            ImGui::Checkbox("AbstractWindow padding", &window_padding);
             for (int i = 0; i < display_lines; i++)
                 ImGui::Text("%*sHello, sailor! Making this line long enough for the example.", i * 4, "");
         }
@@ -7916,7 +7916,7 @@ static void ShowExampleAppFullscreen(bool *p_open) {
 }
 
 //-----------------------------------------------------------------------------
-// [SECTION] Example App: Manipulating IWindow Titles / ShowExampleAppWindowTitles()
+// [SECTION] Example App: Manipulating AbstractWindow Titles / ShowExampleAppWindowTitles()
 //-----------------------------------------------------------------------------
 
 // Demonstrate the use of "##" and "###" in identifiers to manipulate ID generation.
@@ -8537,7 +8537,7 @@ void ShowExampleAppDocuments(bool *p_open) {
         ImGui::PopID();
     }
     ImGui::PushItemWidth(ImGui::GetFontSize() * 12);
-    ImGui::Combo("Output", (int *) &opt_target, "None\0TabBar+Tabs\0DockSpace+IWindow\0");
+    ImGui::Combo("Output", (int *) &opt_target, "None\0TabBar+Tabs\0DockSpace+AbstractWindow\0");
     ImGui::PopItemWidth();
     bool redock_all = false;
     if (opt_target == Target_Tab) {

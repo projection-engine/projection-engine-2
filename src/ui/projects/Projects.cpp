@@ -12,11 +12,10 @@
 
 namespace PEngine {
     IRunner *Projects::initialize() {
-        IWindow::initialize();
-        addWebView(PROJECTS_WINDOW, "project-window.html");
-        addWebViewEventListener(PROJECTS_WINDOW, RELOAD, onMessage);
-        addWebViewEventListener(PROJECTS_WINDOW, CREATE_P, onMessage);
-        addWebViewEventListener(PROJECTS_WINDOW, RPC, onMessage);
+        addWebView( "project-window.html");
+        addWebViewEventListener( RELOAD, onMessage);
+        addWebViewEventListener( CREATE_P, onMessage);
+        addWebViewEventListener( RPC, onMessage);
         return nullptr;
     }
 

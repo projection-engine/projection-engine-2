@@ -1,21 +1,21 @@
 #ifndef PROJECTION_EDITOR_H
 #define PROJECTION_EDITOR_H
 
-#include "../shared/IWindow.h"
+#include "../shared/AbstractWindow.h"
 
 namespace PEngine {
     class WebViewWindow;
 
     class IRunner;
 
-    class Editor : public IWindow {
+    class Editor : public AbstractWindow {
     private:
         static void onMessage(WebViewPayload &payload);
 
         std::string projectPath;
     public:
 
-        explicit Editor() : IWindow("Project Editor") {}
+        explicit Editor() : AbstractWindow("Project Editor") {}
 
         IRunner *initialize() override;
 

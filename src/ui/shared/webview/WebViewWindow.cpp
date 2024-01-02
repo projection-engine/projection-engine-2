@@ -1,7 +1,7 @@
 #include "WebViewWindow.h"
 #include <filesystem>
 #include <iostream>
-#include "../IWindow.h"
+#include "../AbstractWindow.h"
 
 #define GLFW_EXPOSE_NATIVE_WGL
 #define GLFW_EXPOSE_NATIVE_WIN32
@@ -38,6 +38,11 @@ namespace PEngine {
 
         bounds.left = bounds.left / 2;
         webviewController->put_Bounds(bounds);
+
+    }
+
+    void WebViewWindow::setHTMLFile(const std::string &path) {
+        std::string pathToFile = "file:///" + std::filesystem::current_path().string() + "/" + path;
         std::wstring pathToFileW = std::wstring(pathToFile.begin(), pathToFile.end());
         CONSOLE_WARN("Navigating to: {0}", pathToFile)
         webview->Navigate(pathToFileW.c_str());
@@ -81,9 +86,8 @@ namespace PEngine {
         webview->PostWebMessageAsString(std::wstring(messagePayload.begin(), messagePayload.end()).c_str());
     }
 
-    WebViewWindow::WebViewWindow(const std::string &pathToFile, IWindow *window) {
+    WebViewWindow::WebViewWindow(AbstractWindow *window) {
         this->window = window;
-        this->pathToFile = "file:///" + std::filesystem::current_path().string() + "/" + pathToFile;
         CONSOLE_WARN("Creating WebView2 window")
         nativeWindow = glfwGetWin32Window(this->window->getWindow());
         CreateCoreWebView2EnvironmentWithOptions(
