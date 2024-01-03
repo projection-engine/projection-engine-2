@@ -20,37 +20,21 @@ namespace PEngine {
 
     class WebViewWindow;
 
-    class WindowRepository;
-
     class WebViewPayload;
 
     class AbstractWindow : public ILoggable {
     protected:
-        GLFWwindow *window = nullptr;
-        WindowRepository *windowRepository = nullptr;
-        WebViewWindow *webView = nullptr;
         std::string name;
 
-        void addWebView(const std::string &id, const std::string &filePath);
     public:
 
         explicit AbstractWindow(const std::string &name);
 
-        virtual IRunner *initialize() {}
+        virtual IRunner *initialize();
 
-        void addWebViewEventListener(const std::string &listenerId, void (*action)(WebViewPayload &));
+        std::string getName();
 
-        GLFWwindow *getWindow() const;
-
-        void setWindowRepository(WindowRepository *windowRepository);
-
-        const std::string &getName() const;
-
-        WindowRepository *getWindowRepository() const;
-
-        void postWebViewMessage(const std::string &listenerId, const std::string &message);
-
-        void setWindow(GLFWwindow *window);
+        virtual const char *getWebViewHTML();
     };
 }
 #endif

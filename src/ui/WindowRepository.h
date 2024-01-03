@@ -3,8 +3,12 @@
 
 #include <string>
 #include <unordered_map>
+#include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include "../util/debug/ILoggable.h"
+#include <wrl.h>
+#include "imgui_impl_opengl3.h"
+#include "imgui_impl_glfw.h"
 
 namespace PEngine {
     class AbstractWindow;
@@ -15,7 +19,7 @@ namespace PEngine {
 
     class WindowRepository : public ILoggable {
     private:
-        static WindowRepository *singleton;
+        static WindowRepository singleton;
         GLFWwindow *window = nullptr;
         WebViewWindow *webView = nullptr;
         IRunner *runner = nullptr;
@@ -27,20 +31,18 @@ namespace PEngine {
         static void getDesktopResolution(int &horizontal, int &vertical);
 
         static void onError(int error, const char *description);
-    public:
 
-        static WindowRepository *get();
+    public:
+        static WindowRepository &Get();
 
         explicit WindowRepository();
-
-        ~WindowRepository();
 
         template<class W>
         void createWindow(const std::string &id) {
             createWindowInternal(id, new W);
         }
 
-        void setActiveWindow(const std::string &id);
+        void activateWindow(const std::string &id);
 
         AbstractWindow *getActiveWindow();
 
@@ -48,6 +50,11 @@ namespace PEngine {
 
         WebViewWindow *getWebView() const;
 
+        void initializeImGui() const;
+
+        AbstractWindow *getWindowById(const std::string &windowId);
+
+        void run();
     };
 
 }

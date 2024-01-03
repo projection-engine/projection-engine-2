@@ -38,7 +38,7 @@ namespace PEngine {
 
     public:
 
-        explicit Runner(GLFWwindow *w) : IRunner(w) {
+        explicit Runner() {
             initiate();
         }
 

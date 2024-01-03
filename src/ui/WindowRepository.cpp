@@ -1,43 +1,27 @@
-#include <windef.h>
-#include <WinUser.h>
 #include "WindowRepository.h"
 #include "shared/AbstractWindow.h"
 #include "shared/webview/WebViewWindow.h"
 #include "shared/runners/IRunner.h"
-#include "glad/glad.h"
-#include "GLFW/glfw3.h"
-#include "imgui_impl_opengl3.h"
-#include "imgui_impl_glfw.h"
+#include "GLFW/glfw3native.h"
 
 namespace PEngine {
+    WindowRepository WindowRepository::singleton;
 
     void WindowRepository::createWindowInternal(const std::string &id, AbstractWindow *window) {
         windows[id] = window;
-        window->setWindowRepository(this);
-
     }
 
-    void WindowRepository::setActiveWindow(const std::string &id) {
+    void WindowRepository::activateWindow(const std::string &id) {
         if (windows.count(mainWindowId)) {
-            GLFWwindow *oldWindow = windows[mainWindowId]->getWindow();
-            glfwDestroyWindow(oldWindow);
-            glfwTerminate();
             runner->destroyContext();
             delete runner;
         }
         mainWindowId = id;
-
         runner = windows[id]->initialize();
-        GLFWwindow *glfwWindow = windows[id]->getWindow();
-        if (runner == nullptr) {
-            runner = new IRunner(glfwWindow);
+        if(runner == nullptr){
+            runner = new IRunner;
         }
-        while (!glfwWindowShouldClose(glfwWindow)) {
-            glfwPollEvents();
-            runner->run();
-            glfwMakeContextCurrent(glfwGetCurrentContext());
-            glfwSwapBuffers(glfwWindow);
-        }
+        webView->setHTMLFile(windows[id]->getWebViewHTML());
     }
 
 
@@ -46,12 +30,6 @@ namespace PEngine {
             return windows[mainWindowId];
         }
         return nullptr;
-    }
-
-    WindowRepository::~WindowRepository() {
-        ImGui_ImplOpenGL3_Shutdown();
-        ImGui_ImplGlfw_Shutdown();
-        ImGui::DestroyContext();
     }
 
     void WindowRepository::getDesktopResolution(int &horizontal, int &vertical) {
@@ -92,7 +70,28 @@ namespace PEngine {
         glfwSwapInterval(1);
 
         CONSOLE_LOG("WINDOW CREATED")
+        initializeImGui();
+        webView = new WebViewWindow();
+        runner = new IRunner;
+    }
 
+    void WindowRepository::run() {
+        while (!glfwWindowShouldClose(window)) {
+            glfwPollEvents();
+            runner->run();
+            glfwMakeContextCurrent(glfwGetCurrentContext());
+            glfwSwapBuffers(window);
+        }
+
+        glfwDestroyWindow(window);
+        glfwTerminate();
+
+        ImGui_ImplOpenGL3_Shutdown();
+        ImGui_ImplGlfw_Shutdown();
+        ImGui::DestroyContext();
+    }
+
+    void WindowRepository::initializeImGui() const {
         IMGUI_CHECKVERSION();
         ImGui::CreateContext();
         ImGuiIO &io = ImGui::GetIO();
@@ -111,12 +110,9 @@ namespace PEngine {
 
         ImGui_ImplGlfw_InitForOpenGL(window, true);
         ImGui_ImplOpenGL3_Init(GLSL_VERSION);
-
-        webView = new WebViewWindow();
     }
 
-    WindowRepository *WindowRepository::get() {
-        if(singleton == nullptr) { singleton = new WindowRepository; }
+    WindowRepository &WindowRepository::Get() {
         return singleton;
     }
 
@@ -126,5 +122,12 @@ namespace PEngine {
 
     WebViewWindow *WindowRepository::getWebView() const {
         return webView;
+    }
+
+    AbstractWindow *WindowRepository::getWindowById(const std::string &windowId) {
+        if (windows.count(windowId)) {
+            return windows[windowId];
+        }
+        return nullptr;
     }
 }

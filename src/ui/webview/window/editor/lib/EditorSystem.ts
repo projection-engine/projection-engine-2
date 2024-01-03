@@ -1,7 +1,5 @@
 import WebViewSystem from "../../shared/webview/WebViewSystem";
 import EditorMessages from "./EditorMessages";
-import StorageKeys from "../../../shared/enums/StorageKeys";
-import FileSystemUtil from "../../shared/FileSystemUtil";
 import LevelService from "../services/engine/LevelService";
 import HotKeysController from "../../shared/lib/HotKeysController";
 import ContentBrowserUtil from "../util/ContentBrowserUtil";

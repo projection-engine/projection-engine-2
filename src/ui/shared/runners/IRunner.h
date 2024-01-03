@@ -9,9 +9,7 @@
 namespace PEngine {
     class IRunner : public ILoggable {
     protected:
-        GLFWwindow *window = nullptr;
         Document document;
-        bool isRunning = false;
         int windowWidth = 0;
         int windowHeight = 0;
 
@@ -28,10 +26,6 @@ namespace PEngine {
         virtual void updateViewports() {}
 
     public:
-
-        explicit IRunner(GLFWwindow *w) {
-            window = w;
-        }
 
         virtual void destroyContext(){}
 

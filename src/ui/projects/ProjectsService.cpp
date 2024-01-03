@@ -31,12 +31,8 @@ namespace PEngine {
         const std::string &pathToMetadata = projectPath + "/" + "metadata.json";
         FS::WriteFile(pathToMetadata, metadata.stringify());
         addToCache(projectPath, payload.payload, projectId);
-
-        AbstractWindow *window = payload.window;
-        WindowRepository *rep = window->getWindowRepository();
-
-        rep->setActiveWindow(EDITOR_WINDOW);
-        auto *currentWindow = dynamic_cast<Editor *>(rep->getActiveWindow());
+        WindowRepository::Get().activateWindow(EDITOR_WINDOW);
+        auto *currentWindow = dynamic_cast<Editor *>(WindowRepository::Get().getActiveWindow());
         currentWindow->setProject(pathToMetadata);
 
     }

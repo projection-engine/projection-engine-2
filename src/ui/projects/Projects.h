@@ -2,9 +2,6 @@
 #define PROJECTION_PROJECTS_H
 
 #include "../shared//AbstractWindow.h"
-#include "../../engine/Engine.h"
-#include "basic/IOController.h"
-#include "basic/FSController.h"
 
 namespace PEngine {
     class WebViewWindow;
@@ -18,6 +15,8 @@ namespace PEngine {
         explicit Projects() : AbstractWindow("Projects") {}
 
         IRunner *initialize() override;
+
+        const char * getWebViewHTML() override;
     };
 }
 

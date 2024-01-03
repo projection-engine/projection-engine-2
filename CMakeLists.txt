@@ -41,8 +41,8 @@ set(MAIN_PATHS
         src/ui/WindowRepository.h
         src/ui/shared/webview/WebViewWindow.cpp
         src/ui/shared/webview/WebViewWindow.h
-        ui/projects/ProjectsService.cpp
-        ui/projects/ProjectsService.h
+        src/ui/projects/ProjectsService.cpp
+        src/ui/projects/ProjectsService.h
 )
 set(FILE_PATHS
         src/util/JSON.h

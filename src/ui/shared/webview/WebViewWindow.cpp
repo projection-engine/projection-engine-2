@@ -11,10 +11,11 @@
 #include "WebViewPayload.h"
 #include "../../../util/JSON.h"
 #include <unordered_map>
+#include "../WindowRepository.h"
 
 namespace PEngine {
     HWND__ *WebViewWindow::getNativeWindow() const {
-        return nativeWindow;
+        return glfwGetWin32Window(WindowRepository::Get().getWindow());
     }
 
     void WebViewWindow::prepareView(ICoreWebView2Controller *controller) {
@@ -34,18 +35,10 @@ namespace PEngine {
                 TRUE);
 
         RECT bounds;
-        GetClientRect(nativeWindow, &bounds);
+        GetClientRect(getNativeWindow(), &bounds);
 
         bounds.left = bounds.left / 2;
         webviewController->put_Bounds(bounds);
-
-    }
-
-    void WebViewWindow::setHTMLFile(const std::string &path) {
-        std::string pathToFile = "file:///" + std::filesystem::current_path().string() + "/" + path;
-        std::wstring pathToFileW = std::wstring(pathToFile.begin(), pathToFile.end());
-        CONSOLE_WARN("Navigating to: {0}", pathToFile)
-        webview->Navigate(pathToFileW.c_str());
         CONSOLE_LOG("WebView2 context successfully initialized")
         webview->add_WebMessageReceived(
                 Microsoft::WRL::Callback<MSG_RECEIVED_HANDLER>(
@@ -53,6 +46,23 @@ namespace PEngine {
                             return onMessage(args);
                         }).Get(),
                 &token);
+        ready = true;
+        loadHtml();
+    }
+
+    void WebViewWindow::setHTMLFile(const std::string &path) {
+        pathToFile = "file:///" + std::filesystem::current_path().string() + "/" + path;
+        if (ready) {
+            loadHtml();
+        }
+    }
+
+    void WebViewWindow::loadHtml() {
+        if (!pathToFile.empty()) {
+            std::wstring pathToFileW = std::wstring(pathToFile.begin(), pathToFile.end());
+            CONSOLE_WARN("Navigating to: {0}", pathToFile)
+            webview->Navigate(pathToFileW.c_str());
+        }
     }
 
     HRESULT WebViewWindow::onMessage(ICoreWebView2WebMessageReceivedEventArgs *args) {
@@ -67,7 +77,6 @@ namespace PEngine {
             CONSOLE_LOG("WebView message received with ID: {0}", payload.id)
             payload.payload = payloadJson.get<std::string>("payload", "");
             payload.webview = this;
-            payload.window = window;
         } catch (nlohmann::json::parse_error &ex) {
             CONSOLE_ERROR("Error parsing payload")
         }
@@ -86,10 +95,8 @@ namespace PEngine {
         webview->PostWebMessageAsString(std::wstring(messagePayload.begin(), messagePayload.end()).c_str());
     }
 
-    WebViewWindow::WebViewWindow(AbstractWindow *window) {
-        this->window = window;
+    WebViewWindow::WebViewWindow() {
         CONSOLE_WARN("Creating WebView2 window")
-        nativeWindow = glfwGetWin32Window(this->window->getWindow());
         CreateCoreWebView2EnvironmentWithOptions(
                 nullptr,
                 nullptr,
@@ -113,4 +120,9 @@ namespace PEngine {
     wil::com_ptr<ICoreWebView2> WebViewWindow::getWebView() {
         return webview;
     }
+
+    void WebViewWindow::setWindow(AbstractWindow *window) {
+        WebViewWindow::window = window;
+    }
+
 }

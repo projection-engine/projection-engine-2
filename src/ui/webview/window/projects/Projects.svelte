@@ -5,7 +5,6 @@
     import LocalizationEN from "../../shared/enums/LocalizationEN";
     import type ProjectDTO from "./lib/ProjectDTO";
     import ProjectSystem from "./lib/ProjectSystem";
-    import WebViewSystem from "../shared/webview/WebViewSystem";
 
     let projectsToShow: ProjectDTO[] = []
     let isOnAddProject = false

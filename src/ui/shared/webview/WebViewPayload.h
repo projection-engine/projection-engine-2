@@ -11,7 +11,6 @@ namespace PEngine {
     struct WebViewPayload {
         std::string id;
         std::string payload;
-        AbstractWindow *window = nullptr;
         WebViewWindow *webview = nullptr;
 
         void resolve(const char *message) const;

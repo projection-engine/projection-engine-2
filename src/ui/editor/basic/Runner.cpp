@@ -5,6 +5,7 @@
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 #include "../../../engine/Engine.h"
+#include "../../WindowRepository.h"
 
 
 namespace PEngine {
@@ -44,7 +45,7 @@ namespace PEngine {
     void Runner::drawNewFrame() {
         engine->run();
         ImGui::Render();
-        glfwGetFramebufferSize(window, &windowWidth, &windowHeight);
+        glfwGetFramebufferSize(WindowRepository::Get().getWindow(), &windowWidth, &windowHeight);
         glViewport(0, 0, windowWidth, windowHeight);
     }
 

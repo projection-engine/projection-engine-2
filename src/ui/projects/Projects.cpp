@@ -2,20 +2,17 @@
 #include "../shared/webview/WebViewWindow.h"
 #include "../shared/webview/WebViewPayload.h"
 #include "WebView2.h"
-#include "../../util/FS.h"
-#include "nlohmann/json.hpp"
 #include "ProjectsService.h"
-
+#include "../WindowRepository.h"
 #define RPC "READ_PROJECTS_CACHE"
 #define RELOAD "RELOAD"
 #define CREATE_P "CREATE_PROJECT"
 
 namespace PEngine {
     IRunner *Projects::initialize() {
-        addWebView( "project-window.html");
-        addWebViewEventListener( RELOAD, onMessage);
-        addWebViewEventListener( CREATE_P, onMessage);
-        addWebViewEventListener( RPC, onMessage);
+        WindowRepository::Get().getWebView()->addMessageListener(RELOAD, onMessage);
+        WindowRepository::Get().getWebView()->addMessageListener(CREATE_P, onMessage);
+        WindowRepository::Get().getWebView()->addMessageListener(RPC, onMessage);
         return nullptr;
     }
 
@@ -27,5 +24,9 @@ namespace PEngine {
         } else {
             ProjectsService::reload(payload);
         }
+    }
+
+    const char *Projects::getWebViewHTML() {
+        return "project-window.html";
     }
 }

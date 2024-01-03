@@ -5,17 +5,11 @@
     import EngineStore from "../shared/stores/EngineStore"
     import ViewsContainer from "./components/view/SideView.svelte"
     import SettingsStore from "../shared/stores/SettingsStore"
-    import FileSystemUtil from "../shared/FileSystemUtil"
-    import LevelService from "./services/engine/LevelService"
     import HotKeysController from "../shared/lib/HotKeysController"
     import Canvas from "./views/Canvas.svelte"
     import ToastNotificationSystem from "../shared/components/alert/ToastNotificationSystem"
-    import ElectronResources from "../shared/lib/ElectronResources"
     import StoreIPCListener from "../shared/lib/StoreIPCListener"
-    import IPCRoutes from "../../shared/enums/IPCRoutes"
     import EditorUtil from "./util/EditorUtil"
-    import ContentBrowserUtil from "./util/ContentBrowserUtil"
-    import StorageKeys from "../../shared/enums/StorageKeys"
     import MenuBar from "../shared/components/frame/MenuBar.svelte";
     import EditorSystem from "./lib/EditorSystem";
 

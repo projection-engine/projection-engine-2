@@ -22,6 +22,8 @@ namespace PEngine {
         void setProject(const std::string &pathToMetadata);
 
         const std::string &getProject();
+
+        const char * getWebViewHTML() override;
     };
 }
 

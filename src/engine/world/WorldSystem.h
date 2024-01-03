@@ -8,9 +8,6 @@
 #include "components/IComponent.h"
 
 namespace PEngine {
-    /**
-     * For manipulating data
-     * */
 
     class IEntity;
 
