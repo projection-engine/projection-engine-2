@@ -11,6 +11,7 @@ import QueryAPI from "./QueryAPI"
 import FileSystemAPI from "./FileSystemAPI"
 import EntityAPI from "./EntityAPI"
 import Engine from "../../Engine"
+import ProjectionEngine from "../../../../window/ProjectionEngine";
 
 export default class ScriptsAPI {
 	static scriptInstances = new Map()
@@ -26,8 +27,8 @@ export default class ScriptsAPI {
 			const data = await FileSystemAPI.readAsset(current)
 			ScriptsAPI.scriptInstances.set(current, data)
 		}
-		for (let i = 0; i < Engine.entities.array.length; i++) {
-			const current = Engine.entities.array[i]
+		for (let i = 0; i < ProjectionEngine.Engine.entities.array.length; i++) {
+			const current = ProjectionEngine.Engine.entities.array[i]
 			for (let j = 0; j < current.scripts.length; j++)
 				ScriptsAPI.#updateEntityScript(current.scripts[j].id, current, j)
 		}
@@ -68,7 +69,7 @@ export default class ScriptsAPI {
 					entity.scripts.push(script)
 				script.id = scriptID
 
-				if (!Engine.isDev && script.onCreation)
+				if (!ProjectionEngine.Engine.isDev && script.onCreation)
 					script.onCreation()
 				const oldIndex = ScriptsAPI.mountedScriptsMap.get(scriptID + entity.id)
 				if (oldIndex !== undefined)

@@ -10,11 +10,13 @@
     import EditorUtil from "./util/EditorUtil"
     import MenuBar from "../shared/components/frame/MenuBar.svelte";
     import ProjectionEngine from "../ProjectionEngine";
+    import Canvas from "./components/view/Canvas.svelte";
 
     const COMPONENT_ID = crypto.randomUUID()
     let view
     let cameraGizmoSize
     let currentViewIndex = 0
+    let ready = false
 
     onMount(() => {
         ProjectionEngine.SettingsStore
@@ -36,49 +38,62 @@
 {#if view !== undefined}
     <div class="wrapper" style={`--cube-size: ${cameraGizmoSize}px;`}>
         <div class="middle">
-            <ViewsContainer
-                    id="left"
-                    setTabs={(tabs) => EditorUtil.updateView("left", tabs)}
-                    tabs={view.left}
-                    leftOffset={"8px"}
-                    {currentViewIndex}
-                    orientation={"vertical"}
-                    resizePosition={"left"}
-            />
-            <div class="content">
+            {#if ready}
                 <ViewsContainer
-                        id="bottom"
-                        setTabs={(tabs) => EditorUtil.updateView("top", tabs)}
-                        tabs={view.top}
+                        id="left"
+                        setTabs={(tabs) => EditorUtil.updateView("left", tabs)}
+                        tabs={view.left}
+                        leftOffset={"8px"}
                         {currentViewIndex}
-                        resizePosition={"bottom"}
-                        orientation={"horizontal"}
+                        orientation={"vertical"}
+                        resizePosition={"left"}
                 />
+            {/if}
+            <div class="content">
+                {#if ready}
+
+                    <ViewsContainer
+                            id="bottom"
+                            setTabs={(tabs) => EditorUtil.updateView("top", tabs)}
+                            tabs={view.top}
+                            {currentViewIndex}
+                            resizePosition={"bottom"}
+                            orientation={"horizontal"}
+                    />
+                {/if}
                 <Viewport
+                        {ready}
                         {currentViewIndex}
                         viewTab={view.viewport}
                         updateView={(viewTab) => EditorUtil.updateView("viewport", viewTab)}
-                />
-                <ViewsContainer
-                        {currentViewIndex}
-                        id="bottom"
-                        setTabs={(tabs) => EditorUtil.updateView("bottom", tabs)}
-                        tabs={view.bottom}
-                        resizePosition={"top"}
-                        orientation={"horizontal"}
-                />
-            </div>
-            <ViewsContainer
-                    id="right"
-                    {currentViewIndex}
-                    setTabs={(tabs) => EditorUtil.updateView("right", tabs)}
-                    tabs={view.right}
-                    orientation={"vertical"}
-                    leftOffset={"0%"}
-                    resizePosition={"top"}
-            />
-        </div>
+                >
+                    <Canvas onReady={() => ready = true}/>
+                </Viewport>
+                {#if ready}
 
+                    <ViewsContainer
+                            {currentViewIndex}
+                            id="bottom"
+                            setTabs={(tabs) => EditorUtil.updateView("bottom", tabs)}
+                            tabs={view.bottom}
+                            resizePosition={"top"}
+                            orientation={"horizontal"}
+                    />
+                {/if}
+            </div>
+            {#if ready}
+
+                <ViewsContainer
+                        id="right"
+                        {currentViewIndex}
+                        setTabs={(tabs) => EditorUtil.updateView("right", tabs)}
+                        tabs={view.right}
+                        orientation={"vertical"}
+                        leftOffset={"0%"}
+                        resizePosition={"top"}
+                />
+            {/if}
+        </div>
         <Footer/>
     </div>
 {/if}

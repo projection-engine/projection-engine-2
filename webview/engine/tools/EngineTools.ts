@@ -17,6 +17,7 @@ import StaticEditorFBO from "./utils/StaticEditorFBO";
 import GPUUtil from "../core/utils/GPUUtil";
 import ConversionAPI from "../core/lib/math/ConversionAPI";
 import EngineToolsState from "./EngineToolsState";
+import ProjectionEngine from "../../window/ProjectionEngine";
 
 export default class EngineTools {
     static selected: Entity[] = []
@@ -30,7 +31,7 @@ export default class EngineTools {
         StaticEditorShaders.initialize()
         await StaticEditorMeshes.initialize()
 
-        Engine.environment = ENVIRONMENT.DEV
+        ProjectionEngine.Engine.environment = ENVIRONMENT.DEV
         LineRenderer.initialize()
         StaticEditorFBO.initialize()
     }
@@ -50,7 +51,7 @@ export default class EngineTools {
         selected.length = 0
         for (let i = 0; i < data.length; i++) {
             const d = data[i]
-            const entity = Engine.entities.get(d)
+            const entity = ProjectionEngine.Engine.entities.get(d)
             if (entity !== undefined) {
                 selected.push(entity)
                 entity.__isSelected = true
@@ -85,11 +86,11 @@ export default class EngineTools {
     }
 
     static bindSystems() {
-        Engine.addSystem("ENGINE_TOOLS_RENDERER", EngineTools.#loop)
+        ProjectionEngine.Engine.addSystem("ENGINE_TOOLS_RENDERER", EngineTools.#loop)
     }
 
     static unbindSystems() {
-        Engine.removeSystem("ENGINE_TOOLS_RENDERER")
+        ProjectionEngine.Engine.removeSystem("ENGINE_TOOLS_RENDERER")
     }
 
     static #setContextState() {

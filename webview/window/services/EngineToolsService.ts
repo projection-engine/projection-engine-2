@@ -67,7 +67,7 @@ export default class EngineToolsService {
         GPU.canvas.width = visualSettings.resolutionX
         GPU.canvas.height = visualSettings.resolutionY
 
-        if (Engine.environment === ENVIRONMENT.DEV)
+        if (ProjectionEngine.Engine.environment === ENVIRONMENT.DEV)
             EngineTools.bindSystems()
         else
             EngineTools.unbindSystems()
@@ -79,15 +79,15 @@ export default class EngineToolsService {
         const settings = ProjectionEngine.SettingsStore.getData()
         if (engine.executingAnimation)
             UIAPI.showUI()
-        if (Engine.environment === ENVIRONMENT.DEV && !engine.focusedCamera) {
-            Engine.CameraAPI.trackingEntity = undefined
+        if (ProjectionEngine.Engine.environment === ENVIRONMENT.DEV && !engine.focusedCamera) {
+            ProjectionEngine.Engine.CameraAPI.trackingEntity = undefined
             if (settings.camera !== undefined) {
                 CameraTracker.screenSpaceMovementSpeed = settings.camera.screenSpaceMovementSpeed || 1
                 CameraTracker.movementSpeed = settings.camera.movementSpeed * .1
                 CameraTracker.turnSpeed = settings.camera.turnSpeed * .01
                 if (settings.camera.smoothing != null)
-                    Engine.CameraAPI.translationSmoothing = settings.screenSpaceMovement ? 0 : settings.camera.smoothing * .001
-                Engine.CameraAPI.updateViewTarget(settings.camera)
+                    ProjectionEngine.Engine.CameraAPI.translationSmoothing = settings.screenSpaceMovement ? 0 : settings.camera.smoothing * .001
+                ProjectionEngine.Engine.CameraAPI.updateViewTarget(settings.camera)
             }
         }
     }
@@ -118,6 +118,6 @@ export default class EngineToolsService {
         GizmoState.gizmoType = settings.gizmo
         EngineToolsService.#updateCameraTracker()
         EngineToolsService.#updateEngineToolsState()
-        Engine.CameraAPI.isOrthographic = settings.camera.ortho
+        ProjectionEngine.Engine.CameraAPI.isOrthographic = settings.camera.ortho
     }
 }

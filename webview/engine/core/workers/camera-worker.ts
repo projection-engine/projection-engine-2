@@ -65,13 +65,13 @@ class CameraWorker {
         quat.copy(CameraWorker.currentRotation, CameraWorker.rotationBuffer)
         CameraWorker.viewUBOBuffer = viewUBOBuffer
         CameraWorker.projectionUBOBuffer = projectionUBOBuffer
-        Engine.CameraNotificationDecoder.initialize(notificationBuffers)
+        ProjectionEngine.Engine.CameraNotificationDecoder.initialize(notificationBuffers)
 
         mat4.multiply(CameraWorker.viewProjectionMatrix, CameraWorker.projectionMatrix, CameraWorker.viewMatrix)
     }
 
     static updateProjection() {
-        const isOrthographic = Engine.CameraNotificationDecoder.projectionType === Engine.CameraNotificationDecoder.ORTHOGRAPHIC
+        const isOrthographic = ProjectionEngine.Engine.CameraNotificationDecoder.projectionType === ProjectionEngine.Engine.CameraNotificationDecoder.ORTHOGRAPHIC
         const buffer = CameraWorker.projectionBuffer
 
 
@@ -126,14 +126,14 @@ class CameraWorker {
     }
 
     static execute() {
-        const didViewChange = Engine.CameraNotificationDecoder.viewNeedsUpdate === 1
+        const didViewChange = ProjectionEngine.Engine.CameraNotificationDecoder.viewNeedsUpdate === 1
         CameraWorker.needsUpdate = CameraWorker.needsUpdate || didViewChange
-        const elapsed = Engine.CameraNotificationDecoder.elapsed
-        Engine.CameraNotificationDecoder.hasChangedView = 0
-        Engine.CameraNotificationDecoder.hasChangedProjection = 0
+        const elapsed = ProjectionEngine.Engine.CameraNotificationDecoder.elapsed
+        ProjectionEngine.Engine.CameraNotificationDecoder.hasChangedView = 0
+        ProjectionEngine.Engine.CameraNotificationDecoder.hasChangedProjection = 0
 
         if (CameraWorker.needsUpdate) {
-            const tSmoothing = Engine.CameraNotificationDecoder.translationSmoothing
+            const tSmoothing = ProjectionEngine.Engine.CameraNotificationDecoder.translationSmoothing
             const incrementTranslation = tSmoothing === 0 ? 1 : 1 - Math.pow(.001, elapsed * tSmoothing)
 
             const lengthTranslationPrev = vec3.length(CameraWorker.currentTranslation)
@@ -147,21 +147,21 @@ class CameraWorker {
             const offsetTranslation = Math.abs(lengthTranslationPrev - lengthTranslationAfter)
             if (offsetRotation > 0 || offsetTranslation > 1e-6) {
                 CameraWorker.updateView()
-                Engine.CameraNotificationDecoder.viewNeedsUpdate = 0
-                Engine.CameraNotificationDecoder.hasChangedView = 1
+                ProjectionEngine.Engine.CameraNotificationDecoder.viewNeedsUpdate = 0
+                ProjectionEngine.Engine.CameraNotificationDecoder.hasChangedView = 1
             } else {
                 CameraWorker.needsUpdate = false
-                Engine.CameraNotificationDecoder.viewNeedsUpdate = 0
-                Engine.CameraNotificationDecoder.hasChangedView = 0
+                ProjectionEngine.Engine.CameraNotificationDecoder.viewNeedsUpdate = 0
+                ProjectionEngine.Engine.CameraNotificationDecoder.hasChangedView = 0
             }
         }
 
-        const cameraIsOrthographic = Engine.CameraNotificationDecoder.projectionType === Engine.CameraNotificationDecoder.ORTHOGRAPHIC
-        if (Engine.CameraNotificationDecoder.projectionNeedsUpdate === 1 || cameraIsOrthographic && didViewChange) {
+        const cameraIsOrthographic = ProjectionEngine.Engine.CameraNotificationDecoder.projectionType === ProjectionEngine.Engine.CameraNotificationDecoder.ORTHOGRAPHIC
+        if (ProjectionEngine.Engine.CameraNotificationDecoder.projectionNeedsUpdate === 1 || cameraIsOrthographic && didViewChange) {
             CameraWorker.updateProjection()
-            Engine.CameraNotificationDecoder.hasChangedProjection = 1
-            Engine.CameraNotificationDecoder.hasChangedView = 1
-            Engine.CameraNotificationDecoder.projectionNeedsUpdate = 0
+            ProjectionEngine.Engine.CameraNotificationDecoder.hasChangedProjection = 1
+            ProjectionEngine.Engine.CameraNotificationDecoder.hasChangedView = 1
+            ProjectionEngine.Engine.CameraNotificationDecoder.projectionNeedsUpdate = 0
         }
 
     }

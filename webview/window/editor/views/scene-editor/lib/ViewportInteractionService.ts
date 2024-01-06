@@ -26,7 +26,7 @@ export default class ViewportInteractionService {
 
 
     static #onMouseDown(e) {
-        if (!Engine.isReady || e.button !== ViewportInteractionService.#LEFT_BUTTON)
+        if (!ProjectionEngine.Engine.isReady || e.button !== ViewportInteractionService.#LEFT_BUTTON)
             return
         ViewportInteractionService.#mouseDelta = {x: e.clientX, y: e.clientY}
 
@@ -37,7 +37,7 @@ export default class ViewportInteractionService {
     static #onMouseUp(event) {
         GizmoMouseUtil.onMouseUp()
 
-        if (!Engine.isReady)
+        if (!ProjectionEngine.Engine.isReady)
             return
         ViewportUtil.onViewportClick(
             event,

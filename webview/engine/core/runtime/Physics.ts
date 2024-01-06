@@ -3,6 +3,7 @@ import PhysicsAPI from "../lib/rendering/PhysicsAPI"
 import MetricsController from "../lib/utils/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import EngineState from "../EngineState"
+import ProjectionEngine from "../../../window/ProjectionEngine";
 
 export default class Physics {
 	static #interval = null
@@ -18,7 +19,7 @@ export default class Physics {
 	}
 
 	static #execute() {
-		if (Engine.isDev || !PhysicsAPI.ammo)
+		if (ProjectionEngine.Engine.isDev || !PhysicsAPI.ammo)
 			return
 
 		const rigidBodies = PhysicsAPI.rigidBodies

@@ -20,6 +20,7 @@ import LevelService from "./services/LevelService";
 import ToasterService from "./services/ToasterService";
 import ToolTipService from "./services/ToolTipService";
 import ViewportActionService from "./services/ViewportActionService";
+import Engine from "../engine/core/Engine";
 
 export default class ProjectionEngine {
     static ChangesTrackerStore: ChangesTrackerStore
@@ -32,6 +33,7 @@ export default class ProjectionEngine {
     static ViewStateStore: ViewStateStore
     static VisualsStore: VisualsStore
     static WindowChangeStore: WindowChangeStore
+    static Engine: Engine
 
 
     static ContextMenuService: ContextMenuService

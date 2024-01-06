@@ -4,6 +4,7 @@
     import Engine from "../../../../../engine/core/Engine"
     import ToolTip from "../../../../shared/components/tooltip/ToolTip.svelte"
     import LocalizationEN from "../../../../../enums/LocalizationEN"
+    import ProjectionEngine from "../../../../ProjectionEngine";
 
     let entities = 0
     let triangles = 0
@@ -19,7 +20,7 @@
     	meshes = GPU.meshes.size
     	materials = GPU.materials.size
     	textures = GPU.textures.size
-    	entities = Engine.entities.size
+    	entities = ProjectionEngine.Engine.entities.size
     }
 
     onMount(() => {

@@ -88,7 +88,7 @@ export default class SceneEditorUtil {
 
 				const data = PickingAPI.readBlock(nStart, nEnd)
 				worker.postMessage({
-					entities: Engine.entities.array.map(e => ({id: e.id, pick: e.pickIndex})),
+					entities: ProjectionEngine.Engine.entities.array.map(e => ({id: e.id, pick: e.pickIndex})),
 					data
 				}, [data.buffer])
 				worker.onmessage = ({data: selected}) => EntitySelectionStore.setEntitiesSelected(selected)
@@ -139,11 +139,11 @@ export default class SceneEditorUtil {
 			if (!cameraMetadata) {
 				const pitch = quat.fromEuler(quat.create(), -45, 0, 0)
 				const yaw = quat.fromEuler(quat.create(), 0, 45, 0)
-				Engine.CameraAPI.update([5, 10, 5], quat.multiply(quat.create(), yaw, pitch))
+				ProjectionEngine.Engine.CameraAPI.update([5, 10, 5], quat.multiply(quat.create(), yaw, pitch))
 				CameraTracker.xRotation = glMatrix.toRadian(45)
 				CameraTracker.yRotation = -glMatrix.toRadian(45)
 			} else {
-				Engine.CameraAPI.restoreState(cameraMetadata)
+				ProjectionEngine.Engine.CameraAPI.restoreState(cameraMetadata)
 				CameraTracker.xRotation = cameraMetadata.prevX
 				CameraTracker.yRotation = cameraMetadata.prevY
 			}

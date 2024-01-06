@@ -17,6 +17,7 @@ import GPUAPI from "./lib/rendering/GPUAPI"
 import StaticFBO from "./lib/StaticFBO"
 import ScriptsAPI from "./lib/utils/ScriptsAPI"
 import METRICS_FLAGS from "./static/METRICS_FLAGS"
+import ProjectionEngine from "../../window/ProjectionEngine";
 
 let previous = 0
 
@@ -48,7 +49,7 @@ export default class Renderer {
 		const current = Renderer.currentTimeStamp
 		Renderer.elapsed = current - previous
 		previous = current
-		Engine.CameraAPI.updateUBOs()
+		ProjectionEngine.Engine.CameraAPI.updateUBOs()
 		GPU.context.clear(GPU.context.COLOR_BUFFER_BIT | GPU.context.DEPTH_BUFFER_BIT)
 		if (EntityWorkerAPI.hasChangeBuffer[0] === 1)
 			LightsAPI.packageLights(false, true)
@@ -56,7 +57,7 @@ export default class Renderer {
 
 
 	static #executeScripts() {
-		if (Engine.isDev)
+		if (ProjectionEngine.Engine.isDev)
 			return
 		const scripts = ScriptsAPI.mountedScripts
 		const size = scripts.length
@@ -76,7 +77,7 @@ export default class Renderer {
 
 	static #sync() {
 		EntityWorkerAPI.hasChangeBuffer[0] = 0
-		Engine.CameraAPI.syncThreads()
+		ProjectionEngine.Engine.CameraAPI.syncThreads()
 		EntityWorkerAPI.syncThreads()
 	}
 

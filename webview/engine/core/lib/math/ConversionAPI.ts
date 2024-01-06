@@ -1,6 +1,7 @@
 import {mat4, vec3, vec4} from "gl-matrix"
 import CameraAPI from "../utils/CameraAPI"
 import Engine from "../../Engine";
+import ProjectionEngine from "../../../../window/ProjectionEngine";
 
 /**
  * @field canvasBBox - Bounding box for canvas; updated on engine resize observer
@@ -30,27 +31,27 @@ export default class ConversionAPI {
 		const homogeneousCoords = vec4.fromValues(xNormalized * scale, yNormalized * scale, 0, 0)
 
 		// EYE SPACE
-		const eyeCoords = vec4.transformMat4(homogeneousCoords, homogeneousCoords, Engine.CameraAPI.invProjectionMatrix)
+		const eyeCoords = vec4.transformMat4(homogeneousCoords, homogeneousCoords, ProjectionEngine.Engine.CameraAPI.invProjectionMatrix)
 
 		// WORLD SPACE
-		return vec3.transformMat4(<vec3>eyeCoords, <vec3>eyeCoords, mat4.invert(mat4.create(), Engine.CameraAPI.staticViewMatrix))
+		return vec3.transformMat4(<vec3>eyeCoords, <vec3>eyeCoords, mat4.invert(mat4.create(), ProjectionEngine.Engine.CameraAPI.staticViewMatrix))
 	}
 
 	static toLinearWorldCoordinates(x, y): vec4 {
 		const eyeCoords = vec4.create()
 		// EYE SPACE
-		vec4.transformMat4(eyeCoords, [x, y, 0, 0], Engine.CameraAPI.invProjectionMatrix)
+		vec4.transformMat4(eyeCoords, [x, y, 0, 0], ProjectionEngine.Engine.CameraAPI.invProjectionMatrix)
 		eyeCoords[2] = -1
 		eyeCoords[3] = 1
 
 		// WORLD SPACE
-		return vec4.transformMat4(vec4.create(), eyeCoords, Engine.CameraAPI.invViewMatrix)
+		return vec4.transformMat4(vec4.create(), eyeCoords, ProjectionEngine.Engine.CameraAPI.invViewMatrix)
 	}
 
 	static toScreenCoordinates(vec: vec3): [number, number] {
 		const target = <vec4>[...vec, 1]
-		vec4.transformMat4(target, target, Engine.CameraAPI.viewMatrix)
-		vec4.transformMat4(target, target, Engine.CameraAPI.projectionMatrix)
+		vec4.transformMat4(target, target, ProjectionEngine.Engine.CameraAPI.viewMatrix)
+		vec4.transformMat4(target, target, ProjectionEngine.Engine.CameraAPI.projectionMatrix)
 
 		// NORMALIZED DEVICE SPACE
 		const bBox = ConversionAPI.canvasBBox

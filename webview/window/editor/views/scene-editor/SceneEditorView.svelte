@@ -30,25 +30,25 @@
 
     onMount(() => {
         ProjectionEngine.SettingsStore.addListener(COMPONENT_ID, data => {
-    		isSelectBoxDisabled = data.gizmo !== GIZMOS.NONE
-    		shadingModel = data.shadingModel
-    	}, ["gizmo", "shadingModel"])
+            isSelectBoxDisabled = data.gizmo !== GIZMOS.NONE
+            shadingModel = data.shadingModel
+        }, ["gizmo", "shadingModel"])
         ProjectionEngine.EngineStore.addListener(COMPONENT_ID, data => {
-    		executingAnimation = data.executingAnimation
-    		focusedCamera = data.focusedCamera ? Engine.entities.get(data.focusedCamera) : null
-    	}, ["focusedCamera", "executingAnimation"])
-    	GizmoSystem.onStart = () => isOnGizmo = true
-    	GizmoSystem.onStop = () => isOnGizmo = false
+            executingAnimation = data.executingAnimation
+            focusedCamera = data.focusedCamera ? ProjectionEngine.Engine.entities.get(data.focusedCamera) : null
+        }, ["focusedCamera", "executingAnimation"])
+        GizmoSystem.onStart = () => isOnGizmo = true
+        GizmoSystem.onStop = () => isOnGizmo = false
         SceneEditorUtil.onSceneEditorMount(draggable)
     })
 
     onDestroy(() => {
         ProjectionEngine.SettingsStore.removeListener(COMPONENT_ID)
         ProjectionEngine.EngineStore.removeListener(COMPONENT_ID)
-    	GizmoSystem.onStop = GizmoSystem.onStart = undefined
+        GizmoSystem.onStop = GizmoSystem.onStart = undefined
         ProjectionEngine.ContextMenuService.destroy(RENDER_TARGET)
-    	draggable.onDestroy()
-    	ViewportInteractionService.destroy()
+        draggable.onDestroy()
+        ViewportInteractionService.onDestroy()
     })
 </script>
 

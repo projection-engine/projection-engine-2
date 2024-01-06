@@ -15,6 +15,7 @@ import GPUUtil from "../../../core/utils/GPUUtil";
 import StaticEditorFBO from "../../utils/StaticEditorFBO";
 import EngineToolsState from "../../EngineToolsState";
 import Engine from "../../../core/Engine";
+import ProjectionEngine from "../../../../window/ProjectionEngine";
 
 const toDeg = 180 / Math.PI
 const uniformCache = new Float32Array(4)
@@ -65,7 +66,7 @@ export default class RotationGizmo extends AbstractXYZGizmo {
 
             context.uniformMatrix4fv(uniforms.transformMatrix, false, transformMatrix)
             context.uniform3fv(uniforms.translation, GizmoState.mainEntity.__pivotOffset)
-            context.uniform1i(uniforms.cameraIsOrthographic, Engine.CameraAPI.notificationBuffers[2])
+            context.uniform1i(uniforms.cameraIsOrthographic, ProjectionEngine.Engine.CameraAPI.notificationBuffers[2])
 
             GPUUtil.bind2DTextureForDrawing(uniforms.gizmoIDS, 0, StaticEditorFBO.gizmo.colors[0])
             GPU.context.uniform2fv(uniforms.mouseCoordinates, EngineToolsState.mouseCoordinates)

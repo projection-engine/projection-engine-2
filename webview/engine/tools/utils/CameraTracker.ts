@@ -3,6 +3,7 @@ import {quat, vec4} from "gl-matrix"
 import CAMERA_ROTATIONS from "../static/CAMERA_ROTATIONS"
 import GPU from "../../core/GPU"
 import Engine from "../../core/Engine";
+import ProjectionEngine from "../../../window/ProjectionEngine";
 
 let holding = false
 
@@ -69,8 +70,8 @@ export default class CameraTracker {
 	}
 
 	static updateFrame() {
-		if (Engine.CameraAPI.hasChangedView && CameraTracker.gizmoReference)
-			CameraTracker.gizmoReference.style.transform = `translateZ(calc(var(--cube-size) * -3)) matrix3d(${Engine.CameraAPI.staticViewMatrix})`
+		if (ProjectionEngine.Engine.CameraAPI.hasChangedView && CameraTracker.gizmoReference)
+			CameraTracker.gizmoReference.style.transform = `translateZ(calc(var(--cube-size) * -3)) matrix3d(${ProjectionEngine.Engine.CameraAPI.staticViewMatrix})`
 
 		const map = CameraTracker.#keysOnHold
 		let changed = CameraTracker.forceUpdate
@@ -92,15 +93,15 @@ export default class CameraTracker {
 			changed = true
 		}
 		if (map.backward) {
-			if (Engine.CameraAPI.isOrthographic)
-				Engine.CameraAPI.orthographicProjectionSize += multiplier
+			if (ProjectionEngine.Engine.CameraAPI.isOrthographic)
+				ProjectionEngine.Engine.CameraAPI.orthographicProjectionSize += multiplier
 			else
 				toApplyTranslation[2] += multiplier
 			changed = true
 		}
 		if (map.forward) {
-			if (Engine.CameraAPI.isOrthographic)
-				Engine.CameraAPI.orthographicProjectionSize -= multiplier
+			if (ProjectionEngine.Engine.CameraAPI.isOrthographic)
+				ProjectionEngine.Engine.CameraAPI.orthographicProjectionSize -= multiplier
 			else
 				toApplyTranslation[2] -= multiplier
 			changed = true
@@ -113,7 +114,7 @@ export default class CameraTracker {
 			const yaw = quat.fromEuler(cacheYaw, 0, CameraTracker.xRotation * toDeg, 0)
 			quat.copy(cacheRotation, pitch)
 			quat.multiply(cacheRotation, yaw, cacheRotation)
-			Engine.CameraAPI.updateRotation(cacheRotation)
+			ProjectionEngine.Engine.CameraAPI.updateRotation(cacheRotation)
 			changed = true
 		}
 
@@ -123,10 +124,10 @@ export default class CameraTracker {
 
 	static #transform() {
 		CameraTracker.forceUpdate = false
-		vec4.transformQuat(toApplyTranslation, toApplyTranslation, Engine.CameraAPI.rotationBuffer)
+		vec4.transformQuat(toApplyTranslation, toApplyTranslation, ProjectionEngine.Engine.CameraAPI.rotationBuffer)
 
-		Engine.CameraAPI.addTranslation(toApplyTranslation)
-		Engine.CameraAPI.updateView()
+		ProjectionEngine.Engine.CameraAPI.addTranslation(toApplyTranslation)
+		ProjectionEngine.Engine.CameraAPI.updateView()
 	}
 
 	static forceRotationTracking() {
@@ -260,8 +261,8 @@ export default class CameraTracker {
 
 				event.preventDefault()
 				const multiplier = event.ctrlKey ? 10 * 2 : 2
-				if (Engine.CameraAPI.isOrthographic)
-					Engine.CameraAPI.orthographicProjectionSize += multiplier * Math.sign(event.deltaY)
+				if (ProjectionEngine.Engine.CameraAPI.isOrthographic)
+					ProjectionEngine.Engine.CameraAPI.orthographicProjectionSize += multiplier * Math.sign(event.deltaY)
 				else {
 					toApplyTranslation[0] = toApplyTranslation[1] = 0
 					toApplyTranslation[2] += multiplier * Math.sign(event.deltaY)
@@ -299,13 +300,13 @@ export default class CameraTracker {
 
 	static rotate(direction) {
 		function updateCameraPlacement(yaw, pitch) {
-			Engine.CameraAPI.updateProjection()
+			ProjectionEngine.Engine.CameraAPI.updateProjection()
 			CameraTracker.yRotation = pitch
 			CameraTracker.xRotation = yaw
 			CameraTracker.rotationChanged = true
 		}
 
-		vec4.copy(Engine.CameraAPI.rotationBuffer, [0, 0, 0, 1])
+		vec4.copy(ProjectionEngine.Engine.CameraAPI.rotationBuffer, [0, 0, 0, 1])
 
 		switch (direction) {
 		case CAMERA_ROTATIONS.TOP:
