@@ -12,7 +12,6 @@
     import TabsStoreUtil from "../../../util/TabsStoreUtil";
     import View from "./View.svelte";
     import ViewTemplates from "../static/ViewTemplates";
-    import ViewStateStore from "@lib/stores/ViewStateStore";
     import ProjectionEngine from "@lib/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
@@ -43,12 +42,10 @@
     })
 
     function closeTarget(i) {
-        const viewToDelete = ViewsUtil.getViewId(views[i].type, i, groupIndex, id, currentViewIndex)
         removeTab(
             i,
             n => {
                 TabsStoreUtil.updateByAttributes(id, groupIndex, n)
-                ProjectionEngine.ViewStateStore.removeState(viewToDelete)
             },
             TabsStoreUtil.getCurrentTabByCurrentView(id, groupIndex)
         )

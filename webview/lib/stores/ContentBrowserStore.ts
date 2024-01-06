@@ -1,6 +1,7 @@
 import AbstractStore from "./AbstractStore"
-import ProjectionEngine from "../ProjectionEngine";
+import ProjectionEngine, {Injectable} from "../ProjectionEngine";
 
+@Injectable
 export default class ContentBrowserStore extends AbstractStore{
 	constructor() {
 		super({

@@ -7,7 +7,6 @@
     import LocalizationEN from "@enums/LocalizationEN"
     import EntitySelectionStore from "@lib/stores/EntitySelectionStore";
     import type Entity from "@engine-core/instances/Entity";
-    import SerializedState from "../../components/view/SerializedState.svelte";
     import ProjectionEngine from "@lib/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
@@ -84,14 +83,6 @@
     })
 </script>
 
-<SerializedState
-        state={{isOnSelection, isAutoUpdateEnabled, selectedEntity}}
-        onStateInitialize={ state => {
-            isOnSelection = state.isOnSelection
-            isAutoUpdateEnabled = state.isAutoUpdateEnabled
-            selectedEntity = state.selectedEntity
-        }}
-/>
 <Header
         selected={selectedEntity}
         isOnSelection={isOnSelection}

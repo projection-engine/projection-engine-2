@@ -1,6 +1,7 @@
 import AbstractStore from "./AbstractStore"
-import ProjectionEngine from "../ProjectionEngine";
+import ProjectionEngine, {Injectable} from "../ProjectionEngine";
 
+@Injectable
 export default class EntitySelectionStore extends AbstractStore{
 	constructor() {
 		super({lockedEntity: undefined, array: []})

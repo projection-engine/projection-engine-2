@@ -10,9 +10,7 @@ import EngineStore from "./stores/EngineStore";
 import EntitySelectionStore from "./stores/EntitySelectionStore";
 import SettingsStore from "./stores/SettingsStore";
 import TabsStore from "./stores/TabsStore";
-import ViewStateStore from "./stores/ViewStateStore";
 import VisualsStore from "./stores/VisualsStore";
-import WindowChangeStore from "./stores/WindowChangeStore";
 import Engine from "@engine-core/Engine";
 import ToolTipService from "../window/services/ToolTipService";
 import ViewportActionService from "../window/services/ViewportActionService";
@@ -31,9 +29,7 @@ class ProjectionEngine extends ISystemComponent {
     static EntitySelectionStore: EntitySelectionStore
     static SettingsStore: SettingsStore
     static TabsStore: TabsStore
-    static ViewStateStore: ViewStateStore
     static VisualsStore: VisualsStore
-    static WindowChangeStore: WindowChangeStore
     static Engine: Engine
 
 
@@ -77,9 +73,7 @@ class ProjectionEngine extends ISystemComponent {
         ProjectionEngine.EntitySelectionStore = new EntitySelectionStore()
         ProjectionEngine.SettingsStore = new SettingsStore()
         ProjectionEngine.TabsStore = new TabsStore()
-        ProjectionEngine.ViewStateStore = new ViewStateStore()
         ProjectionEngine.VisualsStore = new VisualsStore()
-        ProjectionEngine.WindowChangeStore = new WindowChangeStore()
     }
 }
 
@@ -107,6 +101,11 @@ function Injectable(Clazz: ISystemComponent) {
     P.__instances.set(Clazz, instance);
 }
 
+function InjectVar(Clazz: ISystemComponent){
+    const P = window as unknown as ExtendedWindow
+    return  P.__instances.get(Clazz)
+}
+
 export default ProjectionEngine
-export {Injectable, Inject}
+export {Injectable, Inject, InjectVar}
 

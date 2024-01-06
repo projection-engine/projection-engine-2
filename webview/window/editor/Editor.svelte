@@ -1,18 +1,17 @@
-<script>
+<script lang="ts">
     import {onDestroy, onMount} from "svelte"
     import Viewport from "./components/view/CentralView.svelte"
     import Footer from "./components/footer/Footer.svelte"
-    import EngineStore from "@lib/stores/EngineStore"
     import ViewsContainer from "./components/view/SideView.svelte"
-    import SettingsStore from "@lib/stores/SettingsStore"
     import HotKeysController from "@lib/HotKeysController"
-    import ToasterService from "../services/ToasterService"
     import EditorUtil from "./util/EditorUtil"
     import MenuBar from "@lib/components/frame/MenuBar.svelte";
-    import ProjectionEngine from "@lib/ProjectionEngine";
+    import ProjectionEngine, {InjectVar} from "@lib/ProjectionEngine";
     import Canvas from "./components/view/Canvas.svelte";
+    import Engine from "@engine-core/Engine";
 
     const COMPONENT_ID = crypto.randomUUID()
+    const engine = InjectVar(Engine)
     let view
     let cameraGizmoSize
     let currentViewIndex = 0

@@ -19,17 +19,28 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-37] Dependency injection&#10;- Adding path aliases &#10;- Fixing singleton ref errors">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-37] Dependency injection&#10;- Removing unused files&#10;- Adding backbone for new dependency injection architecture">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/Engine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/Engine.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/enums/AngleBackends.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/enums/LoggerTypes.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/enums/StorageKeys.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/enums/UIDataStores.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/enums/WindowTypes.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/lib/ProjectionEngine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/ProjectionEngine.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/webview/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/webview/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/stores/ChangesTrackerStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/ChangesTrackerStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/stores/ContentBrowserHierarchyStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/ContentBrowserHierarchyStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/stores/ContentBrowserStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/ContentBrowserStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/stores/EngineStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/EngineStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/stores/EntitySelectionStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/EntitySelectionStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/stores/SettingsStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/SettingsStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/stores/TabsStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/TabsStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/stores/ViewStateStore.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/stores/VisualsStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/VisualsStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/stores/WindowChangeStore.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/Editor.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/Editor.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/SerializedState.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/components/ViewGroup.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/components/ViewGroup.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/ContentBrowserView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/ContentBrowserView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/HierarchyView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/HierarchyView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/InspectorView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/InspectorView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/ShaderEditorView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/ShaderEditorView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/ui/UIEditorView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/ui/UIEditorView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/services/LevelService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/services/LevelService.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -265,7 +276,7 @@
       <workItem from="1704558129614" duration="4486000" />
       <workItem from="1704564275015" duration="3968000" />
       <workItem from="1704569235593" duration="952000" />
-      <workItem from="1704573755312" duration="3085000" />
+      <workItem from="1704573755312" duration="4211000" />
     </task>
     <task id="LOCAL-00001" summary="[STD-1] Organizing project&#10;- removing unused C++ classes&#10;- Refactoring files&#10;- Renaming c++ namespaces and project &#10;- Moving future webview stuff">
       <option name="closed" value="true" />
@@ -483,7 +494,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704574600215</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="[STD-37] Dependency injection&#10;- Removing unused files&#10;- Adding backbone for new dependency injection architecture">
+      <option name="closed" value="true" />
+      <created>1704577002578</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1704577002578</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -496,7 +515,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-1] Webview2 integration&#10;- Created WebViewWindow class with essential methods&#10;- Integrating WebViewWindow with EditorWindow &#10;- Making window load html" />
     <MESSAGE value="[STD-1] Webview2 integration&#10;- Removing electron stuff" />
     <MESSAGE value="[STD-1] Webview2 integration&#10;- Removing unused files" />
     <MESSAGE value="[STD-1] Webview2 integration&#10;- Removing unused componments from ui&#10;- Removing shared array buffer dependency" />
@@ -521,7 +539,8 @@
     <MESSAGE value="[STD-27] Abstract singleton&#10;- Removing AbstractSingleton &#10;- Moving static classes to singleton instances  on the Engine class" />
     <MESSAGE value="[STD-35] Removing static members from Engine" />
     <MESSAGE value="[STD-37] Dependency injection&#10;- Adding path aliases &#10;- Fixing singleton ref errors" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-37] Dependency injection&#10;- Adding path aliases &#10;- Fixing singleton ref errors" />
+    <MESSAGE value="[STD-37] Dependency injection&#10;- Removing unused files&#10;- Adding backbone for new dependency injection architecture" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-37] Dependency injection&#10;- Removing unused files&#10;- Adding backbone for new dependency injection architecture" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

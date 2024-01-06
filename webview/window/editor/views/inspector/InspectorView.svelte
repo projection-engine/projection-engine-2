@@ -10,7 +10,6 @@
     import ContentWrapper from "../../../preferences/components/content/ContentWrapper.svelte"
     import InspectorUtil from "../../util/InspectorUtil"
     import INSPECTOR_TABS from "./static/INSPECTOR_TABS"
-    import SerializedState from "../../components/view/SerializedState.svelte";
     import ProjectionEngine from "@lib/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
@@ -48,7 +47,6 @@
     $: isOnDynamicTab = tabIndex > 2 && selectedEntity !== undefined
 </script>
 
-<SerializedState state={{tabIndex}} onStateInitialize={state => tabIndex = state.tabIndex}/>
 <div class="wrapper">
     <div class="tabs">
         {#each tabs as button, index}

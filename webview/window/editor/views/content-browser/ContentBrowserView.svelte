@@ -10,7 +10,6 @@
     import {SORTS, SORTS_KEYS} from "./static/SORT_INFO"
     import FileSystemUtil from "@lib/FileSystemUtil"
     import Properties from "./components/info-editor/Properties.svelte";
-    import SerializedState from "../../components/view/SerializedState.svelte";
 
     const COMPONENT_ID = crypto.randomUUID()
 
@@ -30,18 +29,6 @@
     onDestroy(() => GlobalContentBrowserController.unsubscribe(COMPONENT_ID))
 </script>
 
-<SerializedState
-        state={{sortKey, showDetails, sortDirection,currentDirectory,fileType ,inputValue , viewType}}
-        onStateInitialize={state => {
-            sortKey = state.sortKey
-            sortDirection = state.sortDirection
-            currentDirectory = state.currentDirectory
-            fileType = state.fileType
-            inputValue  = state.inputValue
-            viewType = state.viewType
-            showDetails = state.showDetails
-        }}
-/>
 <Header
         setSortKey={v => sortKey = v}
         setSortDirection={v => sortDirection = v}

@@ -31,15 +31,6 @@ export default class LevelService {
             return
         }
 
-        if (ProjectionEngine.ChangesTrackerStore.getData() && ProjectionEngine.Engine.loadedLevel) {
-            ProjectionEngine.WindowChangeStore.updateStore({
-                message: LocalizationEN.UNSAVED_CHANGES, callback: async () => {
-                    await this.save().catch(console.error)
-                    this.loadLevel(levelID).catch(console.error)
-                }
-            })
-            return
-        }
 
         await EditorFSUtil.readRegistry()
         ProjectionEngine.EntityNamingService.clear()
