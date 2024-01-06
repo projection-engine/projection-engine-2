@@ -1,31 +1,26 @@
 import ScriptsAPI from "../../../engine/core/lib/utils/ScriptsAPI"
 import EntitySelectionStore from "../../shared/stores/EntitySelectionStore"
-import ToastNotificationSystem from "../../shared/components/alert/ToastNotificationSystem"
-import LocalizationEN from "../../../shared/enums/LocalizationEN"
-import EngineStore from "../../shared/stores/EngineStore"
+import LocalizationEN from "../../../enums/LocalizationEN"
 import Entity from "../../../engine/core/instances/Entity"
 import Engine from "../../../engine/core/Engine"
-import ExecutionService from "../services/engine/ExecutionService"
 import CameraAPI from "../../../engine/core/lib/utils/CameraAPI"
 import CameraTracker from "../../../engine/tools/utils/CameraTracker"
 import COMPONENTS from "../../../engine/core/static/COMPONENTS"
-import IPCRoutes from "../../../shared/enums/IPCRoutes"
-import SettingsStore from "../../shared/stores/SettingsStore"
+import IPCRoutes from "../../../enums/IPCRoutes"
 import QueryAPI from "../../../engine/core/lib/utils/QueryAPI"
-import GIZMOS from "../../../shared/enums/Gizmos"
-import ElectronResources from "../../shared/lib/ElectronResources"
+import GIZMOS from "../../../enums/Gizmos"
 import TabsStoreUtil from "./TabsStoreUtil"
 import ContentBrowserUtil from "./ContentBrowserUtil"
 import GizmoState from "../../../engine/tools/gizmo/util/GizmoState";
 import GizmoUtil from "../../../engine/tools/gizmo/util/GizmoUtil";
-import ProjectionEngine from "../../../shared/ProjectionEngine";
+import ProjectionEngine from "../../ProjectionEngine";
 
 export default class EditorUtil {
     static async componentConstructor(entity, scriptID, autoUpdate = true) {
         await ScriptsAPI.linkScript(entity, scriptID)
         if (autoUpdate)
             ProjectionEngine.  EntitySelectionStore.updateStore({array: EntitySelectionStore.getEntitiesSelected()})
-        ToastNotificationSystem.getInstance().success(LocalizationEN.ADDED_COMPONENT)
+        ProjectionEngine.ToastNotificationSystem.success(LocalizationEN.ADDED_COMPONENT)
     }
 
     static focusOnCamera(cameraTarget) {
@@ -35,13 +30,13 @@ export default class EditorUtil {
         if (!focused || isCamera && cameraTarget.id !== focused) {
             const current = isCamera ? cameraTarget : Engine.entities.get(EntitySelectionStore.getMainEntity())
             if (current && current.cameraComponent) {
-                ExecutionService.cameraSerialization = CameraAPI.serializeState()
+                ProjectionEngine.ExecutionService.cameraSerialization = Engine.CameraAPI.serializeState()
                 CameraTracker.stopTracking()
-                CameraAPI.updateViewTarget(current)
+                Engine.CameraAPI.updateViewTarget(current)
                 engineInstance.updateStore({focusedCamera: current.id})
             }
         } else {
-            CameraAPI.restoreState(ExecutionService.cameraSerialization)
+            Engine.CameraAPI.restoreState(ProjectionEngine.ExecutionService.cameraSerialization)
             CameraTracker.startTracking()
             engineInstance.updateStore({focusedCamera: undefined})
         }
@@ -108,7 +103,7 @@ export default class EditorUtil {
     static async importFile(currentDirectory) {
         const {filesImported} = await EditorUtil.getCall<MutableObject>(IPCRoutes.FILE_DIALOG, {currentDirectory: currentDirectory.id}, false)
         if (filesImported.length > 0) {
-            ToastNotificationSystem.getInstance().success(LocalizationEN.IMPORT_SUCCESSFUL)
+            ProjectionEngine.ToastNotificationSystem.success(LocalizationEN.IMPORT_SUCCESSFUL)
             await ContentBrowserUtil.refreshFiles()
         }
     }

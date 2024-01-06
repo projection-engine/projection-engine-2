@@ -1,13 +1,13 @@
 import SELECTION_TYPES from "../views/content-browser/static/SELECTION_TYPES"
 import EditorFSUtil from "../util/EditorFSUtil"
-import ToastNotificationSystem from "../../shared/components/alert/ToastNotificationSystem"
-import LocalizationEN from "../../../shared/enums/LocalizationEN"
+import ToasterService from "../../services/ToasterService"
+import LocalizationEN from "../../../enums/LocalizationEN"
 import ContentBrowserUtil from "../util/ContentBrowserUtil"
 import EditorUtil from "../util/EditorUtil"
 import FileSystemUtil from "../../shared/FileSystemUtil"
 import SettingsStore from "../../shared/stores/SettingsStore"
 import ContentBrowserStore from "../../shared/stores/ContentBrowserStore";
-import ProjectionEngine from "../../../shared/ProjectionEngine";
+import ProjectionEngine from "../../ProjectionEngine";
 
 export default function getContentBrowserActions(navigationHistory, getCurrentDirectory, setCurrentDirectory, setCurrentItem) {
 	const contentBrowserHotkeys = ProjectionEngine.SettingsStore.getData().contentBrowserHotkeys
@@ -43,7 +43,7 @@ export default function getContentBrowserActions(navigationHistory, getCurrentDi
 			label: "Refresh",
 			require: contentBrowserHotkeys.REFRESH,
 			callback: () => {
-				ToastNotificationSystem.getInstance().success(LocalizationEN.REFRESHING)
+				ProjectionEngine.ToastNotificationSystem.success(LocalizationEN.REFRESHING)
 				ContentBrowserUtil.refreshFiles().catch(console.error)
 			}
 		},
@@ -97,17 +97,7 @@ export default function getContentBrowserActions(navigationHistory, getCurrentDi
 	return {
 		hotKeys: Object.values(hotKeys),
 		contextMenu: [
-			{
-				label: LocalizationEN.COPY_ID,
-				onClick: () => {
-					const ID = EditorFSUtil.getByPath(ContentBrowserStore.getContentBrowserSelected()[0]?.id)
-					if (ID) {
-						// ToastNotificationSystem.getInstance().success(LocalizationEN.COPIED)
-						// ElectronResources.clipboard.writeText(ID)
-					}
-				}
-			},
-			{divider: true},
+
 			hotKeys.SELECT_ALL,
 			hotKeys.SELECT_NONE,
 			hotKeys.INVERT_SELECTION,

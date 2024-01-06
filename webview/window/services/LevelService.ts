@@ -1,59 +1,22 @@
-import FileSystemUtil from "../../../shared/FileSystemUtil"
-import EditorActionHistory from "../EditorActionHistory"
-import Engine from "../../../../engine/core/Engine"
-import EditorFSUtil from "../../util/EditorFSUtil"
-import EngineStore from "../../../shared/stores/EngineStore"
-import EntitySelectionStore from "../../../shared/stores/EntitySelectionStore"
-import SettingsStore from "../../../shared/stores/SettingsStore"
-import VisualsStore from "../../../shared/stores/VisualsStore"
-import CameraAPI from "../../../../engine/core/lib/utils/CameraAPI"
-import TabsStore from "../../../shared/stores/TabsStore"
-import CameraTracker from "../../../../engine/tools/utils/CameraTracker"
-import serializeStructure from "../../../../engine/core/utils/serialize-structure"
-import ToastNotificationSystem from "../../../shared/components/alert/ToastNotificationSystem"
-import ChangesTrackerStore from "../../../shared/stores/ChangesTrackerStore"
-import QueryAPI from "../../../../engine/core/lib/utils/QueryAPI"
-import EntityHierarchyService from "./EntityHierarchyService"
-import EntityNamingService from "./EntityNamingService"
-import PickingAPI from "../../../../engine/core/lib/utils/PickingAPI"
-import AXIS from "../../../../engine/tools/static/AXIS"
-import WindowChangeStore from "../../../shared/stores/WindowChangeStore"
-import LocalizationEN from "../../../../shared/enums/LocalizationEN"
-import FileTypes from "../../../../shared/enums/FileTypes"
-import AbstractSingleton from "../../../../shared/AbstractSingleton"
-import EditorUtil from "../../util/EditorUtil"
-import TabsStoreUtil from "../../util/TabsStoreUtil"
-import ProjectionEngine from "../../../../shared/ProjectionEngine";
+import FileSystemUtil from "../shared/FileSystemUtil"
+import Engine from "../../engine/core/Engine"
+import EditorFSUtil from "../editor/util/EditorFSUtil"
+import EntitySelectionStore from "../shared/stores/EntitySelectionStore"
+import CameraAPI from "../../engine/core/lib/utils/CameraAPI"
+import CameraTracker from "../../engine/tools/utils/CameraTracker"
+import serializeStructure from "../../engine/core/utils/serialize-structure"
+import QueryAPI from "../../engine/core/lib/utils/QueryAPI"
+import PickingAPI from "../../engine/core/lib/utils/PickingAPI"
+import AXIS from "../../engine/tools/static/AXIS"
+import LocalizationEN from "../../enums/LocalizationEN"
+import FileTypes from "../../enums/FileTypes"
+import EditorUtil from "../editor/util/EditorUtil"
+import TabsStoreUtil from "../editor/util/TabsStoreUtil"
+import ProjectionEngine from "../ProjectionEngine";
 
 
-export default class LevelService extends AbstractSingleton {
+export default class LevelService  {
     #levelToLoad
-
-    static initialize(meta) {
-        if (!meta) {
-            ToastNotificationSystem.getInstance().error(LocalizationEN.ERROR_LOADING_PROJECT)
-            return
-        }
-        if (meta.settings !== undefined) {
-            const newSettings = {...meta.settings}
-            newSettings.visualSettings = undefined
-            if (meta.layout)
-                ProjectionEngine.TabsStore.updateStore({layout: meta.layout})
-            if (meta.visualSettings)
-                ProjectionEngine.VisualsStore.updateStore(meta.visualSettings)
-            ProjectionEngine.SettingsStore.updateStore(newSettings)
-        }
-        ProjectionEngine.EngineStore.updateStore({
-            meta: {...meta, settings: undefined, visualSettings: undefined, layout: undefined},
-            isReady: true
-        })
-
-        this.get<LevelService>().#levelToLoad = meta.level
-    }
-
-    static getInstance(): LevelService {
-        return super.get<LevelService>()
-    }
 
     getLevelToLoad() {
         const old = this.#levelToLoad
@@ -64,7 +27,7 @@ export default class LevelService extends AbstractSingleton {
     async loadLevel(levelID?: string) {
         if (!levelID || levelID && levelID === Engine.loadedLevel?.id) {
             if (levelID && levelID === Engine.loadedLevel?.id)
-                ToastNotificationSystem.getInstance().error(LocalizationEN.LEVEL_ALREADY_LOADED)
+                ProjectionEngine.ToastNotificationSystem.error(LocalizationEN.LEVEL_ALREADY_LOADED)
             return
         }
 
@@ -79,12 +42,12 @@ export default class LevelService extends AbstractSingleton {
         }
 
         await EditorFSUtil.readRegistry()
-        EntityNamingService.clear()
+        ProjectionEngine.EntityNamingService.clear()
         ProjectionEngine.EntitySelectionStore.updateStore({
             array: []
         })
         EntitySelectionStore.setLockedEntity(undefined)
-        EditorActionHistory.clear()
+        ProjectionEngine. EditorActionHistory.clear()
 
 
         await Engine.loadLevel(levelID, false)
@@ -95,7 +58,7 @@ export default class LevelService extends AbstractSingleton {
         }
         if (Engine.loadedLevel)
             EntitySelectionStore.setLockedEntity(Engine.loadedLevel.id)
-        EntityHierarchyService.updateHierarchy()
+        ProjectionEngine.EntityHierarchyService.updateHierarchy()
     }
 
     async save() {
@@ -103,18 +66,18 @@ export default class LevelService extends AbstractSingleton {
             return
 
         if (ProjectionEngine.EngineStore.getData().executingAnimation) {
-            ToastNotificationSystem.getInstance().warn(LocalizationEN.EXECUTING_SIMULATION)
+            ProjectionEngine.ToastNotificationSystem.warn(LocalizationEN.EXECUTING_SIMULATION)
             return
         }
 
-        ToastNotificationSystem.getInstance().warn(LocalizationEN.SAVING)
+        ProjectionEngine.ToastNotificationSystem.warn(LocalizationEN.SAVING)
         try {
             const metadata = ProjectionEngine.EngineStore.getData().meta
             const settings = {...ProjectionEngine.SettingsStore.getData()}
             const tabIndexViewport = TabsStoreUtil.getCurrentTabByCurrentView("viewport")
             const viewMetadata = <MutableObject | undefined>settings.views[settings.currentView].viewport[tabIndexViewport]
             if (viewMetadata !== undefined) {
-                viewMetadata.cameraMetadata = CameraAPI.serializeState()
+                viewMetadata.cameraMetadata = Engine.CameraAPI.serializeState()
                 viewMetadata.cameraMetadata.prevX = CameraTracker.xRotation
                 viewMetadata.cameraMetadata.prevY = CameraTracker.yRotation
             }
@@ -134,7 +97,7 @@ export default class LevelService extends AbstractSingleton {
             console.error(err)
             return
         }
-        ToastNotificationSystem.getInstance().success(LocalizationEN.PROJECT_SAVED)
+        ProjectionEngine.ToastNotificationSystem.success(LocalizationEN.PROJECT_SAVED)
         await EditorFSUtil.readRegistry()
     }
 

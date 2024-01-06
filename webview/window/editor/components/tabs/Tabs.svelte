@@ -5,7 +5,6 @@
     import Dropdown from "../../../shared/components/dropdown/Dropdown.svelte"
     import {Sortable} from "sortablejs"
     import Tab from "./components/Tab.svelte"
-    import TabContextController from "./TabContextController"
 
     /** @type {function} */
     export let addNewTab
@@ -101,7 +100,6 @@
     		},
     		{passive: false}
     	)
-    	contextID = TabContextController.getInstance().contextID
     	ref.addEventListener("wheel", handler)
     	sortable = new Sortable(ref, {
     		swapThreshold: 1,
@@ -120,12 +118,10 @@
     		},
     		direction: "horizontal"
     	})
-    	TabContextController.getInstance().registerContext(COMPONENT_ID, id => id === "CREATE" ? addNewTab() : removeMultipleTabs())
     })
 
     onDestroy(() => {
     	sortable.destroy()
-    	TabContextController.getInstance().removeContext(COMPONENT_ID)
     	ref.removeEventListener("wheel", handler)
     })
 

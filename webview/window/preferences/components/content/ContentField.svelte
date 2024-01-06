@@ -3,10 +3,8 @@
     import Checkbox from "../../../shared/components/checkbox/Checkbox.svelte"
     import ColorPicker from "../../../shared/components/color-picker/ColorPicker.svelte"
     import Range from "../../../shared/components/range/Range.svelte"
-    import VisualsStore from "../../../shared/stores/VisualsStore"
-    import SettingsStore from "../../../shared/stores/SettingsStore"
     import Component from "../../../../engine/core/instances/components/Component"
-    import ProjectionEngine from "../../../../shared/ProjectionEngine";
+    import ProjectionEngine from "../../../ProjectionEngine";
 
     export let toRender
     export let settings

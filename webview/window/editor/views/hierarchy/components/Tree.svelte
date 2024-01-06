@@ -3,7 +3,7 @@
     import ComponentTreeBranch from "./ComponentTreeBranch.svelte"
     import Icon from "../../../../shared/components/icon/Icon.svelte"
     import VirtualList from "@sveltejs/svelte-virtual-list"
-    import LocalizationEN from "../../../../../shared/enums/LocalizationEN"
+    import LocalizationEN from "../../../../../enums/LocalizationEN"
     import HierarchyToRenderElement from "../template/ToRenderElement";
 
     const COMPONENT_ID = crypto.randomUUID()

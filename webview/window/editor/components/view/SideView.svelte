@@ -4,7 +4,7 @@
     import ViewsUtil from "../../util/ViewsUtil"
     import {onDestroy, onMount} from "svelte"
     import EngineStore from "../../../shared/stores/EngineStore"
-    import ProjectionEngine from "../../../../shared/ProjectionEngine";
+    import ProjectionEngine from "../../../ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
 

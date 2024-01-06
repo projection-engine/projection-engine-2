@@ -7,11 +7,11 @@
     import MaterialItem from "./MaterialItem.svelte"
     import MeshItem from "./MeshItem.svelte"
     import Icon from "../../../../../shared/components/icon/Icon.svelte"
-    import LocalizationEN from "../../../../../../shared/enums/LocalizationEN"
-    import FileTypes from "../../../../../../shared/enums/FileTypes"
+    import LocalizationEN from "../../../../../../enums/LocalizationEN"
+    import FileTypes from "../../../../../../enums/FileTypes"
     import {onDestroy, onMount} from "svelte";
     import ContentBrowserStore from "../../../../../shared/stores/ContentBrowserStore";
-    import ProjectionEngine from "../../../../../../shared/ProjectionEngine";
+    import ProjectionEngine from "../../../../../ProjectionEngine";
 
     const VALID = [FileTypes.TEXTURE, FileTypes.COLLECTION, FileTypes.MATERIAL]
     const COMPONENT_ID = crypto.randomUUID()

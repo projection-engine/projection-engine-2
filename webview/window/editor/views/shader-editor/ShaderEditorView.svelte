@@ -8,12 +8,13 @@
     import Canvas from "./libs/Canvas"
     import getShaderActions from "../../templates/get-shader-actions"
     import HotKeysController from "../../../shared/lib/HotKeysController"
-    import ContextMenuService from "../../../shared/lib/context-menu/ContextMenuService"
+    import ContextMenuService from "../../../services/ContextMenuService"
     import SideBar from "./components/SideBar.svelte"
     import NODE_MAP from "./static/NODE_MAP"
-    import LocalizationEN from "../../../../shared/enums/LocalizationEN"
+    import LocalizationEN from "../../../../enums/LocalizationEN"
     import ShaderEditorUtil from "../../util/ShaderEditorUtil"
     import SerializedState from "../../components/view/SerializedState.svelte";
+    import ProjectionEngine from "../../../ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
 
@@ -25,7 +26,7 @@
     onMount(() => {
     	canvas.initialize(canvasElement)
     	const data = getShaderActions(canvas)
-    	ContextMenuService.getInstance().mount(data.contextMenu, COMPONENT_ID)
+        ProjectionEngine.ContextMenuService.mount(data.contextMenu, COMPONENT_ID)
     	if (canvas.ctx?.canvas)
     		HotKeysController.bindAction(
     			canvas.ctx.canvas,
@@ -36,7 +37,7 @@
     })
 
     onDestroy(() => {
-    	ContextMenuService.getInstance().destroy(COMPONENT_ID)
+        ProjectionEngine.ContextMenuService.destroy(COMPONENT_ID)
     	if (canvas.ctx?.canvas)
     		HotKeysController.unbindAction(canvas.ctx.canvas)
     })

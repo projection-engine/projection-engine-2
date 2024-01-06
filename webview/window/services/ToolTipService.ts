@@ -1,13 +1,11 @@
-import SveltePortal from "../../lib/SveltePortal"
-import AbstractSingleton from "../../../../shared/AbstractSingleton";
+import SveltePortal from "../shared/lib/SveltePortal"
 
-export default class ToolTipService extends AbstractSingleton {
+export default class ToolTipService  {
 	portal = new SveltePortal(999, false)
 	element
 	closeCurrent
 
 	constructor() {
-		super();
 		document.addEventListener("dragstart", () => {
 			this.portal.close()
 			if (this.closeCurrent)
@@ -20,9 +18,4 @@ export default class ToolTipService extends AbstractSingleton {
 
 		this.element = el
 	}
-
-	static getInstance(): ToolTipService{
-		return super.get<ToolTipService>()
-	}
-
 }

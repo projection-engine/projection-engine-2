@@ -1,8 +1,8 @@
 import SETTINGS from "../../editor/static/SETTINGS"
 import ChangesTrackerStore from "./ChangesTrackerStore"
-import UIDataStores from "../../../shared/enums/UIDataStores"
+import UIDataStores from "../../../enums/UIDataStores"
 import AbstractStore from "./AbstractStore"
-import ProjectionEngine from "../../../shared/ProjectionEngine";
+import ProjectionEngine from "../../ProjectionEngine";
 
 export default class SettingsStore extends AbstractStore{
 	static #wasInitialized = false

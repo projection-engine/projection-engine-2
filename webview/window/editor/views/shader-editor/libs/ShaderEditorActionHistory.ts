@@ -3,8 +3,8 @@ import type Canvas from "./Canvas"
 import ShaderNode from "../templates/ShaderNode"
 import ShaderComment from "../templates/ShaderComment"
 import ShaderEditorTools from "./ShaderEditorTools"
-import ToastNotificationSystem from "../../../../shared/components/alert/ToastNotificationSystem"
-import LocalizationEN from "../../../../../shared/enums/LocalizationEN";
+import LocalizationEN from "../../../../../enums/LocalizationEN";
+import ProjectionEngine from "../../../../ProjectionEngine";
 
 
 interface Action {
@@ -39,7 +39,7 @@ export default class ShaderEditorActionHistory {
 	undo() {
 		const action = this.#cache.undo()
 		if (action) {
-			ToastNotificationSystem.getInstance().log(LocalizationEN.UNDOING_CHANGES)
+			ProjectionEngine.ToastNotificationSystem.log(LocalizationEN.UNDOING_CHANGES)
 			this.#apply(action)
 		}
 	}
@@ -47,7 +47,7 @@ export default class ShaderEditorActionHistory {
 	redo() {
 		const action = this.#cache.redo()
 		if (action) {
-			ToastNotificationSystem.getInstance().log(LocalizationEN.REDOING_CHANGES)
+			ProjectionEngine.ToastNotificationSystem.log(LocalizationEN.REDOING_CHANGES)
 			this.#apply(action)
 		}
 	}

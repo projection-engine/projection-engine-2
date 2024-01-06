@@ -1,6 +1,5 @@
 import SHADING_MODELS from "../../../engine/core/static/SHADING_MODELS"
-import LocalizationEN from "../../../shared/enums/LocalizationEN"
-import SettingsStore from "../../shared/stores/SettingsStore"
+import LocalizationEN from "../../../enums/LocalizationEN"
 import ConversionAPI from "../../../engine/core/lib/math/ConversionAPI"
 import GPU from "../../../engine/core/GPU"
 import PickingAPI from "../../../engine/core/lib/utils/PickingAPI"
@@ -10,15 +9,13 @@ import EngineTools from "../../../engine/tools/EngineTools"
 import {glMatrix, quat} from "gl-matrix"
 import CameraAPI from "../../../engine/core/lib/utils/CameraAPI"
 import CameraTracker from "../../../engine/tools/utils/CameraTracker"
-import ViewportInteractionListener from "../views/scene-editor/lib/ViewportInteractionListener"
-import EngineResourceLoaderService from "../services/engine/EngineResourceLoaderService"
-import ContextMenuService from "../../shared/lib/context-menu/ContextMenuService"
+import EngineResourceLoaderService from "../../services/EngineResourceLoaderService"
 import getViewportContext from "../templates/get-viewport-context"
 import RENDER_TARGET from "../static/RENDER_TARGET"
 import SETTINGS from "../static/SETTINGS"
 import EntitySelectionStore from "../../shared/stores/EntitySelectionStore";
 import CameraSerialization from "../../../engine/core/static/CameraSerialization";
-import ProjectionEngine from "../../../shared/ProjectionEngine";
+import ProjectionEngine from "../../ProjectionEngine";
 
 export default class SceneEditorUtil {
 	static #worker?: Worker
@@ -142,11 +139,11 @@ export default class SceneEditorUtil {
 			if (!cameraMetadata) {
 				const pitch = quat.fromEuler(quat.create(), -45, 0, 0)
 				const yaw = quat.fromEuler(quat.create(), 0, 45, 0)
-				CameraAPI.update([5, 10, 5], quat.multiply(quat.create(), yaw, pitch))
+				Engine.CameraAPI.update([5, 10, 5], quat.multiply(quat.create(), yaw, pitch))
 				CameraTracker.xRotation = glMatrix.toRadian(45)
 				CameraTracker.yRotation = -glMatrix.toRadian(45)
 			} else {
-				CameraAPI.restoreState(cameraMetadata)
+				Engine.CameraAPI.restoreState(cameraMetadata)
 				CameraTracker.xRotation = cameraMetadata.prevX
 				CameraTracker.yRotation = cameraMetadata.prevY
 			}
@@ -156,9 +153,8 @@ export default class SceneEditorUtil {
 	}
 
 	static onSceneEditorMount(draggable) {
-		ContextMenuService.getInstance().mount(getViewportContext(), RENDER_TARGET)
+		ProjectionEngine.ContextMenuService.mount(getViewportContext(), RENDER_TARGET)
 		CameraTracker.startTracking()
-		ViewportInteractionListener.get()
 		draggable.onMount({
 			targetElement: GPU.canvas,
 			onDrop: (data, event) => EngineResourceLoaderService.load(data, false, event.clientX, event.clientY).catch(console.error),

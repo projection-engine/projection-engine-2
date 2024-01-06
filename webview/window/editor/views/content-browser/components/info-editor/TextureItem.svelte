@@ -11,7 +11,7 @@
     import TEXTURE_TEMPLATE from "../../../../../../engine/core/static/TEXTURE_TEMPLATE"
 
     import EditorFSUtil from "../../../../util/EditorFSUtil"
-    import LocalizationEN from "../../../../../../shared/enums/LocalizationEN";
+    import LocalizationEN from "../../../../../../enums/LocalizationEN";
 
     const B = "height: 22px; border-radius: 3px; background: var(--pj-background-tertiary); border:var(--pj-border-primary) 1px solid;"
     export let item

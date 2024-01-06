@@ -1,7 +1,6 @@
 <script>
-    import SettingsStore from "../../../../shared/stores/SettingsStore"
     import OptionDropdown from "../../../../shared/components/dropdown/OptionDropdown.svelte"
-    import LocalizationEN from "../../../../../shared/enums/LocalizationEN"
+    import LocalizationEN from "../../../../../enums/LocalizationEN"
     import SceneEditorUtil from "../../../util/SceneEditorUtil"
     import getEntityCreationOptions from "../../../templates/get-entity-creation-options"
     import {getViewportOptionsForDropdown} from "../../../templates/get-viewport-context"
@@ -10,7 +9,7 @@
     import Checkbox from "../../../../shared/components/checkbox/Checkbox.svelte"
     import Dropdown from "../../../../shared/components/dropdown/Dropdown.svelte"
     import {onDestroy, onMount} from "svelte"
-    import ProjectionEngine from "../../../../../shared/ProjectionEngine";
+    import ProjectionEngine from "../../../../ProjectionEngine";
 
     /** @type boolean */
     export let isOnGizmo

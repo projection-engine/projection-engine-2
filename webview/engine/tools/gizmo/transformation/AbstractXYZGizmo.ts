@@ -3,9 +3,8 @@ import GizmoUtil from "../util/GizmoUtil";
 import AXIS from "../../static/AXIS";
 import Mesh from "../../../core/instances/Mesh";
 import Entity from "../../../core/instances/Entity";
-import AbstractSingleton from "../../../../shared/AbstractSingleton";
 
-export default abstract class AbstractXYZGizmo extends AbstractSingleton implements IGizmo {
+export default abstract class AbstractXYZGizmo  implements IGizmo {
     declare mesh: Mesh;
     declare xGizmo: Entity;
     declare yGizmo: Entity;

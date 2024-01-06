@@ -4,7 +4,7 @@
     import MetricsController from "../../../../engine/core/lib/utils/MetricsController"
     import Icon from "../../../shared/components/icon/Icon.svelte"
     import ToolTip from "../../../shared/components/tooltip/ToolTip.svelte"
-    import LocalizationEN from "../../../../shared/enums/LocalizationEN"
+    import LocalizationEN from "../../../../enums/LocalizationEN"
 
     let isRecording = false
     let isSampling = false

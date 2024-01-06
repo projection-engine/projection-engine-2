@@ -48,7 +48,7 @@ export default class Renderer {
 		const current = Renderer.currentTimeStamp
 		Renderer.elapsed = current - previous
 		previous = current
-		CameraAPI.updateUBOs()
+		Engine.CameraAPI.updateUBOs()
 		GPU.context.clear(GPU.context.COLOR_BUFFER_BIT | GPU.context.DEPTH_BUFFER_BIT)
 		if (EntityWorkerAPI.hasChangeBuffer[0] === 1)
 			LightsAPI.packageLights(false, true)
@@ -76,7 +76,7 @@ export default class Renderer {
 
 	static #sync() {
 		EntityWorkerAPI.hasChangeBuffer[0] = 0
-		CameraAPI.syncThreads()
+		Engine.CameraAPI.syncThreads()
 		EntityWorkerAPI.syncThreads()
 	}
 

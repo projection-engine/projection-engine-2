@@ -13,9 +13,9 @@
     import ViewportUtil from "../../util/ViewportUtil"
     import ViewsUtil from "../../util/ViewsUtil"
     import TabsStoreUtil from "../../util/TabsStoreUtil"
-    import LocalizationEN from "../../../../shared/enums/LocalizationEN";
+    import LocalizationEN from "../../../../enums/LocalizationEN";
     import Canvas from "./Canvas.svelte";
-    import ProjectionEngine from "../../../../shared/ProjectionEngine";
+    import ProjectionEngine from "../../../ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     const VIEW_TEMPLATES = [...Object.values(VIEWS), ...Object.values(VIEWPORT_TABS)].map(value => ({

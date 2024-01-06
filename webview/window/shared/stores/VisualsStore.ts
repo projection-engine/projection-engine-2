@@ -1,7 +1,7 @@
 import VISUAL_SETTINGS from "../../editor/static/VISUAL_SETTINGS"
 
 import AbstractStore from "./AbstractStore"
-import ProjectionEngine from "../../../shared/ProjectionEngine";
+import ProjectionEngine from "../../ProjectionEngine";
 
 export default class VisualsStore extends AbstractStore{
 	static #wasInitialized = false

@@ -1,7 +1,6 @@
 import materialCompiler from "./material-compiler/material-compiler"
 
 import ContentBrowserStore from "../../../../shared/stores/ContentBrowserStore"
-import ToastNotificationSystem from "../../../../shared/components/alert/ToastNotificationSystem"
 import Canvas from "./Canvas"
 import type ShaderNode from "../templates/ShaderNode"
 import GPU from "../../../../../engine/core/GPU"
@@ -10,8 +9,9 @@ import GPUAPI from "../../../../../engine/core/lib/rendering/GPUAPI"
 import NodesIndex from "../static/NODE_MAP"
 import ShaderLink from "../templates/ShaderLink"
 import ShaderComment from "../templates/ShaderComment"
-import LocalizationEN from "../../../../../shared/enums/LocalizationEN"
+import LocalizationEN from "../../../../../enums/LocalizationEN"
 import EditorFSUtil from "../../../util/EditorFSUtil"
+import ProjectionEngine from "../../../../ProjectionEngine";
 
 export default class ShaderEditorTools {
 
@@ -110,7 +110,7 @@ export default class ShaderEditorTools {
 						executionSignature: compiled[1]
 					}, openFile.registryID)
 				} else {
-					ToastNotificationSystem.getInstance().warn(LocalizationEN.UPDATING_UNIFORMS)
+					ProjectionEngine.ToastNotificationSystem.warn(LocalizationEN.UPDATING_UNIFORMS)
 					await oldMaterial.updateUniformGroup(compiled[0].uniformValues)
 
 					oldMaterial.doubleSided = compiled[0].settings.doubleSided
@@ -119,7 +119,7 @@ export default class ShaderEditorTools {
 				}
 			}
 
-			ToastNotificationSystem.getInstance().success(LocalizationEN.SAVED)
+			ProjectionEngine.ToastNotificationSystem.success(LocalizationEN.SAVED)
 		} catch (err) {
 			console.error(err)
 		}

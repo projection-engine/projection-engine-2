@@ -1,7 +1,6 @@
 <script>
 
     import {onDestroy, onMount} from "svelte"
-    import EntitySelectionStore from "../../../shared/stores/EntitySelectionStore"
     import QueryAPI from "../../../../engine/core/lib/utils/QueryAPI"
     import EntityInspector from "./components/EntityAttributes.svelte"
 
@@ -12,7 +11,7 @@
     import InspectorUtil from "../../util/InspectorUtil"
     import INSPECTOR_TABS from "./static/INSPECTOR_TABS"
     import SerializedState from "../../components/view/SerializedState.svelte";
-    import ProjectionEngine from "../../../../shared/ProjectionEngine";
+    import ProjectionEngine from "../../../ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     let selectedEntity

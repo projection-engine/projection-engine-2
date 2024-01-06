@@ -7,10 +7,9 @@
     import ToolTip from "../../../shared/components/tooltip/ToolTip.svelte"
     import Icon from "../../../shared/components/icon/Icon.svelte"
     import SveltePortal from "../../../shared/lib/SveltePortal"
-    import LocalizationEN from "../../../../shared/enums/LocalizationEN"
-    import EngineStore from "../../../shared/stores/EngineStore"
+    import LocalizationEN from "../../../../enums/LocalizationEN"
     import ViewHeader from "../../components/view/components/ViewHeader.svelte"
-    import ProjectionEngine from "../../../../shared/ProjectionEngine";
+    import ProjectionEngine from "../../../ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     const TYPES = ConsoleAPI.TYPES

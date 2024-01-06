@@ -4,271 +4,271 @@ import CameraEffectsSerialization from "../static/CameraEffectsSerialization"
 const U_INT = new Uint8Array(1)
 const FLOAT = new Float32Array(1)
 export default class CameraEffects {
-	static cameraMotionBlur = false
-	static #bloom = false
-	static #filmGrain = false
-	static #vignetteEnabled = false
-	static #chromaticAberration = false
-	static #distortion = false
-	static DOF = false
-	static zNear = .1
-	static zFar = 1000
-	static fov = Math.PI / 2
-	static aspectRatio = 1
-	static size = 50
-	static #focusDistanceDOF = 10
-	static #apertureDOF = 1.2
-	static #focalLengthDOF = 5
-	static #samplesDOF = 100
-	static #filmGrainStrength = 1.
-	static #vignetteStrength = .25
-	static bloomThreshold = .75
-	static bloomQuality = 8
-	static bloomOffset = 0
-	static #gamma = 2.2
-	static #exposure = 1.
-	static #chromaticAberrationStrength = 1
-	static #distortionStrength = 1
+    cameraMotionBlur = false
+    #bloom = false
+    #filmGrain = false
+    #vignetteEnabled = false
+    #chromaticAberration = false
+    #distortion = false
+    DOF = false
+    zNear = .1
+    zFar = 1000
+    fov = Math.PI / 2
+    aspectRatio = 1
+    size = 50
+    #focusDistanceDOF = 10
+    #apertureDOF = 1.2
+    #focalLengthDOF = 5
+    #samplesDOF = 100
+    #filmGrainStrength = 1.
+    #vignetteStrength = .25
+    bloomThreshold = .75
+    bloomQuality = 8
+    bloomOffset = 0
+    #gamma = 2.2
+    #exposure = 1.
+    #chromaticAberrationStrength = 1
+    #distortionStrength = 1
 
 
-	static restoreMetadata(data: CameraEffectsSerialization) {
-		CameraEffects.DOF = data.DOF
-		CameraEffects.bloom = data.bloom
-		CameraEffects.filmGrain = data.filmGrain
-		CameraEffects.vignetteEnabled = data.vignetteEnabled
-		CameraEffects.chromaticAberration = data.chromaticAberration
-		CameraEffects.distortion = data.distortion
-		CameraEffects.cameraMotionBlur = data.cameraMotionBlur
-		CameraEffects.zNear = data.zNear
-		CameraEffects.zFar = data.zFar
-		CameraEffects.fov = data.fov
-		CameraEffects.aspectRatio = data.aspectRatio
-		CameraEffects.size = data.size
-		CameraEffects.focusDistanceDOF = data.focusDistanceDOF
-		CameraEffects.apertureDOF = data.apertureDOF
-		CameraEffects.focalLengthDOF = data.focalLengthDOF
-		CameraEffects.samplesDOF = data.samplesDOF
-		CameraEffects.filmGrainStrength = data.filmGrainStrength
-		CameraEffects.vignetteStrength = data.vignetteStrength
-		CameraEffects.bloomThreshold = data.bloomThreshold
-		CameraEffects.bloomQuality = data.bloomQuality
-		CameraEffects.bloomOffset = data.bloomOffset
-		CameraEffects.gamma = data.gamma
-		CameraEffects.exposure = data.exposure
-		CameraEffects.chromaticAberrationStrength = data.chromaticAberrationStrength
-		CameraEffects.distortionStrength = data.distortionStrength
-	}
+    restoreMetadata(data: CameraEffectsSerialization) {
+        this.DOF = data.DOF
+        this.bloom = data.bloom
+        this.filmGrain = data.filmGrain
+        this.vignetteEnabled = data.vignetteEnabled
+        this.chromaticAberration = data.chromaticAberration
+        this.distortion = data.distortion
+        this.cameraMotionBlur = data.cameraMotionBlur
+        this.zNear = data.zNear
+        this.zFar = data.zFar
+        this.fov = data.fov
+        this.aspectRatio = data.aspectRatio
+        this.size = data.size
+        this.focusDistanceDOF = data.focusDistanceDOF
+        this.apertureDOF = data.apertureDOF
+        this.focalLengthDOF = data.focalLengthDOF
+        this.samplesDOF = data.samplesDOF
+        this.filmGrainStrength = data.filmGrainStrength
+        this.vignetteStrength = data.vignetteStrength
+        this.bloomThreshold = data.bloomThreshold
+        this.bloomQuality = data.bloomQuality
+        this.bloomOffset = data.bloomOffset
+        this.gamma = data.gamma
+        this.exposure = data.exposure
+        this.chromaticAberrationStrength = data.chromaticAberrationStrength
+        this.distortionStrength = data.distortionStrength
+    }
 
-	static dumpEffects(): CameraEffectsSerialization {
-		return {
-			zNear: CameraEffects.zNear,
-			zFar: CameraEffects.zFar,
-			fov: CameraEffects.fov,
-			aspectRatio: CameraEffects.aspectRatio,
-			size: CameraEffects.size,
-			focusDistanceDOF: CameraEffects.#focusDistanceDOF,
-			apertureDOF: CameraEffects.#apertureDOF,
-			focalLengthDOF: CameraEffects.#focalLengthDOF,
-			samplesDOF: CameraEffects.#samplesDOF,
-			filmGrainStrength: CameraEffects.#filmGrainStrength,
-			vignetteStrength: CameraEffects.#vignetteStrength,
-			bloomThreshold: CameraEffects.bloomThreshold,
-			bloomQuality: CameraEffects.bloomQuality,
-			bloomOffset: CameraEffects.bloomOffset,
-			gamma: CameraEffects.#gamma,
-			exposure: CameraEffects.#exposure,
-			chromaticAberrationStrength: CameraEffects.#chromaticAberrationStrength,
-			distortionStrength: CameraEffects.#distortionStrength,
-			cameraMotionBlur: CameraEffects.cameraMotionBlur,
-			DOF: CameraEffects.DOF,
-			bloom: CameraEffects.#bloom,
-			filmGrain: CameraEffects.#filmGrain,
-			vignetteEnabled: CameraEffects.#vignetteEnabled,
-			chromaticAberration: CameraEffects.#chromaticAberration,
-			distortion: CameraEffects.#distortion,
-		}
-	}
+    dumpEffects(): CameraEffectsSerialization {
+        return {
+            zNear: this.zNear,
+            zFar: this.zFar,
+            fov: this.fov,
+            aspectRatio: this.aspectRatio,
+            size: this.size,
+            focusDistanceDOF: this.#focusDistanceDOF,
+            apertureDOF: this.#apertureDOF,
+            focalLengthDOF: this.#focalLengthDOF,
+            samplesDOF: this.#samplesDOF,
+            filmGrainStrength: this.#filmGrainStrength,
+            vignetteStrength: this.#vignetteStrength,
+            bloomThreshold: this.bloomThreshold,
+            bloomQuality: this.bloomQuality,
+            bloomOffset: this.bloomOffset,
+            gamma: this.#gamma,
+            exposure: this.#exposure,
+            chromaticAberrationStrength: this.#chromaticAberrationStrength,
+            distortionStrength: this.#distortionStrength,
+            cameraMotionBlur: this.cameraMotionBlur,
+            DOF: this.DOF,
+            bloom: this.#bloom,
+            filmGrain: this.#filmGrain,
+            vignetteEnabled: this.#vignetteEnabled,
+            chromaticAberration: this.#chromaticAberration,
+            distortion: this.#distortion,
+        }
+    }
 
-	static get vignetteStrength() {
-		return CameraEffects.#vignetteStrength
-	}
+    get vignetteStrength() {
+        return this.#vignetteStrength
+    }
 
-	static set vignetteStrength(data) {
-		CameraEffects.#vignetteStrength = data
-		StaticUBOs.lensPostProcessingUBO.bind()
-		FLOAT[0] = data
-		StaticUBOs.lensPostProcessingUBO.updateData("vignetteStrength", FLOAT)
-		StaticUBOs.lensPostProcessingUBO.unbind()
-	}
+    set vignetteStrength(data) {
+        this.#vignetteStrength = data
+        StaticUBOs.lensPostProcessingUBO.bind()
+        FLOAT[0] = data
+        StaticUBOs.lensPostProcessingUBO.updateData("vignetteStrength", FLOAT)
+        StaticUBOs.lensPostProcessingUBO.unbind()
+    }
 
-	static get vignetteEnabled() {
-		return CameraEffects.#vignetteEnabled
-	}
+    get vignetteEnabled() {
+        return this.#vignetteEnabled
+    }
 
-	static set vignetteEnabled(data) {
-		CameraEffects.#vignetteEnabled = data
-		StaticUBOs.lensPostProcessingUBO.bind()
-		U_INT[0] = data ? 1 : 0
-		StaticUBOs.lensPostProcessingUBO.updateData("vignetteEnabled", U_INT)
-		StaticUBOs.lensPostProcessingUBO.unbind()
-	}
+    set vignetteEnabled(data) {
+        this.#vignetteEnabled = data
+        StaticUBOs.lensPostProcessingUBO.bind()
+        U_INT[0] = data ? 1 : 0
+        StaticUBOs.lensPostProcessingUBO.updateData("vignetteEnabled", U_INT)
+        StaticUBOs.lensPostProcessingUBO.unbind()
+    }
 
-	static get filmGrain() {
-		return CameraEffects.#filmGrain
-	}
+    get filmGrain() {
+        return this.#filmGrain
+    }
 
-	static get filmGrainStrength() {
-		return CameraEffects.#filmGrainStrength
-	}
+    get filmGrainStrength() {
+        return this.#filmGrainStrength
+    }
 
-	static set filmGrain(data) {
-		CameraEffects.#filmGrain = data
-		FLOAT[0] = data ? 1 : 0
-		StaticUBOs.frameCompositionUBO.bind()
-		StaticUBOs.frameCompositionUBO.updateData("filmGrainEnabled", FLOAT)
-		StaticUBOs.frameCompositionUBO.unbind()
-	}
+    set filmGrain(data) {
+        this.#filmGrain = data
+        FLOAT[0] = data ? 1 : 0
+        StaticUBOs.frameCompositionUBO.bind()
+        StaticUBOs.frameCompositionUBO.updateData("filmGrainEnabled", FLOAT)
+        StaticUBOs.frameCompositionUBO.unbind()
+    }
 
-	static set filmGrainStrength(data) {
-		CameraEffects.#filmGrainStrength = data
-		StaticUBOs.frameCompositionUBO.bind()
-		FLOAT[0] = data
-		StaticUBOs.frameCompositionUBO.updateData("filmGrainStrength", FLOAT)
-		StaticUBOs.frameCompositionUBO.unbind()
-	}
-
-
-	static get gamma() {
-		return CameraEffects.#gamma
-	}
-
-	static get exposure() {
-		return CameraEffects.#exposure
-	}
-
-	static get focusDistanceDOF() {
-		return CameraEffects.#focusDistanceDOF
-	}
-
-	static set focusDistanceDOF(data) {
-		CameraEffects.#focusDistanceDOF = data
-		StaticUBOs.lensPostProcessingUBO.bind()
-		FLOAT[0] = data
-		StaticUBOs.lensPostProcessingUBO.updateData("focusDistanceDOF", FLOAT)
-		StaticUBOs.lensPostProcessingUBO.unbind()
-	}
-
-	static get apertureDOF() {
-		return CameraEffects.#apertureDOF
-	}
-
-	static set apertureDOF(data) {
-		CameraEffects.#apertureDOF = data
-		StaticUBOs.lensPostProcessingUBO.bind()
-		FLOAT[0] = data
-		StaticUBOs.lensPostProcessingUBO.updateData("apertureDOF", FLOAT)
-		StaticUBOs.lensPostProcessingUBO.unbind()
-	}
-
-	static get focalLengthDOF() {
-		return CameraEffects.#focalLengthDOF
-	}
-
-	static set focalLengthDOF(data) {
-		CameraEffects.#focalLengthDOF = data
-		StaticUBOs.lensPostProcessingUBO.bind()
-		FLOAT[0] = data
-		StaticUBOs.lensPostProcessingUBO.updateData("focalLengthDOF", FLOAT)
-		StaticUBOs.lensPostProcessingUBO.unbind()
-	}
-
-	static get samplesDOF() {
-		return CameraEffects.#samplesDOF
-	}
-
-	static set samplesDOF(data) {
-		CameraEffects.#samplesDOF = data
-		StaticUBOs.lensPostProcessingUBO.bind()
-		FLOAT[0] = data
-		StaticUBOs.lensPostProcessingUBO.updateData("samplesDOF", FLOAT)
-		StaticUBOs.lensPostProcessingUBO.unbind()
-	}
+    set filmGrainStrength(data) {
+        this.#filmGrainStrength = data
+        StaticUBOs.frameCompositionUBO.bind()
+        FLOAT[0] = data
+        StaticUBOs.frameCompositionUBO.updateData("filmGrainStrength", FLOAT)
+        StaticUBOs.frameCompositionUBO.unbind()
+    }
 
 
-	static set gamma(data) {
-		CameraEffects.#gamma = data
-		StaticUBOs.lensPostProcessingUBO.bind()
-		FLOAT[0] = data
-		StaticUBOs.lensPostProcessingUBO.updateData("gamma", FLOAT)
-		StaticUBOs.lensPostProcessingUBO.unbind()
-	}
+    get gamma() {
+        return this.#gamma
+    }
 
-	static set exposure(data) {
-		CameraEffects.#exposure = data
-		StaticUBOs.lensPostProcessingUBO.bind()
-		FLOAT[0] = data
-		StaticUBOs.lensPostProcessingUBO.updateData("exposure", FLOAT)
-		StaticUBOs.lensPostProcessingUBO.unbind()
-	}
+    get exposure() {
+        return this.#exposure
+    }
 
-	static get distortion() {
-		return CameraEffects.#distortion
-	}
+    get focusDistanceDOF() {
+        return this.#focusDistanceDOF
+    }
 
-	static set distortion(v) {
-		CameraEffects.#distortion = v
-		StaticUBOs.lensPostProcessingUBO.bind()
-		U_INT[0] = v ? 1 : 0
-		StaticUBOs.lensPostProcessingUBO.updateData("distortionEnabled", U_INT)
-		StaticUBOs.lensPostProcessingUBO.unbind()
-	}
+    set focusDistanceDOF(data) {
+        this.#focusDistanceDOF = data
+        StaticUBOs.lensPostProcessingUBO.bind()
+        FLOAT[0] = data
+        StaticUBOs.lensPostProcessingUBO.updateData("focusDistanceDOF", FLOAT)
+        StaticUBOs.lensPostProcessingUBO.unbind()
+    }
 
-	static get chromaticAberration() {
-		return CameraEffects.#chromaticAberration
-	}
+    get apertureDOF() {
+        return this.#apertureDOF
+    }
 
-	static set chromaticAberration(v) {
-		CameraEffects.#chromaticAberration = v
-		StaticUBOs.lensPostProcessingUBO.bind()
-		U_INT[0] = v ? 1 : 0
-		StaticUBOs.lensPostProcessingUBO.updateData("chromaticAberrationEnabled", U_INT)
-		StaticUBOs.lensPostProcessingUBO.unbind()
-	}
+    set apertureDOF(data) {
+        this.#apertureDOF = data
+        StaticUBOs.lensPostProcessingUBO.bind()
+        FLOAT[0] = data
+        StaticUBOs.lensPostProcessingUBO.updateData("apertureDOF", FLOAT)
+        StaticUBOs.lensPostProcessingUBO.unbind()
+    }
 
-	static get bloom() {
-		return CameraEffects.#bloom
-	}
+    get focalLengthDOF() {
+        return this.#focalLengthDOF
+    }
 
-	static set bloom(v) {
-		CameraEffects.#bloom = v
-		StaticUBOs.lensPostProcessingUBO.bind()
-		U_INT[0] = v ? 1 : 0
-		StaticUBOs.lensPostProcessingUBO.updateData("bloomEnabled", U_INT)
-		StaticUBOs.lensPostProcessingUBO.unbind()
-	}
+    set focalLengthDOF(data) {
+        this.#focalLengthDOF = data
+        StaticUBOs.lensPostProcessingUBO.bind()
+        FLOAT[0] = data
+        StaticUBOs.lensPostProcessingUBO.updateData("focalLengthDOF", FLOAT)
+        StaticUBOs.lensPostProcessingUBO.unbind()
+    }
 
-	static get chromaticAberrationStrength() {
-		return CameraEffects.#chromaticAberrationStrength
-	}
+    get samplesDOF() {
+        return this.#samplesDOF
+    }
 
-	static set chromaticAberrationStrength(v) {
-		CameraEffects.#chromaticAberrationStrength = v
-		StaticUBOs.lensPostProcessingUBO.bind()
-		FLOAT[0] = v
-		StaticUBOs.lensPostProcessingUBO.updateData("chromaticAberrationIntensity", FLOAT)
-		StaticUBOs.lensPostProcessingUBO.unbind()
-	}
+    set samplesDOF(data) {
+        this.#samplesDOF = data
+        StaticUBOs.lensPostProcessingUBO.bind()
+        FLOAT[0] = data
+        StaticUBOs.lensPostProcessingUBO.updateData("samplesDOF", FLOAT)
+        StaticUBOs.lensPostProcessingUBO.unbind()
+    }
 
-	static get distortionStrength() {
-		return CameraEffects.#distortionStrength
-	}
 
-	static set distortionStrength(v) {
-		CameraEffects.#distortionStrength = v
-		StaticUBOs.lensPostProcessingUBO.bind()
-		FLOAT[0] = v
-		StaticUBOs.lensPostProcessingUBO.updateData("distortionIntensity", FLOAT)
-		StaticUBOs.lensPostProcessingUBO.unbind()
-	}
+    set gamma(data) {
+        this.#gamma = data
+        StaticUBOs.lensPostProcessingUBO.bind()
+        FLOAT[0] = data
+        StaticUBOs.lensPostProcessingUBO.updateData("gamma", FLOAT)
+        StaticUBOs.lensPostProcessingUBO.unbind()
+    }
+
+    set exposure(data) {
+        this.#exposure = data
+        StaticUBOs.lensPostProcessingUBO.bind()
+        FLOAT[0] = data
+        StaticUBOs.lensPostProcessingUBO.updateData("exposure", FLOAT)
+        StaticUBOs.lensPostProcessingUBO.unbind()
+    }
+
+    get distortion() {
+        return this.#distortion
+    }
+
+    set distortion(v) {
+        this.#distortion = v
+        StaticUBOs.lensPostProcessingUBO.bind()
+        U_INT[0] = v ? 1 : 0
+        StaticUBOs.lensPostProcessingUBO.updateData("distortionEnabled", U_INT)
+        StaticUBOs.lensPostProcessingUBO.unbind()
+    }
+
+    get chromaticAberration() {
+        return this.#chromaticAberration
+    }
+
+    set chromaticAberration(v) {
+        this.#chromaticAberration = v
+        StaticUBOs.lensPostProcessingUBO.bind()
+        U_INT[0] = v ? 1 : 0
+        StaticUBOs.lensPostProcessingUBO.updateData("chromaticAberrationEnabled", U_INT)
+        StaticUBOs.lensPostProcessingUBO.unbind()
+    }
+
+    get bloom() {
+        return this.#bloom
+    }
+
+    set bloom(v) {
+        this.#bloom = v
+        StaticUBOs.lensPostProcessingUBO.bind()
+        U_INT[0] = v ? 1 : 0
+        StaticUBOs.lensPostProcessingUBO.updateData("bloomEnabled", U_INT)
+        StaticUBOs.lensPostProcessingUBO.unbind()
+    }
+
+    get chromaticAberrationStrength() {
+        return this.#chromaticAberrationStrength
+    }
+
+    set chromaticAberrationStrength(v) {
+        this.#chromaticAberrationStrength = v
+        StaticUBOs.lensPostProcessingUBO.bind()
+        FLOAT[0] = v
+        StaticUBOs.lensPostProcessingUBO.updateData("chromaticAberrationIntensity", FLOAT)
+        StaticUBOs.lensPostProcessingUBO.unbind()
+    }
+
+    get distortionStrength() {
+        return this.#distortionStrength
+    }
+
+    set distortionStrength(v) {
+        this.#distortionStrength = v
+        StaticUBOs.lensPostProcessingUBO.bind()
+        FLOAT[0] = v
+        StaticUBOs.lensPostProcessingUBO.updateData("distortionIntensity", FLOAT)
+        StaticUBOs.lensPostProcessingUBO.unbind()
+    }
 
 }

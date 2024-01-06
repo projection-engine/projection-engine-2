@@ -3,14 +3,13 @@
     import Dropdown from "../../../../shared/components/dropdown/Dropdown.svelte"
     import Icon from "../../../../shared/components/icon/Icon.svelte"
     import ToolTip from "../../../../shared/components/tooltip/ToolTip.svelte"
-
-    import EntityHierarchyService from "../../../services/engine/EntityHierarchyService"
     import Input from "../../../../shared/components/input/Input.svelte"
     import getDropdownHeaderStyles from "../../../../shared/components/dropdown/utils/get-dropdown-header-styles"
     import NATIVE_COMPONENTS from "../../inspector/static/NATIVE_COMPONENTS"
-    import EntityFactoryService from "../../../services/engine/EntityFactoryService"
-    import LocalizationEN from "../../../../../shared/enums/LocalizationEN"
+    import EntityFactoryService from "../../../../services/EntityFactoryService"
+    import LocalizationEN from "../../../../../enums/LocalizationEN"
     import EmptyIcon from "../../../../shared/components/icon/EmptyIcon.svelte"
+    import ProjectionEngine from "../../../../ProjectionEngine";
 
     export let filteredComponent, setFilteredComponent
     export let search, setSearch
@@ -19,7 +18,7 @@
 <ViewHeader>
     <div data-svelteinline="-" style="justify-content: flex-start; width: 100%">
         <button data-sveltebuttondefault="-"
-                on:click={() => EntityHierarchyService.openTree()}
+                on:click={() => ProjectionEngine.EntityHierarchyService.openTree()}
                 data-svelteview-header-button="-"
         >
             <ToolTip content={LocalizationEN.SHOW_SELECTED}/>

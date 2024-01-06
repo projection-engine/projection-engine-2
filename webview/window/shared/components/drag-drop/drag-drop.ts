@@ -1,4 +1,4 @@
-import DragDropService from "./DragDropService"
+import ProjectionEngine from "../../../ProjectionEngine";
 
 interface DragDropAttributes {
     noTransformation?: boolean
@@ -25,12 +25,12 @@ export default function dragDrop(draggable?:boolean) {
 		switch (event.type) {
 		case "dragleave":
 			if (!draggableElement.contains(event.relatedTarget))
-				DragDropService.getInstance().onLeave()
+				ProjectionEngine.DragDropService.onLeave()
 			break
 		case "drag":
 
 			if (this.onMouseMove)
-				this.onMouseMove(event, draggableElement, DragDropService.getInstance().dragData)
+				this.onMouseMove(event, draggableElement, ProjectionEngine.DragDropService.dragData)
 			break
 		case "dragstart":
 			if (draggableElement.isDisabled) {
@@ -47,11 +47,11 @@ export default function dragDrop(draggable?:boolean) {
 					dragImageElement.innerHTML = getDragImage()
 				event.dataTransfer.setDragImage(dragImageElement, 0, 0)
 			}
-			DragDropService.getInstance().dragData = onDragStartEvent(event)
+			ProjectionEngine.DragDropService.dragData = onDragStartEvent(event)
 
 
-			DragDropService.getInstance().dragImageElement = dragImageElement
-			DragDropService.getInstance().onDragTarget = draggableElement
+			ProjectionEngine.DragDropService.dragImageElement = dragImageElement
+			ProjectionEngine.DragDropService.onDragTarget = draggableElement
 
 			break
 		case "dragend":
@@ -59,21 +59,21 @@ export default function dragDrop(draggable?:boolean) {
 			if (onDragEndEvent)
 				onDragEndEvent()
 
-			DragDropService.getInstance().dragData = undefined
+			ProjectionEngine.DragDropService.dragData = undefined
 			break
 		case "dragover":
 			event.preventDefault()
-			DragDropService.getInstance().dropTarget = draggableElement
-			DragDropService.getInstance().changedElements.push(draggableElement)
+			ProjectionEngine.DragDropService.dropTarget = draggableElement
+			ProjectionEngine.DragDropService.changedElements.push(draggableElement)
 			draggableElement.style.opacity = ".5"
 			draggableElement.dragDropListeners?.dragOver?.(event)
 			break
 		case "drop":
 			event.preventDefault()
-			if (!DragDropService.getInstance().dropTarget || !draggableElement.dragDropListeners?.onDrop)
+			if (!ProjectionEngine.DragDropService.dropTarget || !draggableElement.dragDropListeners?.onDrop)
 				return
-			draggableElement.dragDropListeners?.onDrop?.(DragDropService.getInstance().dragData, event)
-			DragDropService.getInstance().onLeave()
+			draggableElement.dragDropListeners?.onDrop?.(ProjectionEngine.DragDropService.dragData, event)
+			ProjectionEngine.DragDropService.onLeave()
 			break
 		}
 	}
@@ -91,12 +91,11 @@ export default function dragDrop(draggable?:boolean) {
 				onDragOver,
 				onDragEnd
 			} = attributes
-			DragDropService.get()
 			draggableElement = targetElement
 			noTargetTransformation = noTransformation
 			if (typeof dragImage === "function")
 				getDragImage = dragImage
-			dragImageElement = DragDropService.getInstance().createElement(getDragImage ? getDragImage() : dragImage)
+			dragImageElement = ProjectionEngine.DragDropService.createElement(getDragImage ? getDragImage() : dragImage)
 
 			onDragOverEvent = onDragOver
 			onDragEndEvent = onDragEnd
@@ -106,8 +105,8 @@ export default function dragDrop(draggable?:boolean) {
 				dragOver: (event) => {
 					if(!onDragOverEvent)
 						return
-					const target = DragDropService.getInstance().alertModal
-					const html = onDragOverEvent(DragDropService.getInstance().dragData, event)
+					const target = ProjectionEngine.DragDropService.alertModal
+					const html = onDragOverEvent(ProjectionEngine.DragDropService.dragData, event)
 
 					if (!html)
 						return

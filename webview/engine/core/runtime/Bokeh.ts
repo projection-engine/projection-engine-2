@@ -5,12 +5,13 @@ import CameraAPI from "../lib/utils/CameraAPI"
 import MetricsController from "../lib/utils/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import GPUUtil from "../utils/GPUUtil";
+import Engine from "../Engine";
 
 
 export default class Bokeh {
 	static execute() {
 
-		if (!CameraAPI.DOF)
+		if (!Engine.CameraAPI.DOF)
 			return
 
 		StaticShaders.bokeh.bind()

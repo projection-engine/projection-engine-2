@@ -1,19 +1,15 @@
 <script>
-    import ViewportActionUtil from "../../../services/ViewportActionUtil"
     import Engine from "../../../../../engine/core/Engine"
     import CameraGizmo from "./CameraGizmo.svelte"
     import Dropdown from "../../../../shared/components/dropdown/Dropdown.svelte"
     import ToolTip from "../../../../shared/components/tooltip/ToolTip.svelte"
     import Icon from "../../../../shared/components/icon/Icon.svelte"
-    import SettingsStore from "../../../../shared/stores/SettingsStore"
     import CameraTracker from "../../../../../engine/tools/utils/CameraTracker"
     import {onDestroy, onMount} from "svelte"
-    import EntityHierarchyService from "../../../services/engine/EntityHierarchyService"
-    import LocalizationEN from "../../../../../shared/enums/LocalizationEN"
+    import LocalizationEN from "../../../../../enums/LocalizationEN"
     import EmptyIcon from "../../../../shared/components/icon/EmptyIcon.svelte"
     import EditorUtil from "../../../util/EditorUtil"
-    import EngineStore from "../../../../shared/stores/EngineStore"
-    import ProjectionEngine from "../../../../../shared/ProjectionEngine";
+    import ProjectionEngine from "../../../../ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     let cameras = []
@@ -28,7 +24,7 @@
     		camera = data.camera
     	}, ["screenSpaceMovement", "camera"])
         ProjectionEngine.EngineStore.addListener(COMPONENT_ID, data => focusedCamera = data.focusedCamera, ["focusedCamera"])
-    	EntityHierarchyService.registerListener(COMPONENT_ID, () => {
+        ProjectionEngine.EntityHierarchyService.registerListener(COMPONENT_ID, () => {
     		// TODO - CONSUME FROM DYNAMIC LIST OF ENTITIES WITH COMPONENT AFTER ECS
     		cameras = Engine.entities.array.filter(entity => entity.cameraComponent != null)
     	})
@@ -37,7 +33,7 @@
     onDestroy(() => {
         ProjectionEngine.SettingsStore.removeListener(COMPONENT_ID)
         ProjectionEngine.EngineStore.removeListener(COMPONENT_ID)
-    	EntityHierarchyService.removeListener(COMPONENT_ID)
+        ProjectionEngine.EntityHierarchyService.removeListener(COMPONENT_ID)
     })
     
     const toggleProjection = () => {
@@ -90,7 +86,7 @@
 
     <button data-sveltebuttondefault="-" disabled={focusedCamera} class="button viewport"
             style="max-width: 25px; justify-content: center"
-            on:click={() => ViewportActionUtil.focus()}>
+            on:click={() => ProjectionEngine.ViewportActionUtil.focus()}>
         <ToolTip content={LocalizationEN.FOCUS}/>
         <Icon styles="font-size: 1rem">my_location</Icon>
     </button>

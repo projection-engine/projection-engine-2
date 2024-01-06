@@ -4,9 +4,10 @@
     import PrimitiveProcessor from "../../../../../../engine/core/lib/math/PrimitiveProcessor"
     import FileSystemUtil from "../../../../../shared/FileSystemUtil"
     import GPUAPI from "../../../../../../engine/core/lib/rendering/GPUAPI"
-    import ToastNotificationSystem from "../../../../../shared/components/alert/ToastNotificationSystem"
-    import LocalizationEN from "../../../../../../shared/enums/LocalizationEN"
+    import ToasterService from "../../../../../services/ToasterService"
+    import LocalizationEN from "../../../../../../enums/LocalizationEN"
     import EditorFSUtil from "../../../../util/EditorFSUtil"
+    import ProjectionEngine from "../../../../../ProjectionEngine";
 
     export let item
     let wasUpdated = false
@@ -25,7 +26,7 @@
     		GPUAPI.destroyMesh(item.registryID)
     		GPUAPI.allocateMesh(item.registryID, data)
     	}
-    	ToastNotificationSystem.getInstance().log(LocalizationEN.UPDATING_ASSET)
+        ProjectionEngine.ToastNotificationSystem.log(LocalizationEN.UPDATING_ASSET)
     }
 </script>
 

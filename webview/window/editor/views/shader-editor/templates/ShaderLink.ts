@@ -1,11 +1,12 @@
 import type ShaderNode from "./ShaderNode"
 import type Canvas from "../libs/Canvas"
-import ToastNotificationSystem from "../../../../shared/components/alert/ToastNotificationSystem"
+import ToasterService from "../../../../services/ToasterService"
 
 import {Input} from "../static/Input"
 import {Output} from "../static/Output"
 import CanvasResources from "../libs/CanvasResources"
-import LocalizationEN from "../../../../../shared/enums/LocalizationEN";
+import LocalizationEN from "../../../../../enums/LocalizationEN";
+import ProjectionEngine from "../../../../ProjectionEngine";
 
 export default class ShaderLink {
 	targetRef: Input
@@ -57,7 +58,7 @@ export default class ShaderLink {
 					const newLink = new ShaderLink(node, sourceNode, targetIO, sourceIO)
 					canvasAPI.addLink(newLink)
 				} else if (targetIO)
-					ToastNotificationSystem.getInstance().error(LocalizationEN.INVALID_TYPE)
+					ProjectionEngine.ToastNotificationSystem.error(LocalizationEN.INVALID_TYPE)
 				break
 			}
 		}

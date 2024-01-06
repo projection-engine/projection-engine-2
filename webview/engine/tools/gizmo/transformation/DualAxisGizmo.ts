@@ -2,12 +2,11 @@ import AXIS from "../../static/AXIS"
 import StaticEditorMeshes from "../../utils/StaticEditorMeshes"
 import {vec3} from "gl-matrix"
 import GizmoUtil from "../util/GizmoUtil"
-import AbstractSingleton from "../../../../shared/AbstractSingleton"
 import IGizmo from "../IGizmo"
 import Mesh from "../../../core/instances/Mesh"
 import Entity from "../../../core/instances/Entity"
 
-export default class DualAxisGizmo extends AbstractSingleton implements IGizmo {
+export default class DualAxisGizmo  implements IGizmo {
 	mesh: Mesh
 	/**
      * XY gizmo
@@ -23,7 +22,6 @@ export default class DualAxisGizmo extends AbstractSingleton implements IGizmo {
 	zGizmo: Entity
 
 	constructor() {
-		super()
 		this.mesh = StaticEditorMeshes.dualAxisGizmo
 		this.xGizmo = DualAxisGizmo.#mapGizmoMesh("XY", 5)
 		this.zGizmo = DualAxisGizmo.#mapGizmoMesh("XZ", 6)

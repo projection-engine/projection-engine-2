@@ -1,5 +1,4 @@
 import DynamicMap from "../../../engine/core/resource-libs/DynamicMap"
-import AbstractSingleton from "../../../shared/AbstractSingleton"
 
 export default class AbstractStore {
     #data: MutableObject = {}

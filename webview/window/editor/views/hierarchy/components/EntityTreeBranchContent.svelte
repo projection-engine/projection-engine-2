@@ -1,17 +1,14 @@
 <script lang="ts">
     import dragDrop from "../../../../shared/components/drag-drop/drag-drop";
     import {onDestroy, onMount} from "svelte";
-    import EntityNamingService from "../../../services/engine/EntityNamingService";
     import ToolTip from "../../../../shared/components/tooltip/ToolTip.svelte";
     import Icon from "../../../../shared/components/icon/Icon.svelte";
     import Entity from "../../../../../engine/core/instances/Entity";
-    import ChangesTrackerStore from "../../../../shared/stores/ChangesTrackerStore";
-    import EntityUpdateService from "../../../services/engine/EntityUpdateService";
     import ModalInput from "../../../components/modal-input/ModalInput.svelte";
-    import LocalizationEN from "../../../../../shared/enums/LocalizationEN";
+    import LocalizationEN from "../../../../../enums/LocalizationEN";
     import HierarchyUtil from "../../../util/HierarchyUtil";
     import EntitySelectionStore from "../../../../shared/stores/EntitySelectionStore";
-    import ProjectionEngine from "../../../../../shared/ProjectionEngine";
+    import ProjectionEngine from "../../../../ProjectionEngine";
 
     export let entity: Entity
     export let lockedEntity: string
@@ -35,8 +32,8 @@
     $: {
         if (entityID !== entity.id) {
             if (entityID)
-                EntityUpdateService.removeListener(entityID, ID)
-            EntityUpdateService.addListener(entity.id, ID, () => {
+                ProjectionEngine.EntityUpdateService.removeListener(entityID, ID)
+            ProjectionEngine.EntityUpdateService.addListener(entity.id, ID, () => {
                 entityName = entity.name
                 components = HierarchyUtil.mapComponents(entity)
                 children = entity.children.array.length
@@ -50,7 +47,7 @@
     $: {
         if (!isOnEdit && entityName !== entity.name) {
             ProjectionEngine.ChangesTrackerStore.updateStore({changed: true})
-            EntityNamingService.renameEntity(entity.name, entity)
+            ProjectionEngine.EntityNamingService.renameEntity(entity.name, entity)
             entityName = entity.name
         }
     }
@@ -63,7 +60,7 @@
     })
     onDestroy(() => {
         draggable.onDestroy()
-        EntityUpdateService.removeListener(entityID, ID)
+        ProjectionEngine.EntityUpdateService.removeListener(entityID, ID)
     })
 
     $: isLocked = lockedEntity === entity.id

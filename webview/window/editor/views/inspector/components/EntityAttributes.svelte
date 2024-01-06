@@ -4,7 +4,7 @@
     import {onDestroy, onMount} from "svelte"
 
     import dragDrop from "../../../../shared/components/drag-drop/drag-drop"
-    import LocalizationEN from "../../../../../shared/enums/LocalizationEN"
+    import LocalizationEN from "../../../../../enums/LocalizationEN"
     import InspectorUtil from "../../../util/InspectorUtil"
     import INSPECTOR_TABS from "../static/INSPECTOR_TABS"
     import type Entity from "../../../../../engine/core/instances/Entity";

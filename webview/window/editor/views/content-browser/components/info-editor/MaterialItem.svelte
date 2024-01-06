@@ -6,9 +6,10 @@
     import GPUAPI from "../../../../../../engine/core/lib/rendering/GPUAPI"
     import MaterialUniforms from "../../../../components/MaterialUniformsForm.svelte"
     import Icon from "../../../../../shared/components/icon/Icon.svelte"
-    import ToastNotificationSystem from "../../../../../shared/components/alert/ToastNotificationSystem"
-    import LocalizationEN from "../../../../../../shared/enums/LocalizationEN"
+    import ToasterService from "../../../../../services/ToasterService"
+    import LocalizationEN from "../../../../../../enums/LocalizationEN"
     import InspectorUtil from "../../../../util/InspectorUtil"
+    import ProjectionEngine from "../../../../../ProjectionEngine";
 
     export let data
     export let item
@@ -57,7 +58,7 @@
     		const instance = GPU.materials.get(item.registryID)
     		if (instance) {
     			await instance.updateUniformGroup(temp.response.uniformValues)
-    			ToastNotificationSystem.getInstance().success(LocalizationEN.MATERIAL_UPDATED)
+                ProjectionEngine.ToastNotificationSystem.success(LocalizationEN.MATERIAL_UPDATED)
 
     			GPUAPI.cleanUpTextures()
     		}

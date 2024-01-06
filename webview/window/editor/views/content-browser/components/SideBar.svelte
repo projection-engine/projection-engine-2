@@ -4,7 +4,7 @@
     import ContentBrowserHierarchyStore from "../../../../shared/stores/ContentBrowserHierarchyStore"
     import {onDestroy, onMount} from "svelte"
     import FileSystemUtil from "../../../../shared/FileSystemUtil"
-    import ProjectionEngine from "../../../../../shared/ProjectionEngine";
+    import ProjectionEngine from "../../../../ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
 

@@ -3,9 +3,9 @@
     import SETTINGS from "../../editor/static/SETTINGS"
     import SettingsStore from "../../shared/stores/SettingsStore"
     import PropertyHeader from "../../shared/components/PropertyHeader.svelte"
-    import LocalizationEN from "../../../shared/enums/LocalizationEN"
+    import LocalizationEN from "../../../enums/LocalizationEN"
     import {onDestroy, onMount} from "svelte"
-    import ProjectionEngine from "../../../shared/ProjectionEngine";
+    import ProjectionEngine from "../../ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
 

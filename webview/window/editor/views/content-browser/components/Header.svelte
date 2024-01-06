@@ -6,15 +6,16 @@
     import ToolTip from "../../../../shared/components/tooltip/ToolTip.svelte"
     import Dropdown from "../../../../shared/components/dropdown/Dropdown.svelte"
     import Input from "../../../../shared/components/input/Input.svelte"
-    import ToastNotificationSystem from "../../../../shared/components/alert/ToastNotificationSystem"
+    import ToasterService from "../../../../services/ToasterService"
     import SortingOptions from "./SortingOptions.svelte"
-    import LocalizationEN from "../../../../../shared/enums/LocalizationEN"
-    import FileTypes from "../../../../../shared/enums/FileTypes"
+    import LocalizationEN from "../../../../../enums/LocalizationEN"
+    import FileTypes from "../../../../../enums/FileTypes"
     import EmptyIcon from "../../../../shared/components/icon/EmptyIcon.svelte"
     import ContentBrowserUtil from "../../../util/ContentBrowserUtil"
     import EditorUtil from "../../../util/EditorUtil"
     import FileSystemUtil from "../../../../shared/FileSystemUtil"
     import NavigationHistory from "../libs/NavigationHistory";
+    import ProjectionEngine from "../../../../ProjectionEngine";
 
     export let currentDirectory: { id: string }
     export let fileType: string
@@ -63,7 +64,7 @@
         <button data-sveltebuttondefault="-"
                 data-svelteview-header-button="-"
                 on:click={() => {
-                    ToastNotificationSystem.getInstance().warn(LocalizationEN.REFRESHING)
+                    ProjectionEngine.ToastNotificationSystem.warn(LocalizationEN.REFRESHING)
                     ContentBrowserUtil.refreshFiles().catch(console.error)
                 }}
         >

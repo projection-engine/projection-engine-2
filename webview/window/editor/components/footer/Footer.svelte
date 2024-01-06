@@ -6,10 +6,10 @@
     import ToolTip from "../../../shared/components/tooltip/ToolTip.svelte"
     import Engine from "../../../../engine/core/Engine"
     import {onDestroy, onMount} from "svelte"
-    import EntityUpdateService from "../../services/engine/EntityUpdateService"
-    import LocalizationEN from "../../../../shared/enums/LocalizationEN"
+    import EntityUpdateService from "../../../services/EntityUpdateService"
+    import LocalizationEN from "../../../../enums/LocalizationEN"
     import SettingsStore from "../../../shared/stores/SettingsStore"
-    import ProjectionEngine from "../../../../shared/ProjectionEngine";
+    import ProjectionEngine from "../../../ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     let settings = {}
@@ -22,11 +22,11 @@
     	entityID = Engine.loadedLevel?.id
 
     	if (entityID)
-    		EntityUpdateService.removeListener(entityID, COMPONENT_ID)
+            ProjectionEngine.EntityUpdateService.removeListener(entityID, COMPONENT_ID)
 
     	if (!loadedLevel)
     		return
-    	EntityUpdateService.addListener(entityID, COMPONENT_ID, () => {
+        ProjectionEngine.EntityUpdateService.addListener(entityID, COMPONENT_ID, () => {
     		loadedLevel = Engine.loadedLevel.name
     	})
     }

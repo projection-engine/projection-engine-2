@@ -7,13 +7,13 @@
     import SettingsStore from "../../../../shared/stores/SettingsStore";
     import ViewTabItem from "../../../static/ViewTabItem";
     import Dialog from "../../../../shared/components/dialog/Dialog.svelte";
-    import LocalizationEN from "../../../../../shared/enums/LocalizationEN";
+    import LocalizationEN from "../../../../../enums/LocalizationEN";
     import ViewsUtil from "../../../util/ViewsUtil";
     import TabsStoreUtil from "../../../util/TabsStoreUtil";
     import View from "./View.svelte";
     import ViewTemplates from "../static/ViewTemplates";
     import ViewStateStore from "../../../../shared/stores/ViewStateStore";
-    import ProjectionEngine from "../../../../../shared/ProjectionEngine";
+    import ProjectionEngine from "../../../../ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
 

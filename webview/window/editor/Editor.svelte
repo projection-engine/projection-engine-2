@@ -6,10 +6,10 @@
     import ViewsContainer from "./components/view/SideView.svelte"
     import SettingsStore from "../shared/stores/SettingsStore"
     import HotKeysController from "../shared/lib/HotKeysController"
-    import ToastNotificationSystem from "../shared/components/alert/ToastNotificationSystem"
+    import ToasterService from "../services/ToasterService"
     import EditorUtil from "./util/EditorUtil"
     import MenuBar from "../shared/components/frame/MenuBar.svelte";
-    import ProjectionEngine from "../../shared/ProjectionEngine";
+    import ProjectionEngine from "../ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     let view
@@ -24,9 +24,6 @@
                 cameraGizmoSize = data.cameraGizmoSize
             }, ["views", "currentView", "cameraGizmoSize"])
         ProjectionEngine.EngineStore.addListener(COMPONENT_ID, data => HotKeysController.blockActions = data.executingAnimation, ["executingAnimation"])
-
-        ToastNotificationSystem.get()
-
     })
 
     onDestroy(() => {

@@ -1,6 +1,5 @@
 import Engine from "../../../engine/core/Engine"
-import ContentBrowserStore from "../../shared/stores/ContentBrowserStore"
-import ProjectionEngine from "../../../shared/ProjectionEngine";
+import ProjectionEngine from "../../ProjectionEngine";
 
 export default class SelectorUtil{
 	static getIcon(type){

@@ -1,5 +1,5 @@
 import AbstractStore from "./AbstractStore"
-import ProjectionEngine from "../../../shared/ProjectionEngine";
+import ProjectionEngine from "../../ProjectionEngine";
 
 export default class ContentBrowserStore extends AbstractStore{
 	constructor() {

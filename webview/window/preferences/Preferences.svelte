@@ -1,5 +1,4 @@
 <script>
-    import {onMount} from "svelte"
     import ResizableBar from "../shared/components/resizable/ResizableBar.svelte"
     import ContentWrapper from "./components/content/ContentWrapper.svelte"
     import Shortcuts from "./components/Shortcuts.svelte"

@@ -1,7 +1,4 @@
-import ChangesTrackerStore from "../../shared/stores/ChangesTrackerStore"
-import SettingsStore from "../../shared/stores/SettingsStore"
-import TabsStore from "../../shared/stores/TabsStore"
-import ProjectionEngine from "../../../shared/ProjectionEngine";
+import ProjectionEngine from "../../ProjectionEngine";
 
 export default class TabsStoreUtil {
 	static updateByAttributes(direction:"left"|"right"|"top"|"bottom"|"viewport", group:number, value:number) {

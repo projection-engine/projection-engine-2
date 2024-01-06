@@ -7,13 +7,11 @@ import PickingAPI from "../../../engine/core/lib/utils/PickingAPI"
 import QueryAPI from "../../../engine/core/lib/utils/QueryAPI"
 import VisibilityRenderer from "../../../engine/core/runtime/VisibilityRenderer"
 import EngineTools from "../../../engine/tools/EngineTools"
-import EngineStore from "../../shared/stores/EngineStore"
-import SettingsStore from "../../shared/stores/SettingsStore"
-import LocalizationEN from "../../../shared/enums/LocalizationEN"
+import LocalizationEN from "../../../enums/LocalizationEN"
 import VIEWS from "../components/view/static/VIEWS"
 import StaticFBO from "../../../engine/core/lib/StaticFBO";
 import EntitySelectionStore from "../../shared/stores/EntitySelectionStore";
-import ProjectionEngine from "../../../shared/ProjectionEngine";
+import ProjectionEngine from "../../ProjectionEngine";
 
 export default class ViewportUtil {
     static updateViewport(currentView: ViewTabItem) {

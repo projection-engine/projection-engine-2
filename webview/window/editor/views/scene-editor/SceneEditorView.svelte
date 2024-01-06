@@ -2,26 +2,22 @@
     import {onDestroy, onMount} from "svelte"
     import RENDER_TARGET from "../../static/RENDER_TARGET"
     import SelectBox from "../../../shared/components/select-box/SelectBox.svelte"
-    import GIZMOS from "../../../../shared/enums/Gizmos.ts"
+    import GIZMOS from "../../../../enums/Gizmos.ts"
     import GizmoSystem from "../../../../engine/tools/gizmo/GizmoSystem"
     import dragDrop from "../../../shared/components/drag-drop/drag-drop"
     import CameraSettings from "./components/CameraSettings.svelte"
     import SceneOptions from "./components/SceneOptions.svelte"
-    import EngineStore from "../../../shared/stores/EngineStore"
-    import SettingsStore from "../../../shared/stores/SettingsStore"
     import ViewHeader from "../../components/view/components/ViewHeader.svelte"
     import EntityInformation from "./components/EntityInformation.svelte"
     import Engine from "../../../../engine/core/Engine"
-    import ViewportInteractionListener from "./lib/ViewportInteractionListener"
     import GizmoSettings from "./components/GizmoSettings.svelte"
     import SHADING_MODELS from "../../../../engine/core/static/SHADING_MODELS"
     import Icon from "../../../shared/components/icon/Icon.svelte"
-    import ContextMenuService from "../../../shared/lib/context-menu/ContextMenuService"
     import GPU from "../../../../engine/core/GPU"
-    import LocalizationEN from "../../../../shared/enums/LocalizationEN"
+    import LocalizationEN from "../../../../enums/LocalizationEN"
     import SceneEditorUtil from "../../util/SceneEditorUtil"
-    import ViewStateStore from "../../../shared/stores/ViewStateStore";
-    import ProjectionEngine from "../../../../shared/ProjectionEngine";
+    import ProjectionEngine from "../../../ProjectionEngine";
+    import ViewportInteractionService from "./lib/ViewportInteractionService";
 
     const COMPONENT_ID = crypto.randomUUID()
     const draggable = dragDrop(false)
@@ -50,9 +46,9 @@
         ProjectionEngine.SettingsStore.removeListener(COMPONENT_ID)
         ProjectionEngine.EngineStore.removeListener(COMPONENT_ID)
     	GizmoSystem.onStop = GizmoSystem.onStart = undefined
-    	ContextMenuService.getInstance().destroy(RENDER_TARGET)
+        ProjectionEngine.ContextMenuService.destroy(RENDER_TARGET)
     	draggable.onDestroy()
-    	ViewportInteractionListener.destroy()
+    	ViewportInteractionService.destroy()
     })
 </script>
 

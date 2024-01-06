@@ -3,6 +3,7 @@ import CameraAPI from "./CameraAPI"
 import Entity from "../../instances/Entity"
 import QueryAPI from "./QueryAPI"
 import entityWorker from "../../workers/entity-worker";
+import Engine from "../../Engine";
 
 export default class EntityWorkerAPI {
     static hasChangeBuffer = new Uint8Array(new ArrayBuffer(1))
@@ -24,7 +25,7 @@ export default class EntityWorkerAPI {
 
         entityWorker({
             type: WORKER_MESSAGES.INITIALIZE,
-            payload: [EntityWorkerAPI.hasChangeBuffer, CameraAPI.notificationBuffers, CameraAPI.position, 0, 1]
+            payload: [EntityWorkerAPI.hasChangeBuffer, Engine.CameraAPI.notificationBuffers, Engine.CameraAPI.position, 0, 1]
         })
     }
 
