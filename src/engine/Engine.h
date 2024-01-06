@@ -1,7 +1,6 @@
 #ifndef PROJECTION_ENGINE_H
 #define PROJECTION_ENGINE_H
 
-#include "entt/entity/registry.hpp"
 #include "world/WorldSystem.h"
 #include "resource/ResourcesSystem.h"
 #include "runtime/RuntimeSystem.h"
@@ -21,6 +20,8 @@ namespace PEngine {
     public:
 
         explicit Engine(IIOController *ioController, IFSController *fsController);
+
+        explicit Engine() = default;
 
         WorldSystem &getWorld();
 

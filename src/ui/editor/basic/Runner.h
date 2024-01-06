@@ -2,7 +2,6 @@
 #define PROJECTION_RUNNER_H
 
 #include "../../shared/runners/IRunner.h"
-#include "../../../engine/Engine.h"
 #include "IOController.h"
 #include "FSController.h"
 
@@ -12,14 +11,15 @@
 #define BACKGROUND_A 1
 
 namespace PEngine {
-    class Document;
+    class Engine;
 
     class Runner : public IRunner {
     private:
-        Engine engine = Engine(new IOController, new FSController);
+        Engine *engine = nullptr;
+
+        void initiate();
 
     protected:
-        void update() override;
 
         void startNewFrame() override;
 
@@ -31,13 +31,14 @@ namespace PEngine {
 
         void updateViewports() override;
 
+
     public:
 
-        explicit Runner(GLFWwindow *window) : IRunner(window) {}
+        explicit Runner() {
+            initiate();
+        }
 
-        ~Runner() override;
-
-        const Engine &getEngine() const;
+        void destroyContext() override;
     };
 
 }

@@ -26,16 +26,27 @@ set(COMMON_LIBRARIES
         nlohmann_json::nlohmann_json
 )
 
-set(FILE_PATHS
+set(MAIN_PATHS
+        src/ui/shared/AbstractWindow.cpp
+        src/ui/shared/AbstractWindow.h
+        src/ui/editor/Editor.cpp
+        src/ui/editor/Editor.h
+        src/ui/editor/basic/Runner.cpp
+        src/ui/editor/basic/Runner.h
+        src/ui/shared/webview/WebViewPayload.cpp
         src/ui/shared/webview/WebViewPayload.h
-        src/ui/projects/Projects.cpp
-        src/ui/projects/Projects.h
-        src/ui/WindowSystem.cpp
-        src/ui/WindowSystem.h
-
-        src/engine/resource/dto/FBOTextureDTO.h
+        src/ui/WindowRepository.cpp
+        src/ui/WindowRepository.h
         src/ui/shared/webview/WebViewWindow.cpp
         src/ui/shared/webview/WebViewWindow.h
+)
+set(FILE_PATHS
+        src/util/JSON.h
+
+        src/services/FileSystemService.cpp
+        src/services/FileSystemService.h
+
+        src/engine/resource/dto/FBOTextureDTO.h
         src/engine/resource/static/direct_shadows.vs
         src/engine/resource/static/direct_shadows.fs
 
@@ -47,10 +58,6 @@ set(FILE_PATHS
 
         src/engine/external/IIOController.h
         src/engine/external/IFSController.h
-        src/ui/editor/basic/IOController.cpp
-        src/ui/editor/basic/IOController.h
-        src/ui/editor/basic/FSController.cpp
-        src/ui/editor/basic/FSController.h
         src/engine/external/IIOController.cpp
 
         src/engine/resource/core/IResource.h
@@ -84,30 +91,19 @@ set(FILE_PATHS
         src/engine/resource/ResourcesSystem.h
         src/engine/world/IEntity.cpp
         src/engine/world/IEntity.h
-        src/util/FileSystemUtil.h
-        src/ui/shared/store/IStore.h
-        src/ui/shared/elements/EInlineBlock.cpp
-        src/ui/shared/elements/EInlineBlock.h
-        src/ui/shared/elements/ETreeNode.cpp
-        src/ui/shared/elements/ETreeNode.h
-        src/ui/shared/elements/AbstractSimpleElement.cpp
-        src/ui/shared/elements/AbstractSimpleElement.h
+        src/util/FS.h
+        src/util/FS.cpp
         src/util/event/TypedEventPayload.h
         src/util/structures/List.h
         src/util/structures/Map.cpp
         src/util/structures/Map.h
-        src/ui/shared/elements/IElement.h
-        src/ui/shared/elements/ESection.cpp
-        src/ui/shared/elements/ESection.h
-        src/ui/shared/elements/EText.cpp
-        src/ui/shared/elements/EText.h
-        src/ui/shared/document/Document.cpp
-        src/ui/shared/document/Document.h
-        src/ui/shared/IWindow.cpp
-        src/ui/shared/IWindow.h
-        src/ui/shared/views/IView.cpp
-        src/ui/shared/views/IView.h
-        src/ui/shared/elements/IElement.cpp
+
+        src/ui/shared/store/IStore.h
+        src/ui/editor/basic/IOController.cpp
+        src/ui/editor/basic/IOController.h
+        src/ui/editor/basic/FSController.cpp
+        src/ui/editor/basic/FSController.h
+
         src/util/debug/ILoggable.cpp
         src/util/debug/ILoggable.h
         src/util/debug/Timer.cpp
@@ -118,33 +114,8 @@ set(FILE_PATHS
         src/engine/Engine.cpp
         src/engine/Engine.h
         src/util/UUID.h
-        src/ui/editor/Editor.cpp
-        src/ui/editor/Editor.h
-        src/ui/editor/basic/Runner.cpp
-        src/ui/editor/basic/Runner.h
-        src/ui/shared/document/ElementController.cpp
-        src/ui/shared/document/ElementController.h
-        src/ui/shared/document/ElementController.h
-        src/ui/shared/document/ViewController.cpp
-        src/ui/shared/document/ViewController.h
         src/ui/shared/runners/imgui_demo.cpp
-        src/ui/shared/elements/ETree.cpp
-        src/ui/shared/elements/ETree.h
-        src/ui/shared/elements/EButton.cpp
-        src/ui/shared/elements/EButton.h
-        src/ui/shared/elements/EMenuItem.cpp
-        src/ui/shared/elements/EMenuItem.h
-        src/ui/shared/elements/EMenu.cpp
-        src/ui/shared/elements/EMenu.h
-        src/ui/shared/elements/EMenuBar.cpp
-        src/ui/shared/elements/EMenuBar.h
-        src/ui/shared/elements/AbstractTitledElement.cpp
-        src/ui/shared/elements/AbstractTitledElement.h
         src/util/StringUtils.h
-        src/ui/shared/elements/DynamicElement.cpp
-        src/ui/shared/elements/DynamicElement.h
-        src/ui/shared/elements/EIcon.cpp
-        src/ui/shared/elements/EIcon.h
         src/util/event/EventController.cpp
         src/util/event/EventController.h
         src/util/event/IListener.cpp

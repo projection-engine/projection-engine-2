@@ -2,6 +2,7 @@
 #define PROJECTION_WEBVIEWWINDOW_H
 
 #include "WebView2.h"
+#include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include <wrl.h>
 #include "string"
@@ -13,10 +14,9 @@
 #define ENV_HANDLER ICoreWebView2CreateCoreWebView2EnvironmentCompletedHandler
 #define MSG_RECEIVED_ARGS ICoreWebView2WebMessageReceivedEventArgs
 #define MSG_RECEIVED_HANDLER ICoreWebView2WebMessageReceivedEventHandler
-#define BASE ICoreWebView2
 
 namespace PEngine {
-    class IWindow;
+    class AbstractWindow;
 
     class WebViewPayload;
 
@@ -27,26 +27,36 @@ namespace PEngine {
     class WebViewWindow : public ILoggable {
     private:
         std::string pathToFile;
-        HWND nativeWindow;
+        bool ready = false;
         EventRegistrationToken token;
         wil::com_ptr<ICoreWebView2Controller> webviewController = nullptr;
         wil::com_ptr<ICoreWebView2> webview = nullptr;
-        IWindow *window;
+        AbstractWindow *window;
         std::unordered_map<std::string, ListenerDTO *> listeners;
 
         void prepareView(ICoreWebView2Controller *controller);
 
+        HWND__ *getNativeWindow() const;
+
+        void loadHtml();
+
     public:
 
-        explicit WebViewWindow(const std::string &pathToFile, IWindow *window);
-
-        HWND__ *getNativeWindow() const;
+        explicit WebViewWindow();
 
         void addMessageListener(const std::string &listenerId, void (*action)(WebViewPayload &));
 
-        void postMessage(std::string message);
-
         HRESULT onMessage(ICoreWebView2WebMessageReceivedEventArgs *args);
+
+        wil::com_ptr<ICoreWebView2> getWebView();
+
+        void postMessage(const std::string &message, const std::string &id);
+
+        void setHTMLFile(const std::string &path);
+
+        void setWindow(AbstractWindow *window);
+
+        void resize();
     };
 
 }

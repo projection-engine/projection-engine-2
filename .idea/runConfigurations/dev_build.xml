@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="dev-build" type="js.build_tools.npm" nameIsGenerated="true">
-    <package-json value="$PROJECT_DIR$/src/ui/webview/package.json" />
+    <package-json value="$PROJECT_DIR$/webview/package.json" />
     <command value="run" />
     <scripts>
       <script value="dev-build" />

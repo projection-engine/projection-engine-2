@@ -1,6 +1,4 @@
 #include "Tester.h"
-#include "catch2/catch_test_macros.hpp"
-
 #include <utility>
 
 Tester::Tester(std::string n) {

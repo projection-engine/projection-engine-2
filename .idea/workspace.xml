@@ -19,25 +19,635 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-3] Project window&#10;- Improving event system structure">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-6] Project window&#10;- Finishing rework of window system">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/dev_build.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/dev_build.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/editor/EditorWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/editor/EditorWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/IWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/IWindow.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/IWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/IWindow.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/document/Document.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/document/Document.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/document/Document.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/document/Document.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/IElement.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/elements/IElement.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/IElement.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/elements/IElement.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/WindowRepository.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/WindowRepository.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/WindowRepository.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/WindowRepository.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/editor/basic/Runner.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/basic/Runner.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/editor/basic/Runner.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/basic/Runner.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/projects/Projects.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/projects/Projects.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/projects/ProjectsService.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/projects/ProjectsService.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/document/Document.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/document/Document.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/document/ElementController.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/document/ElementController.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/document/ViewController.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/document/ViewController.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/AbstractSimpleElement.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/AbstractSimpleElement.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/AbstractTitledElement.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/AbstractTitledElement.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/DynamicElement.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/DynamicElement.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/EButton.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/EButton.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/EIcon.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/EIcon.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/EInlineBlock.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/EInlineBlock.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/EMenu.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/EMenu.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/EMenuBar.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/EMenuBar.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/EMenuItem.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/EMenuItem.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/ESection.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/ESection.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/EText.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/EText.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/ETree.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/ETree.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/ETreeNode.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/ETreeNode.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/IElement.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/elements/IElement.h" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/shared/runners/IRunner.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/runners/IRunner.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/runners/Runner.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/basic/Runner.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/runners/Runner.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/basic/Runner.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/runners/imgui_demo.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/runners/imgui_demo.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/components/footer/Footer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/webview/window/editor/components/footer/Footer.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/Definitions.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Definitions.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/views/IView.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/views/IView.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewPayload.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewPayload.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewPayload.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewPayload.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/webview/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/webview/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/Engine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/Engine.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/EngineState.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/EngineState.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/GPU.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/GPU.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/Renderer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/Renderer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/instances/Entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/Entity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/instances/Framebuffer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/Framebuffer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/instances/InstanceBufferController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/InstanceBufferController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/instances/LightProbe.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/LightProbe.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/instances/Material.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/Material.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/instances/Mesh.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/Mesh.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/instances/Shader.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/Shader.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/instances/ShadowProbe.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/ShadowProbe.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/instances/Texture.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/Texture.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/instances/UBO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/UBO.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/instances/VertexBuffer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/VertexBuffer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/instances/components/AtmosphereComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/AtmosphereComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/instances/components/CameraComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/CameraComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/instances/components/Component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/Component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/instances/components/ComponentResources.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/ComponentResources.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/instances/components/CullingComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/CullingComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/instances/components/DecalComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/DecalComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/instances/components/LightComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/LightComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/instances/components/LightProbeComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/LightProbeComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/instances/components/MeshComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/MeshComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/instances/components/Movable.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/Movable.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/instances/components/PhysicsColliderComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/PhysicsColliderComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/instances/components/RigidBodyComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/RigidBodyComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/instances/components/SpriteComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/SpriteComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/instances/components/UIComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/UIComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/Ammo.js" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/Ammo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/CameraNotificationDecoder.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/CameraNotificationDecoder.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/EngineResources.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/EngineResources.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/MaterialResourceMapper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/MaterialResourceMapper.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/MeshResourceMapper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/MeshResourceMapper.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/ResourceMapper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/ResourceMapper.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/StaticFBO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/StaticFBO.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/StaticMeshes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/StaticMeshes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/StaticShaders.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/StaticShaders.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/StaticUBOs.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/StaticUBOs.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/math/ConversionAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/math/ConversionAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/math/ImageProcessor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/math/ImageProcessor.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/math/PrimitiveProcessor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/math/PrimitiveProcessor.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/math/TerrainGenerator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/math/TerrainGenerator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/rendering/CubeMapAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/rendering/CubeMapAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/rendering/GPUAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/rendering/GPUAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/rendering/LineAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/rendering/LineAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/rendering/MaterialAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/rendering/MaterialAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/rendering/PhysicsAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/rendering/PhysicsAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/rendering/UIAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/rendering/UIAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/utils/ArrayBufferAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/utils/ArrayBufferAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/utils/CameraAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/utils/CameraAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/utils/ConsoleAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/utils/ConsoleAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/utils/EntityAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/utils/EntityAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/utils/EntityWorkerAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/utils/EntityWorkerAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/utils/FileSystemAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/utils/FileSystemAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/utils/InputEventsAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/utils/InputEventsAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/utils/LightsAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/utils/LightsAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/utils/MetricsController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/utils/MetricsController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/utils/PickingAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/utils/PickingAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/utils/QueryAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/utils/QueryAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/utils/ScriptsAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/utils/ScriptsAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/lib/utils/parse-console-message.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/utils/parse-console-message.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/resource-libs/CameraEffects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/resource-libs/CameraEffects.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/resource-libs/CameraResources.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/resource-libs/CameraResources.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/resource-libs/DynamicMap.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/resource-libs/DynamicMap.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/resource-libs/ResourceEntityMapper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/resource-libs/ResourceEntityMapper.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/resource-libs/UberMaterialAttributeGroup.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/resource-libs/UberMaterialAttributeGroup.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/resource-libs/UberShader.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/resource-libs/UberShader.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/runtime/Bloom.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/Bloom.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/runtime/Bokeh.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/Bokeh.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/runtime/DirectionalShadows.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/DirectionalShadows.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/runtime/FrameComposition.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/FrameComposition.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/runtime/LensPostProcessing.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/LensPostProcessing.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/runtime/MotionBlur.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/MotionBlur.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/runtime/OmnidirectionalShadows.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/OmnidirectionalShadows.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/runtime/Physics.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/Physics.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/runtime/ResourceManager.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/ResourceManager.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/runtime/SSAO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/SSAO.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/runtime/SSGI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/SSGI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/runtime/SceneComposition.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/SceneComposition.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/runtime/TransformationPass.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/TransformationPass.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/runtime/VisibilityRenderer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/VisibilityRenderer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/runtime/loop-meshes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/loop-meshes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/runtime/renderers/AtmosphereRenderer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/renderers/AtmosphereRenderer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/runtime/renderers/DecalRenderer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/renderers/DecalRenderer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/runtime/renderers/MeshRenderer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/renderers/MeshRenderer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/runtime/renderers/SceneRenderer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/renderers/SceneRenderer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/runtime/renderers/SpriteRenderer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/renderers/SpriteRenderer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/forward-rendering/ATMOSPHERE.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/forward-rendering/ATMOSPHERE.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/forward-rendering/CUBEMAP.vert" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/forward-rendering/CUBEMAP.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/forward-rendering/DIRECTIONAL_SHADOWS.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/forward-rendering/DIRECTIONAL_SHADOWS.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/forward-rendering/OMNIDIRECTIONAL_SHADOWS.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/forward-rendering/OMNIDIRECTIONAL_SHADOWS.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/forward-rendering/SHADOWS.vert" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/forward-rendering/SHADOWS.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/forward-rendering/SPRITE.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/forward-rendering/SPRITE.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/forward-rendering/SPRITE.vert" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/forward-rendering/SPRITE.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/forward-rendering/V_BUFFER.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/forward-rendering/V_BUFFER.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/forward-rendering/V_BUFFER.vert" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/forward-rendering/V_BUFFER.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/functions/ACES.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/functions/ACES.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/functions/PERLIN_NOISE.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/functions/PERLIN_NOISE.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/functions/POST_PROCESSING_UNIFORMS.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/functions/POST_PROCESSING_UNIFORMS.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/functions/RAY_MARCHER.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/functions/RAY_MARCHER.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/functions/SATURATE.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/functions/SATURATE.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/functions/SCENE_DEPTH_UTILS.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/functions/SCENE_DEPTH_UTILS.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/functions/STRONG_BLUR.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/functions/STRONG_BLUR.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/post-processing/BILATERAL_BLUR.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/BILATERAL_BLUR.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/post-processing/BILINEAR_DOWNSCALE.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/BILINEAR_DOWNSCALE.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/post-processing/BOKEH.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/BOKEH.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/post-processing/BOX-BLUR.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/BOX-BLUR.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/post-processing/BRDF_GEN.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/BRDF_GEN.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/post-processing/BRIGHTNESS_FILTER.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/BRIGHTNESS_FILTER.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/post-processing/FRAME_COMPOSITION.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/FRAME_COMPOSITION.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/post-processing/GAUSSIAN.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/GAUSSIAN.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/post-processing/IRRADIANCE_MAP.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/IRRADIANCE_MAP.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/post-processing/LENS_POST_PROCESSING.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/LENS_POST_PROCESSING.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/post-processing/MOTION_BLUR.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/MOTION_BLUR.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/post-processing/PREFILTERED_MAP.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/PREFILTERED_MAP.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/post-processing/QUAD.vert" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/QUAD.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/post-processing/SSAO.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/SSAO.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/post-processing/SSGI.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/SSGI.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/post-processing/TO_SCREEN.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/TO_SCREEN.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/post-processing/UPSAMPLE_TENT.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/UPSAMPLE_TENT.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/uber-shader/ATTRIBUTES.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/uber-shader/ATTRIBUTES.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/uber-shader/PB_LIGHT_COMPUTATION.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/uber-shader/PB_LIGHT_COMPUTATION.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/uber-shader/UBER-MATERIAL-BASIS.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/uber-shader/UBER-MATERIAL-BASIS.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/uber-shader/UBER-MATERIAL-DEBUG.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/uber-shader/UBER-MATERIAL-DEBUG.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/uber-shader/UBER-MATERIAL.vert" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/uber-shader/UBER-MATERIAL.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/uber-shader/lights/BRDF_FUNCTIONS.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/uber-shader/lights/BRDF_FUNCTIONS.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/uber-shader/lights/COMPUTE_AREALIGHT.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/uber-shader/lights/COMPUTE_AREALIGHT.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/uber-shader/lights/COMPUTE_DIRECTIONAL_LIGHTS.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/uber-shader/lights/COMPUTE_DIRECTIONAL_LIGHTS.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/uber-shader/lights/COMPUTE_POINT_LIGHTS.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/uber-shader/lights/COMPUTE_POINT_LIGHTS.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/uber-shader/lights/COMPUTE_SPOTLIGHT.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/uber-shader/lights/COMPUTE_SPOTLIGHT.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/shaders/uber-shader/lights/SSS.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/shaders/uber-shader/lights/SSS.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/ATMOSPHERE_TYPES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/ATMOSPHERE_TYPES.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/COLLISION_TYPES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/COLLISION_TYPES.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/COMPONENTS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/COMPONENTS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/CUBE_MAP_VIEWS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/CUBE_MAP_VIEWS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/CameraEffectsSerialization.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/CameraEffectsSerialization.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/CameraSerialization.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/CameraSerialization.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/DATA_TYPES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/DATA_TYPES.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/ELEMENT_ID.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/ELEMENT_ID.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/ENTITY_TYPED_ATTRIBUTES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/ENTITY_TYPED_ATTRIBUTES.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/ENVIRONMENT.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/ENVIRONMENT.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/EmbeddedMeshes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/EmbeddedMeshes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/GLSL_TYPES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/GLSL_TYPES.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/IMAGE_WORKER_ACTIONS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/IMAGE_WORKER_ACTIONS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/LIGHT_TYPES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/LIGHT_TYPES.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/MATERIAL_OUTPUT_FORMAT.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/MATERIAL_OUTPUT_FORMAT.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/MATERIAL_RENDERING_TYPES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/MATERIAL_RENDERING_TYPES.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/METRICS_FLAGS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/METRICS_FLAGS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/MaterialInformation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/MaterialInformation.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/MaterialUniform.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/MaterialUniform.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/MessageInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/MessageInterface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/PhysicTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/PhysicTypes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/SHADERS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/SHADERS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/SHADING_MODELS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/SHADING_MODELS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/TERRAIN_MATERIAL.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/TERRAIN_MATERIAL.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/TEXTURE_TEMPLATE.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/TEXTURE_TEMPLATE.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/TextureInUse.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/TextureInUse.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/TextureParams.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/TextureParams.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/WORKER_MESSAGES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/WORKER_MESSAGES.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/WorkerEntityTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/WorkerEntityTypes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/component-props/ATMOSPHERE_PROPS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/component-props/ATMOSPHERE_PROPS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/component-props/CAMERA_PROPS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/component-props/CAMERA_PROPS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/component-props/CULLING_COMPONENT_PROPS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/component-props/CULLING_COMPONENT_PROPS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/component-props/DECAL_PROPS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/component-props/DECAL_PROPS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/component-props/LIGHT_PROBE_PROPS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/component-props/LIGHT_PROBE_PROPS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/component-props/LIGHT_PROPS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/component-props/LIGHT_PROPS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/component-props/MESH_PROPS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/component-props/MESH_PROPS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/component-props/PHYSICS_COLLIDER_PROPS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/component-props/PHYSICS_COLLIDER_PROPS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/component-props/RIGID_BODY_PROPS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/component-props/RIGID_BODY_PROPS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/component-props/SPRITE_PROPS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/component-props/SPRITE_PROPS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/component-props/TERRAIN_PROPS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/component-props/TERRAIN_PROPS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/templates/COMPONENT_TEMPLATE.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/templates/COMPONENT_TEMPLATE.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/templates/TERRAIN_MATERIAL_UNIFORMS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/templates/TERRAIN_MATERIAL_UNIFORMS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/templates/TERRAIN_TEMPLATE.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/templates/TERRAIN_TEMPLATE.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/templates/UI_TEMPLATE.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/templates/UI_TEMPLATE.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/texture/TEXTURE_FILTERING.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/texture/TEXTURE_FILTERING.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/texture/TEXTURE_FORMATS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/texture/TEXTURE_FORMATS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/static/texture/TEXTURE_WRAPPING.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/texture/TEXTURE_WRAPPING.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/utils/GPUUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/utils/GPUUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/utils/apply-shader-methods.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/utils/apply-shader-methods.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/utils/clone-class.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/utils/clone-class.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/utils/copy-with-offset.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/utils/copy-with-offset.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/utils/get-component-instance.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/utils/get-component-instance.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/utils/get-glsl-sizes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/utils/get-glsl-sizes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/utils/get-image-data.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/utils/get-image-data.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/utils/get-probe-lookat.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/utils/get-probe-lookat.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/utils/get-probe-rotation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/utils/get-probe-rotation.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/utils/get-terrain-material.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/utils/get-terrain-material.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/utils/serialize-structure.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/utils/serialize-structure.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/utils/trim-string.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/utils/trim-string.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/workers/camera-worker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/workers/camera-worker.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/workers/entity-worker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/workers/entity-worker.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/workers/image-worker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/workers/image-worker.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/core/workers/terrain-worker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/workers/terrain-worker.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/EngineTools.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/EngineTools.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/EngineToolsState.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/EngineToolsState.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/gizmo/GizmoLineSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/gizmo/GizmoLineSystem.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/gizmo/GizmoSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/gizmo/GizmoSystem.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/gizmo/IGizmo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/gizmo/IGizmo.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/gizmo/shader/GIZMO.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/gizmo/shader/GIZMO.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/gizmo/shader/GIZMO.vert" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/gizmo/shader/GIZMO.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/gizmo/shader/GIZMO_TO_DEPTH.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/gizmo/shader/GIZMO_TO_DEPTH.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/gizmo/shader/GIZMO_TO_DEPTH.vert" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/gizmo/shader/GIZMO_TO_DEPTH.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/gizmo/shader/ROTATION_GIZMO.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/gizmo/shader/ROTATION_GIZMO.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/gizmo/shader/ROTATION_GIZMO.vert" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/gizmo/shader/ROTATION_GIZMO.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/gizmo/transformation/AbstractXYZGizmo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/gizmo/transformation/AbstractXYZGizmo.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/gizmo/transformation/DualAxisGizmo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/gizmo/transformation/DualAxisGizmo.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/gizmo/transformation/RotationGizmo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/gizmo/transformation/RotationGizmo.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/gizmo/transformation/ScalingGizmo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/gizmo/transformation/ScalingGizmo.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/gizmo/transformation/ScreenSpaceGizmo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/gizmo/transformation/ScreenSpaceGizmo.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/gizmo/transformation/TranslationGizmo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/gizmo/transformation/TranslationGizmo.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/gizmo/util/GizmoMouseUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/gizmo/util/GizmoMouseUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/gizmo/util/GizmoState.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/gizmo/util/GizmoState.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/gizmo/util/GizmoUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/gizmo/util/GizmoUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/icons/CameraIconRenderer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/icons/CameraIconRenderer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/icons/GridSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/icons/GridSystem.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/icons/IconsSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/icons/IconsSystem.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/icons/LineRenderer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/icons/LineRenderer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/outline/SelectedSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/outline/SelectedSystem.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/outline/WireframeRenderer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/outline/WireframeRenderer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/static/AXIS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/static/AXIS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/static/CAMERA_ROTATIONS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/static/CAMERA_ROTATIONS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/static/shaders/GRID.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/static/shaders/GRID.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/static/shaders/GRID.vert" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/static/shaders/GRID.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/static/shaders/ICONS_SPRITE.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/static/shaders/ICONS_SPRITE.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/static/shaders/ICONS_SPRITE.vert" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/static/shaders/ICONS_SPRITE.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/static/shaders/ICONS_SPRITE_TO_DEPTH.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/static/shaders/ICONS_SPRITE_TO_DEPTH.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/static/shaders/ICONS_SPRITE_TO_DEPTH.vert" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/static/shaders/ICONS_SPRITE_TO_DEPTH.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/static/shaders/LINE.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/static/shaders/LINE.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/static/shaders/LINE.vert" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/static/shaders/LINE.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/static/shaders/MESH_MAP.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/static/shaders/MESH_MAP.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/static/shaders/MESH_MAP.vert" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/static/shaders/MESH_MAP.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/static/shaders/SILHOUETTE.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/static/shaders/SILHOUETTE.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/static/shaders/SILHOUETTE.vert" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/static/shaders/SILHOUETTE.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/static/shaders/WIREFRAME.frag" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/static/shaders/WIREFRAME.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/static/shaders/WIREFRAME.vert" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/static/shaders/WIREFRAME.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/utils/CameraTracker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/utils/CameraTracker.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/utils/StaticEditorFBO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/utils/StaticEditorFBO.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/utils/StaticEditorMeshes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/utils/StaticEditorMeshes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/engine/tools/utils/StaticEditorShaders.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/utils/StaticEditorShaders.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/esbuild.js" beforeDir="false" afterPath="$PROJECT_DIR$/webview/esbuild.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/global.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/global.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/webview/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/shared/AbstractSingleton.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/shared/AbstractSingleton.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/shared/enums/AngleBackends.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/shared/enums/AngleBackends.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/shared/enums/FileTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/shared/enums/FileTypes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/shared/enums/Folders.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/shared/enums/Folders.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/shared/enums/GizmoTransformationType.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/shared/enums/GizmoTransformationType.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/shared/enums/Gizmos.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/shared/enums/Gizmos.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/shared/enums/IPCRoutes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/shared/enums/IPCRoutes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/shared/enums/LocalizationEN.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/shared/enums/LocalizationEN.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/shared/enums/LoggerTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/shared/enums/LoggerTypes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/shared/enums/StorageKeys.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/shared/enums/StorageKeys.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/shared/enums/UIDataStores.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/shared/enums/UIDataStores.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/shared/enums/WindowTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/shared/enums/WindowTypes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/shared/logger/RendererLogger.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/shared/logger/RendererLogger.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/static/APP_LOGO.png" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/APP_LOGO.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/static/AUTHORS" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/AUTHORS" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/static/GENERATE_IMAGE_ICONS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/GENERATE_IMAGE_ICONS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/static/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/static/ROBOTO-LICENSE.txt" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/ROBOTO-LICENSE.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/static/STATIC_GIZMO_DATA.json" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/STATIC_GIZMO_DATA.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/static/STATIC_MESHES.json" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/STATIC_MESHES.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/static/alert-module.css" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/alert-module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/static/ammo.wasm.wasm" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/ammo.wasm.wasm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/static/assimpjs.wasm" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/assimpjs.wasm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/static/editor-window.html" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/editor-window.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/static/frame-module.css" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/frame-module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/static/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/global.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/static/hierarchy-module.css" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/hierarchy-module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/static/image.base64" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/image.base64" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/static/license.assimp.txt" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/license.assimp.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/static/license.assimpjs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/license.assimpjs.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/static/material-icons-rounded.woff2" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/material-icons-rounded.woff2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/static/preferences-window.html" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/preferences-window.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/static/project-window.html" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/project-window.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/static/projects-card.css" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/projects-card.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/static/roboto-400.woff2" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/roboto-400.woff2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/static/roboto-500.woff2" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/roboto-500.woff2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/static/selector-module.css" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/selector-module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/static/shader-module.css" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/shader-module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/static/viewport-module.css" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/viewport-module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/webview/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/Editor.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/Editor.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/components/MaterialUniformsForm.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/MaterialUniformsForm.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/components/UndoRedo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/UndoRedo.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/components/footer/Footer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/footer/Footer.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/components/footer/components/PerformanceStatistics.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/footer/components/PerformanceStatistics.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/components/footer/components/SceneStats.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/footer/components/SceneStats.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/components/modal-input/ModalInput.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/modal-input/ModalInput.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/components/selector/Selector.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/selector/Selector.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/components/selector/components/DataIcon.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/selector/components/DataIcon.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/components/selector/components/Option.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/selector/components/Option.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/components/selector/components/Options.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/selector/components/Options.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/components/tabs/TabContextController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/tabs/TabContextController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/components/tabs/Tabs.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/tabs/Tabs.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/components/tabs/components/Tab.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/tabs/components/Tab.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/components/tabs/static/TabData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/tabs/static/TabData.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/components/view/CentralView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/CentralView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/components/view/SerializedState.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/SerializedState.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/components/view/SideView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/SideView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/components/view/components/View.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/components/View.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/components/view/components/ViewGroup.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/components/ViewGroup.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/components/view/components/ViewHeader.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/components/ViewHeader.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/components/view/static/VIEWS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/static/VIEWS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/components/view/static/ViewMetadataContext.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/static/ViewMetadataContext.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/components/view/static/ViewTemplates.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/static/ViewTemplates.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/editor-window.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/editor-window.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/lib/EditorMessages.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/lib/EditorMessages.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/lib/EditorSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/lib/EditorSystem.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/services/EditorActionHistory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/EditorActionHistory.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/services/EngineToolsService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/EngineToolsService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/services/ViewportActionUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/ViewportActionUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/services/engine/EngineResourceLoaderService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/engine/EngineResourceLoaderService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/services/engine/EngineStateService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/engine/EngineStateService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/services/engine/EntityFactoryService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/engine/EntityFactoryService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/services/engine/EntityHierarchyService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/engine/EntityHierarchyService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/services/engine/EntityNamingService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/engine/EntityNamingService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/services/engine/EntityUpdateService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/engine/EntityUpdateService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/services/engine/ExecutionService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/engine/ExecutionService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/services/engine/LevelService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/engine/LevelService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/static/ENGINE.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/static/ENGINE.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/static/INITIAL_LAYOUT.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/static/INITIAL_LAYOUT.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/static/KEYS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/static/KEYS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/static/RENDER_TARGET.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/static/RENDER_TARGET.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/static/SETTINGS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/static/SETTINGS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/static/VIEWPORT_TABS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/static/VIEWPORT_TABS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/static/VISUAL_SETTINGS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/static/VISUAL_SETTINGS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/static/ViewTabItem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/static/ViewTabItem.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/templates/get-content-browser-actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/templates/get-content-browser-actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/templates/get-entity-creation-options.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/templates/get-entity-creation-options.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/templates/get-shader-actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/templates/get-shader-actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/templates/get-viewport-context.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/templates/get-viewport-context.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/templates/get-viewport-hotkeys.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/templates/get-viewport-hotkeys.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/util/ContentBrowserUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/ContentBrowserUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/util/EditorFSUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/EditorFSUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/util/EditorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/EditorUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/util/HierarchyUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/HierarchyUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/util/InspectorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/InspectorUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/util/SceneEditorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/SceneEditorUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/util/SelectionWorker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/SelectionWorker.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/util/SelectorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/SelectorUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/util/ShaderEditorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/ShaderEditorUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/util/TabsStoreUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/TabsStoreUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/util/ViewportUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/ViewportUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/util/ViewsUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/ViewsUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/Canvas.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/Canvas.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/console/ConsoleView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/console/ConsoleView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/content-browser/ContentBrowserView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/ContentBrowserView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/content-browser/components/Browser.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/Browser.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/content-browser/components/BrowserHeader.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/BrowserHeader.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/content-browser/components/Header.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/Header.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/content-browser/components/SideBar.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/SideBar.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/content-browser/components/SideBarItem.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/SideBarItem.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/content-browser/components/SortingOptions.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/SortingOptions.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/content-browser/components/info-editor/CodeItem.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/CodeItem.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/content-browser/components/info-editor/ItemMetadata.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/ItemMetadata.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/content-browser/components/info-editor/MaterialItem.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/MaterialItem.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/content-browser/components/info-editor/MeshItem.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/MeshItem.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/content-browser/components/info-editor/Properties.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/Properties.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/content-browser/components/info-editor/TextureItem.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/TextureItem.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/content-browser/components/item/Card.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/item/Card.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/content-browser/components/item/Item.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/item/Item.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/content-browser/components/item/ItemInput.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/item/ItemInput.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/content-browser/components/item/Row.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/item/Row.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/content-browser/libs/GlobalContentBrowserController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/libs/GlobalContentBrowserController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/content-browser/libs/NavigationHistory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/libs/NavigationHistory.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/content-browser/static/ITEM_TYPES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/static/ITEM_TYPES.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/content-browser/static/SELECTION_TYPES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/static/SELECTION_TYPES.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/content-browser/static/SORT_INFO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/static/SORT_INFO.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/hierarchy/HierarchyView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/HierarchyView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/hierarchy/components/ComponentTreeBranch.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/ComponentTreeBranch.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/hierarchy/components/EntityTreeBranch.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/EntityTreeBranch.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/hierarchy/components/EntityTreeBranchContent.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/EntityTreeBranchContent.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/hierarchy/components/Header.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/Header.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/hierarchy/components/Tree.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/Tree.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/hierarchy/template/ToRenderElement.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/template/ToRenderElement.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/inspector/InspectorView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/InspectorView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/inspector/components/AddComponent.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/AddComponent.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/inspector/components/CameraPreferences.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/CameraPreferences.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/inspector/components/ComponentRow.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/ComponentRow.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/inspector/components/EntityAttributes.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/EntityAttributes.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/inspector/components/EntityInformation.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/EntityInformation.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/inspector/components/TransformationForm.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/TransformationForm.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/inspector/components/UIComponent.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/UIComponent.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/inspector/components/UIStyles.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/UIStyles.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/inspector/components/dynamic-form/Layout.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/dynamic-form/Layout.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/inspector/components/dynamic-form/Property.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/dynamic-form/Property.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/inspector/static/CAMERA_PREFERENCES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/static/CAMERA_PREFERENCES.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/inspector/static/INSPECTOR_TABS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/static/INSPECTOR_TABS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/inspector/static/NATIVE_COMPONENTS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/static/NATIVE_COMPONENTS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/inspector/static/ROTATION_TYPES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/static/ROTATION_TYPES.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/metrics/MetricsView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/metrics/MetricsView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/scene-editor/SceneEditorView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/SceneEditorView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/scene-editor/components/CameraGizmo.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/CameraGizmo.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/scene-editor/components/CameraSettings.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/CameraSettings.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/scene-editor/components/EntityInformation.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/EntityInformation.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/scene-editor/components/GizmoSettings.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/GizmoSettings.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/scene-editor/components/SceneOptions.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/SceneOptions.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/scene-editor/lib/ViewportInteractionListener.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/lib/ViewportInteractionListener.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/scene-editor/static/ROTATION_GRID.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/static/ROTATION_GRID.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/scene-editor/static/SCALE_GRID.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/static/SCALE_GRID.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/scene-editor/static/TRANSLATION_GRID.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/static/TRANSLATION_GRID.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/ShaderEditorView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/ShaderEditorView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/components/Attribute.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/components/Attribute.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/components/AttributeEditor.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/components/AttributeEditor.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/components/HeaderOptions.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/components/HeaderOptions.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/components/Nodes.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/components/Nodes.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/components/SideBar.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/components/SideBar.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/libs/Canvas.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/libs/Canvas.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/libs/CanvasRenderer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/libs/CanvasRenderer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/libs/CanvasResources.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/libs/CanvasResources.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/libs/DraggableNodeUtils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/libs/DraggableNodeUtils.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/libs/ShaderEditorActionHistory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/libs/ShaderEditorActionHistory.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/libs/ShaderEditorTools.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/libs/ShaderEditorTools.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/libs/material-compiler/material-compiler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/libs/material-compiler/material-compiler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/libs/material-compiler/templates/NODE_TYPES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/libs/material-compiler/templates/NODE_TYPES.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/libs/material-compiler/utils/compile-fragment-shader.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/libs/material-compiler/utils/compile-fragment-shader.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/libs/material-compiler/utils/resolve-relationship.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/libs/material-compiler/utils/resolve-relationship.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/static/ALL_NODES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/static/ALL_NODES.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/static/DATA_TYPES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/static/DATA_TYPES.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/static/HEADER_HEIGHT.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/static/HEADER_HEIGHT.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/static/IO_RADIUS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/static/IO_RADIUS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/static/Input.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/static/Input.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/static/NODE_MAP.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/static/NODE_MAP.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/static/NODE_TYPES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/static/NODE_TYPES.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/static/OPEN_FILE.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/static/OPEN_FILE.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/static/Output.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/static/Output.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/static/SCALE_BUTTON_SIZE.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/static/SCALE_BUTTON_SIZE.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/static/SELECT_ACTIONS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/static/SELECT_ACTIONS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/Draggable.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/Draggable.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/ShaderComment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/ShaderComment.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/ShaderLink.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/ShaderLink.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/ShaderNode.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/ShaderNode.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/Signature.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/Signature.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/GaussianBlur.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/GaussianBlur.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/Material.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/Material.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/ParallaxOcclusionMapping.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/ParallaxOcclusionMapping.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/RGB.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/RGB.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/SampleColor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/SampleColor.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/TextureSample.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/TextureSample.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/math/Add.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/math/Add.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/math/Clamp.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/math/Clamp.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/math/Cosine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/math/Cosine.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/math/CosineH.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/math/CosineH.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/math/DDX.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/math/DDX.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/math/DDY.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/math/DDY.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/math/Divide.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/math/Divide.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/math/Float.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/math/Float.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/math/Fresnel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/math/Fresnel.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/math/Max.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/math/Max.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/math/Min.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/math/Min.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/math/Multiply.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/math/Multiply.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/math/Normalize.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/math/Normalize.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/math/OneMinus.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/math/OneMinus.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/math/PerlinNoise.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/math/PerlinNoise.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/math/Pow.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/math/Pow.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/math/Reflect.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/math/Reflect.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/math/Refract.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/math/Refract.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/math/Saturate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/math/Saturate.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/math/Saturation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/math/Saturation.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/math/Sine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/math/Sine.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/math/SineH.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/math/SineH.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/math/Tan.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/math/Tan.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/static/AbsoluteWorldPosition.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/static/AbsoluteWorldPosition.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/static/CameraCoords.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/static/CameraCoords.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/static/ElapsedTime.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/static/ElapsedTime.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/static/FragCoord.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/static/FragCoord.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/static/NormalVector.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/static/NormalVector.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/static/QuadUV.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/static/QuadUV.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/static/SceneColor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/static/SceneColor.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/static/TextureCoords.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/static/TextureCoords.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/static/ToTangentSpace.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/static/ToTangentSpace.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/static/ViewDirection.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/static/ViewDirection.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/vec/BreakVector.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/vec/BreakVector.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/vec/DotProduct.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/vec/DotProduct.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/vec/LinearInterpolate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/vec/LinearInterpolate.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/vec/MakeVector.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/vec/MakeVector.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/vec/Swizzle.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/vec/Swizzle.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/vec/Vec2.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/vec/Vec2.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/vec/Vec3.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/vec/Vec3.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/shader-editor/templates/nodes/vec/Vec4.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/nodes/vec/Vec4.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/ui/UIEditorView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/ui/UIEditorView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/editor/views/ui/components/Header.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/ui/components/Header.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/preferences/Preferences.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/preferences/Preferences.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/preferences/TABS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/preferences/TABS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/preferences/components/Shortcuts.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/preferences/components/Shortcuts.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/preferences/components/ShotcutField.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/preferences/components/ShotcutField.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/preferences/components/content/ContentField.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/preferences/components/content/ContentField.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/preferences/components/content/ContentGroup.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/preferences/components/content/ContentGroup.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/preferences/components/content/ContentWrapper.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/preferences/components/content/ContentWrapper.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/preferences/preferences-window.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/preferences/preferences-window.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/preferences/static/PREFERENCES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/preferences/static/PREFERENCES.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/preferences/static/PREFERENCES_TYPES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/preferences/static/PREFERENCES_TYPES.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/projects/Projects.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/projects/lib/ProjectDTO.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/projects/lib/ProjectSystem.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/projects/lib/ProjectsMessages.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/projects/project-window.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/FileSystemUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/FileSystemUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/WindowInitializer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/WindowInitializer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/PropertyHeader.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/PropertyHeader.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/accordion/Accordion.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/accordion/Accordion.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/alert/ToastNotificationSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/alert/ToastNotificationSystem.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/checkbox/Checkbox.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/checkbox/Checkbox.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/color-picker/ColorPicker.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/color-picker/ColorPicker.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/color-picker/HsvPicker.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/color-picker/HsvPicker.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/color-picker/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/color-picker/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/color-picker/utils/hsv-2-hsl.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/color-picker/utils/hsv-2-hsl.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/color-picker/utils/hsv-2-rgb.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/color-picker/utils/hsv-2-rgb.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/color-picker/utils/rgb-2-hsv.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/color-picker/utils/rgb-2-hsv.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/dialog/Dialog.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/dialog/Dialog.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/dialog/transform-modal.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/dialog/transform-modal.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/drag-drop/DragDropService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/drag-drop/DragDropService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/drag-drop/STYLES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/drag-drop/STYLES.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/drag-drop/drag-drop.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/drag-drop/drag-drop.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/dropdown/Dropdown.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/dropdown/Dropdown.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/dropdown/OptionDropdown.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/dropdown/OptionDropdown.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/dropdown/css/dropdown.css" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/dropdown/css/dropdown.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/dropdown/utils/get-dropdown-header-styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/dropdown/utils/get-dropdown-header-styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/frame/About.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/frame/About.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/frame/MenuBar.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/frame/MenuBar.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/icon/EmptyIcon.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/icon/EmptyIcon.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/icon/Icon.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/icon/Icon.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/input/Input.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/input/Input.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/input/TextArea.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/input/TextArea.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/modal/Modal.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/modal/Modal.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/preview/Preview.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/preview/Preview.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/range/Range.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/range/Range.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/range/utils/get-percentage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/range/utils/get-percentage.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/resizable/ResizableBar.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/resizable/ResizableBar.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/scrollable/Scrollable.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/scrollable/Scrollable.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/select-box/SelectBox.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/select-box/SelectBox.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/tooltip/ToolTip.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/tooltip/ToolTip.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/components/tooltip/ToolTipService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/components/tooltip/ToolTipService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/lib/ElectronResources.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/lib/ElectronResources.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/lib/HotKeysController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/lib/HotKeysController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/lib/StoreIPCListener.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/lib/StoreIPCListener.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/lib/SveltePortal.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/lib/SveltePortal.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/lib/context-menu/ContextMenuService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/lib/context-menu/ContextMenuService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/lib/context-menu/templates/ContextMenuOptions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/lib/context-menu/templates/ContextMenuOptions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/lib/context-menu/templates/ContextMenuTarget.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/lib/context-menu/templates/ContextMenuTarget.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/lib/context-menu/templates/MappedOption.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/lib/context-menu/templates/MappedOption.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/lib/context-menu/utils/find-options.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/lib/context-menu/utils/find-options.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/lib/context-menu/utils/get-context-action.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/lib/context-menu/utils/get-context-action.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/lib/context-menu/utils/get-option-id.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/lib/context-menu/utils/get-option-id.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/stores/AbstractStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/stores/AbstractStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/stores/ChangesTrackerStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/stores/ChangesTrackerStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/stores/ContentBrowserHierarchyStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/stores/ContentBrowserHierarchyStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/stores/ContentBrowserStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/stores/ContentBrowserStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/stores/EngineStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/stores/EngineStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/stores/EntitySelectionStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/stores/EntitySelectionStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/stores/SettingsStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/stores/SettingsStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/stores/TabsStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/stores/TabsStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/stores/ViewStateStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/stores/ViewStateStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/stores/VisualsStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/stores/VisualsStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/stores/WindowChangeStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/stores/WindowChangeStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/webview/WebViewPayload.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/webview/WebViewPayload.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/webview/window/shared/webview/WebViewSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/webview/WebViewSystem.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/FS.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/FS.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/FS.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/FS.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Tester.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/Tester.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/main_test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/main_test.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ui/document/DocumentTest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ui/document/DocumentTest.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ui/document/Example.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ui/document/Example.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ui/document/Example.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +672,20 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;FacoBackup&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="3e0a780f-eb47-497c-bf85-869c651e5983" />
+        <option name="url" value="https://github.com/projection-engine/projection-engine-2.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/ui/webview/esbuild.js" root0="SKIP_INSPECTION" />
@@ -93,6 +717,9 @@
     "CMake Application.projection.executor": "Debug",
     "CMake Debug.projection.executor": "Debug",
     "CMake Debug.projectioncmake.executor": "Debug",
+    "Catch.File-system test.executor": "Debug",
+    "Catch.JSON test.executor": "Run",
+    "Catch.Run all.executor": "Run",
     "Catch.main_test.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -101,7 +728,8 @@
     "Shell Script.copy-files.executor": "Run",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "13-window-architecture",
+    "git-widget-placeholder": "6-project-window",
+    "last_opened_file_path": "C:/Users/russi/WebstormProjects/projection-engine-2/test/core",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -111,17 +739,20 @@
     "npm.dev-build.executor": "Run",
     "npm.sdev.executor": "Run",
     "settings.editor.selected.configurable": "CPPToolchains",
-    "ts.external.directory.path": "C:\\Users\\russi\\WebstormProjects\\projection-engine-2\\src\\ui\\webview\\node_modules\\typescript\\lib",
+    "ts.external.directory.path": "C:\\Users\\russi\\WebstormProjects\\projection-engine-2\\webview\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\test\core" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\ui\editor\basic" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\ui\webview\window\shared\webview" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\ui\webview\window\projects\lib" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\ui\shared\runners" />
-      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\util" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -136,6 +767,24 @@
     <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="File-system test" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="build" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_CLASS="[fs-test]" TEST_METHOD="File-system test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JSON test" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="build" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_CLASS="[json-test]" TEST_METHOD="JSON test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Run all" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="build" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_CLASS="[RUN_ALL]" TEST_METHOD="Run all" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="main.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main.cpp - Visual Studio" CONFIG_NAME="main.cpp">
@@ -183,6 +832,9 @@
     <list>
       <item itemvalue="C/C++ File.main.cpp" />
       <item itemvalue="Catch.main_test" />
+      <item itemvalue="Catch.JSON test" />
+      <item itemvalue="Catch.File-system test" />
+      <item itemvalue="Catch.Run all" />
       <item itemvalue="CMake Application.Projection" />
       <item itemvalue="CMake Debug.projectioncmake" />
       <item itemvalue="npm.bdev" />
@@ -192,6 +844,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Catch.JSON test" />
+        <item itemvalue="Catch.File-system test" />
+        <item itemvalue="Catch.Run all" />
         <item itemvalue="C/C++ File.main.cpp" />
         <item itemvalue="npm.sdev" />
       </list>
@@ -216,7 +871,20 @@
       <workItem from="1703357477856" duration="2788000" />
       <workItem from="1703416218700" duration="5833000" />
       <workItem from="1703506802279" duration="1969000" />
-      <workItem from="1703528281905" duration="7712000" />
+      <workItem from="1703528281905" duration="8635000" />
+      <workItem from="1703717061701" duration="339000" />
+      <workItem from="1703942183869" duration="4324000" />
+      <workItem from="1703970052994" duration="1317000" />
+      <workItem from="1704028499781" duration="3699000" />
+      <workItem from="1704115277815" duration="9076000" />
+      <workItem from="1704127431107" duration="1159000" />
+      <workItem from="1704129491472" duration="440000" />
+      <workItem from="1704134456861" duration="4230000" />
+      <workItem from="1704151774605" duration="2201000" />
+      <workItem from="1704189356757" duration="63000" />
+      <workItem from="1704235592538" duration="597000" />
+      <workItem from="1704236540814" duration="4180000" />
+      <workItem from="1704541634781" duration="4861000" />
     </task>
     <task id="LOCAL-00001" summary="[STD-1] Organizing project&#10;- removing unused C++ classes&#10;- Refactoring files&#10;- Renaming c++ namespaces and project &#10;- Moving future webview stuff">
       <option name="closed" value="true" />
@@ -306,7 +974,87 @@
       <option name="project" value="LOCAL" />
       <updated>1703421270891</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="[STD-13] WindowSystem&#10;- Created windowSystem&#10;- Improved Runner class&#10;- Created Projects window">
+      <option name="closed" value="true" />
+      <created>1703542451825</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1703542451825</updated>
+    </task>
+    <task id="LOCAL-00013" summary="[STD-6] Project window&#10;- Improving event system&#10;- Adding basic functions for project window">
+      <option name="closed" value="true" />
+      <created>1703948510001</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1703948510001</updated>
+    </task>
+    <task id="LOCAL-00014" summary="[STD-6] Project window&#10;- Creating &quot;create project&quot; callback">
+      <option name="closed" value="true" />
+      <created>1703971371539</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1703971371539</updated>
+    </task>
+    <task id="LOCAL-00015" summary="[STD-6] Project window&#10;- creating system for projects &#10;- Completing tests for file system&#10;- Continuing create project">
+      <option name="closed" value="true" />
+      <created>1704032352371</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1704032352371</updated>
+    </task>
+    <task id="LOCAL-00016" summary="[STD-6] Project window&#10;- JSON util&#10;- JSON util tests">
+      <option name="closed" value="true" />
+      <created>1704117632681</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1704117632681</updated>
+    </task>
+    <task id="LOCAL-00017" summary="[STD-6] Project window&#10;- Completing createProject&#10;- Fixing bugs JSON and FS&#10;- Refactoring FileSystemUtil&#10;- Removing imgui stuff from IWindow">
+      <option name="closed" value="true" />
+      <created>1704124383074</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1704124383074</updated>
+    </task>
+    <task id="LOCAL-00018" summary="[STD-6] Project window&#10;- Fixing build issues">
+      <option name="closed" value="true" />
+      <created>1704128589506</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1704128589506</updated>
+    </task>
+    <task id="LOCAL-00019" summary="[STD-6] Project window&#10;- Organizing webview communication stuff on the frontend side&#10;- Fixing communication bugs with the editor window">
+      <option name="closed" value="true" />
+      <created>1704137514595</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1704137514595</updated>
+    </task>
+    <task id="LOCAL-00020" summary="[STD-6] Project window&#10;- Starting rework of window system">
+      <option name="closed" value="true" />
+      <created>1704189413801</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1704189413801</updated>
+    </task>
+    <task id="LOCAL-00021" summary="[STD-6] Project window&#10;- Finishing rework of window system">
+      <option name="closed" value="true" />
+      <created>1704240731387</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1704240731387</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -330,30 +1078,35 @@
     <MESSAGE value="[STD-3] Virtual file system&#10;- Refactoring webview files&#10;- Refactoring directory names" />
     <MESSAGE value="[STD-3] Project window&#10;- Removing old ui&#10;- Creating libs for integration with c++ backend&#10;- Starting project window" />
     <MESSAGE value="[STD-3] Project window&#10;- Improving event system structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-3] Project window&#10;- Improving event system structure" />
+    <MESSAGE value="[STD-13] WindowSystem&#10;- Created windowSystem&#10;- Improved Runner class&#10;- Created Projects window" />
+    <MESSAGE value="[STD-6] Project window&#10;- Improving event system&#10;- Adding basic functions for project window" />
+    <MESSAGE value="[STD-6] Project window&#10;- Creating &quot;create project&quot; callback" />
+    <MESSAGE value="[STD-6] Project window&#10;- creating system for projects &#10;- Completing tests for file system&#10;- Continuing create project" />
+    <MESSAGE value="[STD-6] Project window&#10;- JSON util&#10;- JSON util tests" />
+    <MESSAGE value="[STD-6] Project window&#10;- Completing createProject&#10;- Fixing bugs JSON and FS&#10;- Refactoring FileSystemUtil&#10;- Removing imgui stuff from IWindow" />
+    <MESSAGE value="[STD-6] Project window&#10;- Fixing build issues" />
+    <MESSAGE value="[STD-6] Project window&#10;- Organizing webview communication stuff on the frontend side&#10;- Fixing communication bugs with the editor window" />
+    <MESSAGE value="[STD-6] Project window&#10;- Starting rework of window system" />
+    <MESSAGE value="[STD-6] Project window&#10;- Finishing rework of window system" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-6] Project window&#10;- Finishing rework of window system" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/ui/editor/Editor.cpp</url>
-          <line>22</line>
-          <option name="timeStamp" value="1" />
+          <url>file://$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp</url>
+          <line>57</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/ui/shared/webview/WebViewPayload.cpp</url>
+          <line>6</line>
+          <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp</url>
-          <line>58</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/ui/editor/basic/Runner.h</url>
-          <line>26</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/ui/editor/basic/Runner.h</url>
-          <line>39</line>
-          <option name="timeStamp" value="8" />
+          <line>96</line>
+          <option name="timeStamp" value="42" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

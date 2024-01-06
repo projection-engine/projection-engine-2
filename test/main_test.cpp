@@ -4,9 +4,10 @@
 #include "core/LoggerTest.h"
 #include "core/ListTest.h"
 #include "core/MapTest.h"
-#include "ui/document/DocumentTest.h"
 #include "ui/event/EventControllerTest.h"
 #include "ui/store/IStoreTest.h"
+#include "core/FileSystemTest.h"
+#include "core/JSONTest.h"
 
 void run(int ind, bool all) {
     if (ind == 0 || all) {
@@ -25,16 +26,23 @@ void run(int ind, bool all) {
         Tester *tester = PEngine::MapTest::createTester();
         tester->run();
     }
+
     if (ind == 4 || all) {
-        Tester *tester = PEngine::DocumentTest::createTester();
-        tester->run();
-    }
-    if (ind == 5 || all) {
         Tester *tester = PEngine::EventControllerTest::createTester();
         tester->run();
     }
-    if (ind == 6 || all) {
+    if (ind == 5 || all) {
         Tester *tester = PEngine::IStoreTest::createTester();
+        tester->run();
+    }
+
+    if (ind == 6 || all) {
+        Tester *tester = PEngine::FileSystemTest::createTester();
+        tester->run();
+    }
+
+    if (ind == 7 || all) {
+        Tester *tester = PEngine::JSONTest::createTester();
         tester->run();
     }
 }
@@ -55,16 +63,20 @@ TEST_CASE("Map test", "[map-test]") {
     run(3, false);
 }
 
-TEST_CASE("Document test", "[document-test]") {
+TEST_CASE("EventController test", "[event-controller-test]") {
     run(4, false);
 }
 
-TEST_CASE("EventController test", "[event-controller-test]") {
+TEST_CASE("IStore test", "[istore-test]") {
     run(5, false);
 }
 
-TEST_CASE("IStore test", "[istore-test]") {
+TEST_CASE("File-system test", "[fs-test]") {
     run(6, false);
+}
+
+TEST_CASE("JSON test", "[json-test]") {
+    run(7, false);
 }
 
 TEST_CASE("Run all", "[RUN_ALL]") {

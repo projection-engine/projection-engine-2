@@ -4,13 +4,16 @@
 #include <string>
 
 namespace PEngine {
-    class IWindow;
+    class AbstractWindow;
+
+    class WebViewWindow;
 
     struct WebViewPayload {
         std::string id;
-        const char *payload = nullptr;
-        IWindow *window = nullptr;
-        wil::com_ptr<ICoreWebView2> webview = nullptr;
+        std::string payload;
+        WebViewWindow *webview = nullptr;
+
+        void resolve(const std::string& message) const;
     };
 }
 #endif
