@@ -18,7 +18,8 @@ namespace PEngine {
         }
         mainWindowId = id;
         runner = windows[id]->initialize();
-        if(runner == nullptr){
+        glfwSetWindowTitle(window, windows[id]->getName().c_str());
+        if (runner == nullptr) {
             runner = new IRunner;
         }
         webView->setHTMLFile(windows[id]->getWebViewHTML());

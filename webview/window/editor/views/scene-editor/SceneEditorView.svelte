@@ -18,10 +18,8 @@
     import Icon from "../../../shared/components/icon/Icon.svelte"
     import ContextMenuService from "../../../shared/lib/context-menu/ContextMenuService"
     import GPU from "../../../../engine/core/GPU"
-    import CameraAPI from "../../../../engine/core/lib/utils/CameraAPI"
     import LocalizationEN from "../../../../shared/enums/LocalizationEN"
     import SceneEditorUtil from "../../util/SceneEditorUtil"
-    import SerializedState from "../../components/view/SerializedState.svelte";
     import ViewStateStore from "../../../shared/stores/ViewStateStore";
 
     const COMPONENT_ID = crypto.randomUUID()
@@ -45,7 +43,6 @@
     	GizmoSystem.onStart = () => isOnGizmo = true
     	GizmoSystem.onStop = () => isOnGizmo = false
         SceneEditorUtil.onSceneEditorMount(draggable)
-        window.store = ViewStateStore
     })
 
     onDestroy(() => {
@@ -58,12 +55,6 @@
     })
 </script>
 
-<SerializedState
-        onBeforeDestroy={CameraAPI.serializeState}
-        onStateInitialize={state => {
-            SceneEditorUtil.restoreCameraState(state)
-        }}
-/>
 {#if !executingAnimation}
     <ViewHeader>
         <EntityInformation {isOnGizmo}/>
