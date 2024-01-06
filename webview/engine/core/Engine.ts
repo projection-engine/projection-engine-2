@@ -25,10 +25,12 @@ import TranslationGizmo from "../tools/gizmo/transformation/TranslationGizmo";
 import DualAxisGizmo from "../tools/gizmo/transformation/DualAxisGizmo";
 import ScreenSpaceGizmo from "../tools/gizmo/transformation/ScreenSpaceGizmo";
 import CameraNotificationDecoder from "./lib/CameraNotificationDecoder";
-import ProjectionEngine from "@lib/ProjectionEngine";
+import ProjectionEngine, {Injectable} from "@lib/ProjectionEngine";
+import ISystemComponent from "@lib/ISystemComponent";
 
 
-export default class Engine {
+@Injectable
+export default class Engine extends ISystemComponent {
     #development = false
     #onLevelLoadListeners = new DynamicMap<string, Function>()
     UILayouts = new Map()
@@ -147,18 +149,18 @@ export default class Engine {
         if (!this.isExecuting && this.#isReady) {
             Physics.start()
             ResourceManager.start()
-            this.#frameID = requestAnimationFrame(Engine.#loop)
+            this.#frameID = requestAnimationFrame(Engine._loop)
         }
     }
 
-   static #loop(c) {
+    static _loop(c) {
         const queue = ProjectionEngine.Engine.#executionQueue.array
         const queueLength = queue.length
         Renderer.currentTimeStamp = c
         for (let i = 0; i < queueLength; i++) {
             queue[i]()
         }
-        ProjectionEngine.Engine.#frameID = requestAnimationFrame(Engine.#loop)
+        ProjectionEngine.Engine.#frameID = requestAnimationFrame(Engine._loop)
     }
 
     stop() {

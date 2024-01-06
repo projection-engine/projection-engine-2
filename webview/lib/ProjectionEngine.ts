@@ -20,8 +20,10 @@ import ToasterService from "../window/services/ToasterService";
 import EditorActionHistoryService from "../window/services/EditorActionHistoryService";
 import EntityHierarchyService from "../window/services/EntityHierarchyService";
 import ContextMenuService from "../window/services/ContextMenuService";
+import ISystemComponent from "@lib/ISystemComponent";
 
-export default class ProjectionEngine {
+class ProjectionEngine extends ISystemComponent {
+
     static ChangesTrackerStore: ChangesTrackerStore
     static ContentBrowserHierarchyStore: ContentBrowserHierarchyStore
     static ContentBrowserStore: ContentBrowserStore
@@ -78,7 +80,33 @@ export default class ProjectionEngine {
         ProjectionEngine.ViewStateStore = new ViewStateStore()
         ProjectionEngine.VisualsStore = new VisualsStore()
         ProjectionEngine.WindowChangeStore = new WindowChangeStore()
-
-
     }
 }
+
+interface ExtendedWindow extends Window {
+    __instances: Map<ISystemComponent, typeof ISystemComponent>
+}
+
+function Inject(Clazz: ISystemComponent) {
+    return (target: ISystemComponent, propertyKey: string) => {
+        const P = window as unknown as ExtendedWindow
+        target[propertyKey] = P.__instances.get(Clazz)
+    }
+}
+
+function Injectable(Clazz: ISystemComponent) {
+    const P = window as unknown as ExtendedWindow
+    if (P.__instances && P.__instances.has(Clazz)) {
+        return;
+    }
+    // @ts-ignore
+    const instance = new Clazz();
+    if (P.__instances == null) {
+        P.__instances = new Map()
+    }
+    P.__instances.set(Clazz, instance);
+}
+
+export default ProjectionEngine
+export {Injectable, Inject}
+
