@@ -2,7 +2,7 @@
 export default class WindowInitializer {
 	static initialize() {
 		document.addEventListener("pointerlockerror", WindowInitializer.#onPointerLockError, false)
-		window.onerror = WindowInitializer.#onError
+		// window.onerror = WindowInitializer.#onError
 	}
 
 	static #onError(err, source, lineno) {

@@ -26,11 +26,11 @@ export default class ViewportActionService {
         if (!entity)
             return
 
-        vec3.copy(Engine.CameraAPI.translationBuffer, entity.absoluteTranslation)
+        vec3.copy(ProjectionEngine.Engine.CameraAPI.translationBuffer, entity.absoluteTranslation)
 
         const position = <vec4>[0, 0, 5, 1]
-        vec4.transformQuat(position, position, Engine.CameraAPI.rotationBuffer)
-        vec3.add(Engine.CameraAPI.translationBuffer, Engine.CameraAPI.translationBuffer, <vec3>position)
+        vec4.transformQuat(position, position, ProjectionEngine.Engine.CameraAPI.rotationBuffer)
+        vec3.add(ProjectionEngine.Engine.CameraAPI.translationBuffer, ProjectionEngine.Engine.CameraAPI.translationBuffer, <vec3>position)
 
         CameraTracker.forceUpdate = true
     }
@@ -45,7 +45,7 @@ export default class ViewportActionService {
         const oldSelected = EntitySelectionStore.getEntitiesSelected()
         for (let i = 0; i < oldSelected.length; i++)
             notValid[oldSelected[i]] = true
-        const entities = Engine.entities.array
+        const entities = ProjectionEngine.Engine.entities.array
         for (let i = 0; i < entities.length; i++) {
             if (!notValid[entities[i].id])
                 newArr.push(entities[i].id)
@@ -85,7 +85,7 @@ export default class ViewportActionService {
     }
 
     selectAll() {
-        EntitySelectionStore.setEntitiesSelected(Array.from(Engine.entities.keys()))
+        EntitySelectionStore.setEntitiesSelected(Array.from(ProjectionEngine.Engine.entities.keys()))
     }
 
     fixateActive() {

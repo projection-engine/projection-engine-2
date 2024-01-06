@@ -10,6 +10,7 @@ import ResourceEntityMapper from "../../core/resource-libs/ResourceEntityMapper"
 import CameraIconRenderer from "../icons/CameraIconRenderer"
 import EngineToolsState from "../EngineToolsState"
 import GPUUtil from "../../core/utils/GPUUtil";
+import ProjectionEngine from "../../../window/ProjectionEngine";
 
 const EMPTY_MATRIX = mat4.create()
 const translationCache = vec3.create()
@@ -17,7 +18,7 @@ export default class WireframeRenderer {
 	static execute() {
 		if(!EngineToolsState.showOutline)
 			return
-		const entities = Engine.entities.array
+		const entities = ProjectionEngine.Engine.entities.array
 		const size = entities.length
 		const uniforms = StaticEditorShaders.wireframeUniforms
 		const context = GPU.context

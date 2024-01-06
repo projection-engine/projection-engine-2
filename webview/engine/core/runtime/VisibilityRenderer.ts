@@ -15,6 +15,7 @@ import loopMeshes from "./loop-meshes"
 import Entity from "../instances/Entity"
 import Mesh from "../instances/Mesh"
 import Engine from "../Engine";
+import ProjectionEngine from "../../../window/ProjectionEngine";
 
 const entityMetadata = new Float32Array(16)
 let context: WebGL2RenderingContext, uniforms, VP
@@ -24,12 +25,12 @@ export default class VisibilityRenderer {
 
     static #bindUniforms() {
         uniforms = StaticShaders.visibilityUniforms
-        VP = Engine.CameraAPI.cameraMotionBlur ? Engine.CameraAPI.previousViewProjectionMatrix : Engine.CameraAPI.viewProjectionMatrix
-        context.uniformMatrix4fv(uniforms.viewProjection, false, Engine.CameraAPI.viewProjectionMatrix)
+        VP = ProjectionEngine.Engine.CameraAPI.cameraMotionBlur ? ProjectionEngine.Engine.CameraAPI.previousViewProjectionMatrix : ProjectionEngine.Engine.CameraAPI.viewProjectionMatrix
+        context.uniformMatrix4fv(uniforms.viewProjection, false, ProjectionEngine.Engine.CameraAPI.viewProjectionMatrix)
         context.uniformMatrix4fv(uniforms.previousViewProjection, false, VP)
-        context.uniformMatrix4fv(uniforms.viewMatrix, false, Engine.CameraAPI.viewMatrix)
-        context.uniform3fv(uniforms.cameraPlacement, Engine.CameraAPI.position)
-        mat4.copy(Engine.CameraAPI.previousViewProjectionMatrix, Engine.CameraAPI.viewProjectionMatrix)
+        context.uniformMatrix4fv(uniforms.viewMatrix, false, ProjectionEngine.Engine.CameraAPI.viewMatrix)
+        context.uniform3fv(uniforms.cameraPlacement, ProjectionEngine.Engine.CameraAPI.position)
+        mat4.copy(ProjectionEngine.Engine.CameraAPI.previousViewProjectionMatrix, ProjectionEngine.Engine.CameraAPI.viewProjectionMatrix)
     }
 
     static #drawSprites() {

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import {onMount} from "svelte"
     import Engine from "../../../../engine/core/Engine";
     import VisualsStore from "../../../shared/stores/VisualsStore";
@@ -11,25 +11,28 @@
     import ProjectionEngine from "../../../ProjectionEngine";
     import ViewportInteractionService from "../../views/scene-editor/lib/ViewportInteractionService";
 
-    let canvasRef
+    let canvasRef: HTMLCanvasElement
+    export let onReady: VoidFunction
 
     onMount(() => {
-        Engine.initializeContext(
+        ProjectionEngine.Engine = new Engine()
+        ProjectionEngine.Engine.initialize(
             canvasRef,
             {
                 w: ProjectionEngine.VisualsStore.getData().resolutionX,
                 h: ProjectionEngine.VisualsStore.getData().resolutionY
             },
             EditorFSUtil.readAsset,
-            true
-        ).then(async () => {
-            console.trace("INITIALIZING CANVAS")
-            await EngineTools.initialize().catch(console.error)
-            UIAPI.buildUI(GPU.canvas.parentElement)
-            UIAPI.hideUI()
-            EngineToolsService.initialize()
-            ViewportInteractionService.initialize()
-        })
+            true,
+            async () => {
+                await EngineTools.initialize().catch(console.error)
+                UIAPI.buildUI(GPU.canvas.parentElement)
+                UIAPI.hideUI()
+                EngineToolsService.initialize()
+                ViewportInteractionService.initialize()
+                onReady()
+            }
+        )
     })
 
 </script>

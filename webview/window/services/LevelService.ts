@@ -15,7 +15,7 @@ import TabsStoreUtil from "../editor/util/TabsStoreUtil"
 import ProjectionEngine from "../ProjectionEngine";
 
 
-export default class LevelService  {
+export default class LevelService {
     #levelToLoad
 
     getLevelToLoad() {
@@ -25,13 +25,13 @@ export default class LevelService  {
     }
 
     async loadLevel(levelID?: string) {
-        if (!levelID || levelID && levelID === Engine.loadedLevel?.id) {
-            if (levelID && levelID === Engine.loadedLevel?.id)
+        if (!levelID || levelID && levelID === ProjectionEngine.Engine.loadedLevel?.id) {
+            if (levelID && levelID === ProjectionEngine.Engine.loadedLevel?.id)
                 ProjectionEngine.ToastNotificationSystem.error(LocalizationEN.LEVEL_ALREADY_LOADED)
             return
         }
 
-        if (ProjectionEngine.ChangesTrackerStore.getData() && Engine.loadedLevel) {
+        if (ProjectionEngine.ChangesTrackerStore.getData() && ProjectionEngine.Engine.loadedLevel) {
             ProjectionEngine.WindowChangeStore.updateStore({
                 message: LocalizationEN.UNSAVED_CHANGES, callback: async () => {
                     await this.save().catch(console.error)
@@ -47,17 +47,17 @@ export default class LevelService  {
             array: []
         })
         EntitySelectionStore.setLockedEntity(undefined)
-        ProjectionEngine. EditorActionHistory.clear()
+        ProjectionEngine.EditorActionHistory.clear()
 
 
-        await Engine.loadLevel(levelID, false)
-        const entities = Engine.entities.array
+        await ProjectionEngine.Engine.loadLevel(levelID, false)
+        const entities = ProjectionEngine.Engine.entities.array
         for (let i = 0; i < entities.length; i++) {
             const entity = entities[i];
             entity.setPickID(PickingAPI.getPickerId(i + AXIS.ZY + 1))
         }
-        if (Engine.loadedLevel)
-            EntitySelectionStore.setLockedEntity(Engine.loadedLevel.id)
+        if (ProjectionEngine.Engine.loadedLevel)
+            EntitySelectionStore.setLockedEntity(ProjectionEngine.Engine.loadedLevel.id)
         ProjectionEngine.EntityHierarchyService.updateHierarchy()
     }
 
@@ -77,7 +77,7 @@ export default class LevelService  {
             const tabIndexViewport = TabsStoreUtil.getCurrentTabByCurrentView("viewport")
             const viewMetadata = <MutableObject | undefined>settings.views[settings.currentView].viewport[tabIndexViewport]
             if (viewMetadata !== undefined) {
-                viewMetadata.cameraMetadata = Engine.CameraAPI.serializeState()
+                viewMetadata.cameraMetadata = ProjectionEngine.Engine.CameraAPI.serializeState()
                 viewMetadata.cameraMetadata.prevX = CameraTracker.xRotation
                 viewMetadata.cameraMetadata.prevY = CameraTracker.yRotation
             }
@@ -87,9 +87,9 @@ export default class LevelService  {
                 JSON.stringify({
                     ...metadata,
                     settings,
-                    layout:ProjectionEngine. TabsStore.getData(),
+                    layout: ProjectionEngine.TabsStore.getData(),
                     visualSettings: ProjectionEngine.VisualsStore.getData(),
-                    level: Engine.loadedLevel?.id
+                    level: ProjectionEngine.Engine.loadedLevel?.id
                 }), true)
 
             await this.saveCurrentLevel().catch(console.error)
@@ -102,19 +102,19 @@ export default class LevelService  {
     }
 
     async saveCurrentLevel() {
-        if (!Engine.loadedLevel)
+        if (!ProjectionEngine.Engine.loadedLevel)
             return
         const serialized = {
-            entity: Engine.loadedLevel.serializable(),
-            entities: QueryAPI.getHierarchy(Engine.loadedLevel).map(e => e.serializable()),
+            entity: ProjectionEngine.Engine.loadedLevel.serializable(),
+            entities: QueryAPI.getHierarchy(ProjectionEngine.Engine.loadedLevel).map(e => e.serializable()),
         }
 
-        const assetReg = EditorFSUtil.getRegistryEntry(Engine.loadedLevel.id)
+        const assetReg = EditorFSUtil.getRegistryEntry(ProjectionEngine.Engine.loadedLevel.id)
         let path = assetReg?.path
 
         if (!assetReg) {
-            path = FileSystemUtil.resolvePath(await EditorUtil.resolveFileName(FileSystemUtil.ASSETS_PATH + FileSystemUtil.sep + Engine.loadedLevel.name, FileTypes.LEVEL))
-            await EditorFSUtil.createRegistryEntry(Engine.loadedLevel.id, FileSystemUtil.sep + path.split(FileSystemUtil.sep).pop())
+            path = FileSystemUtil.resolvePath(await EditorUtil.resolveFileName(FileSystemUtil.ASSETS_PATH + FileSystemUtil.sep + ProjectionEngine.Engine.loadedLevel.name, FileTypes.LEVEL))
+            await EditorFSUtil.createRegistryEntry(ProjectionEngine.Engine.loadedLevel.id, FileSystemUtil.sep + path.split(FileSystemUtil.sep).pop())
             EditorFSUtil.readRegistry().catch(console.error)
         } else
             path = FileSystemUtil.ASSETS_PATH + FileSystemUtil.sep + path
@@ -123,7 +123,7 @@ export default class LevelService  {
             path,
             serializeStructure(serialized)
         )
-        ProjectionEngine. ChangesTrackerStore.updateStore({changed: false})
+        ProjectionEngine.ChangesTrackerStore.updateStore({changed: false})
     }
 }
 

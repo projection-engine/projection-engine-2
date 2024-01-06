@@ -2,6 +2,7 @@ import Engine from "../../engine/core/Engine"
 import Entity from "../../engine/core/instances/Entity"
 import HierarchyToRenderElement from "../editor/views/hierarchy/template/ToRenderElement"
 import EntitySelectionStore from "../shared/stores/EntitySelectionStore";
+import ProjectionEngine from "../ProjectionEngine";
 
 
 export default class EntityHierarchyService {
@@ -9,7 +10,7 @@ export default class EntityHierarchyService {
     #listening: { [key: string]: Function } = {}
 
     updateHierarchy() {
-        const data = [], root = Engine.loadedLevel
+        const data = [], root = ProjectionEngine.Engine.loadedLevel
         if (!root)
             return
 
@@ -38,7 +39,7 @@ export default class EntityHierarchyService {
     }
 
     openTree() {
-        const node = Engine.entities.get(EntitySelectionStore.getMainEntity())
+        const node = ProjectionEngine.Engine.entities.get(EntitySelectionStore.getMainEntity())
         if (!node)
             return {}
         const open = {}

@@ -19,7 +19,7 @@ export default class EditorUtil {
     static async componentConstructor(entity, scriptID, autoUpdate = true) {
         await ScriptsAPI.linkScript(entity, scriptID)
         if (autoUpdate)
-            ProjectionEngine.  EntitySelectionStore.updateStore({array: EntitySelectionStore.getEntitiesSelected()})
+            ProjectionEngine.EntitySelectionStore.updateStore({array: EntitySelectionStore.getEntitiesSelected()})
         ProjectionEngine.ToastNotificationSystem.success(LocalizationEN.ADDED_COMPONENT)
     }
 
@@ -28,15 +28,15 @@ export default class EditorUtil {
         const focused = engineInstance.getData().focusedCamera
         const isCamera = cameraTarget instanceof Entity
         if (!focused || isCamera && cameraTarget.id !== focused) {
-            const current = isCamera ? cameraTarget : Engine.entities.get(EntitySelectionStore.getMainEntity())
+            const current = isCamera ? cameraTarget : ProjectionEngine.Engine.entities.get(EntitySelectionStore.getMainEntity())
             if (current && current.cameraComponent) {
-                ProjectionEngine.ExecutionService.cameraSerialization = Engine.CameraAPI.serializeState()
+                ProjectionEngine.ExecutionService.cameraSerialization = ProjectionEngine.Engine.CameraAPI.serializeState()
                 CameraTracker.stopTracking()
-                Engine.CameraAPI.updateViewTarget(current)
+                ProjectionEngine.Engine.CameraAPI.updateViewTarget(current)
                 engineInstance.updateStore({focusedCamera: current.id})
             }
         } else {
-            Engine.CameraAPI.restoreState(ProjectionEngine.ExecutionService.cameraSerialization)
+            ProjectionEngine.Engine.CameraAPI.restoreState(ProjectionEngine.ExecutionService.cameraSerialization)
             CameraTracker.startTracking()
             engineInstance.updateStore({focusedCamera: undefined})
         }
@@ -143,7 +143,7 @@ export default class EditorUtil {
         const selected = EntitySelectionStore.getEntitiesSelected()
         for (let i = 0; i < selected.length; i++) {
             const entity = QueryAPI.getEntityByID(selected[i])
-            const currentGizmo =ProjectionEngine. SettingsStore.getData().gizmo
+            const currentGizmo = ProjectionEngine.SettingsStore.getData().gizmo
 
             switch (currentGizmo) {
                 case GIZMOS.TRANSLATION: {
@@ -174,12 +174,12 @@ export default class EditorUtil {
     }
 
     static updateView(key, newView) {
-        const settingsData =ProjectionEngine. SettingsStore.getData()
+        const settingsData = ProjectionEngine.SettingsStore.getData()
         const view = settingsData.views[settingsData.currentView]
         const copy = [...settingsData.views]
         copy[settingsData.currentView] = {...view, [key]: newView}
 
-        ProjectionEngine.   SettingsStore.updateStore({views: copy})
+        ProjectionEngine.SettingsStore.updateStore({views: copy})
     }
 
     static getCall<T>(channel, data, addMiddle = true): Promise<T> {

@@ -4,6 +4,7 @@ import Engine from "../Engine"
 import ENVIRONMENT from "../static/ENVIRONMENT"
 import PhysicsAPI from "../lib/rendering/PhysicsAPI"
 import UIAPI from "../lib/rendering/UIAPI"
+import ProjectionEngine from "../../../window/ProjectionEngine";
 
 export default class ResourceEntityMapper {
 	static queryMap = new DynamicMap<string, Entity>()
@@ -77,7 +78,7 @@ export default class ResourceEntityMapper {
 	}
 
 	static addEntity(entity: Entity) {
-		if (Engine.environment !== ENVIRONMENT.DEV && entity.rigidBodyComponent) {
+		if (ProjectionEngine.Engine.environment !== ENVIRONMENT.DEV && entity.rigidBodyComponent) {
 			PhysicsAPI.registerRigidBody(entity)
 		}
 		if (entity.lightComponent !== undefined)

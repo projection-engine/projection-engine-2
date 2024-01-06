@@ -1,7 +1,6 @@
 import {quat, vec3} from "gl-matrix"
 import ArrayBufferAPI from "../lib/utils/ArrayBufferAPI"
 import CameraEffects from "./CameraEffects"
-import CameraNotificationDecoder from "../lib/CameraNotificationDecoder"
 import ProjectionEngine from "../../../window/ProjectionEngine";
 import Engine from "../Engine";
 
@@ -27,7 +26,7 @@ export default class CameraResources extends CameraEffects {
     projectionBuffer = ArrayBufferAPI.allocateVector(5)
     translationBuffer = <vec3>ArrayBufferAPI.allocateVector(3)
     rotationBuffer = <quat>ArrayBufferAPI.allocateVector(4, 0, true)
-    notificationBuffers = Engine.CameraNotificationDecoder.generateBuffer()
+    notificationBuffers = ProjectionEngine.Engine.CameraNotificationDecoder.generateBuffer()
 
 
     addTranslation(data: number[] | Float32Array) {

@@ -18,28 +18,28 @@
     let entityID
 
     function load() {
-    	loadedLevel = Engine.loadedLevel?.name
-    	entityID = Engine.loadedLevel?.id
+        loadedLevel = ProjectionEngine.Engine.loadedLevel?.name
+        entityID = ProjectionEngine.Engine.loadedLevel?.id
 
-    	if (entityID)
+        if (entityID)
             ProjectionEngine.EntityUpdateService.removeListener(entityID, COMPONENT_ID)
 
-    	if (!loadedLevel)
-    		return
+        if (!loadedLevel)
+            return
         ProjectionEngine.EntityUpdateService.addListener(entityID, COMPONENT_ID, () => {
-    		loadedLevel = Engine.loadedLevel.name
-    	})
+            loadedLevel = ProjectionEngine.Engine.loadedLevel.name
+        })
     }
 
     onMount(() => {
         ProjectionEngine.SettingsStore.addListener(COMPONENT_ID, data => settings = data, ["hideFooter"])
-    	Engine.addLevelLoaderListener(COMPONENT_ID, load)
-    	load()
+        ProjectionEngine.Engine.addLevelLoaderListener(COMPONENT_ID, load)
+        load()
     })
 
     onDestroy(() => {
         ProjectionEngine.SettingsStore.removeListener(COMPONENT_ID)
-    	Engine.removeLevelLoaderListener(COMPONENT_ID)
+        ProjectionEngine.Engine.removeLevelLoaderListener(COMPONENT_ID)
     })
 </script>
 
@@ -61,10 +61,10 @@
     <div class="meta-data" style="justify-content: flex-end">
         <SceneStats/>
         <div data-sveltevertdivider="-"></div>
-<!--        <div class="version"-->
-<!--             on:click={() => ElectronResources.shell.openExternal("https://github.com/projection-engine")}>-->
-<!--            {LocalizationEN.VERSION}-->
-<!--        </div>-->
+        <!--        <div class="version"-->
+        <!--             on:click={() => ElectronResources.shell.openExternal("https://github.com/projection-engine")}>-->
+        <!--            {LocalizationEN.VERSION}-->
+        <!--        </div>-->
     </div>
 </div>
 
@@ -75,6 +75,7 @@
         align-items: center;
         gap: 4px;
     }
+
     .container {
         border-top: var(--pj-border-primary) 1px solid;
         width: 100%;

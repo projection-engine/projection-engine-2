@@ -25,87 +25,104 @@ import TranslationGizmo from "../tools/gizmo/transformation/TranslationGizmo";
 import DualAxisGizmo from "../tools/gizmo/transformation/DualAxisGizmo";
 import ScreenSpaceGizmo from "../tools/gizmo/transformation/ScreenSpaceGizmo";
 import CameraNotificationDecoder from "./lib/CameraNotificationDecoder";
-
+import ProjectionEngine from "../../window/ProjectionEngine";
 
 
 export default class Engine {
-    static #development = false
-    static #onLevelLoadListeners = new DynamicMap<string, Function>()
-    static UILayouts = new Map()
-    static isDev = true
-    static #environment: number = ENVIRONMENT.DEV
-    static #isReady = false
-    static CameraAPI: CameraAPI
-    static #initialized = false
-    static #loadedLevel: Entity
-    static #executionQueue = new DynamicMap<string, Function>()
-    static #frameID: number = undefined
-    static RotationGizmo: RotationGizmo
-    static ScalingGizmo: ScalingGizmo
-    static TranslationGizmo: TranslationGizmo
-    static DualAxisGizmo: DualAxisGizmo
-    static ScreenSpaceGizmo: ScreenSpaceGizmo
-    static CameraNotificationDecoder: CameraNotificationDecoder
-    static #initializationWasTried = false;
+    #development = false
+    #onLevelLoadListeners = new DynamicMap<string, Function>()
+    UILayouts = new Map()
+    isDev = true
+    #environment: number = ENVIRONMENT.DEV
+    #isReady = false
+    CameraAPI: CameraAPI
+    #loadedLevel: Entity
+    #executionQueue = new DynamicMap<string, Function>()
+    #frameID: number = undefined
+    RotationGizmo: RotationGizmo
+    ScalingGizmo: ScalingGizmo
+    TranslationGizmo: TranslationGizmo
+    DualAxisGizmo: DualAxisGizmo
+    ScreenSpaceGizmo: ScreenSpaceGizmo
+    CameraNotificationDecoder: CameraNotificationDecoder
 
-    static get isExecuting() {
-        return Engine.#frameID !== undefined
+    get isExecuting() {
+        return this.#frameID !== undefined
     }
 
-    static removeLevelLoaderListener(id: string) {
-        Engine.#onLevelLoadListeners.delete(id)
+    removeLevelLoaderListener(id: string) {
+        this.#onLevelLoadListeners.delete(id)
     }
 
-    static addLevelLoaderListener(id: string, callback: Function) {
-        Engine.#onLevelLoadListeners.set(id, callback)
+    addLevelLoaderListener(id: string, callback: Function) {
+        this.#onLevelLoadListeners.set(id, callback)
     }
 
-    static get entities(): DynamicMap<string, Entity> {
+    get entities(): DynamicMap<string, Entity> {
         return ResourceEntityMapper.entities
     }
 
-    static get queryMap(): Map<string, Entity> {
+    get queryMap(): Map<string, Entity> {
         return ResourceEntityMapper.queryMap
     }
 
-    static get isReady() {
-        return Engine.#isReady
+    get isReady() {
+        return this.#isReady
     }
 
-    static get loadedLevel(): Entity {
-        return Engine.#loadedLevel
+    get loadedLevel(): Entity {
+        return this.#loadedLevel
     }
 
-    static get developmentMode() {
-        return Engine.#development
+    get developmentMode() {
+        return this.#development
     }
 
-    static get environment(): number {
-        return Engine.#environment
+    get environment(): number {
+        return this.#environment
     }
 
-    static set environment(data: number) {
-        Engine.isDev = data === ENVIRONMENT.DEV
-        Engine.#environment = data
-        if (Engine.isDev)
-            Engine.CameraAPI.updateAspectRatio()
+    set environment(data: number) {
+        this.isDev = data === ENVIRONMENT.DEV
+        this.#environment = data
+        if (this.isDev)
+            this.CameraAPI.updateAspectRatio()
     }
 
-    static async initializeContext(canvas: HTMLCanvasElement, mainResolution: {
+    async initialize(canvas: HTMLCanvasElement, mainResolution: {
         w: number,
         h: number
-    } | undefined, readAsset: Function, devAmbient: boolean) {
-        if (Engine.#initialized)
-            return
-        Engine.#initialized = true
-        Engine.CameraNotificationDecoder = new CameraNotificationDecoder();
-        Engine.CameraAPI = new CameraAPI();
-        Engine.RotationGizmo = new RotationGizmo();
-        Engine.ScalingGizmo = new ScalingGizmo();
-        Engine.TranslationGizmo = new TranslationGizmo();
-        Engine.DualAxisGizmo = new DualAxisGizmo();
-        Engine.ScreenSpaceGizmo = new ScreenSpaceGizmo();
-        Engine.#development = devAmbient
+    } | undefined, readAsset: Function, devAmbient: boolean, whenReady: VoidFunction) {
+        this.CameraNotificationDecoder = new CameraNotificationDecoder();
+        this.CameraAPI = new CameraAPI();
+        this.RotationGizmo = new RotationGizmo();
+        this.ScalingGizmo = new ScalingGizmo();
+        this.TranslationGizmo = new TranslationGizmo();
+        this.DualAxisGizmo = new DualAxisGizmo();
+        this.ScreenSpaceGizmo = new ScreenSpaceGizmo();
+        this.#development = devAmbient
+        await this.initializeAsync(canvas, mainResolution, readAsset)
+        ConversionAPI.canvasBBox = GPU.canvas.getBoundingClientRect()
+        const OBS = new ResizeObserver(() => {
+            const bBox = GPU.canvas.getBoundingClientRect()
+            ConversionAPI.canvasBBox = bBox
+            this.CameraAPI.aspectRatio = bBox.width / bBox.height
+            this.CameraAPI.updateProjection()
+            this.CameraAPI.updateAspectRatio()
+        })
+        OBS.observe(GPU.canvas.parentElement)
+        OBS.observe(GPU.canvas)
+        this.#isReady = true
+        GPU.skylightProbe = new LightProbe(128)
+        this.addSystem("start", Renderer.loop)
+        whenReady()
+        this.start()
+    }
+
+    private async initializeAsync(canvas: HTMLCanvasElement, mainResolution: {
+        w: number;
+        h: number
+    }, readAsset: Function) {
         await GPU.initializeContext(canvas, mainResolution)
         FileSystemAPI.initialize(readAsset)
         FrameComposition.initialize()
@@ -113,27 +130,12 @@ export default class Engine {
         OmnidirectionalShadows.initialize()
         await PhysicsAPI.initialize()
         LightsAPI.initialize()
-
-        ConversionAPI.canvasBBox = GPU.canvas.getBoundingClientRect()
-        const OBS = new ResizeObserver(() => {
-            const bBox = GPU.canvas.getBoundingClientRect()
-            ConversionAPI.canvasBBox = bBox
-            Engine.CameraAPI.aspectRatio = bBox.width / bBox.height
-            Engine.CameraAPI.updateProjection()
-            Engine.CameraAPI.updateAspectRatio()
-        })
-        OBS.observe(GPU.canvas.parentElement)
-        OBS.observe(GPU.canvas)
-        Engine.#isReady = true
-        GPU.skylightProbe = new LightProbe(128)
-        Engine.addSystem("start", Renderer.loop)
-        Engine.start()
     }
 
-    static async startSimulation() {
-        Engine.environment = ENVIRONMENT.EXECUTION
+    async startSimulation() {
+        this.environment = ENVIRONMENT.EXECUTION
         UIAPI.buildUI(GPU.canvas.parentElement)
-        const entities = Engine.entities.array
+        const entities = this.entities.array
         for (let i = 0; i < entities.length; i++) {
             const current = entities[i]
             PhysicsAPI.registerRigidBody(current)
@@ -141,35 +143,33 @@ export default class Engine {
         await ScriptsAPI.updateAllScripts()
     }
 
-    static start() {
-
-        if (!Engine.isExecuting && Engine.#isReady) {
+    start() {
+        if (!this.isExecuting && this.#isReady) {
             Physics.start()
             ResourceManager.start()
-            Engine.#frameID = requestAnimationFrame(Engine.#loop)
-        } else
-            Engine.#initializationWasTried = true
+            this.#frameID = requestAnimationFrame(Engine.#loop)
+        }
     }
 
-    static #loop(c) {
-        const queue = Engine.#executionQueue.array
+   static #loop(c) {
+        const queue = ProjectionEngine.Engine.#executionQueue.array
         const queueLength = queue.length
         Renderer.currentTimeStamp = c
         for (let i = 0; i < queueLength; i++) {
             queue[i]()
         }
-        Engine.#frameID = requestAnimationFrame(Engine.#loop)
+        ProjectionEngine.Engine.#frameID = requestAnimationFrame(Engine.#loop)
     }
 
-    static stop() {
-        cancelAnimationFrame(Engine.#frameID)
-        Engine.#frameID = undefined
+    stop() {
+        cancelAnimationFrame(this.#frameID)
+        this.#frameID = undefined
         ResourceManager.stop()
         Physics.stop()
     }
 
-    static async loadLevel(levelID: string, cleanEngine?: boolean) {
-        if (!levelID || Engine.#loadedLevel?.id === levelID && !cleanEngine)
+    async loadLevel(levelID: string, cleanEngine?: boolean) {
+        if (!levelID || this.#loadedLevel?.id === levelID && !cleanEngine)
             return []
         try {
 
@@ -189,7 +189,7 @@ export default class Engine {
             if (!levelEntity.name)
                 levelEntity.name = "New level"
             levelEntity.parentID = undefined
-            Engine.#replaceLevel(levelEntity)
+            this.#replaceLevel(levelEntity)
             const allEntities = []
             for (let i = 0; i < entities.length; i++) {
                 try {
@@ -207,7 +207,7 @@ export default class Engine {
                     const uiID = entity.uiComponent?.uiLayoutID
                     const file = FileSystemAPI.readAsset(uiID)
                     if (file)
-                        Engine.UILayouts.set(uiID, file)
+                        this.UILayouts.set(uiID, file)
                     allEntities.push(entity)
                 } catch (err) {
                     console.error(err)
@@ -218,12 +218,12 @@ export default class Engine {
         } catch (err) {
             console.error(err)
         }
-        Engine.#onLevelLoadListeners.array.forEach(callback => callback())
+        this.#onLevelLoadListeners.array.forEach(callback => callback())
     }
 
-    static #replaceLevel(newLevel?: Entity) {
-        const oldLevel = Engine.#loadedLevel
-        Engine.#loadedLevel = newLevel
+    #replaceLevel(newLevel?: Entity) {
+        const oldLevel = this.#loadedLevel
+        this.#loadedLevel = newLevel
         if (oldLevel) {
             EntityAPI.removeEntity(oldLevel)
         }
@@ -231,11 +231,11 @@ export default class Engine {
             EntityAPI.addEntity(newLevel)
     }
 
-    static addSystem(id: string, callback: Function) {
-        Engine.#executionQueue.set(id, callback)
+    addSystem(id: string, callback: Function) {
+        this.#executionQueue.set(id, callback)
     }
 
-    static removeSystem(id: string) {
-        Engine.#executionQueue.delete(id)
+    removeSystem(id: string) {
+        this.#executionQueue.delete(id)
     }
 }

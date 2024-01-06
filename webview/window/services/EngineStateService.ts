@@ -14,7 +14,7 @@ import ProjectionEngine from "../ProjectionEngine";
 function checkLevel(_, propertyKey: string, descriptor: PropertyDescriptor) {
     const original = descriptor.value
     descriptor.value = function (...args) {
-        if (!Engine.loadedLevel) {
+        if (!ProjectionEngine.Engine.loadedLevel) {
             ProjectionEngine.ToastNotificationSystem.error(LocalizationEN.NO_LEVEL_LOADED)
             return
         }
@@ -25,7 +25,7 @@ function checkLevel(_, propertyKey: string, descriptor: PropertyDescriptor) {
 
 export default class EngineStateService {
     static #updateStructure(replacedMap?: { [key: string]: boolean }) {
-        const arr = Engine.entities.array
+        const arr = ProjectionEngine.Engine.entities.array
         for (let i = 0; i < arr.length; i++) {
             const entity = arr[i]
             entity.setPickID(PickingAPI.getPickerId(i + AXIS.ZY + 1))
@@ -33,7 +33,7 @@ export default class EngineStateService {
                 continue
             if (entity.parent && !replacedMap?.[entity.parent?.id])
                 entity.parentID = entity.parent.id
-            const parent = Engine.entities.get(entity.parentID)
+            const parent = ProjectionEngine.Engine.entities.get(entity.parentID)
             if (parent) {
                 entity.parentID = undefined
                 entity.addParent(parent)
@@ -72,7 +72,7 @@ export default class EngineStateService {
     static removeBlock(payload: string[]) {
         const hierarchy: { [key: string]: Entity } = {}
         for (let i = 0; i < payload.length; i++) {
-            const entity = Engine.entities.get(payload[i])
+            const entity = ProjectionEngine.Engine.entities.get(payload[i])
             if (!entity)
                 continue
             hierarchy[entity.id] = entity
@@ -88,7 +88,7 @@ export default class EngineStateService {
         ProjectionEngine.EntitySelectionStore.updateStore({
             array: []
         })
-        EntitySelectionStore.setLockedEntity(Engine.entities.array[0]?.id)
+        EntitySelectionStore.setLockedEntity(ProjectionEngine.Engine.entities.array[0]?.id)
         EngineStateService.#updateStructure()
     }
 
@@ -109,11 +109,11 @@ export default class EngineStateService {
 
     @checkLevel
     static linkMultiple(payload: string[]) {
-        const values = Engine.entities.array
+        const values = ProjectionEngine.Engine.entities.array
         for (let i = 0; i < values.length; i++) {
             const s = values[i]
             if (payload.indexOf(s.id) > 0) {
-                const found = Engine.entities.get(payload[0])
+                const found = ProjectionEngine.Engine.entities.get(payload[0])
                 s.addParent(found)
             }
         }

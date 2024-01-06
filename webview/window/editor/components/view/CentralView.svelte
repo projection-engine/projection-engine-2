@@ -25,6 +25,7 @@
 
     export let updateView
     export let viewTab
+    export let ready
     export let currentViewIndex
 
     let currentTab = TabsStoreUtil.getCurrentTabByCurrentView("viewport")
@@ -104,6 +105,7 @@
         />
     </div>
     <div class="wrapper">
+        {#if ready}
             <View
                     {currentViewIndex}
                     instance={viewTab[currentTab]}
@@ -112,7 +114,8 @@
                     groupIndex={0}
                     styles="position: absolute; top: 0; display: flex; align-items: center;"
             />
-        <Canvas/>
+        {/if}
+        <slot/>
     </div>
 </div>
 

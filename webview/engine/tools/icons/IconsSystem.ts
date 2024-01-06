@@ -12,6 +12,7 @@ import StaticFBO from "../../core/lib/StaticFBO"
 import EngineToolsState from "../EngineToolsState"
 import GizmoUtil from "../gizmo/util/GizmoUtil"
 import GPUUtil from "../../core/utils/GPUUtil";
+import ProjectionEngine from "../../../window/ProjectionEngine";
 
 
 const iconAttributes = mat4.create()
@@ -19,8 +20,8 @@ export default class IconsSystem {
 	static iconsTexture?: WebGLTexture
 
 	static loop(cb, uniforms?: MutableObject) {
-		const tracking = Engine.CameraAPI.trackingEntity
-		const entities = Engine.entities.array
+		const tracking = ProjectionEngine.Engine.CameraAPI.trackingEntity
+		const entities = ProjectionEngine.Engine.entities.array
 		const size = entities.length
 
 		for (let i = 0; i < size; i++) {
@@ -165,8 +166,8 @@ export default class IconsSystem {
 
 		GPUUtil.bind2DTextureForDrawing(uniforms.sceneDepth, 1, StaticFBO.sceneDepthVelocity)
 
-		context.uniformMatrix4fv(uniforms.projectionM, false, Engine.CameraAPI.projectionMatrix)
-		context.uniformMatrix4fv(uniforms.viewM, false, Engine.CameraAPI.viewMatrix)
+		context.uniformMatrix4fv(uniforms.projectionM, false, ProjectionEngine.Engine.CameraAPI.projectionMatrix)
+		context.uniformMatrix4fv(uniforms.viewM, false, ProjectionEngine.Engine.CameraAPI.viewMatrix)
 
 		if (EngineToolsState.showIcons)
 			IconsSystem.loop(IconsSystem.drawIcon)

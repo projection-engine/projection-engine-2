@@ -13,7 +13,7 @@ import ProjectionEngine from "../ProjectionEngine";
 
 
 export default class EntityFactoryService {
-    static translateEntity(entity, rotation = Engine.CameraAPI.rotationBuffer, translation = Engine.CameraAPI.translationBuffer) {
+    static translateEntity(entity, rotation = ProjectionEngine.Engine.CameraAPI.rotationBuffer, translation = ProjectionEngine.Engine.CameraAPI.translationBuffer) {
         if (ProjectionEngine.SettingsStore.getData().spawnOnOrigin) {
             vec3.copy(entity._translation, [0, 0, 0])
             entity.__changedBuffer[0] = 1
@@ -99,7 +99,7 @@ export default class EntityFactoryService {
     }
 
     static toggleEntityVisibility(entityID: string, noSubmit?: boolean) {
-        EntityAPI.toggleVisibility(Engine.entities.get(entityID))
+        EntityAPI.toggleVisibility(ProjectionEngine.Engine.entities.get(entityID))
         if (!noSubmit)
             ProjectionEngine.EntityHierarchyService.updateHierarchy()
     }

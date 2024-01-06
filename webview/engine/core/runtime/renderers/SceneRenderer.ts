@@ -16,6 +16,7 @@ import Renderer from "../../Renderer"
 import Mesh from "../../instances/Mesh"
 import loopMeshes from "../loop-meshes"
 import EngineState from "../../EngineState"
+import ProjectionEngine from "../../../../window/ProjectionEngine";
 
 let stateWasCleared = false, isDoubleSided = false, isSky = false, texOffset = 0
 
@@ -33,18 +34,18 @@ export default class SceneRenderer {
         const context = GPU.context
 
         UberShader.uber.bind()
-        if (Engine.developmentMode)
+        if (ProjectionEngine.Engine.developmentMode)
             context.uniform1i(uniforms.shadingModel, EngineState.debugShadingModel)
 
         stateWasCleared = isDoubleSided = isSky = false
         texOffset = 7
 
-        context.uniformMatrix4fv(uniforms.skyProjectionMatrix, false, Engine.CameraAPI.skyboxProjectionMatrix)
+        context.uniformMatrix4fv(uniforms.skyProjectionMatrix, false, ProjectionEngine.Engine.CameraAPI.skyboxProjectionMatrix)
         context.uniform1f(uniforms.elapsedTime, Renderer.elapsed)
-        context.uniformMatrix4fv(uniforms.viewMatrix, false, Engine.CameraAPI.viewMatrix)
-        context.uniformMatrix4fv(uniforms.invViewMatrix, false, Engine.CameraAPI.invViewMatrix)
-        context.uniformMatrix4fv(uniforms.viewProjection, false, Engine.CameraAPI.viewProjectionMatrix)
-        context.uniform3fv(uniforms.cameraPosition, Engine.CameraAPI.position)
+        context.uniformMatrix4fv(uniforms.viewMatrix, false, ProjectionEngine.Engine.CameraAPI.viewMatrix)
+        context.uniformMatrix4fv(uniforms.invViewMatrix, false, ProjectionEngine.Engine.CameraAPI.invViewMatrix)
+        context.uniformMatrix4fv(uniforms.viewProjection, false, ProjectionEngine.Engine.CameraAPI.viewProjectionMatrix)
+        context.uniform3fv(uniforms.cameraPosition, ProjectionEngine.Engine.CameraAPI.position)
 
         SceneRenderer.#bindTexture(context, uniforms.brdf_sampler, 0, GPU.BRDF, false)
         SceneRenderer.#bindTexture(context, uniforms.SSAO, 1, StaticFBO.ssaoBlurredSampler, false)
