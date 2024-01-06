@@ -6,6 +6,8 @@
 namespace PEngine {
     class FS {
     public:
+        static std::string SEP;
+
         static void WriteFile(const std::string &filePath, const std::string &data);
 
         static void DeleteFileOrDir(const std::string &filePath);

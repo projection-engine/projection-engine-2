@@ -3,7 +3,7 @@ const sveltePreprocess = require("svelte-preprocess")
 const sveltePlugin = require("esbuild-svelte")
 const {copy} = require("esbuild-plugin-copy")
 
-const OUTPUT = "../../../build/src/"
+const OUTPUT = "../build/src/"
 const production = process.argv[2] === "prod"
 const COMMON = {
     tsconfig: "tsconfig.json",
@@ -46,9 +46,8 @@ async function start() {
     contexts.push(esbuild.context(worker("engine/core/workers/camera-worker.ts", "camera-worker")))
     contexts.push(esbuild.context(worker("engine/core/workers/terrain-worker.ts", "terrain-worker")))
     contexts.push(esbuild.context(worker("engine/core/workers/image-worker.ts", "image-worker")))
-    contexts.push(esbuild.context(frontend("/editor/editor-window.ts", "editor-window")))
     contexts.push(esbuild.context({
-        ...frontend("/projects/project-window.ts", "project-window"),
+        ...frontend("/editor/editor-window.ts", "editor-window"),
         plugins: [
             sveltePlugin({
                 preprocess: sveltePreprocess({typescript: {tsconfigFile: "tsconfig.json"}}),

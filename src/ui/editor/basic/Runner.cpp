@@ -1,6 +1,4 @@
 #include "Runner.h"
-#include "../../shared/elements/IElement.h"
-#include "../../shared/views/IView.h"
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
@@ -9,31 +7,13 @@
 
 
 namespace PEngine {
-    void Runner::update() {
-        auto &list = document.getViews();
-        document.getViews().iterate();
-        while (list.hasNext()) {
-            auto *next = list.next();
-            next->update();
-        }
-    }
-
     void Runner::render() {
-        ImGui::ShowDemoWindow();
-        auto &list = document.getElements();
-        list.iterate();
-        while (list.hasNext()) {
-            auto *next = list.next();
-            if (next->isActive()) {
-                next->render();
-            }
-        }
+//        ImGui::ShowDemoWindow();
     }
 
     void Runner::updateViewports() {
         ImGui::UpdatePlatformWindows();
         ImGui::RenderPlatformWindowsDefault();
-
     }
 
     void Runner::startNewFrame() {

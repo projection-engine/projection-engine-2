@@ -35,14 +35,10 @@ set(MAIN_PATHS
         src/ui/editor/basic/Runner.h
         src/ui/shared/webview/WebViewPayload.cpp
         src/ui/shared/webview/WebViewPayload.h
-        src/ui/projects/Projects.cpp
-        src/ui/projects/Projects.h
         src/ui/WindowRepository.cpp
         src/ui/WindowRepository.h
         src/ui/shared/webview/WebViewWindow.cpp
         src/ui/shared/webview/WebViewWindow.h
-        src/ui/projects/ProjectsService.cpp
-        src/ui/projects/ProjectsService.h
 )
 set(FILE_PATHS
         src/util/JSON.h
@@ -103,26 +99,10 @@ set(FILE_PATHS
         src/util/structures/Map.h
 
         src/ui/shared/store/IStore.h
-        src/ui/shared/elements/EInlineBlock.cpp
-        src/ui/shared/elements/EInlineBlock.h
-        src/ui/shared/elements/ETreeNode.cpp
-        src/ui/shared/elements/ETreeNode.h
-        src/ui/shared/elements/AbstractSimpleElement.cpp
-        src/ui/shared/elements/AbstractSimpleElement.h
         src/ui/editor/basic/IOController.cpp
         src/ui/editor/basic/IOController.h
         src/ui/editor/basic/FSController.cpp
         src/ui/editor/basic/FSController.h
-        src/ui/shared/elements/IElement.h
-        src/ui/shared/elements/ESection.cpp
-        src/ui/shared/elements/ESection.h
-        src/ui/shared/elements/EText.cpp
-        src/ui/shared/elements/EText.h
-        src/ui/shared/document/Document.cpp
-        src/ui/shared/document/Document.h
-        src/ui/shared/views/IView.cpp
-        src/ui/shared/views/IView.h
-        src/ui/shared/elements/IElement.cpp
 
         src/util/debug/ILoggable.cpp
         src/util/debug/ILoggable.h
@@ -134,28 +114,7 @@ set(FILE_PATHS
         src/engine/Engine.cpp
         src/engine/Engine.h
         src/util/UUID.h
-        src/ui/shared/document/ElementController.cpp
-        src/ui/shared/document/ElementController.h
-        src/ui/shared/document/ElementController.h
-        src/ui/shared/document/ViewController.cpp
-        src/ui/shared/document/ViewController.h
         src/ui/shared/runners/imgui_demo.cpp
-        src/ui/shared/elements/ETree.cpp
-        src/ui/shared/elements/ETree.h
-        src/ui/shared/elements/EButton.cpp
-        src/ui/shared/elements/EButton.h
-        src/ui/shared/elements/EMenuItem.cpp
-        src/ui/shared/elements/EMenuItem.h
-        src/ui/shared/elements/EMenu.cpp
-        src/ui/shared/elements/EMenu.h
-        src/ui/shared/elements/EMenuBar.cpp
-        src/ui/shared/elements/EMenuBar.h
-        src/ui/shared/elements/AbstractTitledElement.cpp
-        src/ui/shared/elements/AbstractTitledElement.h
-        src/ui/shared/elements/DynamicElement.cpp
-        src/ui/shared/elements/DynamicElement.h
-        src/ui/shared/elements/EIcon.cpp
-        src/ui/shared/elements/EIcon.h
         src/util/StringUtils.h
         src/util/event/EventController.cpp
         src/util/event/EventController.h

@@ -55,6 +55,8 @@ namespace PEngine {
         void setHTMLFile(const std::string &path);
 
         void setWindow(AbstractWindow *window);
+
+        void resize();
     };
 
 }

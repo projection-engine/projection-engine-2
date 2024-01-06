@@ -19,6 +19,8 @@ namespace PEngine {
 
     class WindowRepository : public ILoggable {
     private:
+        static void windowResizeCallback(GLFWwindow *window, int width, int height);
+
         static WindowRepository singleton;
         GLFWwindow *window = nullptr;
         WebViewWindow *webView = nullptr;
@@ -55,6 +57,8 @@ namespace PEngine {
         AbstractWindow *getWindowById(const std::string &windowId);
 
         void run();
+
+
     };
 
 }

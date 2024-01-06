@@ -5,6 +5,8 @@
 #include <stdexcept>
 
 namespace PEngine {
+    std::string FS::SEP = "\\";
+
     void FS::WriteFile(const std::string &filePath, const std::string &data) {
         std::ofstream outputFile(filePath);
         if (outputFile.is_open()) {

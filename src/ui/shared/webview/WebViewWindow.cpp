@@ -12,6 +12,8 @@
 #include "../../../util/JSON.h"
 #include <unordered_map>
 #include "../WindowRepository.h"
+#include "../../../util/FS.h"
+#include "WebView2EnvironmentOptions.h"
 
 namespace PEngine {
     HWND__ *WebViewWindow::getNativeWindow() const {
@@ -87,30 +89,37 @@ namespace PEngine {
     }
 
     void WebViewWindow::postMessage(const std::string &message, const std::string &id) {
-        nlohmann::json jsonObj;
-        jsonObj["message"] = message;
-        jsonObj["id"] = id;
-        std::string messagePayload = jsonObj.dump();
+        JSON jsonObj;
+        jsonObj.set("payload", message.c_str());
+        jsonObj.set("id", id.c_str());
+        std::string messagePayload = jsonObj.stringify();
         CONSOLE_WARN("Posting message")
         webview->PostWebMessageAsString(std::wstring(messagePayload.begin(), messagePayload.end()).c_str());
     }
 
     WebViewWindow::WebViewWindow() {
         CONSOLE_WARN("Creating WebView2 window")
+        const Microsoft::WRL::ComPtr<ICoreWebView2CreateCoreWebView2EnvironmentCompletedHandler> &callback = Microsoft::WRL::Callback<ENV_HANDLER>(
+                [this](HRESULT r, ICoreWebView2Environment *env) -> HRESULT {
+                    const Microsoft::WRL::ComPtr<CONTROLLER_HANDLER> &handler = Microsoft::WRL::Callback<CONTROLLER_HANDLER>(
+                            [this](HRESULT r, ICoreWebView2Controller *controller) -> HRESULT {
+                                prepareView(controller);
+                                return S_OK;
+                            });
+                    env->CreateCoreWebView2Controller(getNativeWindow(), handler.Get());
+                    return S_OK;
+                });
+
+        auto options = Microsoft::WRL::Make<CoreWebView2EnvironmentOptions>();
+        std::wstring args;
+        args.append(L"--allow-file-access-from-files --disable-web-security");
+        options->put_AdditionalBrowserArguments(args.c_str());
         CreateCoreWebView2EnvironmentWithOptions(
                 nullptr,
                 nullptr,
-                nullptr,
-                Microsoft::WRL::Callback<ENV_HANDLER>(
-                        [this](HRESULT r, ICoreWebView2Environment *env) -> HRESULT {
-                            const Microsoft::WRL::ComPtr<CONTROLLER_HANDLER> &handler = Microsoft::WRL::Callback<CONTROLLER_HANDLER>(
-                                    [this](HRESULT r, ICoreWebView2Controller *controller) -> HRESULT {
-                                        prepareView(controller);
-                                        return S_OK;
-                                    });
-                            env->CreateCoreWebView2Controller(getNativeWindow(), handler.Get());
-                            return S_OK;
-                        }).Get());
+                options.Get(),
+                callback.Get()
+        );
     }
 
     void WebViewWindow::addMessageListener(const std::string &listenerId, void (*action)(WebViewPayload &)) {
@@ -123,6 +132,14 @@ namespace PEngine {
 
     void WebViewWindow::setWindow(AbstractWindow *window) {
         WebViewWindow::window = window;
+    }
+
+    void WebViewWindow::resize() {
+        if(webviewController != nullptr) {
+            RECT bounds;
+            GetClientRect(getNativeWindow(), &bounds);
+            webviewController->put_Bounds(bounds);
+        }
     }
 
 }

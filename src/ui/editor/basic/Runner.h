@@ -11,8 +11,6 @@
 #define BACKGROUND_A 1
 
 namespace PEngine {
-    class Document;
-
     class Engine;
 
     class Runner : public IRunner {
@@ -22,8 +20,6 @@ namespace PEngine {
         void initiate();
 
     protected:
-
-        void update() override;
 
         void startNewFrame() override;
 

@@ -4,16 +4,12 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include "../../util/debug/ILoggable.h"
-#include "../shared/document/Document.h"
 
 namespace PEngine {
     class IRunner : public ILoggable {
     protected:
-        Document document;
         int windowWidth = 0;
         int windowHeight = 0;
-
-        virtual void update() {}
 
         virtual void startNewFrame() {}
 
@@ -30,7 +26,6 @@ namespace PEngine {
         virtual void destroyContext(){}
 
         void run() {
-            update();
             startNewFrame();
             render();
             drawNewFrame();

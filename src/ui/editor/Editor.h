@@ -12,18 +12,13 @@ namespace PEngine {
     private:
         static void onMessage(WebViewPayload &payload);
 
-        std::string projectPath;
     public:
 
         explicit Editor() : AbstractWindow("Project Editor") {}
 
         IRunner *initialize() override;
 
-        void setProject(const std::string &pathToMetadata);
-
-        const std::string &getProject();
-
-        const char * getWebViewHTML() override;
+        const char *getWebViewHTML() override;
     };
 }
 

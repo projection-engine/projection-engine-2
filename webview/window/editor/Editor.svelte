@@ -11,25 +11,24 @@
     import StoreIPCListener from "../shared/lib/StoreIPCListener"
     import EditorUtil from "./util/EditorUtil"
     import MenuBar from "../shared/components/frame/MenuBar.svelte";
-    import EditorSystem from "./lib/EditorSystem";
 
     const COMPONENT_ID = crypto.randomUUID()
-    let isMetadataReady = false
     let isContextInitialized = false
     let view
     let cameraGizmoSize
     let currentViewIndex = 0
 
     onMount(() => {
-        SettingsStore.getInstance().addListener(COMPONENT_ID, data => {
-            view = data.views?.[data.currentView]
-            currentViewIndex = data.currentView
-            cameraGizmoSize = data.cameraGizmoSize
-        }, ["views", "currentView", "cameraGizmoSize"])
+        SettingsStore.getInstance()
+            .addListener(COMPONENT_ID, data => {
+                view = data.views?.[data.currentView]
+                currentViewIndex = data.currentView
+                cameraGizmoSize = data.cameraGizmoSize
+            }, ["views", "currentView", "cameraGizmoSize"])
         EngineStore.getInstance().addListener(COMPONENT_ID, data => HotKeysController.blockActions = data.executingAnimation, ["executingAnimation"])
         StoreIPCListener.get()
         ToastNotificationSystem.get()
-        EditorSystem.loadProject().then(() => isMetadataReady = true)
+
     })
 
     onDestroy(() => {
@@ -39,10 +38,8 @@
 </script>
 
 <MenuBar/>
-{#if isMetadataReady}
-    <Canvas initializeEditor={() => isContextInitialized = true}/>
-{/if}
-{#if isMetadataReady && isContextInitialized && view !== undefined}
+<Canvas initializeEditor={() => isContextInitialized = true}/>
+{#if isContextInitialized && view !== undefined}
     <div class="wrapper" style={`--cube-size: ${cameraGizmoSize}px;`}>
         <div class="middle">
             <ViewsContainer

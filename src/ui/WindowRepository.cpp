@@ -66,6 +66,7 @@ namespace PEngine {
             return;
         }
 
+        glfwSetFramebufferSizeCallback(window, windowResizeCallback);
         glfwMakeContextCurrent(window);
         glfwSwapInterval(1);
 
@@ -129,5 +130,9 @@ namespace PEngine {
             return windows[windowId];
         }
         return nullptr;
+    }
+
+    void WindowRepository::windowResizeCallback(GLFWwindow *window, int width, int height) {
+        WindowRepository::Get().webView->resize();
     }
 }

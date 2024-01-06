@@ -13,7 +13,7 @@ namespace PEngine {
         std::string payload;
         WebViewWindow *webview = nullptr;
 
-        void resolve(const char *message) const;
+        void resolve(const std::string& message) const;
     };
 }
 #endif
