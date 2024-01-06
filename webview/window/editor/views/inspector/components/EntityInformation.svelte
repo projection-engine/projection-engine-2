@@ -1,20 +1,20 @@
 <script lang="ts">
-    import Engine from "../../../../../engine/core/Engine";
+    import Engine from "@engine-core/Engine";
 
     import Selector from "../../../components/selector/Selector.svelte";
-    import Checkbox from "../../../../shared/components/checkbox/Checkbox.svelte";
+    import Checkbox from "@lib/components/checkbox/Checkbox.svelte";
     import EntityFactoryService from "../../../../services/EntityFactoryService";
 
-    import Input from "../../../../shared/components/input/Input.svelte";
-    import ColorPicker from "../../../../shared/components/color-picker/ColorPicker.svelte";
-    import Entity from "../../../../../engine/core/instances/Entity";
-    import PropertyHeader from "../../../../shared/components/PropertyHeader.svelte";
-    import Accordion from "../../../../shared/components/accordion/Accordion.svelte";
+    import Input from "@lib/components/input/Input.svelte";
+    import ColorPicker from "@lib/components/color-picker/ColorPicker.svelte";
+    import Entity from "@engine-core/instances/Entity";
+    import PropertyHeader from "@lib/components/PropertyHeader.svelte";
+    import Accordion from "@lib/components/accordion/Accordion.svelte";
     import TransformationForm from "./TransformationForm.svelte";
     import {onDestroy} from "svelte";
     import AddComponent from "./AddComponent.svelte";
-    import LocalizationEN from "../../../../../enums/LocalizationEN";
-    import ProjectionEngine from "../../../../ProjectionEngine";
+    import LocalizationEN from "@enums/LocalizationEN";
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     export let entity: Entity
 

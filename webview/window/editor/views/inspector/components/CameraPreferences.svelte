@@ -1,14 +1,14 @@
 <script>
     import CameraTracker from "../../../../../engine/tools/utils/CameraTracker"
     import Layout from "./dynamic-form/Layout.svelte"
-    import CAMERA_PROPS from "../../../../../engine/core/static/component-props/CAMERA_PROPS"
+    import CAMERA_PROPS from "@engine-core/static/component-props/CAMERA_PROPS"
     import ContentField from "../../../../preferences/components/content/ContentField.svelte"
     import {onDestroy, onMount} from "svelte"
-    import Accordion from "../../../../shared/components/accordion/Accordion.svelte"
-    import PropertyHeader from "../../../../shared/components/PropertyHeader.svelte"
-    import LocalizationEN from "../../../../../enums/LocalizationEN"
+    import Accordion from "@lib/components/accordion/Accordion.svelte"
+    import PropertyHeader from "@lib/components/PropertyHeader.svelte"
+    import LocalizationEN from "@enums/LocalizationEN"
     import CAMERA_PREFERENCES from "../static/CAMERA_PREFERENCES"
-    import ProjectionEngine from "../../../../ProjectionEngine";
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     let cameraSettings = {}

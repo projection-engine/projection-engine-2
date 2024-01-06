@@ -6,9 +6,9 @@
     import Header from "./components/Header.svelte"
     import GlobalContentBrowserController from "./libs/GlobalContentBrowserController"
     import ITEM_TYPES from "./static/ITEM_TYPES"
-    import ResizableBar from "../../../shared/components/resizable/ResizableBar.svelte"
+    import ResizableBar from "@lib/components/resizable/ResizableBar.svelte"
     import {SORTS, SORTS_KEYS} from "./static/SORT_INFO"
-    import FileSystemUtil from "../../../shared/FileSystemUtil"
+    import FileSystemUtil from "@lib/FileSystemUtil"
     import Properties from "./components/info-editor/Properties.svelte";
     import SerializedState from "../../components/view/SerializedState.svelte";
 

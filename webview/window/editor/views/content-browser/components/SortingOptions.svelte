@@ -1,12 +1,12 @@
 <script>
 
-    import Icon from "../../../../shared/components/icon/Icon.svelte"
+    import Icon from "@lib/components/icon/Icon.svelte"
     import {SORTS, SORTS_KEYS} from "../static/SORT_INFO"
-    import Dropdown from "../../../../shared/components/dropdown/Dropdown.svelte"
-    import ToolTip from "../../../../shared/components/tooltip/ToolTip.svelte"
-    import getDropdownHeaderStyles from "../../../../shared/components/dropdown/utils/get-dropdown-header-styles"
-    import LocalizationEN from "../../../../../enums/LocalizationEN"
-    import EmptyIcon from "../../../../shared/components/icon/EmptyIcon.svelte"
+    import Dropdown from "@lib/components/dropdown/Dropdown.svelte"
+    import ToolTip from "@lib/components/tooltip/ToolTip.svelte"
+    import getDropdownHeaderStyles from "@lib/components/dropdown/utils/get-dropdown-header-styles"
+    import LocalizationEN from "@enums/LocalizationEN"
+    import EmptyIcon from "@lib/components/icon/EmptyIcon.svelte"
 
     export let setSortKey
     export let setSortDirection

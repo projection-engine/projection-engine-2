@@ -1,5 +1,5 @@
 import {mat4, quat, vec3} from "gl-matrix"
-import DynamicMap from "../resource-libs/DynamicMap"
+import DynamicMap from "../lib/DynamicMap"
 import Movable from "../instances/components/Movable"
 
 /**

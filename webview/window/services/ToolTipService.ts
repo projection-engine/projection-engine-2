@@ -1,4 +1,4 @@
-import SveltePortal from "../shared/lib/SveltePortal"
+import SveltePortal from "@lib/SveltePortal"
 
 export default class ToolTipService  {
 	portal = new SveltePortal(999, false)

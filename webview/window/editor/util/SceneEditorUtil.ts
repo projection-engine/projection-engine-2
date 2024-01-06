@@ -1,21 +1,21 @@
-import SHADING_MODELS from "../../../engine/core/static/SHADING_MODELS"
-import LocalizationEN from "../../../enums/LocalizationEN"
-import ConversionAPI from "../../../engine/core/lib/math/ConversionAPI"
-import GPU from "../../../engine/core/GPU"
-import PickingAPI from "../../../engine/core/lib/utils/PickingAPI"
-import Engine from "../../../engine/core/Engine"
-import VisibilityRenderer from "../../../engine/core/runtime/VisibilityRenderer"
+import SHADING_MODELS from "@engine-core/static/SHADING_MODELS"
+import LocalizationEN from "@enums/LocalizationEN"
+import ConversionAPI from "@engine-core/lib/math/ConversionAPI"
+import GPU from "@engine-core/GPU"
+import PickingAPI from "@engine-core/lib/utils/PickingAPI"
+import Engine from "@engine-core/Engine"
+import VisibilityRenderer from "@engine-core/runtime/VisibilityRenderer"
 import EngineTools from "../../../engine/tools/EngineTools"
 import {glMatrix, quat} from "gl-matrix"
-import CameraAPI from "../../../engine/core/lib/utils/CameraAPI"
+import CameraAPI from "@engine-core/lib/utils/CameraAPI"
 import CameraTracker from "../../../engine/tools/utils/CameraTracker"
 import EngineResourceLoaderService from "../../services/EngineResourceLoaderService"
 import getViewportContext from "../templates/get-viewport-context"
 import RENDER_TARGET from "../static/RENDER_TARGET"
 import SETTINGS from "../static/SETTINGS"
-import EntitySelectionStore from "../../shared/stores/EntitySelectionStore";
-import CameraSerialization from "../../../engine/core/static/CameraSerialization";
-import ProjectionEngine from "../../ProjectionEngine";
+import EntitySelectionStore from "@lib/stores/EntitySelectionStore";
+import CameraSerialization from "@engine-core/static/CameraSerialization";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 export default class SceneEditorUtil {
 	static #worker?: Worker

@@ -1,7 +1,7 @@
 <script>
 
 
-    import LocalizationEN from "../../../../../../enums/LocalizationEN"
+    import LocalizationEN from "@enums/LocalizationEN"
 
     export let data
 </script>

@@ -1,15 +1,15 @@
 <script>
-    import GPU from "../../../../../../engine/core/GPU"
+    import GPU from "@engine-core/GPU"
 
-    import FileSystemUtil from "../../../../../shared/FileSystemUtil"
+    import FileSystemUtil from "@lib/FileSystemUtil"
     import EditorFSUtil from "../../../../util/EditorFSUtil"
-    import GPUAPI from "../../../../../../engine/core/lib/rendering/GPUAPI"
+    import GPUAPI from "@engine-core/lib/rendering/GPUAPI"
     import MaterialUniforms from "../../../../components/MaterialUniformsForm.svelte"
-    import Icon from "../../../../../shared/components/icon/Icon.svelte"
+    import Icon from "@lib/components/icon/Icon.svelte"
     import ToasterService from "../../../../../services/ToasterService"
-    import LocalizationEN from "../../../../../../enums/LocalizationEN"
+    import LocalizationEN from "@enums/LocalizationEN"
     import InspectorUtil from "../../../../util/InspectorUtil"
-    import ProjectionEngine from "../../../../../ProjectionEngine";
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     export let data
     export let item

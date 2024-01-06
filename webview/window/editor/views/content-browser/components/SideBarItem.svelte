@@ -1,7 +1,7 @@
 <script>
-    import dragDrop from "../../../../shared/components/drag-drop/drag-drop"
+    import dragDrop from "@lib/components/drag-drop/drag-drop"
     import {onDestroy, onMount} from "svelte"
-    import Icon from "../../../../shared/components/icon/Icon.svelte"
+    import Icon from "@lib/components/icon/Icon.svelte"
     import ContentBrowserUtil from "../../../util/ContentBrowserUtil"
 
     export let depth

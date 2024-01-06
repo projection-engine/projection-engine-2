@@ -1,9 +1,9 @@
 <script>
     import ALL_NODES from "../static/ALL_NODES"
 
-    import Icon from "../../../../shared/components/icon/Icon.svelte"
-    import Input from "../../../../shared/components/input/Input.svelte"
-    import LocalizationEN from "../../../../../enums/LocalizationEN"
+    import Icon from "@lib/components/icon/Icon.svelte"
+    import Input from "@lib/components/input/Input.svelte"
+    import LocalizationEN from "@enums/LocalizationEN"
 
     let inputValue = ""
     $: nodes = !inputValue ? ALL_NODES : ALL_NODES.filter(i => i.label.toLowerCase().includes(inputValue.toLowerCase()))

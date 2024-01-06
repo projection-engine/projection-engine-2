@@ -1,19 +1,19 @@
 <script>
     import Item from "./item/Item.svelte"
-    import SelectBox from "../../../../shared/components/select-box/SelectBox.svelte"
+    import SelectBox from "@lib/components/select-box/SelectBox.svelte"
     import VirtualList from "@sveltejs/svelte-virtual-list"
     import {onDestroy, onMount} from "svelte"
-    import HotKeysController from "../../../../shared/lib/HotKeysController"
-    import EntitySelectionStore from "../../../../shared/stores/EntitySelectionStore"
+    import HotKeysController from "@lib/HotKeysController"
+    import EntitySelectionStore from "@lib/stores/EntitySelectionStore"
 
     import ITEM_TYPES from "../static/ITEM_TYPES"
     import BrowserHeader from "./BrowserHeader.svelte"
-    import Icon from "../../../../shared/components/icon/Icon.svelte"
+    import Icon from "@lib/components/icon/Icon.svelte"
     import ContextMenuService from "../../../../services/ContextMenuService"
-    import LocalizationEN from "../../../../../enums/LocalizationEN"
+    import LocalizationEN from "@enums/LocalizationEN"
     import ContentBrowserUtil from "../../../util/ContentBrowserUtil"
-    import ContentBrowserStore from "../../../../shared/stores/ContentBrowserStore"
-    import ProjectionEngine from "../../../../ProjectionEngine";
+    import ContentBrowserStore from "@lib/stores/ContentBrowserStore"
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     const CARD_SIZE = 115

@@ -1,10 +1,10 @@
 <script>
 
-    import Checkbox from "../../../shared/components/checkbox/Checkbox.svelte"
-    import ColorPicker from "../../../shared/components/color-picker/ColorPicker.svelte"
-    import Range from "../../../shared/components/range/Range.svelte"
-    import Component from "../../../../engine/core/instances/components/Component"
-    import ProjectionEngine from "../../../ProjectionEngine";
+    import Checkbox from "@lib/components/checkbox/Checkbox.svelte"
+    import ColorPicker from "@lib/components/color-picker/ColorPicker.svelte"
+    import Range from "@lib/components/range/Range.svelte"
+    import Component from "@engine-core/instances/components/Component"
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     export let toRender
     export let settings

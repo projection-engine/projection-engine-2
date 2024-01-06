@@ -14,7 +14,7 @@ import UIComponent from "./UIComponent"
 import CameraComponent from "./CameraComponent"
 import DecalComponent from "./DecalComponent"
 import LightProbeComponent from "./LightProbeComponent"
-import DynamicMap from "../../resource-libs/DynamicMap"
+import DynamicMap from "../../lib/DynamicMap"
 
 export default class ComponentResources extends Movable {
 	#components = new DynamicMap<string, Component>()

@@ -1,8 +1,8 @@
 <script>
-    import Icon from "../../../../../shared/components/icon/Icon.svelte"
+    import Icon from "@lib/components/icon/Icon.svelte"
     import KEYS from "../../../../static/KEYS"
 
-    import FileTypes from "../../../../../../enums/FileTypes"
+    import FileTypes from "@enums/FileTypes"
     import ContentBrowserUtil from "../../../../util/ContentBrowserUtil"
 
     export let data

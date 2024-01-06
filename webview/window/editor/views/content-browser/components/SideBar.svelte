@@ -1,10 +1,10 @@
 <script>
     import SideBarItem from "./SideBarItem.svelte"
     import VirtualList from "@sveltejs/svelte-virtual-list"
-    import ContentBrowserHierarchyStore from "../../../../shared/stores/ContentBrowserHierarchyStore"
+    import ContentBrowserHierarchyStore from "@lib/stores/ContentBrowserHierarchyStore"
     import {onDestroy, onMount} from "svelte"
-    import FileSystemUtil from "../../../../shared/FileSystemUtil"
-    import ProjectionEngine from "../../../../ProjectionEngine";
+    import FileSystemUtil from "@lib/FileSystemUtil"
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
 

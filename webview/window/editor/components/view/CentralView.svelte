@@ -1,21 +1,21 @@
 <script>
 
-    import EngineStore from "../../../shared/stores/EngineStore"
+    import EngineStore from "@lib/stores/EngineStore"
     import {onDestroy, onMount} from "svelte"
     import VIEWPORT_TABS from "../../static/VIEWPORT_TABS.ts"
-    import HotKeysController from "../../../shared/lib/HotKeysController"
+    import HotKeysController from "@lib/HotKeysController"
     import getViewportHotkeys from "../../templates/get-viewport-hotkeys"
     import Tabs from "../tabs/Tabs.svelte"
     import VIEWS from "./static/VIEWS"
     import View from "./components/View.svelte"
-    import TabsStore from "../../../shared/stores/TabsStore"
-    import GPU from "../../../../engine/core/GPU"
+    import TabsStore from "@lib/stores/TabsStore"
+    import GPU from "@engine-core/GPU"
     import ViewportUtil from "../../util/ViewportUtil"
     import ViewsUtil from "../../util/ViewsUtil"
     import TabsStoreUtil from "../../util/TabsStoreUtil"
-    import LocalizationEN from "../../../../enums/LocalizationEN";
+    import LocalizationEN from "@enums/LocalizationEN";
     import Canvas from "./Canvas.svelte";
-    import ProjectionEngine from "../../../ProjectionEngine";
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     const VIEW_TEMPLATES = [...Object.values(VIEWS), ...Object.values(VIEWPORT_TABS)].map(value => ({

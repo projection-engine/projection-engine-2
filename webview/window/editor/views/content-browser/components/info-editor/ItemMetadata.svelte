@@ -1,10 +1,10 @@
 <script>
 
     import GlobalContentBrowserController from "../../libs/GlobalContentBrowserController"
-    import ToolTip from "../../../../../shared/components/tooltip/ToolTip.svelte"
-    import LocalizationEN from "../../../../../../enums/LocalizationEN"
+    import ToolTip from "@lib/components/tooltip/ToolTip.svelte"
+    import LocalizationEN from "@enums/LocalizationEN"
     import ContentBrowserUtil from "../../../../util/ContentBrowserUtil"
-    import FileSystemUtil from "../../../../../shared/FileSystemUtil"
+    import FileSystemUtil from "@lib/FileSystemUtil"
 
     export let item
     let data

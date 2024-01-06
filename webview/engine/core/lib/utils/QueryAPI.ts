@@ -1,6 +1,6 @@
 import Engine from "../../Engine"
 import Entity from "../../instances/Entity"
-import ProjectionEngine from "../../../../window/ProjectionEngine";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 export default class QueryAPI {
     static getEntityByQueryID(id: string): Entity | undefined {

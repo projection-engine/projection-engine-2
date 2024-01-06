@@ -1,6 +1,6 @@
-import QueryAPI from "../../engine/core/lib/utils/QueryAPI"
-import Entity from "../../engine/core/instances/Entity"
-import ProjectionEngine from "../ProjectionEngine";
+import QueryAPI from "@engine-core/lib/utils/QueryAPI"
+import Entity from "@engine-core/instances/Entity"
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 export default class EntityNamingService {
     #byName = new Map<string, string>()

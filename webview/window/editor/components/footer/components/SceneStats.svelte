@@ -1,10 +1,10 @@
 <script>
     import {onDestroy, onMount} from "svelte"
-    import GPU from "../../../../../engine/core/GPU"
-    import Engine from "../../../../../engine/core/Engine"
-    import ToolTip from "../../../../shared/components/tooltip/ToolTip.svelte"
-    import LocalizationEN from "../../../../../enums/LocalizationEN"
-    import ProjectionEngine from "../../../../ProjectionEngine";
+    import GPU from "@engine-core/GPU"
+    import Engine from "@engine-core/Engine"
+    import ToolTip from "@lib/components/tooltip/ToolTip.svelte"
+    import LocalizationEN from "@enums/LocalizationEN"
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     let entities = 0
     let triangles = 0

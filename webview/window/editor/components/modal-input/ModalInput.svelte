@@ -1,5 +1,5 @@
 <script>
-    import Modal from "../../../shared/components/modal/Modal.svelte"
+    import Modal from "@lib/components/modal/Modal.svelte"
     import KEYS from "../../static/KEYS"
 
     export let handleClose

@@ -1,17 +1,17 @@
 import materialCompiler from "./material-compiler/material-compiler"
 
-import ContentBrowserStore from "../../../../shared/stores/ContentBrowserStore"
+import ContentBrowserStore from "@lib/stores/ContentBrowserStore"
 import Canvas from "./Canvas"
 import type ShaderNode from "../templates/ShaderNode"
-import GPU from "../../../../../engine/core/GPU"
-import UberShader from "../../../../../engine/core/resource-libs/UberShader"
-import GPUAPI from "../../../../../engine/core/lib/rendering/GPUAPI"
+import GPU from "@engine-core/GPU"
+import UberShader from "@engine-core/lib/UberShader"
+import GPUAPI from "@engine-core/lib/rendering/GPUAPI"
 import NodesIndex from "../static/NODE_MAP"
 import ShaderLink from "../templates/ShaderLink"
 import ShaderComment from "../templates/ShaderComment"
-import LocalizationEN from "../../../../../enums/LocalizationEN"
+import LocalizationEN from "@enums/LocalizationEN"
 import EditorFSUtil from "../../../util/EditorFSUtil"
-import ProjectionEngine from "../../../../ProjectionEngine";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 export default class ShaderEditorTools {
 

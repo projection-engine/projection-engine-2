@@ -1,8 +1,8 @@
 <script>
     import ContentField from "./ContentField.svelte"
-    import Accordion from "../../../shared/components/accordion/Accordion.svelte"
+    import Accordion from "@lib/components/accordion/Accordion.svelte"
     import {onDestroy, onMount} from "svelte"
-    import ProjectionEngine from "../../../ProjectionEngine";
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     export let toRender

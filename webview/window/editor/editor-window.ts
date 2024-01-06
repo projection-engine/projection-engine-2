@@ -1,6 +1,6 @@
 import Editor from "./Editor.svelte"
-import WindowInitializer from "../shared/WindowInitializer"
-import ProjectionEngine from "../ProjectionEngine";
+import WindowInitializer from "@lib/WindowInitializer"
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 ProjectionEngine.createContext()
 WindowInitializer.initialize()

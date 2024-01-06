@@ -1,20 +1,20 @@
 import ViewportActionService from "../../services/ViewportActionService"
-import SettingsStore from "../../shared/stores/SettingsStore"
-import GIZMOS from "../../../enums/Gizmos"
+import SettingsStore from "@lib/stores/SettingsStore"
+import GIZMOS from "@enums/Gizmos"
 import EditorActionHistoryService from "../../services/EditorActionHistoryService"
-import QueryAPI from "../../../engine/core/lib/utils/QueryAPI"
-import GizmoTransformationType from "../../../enums/GizmoTransformationType"
+import QueryAPI from "@engine-core/lib/utils/QueryAPI"
+import GizmoTransformationType from "@enums/GizmoTransformationType"
 import EntityFactoryService from "../../services/EntityFactoryService"
 import CAMERA_ROTATIONS from "../../../engine/tools/static/CAMERA_ROTATIONS"
 import LevelService from "../../services/LevelService"
 import CameraTracker from "../../../engine/tools/utils/CameraTracker"
-import ContextMenuOption from "../../shared/lib/context-menu/templates/ContextMenuOptions"
+import ContextMenuOption from "@lib/context-menu/templates/ContextMenuOptions"
 import EntityHierarchyService from "../../services/EntityHierarchyService"
 import EngineStateService from "../../services/EngineStateService"
-import LocalizationEN from "../../../enums/LocalizationEN"
+import LocalizationEN from "@enums/LocalizationEN"
 import EditorUtil from "../util/EditorUtil"
-import EntitySelectionStore from "../../shared/stores/EntitySelectionStore";
-import ProjectionEngine from "../../ProjectionEngine";
+import EntitySelectionStore from "@lib/stores/EntitySelectionStore";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 
 export default function getViewportHotkeys(): { [key: string]: ContextMenuOption } {

@@ -1,5 +1,5 @@
-import Component from "../../../../../engine/core/instances/components/Component"
-import LocalizationEN from "../../../../../enums/LocalizationEN"
+import Component from "@engine-core/instances/components/Component"
+import LocalizationEN from "@enums/LocalizationEN"
 import CameraTracker from "../../../../../engine/tools/utils/CameraTracker"
 
 export default [

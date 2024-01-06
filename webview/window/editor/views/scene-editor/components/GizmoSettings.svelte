@@ -1,17 +1,17 @@
 <script>
-    import GizmoTransformationType from "../../../../../enums/GizmoTransformationType.ts"
-    import Gizmos from "../../../../../enums/Gizmos.ts"
+    import GizmoTransformationType from "@enums/GizmoTransformationType.ts"
+    import Gizmos from "@enums/Gizmos.ts"
     import ROTATION_GRID from "../static/ROTATION_GRID"
     import SCALE_GRID from "../static/SCALE_GRID"
     import TRANSLATION_GRID from "../static/TRANSLATION_GRID"
-    import ToolTip from "../../../../shared/components/tooltip/ToolTip.svelte"
-    import Icon from "../../../../shared/components/icon/Icon.svelte"
-    import Dropdown from "../../../../shared/components/dropdown/Dropdown.svelte"
-    import LocalizationEN from "../../../../../enums/LocalizationEN"
-    import EmptyIcon from "../../../../shared/components/icon/EmptyIcon.svelte"
+    import ToolTip from "@lib/components/tooltip/ToolTip.svelte"
+    import Icon from "@lib/components/icon/Icon.svelte"
+    import Dropdown from "@lib/components/dropdown/Dropdown.svelte"
+    import LocalizationEN from "@enums/LocalizationEN"
+    import EmptyIcon from "@lib/components/icon/EmptyIcon.svelte"
     import {onDestroy, onMount} from "svelte"
     import SceneEditorUtil from "../../../util/SceneEditorUtil"
-    import ProjectionEngine from "../../../../ProjectionEngine";
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     const BUTTON_DROPDOWN = "border-radius: 25px; height: 25px; background: var(--pj-background-tertiary);"

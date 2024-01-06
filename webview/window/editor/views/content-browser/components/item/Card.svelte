@@ -1,9 +1,9 @@
 <script>
-    import Preview from "../../../../../shared/components/preview/Preview.svelte"
-    import Icon from "../../../../../shared/components/icon/Icon.svelte"
+    import Preview from "@lib/components/preview/Preview.svelte"
+    import Icon from "@lib/components/icon/Icon.svelte"
     import ModalInput from "../../../../components/modal-input/ModalInput.svelte"
 
-    import FileTypes from "../../../../../../enums/FileTypes"
+    import FileTypes from "@enums/FileTypes"
     import ContentBrowserUtil from "../../../../util/ContentBrowserUtil"
 
     export let data

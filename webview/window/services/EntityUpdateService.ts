@@ -1,4 +1,4 @@
-import Entity from "../../engine/core/instances/Entity"
+import Entity from "@engine-core/instances/Entity"
 
 export default class EntityUpdateService {
     #listeners = new Map<string, { callback: Function, id: string }[]>()

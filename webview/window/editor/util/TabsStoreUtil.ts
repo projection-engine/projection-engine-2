@@ -1,4 +1,4 @@
-import ProjectionEngine from "../../ProjectionEngine";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 export default class TabsStoreUtil {
 	static updateByAttributes(direction:"left"|"right"|"top"|"bottom"|"viewport", group:number, value:number) {

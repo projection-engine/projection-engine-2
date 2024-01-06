@@ -1,5 +1,5 @@
 import UBO from "../instances/UBO"
-import UberShader from "../resource-libs/UberShader"
+import UberShader from "./UberShader"
 import GPU from "../GPU"
 
 export enum StaticUBONames {

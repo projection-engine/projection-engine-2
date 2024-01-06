@@ -7,11 +7,11 @@ import Entity from "../../instances/Entity"
 import ENTITY_TYPED_ATTRIBUTES from "../../static/ENTITY_TYPED_ATTRIBUTES"
 import LightsAPI from "./LightsAPI"
 import VisibilityRenderer from "../../runtime/VisibilityRenderer"
-import ResourceEntityMapper from "../../resource-libs/ResourceEntityMapper"
+import ResourceEntityMapper from "../ResourceEntityMapper"
 import MeshResourceMapper from "../MeshResourceMapper"
 import MaterialResourceMapper from "../MaterialResourceMapper"
 import QueryAPI from "./QueryAPI"
-import ProjectionEngine from "../../../../window/ProjectionEngine";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 const COMPONENT_TRIGGER_UPDATE = [COMPONENTS.LIGHT, COMPONENTS.MESH]
 const excludedKeys = [

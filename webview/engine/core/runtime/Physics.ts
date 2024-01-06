@@ -3,7 +3,7 @@ import PhysicsAPI from "../lib/rendering/PhysicsAPI"
 import MetricsController from "../lib/utils/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import EngineState from "../EngineState"
-import ProjectionEngine from "../../../window/ProjectionEngine";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 export default class Physics {
 	static #interval = null

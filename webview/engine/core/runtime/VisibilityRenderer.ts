@@ -5,7 +5,7 @@ import SSAO from "./SSAO"
 import {mat4} from "gl-matrix"
 import StaticShaders from "../lib/StaticShaders"
 import StaticFBO from "../lib/StaticFBO"
-import ResourceEntityMapper from "../resource-libs/ResourceEntityMapper"
+import ResourceEntityMapper from "../lib/ResourceEntityMapper"
 import StaticMeshes from "../lib/StaticMeshes"
 import MATERIAL_RENDERING_TYPES from "../static/MATERIAL_RENDERING_TYPES"
 import MetricsController from "../lib/utils/MetricsController"
@@ -15,7 +15,7 @@ import loopMeshes from "./loop-meshes"
 import Entity from "../instances/Entity"
 import Mesh from "../instances/Mesh"
 import Engine from "../Engine";
-import ProjectionEngine from "../../../window/ProjectionEngine";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 const entityMetadata = new Float32Array(16)
 let context: WebGL2RenderingContext, uniforms, VP

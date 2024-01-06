@@ -1,7 +1,7 @@
 <script>
 
     import KEYS from "../../../static/KEYS.ts"
-    import LocalizationEN from "../../../../../enums/LocalizationEN"
+    import LocalizationEN from "@enums/LocalizationEN"
 
 
     export let initial

@@ -11,7 +11,7 @@ import QueryAPI from "./QueryAPI"
 import FileSystemAPI from "./FileSystemAPI"
 import EntityAPI from "./EntityAPI"
 import Engine from "../../Engine"
-import ProjectionEngine from "../../../../window/ProjectionEngine";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 export default class ScriptsAPI {
 	static scriptInstances = new Map()

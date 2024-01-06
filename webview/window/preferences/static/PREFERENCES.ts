@@ -1,5 +1,5 @@
-import Component from "../../../engine/core/instances/components/Component"
-import LocalizationEN from "../../../enums/LocalizationEN"
+import Component from "@engine-core/instances/components/Component"
+import LocalizationEN from "@enums/LocalizationEN"
 import EngineToolsState from "../../../engine/tools/EngineToolsState"
 
 export default [

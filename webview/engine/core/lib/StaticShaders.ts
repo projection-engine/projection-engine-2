@@ -1,6 +1,6 @@
 import SHADERS from "../static/SHADERS"
 import Shader from "../instances/Shader"
-import UberShader from "../resource-libs/UberShader"
+import UberShader from "./UberShader"
 
 export default class StaticShaders {
 

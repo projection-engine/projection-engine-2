@@ -1,8 +1,8 @@
 <script lang="ts">
     import {getContext, onDestroy, onMount} from "svelte";
-    import ViewStateStore from "../../../shared/stores/ViewStateStore";
+    import ViewStateStore from "@lib/stores/ViewStateStore";
     import ViewMetadataContext from "./static/ViewMetadataContext";
-    import ProjectionEngine from "../../../ProjectionEngine";
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     export let state: MutableObject
     export let onStateInitialize: GenericVoidFunctionWithP<MutableObject> | undefined

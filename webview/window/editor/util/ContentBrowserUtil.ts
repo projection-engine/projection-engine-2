@@ -1,21 +1,23 @@
-import ContentBrowserStore from "../../shared/stores/ContentBrowserStore"
+
 import SELECTION_TYPES from "../views/content-browser/static/SELECTION_TYPES"
-import LocalizationEN from "../../../enums/LocalizationEN"
-import FileTypes from "../../../enums/FileTypes"
+import FileTypes from "@enums/FileTypes"
 import EngineResourceLoaderService from "../../services/EngineResourceLoaderService"
 import ShaderEditorTools from "../views/shader-editor/libs/ShaderEditorTools"
 import VIEWS from "../components/view/static/VIEWS"
 import EditorFSUtil from "./EditorFSUtil"
-import FileSystemUtil from "../../shared/FileSystemUtil"
 import {SORTS} from "../views/content-browser/static/SORT_INFO"
-import COMPONENT_TEMPLATE from "../../../engine/core/static/templates/COMPONENT_TEMPLATE"
-import UI_TEMPLATE from "../../../engine/core/static/templates/UI_TEMPLATE"
+import COMPONENT_TEMPLATE from "@engine-core/static/templates/COMPONENT_TEMPLATE"
+import UI_TEMPLATE from "@engine-core/static/templates/UI_TEMPLATE"
 import EditorUtil from "./EditorUtil"
-import IPCRoutes from "../../../enums/IPCRoutes"
+import IPCRoutes from "@enums/IPCRoutes"
 import getContentBrowserActions from "../templates/get-content-browser-actions"
-import HotKeysController from "../../shared/lib/HotKeysController"
 import NavigationHistory from "../views/content-browser/libs/NavigationHistory"
-import ProjectionEngine from "../../ProjectionEngine";
+import ProjectionEngine from "@lib/ProjectionEngine";
+import ContentBrowserStore from "@lib/stores/ContentBrowserStore"
+import LocalizationEN from "@enums/LocalizationEN";
+import FileSystemUtil from "@lib/FileSystemUtil";
+import HotKeysController from "@lib/HotKeysController";
+
 
 export default class ContentBrowserUtil {
     static sortItems(arr: MutableObject[], isDSC: boolean, sortKey: string) {

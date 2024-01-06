@@ -1,17 +1,16 @@
-import LocalizationEN from "../../../enums/LocalizationEN"
-import COMPONENTS from "../../../engine/core/static/COMPONENTS"
+import LocalizationEN from "@enums/LocalizationEN"
+import COMPONENTS from "@engine-core/static/COMPONENTS"
 import EngineResourceLoaderService from "../../services/EngineResourceLoaderService"
-import FileSystemAPI from "../../../engine/core/lib/utils/FileSystemAPI"
-import EntitySelectionStore from "../../shared/stores/EntitySelectionStore"
-import LightComponent from "../../../engine/core/instances/components/LightComponent"
-import LightsAPI from "../../../engine/core/lib/utils/LightsAPI"
-import CameraComponent from "../../../engine/core/instances/components/CameraComponent"
-import CameraAPI from "../../../engine/core/lib/utils/CameraAPI"
+import FileSystemAPI from "@engine-core/lib/utils/FileSystemAPI"
+import EntitySelectionStore from "@lib/stores/EntitySelectionStore"
+import LightComponent from "@engine-core/instances/components/LightComponent"
+import LightsAPI from "@engine-core/lib/utils/LightsAPI"
+import CameraComponent from "@engine-core/instances/components/CameraComponent"
 import EditorUtil from "./EditorUtil"
-import type Entity from "../../../engine/core/instances/Entity";
-import type Component from "../../../engine/core/instances/components/Component";
-import ProjectionEngine from "../../ProjectionEngine";
-import Engine from "../../../engine/core/Engine";
+import type Entity from "@engine-core/instances/Entity";
+import type Component from "@engine-core/instances/components/Component";
+import ProjectionEngine from "@lib/ProjectionEngine";
+import Engine from "@engine-core/Engine";
 
 export default class InspectorUtil {
     static compareObjects(obj1, obj2) {
@@ -61,7 +60,7 @@ export default class InspectorUtil {
         }
         component[key] = value
         if (component.componentKey === COMPONENTS.CAMERA && entity.id === ProjectionEngine.EngineStore.getData().focusedCamera)
-            Engine.CameraAPI.updateViewTarget(entity)
+            ProjectionEngine.Engine.CameraAPI.updateViewTarget(entity)
     }
 
     static removeComponent(entity, index, key) {

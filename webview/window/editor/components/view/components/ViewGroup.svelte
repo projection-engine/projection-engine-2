@@ -2,18 +2,18 @@
 
     import Tabs from "../../tabs/Tabs.svelte";
     import VIEWS from "../static/VIEWS";
-    import TabsStore from "../../../../shared/stores/TabsStore";
+    import TabsStore from "@lib/stores/TabsStore";
     import {onDestroy, onMount} from "svelte";
-    import SettingsStore from "../../../../shared/stores/SettingsStore";
+    import SettingsStore from "@lib/stores/SettingsStore";
     import ViewTabItem from "../../../static/ViewTabItem";
-    import Dialog from "../../../../shared/components/dialog/Dialog.svelte";
-    import LocalizationEN from "../../../../../enums/LocalizationEN";
+    import Dialog from "@lib/components/dialog/Dialog.svelte";
+    import LocalizationEN from "@enums/LocalizationEN";
     import ViewsUtil from "../../../util/ViewsUtil";
     import TabsStoreUtil from "../../../util/TabsStoreUtil";
     import View from "./View.svelte";
     import ViewTemplates from "../static/ViewTemplates";
-    import ViewStateStore from "../../../../shared/stores/ViewStateStore";
-    import ProjectionEngine from "../../../../ProjectionEngine";
+    import ViewStateStore from "@lib/stores/ViewStateStore";
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
 

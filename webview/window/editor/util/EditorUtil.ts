@@ -1,19 +1,19 @@
-import ScriptsAPI from "../../../engine/core/lib/utils/ScriptsAPI"
-import EntitySelectionStore from "../../shared/stores/EntitySelectionStore"
-import LocalizationEN from "../../../enums/LocalizationEN"
-import Entity from "../../../engine/core/instances/Entity"
-import Engine from "../../../engine/core/Engine"
-import CameraAPI from "../../../engine/core/lib/utils/CameraAPI"
+import ScriptsAPI from "@engine-core/lib/utils/ScriptsAPI"
+import EntitySelectionStore from "@lib/stores/EntitySelectionStore"
+import LocalizationEN from "@enums/LocalizationEN"
+import Entity from "@engine-core/instances/Entity"
+import Engine from "@engine-core/Engine"
+import CameraAPI from "@engine-core/lib/utils/CameraAPI"
 import CameraTracker from "../../../engine/tools/utils/CameraTracker"
-import COMPONENTS from "../../../engine/core/static/COMPONENTS"
-import IPCRoutes from "../../../enums/IPCRoutes"
-import QueryAPI from "../../../engine/core/lib/utils/QueryAPI"
-import GIZMOS from "../../../enums/Gizmos"
+import COMPONENTS from "@engine-core/static/COMPONENTS"
+import IPCRoutes from "@enums/IPCRoutes"
+import QueryAPI from "@engine-core/lib/utils/QueryAPI"
+import GIZMOS from "@enums/Gizmos"
 import TabsStoreUtil from "./TabsStoreUtil"
 import ContentBrowserUtil from "./ContentBrowserUtil"
 import GizmoState from "../../../engine/tools/gizmo/util/GizmoState";
 import GizmoUtil from "../../../engine/tools/gizmo/util/GizmoUtil";
-import ProjectionEngine from "../../ProjectionEngine";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 export default class EditorUtil {
     static async componentConstructor(entity, scriptID, autoUpdate = true) {

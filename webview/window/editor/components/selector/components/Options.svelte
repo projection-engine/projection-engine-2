@@ -1,11 +1,11 @@
 <script>
     import Option from "./Option.svelte"
-    import EmbeddedMeshes from "../../../../../engine/core/static/EmbeddedMeshes"
+    import EmbeddedMeshes from "@engine-core/static/EmbeddedMeshes"
     import VirtualList from "@sveltejs/svelte-virtual-list"
 
-    import Icon from "../../../../shared/components/icon/Icon.svelte"
-    import Input from "../../../../shared/components/input/Input.svelte"
-    import LocalizationEN from "../../../../../enums/LocalizationEN"
+    import Icon from "@lib/components/icon/Icon.svelte"
+    import Input from "@lib/components/input/Input.svelte"
+    import LocalizationEN from "@enums/LocalizationEN"
     import SelectorUtil from "../../../util/SelectorUtil"
 
     export let handleChange

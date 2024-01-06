@@ -1,8 +1,8 @@
 <script>
     import KEYS from "../../static/KEYS.ts"
     import {onDestroy, onMount} from "svelte"
-    import Icon from "../../../shared/components/icon/Icon.svelte"
-    import Dropdown from "../../../shared/components/dropdown/Dropdown.svelte"
+    import Icon from "@lib/components/icon/Icon.svelte"
+    import Dropdown from "@lib/components/dropdown/Dropdown.svelte"
     import {Sortable} from "sortablejs"
     import Tab from "./components/Tab.svelte"
 

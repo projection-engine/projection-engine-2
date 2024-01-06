@@ -1,13 +1,13 @@
 import SELECTION_TYPES from "../views/content-browser/static/SELECTION_TYPES"
 import EditorFSUtil from "../util/EditorFSUtil"
 import ToasterService from "../../services/ToasterService"
-import LocalizationEN from "../../../enums/LocalizationEN"
+import LocalizationEN from "@enums/LocalizationEN"
 import ContentBrowserUtil from "../util/ContentBrowserUtil"
 import EditorUtil from "../util/EditorUtil"
-import FileSystemUtil from "../../shared/FileSystemUtil"
-import SettingsStore from "../../shared/stores/SettingsStore"
-import ContentBrowserStore from "../../shared/stores/ContentBrowserStore";
-import ProjectionEngine from "../../ProjectionEngine";
+import FileSystemUtil from "@lib/FileSystemUtil"
+import SettingsStore from "@lib/stores/SettingsStore"
+import ContentBrowserStore from "@lib/stores/ContentBrowserStore";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 export default function getContentBrowserActions(navigationHistory, getCurrentDirectory, setCurrentDirectory, setCurrentItem) {
 	const contentBrowserHotkeys = ProjectionEngine.SettingsStore.getData().contentBrowserHotkeys

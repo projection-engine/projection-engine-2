@@ -12,7 +12,13 @@
     "typeRoots": [
       "./global.d.ts",
       "node_modules/@types"
-    ]
+    ],
+    "paths": {
+      "@engine-core/*":  ["./engine/core/*"],
+      "@enums/*":  ["./enums/*"],
+      "@engine-tools/*": ["./engine/tools/*"],
+      "@lib/*": ["./lib/*"],
+    }
   },
   "exclude": [
     "node_modules"

@@ -1,14 +1,14 @@
 <script lang="ts">
-    import dragDrop from "../../../../shared/components/drag-drop/drag-drop";
+    import dragDrop from "@lib/components/drag-drop/drag-drop";
     import {onDestroy, onMount} from "svelte";
-    import ToolTip from "../../../../shared/components/tooltip/ToolTip.svelte";
-    import Icon from "../../../../shared/components/icon/Icon.svelte";
-    import Entity from "../../../../../engine/core/instances/Entity";
+    import ToolTip from "@lib/components/tooltip/ToolTip.svelte";
+    import Icon from "@lib/components/icon/Icon.svelte";
+    import Entity from "@engine-core/instances/Entity";
     import ModalInput from "../../../components/modal-input/ModalInput.svelte";
-    import LocalizationEN from "../../../../../enums/LocalizationEN";
+    import LocalizationEN from "@enums/LocalizationEN";
     import HierarchyUtil from "../../../util/HierarchyUtil";
-    import EntitySelectionStore from "../../../../shared/stores/EntitySelectionStore";
-    import ProjectionEngine from "../../../../ProjectionEngine";
+    import EntitySelectionStore from "@lib/stores/EntitySelectionStore";
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     export let entity: Entity
     export let lockedEntity: string

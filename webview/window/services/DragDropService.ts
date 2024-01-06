@@ -1,4 +1,4 @@
-import STYLES from "../shared/components/drag-drop/STYLES"
+import STYLES from "@lib/components/drag-drop/STYLES"
 
 export default class DragDropService {
 	dropTarget?:HTMLElement

@@ -1,12 +1,12 @@
 <script>
-    import DATA_TYPES from "../../../../../engine/core/static/DATA_TYPES"
-    import Checkbox from "../../../../shared/components/checkbox/Checkbox.svelte"
+    import DATA_TYPES from "@engine-core/static/DATA_TYPES"
+    import Checkbox from "@lib/components/checkbox/Checkbox.svelte"
     import Selector from "../../../components/selector/Selector.svelte"
-    import getDropdownHeaderStyles from "../../../../shared/components/dropdown/utils/get-dropdown-header-styles"
-    import Range from "../../../../shared/components/range/Range.svelte"
-    import ColorPicker from "../../../../shared/components/color-picker/ColorPicker.svelte"
-    import Dropdown from "../../../../shared/components/dropdown/Dropdown.svelte"
-    import Icon from "../../../../shared/components/icon/Icon.svelte"
+    import getDropdownHeaderStyles from "@lib/components/dropdown/utils/get-dropdown-header-styles"
+    import Range from "@lib/components/range/Range.svelte"
+    import ColorPicker from "@lib/components/color-picker/ColorPicker.svelte"
+    import Dropdown from "@lib/components/dropdown/Dropdown.svelte"
+    import Icon from "@lib/components/icon/Icon.svelte"
     import ShaderEditorUtil from "../../../util/ShaderEditorUtil"
 
     export let attribute

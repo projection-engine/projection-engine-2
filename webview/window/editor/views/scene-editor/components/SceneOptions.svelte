@@ -1,15 +1,15 @@
 <script>
-    import OptionDropdown from "../../../../shared/components/dropdown/OptionDropdown.svelte"
-    import LocalizationEN from "../../../../../enums/LocalizationEN"
+    import OptionDropdown from "@lib/components/dropdown/OptionDropdown.svelte"
+    import LocalizationEN from "@enums/LocalizationEN"
     import SceneEditorUtil from "../../../util/SceneEditorUtil"
     import getEntityCreationOptions from "../../../templates/get-entity-creation-options"
     import {getViewportOptionsForDropdown} from "../../../templates/get-viewport-context"
-    import getDropdownHeaderStyles from "../../../../shared/components/dropdown/utils/get-dropdown-header-styles"
-    import Range from "../../../../shared/components/range/Range.svelte"
-    import Checkbox from "../../../../shared/components/checkbox/Checkbox.svelte"
-    import Dropdown from "../../../../shared/components/dropdown/Dropdown.svelte"
+    import getDropdownHeaderStyles from "@lib/components/dropdown/utils/get-dropdown-header-styles"
+    import Range from "@lib/components/range/Range.svelte"
+    import Checkbox from "@lib/components/checkbox/Checkbox.svelte"
+    import Dropdown from "@lib/components/dropdown/Dropdown.svelte"
     import {onDestroy, onMount} from "svelte"
-    import ProjectionEngine from "../../../../ProjectionEngine";
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     /** @type boolean */
     export let isOnGizmo

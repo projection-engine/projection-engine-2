@@ -1,14 +1,14 @@
 <script lang="ts">
     import {onMount} from "svelte"
-    import Engine from "../../../../engine/core/Engine";
-    import VisualsStore from "../../../shared/stores/VisualsStore";
+    import Engine from "@engine-core/Engine";
+    import VisualsStore from "@lib/stores/VisualsStore";
     import EditorFSUtil from "../../util/EditorFSUtil";
     import EngineTools from "../../../../engine/tools/EngineTools";
     import LevelService from "../../../services/LevelService";
-    import UIAPI from "../../../../engine/core/lib/rendering/UIAPI";
+    import UIAPI from "@engine-core/lib/rendering/UIAPI";
     import EngineToolsService from "../../../services/EngineToolsService";
-    import GPU from "../../../../engine/core/GPU";
-    import ProjectionEngine from "../../../ProjectionEngine";
+    import GPU from "@engine-core/GPU";
+    import ProjectionEngine from "@lib/ProjectionEngine";
     import ViewportInteractionService from "../../views/scene-editor/lib/ViewportInteractionService";
 
     let canvasRef: HTMLCanvasElement

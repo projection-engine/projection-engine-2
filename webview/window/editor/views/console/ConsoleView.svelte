@@ -1,15 +1,15 @@
 <script lang="ts">
 
     import {onDestroy, onMount} from "svelte"
-    import ConsoleAPI from "../../../../engine/core/lib/utils/ConsoleAPI"
+    import ConsoleAPI from "@engine-core/lib/utils/ConsoleAPI"
 
     import VirtualList from "@sveltejs/svelte-virtual-list"
-    import ToolTip from "../../../shared/components/tooltip/ToolTip.svelte"
-    import Icon from "../../../shared/components/icon/Icon.svelte"
-    import SveltePortal from "../../../shared/lib/SveltePortal"
-    import LocalizationEN from "../../../../enums/LocalizationEN"
+    import ToolTip from "@lib/components/tooltip/ToolTip.svelte"
+    import Icon from "@lib/components/icon/Icon.svelte"
+    import SveltePortal from "@lib/SveltePortal"
+    import LocalizationEN from "@enums/LocalizationEN"
     import ViewHeader from "../../components/view/components/ViewHeader.svelte"
-    import ProjectionEngine from "../../../ProjectionEngine";
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     const TYPES = ConsoleAPI.TYPES

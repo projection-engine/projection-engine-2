@@ -12,7 +12,7 @@ import StaticFBO from "../../core/lib/StaticFBO"
 import EngineToolsState from "../EngineToolsState"
 import GizmoUtil from "../gizmo/util/GizmoUtil"
 import GPUUtil from "../../core/utils/GPUUtil";
-import ProjectionEngine from "../../../window/ProjectionEngine";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 
 const iconAttributes = mat4.create()

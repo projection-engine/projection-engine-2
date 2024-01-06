@@ -3,9 +3,9 @@ import InputEventsAPI from "../utils/InputEventsAPI"
 import QueryAPI from "../utils/QueryAPI"
 import FileSystemAPI from "../utils/FileSystemAPI"
 import UIComponent from "../../instances/components/UIComponent"
-import ResourceEntityMapper from "../../resource-libs/ResourceEntityMapper"
+import ResourceEntityMapper from "../ResourceEntityMapper"
 import Entity from "../../instances/Entity"
-import ProjectionEngine from "../../../../window/ProjectionEngine";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 const STYLES = {
     position: "absolute",

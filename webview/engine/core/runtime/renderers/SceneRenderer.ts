@@ -6,17 +6,17 @@ import Engine from "../../Engine"
 import CameraAPI from "../../lib/utils/CameraAPI"
 import StaticFBO from "../../lib/StaticFBO"
 import OmnidirectionalShadows from "../OmnidirectionalShadows"
-import UberMaterialAttributeGroup from "../../resource-libs/UberMaterialAttributeGroup"
+import UberMaterialAttributeGroup from "../../lib/UberMaterialAttributeGroup"
 import MATERIAL_RENDERING_TYPES from "../../static/MATERIAL_RENDERING_TYPES"
 import Material from "../../instances/Material"
-import UberShader from "../../resource-libs/UberShader"
+import UberShader from "../../lib/UberShader"
 import MaterialResourceMapper from "../../lib/MaterialResourceMapper"
-import ResourceEntityMapper from "../../resource-libs/ResourceEntityMapper"
+import ResourceEntityMapper from "../../lib/ResourceEntityMapper"
 import Renderer from "../../Renderer"
 import Mesh from "../../instances/Mesh"
 import loopMeshes from "../loop-meshes"
 import EngineState from "../../EngineState"
-import ProjectionEngine from "../../../../window/ProjectionEngine";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 let stateWasCleared = false, isDoubleSided = false, isSky = false, texOffset = 0
 

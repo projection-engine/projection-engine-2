@@ -2,14 +2,14 @@
 
     import Nodes from "./Nodes.svelte";
     import AttributeEditor from "./AttributeEditor.svelte";
-    import ResizableBar from "../../../../shared/components/resizable/ResizableBar.svelte";
+    import ResizableBar from "@lib/components/resizable/ResizableBar.svelte";
 
-    import Icon from "../../../../shared/components/icon/Icon.svelte";
+    import Icon from "@lib/components/icon/Icon.svelte";
     import type Canvas from "../libs/Canvas";
     import type ShaderNode from "../templates/ShaderNode";
     import ShaderComment from "../templates/ShaderComment";
     import {onDestroy, onMount} from "svelte";
-    import LocalizationEN from "../../../../../enums/LocalizationEN";
+    import LocalizationEN from "@enums/LocalizationEN";
 
     export let canvasAPI: Canvas
     let tab = 0

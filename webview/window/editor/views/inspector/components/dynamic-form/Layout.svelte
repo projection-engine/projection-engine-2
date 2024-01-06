@@ -1,16 +1,16 @@
 <script>
     import Property from "./Property.svelte"
 
-    import Component from "../../../../../../engine/core/instances/components/Component"
-    import Accordion from "../../../../../shared/components/accordion/Accordion.svelte"
-    import PropertyHeader from "../../../../../shared/components/PropertyHeader.svelte"
-    import LocalizationEN from "../../../../../../enums/LocalizationEN"
+    import Component from "@engine-core/instances/components/Component"
+    import Accordion from "@lib/components/accordion/Accordion.svelte"
+    import PropertyHeader from "@lib/components/PropertyHeader.svelte"
+    import LocalizationEN from "@enums/LocalizationEN"
     import InspectorUtil from "../../../../util/InspectorUtil"
     import EditorUtil from "../../../../util/EditorUtil";
-    import COMPONENTS from "../../../../../../engine/core/static/COMPONENTS";
+    import COMPONENTS from "@engine-core/static/COMPONENTS";
     import UIComponent from "../UIComponent.svelte";
     import MaterialUniforms from "../../../../components/MaterialUniformsForm.svelte";
-    import Checkbox from "../../../../../shared/components/checkbox/Checkbox.svelte";
+    import Checkbox from "@lib/components/checkbox/Checkbox.svelte";
 
     export let key
     export let index

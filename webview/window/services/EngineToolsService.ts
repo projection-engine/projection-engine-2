@@ -1,17 +1,17 @@
-import Engine from "../../engine/core/Engine"
+import Engine from "@engine-core/Engine"
 import CameraTracker from "../../engine/tools/utils/CameraTracker"
 import EngineTools from "../../engine/tools/EngineTools"
-import CameraAPI from "../../engine/core/lib/utils/CameraAPI"
-import ENVIRONMENT from "../../engine/core/static/ENVIRONMENT"
-import EngineResources from "../../engine/core/lib/EngineResources"
-import EntitySelectionStore from "../shared/stores/EntitySelectionStore"
-import UIAPI from "../../engine/core/lib/rendering/UIAPI"
-import GPU from "../../engine/core/GPU"
+import CameraAPI from "@engine-core/lib/utils/CameraAPI"
+import ENVIRONMENT from "@engine-core/static/ENVIRONMENT"
+import EngineResources from "@engine-core/lib/EngineResources"
+import EntitySelectionStore from "@lib/stores/EntitySelectionStore"
+import UIAPI from "@engine-core/lib/rendering/UIAPI"
+import GPU from "@engine-core/GPU"
 import EngineToolsState from "../../engine/tools/EngineToolsState"
-import EngineState from "../../engine/core/EngineState"
+import EngineState from "@engine-core/EngineState"
 import SETTINGS from "../editor/static/SETTINGS"
 import GizmoState from "../../engine/tools/gizmo/util/GizmoState"
-import ProjectionEngine from "../ProjectionEngine";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 export default class EngineToolsService {
 

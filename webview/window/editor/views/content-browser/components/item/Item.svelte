@@ -1,15 +1,15 @@
 <script>
     import {onDestroy, onMount} from "svelte"
-    import dragDrop from "../../../../../shared/components/drag-drop/drag-drop"
+    import dragDrop from "@lib/components/drag-drop/drag-drop"
     import Card from "./Card.svelte"
     import Row from "./Row.svelte"
-    import ToolTip from "../../../../../shared/components/tooltip/ToolTip.svelte"
-    import FileTypes from "../../../../../../enums/FileTypes"
-    import Folders from "../../../../../../enums/Folders"
+    import ToolTip from "@lib/components/tooltip/ToolTip.svelte"
+    import FileTypes from "@enums/FileTypes"
+    import Folders from "@enums/Folders"
     import ContentBrowserUtil from "../../../../util/ContentBrowserUtil"
-    import FileSystemUtil from "../../../../../shared/FileSystemUtil"
-    import ContentBrowserStore from "../../../../../shared/stores/ContentBrowserStore";
-    import ProjectionEngine from "../../../../../ProjectionEngine";
+    import FileSystemUtil from "@lib/FileSystemUtil"
+    import ContentBrowserStore from "@lib/stores/ContentBrowserStore";
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     export let reset
     export let data

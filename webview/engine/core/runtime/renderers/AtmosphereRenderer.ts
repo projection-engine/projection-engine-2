@@ -1,5 +1,5 @@
 import GPU from "../../GPU"
-import ResourceEntityMapper from "../../resource-libs/ResourceEntityMapper"
+import ResourceEntityMapper from "../../lib/ResourceEntityMapper"
 import StaticShaders from "../../lib/StaticShaders"
 import StaticMeshes from "../../lib/StaticMeshes"
 import MetricsController from "../../lib/utils/MetricsController"
@@ -8,7 +8,7 @@ import AtmosphereComponent from "../../instances/components/AtmosphereComponent"
 import {mat4} from "gl-matrix"
 import CameraAPI from "../../lib/utils/CameraAPI"
 import Engine from "../../Engine";
-import ProjectionEngine from "../../../../window/ProjectionEngine";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 const resources = mat4.create().fill(0)
 export default class AtmosphereRenderer {

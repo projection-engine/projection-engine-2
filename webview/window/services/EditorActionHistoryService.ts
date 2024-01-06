@@ -1,12 +1,12 @@
 import UndoRedo from "../editor/components/UndoRedo"
-import EntityAPI from "../../engine/core/lib/utils/EntityAPI"
+import EntityAPI from "@engine-core/lib/utils/EntityAPI"
 
 
-import serializeStructure from "../../engine/core/utils/serialize-structure"
+import serializeStructure from "@engine-core/utils/serialize-structure"
 import EngineStateService from "./EngineStateService"
-import Entity from "../../engine/core/instances/Entity"
-import LocalizationEN from "../../enums/LocalizationEN"
-import ProjectionEngine from "../ProjectionEngine";
+import Entity from "@engine-core/instances/Entity"
+import LocalizationEN from "@enums/LocalizationEN"
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 interface Action {
     nameCache: Map<string, string>

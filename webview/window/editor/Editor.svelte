@@ -2,14 +2,14 @@
     import {onDestroy, onMount} from "svelte"
     import Viewport from "./components/view/CentralView.svelte"
     import Footer from "./components/footer/Footer.svelte"
-    import EngineStore from "../shared/stores/EngineStore"
+    import EngineStore from "@lib/stores/EngineStore"
     import ViewsContainer from "./components/view/SideView.svelte"
-    import SettingsStore from "../shared/stores/SettingsStore"
-    import HotKeysController from "../shared/lib/HotKeysController"
+    import SettingsStore from "@lib/stores/SettingsStore"
+    import HotKeysController from "@lib/HotKeysController"
     import ToasterService from "../services/ToasterService"
     import EditorUtil from "./util/EditorUtil"
-    import MenuBar from "../shared/components/frame/MenuBar.svelte";
-    import ProjectionEngine from "../ProjectionEngine";
+    import MenuBar from "@lib/components/frame/MenuBar.svelte";
+    import ProjectionEngine from "@lib/ProjectionEngine";
     import Canvas from "./components/view/Canvas.svelte";
 
     const COMPONENT_ID = crypto.randomUUID()
