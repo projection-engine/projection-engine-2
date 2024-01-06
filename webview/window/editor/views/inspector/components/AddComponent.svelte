@@ -1,14 +1,13 @@
 <script lang="ts">
-    import ContentBrowserStore from "../../../../shared/stores/ContentBrowserStore"
     import {onDestroy, onMount} from "svelte"
 
     import Icon from "../../../../shared/components/icon/Icon.svelte"
     import Dropdown from "../../../../shared/components/dropdown/Dropdown.svelte"
-    import LocalizationEN from "../../../../../shared/enums/LocalizationEN"
+    import LocalizationEN from "../../../../../enums/LocalizationEN"
     import EditorUtil from "../../../util/EditorUtil"
     import NATIVE_COMPONENTS from "../static/NATIVE_COMPONENTS";
     import Entity from "../../../../../engine/core/instances/Entity";
-    import EditorActionHistory from "../../../services/EditorActionHistory";
+    import ProjectionEngine from "../../../../ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     export let entity: Entity
@@ -16,8 +15,8 @@
     let components = []
     let scripts = []
 
-    onMount(() => ContentBrowserStore.getInstance().addListener(COMPONENT_ID, data => scripts = data.components, ["components"]))
-    onDestroy(() => ContentBrowserStore.getInstance().removeListener(COMPONENT_ID))
+    onMount(() => ProjectionEngine.ContentBrowserStore.addListener(COMPONENT_ID, data => scripts = data.components, ["components"]))
+    onDestroy(() => ProjectionEngine.ContentBrowserStore.removeListener(COMPONENT_ID))
 
     $:components = [
         ...scripts.map(s => ({type: "script", data: s})),
@@ -50,9 +49,9 @@
                     data-sveltebuttondefault="-"
                     data-svelteinline="-"
                     on:click={(e) =>{
-                        EditorActionHistory.save(entity)
+                        ProjectionEngine.EditorActionHistory.save(entity)
                         entity.addComponent(component.data[0])
-                        EditorActionHistory.save(entity)
+                        ProjectionEngine.EditorActionHistory.save(entity)
                         e.target.closeDropdown()
                     }}
             >

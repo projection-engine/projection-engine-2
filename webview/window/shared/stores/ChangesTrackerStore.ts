@@ -2,8 +2,13 @@ import AbstractStore from "./AbstractStore"
 
 
 export default class ChangesTrackerStore extends AbstractStore{
+
+	constructor() {
+		super({})
+	}
+
 	updateStore(value?:{changed: boolean}) {
-		if(this.data.changed === value.changed)
+		if(this.getData().changed === value.changed)
 			return
 		super.updateStore(value)
 	}

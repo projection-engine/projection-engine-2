@@ -4,9 +4,10 @@ import Canvas from "../views/shader-editor/libs/Canvas"
 import type ShaderNode from "../views/shader-editor/templates/ShaderNode"
 import ShaderComment from "../views/shader-editor/templates/ShaderComment"
 import ALL_NODES from "../views/shader-editor/static/ALL_NODES"
-import ContextMenuService from "../../shared/lib/context-menu/ContextMenuService"
+import ContextMenuService from "../../services/ContextMenuService"
 import NODE_MAP from "../views/shader-editor/static/NODE_MAP"
 import ShaderEditorUtil from "../util/ShaderEditorUtil"
+import ProjectionEngine from "../../ProjectionEngine";
 
 export function selectAllNodes(canvasAPI:Canvas){
 	let last: ShaderNode | ShaderComment
@@ -22,7 +23,7 @@ export function selectAllNodes(canvasAPI:Canvas){
 	canvasAPI.clear()
 }
 export default function getShaderActions(canvasAPI: Canvas) {
-	const settings = SettingsStore.getData()
+	const settings = ProjectionEngine.SettingsStore.getData()
 
 	const options = {
 		SELECT_ALL: {
@@ -107,7 +108,7 @@ export default function getShaderActions(canvasAPI: Canvas) {
 				label: "New node",
 				children: ALL_NODES.map(data => ({
 					...data,
-					callback: () => canvasAPI.onDrop(data.dataTransfer, ContextMenuService.getInstance().currentX, ContextMenuService.getInstance().currentY)
+					callback: () => canvasAPI.onDrop(data.dataTransfer,ProjectionEngine. ContextMenuService.currentX, ProjectionEngine.ContextMenuService.currentY)
 				}))
 			}
 		]

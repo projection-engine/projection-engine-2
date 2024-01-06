@@ -7,9 +7,9 @@
     import ToolTip from "../../../shared/components/tooltip/ToolTip.svelte"
     import Icon from "../../../shared/components/icon/Icon.svelte"
     import SveltePortal from "../../../shared/lib/SveltePortal"
-    import LocalizationEN from "../../../../shared/enums/LocalizationEN"
-    import EngineStore from "../../../shared/stores/EngineStore"
+    import LocalizationEN from "../../../../enums/LocalizationEN"
     import ViewHeader from "../../components/view/components/ViewHeader.svelte"
+    import ProjectionEngine from "../../../ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     const TYPES = ConsoleAPI.TYPES
@@ -26,7 +26,7 @@
     }
 
     onMount(() => {
-    	EngineStore.getInstance().addListener(COMPONENT_ID, () => ConsoleAPI.clear(), ["executingAnimation"])
+        ProjectionEngine.EngineStore.addListener(COMPONENT_ID, () => ConsoleAPI.clear(), ["executingAnimation"])
     	ConsoleAPI.addListener(COMPONENT_ID, (md, messages) => {
     		toRender = messages
     		newMessages = messages.length > 0
@@ -36,7 +36,7 @@
     })
 
     onDestroy(() => {
-    	EngineStore.getInstance().removeListener(COMPONENT_ID)
+        ProjectionEngine.EngineStore.removeListener(COMPONENT_ID)
     	ConsoleAPI.removeListener(COMPONENT_ID)
     	portal.destroy()
     	document.removeEventListener("mousedown", handler)

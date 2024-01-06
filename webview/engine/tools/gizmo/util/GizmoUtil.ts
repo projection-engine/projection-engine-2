@@ -13,6 +13,7 @@ import Mesh from "../../../core/instances/Mesh";
 import StaticEditorFBO from "../../utils/StaticEditorFBO";
 import GPUUtil from "../../../core/utils/GPUUtil";
 import EngineToolsState from "../../EngineToolsState";
+import Engine from "../../../core/Engine";
 
 
 export default class GizmoUtil {
@@ -80,7 +81,7 @@ export default class GizmoUtil {
 		GPU.context.uniform3fv(uniforms.translation, GizmoState.mainEntity.__pivotOffset)
 		GPU.context.uniform1i(uniforms.axis, axis)
 		GPU.context.uniform1i(uniforms.selectedAxis, GizmoState.clickedAxis)
-		GPU.context.uniform1i(uniforms.cameraIsOrthographic, CameraAPI.notificationBuffers[2])
+		GPU.context.uniform1i(uniforms.cameraIsOrthographic,Engine.CameraAPI.notificationBuffers[2])
 		mesh.simplifiedDraw()
 	}
 
@@ -88,7 +89,7 @@ export default class GizmoUtil {
 	static drawGizmoToDepth() {
 		const data = {
 			translation: GizmoState.mainEntity.__pivotOffset,
-			cameraIsOrthographic: CameraAPI.isOrthographic
+			cameraIsOrthographic: Engine.CameraAPI.isOrthographic
 		}
 		StaticEditorFBO.gizmo.startMapping()
 		for (let i = 0; i < GizmoState.targetGizmos.length; i++) {
@@ -157,7 +158,7 @@ export default class GizmoUtil {
 	static mapToScreenMovement(event: MouseEvent, scaleVec=false): vec3 {
 		if (GizmoState.clickedAxis === AXIS.NONE)
 			return [0, 0, 0]
-		const distanceFrom = <vec3>CameraAPI.position
+		const distanceFrom = <vec3>Engine.CameraAPI.position
 		const scale = vec3.len(distanceFrom)
 		const worldCoordinates = ConversionAPI.toWorldCoordinates(event.clientX, event.clientY)
 		if(scaleVec){

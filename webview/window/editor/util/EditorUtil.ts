@@ -1,46 +1,42 @@
 import ScriptsAPI from "../../../engine/core/lib/utils/ScriptsAPI"
 import EntitySelectionStore from "../../shared/stores/EntitySelectionStore"
-import ToastNotificationSystem from "../../shared/components/alert/ToastNotificationSystem"
-import LocalizationEN from "../../../shared/enums/LocalizationEN"
-import EngineStore from "../../shared/stores/EngineStore"
+import LocalizationEN from "../../../enums/LocalizationEN"
 import Entity from "../../../engine/core/instances/Entity"
 import Engine from "../../../engine/core/Engine"
-import ExecutionService from "../services/engine/ExecutionService"
 import CameraAPI from "../../../engine/core/lib/utils/CameraAPI"
 import CameraTracker from "../../../engine/tools/utils/CameraTracker"
 import COMPONENTS from "../../../engine/core/static/COMPONENTS"
-import IPCRoutes from "../../../shared/enums/IPCRoutes"
-import SettingsStore from "../../shared/stores/SettingsStore"
+import IPCRoutes from "../../../enums/IPCRoutes"
 import QueryAPI from "../../../engine/core/lib/utils/QueryAPI"
-import GIZMOS from "../../../shared/enums/Gizmos"
-import ElectronResources from "../../shared/lib/ElectronResources"
+import GIZMOS from "../../../enums/Gizmos"
 import TabsStoreUtil from "./TabsStoreUtil"
 import ContentBrowserUtil from "./ContentBrowserUtil"
 import GizmoState from "../../../engine/tools/gizmo/util/GizmoState";
 import GizmoUtil from "../../../engine/tools/gizmo/util/GizmoUtil";
+import ProjectionEngine from "../../ProjectionEngine";
 
 export default class EditorUtil {
     static async componentConstructor(entity, scriptID, autoUpdate = true) {
         await ScriptsAPI.linkScript(entity, scriptID)
         if (autoUpdate)
-            EntitySelectionStore.updateStore({array: EntitySelectionStore.getEntitiesSelected()})
-        ToastNotificationSystem.getInstance().success(LocalizationEN.ADDED_COMPONENT)
+            ProjectionEngine.  EntitySelectionStore.updateStore({array: EntitySelectionStore.getEntitiesSelected()})
+        ProjectionEngine.ToastNotificationSystem.success(LocalizationEN.ADDED_COMPONENT)
     }
 
     static focusOnCamera(cameraTarget) {
-        const engineInstance = EngineStore.getInstance()
-        const focused = engineInstance.data.focusedCamera
+        const engineInstance = ProjectionEngine.EngineStore
+        const focused = engineInstance.getData().focusedCamera
         const isCamera = cameraTarget instanceof Entity
         if (!focused || isCamera && cameraTarget.id !== focused) {
             const current = isCamera ? cameraTarget : Engine.entities.get(EntitySelectionStore.getMainEntity())
             if (current && current.cameraComponent) {
-                ExecutionService.cameraSerialization = CameraAPI.serializeState()
+                ProjectionEngine.ExecutionService.cameraSerialization = Engine.CameraAPI.serializeState()
                 CameraTracker.stopTracking()
-                CameraAPI.updateViewTarget(current)
+                Engine.CameraAPI.updateViewTarget(current)
                 engineInstance.updateStore({focusedCamera: current.id})
             }
         } else {
-            CameraAPI.restoreState(ExecutionService.cameraSerialization)
+            Engine.CameraAPI.restoreState(ProjectionEngine.ExecutionService.cameraSerialization)
             CameraTracker.startTracking()
             engineInstance.updateStore({focusedCamera: undefined})
         }
@@ -107,15 +103,15 @@ export default class EditorUtil {
     static async importFile(currentDirectory) {
         const {filesImported} = await EditorUtil.getCall<MutableObject>(IPCRoutes.FILE_DIALOG, {currentDirectory: currentDirectory.id}, false)
         if (filesImported.length > 0) {
-            ToastNotificationSystem.getInstance().success(LocalizationEN.IMPORT_SUCCESSFUL)
+            ProjectionEngine.ToastNotificationSystem.success(LocalizationEN.IMPORT_SUCCESSFUL)
             await ContentBrowserUtil.refreshFiles()
         }
     }
 
     static openBottomView(view) {
-        const settingsStore = SettingsStore.getInstance()
-        const views = [...settingsStore.data.views]
-        const tab = views[settingsStore.data.currentView]
+        const settingsStore = ProjectionEngine.SettingsStore
+        const views = [...settingsStore.getData().views]
+        const tab = views[settingsStore.getData().currentView]
         const existingTab = tab.bottom[0].findIndex(v => v?.type === view)
         if (existingTab > -1) {
             TabsStoreUtil.updateByAttributes("bottom", 0, existingTab)
@@ -147,7 +143,7 @@ export default class EditorUtil {
         const selected = EntitySelectionStore.getEntitiesSelected()
         for (let i = 0; i < selected.length; i++) {
             const entity = QueryAPI.getEntityByID(selected[i])
-            const currentGizmo = SettingsStore.getData().gizmo
+            const currentGizmo =ProjectionEngine. SettingsStore.getData().gizmo
 
             switch (currentGizmo) {
                 case GIZMOS.TRANSLATION: {
@@ -178,12 +174,12 @@ export default class EditorUtil {
     }
 
     static updateView(key, newView) {
-        const settingsData = SettingsStore.getData()
+        const settingsData =ProjectionEngine. SettingsStore.getData()
         const view = settingsData.views[settingsData.currentView]
         const copy = [...settingsData.views]
         copy[settingsData.currentView] = {...view, [key]: newView}
 
-        SettingsStore.updateStore({views: copy})
+        ProjectionEngine.   SettingsStore.updateStore({views: copy})
     }
 
     static getCall<T>(channel, data, addMiddle = true): Promise<T> {
@@ -191,11 +187,7 @@ export default class EditorUtil {
             let listenID = crypto.randomUUID()
             if (data.listenID)
                 listenID = data.listenID
-            ElectronResources.ipcRenderer.once(channel + (addMiddle ? "-" : "") + listenID, (ev, data: T) => {
-                resolve(data)
-            })
-
-            ElectronResources.ipcRenderer.send(channel, {...data, listenID})
+            resolve(null)
         })
     }
 }

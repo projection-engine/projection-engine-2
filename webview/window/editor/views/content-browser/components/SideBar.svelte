@@ -4,6 +4,7 @@
     import ContentBrowserHierarchyStore from "../../../../shared/stores/ContentBrowserHierarchyStore"
     import {onDestroy, onMount} from "svelte"
     import FileSystemUtil from "../../../../shared/FileSystemUtil"
+    import ProjectionEngine from "../../../../ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
 
@@ -13,8 +14,8 @@
     export let currentDirectory
 
     let hierarchy = {items: []}
-    onMount(() => ContentBrowserHierarchyStore.getInstance().addListener(COMPONENT_ID, v => hierarchy = v))
-    onDestroy(() => ContentBrowserHierarchyStore.getInstance().removeListener(COMPONENT_ID))
+    onMount(() => ProjectionEngine.ContentBrowserHierarchyStore.addListener(COMPONENT_ID, v => hierarchy = v))
+    onDestroy(() => ProjectionEngine.ContentBrowserHierarchyStore.removeListener(COMPONENT_ID))
 </script>
 
 <div class="wrapper">
@@ -30,7 +31,7 @@
                             delete open[item.children[i]]
                     }
                     open[item.item.id] = inv
-                    ContentBrowserHierarchyStore.updateStore({open})
+                ProjectionEngine.    ContentBrowserHierarchyStore.updateStore({open})
                 }}
                 open={hierarchy.open}
                 childQuantity={item.childQuantity}

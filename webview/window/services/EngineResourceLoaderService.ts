@@ -1,24 +1,23 @@
-import FileSystemUtil from "../../../shared/FileSystemUtil"
-import EditorFSUtil from "../../util/EditorFSUtil"
+import FileSystemUtil from "../shared/FileSystemUtil"
+import EditorFSUtil from "../editor/util/EditorFSUtil"
 
-import COMPONENTS from "../../../../engine/core/static/COMPONENTS"
-import PickingAPI from "../../../../engine/core/lib/utils/PickingAPI"
-import QueryAPI from "../../../../engine/core/lib/utils/QueryAPI"
-import EditorActionHistory from "../EditorActionHistory"
+import COMPONENTS from "../../engine/core/static/COMPONENTS"
+import PickingAPI from "../../engine/core/lib/utils/PickingAPI"
+import QueryAPI from "../../engine/core/lib/utils/QueryAPI"
 import EntityFactoryService from "./EntityFactoryService"
-import GPU from "../../../../engine/core/GPU"
-import GPUAPI from "../../../../engine/core/lib/rendering/GPUAPI"
+import GPU from "../../engine/core/GPU"
+import GPUAPI from "../../engine/core/lib/rendering/GPUAPI"
 
-import FileSystemAPI from "../../../../engine/core/lib/utils/FileSystemAPI"
-import MeshComponent from "../../../../engine/core/instances/components/MeshComponent"
-import SpriteComponent from "../../../../engine/core/instances/components/SpriteComponent"
-import ToastNotificationSystem from "../../../shared/components/alert/ToastNotificationSystem"
+import FileSystemAPI from "../../engine/core/lib/utils/FileSystemAPI"
+import MeshComponent from "../../engine/core/instances/components/MeshComponent"
+import SpriteComponent from "../../engine/core/instances/components/SpriteComponent"
 import EngineStateService from "./EngineStateService"
-import EntityAPI from "../../../../engine/core/lib/utils/EntityAPI"
-import FileTypes from "../../../../shared/enums/FileTypes"
-import LocalizationEN from "../../../../shared/enums/LocalizationEN"
-import Entity from "../../../../engine/core/instances/Entity"
-import StaticFBO from "../../../../engine/core/lib/StaticFBO";
+import EntityAPI from "../../engine/core/lib/utils/EntityAPI"
+import FileTypes from "../../enums/FileTypes"
+import LocalizationEN from "../../enums/LocalizationEN"
+import Entity from "../../engine/core/instances/Entity"
+import StaticFBO from "../../engine/core/lib/StaticFBO";
+import ProjectionEngine from "../ProjectionEngine";
 
 
 export default class EngineResourceLoaderService {
@@ -76,7 +75,7 @@ export default class EngineResourceLoaderService {
 				}
 				EngineStateService.appendBlock(entities)
 			} else
-				ToastNotificationSystem.getInstance().error(LocalizationEN.COLLECTION_NOT_FOUND)
+				ProjectionEngine.ToastNotificationSystem.error(LocalizationEN.COLLECTION_NOT_FOUND)
 		} catch (error) {
 			console.error(error)
 		}
@@ -134,10 +133,10 @@ export default class EngineResourceLoaderService {
 				if (!entity || !entity.meshComponent) return
 				const result = await FileSystemAPI.loadMaterial(data)
 				if (result) {
-					EditorActionHistory.save(entity)
+					ProjectionEngine.EditorActionHistory.save(entity)
 					const component = entity.meshComponent
 					component.materialID = data
-					EditorActionHistory.save(entity)
+					ProjectionEngine.EditorActionHistory.save(entity)
 				} else
 					console.error(LocalizationEN.SOME_ERROR_OCCURRED + ` (Material: ${data})`)
 				break
@@ -150,7 +149,7 @@ export default class EngineResourceLoaderService {
 
 		if (entitiesToPush.length > 0) {
 			EngineStateService.appendBlock(entitiesToPush)
-			ToastNotificationSystem.getInstance().success(LocalizationEN.ENTITIES_CREATED)
+			ProjectionEngine.ToastNotificationSystem.success(LocalizationEN.ENTITIES_CREATED)
 		}
 	}
 

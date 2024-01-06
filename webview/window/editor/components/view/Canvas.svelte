@@ -4,17 +4,22 @@
     import VisualsStore from "../../../shared/stores/VisualsStore";
     import EditorFSUtil from "../../util/EditorFSUtil";
     import EngineTools from "../../../../engine/tools/EngineTools";
-    import LevelService from "../../services/engine/LevelService";
+    import LevelService from "../../../services/LevelService";
     import UIAPI from "../../../../engine/core/lib/rendering/UIAPI";
-    import EngineToolsService from "../../services/EngineToolsService";
+    import EngineToolsService from "../../../services/EngineToolsService";
     import GPU from "../../../../engine/core/GPU";
+    import ProjectionEngine from "../../../ProjectionEngine";
+    import ViewportInteractionService from "../../views/scene-editor/lib/ViewportInteractionService";
 
     let canvasRef
 
     onMount(() => {
         Engine.initializeContext(
             canvasRef,
-            {w: VisualsStore.getData().resolutionX, h: VisualsStore.getData().resolutionY},
+            {
+                w: ProjectionEngine.VisualsStore.getData().resolutionX,
+                h: ProjectionEngine.VisualsStore.getData().resolutionY
+            },
             EditorFSUtil.readAsset,
             true
         ).then(async () => {
@@ -22,7 +27,8 @@
             await EngineTools.initialize().catch(console.error)
             UIAPI.buildUI(GPU.canvas.parentElement)
             UIAPI.hideUI()
-            EngineToolsService.get()
+            EngineToolsService.initialize()
+            ViewportInteractionService.initialize()
         })
     })
 

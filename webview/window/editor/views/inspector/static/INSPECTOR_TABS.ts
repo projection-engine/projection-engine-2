@@ -1,5 +1,5 @@
 import PREFERENCES from "../../../../preferences/static/PREFERENCES"
-import LocalizationEN from "../../../../../shared/enums/LocalizationEN"
+import LocalizationEN from "../../../../../enums/LocalizationEN"
 
 export default [
 	PREFERENCES[2],

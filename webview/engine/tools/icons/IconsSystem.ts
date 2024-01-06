@@ -19,7 +19,7 @@ export default class IconsSystem {
 	static iconsTexture?: WebGLTexture
 
 	static loop(cb, uniforms?: MutableObject) {
-		const tracking = CameraAPI.trackingEntity
+		const tracking = Engine.CameraAPI.trackingEntity
 		const entities = Engine.entities.array
 		const size = entities.length
 
@@ -165,8 +165,8 @@ export default class IconsSystem {
 
 		GPUUtil.bind2DTextureForDrawing(uniforms.sceneDepth, 1, StaticFBO.sceneDepthVelocity)
 
-		context.uniformMatrix4fv(uniforms.projectionM, false, CameraAPI.projectionMatrix)
-		context.uniformMatrix4fv(uniforms.viewM, false, CameraAPI.viewMatrix)
+		context.uniformMatrix4fv(uniforms.projectionM, false, Engine.CameraAPI.projectionMatrix)
+		context.uniformMatrix4fv(uniforms.viewM, false, Engine.CameraAPI.viewMatrix)
 
 		if (EngineToolsState.showIcons)
 			IconsSystem.loop(IconsSystem.drawIcon)

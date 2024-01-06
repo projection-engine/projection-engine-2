@@ -3,7 +3,7 @@
     import Icon from "../../../../../shared/components/icon/Icon.svelte"
     import ModalInput from "../../../../components/modal-input/ModalInput.svelte"
 
-    import FileTypes from "../../../../../../shared/enums/FileTypes"
+    import FileTypes from "../../../../../../enums/FileTypes"
     import ContentBrowserUtil from "../../../../util/ContentBrowserUtil"
 
     export let data

@@ -1,19 +1,17 @@
-import LocalizationEN from "../../../shared/enums/LocalizationEN"
-import ContentBrowserStore from "../../shared/stores/ContentBrowserStore"
-import ToastNotificationSystem from "../../shared/components/alert/ToastNotificationSystem"
+import LocalizationEN from "../../../enums/LocalizationEN"
 import COMPONENTS from "../../../engine/core/static/COMPONENTS"
-import EngineResourceLoaderService from "../services/engine/EngineResourceLoaderService"
+import EngineResourceLoaderService from "../../services/EngineResourceLoaderService"
 import FileSystemAPI from "../../../engine/core/lib/utils/FileSystemAPI"
-import EntityHierarchyService from "../services/engine/EntityHierarchyService"
 import EntitySelectionStore from "../../shared/stores/EntitySelectionStore"
 import LightComponent from "../../../engine/core/instances/components/LightComponent"
 import LightsAPI from "../../../engine/core/lib/utils/LightsAPI"
 import CameraComponent from "../../../engine/core/instances/components/CameraComponent"
-import EngineStore from "../../shared/stores/EngineStore"
 import CameraAPI from "../../../engine/core/lib/utils/CameraAPI"
 import EditorUtil from "./EditorUtil"
 import type Entity from "../../../engine/core/instances/Entity";
 import type Component from "../../../engine/core/instances/components/Component";
+import ProjectionEngine from "../../ProjectionEngine";
+import Engine from "../../../engine/core/Engine";
 
 export default class InspectorUtil {
     static compareObjects(obj1, obj2) {
@@ -62,8 +60,8 @@ export default class InspectorUtil {
             entity.__cameraNeedsUpdate = true
         }
         component[key] = value
-        if (component.componentKey === COMPONENTS.CAMERA && entity.id === EngineStore.getData().focusedCamera)
-            CameraAPI.updateViewTarget(entity)
+        if (component.componentKey === COMPONENTS.CAMERA && entity.id === ProjectionEngine.EngineStore.getData().focusedCamera)
+            Engine.CameraAPI.updateViewTarget(entity)
     }
 
     static removeComponent(entity, index, key) {
@@ -75,8 +73,8 @@ export default class InspectorUtil {
         } else
             entity.removeComponent(key)
 
-        EntityHierarchyService.updateHierarchy()
-        EntitySelectionStore.updateStore({array: EntitySelectionStore.getEntitiesSelected()})
+        ProjectionEngine.EntityHierarchyService.updateHierarchy()
+        ProjectionEngine.EntitySelectionStore.updateStore({array: EntitySelectionStore.getEntitiesSelected()})
     }
 
     static async handleComponentDrop(entity, data) {
@@ -112,7 +110,7 @@ export default class InspectorUtil {
     }
 
     static #getItemFound(id) {
-        const filesStoreData = ContentBrowserStore.getData()
+        const filesStoreData =ProjectionEngine. ContentBrowserStore.getData()
         let type = "SCRIPT"
         let itemFound = filesStoreData.components.find(s => s.registryID === id)
         if (!itemFound) {
@@ -129,7 +127,7 @@ export default class InspectorUtil {
         }
 
         if (!itemFound) {
-            ToastNotificationSystem.getInstance().error(LocalizationEN.FILE_NOT_FOUND)
+            ProjectionEngine.   ToastNotificationSystem.error(LocalizationEN.FILE_NOT_FOUND)
             return null
         }
         return type

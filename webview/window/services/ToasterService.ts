@@ -1,15 +1,12 @@
-import AbstractSingleton from "../../../../shared/AbstractSingleton";
-
-export default class ToastNotificationSystem extends AbstractSingleton {
+export default class ToasterService {
     defaultDelay = 3500
     success = (...messages: string[]): void => null
     error = (...messages: string[]): void => null
     warn = (...messages: string[]): void => null
     log = (...messages: string[]): void => null
-    target
+    target: HTMLElement
 
     constructor() {
-        super();
         const target = this.target = document.createElement("div")
         Object.assign(target.style, {
                 "position": "fixed",
@@ -29,10 +26,6 @@ export default class ToastNotificationSystem extends AbstractSingleton {
         this.warn = (...messages) => this.#pushAlert(messages.join(" "), "alert")
         this.error = (...messages) => this.#pushAlert(messages.join(" "), "error")
         this.success = (...messages) => this.#pushAlert(messages.join(" "), "success")
-    }
-
-    static getInstance(): ToastNotificationSystem {
-        return super.get<ToastNotificationSystem>()
     }
 
     #pushAlert(message, type) {

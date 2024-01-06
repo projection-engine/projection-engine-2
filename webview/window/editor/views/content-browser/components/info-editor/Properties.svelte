@@ -7,10 +7,11 @@
     import MaterialItem from "./MaterialItem.svelte"
     import MeshItem from "./MeshItem.svelte"
     import Icon from "../../../../../shared/components/icon/Icon.svelte"
-    import LocalizationEN from "../../../../../../shared/enums/LocalizationEN"
-    import FileTypes from "../../../../../../shared/enums/FileTypes"
+    import LocalizationEN from "../../../../../../enums/LocalizationEN"
+    import FileTypes from "../../../../../../enums/FileTypes"
     import {onDestroy, onMount} from "svelte";
     import ContentBrowserStore from "../../../../../shared/stores/ContentBrowserStore";
+    import ProjectionEngine from "../../../../../ProjectionEngine";
 
     const VALID = [FileTypes.TEXTURE, FileTypes.COLLECTION, FileTypes.MATERIAL]
     const COMPONENT_ID = crypto.randomUUID()
@@ -32,9 +33,9 @@
     }
 
     onMount(() => {
-        ContentBrowserStore.getInstance().addListener(COMPONENT_ID, data => selectedFile = data.selectedItems[0], ["selectedItems"])
+        ProjectionEngine.ContentBrowserStore.addListener(COMPONENT_ID, data => selectedFile = data.selectedItems[0], ["selectedItems"])
     })
-    onDestroy(() => ContentBrowserStore.getInstance().removeListener(COMPONENT_ID))
+    onDestroy(() => ProjectionEngine.ContentBrowserStore.removeListener(COMPONENT_ID))
 </script>
 
 <div class="wrapper">

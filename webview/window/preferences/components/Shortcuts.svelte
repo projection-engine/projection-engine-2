@@ -3,13 +3,14 @@
     import SETTINGS from "../../editor/static/SETTINGS"
     import SettingsStore from "../../shared/stores/SettingsStore"
     import PropertyHeader from "../../shared/components/PropertyHeader.svelte"
-    import LocalizationEN from "../../../shared/enums/LocalizationEN"
+    import LocalizationEN from "../../../enums/LocalizationEN"
     import {onDestroy, onMount} from "svelte"
+    import ProjectionEngine from "../../ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
 
     function update(key, value) {
-    	SettingsStore.updateStore({[key]: value})
+        ProjectionEngine.	SettingsStore.updateStore({[key]: value})
     }
 
     function updateHotKey(key, objectKey, newValue) {
@@ -21,7 +22,7 @@
     let allShortcuts
 
     onMount(() => {
-    	SettingsStore.getInstance().addListener(COMPONENT_ID, data => {
+        ProjectionEngine.SettingsStore.addListener(COMPONENT_ID, data => {
     		const vp = Object.entries(data.viewportHotkeys).map(v => ([...v, "viewportHotkeys", (keys) => updateHotKey("viewportHotkeys", v[0], keys)]))
     		const sc = Object.entries(data.shaderEditorHotkeys).map(v => ([...v, "shaderEditorHotkeys", (keys) => updateHotKey("shaderEditorHotkeys", v[0], keys)]))
     		const cb = Object.entries(data.contentBrowserHotkeys).map(v => ([...v, "contentBrowserHotkeys", (keys) => updateHotKey("contentBrowserHotkeys", v[0], keys)]))
@@ -37,7 +38,7 @@
     		}
     	})
     })
-    onDestroy(() => SettingsStore.getInstance().removeListener(COMPONENT_ID))
+    onDestroy(() => ProjectionEngine.SettingsStore.removeListener(COMPONENT_ID))
 </script>
 
 <PropertyHeader title={LocalizationEN.SHORTCUTS}/>

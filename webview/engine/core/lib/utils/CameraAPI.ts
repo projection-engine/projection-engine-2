@@ -15,196 +15,191 @@ import CameraSerialization from "../../static/CameraSerialization"
 import CameraNotificationDecoder from "../CameraNotificationDecoder"
 import Renderer from "../../Renderer"
 import cameraWorker from "../../workers/camera-worker";
+import ProjectionEngine from "../../../../window/ProjectionEngine";
 
 
 const TEMPLATE_CAMERA = new CameraComponent()
 export default class CameraAPI extends CameraResources {
-	static #dynamicAspectRatio = false
-	static metadata = new CameraEffects()
-	static trackingEntity
-	static #initialized = false
-	static initialize() {
-		if (CameraAPI.#initialized)
-			return
-		CameraAPI.#initialized = true
-		CameraAPI.projectionBuffer[4] = 10
-		CameraNotificationDecoder.initialize(CameraAPI.notificationBuffers)
-		cameraWorker([
-			CameraAPI.notificationBuffers,
-			CameraAPI.position,
-			CameraAPI.viewMatrix,
-			CameraAPI.projectionMatrix,
-			CameraAPI.invViewMatrix,
-			CameraAPI.invProjectionMatrix,
-			CameraAPI.staticViewMatrix,
-			CameraAPI.translationBuffer,
-			CameraAPI.rotationBuffer,
-			CameraAPI.skyboxProjectionMatrix,
-			CameraAPI.invSkyboxProjectionMatrix,
-			CameraAPI.projectionBuffer,
-			CameraAPI.viewProjectionMatrix,
-			CameraAPI.viewUBOBuffer,
-			CameraAPI.projectionUBOBuffer
-		])
-		new ResizeObserver(CameraAPI.updateAspectRatio)
-			.observe(GPU.canvas)
+    #dynamicAspectRatio = false
+    metadata = new CameraEffects()
+    trackingEntity
+    constructor() {
+        super()
+        this.projectionBuffer[4] = 10
+        Engine.CameraNotificationDecoder.initialize(this.notificationBuffers)
+        cameraWorker([
+            this.notificationBuffers,
+            this.position,
+            this.viewMatrix,
+            this.projectionMatrix,
+            this.invViewMatrix,
+            this.invProjectionMatrix,
+            this.staticViewMatrix,
+            this.translationBuffer,
+            this.rotationBuffer,
+            this.skyboxProjectionMatrix,
+            this.invSkyboxProjectionMatrix,
+            this.projectionBuffer,
+            this.viewProjectionMatrix,
+            this.viewUBOBuffer,
+            this.projectionUBOBuffer
+        ])
+    }
 
-	}
+    syncThreads() {
+        Engine.CameraNotificationDecoder.elapsed = Renderer.elapsed
+        cameraWorker()
+    }
 
-	static syncThreads() {
-		CameraNotificationDecoder.elapsed = Renderer.elapsed
-		cameraWorker()
-	}
+    updateUBOs() {
+        const entity = this.trackingEntity
+        if (entity && entity.__changedBuffer[1])
+            this.update(entity.translation, entity.rotationQuaternionFinal)
 
-	static updateUBOs() {
-		const entity = CameraAPI.trackingEntity
-		if (entity && entity.__changedBuffer[1])
-			CameraAPI.update(entity.translation, entity.rotationQuaternionFinal)
+        if (Engine.CameraNotificationDecoder.hasChangedProjection === 1) {
+            const UBO = StaticUBOs.cameraProjectionUBO
 
-		if (CameraNotificationDecoder.hasChangedProjection === 1) {
-			const UBO = StaticUBOs.cameraProjectionUBO
+            UBO.bind()
+            this.projectionUBOBuffer[32] = GPU.bufferResolution[0]
+            this.projectionUBOBuffer[33] = GPU.bufferResolution[1]
+            this.projectionUBOBuffer[34] = 2.0 / Math.log2(this.projectionBuffer[0] + 1)
 
-			UBO.bind()
-			CameraAPI.projectionUBOBuffer[32] = GPU.bufferResolution[0]
-			CameraAPI.projectionUBOBuffer[33] = GPU.bufferResolution[1]
-			CameraAPI.projectionUBOBuffer[34] = 2.0 / Math.log2 (CameraAPI.projectionBuffer[0] + 1)
+            UBO.updateBuffer(this.projectionUBOBuffer)
+            UBO.unbind()
 
-			UBO.updateBuffer(CameraAPI.projectionUBOBuffer)
-			UBO.unbind()
+            VisibilityRenderer.needsUpdate = true
+        }
 
-			VisibilityRenderer.needsUpdate = true
-		}
+        if (Engine.CameraNotificationDecoder.hasChangedView === 1) {
+            const UBO = StaticUBOs.cameraViewUBO
+            UBO.bind()
+            UBO.updateBuffer(this.viewUBOBuffer)
+            UBO.unbind()
 
-		if (CameraNotificationDecoder.hasChangedView === 1) {
-			const UBO = StaticUBOs.cameraViewUBO
-			UBO.bind()
-			UBO.updateBuffer(CameraAPI.viewUBOBuffer)
-			UBO.unbind()
+            VisibilityRenderer.needsUpdate = true
+        }
+    }
 
-			VisibilityRenderer.needsUpdate = true
-		}
-	}
+    updateAspectRatio() {
+        const bBox = GPU.canvas.getBoundingClientRect()
+        ConversionAPI.canvasBBox = bBox
+        if (Engine.environment === ENVIRONMENT.DEV || this.#dynamicAspectRatio) {
+            this.aspectRatio = bBox.width / bBox.height
+            this.updateProjection()
+        }
+    }
 
-	static updateAspectRatio() {
-		const bBox = GPU.canvas.getBoundingClientRect()
-		ConversionAPI.canvasBBox = bBox
-		if (Engine.environment === ENVIRONMENT.DEV || CameraAPI.#dynamicAspectRatio) {
-			CameraAPI.aspectRatio = bBox.width / bBox.height
-			CameraAPI.updateProjection()
-		}
-	}
+    update(translation, rotation) {
+        if (translation != null)
+            vec3.copy(this.translationBuffer, translation)
+        if (rotation != null)
+            vec4.copy(this.rotationBuffer, rotation)
+        Engine.CameraNotificationDecoder.viewNeedsUpdate = 1
+    }
 
-	static update(translation, rotation) {
-		if (translation != null)
-			vec3.copy(CameraAPI.translationBuffer, translation)
-		if (rotation != null)
-			vec4.copy(CameraAPI.rotationBuffer, rotation)
-		CameraNotificationDecoder.viewNeedsUpdate = 1
-	}
+    serializeState(): CameraSerialization {
 
-	static serializeState(): CameraSerialization {
+        return {
+            translationSmoothing: this.translationSmoothing,
+            metadata: {...this.dumpEffects()},
+            rotation: [...this.rotationBuffer],
+            translation: [...this.translationBuffer]
+        }
+    }
 
-		return {
-			translationSmoothing: CameraAPI.translationSmoothing,
-			metadata: {...CameraAPI.dumpEffects()},
-			rotation: [...CameraAPI.rotationBuffer],
-			translation: [...CameraAPI.translationBuffer]
-		}
-	}
+    get hasChangedView() {
+        return Engine.CameraNotificationDecoder.hasChangedView === 1
+    }
 
-	static get hasChangedView() {
-		return CameraNotificationDecoder.hasChangedView === 1
-	}
+    get isOrthographic(): boolean {
+        return Engine.CameraNotificationDecoder.projectionType === Engine.CameraNotificationDecoder.ORTHOGRAPHIC
+    }
 
-	static get isOrthographic(): boolean {
-		return CameraNotificationDecoder.projectionType === CameraNotificationDecoder.ORTHOGRAPHIC
-	}
+    set isOrthographic(data) {
+        Engine.CameraNotificationDecoder.projectionType = data ? Engine.CameraNotificationDecoder.ORTHOGRAPHIC : Engine.CameraNotificationDecoder.PERSPECTIVE
+        Engine.CameraNotificationDecoder.projectionNeedsUpdate = 1
+    }
 
-	static set isOrthographic(data) {
-		CameraNotificationDecoder.projectionType = data ? CameraNotificationDecoder.ORTHOGRAPHIC : CameraNotificationDecoder.PERSPECTIVE
-		CameraNotificationDecoder.projectionNeedsUpdate = 1
-	}
+    set translationSmoothing(data) {
+        Engine.CameraNotificationDecoder.translationSmoothing = data
+    }
 
-	static set translationSmoothing(data) {
-		CameraNotificationDecoder.translationSmoothing = data
-	}
-
-	static get translationSmoothing() {
-		return CameraNotificationDecoder.translationSmoothing
-	}
+    get translationSmoothing() {
+        return Engine.CameraNotificationDecoder.translationSmoothing
+    }
 
 
-	static updateProjection() {
-		CameraNotificationDecoder.projectionNeedsUpdate = 1
-	}
+    updateProjection() {
+        Engine.CameraNotificationDecoder.projectionNeedsUpdate = 1
+    }
 
-	static updateView() {
-		CameraNotificationDecoder.viewNeedsUpdate = 1
-	}
+    updateView() {
+        Engine.CameraNotificationDecoder.viewNeedsUpdate = 1
+    }
 
-	static restoreState(state: CameraSerialization) {
-		const {rotation, translation, translationSmoothing, metadata} = state
-		CameraAPI.restoreMetadata(metadata)
-		CameraAPI.updateTranslation(translation)
-		CameraAPI.updateRotation(rotation)
-		CameraAPI.translationSmoothing = translationSmoothing
+    restoreState(state: CameraSerialization) {
+        const {rotation, translation, translationSmoothing, metadata} = state
+        this.restoreMetadata(metadata)
+        this.updateTranslation(translation)
+        this.updateRotation(rotation)
+        this.translationSmoothing = translationSmoothing
 
-		CameraAPI.updateView()
-	}
+        this.updateView()
+    }
 
-	static updateViewTarget(data: Entity | Object) {
-		if (!data)
-			CameraAPI.trackingEntity = undefined
+    updateViewTarget(data: Entity | Object) {
+        if (!data)
+            this.trackingEntity = undefined
 
-		let cameraObj
-		if (data instanceof Entity) {
-			CameraAPI.trackingEntity = data
-			cameraObj = data.cameraComponent
-		} else
-			cameraObj = data
+        let cameraObj
+        if (data instanceof Entity) {
+            this.trackingEntity = data
+            cameraObj = data.cameraComponent
+        } else
+            cameraObj = data
 
-		if (!data)
-			return
+        if (!data)
+            return
 
-		cameraObj = {...TEMPLATE_CAMERA, ...cameraObj}
+        cameraObj = {...TEMPLATE_CAMERA, ...cameraObj}
 
-		MotionBlur.enabled = cameraObj.motionBlurEnabled === true || cameraObj.cameraMotionBlur === true
+        MotionBlur.enabled = cameraObj.motionBlurEnabled === true || cameraObj.cameraMotionBlur === true
 
-		MotionBlur.velocityScale = cameraObj.mbVelocityScale
-		MotionBlur.maxSamples = cameraObj.mbSamples
+        MotionBlur.velocityScale = cameraObj.mbVelocityScale
+        MotionBlur.maxSamples = cameraObj.mbSamples
 
-		CameraAPI.zFar = cameraObj.zFar
-		CameraAPI.zNear = cameraObj.zNear
-		CameraAPI.fov = cameraObj.fov < Math.PI * 2 ? cameraObj.fov : glMatrix.toRadian(cameraObj.fov)
-		CameraAPI.#dynamicAspectRatio = cameraObj.dynamicAspectRatio
-		CameraAPI.isOrthographic = cameraObj.ortho
-		CameraAPI.cameraMotionBlur = cameraObj.cameraMotionBlur
-		CameraAPI.vignetteEnabled = cameraObj.vignette
-		CameraAPI.vignetteStrength = cameraObj.vignetteStrength
-		CameraAPI.distortion = cameraObj.distortion
-		CameraAPI.distortionStrength = cameraObj.distortionStrength
-		CameraAPI.chromaticAberration = cameraObj.chromaticAberration
-		CameraAPI.chromaticAberrationStrength = cameraObj.chromaticAberrationStrength
-		CameraAPI.filmGrain = cameraObj.filmGrain
-		CameraAPI.filmGrainStrength = cameraObj.filmGrainStrength
-		CameraAPI.bloom = cameraObj.bloom
-		CameraAPI.bloomThreshold = cameraObj.bloomThreshold
-		CameraAPI.gamma = cameraObj.gamma
-		CameraAPI.exposure = cameraObj.exposure
-		CameraAPI.apertureDOF = cameraObj.apertureDOF
-		CameraAPI.focalLengthDOF = cameraObj.focalLengthDOF
-		CameraAPI.focusDistanceDOF = cameraObj.focusDistanceDOF
-		CameraAPI.samplesDOF = cameraObj.samplesDOF
-		CameraAPI.DOF = cameraObj.enabledDOF
+        this.zFar = cameraObj.zFar
+        this.zNear = cameraObj.zNear
+        this.fov = cameraObj.fov < Math.PI * 2 ? cameraObj.fov : glMatrix.toRadian(cameraObj.fov)
+        this.#dynamicAspectRatio = cameraObj.dynamicAspectRatio
+        this.isOrthographic = cameraObj.ortho
+        this.cameraMotionBlur = cameraObj.cameraMotionBlur
+        this.vignetteEnabled = cameraObj.vignette
+        this.vignetteStrength = cameraObj.vignetteStrength
+        this.distortion = cameraObj.distortion
+        this.distortionStrength = cameraObj.distortionStrength
+        this.chromaticAberration = cameraObj.chromaticAberration
+        this.chromaticAberrationStrength = cameraObj.chromaticAberrationStrength
+        this.filmGrain = cameraObj.filmGrain
+        this.filmGrainStrength = cameraObj.filmGrainStrength
+        this.bloom = cameraObj.bloom
+        this.bloomThreshold = cameraObj.bloomThreshold
+        this.gamma = cameraObj.gamma
+        this.exposure = cameraObj.exposure
+        this.apertureDOF = cameraObj.apertureDOF
+        this.focalLengthDOF = cameraObj.focalLengthDOF
+        this.focusDistanceDOF = cameraObj.focusDistanceDOF
+        this.samplesDOF = cameraObj.samplesDOF
+        this.DOF = cameraObj.enabledDOF
 
-		if (!cameraObj.dynamicAspectRatio && cameraObj.aspectRatio)
-			CameraAPI.aspectRatio = cameraObj.aspectRatio
-		else
-			CameraAPI.updateAspectRatio()
+        if (!cameraObj.dynamicAspectRatio && cameraObj.aspectRatio)
+            this.aspectRatio = cameraObj.aspectRatio
+        else
+            this.updateAspectRatio()
 
-		if (data instanceof Entity)
-			CameraAPI.update(data.translation, data.rotationQuaternionFinal)
-		CameraAPI.updateProjection()
-	}
+        if (data instanceof Entity)
+            this.update(data.translation, data.rotationQuaternionFinal)
+        this.updateProjection()
+    }
 }
 

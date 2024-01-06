@@ -1,10 +1,8 @@
 import ContentBrowserStore from "../../shared/stores/ContentBrowserStore"
 import SELECTION_TYPES from "../views/content-browser/static/SELECTION_TYPES"
-import ToastNotificationSystem from "../../shared/components/alert/ToastNotificationSystem"
-import LocalizationEN from "../../../shared/enums/LocalizationEN"
-import FileTypes from "../../../shared/enums/FileTypes"
-import EngineResourceLoaderService from "../services/engine/EngineResourceLoaderService"
-import LevelService from "../services/engine/LevelService"
+import LocalizationEN from "../../../enums/LocalizationEN"
+import FileTypes from "../../../enums/FileTypes"
+import EngineResourceLoaderService from "../../services/EngineResourceLoaderService"
 import ShaderEditorTools from "../views/shader-editor/libs/ShaderEditorTools"
 import VIEWS from "../components/view/static/VIEWS"
 import EditorFSUtil from "./EditorFSUtil"
@@ -13,12 +11,11 @@ import {SORTS} from "../views/content-browser/static/SORT_INFO"
 import COMPONENT_TEMPLATE from "../../../engine/core/static/templates/COMPONENT_TEMPLATE"
 import UI_TEMPLATE from "../../../engine/core/static/templates/UI_TEMPLATE"
 import EditorUtil from "./EditorUtil"
-import ContentBrowserHierarchyStore from "../../shared/stores/ContentBrowserHierarchyStore"
-import IPCRoutes from "../../../shared/enums/IPCRoutes"
+import IPCRoutes from "../../../enums/IPCRoutes"
 import getContentBrowserActions from "../templates/get-content-browser-actions"
 import HotKeysController from "../../shared/lib/HotKeysController"
-import ContextMenuService from "../../shared/lib/context-menu/ContextMenuService"
 import NavigationHistory from "../views/content-browser/libs/NavigationHistory"
+import ProjectionEngine from "../../ProjectionEngine";
 
 export default class ContentBrowserUtil {
     static sortItems(arr: MutableObject[], isDSC: boolean, sortKey: string) {
@@ -34,7 +31,7 @@ export default class ContentBrowserUtil {
     }
 
     static selection(type, currentDirectory) {
-        const items = ContentBrowserStore.getData().items
+        const items = ProjectionEngine.ContentBrowserStore.getData().items
 
         switch (type) {
             case SELECTION_TYPES.INVERT: {
@@ -66,7 +63,7 @@ export default class ContentBrowserUtil {
             return
         if (!data.isFolder) {
             const fileType = "." + data.type
-            ToastNotificationSystem.getInstance().warn(LocalizationEN.OPENING_ASSET + " (" + data.name + ")")
+            ProjectionEngine.ToastNotificationSystem.warn(LocalizationEN.OPENING_ASSET + " (" + data.name + ")")
             switch (fileType) {
                 // case FileTypes.UI_LAYOUT:
                 // case FileTypes.COMPONENT:
@@ -74,7 +71,7 @@ export default class ContentBrowserUtil {
                 // case FileTypes.JSON:
                 //     ElectronResources.shell.openPath(FileSystemUtil.resolvePath(FileSystemUtil.ASSETS_PATH + FileSystemUtil.sep + data.id))
                 //         .catch(err => {
-                //             ToastNotificationSystem.getInstance().error(LocalizationEN.ERROR_OPENING_FILE)
+                //             ToasterService.getInstance().error(LocalizationEN.ERROR_OPENING_FILE)
                 //             console.error(err)
                 //         })
                 //     break
@@ -82,10 +79,10 @@ export default class ContentBrowserUtil {
                 case FileTypes.COLLECTION:
                 case FileTypes.TEXTURE:
                     EngineResourceLoaderService.load(data.registryID, true).catch(console.error)
-                    ToastNotificationSystem.getInstance().warn(LocalizationEN.CREATING_ENTITY)
+                    ProjectionEngine.ToastNotificationSystem.warn(LocalizationEN.CREATING_ENTITY)
                     break
                 case FileTypes.LEVEL:
-                    LevelService.getInstance().loadLevel(data.registryID).catch(console.error)
+                    ProjectionEngine.LevelService.loadLevel(data.registryID).catch(console.error)
                     break
                 case FileTypes.MATERIAL:
                     ShaderEditorTools.toOpenFile = data
@@ -133,7 +130,7 @@ export default class ContentBrowserUtil {
     }
 
     static async handleDropFolder(event: string[] | string, target?: string) {
-        const itemsFilesStore = ContentBrowserStore.getData().items
+        const itemsFilesStore = ProjectionEngine.ContentBrowserStore.getData().items
         try {
             const items = Array.isArray(event) ? event : JSON.parse(event)
             for (let i = 0; i < items.length; i++) {
@@ -162,7 +159,7 @@ export default class ContentBrowserUtil {
                     if (!FileSystemUtil.exists(newPath)) {
                         await ContentBrowserUtil.rename(FileSystemUtil.resolvePath(FileSystemUtil.ASSETS_PATH + FileSystemUtil.sep + textData), FileSystemUtil.resolvePath(newPath))
                         await ContentBrowserUtil.refreshFiles()
-                    } else ToastNotificationSystem.getInstance().error(LocalizationEN.ITEM_ALREADY_EXISTS)
+                    } else ProjectionEngine.ToastNotificationSystem.error(LocalizationEN.ITEM_ALREADY_EXISTS)
                 }
             }
         } catch (error) {
@@ -171,10 +168,10 @@ export default class ContentBrowserUtil {
     }
 
     static async handleDelete(entries, currentDirectory, setCurrentDirectory) {
-        const items = ContentBrowserStore.getData().items
+        const items = ProjectionEngine.ContentBrowserStore.getData().items
         const itemsToDelete = !Array.isArray(entries) ? [entries] : entries
 
-        ToastNotificationSystem.getInstance().warn(LocalizationEN.DELETING_ITEMS)
+        ProjectionEngine.ToastNotificationSystem.warn(LocalizationEN.DELETING_ITEMS)
         for (let i = 0; i < itemsToDelete.length; i++) {
             const currentItem = itemsToDelete[i]
             const file = items.find(e => e.id === currentItem)
@@ -203,7 +200,7 @@ export default class ContentBrowserUtil {
         }
 
         await ContentBrowserUtil.refreshFiles().catch(console.error)
-        ToastNotificationSystem.getInstance().success(LocalizationEN.SUCCESSFUL_DELETE)
+        ProjectionEngine.ToastNotificationSystem.success(LocalizationEN.SUCCESSFUL_DELETE)
     }
 
     static getTypeName(type: string): string {
@@ -280,7 +277,7 @@ export default class ContentBrowserUtil {
         `
     }
 
-    static getItemDragData( data, setOnDrag: Function) {
+    static getItemDragData(data, setOnDrag: Function) {
         return {
             dragImage: `
                 <span data-svelteicon="-" style="font-size: 70px">${ContentBrowserUtil.#getDragIcon(ContentBrowserUtil.getItemIcon(data), data)}</span>
@@ -406,30 +403,30 @@ export default class ContentBrowserUtil {
 
 
     static initializeContentBrowser() {
-        ContentBrowserStore.getInstance().addListener("self-update", () => {
-            ContentBrowserHierarchyStore.updateStore({})
+        ProjectionEngine.ContentBrowserStore.addListener("self-update", () => {
+            ProjectionEngine.ContentBrowserHierarchyStore.updateStore({})
         })
         ContentBrowserUtil.refreshFiles().catch(console.error)
     }
 
 
     static async refreshFiles() {
-        const instance = ContentBrowserStore.getInstance()
+        const instance = ProjectionEngine.ContentBrowserStore
         try {
             const items = await EditorUtil.getCall(IPCRoutes.REFRESH_CONTENT_BROWSER, {pathName: FileSystemUtil.path + FileSystemUtil.sep}, false)
             const fileTypes = await ContentBrowserUtil.getRegistryData()
-            instance.updateStore({items: items ?? instance.data.items, ...fileTypes})
+            instance.updateStore({items: items ?? instance.getData().items, ...fileTypes})
         } catch (err) {
             console.error(err)
         }
     }
 
     static getFilesToCut() {
-        return ContentBrowserStore.getData().toCut
+        return ProjectionEngine.ContentBrowserStore.getData().toCut
     }
 
     static cutFiles(toCut: string[]) {
-        ContentBrowserStore.updateStore({toCut})
+        ProjectionEngine.ContentBrowserStore.updateStore({toCut})
     }
 
     static paste(target?: string) {
@@ -450,10 +447,10 @@ export default class ContentBrowserUtil {
     }
 
     static updateHierarchy() {
-        const items = ContentBrowserStore.getData().items
+        const items = ProjectionEngine.ContentBrowserStore.getData().items
         if (!items)
             return
-        const open = ContentBrowserHierarchyStore.getData().open
+        const open = ProjectionEngine.ContentBrowserHierarchyStore.getData().open
         const folders = items.filter(item => item.isFolder)
         const cache = {
             [FileSystemUtil.sep]: {
@@ -475,7 +472,7 @@ export default class ContentBrowserUtil {
 
     static #getHierarchy(cache, item, depth = 0, folders) {
         cache[item.id] = {item, depth, childQuantity: 0, children: []}
-        const isOpen = ContentBrowserHierarchyStore.getData().open[item.id]
+        const isOpen = ProjectionEngine.ContentBrowserHierarchyStore.getData().open[item.id]
         for (let i = 0; i < folders.length; i++) {
             const current = folders[i]
             if (current.parent === item.id && !cache[current.id]) {
@@ -497,8 +494,8 @@ export default class ContentBrowserUtil {
     ) {
         const actions = getContentBrowserActions(navigationHistory, getCurrentDirectory, setCurrentDirectory, setCurrentItem)
         HotKeysController.unbindAction(ref)
-        ContextMenuService.getInstance().destroy(COMPONENT_ID)
-        ContextMenuService.getInstance().mount(
+        ProjectionEngine.ContextMenuService.destroy(COMPONENT_ID)
+        ProjectionEngine.ContextMenuService.mount(
             actions.contextMenu,
             COMPONENT_ID,
             (trigger, element) => {

@@ -5,7 +5,7 @@
     import ToolTip from "../../../../shared/components/tooltip/ToolTip.svelte"
     import Icon from "../../../../shared/components/icon/Icon.svelte"
     import ViewHeader from "../../../components/view/components/ViewHeader.svelte"
-    import LocalizationEN from "../../../../../shared/enums/LocalizationEN"
+    import LocalizationEN from "../../../../../enums/LocalizationEN"
     import ShaderEditorUtil from "../../../util/ShaderEditorUtil"
 
     export let openFile

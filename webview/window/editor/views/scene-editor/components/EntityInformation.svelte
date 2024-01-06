@@ -1,14 +1,14 @@
 <script>
     import {onDestroy, onMount} from "svelte"
-    import GIZMOS from "../../../../../shared/enums/Gizmos.ts"
-    import Gizmos from "../../../../../shared/enums/Gizmos.ts"
+    import GIZMOS from "../../../../../enums/Gizmos.ts"
+    import Gizmos from "../../../../../enums/Gizmos.ts"
 
     import GizmoSystem from "../../../../../engine/tools/gizmo/GizmoSystem"
-    import LocalizationEN from "../../../../../shared/enums/LocalizationEN"
-    import SettingsStore from "../../../../shared/stores/SettingsStore"
+    import LocalizationEN from "../../../../../enums/LocalizationEN"
     import EntitySelectionStore from "../../../../shared/stores/EntitySelectionStore"
     import GizmoState from "../../../../../engine/tools/gizmo/util/GizmoState"
     import SceneEditorUtil from "../../../util/SceneEditorUtil"
+    import ProjectionEngine from "../../../../ProjectionEngine";
 
     /** @type boolean */
     export let isOnGizmo
@@ -41,8 +41,8 @@
     		}
     		}
     	})
-    	EntitySelectionStore.getInstance().addListener(COMPONENT_ID, () => selectedSize = EntitySelectionStore.getEntitiesSelected().length)
-    	SettingsStore.getInstance().addListener(COMPONENT_ID, data => {
+        ProjectionEngine.EntitySelectionStore.addListener(COMPONENT_ID, () => selectedSize = EntitySelectionStore.getEntitiesSelected().length)
+        ProjectionEngine.SettingsStore.addListener(COMPONENT_ID, data => {
     		gizmo = data.gizmo
     		isValidPivot = gizmo === GIZMOS.TRANSLATION && selectedSize === 1
     		isValidScaling = gizmo === GIZMOS.SCALE
@@ -51,8 +51,8 @@
     })
 
     onDestroy(() => {
-    	EntitySelectionStore.getInstance().removeListener(COMPONENT_ID)
-    	SettingsStore.getInstance().removeListener(COMPONENT_ID)
+        ProjectionEngine.EntitySelectionStore.removeListener(COMPONENT_ID)
+        ProjectionEngine.SettingsStore.removeListener(COMPONENT_ID)
     	GizmoSystem.removeListener(COMPONENT_ID)
     })
 </script>

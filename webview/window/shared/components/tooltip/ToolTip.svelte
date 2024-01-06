@@ -1,6 +1,7 @@
 <script>
     import {onDestroy, onMount} from "svelte"
-    import ToolTipService from "./ToolTipService"
+    import ToolTipService from "../../../services/ToolTipService"
+    import ProjectionEngine from "../../../ProjectionEngine";
 
     let open = false
     export let content = ""
@@ -11,27 +12,27 @@
 
     const handleMouseMove = (event) => {
 
-    	ToolTipService.getInstance().element.style.left = (event.clientX + 10) + "px"
-    	ToolTipService.getInstance().element.style.top = (event.clientY + 10) + "px"
+    	ProjectionEngine.ToolTipService.element.style.left = (event.clientX + 10) + "px"
+    	ProjectionEngine.ToolTipService.element.style.top = (event.clientY + 10) + "px"
 
     	let transform = {x: "0px", y: "0px"}
     	if ((event.clientX + 10 + bBox.width) >= bodyBBox.width)
     		transform.x = "calc(-100% - 10px)"
     	if ((event.clientY + 10 + bBox.height) >= bodyBBox.height)
     		transform.y = "calc(-100% - 10px)"
-    	ToolTipService.getInstance().element.style.transform = `translate(${transform.x}, ${transform.y})`
+    	ProjectionEngine.ToolTipService.element.style.transform = `translate(${transform.x}, ${transform.y})`
     }
 
     function close() {
     	document.removeEventListener("mousemove", handleMouseMove)
     	open = false
-    	ToolTipService.getInstance().element.setAttribute("data-sveltetooltipanimation", "")
+    	ProjectionEngine.ToolTipService.element.setAttribute("data-sveltetooltipanimation", "")
     }
 
     const hover = (event) => {
     	open = true
 
-    	const instance = ToolTipService.getInstance()
+    	const instance = ProjectionEngine.ToolTipService
     	bBox = instance.element.getBoundingClientRect()
     	bodyBBox = document.body.getBoundingClientRect()
 
@@ -48,7 +49,7 @@
     }
 
     $: {
-    	const instance = ToolTipService.getInstance()
+    	const instance = ProjectionEngine.ToolTipService
 
     	if (open) {
     		instance.portal.open()
@@ -63,7 +64,7 @@
 
     $: {
     	if (open)
-    		ToolTipService.getInstance().element.innerHTML = content
+    		ProjectionEngine.ToolTipService.element.innerHTML = content
     }
     onMount(() => {
     	targetParent = wrapper.parentElement

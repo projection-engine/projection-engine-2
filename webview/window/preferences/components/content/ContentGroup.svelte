@@ -2,8 +2,7 @@
     import ContentField from "./ContentField.svelte"
     import Accordion from "../../../shared/components/accordion/Accordion.svelte"
     import {onDestroy, onMount} from "svelte"
-    import VisualsStore from "../../../shared/stores/VisualsStore"
-    import SettingsStore from "../../../shared/stores/SettingsStore"
+    import ProjectionEngine from "../../../ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     export let toRender
@@ -12,13 +11,13 @@
     let visualSettings
 
     onMount(() => {
-    	VisualsStore.getInstance().addListener(COMPONENT_ID, v => visualSettings = v)
-    	SettingsStore.getInstance().addListener(COMPONENT_ID, v => settings = v)
+        ProjectionEngine.VisualsStore.addListener(COMPONENT_ID, v => visualSettings = v)
+        ProjectionEngine.SettingsStore.addListener(COMPONENT_ID, v => settings = v)
     })
 
     onDestroy(() => {
-    	VisualsStore.getInstance().removeListener(COMPONENT_ID)
-    	SettingsStore.getInstance().removeListener(COMPONENT_ID)
+        ProjectionEngine.VisualsStore.removeListener(COMPONENT_ID)
+        ProjectionEngine.SettingsStore.removeListener(COMPONENT_ID)
     })
 </script>
 

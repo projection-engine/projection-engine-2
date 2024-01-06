@@ -7,6 +7,7 @@ import Framebuffer from "../instances/Framebuffer"
 import MetricsController from "../lib/utils/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import GPUUtil from "../utils/GPUUtil";
+import Engine from "../Engine";
 
 export default class Bloom {
 	static #upSample(fbo: Framebuffer, context: WebGL2RenderingContext, nextSampler: WebGLTexture, blurredSampler: WebGLTexture) {
@@ -16,7 +17,7 @@ export default class Bloom {
 		GPUUtil.bind2DTextureForDrawing(upSamplingShaderUniforms.nextSampler, 0, nextSampler)
 		GPUUtil.bind2DTextureForDrawing(upSamplingShaderUniforms.blurred, 1, blurredSampler)
 
-		context.uniform1f(upSamplingShaderUniforms.sampleScale, CameraAPI.bloomOffset)
+		context.uniform1f(upSamplingShaderUniforms.sampleScale, Engine.CameraAPI.bloomOffset)
 		StaticMeshes.drawQuad()
 		fbo.stopMapping()
 	}
@@ -24,13 +25,13 @@ export default class Bloom {
 	static execute() {
 
 		const context = GPU.context
-		if (!CameraAPI.bloom)
+		if (!Engine.CameraAPI.bloom)
 			return
 		StaticFBO.lens.startMapping()
 		StaticShaders.bloom.bind()
 		GPUUtil.bind2DTextureForDrawing(StaticShaders.bloomUniforms.sceneColor, 0, StaticFBO.postProcessing1Sampler)
 
-		context.uniform1f(StaticShaders.bloomUniforms.threshold, CameraAPI.bloomThreshold)
+		context.uniform1f(StaticShaders.bloomUniforms.threshold, Engine.CameraAPI.bloomThreshold)
 		StaticMeshes.drawQuad()
 		StaticFBO.lens.stopMapping()
 
@@ -44,7 +45,7 @@ export default class Bloom {
 			GPUUtil.bind2DTextureForDrawing(StaticShaders.gaussianUniforms.sceneColor, 0, i > 0 ? downscale[i - 1].colors[0] : StaticFBO.lensSampler)
 
 			context.uniform1f(StaticShaders.gaussianUniforms.blurRadius, 10)
-			context.uniform1i(StaticShaders.gaussianUniforms.samples, CameraAPI.bloomQuality)
+			context.uniform1i(StaticShaders.gaussianUniforms.samples, Engine.CameraAPI.bloomQuality)
 			context.uniform2fv(StaticShaders.gaussianUniforms.bufferResolution, fbo.resolution)
 
 			StaticMeshes.drawQuad()

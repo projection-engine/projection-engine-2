@@ -1,4 +1,5 @@
 import AbstractStore from "./AbstractStore"
+import ProjectionEngine from "../../ProjectionEngine";
 
 export default class EntitySelectionStore extends AbstractStore{
 	constructor() {
@@ -6,11 +7,11 @@ export default class EntitySelectionStore extends AbstractStore{
 	}
 
 	static setEntitiesSelected(data:string[]|string)	 {
-		EntitySelectionStore.updateStore({array: Array.isArray(data) ? data : [data]})
+		ProjectionEngine.EntitySelectionStore.updateStore({array: Array.isArray(data) ? data : [data]})
 	}
 
 	static getEntitiesSelected() {
-		return EntitySelectionStore.getData().array
+		return ProjectionEngine.EntitySelectionStore.getData().array
 	}
 
 	static getMainEntity() {
@@ -20,10 +21,10 @@ export default class EntitySelectionStore extends AbstractStore{
 	}
 
 	static getLockedEntity() {
-		return EntitySelectionStore.getData().lockedEntity
+		return ProjectionEngine.EntitySelectionStore.getData().lockedEntity
 	}
 
 	static setLockedEntity(data:string) {
-		EntitySelectionStore.updateStore({lockedEntity: data})
+		ProjectionEngine.EntitySelectionStore.updateStore({lockedEntity: data})
 	}
 }

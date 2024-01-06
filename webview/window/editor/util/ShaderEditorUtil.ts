@@ -13,7 +13,7 @@ import {Input} from "../views/shader-editor/static/Input"
 import CanvasRenderer from "../views/shader-editor/libs/CanvasRenderer"
 import DATA_TYPES from "../../../engine/core/static/DATA_TYPES"
 import Draggable from "../views/shader-editor/templates/Draggable"
-import ContextMenuService from "../../shared/lib/context-menu/ContextMenuService"
+import ProjectionEngine from "../../ProjectionEngine";
 
 export default class ShaderEditorUtil{
 	static  addComment(canvasAPI: Canvas) {
@@ -88,7 +88,7 @@ export default class ShaderEditorUtil{
 			if (!canvasAPI.openFile)
 				return
 			if (isOnScroll) {
-				ContextMenuService.getInstance().blockContext = !ShaderEditorUtil.#checkOffset(event, initialClick)
+				ProjectionEngine.ContextMenuService.blockContext = !ShaderEditorUtil.#checkOffset(event, initialClick)
 				parentElement.scrollTop -= event.movementY
 				parentElement.scrollLeft -= event.movementX
 			} else {
@@ -111,7 +111,7 @@ export default class ShaderEditorUtil{
 			const BBox = canvasAPI.canvas.getBoundingClientRect()
 			parentBBox = parentElement.getBoundingClientRect()
 			isOnScroll = mouseDownEvent.button === 2
-			ContextMenuService.getInstance().blockContext = false
+			ProjectionEngine.ContextMenuService.blockContext = false
 
 			if (!isOnScroll)
 				ShaderEditorUtil.onMouseDownEvent(BBox, IO, tempLink, nodesOnDrag, canvasAPI, parentBBox, parentElement, mouseDownEvent)

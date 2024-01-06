@@ -1,18 +1,18 @@
 import HierarchyToRenderElement from "../views/hierarchy/template/ToRenderElement"
-import EntityHierarchyService from "../services/engine/EntityHierarchyService"
-import LocalizationEN from "../../../shared/enums/LocalizationEN"
+import LocalizationEN from "../../../enums/LocalizationEN"
 import Entity from "../../../engine/core/instances/Entity"
 import Engine from "../../../engine/core/Engine"
-import EngineStateService from "../services/engine/EngineStateService"
+import EngineStateService from "../../services/EngineStateService"
 import EditorUtil from "./EditorUtil"
 import HotKeysController from "../../shared/lib/HotKeysController";
 import getViewportHotkeys from "../templates/get-viewport-hotkeys";
 import EntitySelectionStore from "../../shared/stores/EntitySelectionStore";
+import ProjectionEngine from "../../ProjectionEngine";
 
 export default class HierarchyUtil {
 	static buildTree(openTree: { [key: string]: boolean }, search: string, filteredComponent: string): HierarchyToRenderElement[] {
 
-		const hierarchy = EntityHierarchyService.hierarchy
+		const hierarchy = ProjectionEngine.EntityHierarchyService.hierarchy
 		const data: HierarchyToRenderElement[] = []
 		let blockStart = -1
 		let minDepth = -1
@@ -130,7 +130,7 @@ export default class HierarchyUtil {
 			EngineStateService.appendBlock(toAdd)
 		else {
 			EntitySelectionStore.setEntitiesSelected(newSelection)
-			EntityHierarchyService.updateHierarchy()
+			ProjectionEngine.EntityHierarchyService.updateHierarchy()
 		}
 	}
 

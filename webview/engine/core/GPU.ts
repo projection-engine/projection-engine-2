@@ -17,6 +17,7 @@ import StaticMeshes from "./lib/StaticMeshes"
 import StaticFBO from "./lib/StaticFBO"
 import StaticUBOs from "./lib/StaticUBOs"
 import DynamicMap from "./resource-libs/DynamicMap"
+import Engine from "./Engine";
 
 export default class GPU {
 	static context?: WebGL2RenderingContext
@@ -64,7 +65,6 @@ export default class GPU {
 
 
 		StaticUBOs.initialize()
-		CameraAPI.initialize()
 		await StaticMeshes.initialize()
 		StaticShaders.initialize()
 		StaticFBO.initialize()

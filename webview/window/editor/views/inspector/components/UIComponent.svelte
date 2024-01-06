@@ -9,7 +9,7 @@
     import Engine from "../../../../../engine/core/Engine"
     import Input from "../../../../shared/components/input/Input.svelte"
     import Icon from "../../../../shared/components/icon/Icon.svelte"
-    import LocalizationEN from "../../../../../shared/enums/LocalizationEN"
+    import LocalizationEN from "../../../../../enums/LocalizationEN"
     import InspectorUtil from "../../../util/InspectorUtil"
 
     export let entity

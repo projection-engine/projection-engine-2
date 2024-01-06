@@ -5,12 +5,12 @@
     import ViewHeader from "../../../components/view/components/ViewHeader.svelte"
     import Icon from "../../../../shared/components/icon/Icon.svelte"
     import ToolTip from "../../../../shared/components/tooltip/ToolTip.svelte"
-    import EngineStateService from "../../../services/engine/EngineStateService"
-    import ToastNotificationSystem from "../../../../shared/components/alert/ToastNotificationSystem"
+    import EngineStateService from "../../../../services/EngineStateService"
     import EntityAPI from "../../../../../engine/core/lib/utils/EntityAPI"
-    import LocalizationEN from "../../../../../shared/enums/LocalizationEN"
+    import LocalizationEN from "../../../../../enums/LocalizationEN"
     import EntitySelectionStore from "../../../../shared/stores/EntitySelectionStore";
     import type Entity from "../../../../../engine/core/instances/Entity";
+    import ProjectionEngine from "../../../../ProjectionEngine";
 
     export let isOnSelection:boolean
     export let toggleOnSelection:GenericVoidFunction
@@ -51,7 +51,7 @@
         <button data-sveltebuttondefault="-"
                 on:click={() => {
                     UIAPI.updateAllElements().then(() => {
-                        ToastNotificationSystem.getInstance().log(LocalizationEN.UPDATING_UI)
+                        ProjectionEngine.ToastNotificationSystem.log(LocalizationEN.UPDATING_UI)
                     })
                 }}
                 data-svelteview-header-button="-"

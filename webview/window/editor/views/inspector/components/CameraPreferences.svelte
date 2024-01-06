@@ -1,14 +1,14 @@
 <script>
     import CameraTracker from "../../../../../engine/tools/utils/CameraTracker"
-    import SettingsStore from "../../../../shared/stores/SettingsStore"
     import Layout from "./dynamic-form/Layout.svelte"
     import CAMERA_PROPS from "../../../../../engine/core/static/component-props/CAMERA_PROPS"
     import ContentField from "../../../../preferences/components/content/ContentField.svelte"
     import {onDestroy, onMount} from "svelte"
     import Accordion from "../../../../shared/components/accordion/Accordion.svelte"
     import PropertyHeader from "../../../../shared/components/PropertyHeader.svelte"
-    import LocalizationEN from "../../../../../shared/enums/LocalizationEN"
+    import LocalizationEN from "../../../../../enums/LocalizationEN"
     import CAMERA_PREFERENCES from "../static/CAMERA_PREFERENCES"
+    import ProjectionEngine from "../../../../ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     let cameraSettings = {}
@@ -16,18 +16,18 @@
     let camera
 
     onMount(() => {
-    	SettingsStore.getInstance().addListener(COMPONENT_ID, data => {
+        ProjectionEngine.SettingsStore.addListener(COMPONENT_ID, data => {
     		cameraSettings = {...data.camera, props: CAMERA_PROPS}
     		settings = data
     		camera = data.camera
     	}, ["camera"])
     })
 
-    onDestroy(() => SettingsStore.getInstance().removeListener(COMPONENT_ID))
+    onDestroy(() => ProjectionEngine.SettingsStore.removeListener(COMPONENT_ID))
 
     const updateCamera = (key, value, full) => {
     	if (full)
-    		SettingsStore.updateStore({camera: {...camera, [key]: value}})
+            ProjectionEngine.	SettingsStore.updateStore({camera: {...camera, [key]: value}})
     	if (CameraTracker[key] !== undefined)
     		CameraTracker[key] = value
     }

@@ -9,10 +9,11 @@
     import ITEM_TYPES from "../static/ITEM_TYPES"
     import BrowserHeader from "./BrowserHeader.svelte"
     import Icon from "../../../../shared/components/icon/Icon.svelte"
-    import ContextMenuService from "../../../../shared/lib/context-menu/ContextMenuService"
-    import LocalizationEN from "../../../../../shared/enums/LocalizationEN"
+    import ContextMenuService from "../../../../services/ContextMenuService"
+    import LocalizationEN from "../../../../../enums/LocalizationEN"
     import ContentBrowserUtil from "../../../util/ContentBrowserUtil"
     import ContentBrowserStore from "../../../../shared/stores/ContentBrowserStore"
+    import ProjectionEngine from "../../../../ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     const CARD_SIZE = 115
@@ -59,7 +60,7 @@
 
     onMount(() => {
     	ContentBrowserUtil.buildContextMenuAndHotKeys(COMPONENT_ID, ref, navigationHistory, () => currentDirectory, setCurrentDirectory, v => currentItem = v)
-    	ContentBrowserStore.getInstance().addListener(COMPONENT_ID, v => store = v)
+        ProjectionEngine.ContentBrowserStore.addListener(COMPONENT_ID, v => store = v)
     	resizeOBS = new ResizeObserver(() => {
     		if (isRowType)
     			return
@@ -74,10 +75,10 @@
 
     onDestroy(() => {
 
-    	ContentBrowserStore.getInstance().removeListener(COMPONENT_ID)
-    	EntitySelectionStore.getInstance().removeListener(COMPONENT_ID)
+        ProjectionEngine.ContentBrowserStore.removeListener(COMPONENT_ID)
+        ProjectionEngine.EntitySelectionStore.removeListener(COMPONENT_ID)
     	HotKeysController.unbindAction(ref)
-    	ContextMenuService.getInstance().destroy(COMPONENT_ID)
+        ProjectionEngine.ContextMenuService.destroy(COMPONENT_ID)
     	clearTimeout(timeout)
     	resizeOBS?.disconnect?.()
     })

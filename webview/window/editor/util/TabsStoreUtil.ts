@@ -1,12 +1,10 @@
-import ChangesTrackerStore from "../../shared/stores/ChangesTrackerStore"
-import SettingsStore from "../../shared/stores/SettingsStore"
-import TabsStore from "../../shared/stores/TabsStore"
+import ProjectionEngine from "../../ProjectionEngine";
 
 export default class TabsStoreUtil {
 	static updateByAttributes(direction:"left"|"right"|"top"|"bottom"|"viewport", group:number, value:number) {
-		ChangesTrackerStore.updateStore({changed: true})
-		const settingsData = SettingsStore.getData()
-		const clone = {...TabsStore.getData()}
+		ProjectionEngine.ChangesTrackerStore.updateStore({changed: true})
+		const settingsData = ProjectionEngine.SettingsStore.getData()
+		const clone = {...ProjectionEngine.TabsStore.getData()}
 		if (!clone[settingsData.currentView])
 			clone[settingsData.currentView] = {}
 
@@ -17,22 +15,22 @@ export default class TabsStoreUtil {
 		} else
 			clone[settingsData.currentView][direction] = value
 
-		TabsStore.updateStore(clone)
+		ProjectionEngine.TabsStore.updateStore(clone)
 	}
 
 
 	static getFocusedTab() {
-		return TabsStore.getData().focused
+		return ProjectionEngine.TabsStore.getData().focused
 	}
 
 	static setFocusedTab(data) {
-		TabsStore.updateStore({focused: data})
+		ProjectionEngine.TabsStore.updateStore({focused: data})
 	}
 
 	static getCurrentTabByCurrentView(direction:"left"|"right"|"top"|"bottom"|"viewport", group?: number): number {
 		let value
-		const settingsData =SettingsStore.getData()
-		const tabsData =TabsStore.getData()
+		const settingsData =ProjectionEngine.SettingsStore.getData()
+		const tabsData =ProjectionEngine.TabsStore.getData()
 		if (group !== undefined)
 			value = tabsData[settingsData.currentView]?.[direction]?.[group]
 		else

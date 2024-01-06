@@ -1,7 +1,7 @@
 import EditorFSUtil from "../editor/util/EditorFSUtil"
 import ElectronResources from "./lib/ElectronResources"
-import Folders from "../../shared/enums/Folders"
-import IPCRoutes from "../../shared/enums/IPCRoutes"
+import Folders from "../../enums/Folders"
+import IPCRoutes from "../../enums/IPCRoutes"
 import EditorUtil from "../editor/util/EditorUtil"
 
 

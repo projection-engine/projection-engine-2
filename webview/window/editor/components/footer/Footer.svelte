@@ -6,9 +6,10 @@
     import ToolTip from "../../../shared/components/tooltip/ToolTip.svelte"
     import Engine from "../../../../engine/core/Engine"
     import {onDestroy, onMount} from "svelte"
-    import EntityUpdateService from "../../services/engine/EntityUpdateService"
-    import LocalizationEN from "../../../../shared/enums/LocalizationEN"
+    import EntityUpdateService from "../../../services/EntityUpdateService"
+    import LocalizationEN from "../../../../enums/LocalizationEN"
     import SettingsStore from "../../../shared/stores/SettingsStore"
+    import ProjectionEngine from "../../../ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     let settings = {}
@@ -21,23 +22,23 @@
     	entityID = Engine.loadedLevel?.id
 
     	if (entityID)
-    		EntityUpdateService.removeListener(entityID, COMPONENT_ID)
+            ProjectionEngine.EntityUpdateService.removeListener(entityID, COMPONENT_ID)
 
     	if (!loadedLevel)
     		return
-    	EntityUpdateService.addListener(entityID, COMPONENT_ID, () => {
+        ProjectionEngine.EntityUpdateService.addListener(entityID, COMPONENT_ID, () => {
     		loadedLevel = Engine.loadedLevel.name
     	})
     }
 
     onMount(() => {
-    	SettingsStore.getInstance().addListener(COMPONENT_ID, data => settings = data, ["hideFooter"])
+        ProjectionEngine.SettingsStore.addListener(COMPONENT_ID, data => settings = data, ["hideFooter"])
     	Engine.addLevelLoaderListener(COMPONENT_ID, load)
     	load()
     })
 
     onDestroy(() => {
-    	SettingsStore.getInstance().removeListener(COMPONENT_ID)
+        ProjectionEngine.SettingsStore.removeListener(COMPONENT_ID)
     	Engine.removeLevelLoaderListener(COMPONENT_ID)
     })
 </script>

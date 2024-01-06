@@ -1,11 +1,9 @@
 <script lang="ts">
     import Engine from "../../../../../engine/core/Engine";
-    import EntityNamingService from "../../../services/engine/EntityNamingService";
 
     import Selector from "../../../components/selector/Selector.svelte";
     import Checkbox from "../../../../shared/components/checkbox/Checkbox.svelte";
-    import EntityFactoryService from "../../../services/engine/EntityFactoryService";
-    import EntityHierarchyService from "../../../services/engine/EntityHierarchyService";
+    import EntityFactoryService from "../../../../services/EntityFactoryService";
 
     import Input from "../../../../shared/components/input/Input.svelte";
     import ColorPicker from "../../../../shared/components/color-picker/ColorPicker.svelte";
@@ -13,11 +11,10 @@
     import PropertyHeader from "../../../../shared/components/PropertyHeader.svelte";
     import Accordion from "../../../../shared/components/accordion/Accordion.svelte";
     import TransformationForm from "./TransformationForm.svelte";
-    import EntityUpdateService from "../../../services/engine/EntityUpdateService";
     import {onDestroy} from "svelte";
     import AddComponent from "./AddComponent.svelte";
-    import ToastNotificationSystem from "../../../../shared/components/alert/ToastNotificationSystem";
-    import LocalizationEN from "../../../../../shared/enums/LocalizationEN";
+    import LocalizationEN from "../../../../../enums/LocalizationEN";
+    import ProjectionEngine from "../../../../ProjectionEngine";
 
     export let entity: Entity
 
@@ -27,8 +24,8 @@
     $: {
         if (entityID !== entity.id) {
             if (entityID)
-                EntityUpdateService.removeListener(entityID, ID)
-            EntityUpdateService.addListener(entity.id, ID, () => {
+                ProjectionEngine.EntityUpdateService.removeListener(entityID, ID)
+            ProjectionEngine.EntityUpdateService.addListener(entity.id, ID, () => {
                 entityName = entity.name
             })
             entityName = entity.name
@@ -37,7 +34,7 @@
     }
 
     onDestroy(() => {
-        EntityUpdateService.removeListener(entityID, ID)
+        ProjectionEngine.EntityUpdateService.removeListener(entityID, ID)
     })
 </script>
 
@@ -52,8 +49,8 @@
         <Input
                 width="100%"
                 hasBorder={true}
-                onBlur={(_,v) => EntityNamingService.renameEntity(v, entity)}
-                onEnter={v => EntityNamingService.renameEntity(v, entity)}
+                onBlur={(_,v) => ProjectionEngine.EntityNamingService.renameEntity(v, entity)}
+                onEnter={v => ProjectionEngine.EntityNamingService.renameEntity(v, entity)}
                 inputValue={entityName}
                 height="23px"
                 placeholder={LocalizationEN.MY_ENTITY}
@@ -81,15 +78,15 @@
                     selected={entity.parent}
                     handleChange={v => {
                         if(v === entity){
-                            ToastNotificationSystem.getInstance().error(LocalizationEN.COULD_NOT_LINK_ENTITIES)
+                            ProjectionEngine.ToastNotificationSystem.error(LocalizationEN.COULD_NOT_LINK_ENTITIES)
                             return
                         }
                         entity.addParent(v)
                          if(entity.parent !== v){
-                            ToastNotificationSystem.getInstance().error(LocalizationEN.COULD_NOT_LINK_ENTITIES)
+                            ProjectionEngine.ToastNotificationSystem.error(LocalizationEN.COULD_NOT_LINK_ENTITIES)
                             return
                         }
-                        EntityHierarchyService.updateHierarchy()
+                        ProjectionEngine.EntityHierarchyService.updateHierarchy()
                     }}
             />
         {/if}
@@ -112,7 +109,7 @@
                 value={entity.colorIdentifier||[255,255,255]}
                 submit={(_, arr) => {
                 entity.colorIdentifier = arr
-                EntityHierarchyService.updateHierarchy()
+                ProjectionEngine.EntityHierarchyService.updateHierarchy()
             }}
         />
     </div>

@@ -4,6 +4,7 @@
     import ViewsUtil from "../../util/ViewsUtil"
     import {onDestroy, onMount} from "svelte"
     import EngineStore from "../../../shared/stores/EngineStore"
+    import ProjectionEngine from "../../../ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
 
@@ -42,8 +43,8 @@
     	}
     }
 
-    onMount(() => EngineStore.getInstance().addListener(COMPONENT_ID, data => reducedOpacity = data.executingAnimation, ["executingAnimation"]))
-    onDestroy(() => EngineStore.getInstance().removeListener(COMPONENT_ID))
+    onMount(() => ProjectionEngine.EngineStore.addListener(COMPONENT_ID, data => reducedOpacity = data.executingAnimation, ["executingAnimation"]))
+    onDestroy(() => ProjectionEngine.EngineStore.removeListener(COMPONENT_ID))
 </script>
 
 

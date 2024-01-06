@@ -4,15 +4,15 @@
 
     import {onDestroy, onMount} from "svelte"
     import Checkbox from "../../../../shared/components/checkbox/Checkbox.svelte"
-    import EditorActionHistory from "../../../services/EditorActionHistory"
     import Range from "../../../../shared/components/range/Range.svelte"
     import Icon from "../../../../shared/components/icon/Icon.svelte"
     import Dropdown from "../../../../shared/components/dropdown/Dropdown.svelte"
     import Accordion from "../../../../shared/components/accordion/Accordion.svelte"
     import ROTATION_TYPES from "../static/ROTATION_TYPES"
     import Movable from "../../../../../engine/core/instances/components/Movable"
-    import LocalizationEN from "../../../../../shared/enums/LocalizationEN"
+    import LocalizationEN from "../../../../../enums/LocalizationEN"
     import EmptyIcon from "../../../../shared/components/icon/EmptyIcon.svelte"
+    import ProjectionEngine from "../../../../ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     let targets = []
@@ -29,7 +29,7 @@
     let lockedCache = [false, false, false]
 
     onMount(() => {
-    	EntitySelectionStore.getInstance().addListener(COMPONENT_ID, () => {
+        ProjectionEngine.EntitySelectionStore.addListener(COMPONENT_ID, () => {
     		const cache = []
     		const entitiesSelected = EntitySelectionStore.getEntitiesSelected()
     		for (let i = 0; i < entitiesSelected.length; i++) {
@@ -64,7 +64,7 @@
     	})
     })
 
-    onDestroy(() => EntitySelectionStore.getInstance().removeListener(COMPONENT_ID))
+    onDestroy(() => ProjectionEngine.EntitySelectionStore.removeListener(COMPONENT_ID))
 
     $: {
     	mainEntity = targets[0]
@@ -78,7 +78,7 @@
     function rotate(axis, value) {
     	if (!hasStarted) {
     		hasStarted = true
-    		EditorActionHistory.save(targets)
+            ProjectionEngine.EditorActionHistory.save(targets)
     	}
 
     	if (rotationType === Movable.ROTATION_QUATERNION)
@@ -91,7 +91,7 @@
     function transformScaleTranslation(axis, value, isTranslation) {
     	if (!hasStarted) {
     		hasStarted = true
-    		EditorActionHistory.save(targets)
+            ProjectionEngine.EditorActionHistory.save(targets)
     	}
     	for (let i = 0; i < targets.length; i++) {
     		const entity = targets[i]
@@ -117,7 +117,7 @@
     function transformPivot(axis, value) {
     	if (!hasStarted) {
     		hasStarted = true
-    		EditorActionHistory.save(targets)
+            ProjectionEngine.EditorActionHistory.save(targets)
     	}
 
     	for (let i = 0; i < targets.length; i++) {
@@ -131,7 +131,7 @@
     }
 
     function onFinish() {
-    	EditorActionHistory.save(targets)
+        ProjectionEngine.EditorActionHistory.save(targets)
     	hasStarted = false
     }
 </script>

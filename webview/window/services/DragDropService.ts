@@ -1,7 +1,6 @@
-import STYLES from "./STYLES"
-import AbstractSingleton from "../../../../shared/AbstractSingleton";
+import STYLES from "../shared/components/drag-drop/STYLES"
 
-export default class DragDropService extends AbstractSingleton{
+export default class DragDropService {
 	dropTarget?:HTMLElement
 	dragData
 	onDragTarget?:HTMLElement
@@ -11,7 +10,6 @@ export default class DragDropService extends AbstractSingleton{
 	dragImageElement?:HTMLElement
 
 	constructor() {
-		super();
 		this.alertModal = this.createElement("")
 		this.alertModal.style.background = "var(--pj-accent-color)"
 		this.alertModal.style.left = "50%"
@@ -19,10 +17,6 @@ export default class DragDropService extends AbstractSingleton{
 		this.alertModal.style.top = "4px"
 		this.alertModal.style.zIndex = "-1"
 		document.body.appendChild(this.alertModal)
-	}
-
-	static getInstance(): DragDropService{
-		return super.get<DragDropService>()
 	}
 
 	onLeave() {

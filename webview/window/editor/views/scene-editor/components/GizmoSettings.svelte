@@ -1,18 +1,17 @@
 <script>
-    import GizmoTransformationType from "../../../../../shared/enums/GizmoTransformationType.ts"
-
-    import SettingsStore from "../../../../shared/stores/SettingsStore"
-    import Gizmos from "../../../../../shared/enums/Gizmos.ts"
+    import GizmoTransformationType from "../../../../../enums/GizmoTransformationType.ts"
+    import Gizmos from "../../../../../enums/Gizmos.ts"
     import ROTATION_GRID from "../static/ROTATION_GRID"
     import SCALE_GRID from "../static/SCALE_GRID"
     import TRANSLATION_GRID from "../static/TRANSLATION_GRID"
     import ToolTip from "../../../../shared/components/tooltip/ToolTip.svelte"
     import Icon from "../../../../shared/components/icon/Icon.svelte"
     import Dropdown from "../../../../shared/components/dropdown/Dropdown.svelte"
-    import LocalizationEN from "../../../../../shared/enums/LocalizationEN"
+    import LocalizationEN from "../../../../../enums/LocalizationEN"
     import EmptyIcon from "../../../../shared/components/icon/EmptyIcon.svelte"
     import {onDestroy, onMount} from "svelte"
     import SceneEditorUtil from "../../../util/SceneEditorUtil"
+    import ProjectionEngine from "../../../../ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     const BUTTON_DROPDOWN = "border-radius: 25px; height: 25px; background: var(--pj-background-tertiary);"
@@ -23,18 +22,18 @@
     let gizmo
 
     onMount(() => {
-    	SettingsStore.getInstance().addListener(COMPONENT_ID, data => {
+        ProjectionEngine.SettingsStore.addListener(COMPONENT_ID, data => {
     		transformationType = data.transformationType
     		gizmoGrid = data.gizmoGrid
     		gizmo = data.gizmo
     	}, ["transformationType", "gizmoGrid", "gizmo"])
     })
-    onDestroy(() => SettingsStore.getInstance().removeListener(COMPONENT_ID))
+    onDestroy(() => ProjectionEngine.SettingsStore.removeListener(COMPONENT_ID))
 </script>
 
 <div class="wrapper">
     <button data-sveltebuttondefault="-"
-            on:click={() => SettingsStore.updateStore({transformationType: transformationType === GizmoTransformationType.RELATIVE ? GizmoTransformationType.GLOBAL : GizmoTransformationType.RELATIVE})}
+            on:click={() => ProjectionEngine.SettingsStore.updateStore({transformationType: transformationType === GizmoTransformationType.RELATIVE ? GizmoTransformationType.GLOBAL : GizmoTransformationType.RELATIVE})}
             class="button viewport"
     >
         {#if transformationType === GizmoTransformationType.RELATIVE}
@@ -122,7 +121,7 @@
             class="button viewport"
             style="margin-left: 8px"
             data-sveltehighlight={gizmo === Gizmos.NONE ? "-" : undefined}
-            on:click={() => SettingsStore.updateStore({gizmo: Gizmos.NONE})}>
+            on:click={() =>ProjectionEngine.SettingsStore.updateStore({gizmo: Gizmos.NONE})}>
         <Icon styles="font-size: 1rem; color: #FFC757">highlight_alt</Icon>
 
         {LocalizationEN.SELECTION}
@@ -132,7 +131,7 @@
     <button data-sveltebuttondefault="-"
             class="button viewport"
             data-sveltehighlight={gizmo === Gizmos.TRANSLATION ? "-" : undefined}
-            on:click={() => SettingsStore.updateStore({gizmo: Gizmos.TRANSLATION})}>
+            on:click={() => ProjectionEngine.SettingsStore.updateStore({gizmo: Gizmos.TRANSLATION})}>
         <Icon styles="font-size: 1rem; color: var(--pj-color-quaternary)">open_with</Icon>
         {LocalizationEN.T_GIZMO}
 
@@ -143,7 +142,7 @@
 
             class="button viewport"
             data-sveltehighlight={gizmo === Gizmos.SCALE ? "-" : undefined}
-            on:click={() => SettingsStore.updateStore({gizmo: Gizmos.SCALE})}>
+            on:click={() => ProjectionEngine.SettingsStore.updateStore({gizmo: Gizmos.SCALE})}>
         <Icon styles="font-size: 1rem; color: var(--pj-color-quaternary)">open_in_full</Icon>
         {LocalizationEN.S_GIZMO}
         <ToolTip content={LocalizationEN.S_GIZMO}/>
@@ -152,7 +151,7 @@
 
             class="button viewport"
             data-sveltehighlight={gizmo === Gizmos.ROTATION ? "-" : undefined}
-            on:click={() => SettingsStore.updateStore({gizmo: Gizmos.ROTATION})}>
+            on:click={() =>ProjectionEngine. SettingsStore.updateStore({gizmo: Gizmos.ROTATION})}>
         <Icon styles="font-size: 1rem; color: var(--pj-color-quaternary)">360</Icon>
         {LocalizationEN.R_GIZMO}
 

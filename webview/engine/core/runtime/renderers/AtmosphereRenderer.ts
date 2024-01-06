@@ -7,6 +7,7 @@ import METRICS_FLAGS from "../../static/METRICS_FLAGS"
 import AtmosphereComponent from "../../instances/components/AtmosphereComponent"
 import {mat4} from "gl-matrix"
 import CameraAPI from "../../lib/utils/CameraAPI"
+import Engine from "../../Engine";
 
 const resources = mat4.create().fill(0)
 export default class AtmosphereRenderer {
@@ -22,7 +23,7 @@ export default class AtmosphereRenderer {
 			if (i === 0) {
 				shader.bind()
 				context.disable(context.DEPTH_TEST)
-				context.uniformMatrix4fv(uniforms.invSkyProjectionMatrix, false, CameraAPI.invSkyboxProjectionMatrix)
+				context.uniformMatrix4fv(uniforms.invSkyProjectionMatrix, false, Engine.CameraAPI.invSkyboxProjectionMatrix)
 			}
 			const entity = entities[i]
 			const component = entity.atmosphereComponent

@@ -1,14 +1,12 @@
 <script>
-    import {onMount} from "svelte"
     import ResizableBar from "../shared/components/resizable/ResizableBar.svelte"
     import ContentWrapper from "./components/content/ContentWrapper.svelte"
     import Shortcuts from "./components/Shortcuts.svelte"
     import PREFERENCES from "./static/PREFERENCES"
     import Icon from "../shared/components/icon/Icon.svelte"
-    import StoreIPCListener from "../shared/lib/StoreIPCListener"
 
     let tab = 0
-    onMount(() => StoreIPCListener.get())
+
 </script>
 
 

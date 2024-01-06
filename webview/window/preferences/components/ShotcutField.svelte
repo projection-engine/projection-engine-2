@@ -3,11 +3,10 @@
     import SETTINGS from "../../editor/static/SETTINGS"
 
     import KEYS from "../../editor/static/KEYS.ts"
-    import SettingsStore from "../../shared/stores/SettingsStore"
     import ToolTip from "../../shared/components/tooltip/ToolTip.svelte"
     import Icon from "../../shared/components/icon/Icon.svelte"
-    import ToastNotificationSystem from "../../shared/components/alert/ToastNotificationSystem"
-    import LocalizationEN from "../../../shared/enums/LocalizationEN"
+    import LocalizationEN from "../../../enums/LocalizationEN"
+    import ProjectionEngine from "../../ProjectionEngine";
 
     export let shortcut = []
     export let key
@@ -15,7 +14,7 @@
     export let all
 
     function update(key, value) {
-    	SettingsStore.updateStore({[key]: value})
+        ProjectionEngine.SettingsStore.updateStore({[key]: value})
     }
 
     let currentShortcut
@@ -57,7 +56,7 @@
 
     		if (all.find(a => JSON.stringify(a) === c) != null) {
     			currentShortcut = [...shortcut]
-    			ToastNotificationSystem.getInstance().error(LocalizationEN.SHORTCUT_ALREADY_LINKED)
+                ProjectionEngine.ToastNotificationSystem.error(LocalizationEN.SHORTCUT_ALREADY_LINKED)
     		}
     		update(currentShortcut)
     	} else if (!event.repeat) {

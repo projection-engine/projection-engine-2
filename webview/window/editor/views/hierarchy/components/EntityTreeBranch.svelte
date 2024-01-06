@@ -1,12 +1,12 @@
 <script lang="ts">
     import TreeBranchContent from "./EntityTreeBranchContent.svelte";
 
-    import EntityFactoryService from "../../../services/engine/EntityFactoryService";
+    import EntityFactoryService from "../../../../services/EntityFactoryService";
     import Icon from "../../../../shared/components/icon/Icon.svelte";
     import ToolTip from "../../../../shared/components/tooltip/ToolTip.svelte";
     import Entity from "../../../../../engine/core/instances/Entity";
     import QueryAPI from "../../../../../engine/core/lib/utils/QueryAPI";
-    import LocalizationEN from "../../../../../shared/enums/LocalizationEN";
+    import LocalizationEN from "../../../../../enums/LocalizationEN";
 
     export let testSearch: GenericVoidFunctionWithP<MutableObject>
     export let depth: number

@@ -2,13 +2,12 @@ import AXIS from "../../static/AXIS"
 import StaticMeshes from "../../../core/lib/StaticMeshes"
 import GizmoState from "../util/GizmoState"
 import GizmoUtil from "../util/GizmoUtil"
-import AbstractSingleton from "../../../../shared/AbstractSingleton"
 import IGizmo from "../IGizmo"
 import Mesh from "../../../core/instances/Mesh"
 import Entity from "../../../core/instances/Entity"
 import PickingAPI from "../../../core/lib/utils/PickingAPI"
 
-export default class ScreenSpaceGizmo extends AbstractSingleton implements IGizmo {
+export default class ScreenSpaceGizmo implements IGizmo {
 	mesh: Mesh
 	xGizmo: Entity
 	yGizmo: Entity
