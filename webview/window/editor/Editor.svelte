@@ -6,14 +6,12 @@
     import ViewsContainer from "./components/view/SideView.svelte"
     import SettingsStore from "../shared/stores/SettingsStore"
     import HotKeysController from "../shared/lib/HotKeysController"
-    import Canvas from "./views/Canvas.svelte"
     import ToastNotificationSystem from "../shared/components/alert/ToastNotificationSystem"
     import StoreIPCListener from "../shared/lib/StoreIPCListener"
     import EditorUtil from "./util/EditorUtil"
     import MenuBar from "../shared/components/frame/MenuBar.svelte";
 
     const COMPONENT_ID = crypto.randomUUID()
-    let isContextInitialized = false
     let view
     let cameraGizmoSize
     let currentViewIndex = 0
@@ -38,8 +36,7 @@
 </script>
 
 <MenuBar/>
-<Canvas initializeEditor={() => isContextInitialized = true}/>
-{#if isContextInitialized && view !== undefined}
+{#if view !== undefined}
     <div class="wrapper" style={`--cube-size: ${cameraGizmoSize}px;`}>
         <div class="middle">
             <ViewsContainer
