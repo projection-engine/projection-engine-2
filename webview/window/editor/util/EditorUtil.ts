@@ -18,18 +18,19 @@ import TabsStoreUtil from "./TabsStoreUtil"
 import ContentBrowserUtil from "./ContentBrowserUtil"
 import GizmoState from "../../../engine/tools/gizmo/util/GizmoState";
 import GizmoUtil from "../../../engine/tools/gizmo/util/GizmoUtil";
+import ProjectionEngine from "../../../shared/ProjectionEngine";
 
 export default class EditorUtil {
     static async componentConstructor(entity, scriptID, autoUpdate = true) {
         await ScriptsAPI.linkScript(entity, scriptID)
         if (autoUpdate)
-            EntitySelectionStore.updateStore({array: EntitySelectionStore.getEntitiesSelected()})
+            ProjectionEngine.  EntitySelectionStore.updateStore({array: EntitySelectionStore.getEntitiesSelected()})
         ToastNotificationSystem.getInstance().success(LocalizationEN.ADDED_COMPONENT)
     }
 
     static focusOnCamera(cameraTarget) {
-        const engineInstance = EngineStore.getInstance()
-        const focused = engineInstance.data.focusedCamera
+        const engineInstance = ProjectionEngine.EngineStore
+        const focused = engineInstance.getData().focusedCamera
         const isCamera = cameraTarget instanceof Entity
         if (!focused || isCamera && cameraTarget.id !== focused) {
             const current = isCamera ? cameraTarget : Engine.entities.get(EntitySelectionStore.getMainEntity())
@@ -113,9 +114,9 @@ export default class EditorUtil {
     }
 
     static openBottomView(view) {
-        const settingsStore = SettingsStore.getInstance()
-        const views = [...settingsStore.data.views]
-        const tab = views[settingsStore.data.currentView]
+        const settingsStore = ProjectionEngine.SettingsStore
+        const views = [...settingsStore.getData().views]
+        const tab = views[settingsStore.getData().currentView]
         const existingTab = tab.bottom[0].findIndex(v => v?.type === view)
         if (existingTab > -1) {
             TabsStoreUtil.updateByAttributes("bottom", 0, existingTab)
@@ -147,7 +148,7 @@ export default class EditorUtil {
         const selected = EntitySelectionStore.getEntitiesSelected()
         for (let i = 0; i < selected.length; i++) {
             const entity = QueryAPI.getEntityByID(selected[i])
-            const currentGizmo = SettingsStore.getData().gizmo
+            const currentGizmo =ProjectionEngine. SettingsStore.getData().gizmo
 
             switch (currentGizmo) {
                 case GIZMOS.TRANSLATION: {
@@ -178,12 +179,12 @@ export default class EditorUtil {
     }
 
     static updateView(key, newView) {
-        const settingsData = SettingsStore.getData()
+        const settingsData =ProjectionEngine. SettingsStore.getData()
         const view = settingsData.views[settingsData.currentView]
         const copy = [...settingsData.views]
         copy[settingsData.currentView] = {...view, [key]: newView}
 
-        SettingsStore.updateStore({views: copy})
+        ProjectionEngine.   SettingsStore.updateStore({views: copy})
     }
 
     static getCall<T>(channel, data, addMiddle = true): Promise<T> {
@@ -191,11 +192,7 @@ export default class EditorUtil {
             let listenID = crypto.randomUUID()
             if (data.listenID)
                 listenID = data.listenID
-            ElectronResources.ipcRenderer.once(channel + (addMiddle ? "-" : "") + listenID, (ev, data: T) => {
-                resolve(data)
-            })
-
-            ElectronResources.ipcRenderer.send(channel, {...data, listenID})
+            resolve(null)
         })
     }
 }

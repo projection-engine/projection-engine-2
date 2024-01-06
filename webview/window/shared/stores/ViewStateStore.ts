@@ -1,33 +1,30 @@
 import AbstractStore from "./AbstractStore"
+import ProjectionEngine from "../../../shared/ProjectionEngine";
 
 export default class ViewStateStore extends AbstractStore {
     constructor() {
         super({})
     }
 
-    static getInstance(): ViewStateStore {
-        return super.get<ViewStateStore>()
+     updateViewState(viewMetadata: string, newState: MutableObject) {
+        const previousData = this.getData()[viewMetadata] ?? {}
+        ProjectionEngine.ViewStateStore.updateStore({[viewMetadata]: {...previousData, ...newState}})
     }
 
-    static updateViewState(viewMetadata: string, newState: MutableObject) {
-        const previousData = ViewStateStore.getData()[viewMetadata] ?? {}
-        ViewStateStore.getInstance().updateStore({[viewMetadata]: {...previousData, ...newState}})
+     removeState(viewMetadata: string) {
+        delete this.getData()[viewMetadata]
     }
 
-    static removeState(viewMetadata: string) {
-        delete ViewStateStore.getData()[viewMetadata]
-    }
-
-    static onViewMount(viewMetadata: string, onIfExists: GenericVoidFunctionWithP<MutableObject>|undefined) {
-        const previousData = ViewStateStore.getData()[viewMetadata]
-        ViewStateStore.getInstance().updateStore({[viewMetadata]: previousData})
+     onViewMount(viewMetadata: string, onIfExists: GenericVoidFunctionWithP<MutableObject>|undefined) {
+        const previousData = this.getData()[viewMetadata]
+         this.updateStore({[viewMetadata]: previousData})
         if (previousData && onIfExists)
             onIfExists(previousData)
     }
 
-    static onViewDestroy(viewMetadata: string, latestState: MutableObject | undefined) {
-        const previousData = ViewStateStore.getData()[viewMetadata] ?? {}
-        ViewStateStore.getInstance().updateStore({
+     onViewDestroy(viewMetadata: string, latestState: MutableObject | undefined) {
+        const previousData = this.getData()[viewMetadata] ?? {}
+         this.updateStore({
             [viewMetadata]: {...previousData, ...latestState}
         })
     }

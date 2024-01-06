@@ -19,6 +19,7 @@ import getContentBrowserActions from "../templates/get-content-browser-actions"
 import HotKeysController from "../../shared/lib/HotKeysController"
 import ContextMenuService from "../../shared/lib/context-menu/ContextMenuService"
 import NavigationHistory from "../views/content-browser/libs/NavigationHistory"
+import ProjectionEngine from "../../../shared/ProjectionEngine";
 
 export default class ContentBrowserUtil {
     static sortItems(arr: MutableObject[], isDSC: boolean, sortKey: string) {
@@ -34,7 +35,7 @@ export default class ContentBrowserUtil {
     }
 
     static selection(type, currentDirectory) {
-        const items = ContentBrowserStore.getData().items
+        const items = ProjectionEngine.ContentBrowserStore.getData().items
 
         switch (type) {
             case SELECTION_TYPES.INVERT: {
@@ -133,7 +134,7 @@ export default class ContentBrowserUtil {
     }
 
     static async handleDropFolder(event: string[] | string, target?: string) {
-        const itemsFilesStore = ContentBrowserStore.getData().items
+        const itemsFilesStore = ProjectionEngine.ContentBrowserStore.getData().items
         try {
             const items = Array.isArray(event) ? event : JSON.parse(event)
             for (let i = 0; i < items.length; i++) {
@@ -171,7 +172,7 @@ export default class ContentBrowserUtil {
     }
 
     static async handleDelete(entries, currentDirectory, setCurrentDirectory) {
-        const items = ContentBrowserStore.getData().items
+        const items = ProjectionEngine.ContentBrowserStore.getData().items
         const itemsToDelete = !Array.isArray(entries) ? [entries] : entries
 
         ToastNotificationSystem.getInstance().warn(LocalizationEN.DELETING_ITEMS)
@@ -280,7 +281,7 @@ export default class ContentBrowserUtil {
         `
     }
 
-    static getItemDragData( data, setOnDrag: Function) {
+    static getItemDragData(data, setOnDrag: Function) {
         return {
             dragImage: `
                 <span data-svelteicon="-" style="font-size: 70px">${ContentBrowserUtil.#getDragIcon(ContentBrowserUtil.getItemIcon(data), data)}</span>
@@ -406,30 +407,30 @@ export default class ContentBrowserUtil {
 
 
     static initializeContentBrowser() {
-        ContentBrowserStore.getInstance().addListener("self-update", () => {
-            ContentBrowserHierarchyStore.updateStore({})
+        ProjectionEngine.ContentBrowserStore.addListener("self-update", () => {
+            ProjectionEngine.ContentBrowserHierarchyStore.updateStore({})
         })
         ContentBrowserUtil.refreshFiles().catch(console.error)
     }
 
 
     static async refreshFiles() {
-        const instance = ContentBrowserStore.getInstance()
+        const instance = ProjectionEngine.ContentBrowserStore
         try {
             const items = await EditorUtil.getCall(IPCRoutes.REFRESH_CONTENT_BROWSER, {pathName: FileSystemUtil.path + FileSystemUtil.sep}, false)
             const fileTypes = await ContentBrowserUtil.getRegistryData()
-            instance.updateStore({items: items ?? instance.data.items, ...fileTypes})
+            instance.updateStore({items: items ?? instance.getData().items, ...fileTypes})
         } catch (err) {
             console.error(err)
         }
     }
 
     static getFilesToCut() {
-        return ContentBrowserStore.getData().toCut
+        return ProjectionEngine.ContentBrowserStore.getData().toCut
     }
 
     static cutFiles(toCut: string[]) {
-        ContentBrowserStore.updateStore({toCut})
+        ProjectionEngine.ContentBrowserStore.updateStore({toCut})
     }
 
     static paste(target?: string) {
@@ -450,10 +451,10 @@ export default class ContentBrowserUtil {
     }
 
     static updateHierarchy() {
-        const items = ContentBrowserStore.getData().items
+        const items = ProjectionEngine.ContentBrowserStore.getData().items
         if (!items)
             return
-        const open = ContentBrowserHierarchyStore.getData().open
+        const open = ProjectionEngine.ContentBrowserHierarchyStore.getData().open
         const folders = items.filter(item => item.isFolder)
         const cache = {
             [FileSystemUtil.sep]: {
@@ -475,7 +476,7 @@ export default class ContentBrowserUtil {
 
     static #getHierarchy(cache, item, depth = 0, folders) {
         cache[item.id] = {item, depth, childQuantity: 0, children: []}
-        const isOpen = ContentBrowserHierarchyStore.getData().open[item.id]
+        const isOpen = ProjectionEngine.ContentBrowserHierarchyStore.getData().open[item.id]
         for (let i = 0; i < folders.length; i++) {
             const current = folders[i]
             if (current.parent === item.id && !cache[current.id]) {

@@ -15,6 +15,7 @@
     import TabsStoreUtil from "../../util/TabsStoreUtil"
     import LocalizationEN from "../../../../shared/enums/LocalizationEN";
     import Canvas from "./Canvas.svelte";
+    import ProjectionEngine from "../../../../shared/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     const VIEW_TEMPLATES = [...Object.values(VIEWS), ...Object.values(VIEWPORT_TABS)].map(value => ({
@@ -54,11 +55,11 @@
     }
 
     onMount(() => {
-        TabsStore.getInstance().addListener(COMPONENT_ID, () => {
+        ProjectionEngine.TabsStore.addListener(COMPONENT_ID, () => {
             currentTab = TabsStoreUtil.getCurrentTabByCurrentView("viewport")
             focused = ref === TabsStoreUtil.getFocusedTab()
         })
-        EngineStore.getInstance().addListener(COMPONENT_ID, data => {
+        ProjectionEngine.EngineStore.addListener(COMPONENT_ID, data => {
             if (data.executingAnimation && viewTab[currentTab].type !== VIEWPORT_TABS.EDITOR)
                 setViewportTab(VIEWPORT_TABS.EDITOR)
             executingAnimation = data.executingAnimation
@@ -68,8 +69,8 @@
     })
 
     onDestroy(() => {
-        TabsStore.getInstance().removeListener(COMPONENT_ID)
-        EngineStore.getInstance().removeListener(COMPONENT_ID)
+        ProjectionEngine.TabsStore.removeListener(COMPONENT_ID)
+        ProjectionEngine.EngineStore.removeListener(COMPONENT_ID)
         HotKeysController.unbindAction(ref)
     })
 

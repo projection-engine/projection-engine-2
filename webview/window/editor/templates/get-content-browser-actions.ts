@@ -7,9 +7,10 @@ import EditorUtil from "../util/EditorUtil"
 import FileSystemUtil from "../../shared/FileSystemUtil"
 import SettingsStore from "../../shared/stores/SettingsStore"
 import ContentBrowserStore from "../../shared/stores/ContentBrowserStore";
+import ProjectionEngine from "../../../shared/ProjectionEngine";
 
 export default function getContentBrowserActions(navigationHistory, getCurrentDirectory, setCurrentDirectory, setCurrentItem) {
-	const contentBrowserHotkeys = SettingsStore.getData().contentBrowserHotkeys
+	const contentBrowserHotkeys = ProjectionEngine.SettingsStore.getData().contentBrowserHotkeys
 	const hotKeys = {
 		BACK: {
 			label: "Go back",

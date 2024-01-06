@@ -9,6 +9,7 @@
     import NATIVE_COMPONENTS from "../static/NATIVE_COMPONENTS";
     import Entity from "../../../../../engine/core/instances/Entity";
     import EditorActionHistory from "../../../services/EditorActionHistory";
+    import ProjectionEngine from "../../../../../shared/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     export let entity: Entity
@@ -16,8 +17,8 @@
     let components = []
     let scripts = []
 
-    onMount(() => ContentBrowserStore.getInstance().addListener(COMPONENT_ID, data => scripts = data.components, ["components"]))
-    onDestroy(() => ContentBrowserStore.getInstance().removeListener(COMPONENT_ID))
+    onMount(() => ProjectionEngine.ContentBrowserStore.addListener(COMPONENT_ID, data => scripts = data.components, ["components"]))
+    onDestroy(() => ProjectionEngine.ContentBrowserStore.removeListener(COMPONENT_ID))
 
     $:components = [
         ...scripts.map(s => ({type: "script", data: s})),

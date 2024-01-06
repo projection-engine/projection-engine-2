@@ -6,6 +6,7 @@
     import VisualsStore from "../../../shared/stores/VisualsStore"
     import SettingsStore from "../../../shared/stores/SettingsStore"
     import Component from "../../../../engine/core/instances/components/Component"
+    import ProjectionEngine from "../../../../shared/ProjectionEngine";
 
     export let toRender
     export let settings
@@ -44,9 +45,9 @@
     		s[key] = value
     	if (save) {
     		if (toRender?.target === "settings")
-    			SettingsStore.updateStore(s)
+                ProjectionEngine.SettingsStore.updateStore(s)
     		else
-    			VisualsStore.updateStore(s)
+                ProjectionEngine.VisualsStore.updateStore(s)
     	}
     }
 

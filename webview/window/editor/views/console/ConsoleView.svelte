@@ -10,6 +10,7 @@
     import LocalizationEN from "../../../../shared/enums/LocalizationEN"
     import EngineStore from "../../../shared/stores/EngineStore"
     import ViewHeader from "../../components/view/components/ViewHeader.svelte"
+    import ProjectionEngine from "../../../../shared/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     const TYPES = ConsoleAPI.TYPES
@@ -26,7 +27,7 @@
     }
 
     onMount(() => {
-    	EngineStore.getInstance().addListener(COMPONENT_ID, () => ConsoleAPI.clear(), ["executingAnimation"])
+        ProjectionEngine.EngineStore.addListener(COMPONENT_ID, () => ConsoleAPI.clear(), ["executingAnimation"])
     	ConsoleAPI.addListener(COMPONENT_ID, (md, messages) => {
     		toRender = messages
     		newMessages = messages.length > 0
@@ -36,7 +37,7 @@
     })
 
     onDestroy(() => {
-    	EngineStore.getInstance().removeListener(COMPONENT_ID)
+        ProjectionEngine.EngineStore.removeListener(COMPONENT_ID)
     	ConsoleAPI.removeListener(COMPONENT_ID)
     	portal.destroy()
     	document.removeEventListener("mousedown", handler)

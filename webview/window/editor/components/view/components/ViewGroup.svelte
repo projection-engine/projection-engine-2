@@ -13,6 +13,7 @@
     import View from "./View.svelte";
     import ViewTemplates from "../static/ViewTemplates";
     import ViewStateStore from "../../../../shared/stores/ViewStateStore";
+    import ProjectionEngine from "../../../../../shared/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
 
@@ -47,7 +48,7 @@
             i,
             n => {
                 TabsStoreUtil.updateByAttributes(id, groupIndex, n)
-                ViewStateStore.removeState(viewToDelete)
+                ProjectionEngine.ViewStateStore.removeState(viewToDelete)
             },
             TabsStoreUtil.getCurrentTabByCurrentView(id, groupIndex)
         )
@@ -66,12 +67,12 @@
     }
 
     onMount(() => {
-        TabsStore.getInstance().addListener(COMPONENT_ID, data => focused = data.focused === ref, ["focused"])
-        SettingsStore.getInstance().addListener(COMPONENT_ID, update, ["currentView"])
+        ProjectionEngine.TabsStore.addListener(COMPONENT_ID, data => focused = data.focused === ref, ["focused"])
+        ProjectionEngine.SettingsStore.addListener(COMPONENT_ID, update, ["currentView"])
     })
     onDestroy(() => {
-        TabsStore.getInstance().removeListener(COMPONENT_ID)
-        SettingsStore.getInstance().removeListener(COMPONENT_ID)
+        ProjectionEngine.TabsStore.removeListener(COMPONENT_ID)
+        ProjectionEngine.SettingsStore.removeListener(COMPONENT_ID)
     })
 
 </script>

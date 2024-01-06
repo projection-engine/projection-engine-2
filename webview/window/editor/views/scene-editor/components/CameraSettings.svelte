@@ -13,6 +13,7 @@
     import EmptyIcon from "../../../../shared/components/icon/EmptyIcon.svelte"
     import EditorUtil from "../../../util/EditorUtil"
     import EngineStore from "../../../../shared/stores/EngineStore"
+    import ProjectionEngine from "../../../../../shared/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     let cameras = []
@@ -22,11 +23,11 @@
 
 
     onMount(() => {
-    	SettingsStore.getInstance().addListener(COMPONENT_ID, data => {
+        ProjectionEngine.SettingsStore.addListener(COMPONENT_ID, data => {
     		CameraTracker.screenSpaceMovement = screenSpaceMovement = data.screenSpaceMovement
     		camera = data.camera
     	}, ["screenSpaceMovement", "camera"])
-    	EngineStore.getInstance().addListener(COMPONENT_ID, data => focusedCamera = data.focusedCamera, ["focusedCamera"])
+        ProjectionEngine.EngineStore.addListener(COMPONENT_ID, data => focusedCamera = data.focusedCamera, ["focusedCamera"])
     	EntityHierarchyService.registerListener(COMPONENT_ID, () => {
     		// TODO - CONSUME FROM DYNAMIC LIST OF ENTITIES WITH COMPONENT AFTER ECS
     		cameras = Engine.entities.array.filter(entity => entity.cameraComponent != null)
@@ -34,13 +35,13 @@
     })
 
     onDestroy(() => {
-    	SettingsStore.getInstance().removeListener(COMPONENT_ID)
-    	EngineStore.getInstance().removeListener(COMPONENT_ID)
+        ProjectionEngine.SettingsStore.removeListener(COMPONENT_ID)
+        ProjectionEngine.EngineStore.removeListener(COMPONENT_ID)
     	EntityHierarchyService.removeListener(COMPONENT_ID)
     })
     
     const toggleProjection = () => {
-    	SettingsStore.updateStore({camera: {...camera, ortho: !camera.ortho}})
+        ProjectionEngine.SettingsStore.updateStore({camera: {...camera, ortho: !camera.ortho}})
     }
 
 </script>
@@ -96,7 +97,7 @@
 
     <button data-sveltebuttondefault="-" disabled={focusedCamera} class="button viewport"
             style="max-width: 25px; justify-content: center"
-            on:click={() => SettingsStore.updateStore({screenSpaceMovement: !screenSpaceMovement})}>
+            on:click={() => ProjectionEngine.SettingsStore.updateStore({screenSpaceMovement: !screenSpaceMovement})}>
         <ToolTip content={LocalizationEN.TOGGLE_CAMERA_MOVEMENT}/>
         {#if screenSpaceMovement}
             <Icon styles="font-size: 1rem">lock_outline</Icon>

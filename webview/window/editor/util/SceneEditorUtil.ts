@@ -18,6 +18,7 @@ import RENDER_TARGET from "../static/RENDER_TARGET"
 import SETTINGS from "../static/SETTINGS"
 import EntitySelectionStore from "../../shared/stores/EntitySelectionStore";
 import CameraSerialization from "../../../engine/core/static/CameraSerialization";
+import ProjectionEngine from "../../../shared/ProjectionEngine";
 
 export default class SceneEditorUtil {
 	static #worker?: Worker
@@ -76,7 +77,7 @@ export default class SceneEditorUtil {
 			{label: LocalizationEN.LIGHT_ONLY, id: SHADING_MODELS.LIGHT_ONLY}
 		].map(e => e.divider ? e : ({
 			...e,
-			onClick: () => SettingsStore.updateStore({shadingModel: e.id})
+			onClick: () => ProjectionEngine.SettingsStore.updateStore({shadingModel: e.id})
 		}))
 	}
 
@@ -133,7 +134,7 @@ export default class SceneEditorUtil {
 	}
 
 	static updateGizmoGrid(key, value) {
-		SettingsStore.updateStore({gizmoGrid: {...SettingsStore.getData().gizmoGrid, [key]: value}})
+		ProjectionEngine.	SettingsStore.updateStore({gizmoGrid: {...ProjectionEngine.SettingsStore.getData().gizmoGrid, [key]: value}})
 	}
 
 	static restoreCameraState(cameraMetadata:CameraSerialization|undefined) {
@@ -173,22 +174,22 @@ export default class SceneEditorUtil {
 			{
 				label: LocalizationEN.GRID,
 				icon: settings.showGrid ? "check" : undefined,
-				onClick: () => SettingsStore.updateStore({showGrid: !settings.showGrid})
+				onClick: () =>ProjectionEngine. SettingsStore.updateStore({showGrid: !settings.showGrid})
 			},
 			{
 				label: LocalizationEN.ICONS,
 				icon: settings.showIcons ? "check" : undefined,
-				onClick: () => SettingsStore.updateStore({showIcons: !settings.showIcons})
+				onClick: () => ProjectionEngine.SettingsStore.updateStore({showIcons: !settings.showIcons})
 			},
 			{
 				label: LocalizationEN.LINES,
 				icon: settings.showLines ? "check" : undefined,
-				onClick: () => SettingsStore.updateStore({showLines: !settings.showLines})
+				onClick: () => ProjectionEngine.SettingsStore.updateStore({showLines: !settings.showLines})
 			},
 			{
 				label: LocalizationEN.OUTLINE,
 				icon: settings.showOutline ? "check" : undefined,
-				onClick: () => SettingsStore.updateStore({showOutline: !settings.showOutline})
+				onClick: () =>ProjectionEngine. SettingsStore.updateStore({showOutline: !settings.showOutline})
 			},
 		]
 	}

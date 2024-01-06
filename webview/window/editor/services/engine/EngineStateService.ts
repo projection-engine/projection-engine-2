@@ -12,6 +12,7 @@ import ToastNotificationSystem from "../../../shared/components/alert/ToastNotif
 import QueryAPI from "../../../../engine/core/lib/utils/QueryAPI"
 import LocalizationEN from "../../../../shared/enums/LocalizationEN"
 import GizmoUtil from "../../../../engine/tools/gizmo/util/GizmoUtil"
+import ProjectionEngine from "../../../../shared/ProjectionEngine";
 
 
 function checkLevel(_, propertyKey: string, descriptor: PropertyDescriptor) {
@@ -88,7 +89,7 @@ export default class EngineStateService {
 
     	EntityAPI.removeGroup(entities, false)
 
-    	EntitySelectionStore.updateStore({
+		ProjectionEngine.	EntitySelectionStore.updateStore({
     		array: []
     	})
     	EntitySelectionStore.setLockedEntity(Engine.entities.array[0]?.id)
@@ -103,7 +104,7 @@ export default class EngineStateService {
     	EntityNamingService.renameEntity(entity.name, entity)
     	GizmoUtil.createTransformationCache(entity)
     	EntityAPI.addEntity(entity)
-    	EntitySelectionStore.updateStore({
+		ProjectionEngine.EntitySelectionStore.updateStore({
     		array: [entity.id]
     	})
     	EntitySelectionStore.setLockedEntity(entity.id)

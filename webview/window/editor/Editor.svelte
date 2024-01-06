@@ -7,9 +7,9 @@
     import SettingsStore from "../shared/stores/SettingsStore"
     import HotKeysController from "../shared/lib/HotKeysController"
     import ToastNotificationSystem from "../shared/components/alert/ToastNotificationSystem"
-    import StoreIPCListener from "../shared/lib/StoreIPCListener"
     import EditorUtil from "./util/EditorUtil"
     import MenuBar from "../shared/components/frame/MenuBar.svelte";
+    import ProjectionEngine from "../../shared/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     let view
@@ -17,21 +17,21 @@
     let currentViewIndex = 0
 
     onMount(() => {
-        SettingsStore.getInstance()
+        ProjectionEngine.SettingsStore
             .addListener(COMPONENT_ID, data => {
                 view = data.views?.[data.currentView]
                 currentViewIndex = data.currentView
                 cameraGizmoSize = data.cameraGizmoSize
             }, ["views", "currentView", "cameraGizmoSize"])
-        EngineStore.getInstance().addListener(COMPONENT_ID, data => HotKeysController.blockActions = data.executingAnimation, ["executingAnimation"])
-        StoreIPCListener.get()
+        ProjectionEngine.EngineStore.addListener(COMPONENT_ID, data => HotKeysController.blockActions = data.executingAnimation, ["executingAnimation"])
+
         ToastNotificationSystem.get()
 
     })
 
     onDestroy(() => {
-        EngineStore.getInstance().removeListener(COMPONENT_ID)
-        SettingsStore.getInstance().removeListener(COMPONENT_ID)
+        ProjectionEngine.EngineStore.removeListener(COMPONENT_ID)
+        ProjectionEngine.SettingsStore.removeListener(COMPONENT_ID)
     })
 </script>
 

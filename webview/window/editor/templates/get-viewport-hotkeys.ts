@@ -14,10 +14,11 @@ import EngineStateService from "../services/engine/EngineStateService"
 import LocalizationEN from "../../../shared/enums/LocalizationEN"
 import EditorUtil from "../util/EditorUtil"
 import EntitySelectionStore from "../../shared/stores/EntitySelectionStore";
+import ProjectionEngine from "../../../shared/ProjectionEngine";
 
 
 export default function getViewportHotkeys(): { [key: string]: ContextMenuOption } {
-	const viewportHotkeys = SettingsStore.getData().viewportHotkeys
+	const viewportHotkeys = ProjectionEngine.SettingsStore.getData().viewportHotkeys
 	return {
 		DUPLICATE: {
 			label: "Duplicate active",
@@ -67,7 +68,7 @@ export default function getViewportHotkeys(): { [key: string]: ContextMenuOption
 
 			require: viewportHotkeys.TRANSLATION_GIZMO,
 			callback: () => {
-				SettingsStore.updateStore({gizmo: GIZMOS.TRANSLATION})
+				ProjectionEngine.		SettingsStore.updateStore({gizmo: GIZMOS.TRANSLATION})
 			}
 		},
 		SELECT_HIERARCHY: {
@@ -117,8 +118,8 @@ export default function getViewportHotkeys(): { [key: string]: ContextMenuOption
 		CYCLE_GIZMOS: {
 			label: "Cycle gizmos",
 			callback: () => {
-				const settingsInstance = SettingsStore.getInstance()
-				switch (settingsInstance.data.gizmo) {
+				const settingsInstance = ProjectionEngine.SettingsStore
+				switch (settingsInstance.getData().gizmo) {
 				case GIZMOS.TRANSLATION:
 					settingsInstance.updateStore({gizmo: GIZMOS.SCALE})
 					break
@@ -138,8 +139,8 @@ export default function getViewportHotkeys(): { [key: string]: ContextMenuOption
 		SWITCH_TRANSFORMATION: {
 			label: "Switch transformation",
 			callback: () => {
-				const settingsInstance = SettingsStore.getInstance()
-				const newT = settingsInstance.data.transformationType === GizmoTransformationType.GLOBAL ? GizmoTransformationType.RELATIVE : GizmoTransformationType.GLOBAL
+				const settingsInstance = ProjectionEngine.SettingsStore
+				const newT = settingsInstance.getData().transformationType === GizmoTransformationType.GLOBAL ? GizmoTransformationType.RELATIVE : GizmoTransformationType.GLOBAL
 				settingsInstance.updateStore({transformationType: newT})
 			},
 			require: viewportHotkeys.SWITCH_TRANSFORMATION,
@@ -156,11 +157,11 @@ export default function getViewportHotkeys(): { [key: string]: ContextMenuOption
 		},
 		SCALE_GIZMO: {
 			require: viewportHotkeys.SCALE_GIZMO,
-			callback: () => SettingsStore.updateStore({gizmo: GIZMOS.SCALE})
+			callback: () => ProjectionEngine.SettingsStore.updateStore({gizmo: GIZMOS.SCALE})
 		},
 		ROTATION_GIZMO: {
 			require: viewportHotkeys.ROTATION_GIZMO,
-			callback: () => SettingsStore.updateStore({gizmo: GIZMOS.ROTATION})
+			callback: () => ProjectionEngine.SettingsStore.updateStore({gizmo: GIZMOS.ROTATION})
 		},
 		UNDO: {
 			require: viewportHotkeys.UNDO,

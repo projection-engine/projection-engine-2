@@ -21,6 +21,7 @@
     import LocalizationEN from "../../../../shared/enums/LocalizationEN"
     import SceneEditorUtil from "../../util/SceneEditorUtil"
     import ViewStateStore from "../../../shared/stores/ViewStateStore";
+    import ProjectionEngine from "../../../../shared/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     const draggable = dragDrop(false)
@@ -32,11 +33,11 @@
     let focusedCamera
 
     onMount(() => {
-    	SettingsStore.getInstance().addListener(COMPONENT_ID, data => {
+        ProjectionEngine.SettingsStore.addListener(COMPONENT_ID, data => {
     		isSelectBoxDisabled = data.gizmo !== GIZMOS.NONE
     		shadingModel = data.shadingModel
     	}, ["gizmo", "shadingModel"])
-    	EngineStore.getInstance().addListener(COMPONENT_ID, data => {
+        ProjectionEngine.EngineStore.addListener(COMPONENT_ID, data => {
     		executingAnimation = data.executingAnimation
     		focusedCamera = data.focusedCamera ? Engine.entities.get(data.focusedCamera) : null
     	}, ["focusedCamera", "executingAnimation"])
@@ -46,8 +47,8 @@
     })
 
     onDestroy(() => {
-    	SettingsStore.getInstance().removeListener(COMPONENT_ID)
-    	EngineStore.getInstance().removeListener(COMPONENT_ID)
+        ProjectionEngine.SettingsStore.removeListener(COMPONENT_ID)
+        ProjectionEngine.EngineStore.removeListener(COMPONENT_ID)
     	GizmoSystem.onStop = GizmoSystem.onStart = undefined
     	ContextMenuService.getInstance().destroy(RENDER_TARGET)
     	draggable.onDestroy()

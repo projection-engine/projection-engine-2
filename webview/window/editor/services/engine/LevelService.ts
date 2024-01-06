@@ -23,6 +23,7 @@ import FileTypes from "../../../../shared/enums/FileTypes"
 import AbstractSingleton from "../../../../shared/AbstractSingleton"
 import EditorUtil from "../../util/EditorUtil"
 import TabsStoreUtil from "../../util/TabsStoreUtil"
+import ProjectionEngine from "../../../../shared/ProjectionEngine";
 
 
 export default class LevelService extends AbstractSingleton {
@@ -37,12 +38,12 @@ export default class LevelService extends AbstractSingleton {
             const newSettings = {...meta.settings}
             newSettings.visualSettings = undefined
             if (meta.layout)
-                TabsStore.updateStore({layout: meta.layout})
+                ProjectionEngine.TabsStore.updateStore({layout: meta.layout})
             if (meta.visualSettings)
-                VisualsStore.updateStore(meta.visualSettings)
-            SettingsStore.updateStore(newSettings)
+                ProjectionEngine.VisualsStore.updateStore(meta.visualSettings)
+            ProjectionEngine.SettingsStore.updateStore(newSettings)
         }
-        EngineStore.updateStore({
+        ProjectionEngine.EngineStore.updateStore({
             meta: {...meta, settings: undefined, visualSettings: undefined, layout: undefined},
             isReady: true
         })
@@ -67,8 +68,8 @@ export default class LevelService extends AbstractSingleton {
             return
         }
 
-        if (ChangesTrackerStore.getData() && Engine.loadedLevel) {
-            WindowChangeStore.updateStore({
+        if (ProjectionEngine.ChangesTrackerStore.getData() && Engine.loadedLevel) {
+            ProjectionEngine.WindowChangeStore.updateStore({
                 message: LocalizationEN.UNSAVED_CHANGES, callback: async () => {
                     await this.save().catch(console.error)
                     this.loadLevel(levelID).catch(console.error)
@@ -79,7 +80,7 @@ export default class LevelService extends AbstractSingleton {
 
         await EditorFSUtil.readRegistry()
         EntityNamingService.clear()
-        EntitySelectionStore.updateStore({
+        ProjectionEngine.EntitySelectionStore.updateStore({
             array: []
         })
         EntitySelectionStore.setLockedEntity(undefined)
@@ -98,18 +99,18 @@ export default class LevelService extends AbstractSingleton {
     }
 
     async save() {
-        if (!ChangesTrackerStore.getData().changed)
+        if (!ProjectionEngine.ChangesTrackerStore.getData().changed)
             return
 
-        if (EngineStore.getData().executingAnimation) {
+        if (ProjectionEngine.EngineStore.getData().executingAnimation) {
             ToastNotificationSystem.getInstance().warn(LocalizationEN.EXECUTING_SIMULATION)
             return
         }
 
         ToastNotificationSystem.getInstance().warn(LocalizationEN.SAVING)
         try {
-            const metadata = EngineStore.getData().meta
-            const settings = {...SettingsStore.getData()}
+            const metadata = ProjectionEngine.EngineStore.getData().meta
+            const settings = {...ProjectionEngine.SettingsStore.getData()}
             const tabIndexViewport = TabsStoreUtil.getCurrentTabByCurrentView("viewport")
             const viewMetadata = <MutableObject | undefined>settings.views[settings.currentView].viewport[tabIndexViewport]
             if (viewMetadata !== undefined) {
@@ -123,8 +124,8 @@ export default class LevelService extends AbstractSingleton {
                 JSON.stringify({
                     ...metadata,
                     settings,
-                    layout: TabsStore.getData(),
-                    visualSettings: VisualsStore.getData(),
+                    layout:ProjectionEngine. TabsStore.getData(),
+                    visualSettings: ProjectionEngine.VisualsStore.getData(),
                     level: Engine.loadedLevel?.id
                 }), true)
 
@@ -159,7 +160,7 @@ export default class LevelService extends AbstractSingleton {
             path,
             serializeStructure(serialized)
         )
-        ChangesTrackerStore.updateStore({changed: false})
+        ProjectionEngine. ChangesTrackerStore.updateStore({changed: false})
     }
 }
 

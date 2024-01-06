@@ -13,6 +13,7 @@
     import Movable from "../../../../../engine/core/instances/components/Movable"
     import LocalizationEN from "../../../../../shared/enums/LocalizationEN"
     import EmptyIcon from "../../../../shared/components/icon/EmptyIcon.svelte"
+    import ProjectionEngine from "../../../../../shared/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     let targets = []
@@ -29,7 +30,7 @@
     let lockedCache = [false, false, false]
 
     onMount(() => {
-    	EntitySelectionStore.getInstance().addListener(COMPONENT_ID, () => {
+        ProjectionEngine.EntitySelectionStore.addListener(COMPONENT_ID, () => {
     		const cache = []
     		const entitiesSelected = EntitySelectionStore.getEntitiesSelected()
     		for (let i = 0; i < entitiesSelected.length; i++) {
@@ -64,7 +65,7 @@
     	})
     })
 
-    onDestroy(() => EntitySelectionStore.getInstance().removeListener(COMPONENT_ID))
+    onDestroy(() => ProjectionEngine.EntitySelectionStore.removeListener(COMPONENT_ID))
 
     $: {
     	mainEntity = targets[0]

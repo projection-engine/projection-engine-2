@@ -12,6 +12,7 @@
     import getViewportContext from "../../templates/get-viewport-context";
     import EntitySelectionStore from "../../../shared/stores/EntitySelectionStore";
     import HierarchyToRenderElement from "./template/ToRenderElement";
+    import ProjectionEngine from "../../../../shared/ProjectionEngine";
 
     const ID = crypto.randomUUID()
     const draggable = dragDrop()
@@ -35,7 +36,7 @@
         HierarchyUtil.initializeView(draggable, ref)
         EntityHierarchyService.registerListener(ID, updateHierarchy)
         ContextMenuService.getInstance().mount(getViewportContext(), ID)
-        EntitySelectionStore.getInstance().addListener(ID, data => {
+        ProjectionEngine.EntitySelectionStore.addListener(ID, data => {
             selectedList = data.array
             lockedEntity = data.lockedEntity
         })
@@ -44,7 +45,7 @@
     onDestroy(() => {
         HotKeysController.unbindAction(ref)
         draggable.onDestroy()
-        EntitySelectionStore.getInstance().removeListener(ID)
+        ProjectionEngine.EntitySelectionStore.removeListener(ID)
         EntityHierarchyService.removeListener(ID)
         ContextMenuService.getInstance().destroy(ID)
     })

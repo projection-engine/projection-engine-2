@@ -10,6 +10,7 @@
     import Checkbox from "../../../../shared/components/checkbox/Checkbox.svelte"
     import Dropdown from "../../../../shared/components/dropdown/Dropdown.svelte"
     import {onDestroy, onMount} from "svelte"
+    import ProjectionEngine from "../../../../../shared/ProjectionEngine";
 
     /** @type boolean */
     export let isOnGizmo
@@ -22,7 +23,7 @@
     let spawnOnOrigin
 
     onMount(() => {
-    	SettingsStore.getInstance().addListener(COMPONENT_ID, data => {
+        ProjectionEngine.SettingsStore.addListener(COMPONENT_ID, data => {
     		spawnOnOrigin = data.spawnOnOrigin
     		spawnDistanceFromCamera = data.spawnDistanceFromCamera
     		options = SceneEditorUtil.getSceneOptions(data)
@@ -32,7 +33,7 @@
     })
 
     onDestroy(() => {
-    	SettingsStore.getInstance().removeListener(COMPONENT_ID)
+        ProjectionEngine.SettingsStore.removeListener(COMPONENT_ID)
     })
 </script>
 
@@ -56,13 +57,13 @@
                     label={LocalizationEN.DISTANCE}
                     minValue={.001}
                     value={spawnDistanceFromCamera}
-                    onFinish={v => SettingsStore.updateStore({spawnDistanceFromCamera: v})}
+                    onFinish={v =>ProjectionEngine. SettingsStore.updateStore({spawnDistanceFromCamera: v})}
             />
             <div data-sveltedivider="-"></div>
             <Checkbox
                     label={LocalizationEN.SPAWN_ON_ORIGIN}
                     checked={spawnOnOrigin}
-                    handleCheck={() => SettingsStore.updateStore({spawnOnOrigin: !spawnOnOrigin})}
+                    handleCheck={() =>ProjectionEngine. SettingsStore.updateStore({spawnOnOrigin: !spawnOnOrigin})}
             />
         </div>
     </Dropdown>

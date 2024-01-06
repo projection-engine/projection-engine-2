@@ -8,6 +8,7 @@
     import Icon from "../../shared/components/icon/Icon.svelte"
     import ToastNotificationSystem from "../../shared/components/alert/ToastNotificationSystem"
     import LocalizationEN from "../../../shared/enums/LocalizationEN"
+    import ProjectionEngine from "../../../shared/ProjectionEngine";
 
     export let shortcut = []
     export let key
@@ -15,7 +16,7 @@
     export let all
 
     function update(key, value) {
-    	SettingsStore.updateStore({[key]: value})
+        ProjectionEngine.SettingsStore.updateStore({[key]: value})
     }
 
     let currentShortcut

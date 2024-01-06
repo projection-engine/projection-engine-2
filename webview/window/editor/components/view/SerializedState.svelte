@@ -2,6 +2,7 @@
     import {getContext, onDestroy, onMount} from "svelte";
     import ViewStateStore from "../../../shared/stores/ViewStateStore";
     import ViewMetadataContext from "./static/ViewMetadataContext";
+    import ProjectionEngine from "../../../../shared/ProjectionEngine";
 
     export let state: MutableObject
     export let onStateInitialize: GenericVoidFunctionWithP<MutableObject> | undefined
@@ -11,17 +12,17 @@
 
     $: {
         if (isInitialized) {
-            ViewStateStore.updateViewState(context, state)
+            ProjectionEngine.ViewStateStore.updateViewState(context, state)
         }
     }
 
     onMount(() => {
-        ViewStateStore.onViewMount(context, onStateInitialize)
+        ProjectionEngine.ViewStateStore.onViewMount(context, onStateInitialize)
         isInitialized = true
     })
     onDestroy(() => {
-        if(onBeforeDestroy) {
-            ViewStateStore.onViewDestroy(context, onBeforeDestroy())
+        if (onBeforeDestroy) {
+            ProjectionEngine.ViewStateStore.onViewDestroy(context, onBeforeDestroy())
         }
     })
 </script>

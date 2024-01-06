@@ -7,6 +7,7 @@ import GizmoState from "../../../../../engine/tools/gizmo/util/GizmoState"
 import GizmoMouseUtil from "../../../../../engine/tools/gizmo/util/GizmoMouseUtil"
 import EngineTools from "../../../../../engine/tools/EngineTools";
 import EntitySelectionStore from "../../../../shared/stores/EntitySelectionStore";
+import ProjectionEngine from "../../../../../shared/ProjectionEngine";
 
 
 export default class ViewportInteractionListener extends AbstractSingleton {
@@ -44,7 +45,7 @@ export default class ViewportInteractionListener extends AbstractSingleton {
 		ViewportUtil.onViewportClick(
 			event,
 			this.mouseDelta,
-			SettingsStore.getData(),
+			ProjectionEngine.SettingsStore.getData(),
 			(data) => {
 				if (GizmoState.wasOnGizmo) {
 					GizmoState.wasOnGizmo = false

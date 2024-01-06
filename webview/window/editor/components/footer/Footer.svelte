@@ -9,6 +9,7 @@
     import EntityUpdateService from "../../services/engine/EntityUpdateService"
     import LocalizationEN from "../../../../shared/enums/LocalizationEN"
     import SettingsStore from "../../../shared/stores/SettingsStore"
+    import ProjectionEngine from "../../../../shared/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     let settings = {}
@@ -31,13 +32,13 @@
     }
 
     onMount(() => {
-    	SettingsStore.getInstance().addListener(COMPONENT_ID, data => settings = data, ["hideFooter"])
+        ProjectionEngine.SettingsStore.addListener(COMPONENT_ID, data => settings = data, ["hideFooter"])
     	Engine.addLevelLoaderListener(COMPONENT_ID, load)
     	load()
     })
 
     onDestroy(() => {
-    	SettingsStore.getInstance().removeListener(COMPONENT_ID)
+        ProjectionEngine.SettingsStore.removeListener(COMPONENT_ID)
     	Engine.removeLevelLoaderListener(COMPONENT_ID)
     })
 </script>

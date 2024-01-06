@@ -8,13 +8,14 @@
     import UIAPI from "../../../../engine/core/lib/rendering/UIAPI";
     import EngineToolsService from "../../services/EngineToolsService";
     import GPU from "../../../../engine/core/GPU";
+    import ProjectionEngine from "../../../../shared/ProjectionEngine";
 
     let canvasRef
 
     onMount(() => {
         Engine.initializeContext(
             canvasRef,
-            {w: VisualsStore.getData().resolutionX, h: VisualsStore.getData().resolutionY},
+            {w: ProjectionEngine.VisualsStore.getData().resolutionX, h: ProjectionEngine.VisualsStore.getData().resolutionY},
             EditorFSUtil.readAsset,
             true
         ).then(async () => {

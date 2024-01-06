@@ -19,13 +19,63 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-6] Project scheme&#10;- Removing unused classes&#10;- Removing project window&#10;- Adding window resize&#10;- Fixing fetch errors&#10;- Enabling editor initialization without project path">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-30] Engine initialization&#10;- Removed async engine initalization&#10;- Fixed window name">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/WindowRepository.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/WindowRepository.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/Editor.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/Editor.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/footer/Footer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/footer/Footer.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/Canvas.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/Canvas.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/CentralView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/CentralView.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/Canvas.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/Canvas.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/SerializedState.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/SerializedState.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/SideView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/SideView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/components/ViewGroup.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/components/ViewGroup.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/editor-window.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/editor-window.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/services/EditorActionHistory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/EditorActionHistory.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/services/EngineToolsService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/EngineToolsService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/services/engine/EngineStateService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/engine/EngineStateService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/services/engine/EntityFactoryService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/engine/EntityFactoryService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/services/engine/ExecutionService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/engine/ExecutionService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/services/engine/LevelService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/engine/LevelService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/templates/get-content-browser-actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/templates/get-content-browser-actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/templates/get-shader-actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/templates/get-shader-actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/templates/get-viewport-hotkeys.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/templates/get-viewport-hotkeys.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/ContentBrowserUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/ContentBrowserUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/EditorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/EditorUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/InspectorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/InspectorUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/SceneEditorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/SceneEditorUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/SelectorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/SelectorUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/TabsStoreUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/TabsStoreUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/ViewportUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/ViewportUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/console/ConsoleView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/console/ConsoleView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/Browser.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/Browser.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/SideBar.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/SideBar.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/Properties.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/Properties.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/item/Item.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/item/Item.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/HierarchyView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/HierarchyView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/EntityTreeBranchContent.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/EntityTreeBranchContent.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/InspectorView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/InspectorView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/AddComponent.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/AddComponent.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/CameraPreferences.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/CameraPreferences.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/TransformationForm.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/TransformationForm.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/SceneEditorView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/SceneEditorView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/CameraSettings.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/CameraSettings.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/EntityInformation.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/EntityInformation.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/GizmoSettings.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/GizmoSettings.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/SceneOptions.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/SceneOptions.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/lib/ViewportInteractionListener.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/lib/ViewportInteractionListener.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/preferences/Preferences.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/preferences/Preferences.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/preferences/components/Shortcuts.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/preferences/components/Shortcuts.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/preferences/components/ShotcutField.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/preferences/components/ShotcutField.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/preferences/components/content/ContentField.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/preferences/components/content/ContentField.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/preferences/components/content/ContentGroup.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/preferences/components/content/ContentGroup.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/shared/lib/StoreIPCListener.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/shared/stores/AbstractStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/stores/AbstractStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/shared/stores/ChangesTrackerStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/stores/ChangesTrackerStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/shared/stores/ContentBrowserStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/stores/ContentBrowserStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/shared/stores/EntitySelectionStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/stores/EntitySelectionStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/shared/stores/SettingsStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/stores/SettingsStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/shared/stores/TabsStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/stores/TabsStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/shared/stores/ViewStateStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/stores/ViewStateStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/shared/stores/VisualsStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/shared/stores/VisualsStore.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +96,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="8-c++-build-and-webview-build" />
+        <entry key="$PROJECT_DIR$" value="30-fix-engine-initialization" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -106,7 +156,7 @@
     "Shell Script.copy-files.executor": "Run",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "6-project-window",
+    "git-widget-placeholder": "27-abstractsingleton",
     "last_opened_file_path": "C:/Users/russi/WebstormProjects/projection-engine-2/test/core",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -262,7 +312,7 @@
       <workItem from="1704189356757" duration="63000" />
       <workItem from="1704235592538" duration="597000" />
       <workItem from="1704236540814" duration="4180000" />
-      <workItem from="1704541634781" duration="6500000" />
+      <workItem from="1704541634781" duration="8656000" />
     </task>
     <task id="LOCAL-00001" summary="[STD-1] Organizing project&#10;- removing unused C++ classes&#10;- Refactoring files&#10;- Renaming c++ namespaces and project &#10;- Moving future webview stuff">
       <option name="closed" value="true" />
@@ -440,7 +490,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704546693868</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="[STD-30] Engine initialization&#10;- Removed async engine initalization&#10;- Fixed window name">
+      <option name="closed" value="true" />
+      <created>1704548651448</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1704548651448</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -475,7 +533,8 @@
     <MESSAGE value="[STD-6] Project window&#10;- Starting rework of window system" />
     <MESSAGE value="[STD-6] Project window&#10;- Finishing rework of window system" />
     <MESSAGE value="[STD-6] Project scheme&#10;- Removing unused classes&#10;- Removing project window&#10;- Adding window resize&#10;- Fixing fetch errors&#10;- Enabling editor initialization without project path" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-6] Project scheme&#10;- Removing unused classes&#10;- Removing project window&#10;- Adding window resize&#10;- Fixing fetch errors&#10;- Enabling editor initialization without project path" />
+    <MESSAGE value="[STD-30] Engine initialization&#10;- Removed async engine initalization&#10;- Fixed window name" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-30] Engine initialization&#10;- Removed async engine initalization&#10;- Fixed window name" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

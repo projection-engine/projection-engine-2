@@ -9,6 +9,7 @@ import ChangesTrackerStore from "../../shared/stores/ChangesTrackerStore"
 import EngineStateService from "./engine/EngineStateService"
 import Entity from "../../../engine/core/instances/Entity"
 import LocalizationEN from "../../../shared/enums/LocalizationEN"
+import ProjectionEngine from "../../../shared/ProjectionEngine";
 
 interface Action {
     nameCache: Map<string, string>
@@ -25,7 +26,7 @@ export default class EditorActionHistory {
 	}
 
 	static save(value: Entity[] | Entity, isRemoval?: boolean) {
-		ChangesTrackerStore.updateStore({changed: true})
+		ProjectionEngine.	ChangesTrackerStore.updateStore({changed: true})
 
 		const data = (Array.isArray(value) ? value.map(v => v?.serializable?.()) : [value.serializable()]).filter(e => e !== undefined)
 		EditorActionHistory.#cache.save({
@@ -41,7 +42,7 @@ export default class EditorActionHistory {
 			ToastNotificationSystem.getInstance().log(LocalizationEN.UNDOING_CHANGES)
 			EditorActionHistory.#apply(action)
 		} else
-			ChangesTrackerStore.updateStore({changed: true})
+			ProjectionEngine.ChangesTrackerStore.updateStore({changed: true})
 	}
 
 	static redo() {

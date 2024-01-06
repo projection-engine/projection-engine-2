@@ -12,6 +12,7 @@
     import InspectorUtil from "../../util/InspectorUtil"
     import INSPECTOR_TABS from "./static/INSPECTOR_TABS"
     import SerializedState from "../../components/view/SerializedState.svelte";
+    import ProjectionEngine from "../../../../shared/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     let selectedEntity
@@ -20,7 +21,7 @@
     let isOnDynamicTab = false
 
     onMount(() => {
-        EntitySelectionStore.getInstance().addListener(COMPONENT_ID, data => {
+        ProjectionEngine.EntitySelectionStore.addListener(COMPONENT_ID, data => {
             const temp = QueryAPI.getEntityByID(data.array[0] || data.lockedEntity)
             if (temp === selectedEntity)
                 return
@@ -35,7 +36,7 @@
     })
 
     onDestroy(() => {
-        EntitySelectionStore.getInstance().removeListener(COMPONENT_ID)
+        ProjectionEngine.EntitySelectionStore.removeListener(COMPONENT_ID)
     })
 
     function setTabs(data) {

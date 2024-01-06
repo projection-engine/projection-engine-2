@@ -15,18 +15,19 @@ import EngineToolsState from "../../../engine/tools/EngineToolsState"
 import EngineState from "../../../engine/core/EngineState"
 import SETTINGS from "../static/SETTINGS"
 import GizmoState from "../../../engine/tools/gizmo/util/GizmoState"
+import ProjectionEngine from "../../../shared/ProjectionEngine";
 
 export default class EngineToolsService extends AbstractSingleton {
 
 	constructor() {
 		super()
-		EntitySelectionStore.getInstance()
+		ProjectionEngine.EntitySelectionStore
 			.addListener("EngineToolsService", EngineToolsService.#updateSelection)
-		EngineStore.getInstance()
+		ProjectionEngine.EngineStore
 			.addListener("EngineToolsService", EngineToolsService.#updateCameraTracker)
-		SettingsStore.getInstance()
+		ProjectionEngine.SettingsStore
 			.addListener("EngineToolsService_camera", EngineToolsService.#updateWithSettings)
-		VisualsStore.getInstance()
+		ProjectionEngine.VisualsStore
 			.addListener("EngineToolsService", EngineToolsService.#updateEngineSettings)
 	}
 
@@ -35,7 +36,7 @@ export default class EngineToolsService extends AbstractSingleton {
 	}
 
 	static #updateEngineState() {
-		const visualSettings = VisualsStore.getData()
+		const visualSettings = ProjectionEngine.VisualsStore.getData()
 		EngineState.fxaaEnabled = visualSettings.FXAA
 		EngineState.fxaaSpanMax = visualSettings.FXAASpanMax
 		EngineState.fxaaReduceMin = visualSettings.FXAAReduceMin
@@ -67,7 +68,7 @@ export default class EngineToolsService extends AbstractSingleton {
 	}
 
 	static 	#updateEngineSettings() {
-		const visualSettings = VisualsStore.getData()
+		const visualSettings = ProjectionEngine.VisualsStore.getData()
 		GPU.canvas.width = visualSettings.resolutionX
 		GPU.canvas.height = visualSettings.resolutionY
 
@@ -79,8 +80,8 @@ export default class EngineToolsService extends AbstractSingleton {
 	}
 
 	static #updateCameraTracker() {
-		const engine = EngineStore.getData()
-		const settings = SettingsStore.getData()
+		const engine = ProjectionEngine.EngineStore.getData()
+		const settings = ProjectionEngine.SettingsStore.getData()
 		if (engine.executingAnimation)
 			UIAPI.showUI()
 		if (Engine.environment === ENVIRONMENT.DEV && !engine.focusedCamera) {
@@ -97,7 +98,7 @@ export default class EngineToolsService extends AbstractSingleton {
 	}
 
 	static 	#updateEngineToolsState() {
-		const settings = SettingsStore.getData() as typeof SETTINGS
+		const settings = ProjectionEngine.SettingsStore.getData() as typeof SETTINGS
 		EngineToolsState.gridColor = settings.gridColor
 		EngineToolsState.gridScale = settings.gridScale * 10
 		EngineToolsState.gridThreshold = settings.gridThreshold
@@ -112,7 +113,7 @@ export default class EngineToolsService extends AbstractSingleton {
 	}
 
 	static #updateWithSettings() {
-		const settings = SettingsStore.getData()
+		const settings = ProjectionEngine.SettingsStore.getData()
 		EngineState.debugShadingModel = settings.shadingModel
 		GizmoState.rotationGridSize = settings.gizmoGrid.rotationGizmo || 1
 		GizmoState.translationGridSize = settings.gizmoGrid.translationGizmo || 1

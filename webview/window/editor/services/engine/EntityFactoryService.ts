@@ -11,17 +11,18 @@ import EntityHierarchyService from "./EntityHierarchyService"
 import EngineStateService from "./EngineStateService"
 import Engine from "../../../../engine/core/Engine"
 import LocalizationEN from "../../../../shared/enums/LocalizationEN"
+import ProjectionEngine from "../../../../shared/ProjectionEngine";
 
 
 export default class EntityFactoryService {
 	static translateEntity(entity, rotation = CameraAPI.rotationBuffer, translation = CameraAPI.translationBuffer) {
-		if (SettingsStore.getData().spawnOnOrigin) {
+		if (ProjectionEngine.SettingsStore.getData().spawnOnOrigin) {
 			vec3.copy(entity._translation, [0, 0, 0])
 			entity.__changedBuffer[0] = 1
 			return
 		}
 
-		const position = <vec4>[0, 0, -(SettingsStore.getData().spawnDistanceFromCamera || 10), 1]
+		const position = <vec4>[0, 0, -(ProjectionEngine.SettingsStore.getData().spawnDistanceFromCamera || 10), 1]
 		vec4.transformQuat(position, position, rotation)
 		vec3.add(entity._translation, translation, <vec3>position)
 		entity.__changedBuffer[0] = 1

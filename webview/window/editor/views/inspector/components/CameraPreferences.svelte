@@ -9,6 +9,7 @@
     import PropertyHeader from "../../../../shared/components/PropertyHeader.svelte"
     import LocalizationEN from "../../../../../shared/enums/LocalizationEN"
     import CAMERA_PREFERENCES from "../static/CAMERA_PREFERENCES"
+    import ProjectionEngine from "../../../../../shared/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     let cameraSettings = {}
@@ -16,18 +17,18 @@
     let camera
 
     onMount(() => {
-    	SettingsStore.getInstance().addListener(COMPONENT_ID, data => {
+        ProjectionEngine.SettingsStore.addListener(COMPONENT_ID, data => {
     		cameraSettings = {...data.camera, props: CAMERA_PROPS}
     		settings = data
     		camera = data.camera
     	}, ["camera"])
     })
 
-    onDestroy(() => SettingsStore.getInstance().removeListener(COMPONENT_ID))
+    onDestroy(() => ProjectionEngine.SettingsStore.removeListener(COMPONENT_ID))
 
     const updateCamera = (key, value, full) => {
     	if (full)
-    		SettingsStore.updateStore({camera: {...camera, [key]: value}})
+            ProjectionEngine.	SettingsStore.updateStore({camera: {...camera, [key]: value}})
     	if (CameraTracker[key] !== undefined)
     		CameraTracker[key] = value
     }

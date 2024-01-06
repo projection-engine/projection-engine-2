@@ -5,10 +5,9 @@
     import Shortcuts from "./components/Shortcuts.svelte"
     import PREFERENCES from "./static/PREFERENCES"
     import Icon from "../shared/components/icon/Icon.svelte"
-    import StoreIPCListener from "../shared/lib/StoreIPCListener"
 
     let tab = 0
-    onMount(() => StoreIPCListener.get())
+
 </script>
 
 

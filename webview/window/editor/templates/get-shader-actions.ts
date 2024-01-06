@@ -7,6 +7,7 @@ import ALL_NODES from "../views/shader-editor/static/ALL_NODES"
 import ContextMenuService from "../../shared/lib/context-menu/ContextMenuService"
 import NODE_MAP from "../views/shader-editor/static/NODE_MAP"
 import ShaderEditorUtil from "../util/ShaderEditorUtil"
+import ProjectionEngine from "../../../shared/ProjectionEngine";
 
 export function selectAllNodes(canvasAPI:Canvas){
 	let last: ShaderNode | ShaderComment
@@ -22,7 +23,7 @@ export function selectAllNodes(canvasAPI:Canvas){
 	canvasAPI.clear()
 }
 export default function getShaderActions(canvasAPI: Canvas) {
-	const settings = SettingsStore.getData()
+	const settings = ProjectionEngine.SettingsStore.getData()
 
 	const options = {
 		SELECT_ALL: {

@@ -1,5 +1,6 @@
 import Engine from "../../../engine/core/Engine"
 import ContentBrowserStore from "../../shared/stores/ContentBrowserStore"
+import ProjectionEngine from "../../../shared/ProjectionEngine";
 
 export default class SelectorUtil{
 	static getIcon(type){
@@ -24,7 +25,7 @@ export default class SelectorUtil{
 	}
 
 	static getType(type, mergeMaterials, terrainMaterials) {
-		const store = ContentBrowserStore.getData()
+		const store =ProjectionEngine. ContentBrowserStore.getData()
 		switch (type) {
 		case "image":
 			return store.textures

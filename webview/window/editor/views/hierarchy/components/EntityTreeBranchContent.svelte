@@ -11,6 +11,7 @@
     import LocalizationEN from "../../../../../shared/enums/LocalizationEN";
     import HierarchyUtil from "../../../util/HierarchyUtil";
     import EntitySelectionStore from "../../../../shared/stores/EntitySelectionStore";
+    import ProjectionEngine from "../../../../../shared/ProjectionEngine";
 
     export let entity: Entity
     export let lockedEntity: string
@@ -48,7 +49,7 @@
     }
     $: {
         if (!isOnEdit && entityName !== entity.name) {
-            ChangesTrackerStore.updateStore({changed: true})
+            ProjectionEngine.ChangesTrackerStore.updateStore({changed: true})
             EntityNamingService.renameEntity(entity.name, entity)
             entityName = entity.name
         }

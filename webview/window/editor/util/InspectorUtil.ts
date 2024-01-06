@@ -14,6 +14,7 @@ import CameraAPI from "../../../engine/core/lib/utils/CameraAPI"
 import EditorUtil from "./EditorUtil"
 import type Entity from "../../../engine/core/instances/Entity";
 import type Component from "../../../engine/core/instances/components/Component";
+import ProjectionEngine from "../../../shared/ProjectionEngine";
 
 export default class InspectorUtil {
     static compareObjects(obj1, obj2) {
@@ -62,7 +63,7 @@ export default class InspectorUtil {
             entity.__cameraNeedsUpdate = true
         }
         component[key] = value
-        if (component.componentKey === COMPONENTS.CAMERA && entity.id === EngineStore.getData().focusedCamera)
+        if (component.componentKey === COMPONENTS.CAMERA && entity.id === ProjectionEngine.EngineStore.getData().focusedCamera)
             CameraAPI.updateViewTarget(entity)
     }
 
@@ -76,7 +77,7 @@ export default class InspectorUtil {
             entity.removeComponent(key)
 
         EntityHierarchyService.updateHierarchy()
-        EntitySelectionStore.updateStore({array: EntitySelectionStore.getEntitiesSelected()})
+        ProjectionEngine.EntitySelectionStore.updateStore({array: EntitySelectionStore.getEntitiesSelected()})
     }
 
     static async handleComponentDrop(entity, data) {
@@ -112,7 +113,7 @@ export default class InspectorUtil {
     }
 
     static #getItemFound(id) {
-        const filesStoreData = ContentBrowserStore.getData()
+        const filesStoreData =ProjectionEngine. ContentBrowserStore.getData()
         let type = "SCRIPT"
         let itemFound = filesStoreData.components.find(s => s.registryID === id)
         if (!itemFound) {

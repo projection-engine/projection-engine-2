@@ -11,6 +11,7 @@
     import FileTypes from "../../../../../../shared/enums/FileTypes"
     import {onDestroy, onMount} from "svelte";
     import ContentBrowserStore from "../../../../../shared/stores/ContentBrowserStore";
+    import ProjectionEngine from "../../../../../../shared/ProjectionEngine";
 
     const VALID = [FileTypes.TEXTURE, FileTypes.COLLECTION, FileTypes.MATERIAL]
     const COMPONENT_ID = crypto.randomUUID()
@@ -32,9 +33,9 @@
     }
 
     onMount(() => {
-        ContentBrowserStore.getInstance().addListener(COMPONENT_ID, data => selectedFile = data.selectedItems[0], ["selectedItems"])
+        ProjectionEngine.ContentBrowserStore.addListener(COMPONENT_ID, data => selectedFile = data.selectedItems[0], ["selectedItems"])
     })
-    onDestroy(() => ContentBrowserStore.getInstance().removeListener(COMPONENT_ID))
+    onDestroy(() => ProjectionEngine.ContentBrowserStore.removeListener(COMPONENT_ID))
 </script>
 
 <div class="wrapper">

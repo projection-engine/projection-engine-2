@@ -11,6 +11,7 @@ import ToastNotificationSystem from "../../../shared/components/alert/ToastNotif
 import ResourceEntityMapper from "../../../../engine/core/resource-libs/ResourceEntityMapper"
 import LevelService from "./LevelService"
 import LocalizationEN from "../../../../shared/enums/LocalizationEN"
+import ProjectionEngine from "../../../../shared/ProjectionEngine";
 
 export default class ExecutionService {
 	static #currentLevelID
@@ -30,7 +31,7 @@ export default class ExecutionService {
 		await LevelService.getInstance().saveCurrentLevel().catch(console.error)
 		ExecutionService.#currentLevelID = Engine.loadedLevel.id
 		await Engine.startSimulation()
-		EngineStore.updateStore({focusedCamera: undefined, executingAnimation: true})
+		ProjectionEngine.EngineStore.updateStore({focusedCamera: undefined, executingAnimation: true})
 	}
 
 	static async stopPlayState() {
@@ -51,7 +52,7 @@ export default class ExecutionService {
 
 		CameraAPI.trackingEntity = undefined
 		CameraTracker.startTracking()
-		EngineStore.updateStore({executingAnimation: false})
+		ProjectionEngine.	EngineStore.updateStore({executingAnimation: false})
 		CameraAPI.restoreState(ExecutionService.cameraSerialization)
 	}
 

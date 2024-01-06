@@ -1,4 +1,5 @@
 import AbstractStore from "./AbstractStore"
+import ProjectionEngine from "../../../shared/ProjectionEngine";
 
 export default class ContentBrowserStore extends AbstractStore{
 	constructor() {
@@ -21,15 +22,15 @@ export default class ContentBrowserStore extends AbstractStore{
 	}
 
 	static setContentBrowserSelected(data:MutableObject[]) {
-		ContentBrowserStore.updateStore({selectedItems: data})
+		ProjectionEngine.ContentBrowserStore.updateStore({selectedItems: data})
 	}
 
 	static getContentBrowserSelected():MutableObject[] {
-		return ContentBrowserStore.getData().selectedItems
+		return ProjectionEngine.ContentBrowserStore.getData().selectedItems
 	}
 
 	static getItemById(id:string){
-		return ContentBrowserStore.getData().items.find(item => item.id === id)
+		return ProjectionEngine.ContentBrowserStore.getData().items.find(item => item.id === id)
 	}
 
 }
