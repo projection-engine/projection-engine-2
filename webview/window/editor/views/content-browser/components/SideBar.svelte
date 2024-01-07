@@ -1,28 +1,21 @@
 <script>
     import SideBarItem from "./SideBarItem.svelte"
     import VirtualList from "@sveltejs/svelte-virtual-list"
-    import ContentBrowserHierarchyStore from "@lib/stores/ContentBrowserHierarchyStore"
-    import {onDestroy, onMount} from "svelte"
     import FileSystemUtil from "@lib/FileSystemUtil"
-    import ProjectionEngine from "@lib/ProjectionEngine";
 
-    const COMPONENT_ID = crypto.randomUUID()
-
-    /** @type {function} */
     export let setCurrentDirectory
-    /** @type {{id: string}} */
     export let currentDirectory
 
-    let hierarchy = {items: []}
-    onMount(() => ProjectionEngine.ContentBrowserHierarchyStore.addListener(COMPONENT_ID, v => hierarchy = v))
-    onDestroy(() => ProjectionEngine.ContentBrowserHierarchyStore.removeListener(COMPONENT_ID))
+
+    let openItems = {}
+    let hierarchy = []
 </script>
 
 <div class="wrapper">
-    <VirtualList items={hierarchy.items} let:item>
+    <VirtualList items={hierarchy} let:item>
         <SideBarItem
                 triggerOpen={() => {
-                    let open = ContentBrowserHierarchyStore.getData().open
+                    let open = openItems
                     const inv = !open[item.item.id]
                     if(item.item.id === FileSystemUtil.sep && !inv)
                         open = {}
@@ -31,9 +24,9 @@
                             delete open[item.children[i]]
                     }
                     open[item.item.id] = inv
-                ProjectionEngine.    ContentBrowserHierarchyStore.updateStore({open})
+                    openItems = open
                 }}
-                open={hierarchy.open}
+                open={openItems}
                 childQuantity={item.childQuantity}
                 depth={item.depth}
                 setCurrentDirectory={setCurrentDirectory}

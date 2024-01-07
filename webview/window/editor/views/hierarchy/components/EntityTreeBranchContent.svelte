@@ -46,7 +46,6 @@
     }
     $: {
         if (!isOnEdit && entityName !== entity.name) {
-            ProjectionEngine.ChangesTrackerStore.updateStore({changed: true})
             ProjectionEngine.EntityNamingService.renameEntity(entity.name, entity)
             entityName = entity.name
         }

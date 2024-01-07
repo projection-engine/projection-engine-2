@@ -1,23 +1,27 @@
-<script>
+<script lang="ts">
     import ContentField from "./ContentField.svelte"
     import Accordion from "@lib/components/accordion/Accordion.svelte"
     import {onDestroy, onMount} from "svelte"
-    import ProjectionEngine from "@lib/ProjectionEngine";
+    import {InjectVar} from "@lib/Injection";
+    import VisualsStore from "@lib/stores/VisualsStore";
+    import SettingsStore from "@lib/stores/SettingsStore";
 
     const COMPONENT_ID = crypto.randomUUID()
     export let toRender
 
     let settings
     let visualSettings
+    const visualsStore = InjectVar(VisualsStore) as VisualsStore
+    const settingsStore = InjectVar(SettingsStore) as SettingsStore
 
     onMount(() => {
-        ProjectionEngine.VisualsStore.addListener(COMPONENT_ID, v => visualSettings = v)
-        ProjectionEngine.SettingsStore.addListener(COMPONENT_ID, v => settings = v)
+        visualsStore.addListener(COMPONENT_ID, v => visualSettings = v)
+        settingsStore.addListener(COMPONENT_ID, v => settings = v)
     })
 
     onDestroy(() => {
-        ProjectionEngine.VisualsStore.removeListener(COMPONENT_ID)
-        ProjectionEngine.SettingsStore.removeListener(COMPONENT_ID)
+        visualsStore.removeListener(COMPONENT_ID)
+        settingsStore.removeListener(COMPONENT_ID)
     })
 </script>
 

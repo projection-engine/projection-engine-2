@@ -1,5 +1,6 @@
 import AbstractStore from "./AbstractStore"
-import ProjectionEngine, {Injectable} from "../ProjectionEngine";
+import {Injectable} from "@lib/Injection";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 @Injectable
 export default class EntitySelectionStore extends AbstractStore{

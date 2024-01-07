@@ -12,9 +12,7 @@
             <button
                     data-svelteinline="-"
                     on:click={(e) =>{
-                    ProjectionEngine.EditorActionHistory.save(entity)
                     entity.addComponent(data[0])
-                    ProjectionEngine.EditorActionHistory.save(entity)
                     e.target.closeDropdown()
 
                 }}

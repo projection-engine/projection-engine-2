@@ -2,7 +2,8 @@ import Engine from "@engine-core/Engine"
 import Entity from "@engine-core/instances/Entity"
 import HierarchyToRenderElement from "../editor/views/hierarchy/template/ToRenderElement"
 import EntitySelectionStore from "@lib/stores/EntitySelectionStore";
-import ProjectionEngine, {Injectable} from "@lib/ProjectionEngine";
+import {Injectable} from "@lib/Injection";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 
 @Injectable

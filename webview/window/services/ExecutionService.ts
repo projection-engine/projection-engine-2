@@ -7,7 +7,8 @@ import ScriptsAPI from "@engine-core/lib/utils/ScriptsAPI"
 
 import ResourceEntityMapper from "@engine-core/lib/ResourceEntityMapper"
 import LocalizationEN from "@enums/LocalizationEN"
-import ProjectionEngine, {Injectable} from "@lib/ProjectionEngine";
+import {Injectable} from "@lib/Injection";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 @Injectable
 export default class ExecutionService {

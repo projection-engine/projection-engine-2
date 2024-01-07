@@ -25,7 +25,6 @@
     let lockedRotation
     let lockedTranslation
     let lockedScaling
-    let hasStarted = false
     let lockedCache = [false, false, false]
 
     onMount(() => {
@@ -76,11 +75,6 @@
     }
 
     function rotate(axis, value) {
-        if (!hasStarted) {
-            hasStarted = true
-            ProjectionEngine.EditorActionHistory.save(targets)
-        }
-
         if (rotationType === Movable.ROTATION_QUATERNION)
             mainEntity.rotationQuaternion[axis] = value
         else
@@ -89,10 +83,6 @@
     }
 
     function transformScaleTranslation(axis, value, isTranslation) {
-        if (!hasStarted) {
-            hasStarted = true
-            ProjectionEngine.EditorActionHistory.save(targets)
-        }
         for (let i = 0; i < targets.length; i++) {
             const entity = targets[i]
             if (!isTranslation) {
@@ -115,11 +105,6 @@
     }
 
     function transformPivot(axis, value) {
-        if (!hasStarted) {
-            hasStarted = true
-            ProjectionEngine.EditorActionHistory.save(targets)
-        }
-
         for (let i = 0; i < targets.length; i++) {
             const entity = targets[i]
             if (!entity.__originalPivot)
@@ -131,7 +116,6 @@
     }
 
     function onFinish() {
-        ProjectionEngine.EditorActionHistory.save(targets)
         hasStarted = false
     }
 </script>

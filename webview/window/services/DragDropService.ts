@@ -1,5 +1,5 @@
 import STYLES from "@lib/components/drag-drop/STYLES"
-import {Injectable} from "@lib/ProjectionEngine";
+import {Injectable} from "@lib/Injection";
 
 @Injectable
 export default class DragDropService {

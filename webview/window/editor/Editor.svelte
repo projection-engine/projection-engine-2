@@ -6,30 +6,37 @@
     import HotKeysController from "@lib/HotKeysController"
     import EditorUtil from "./util/EditorUtil"
     import MenuBar from "@lib/components/frame/MenuBar.svelte";
-    import ProjectionEngine, {InjectVar} from "@lib/ProjectionEngine";
+    import {InjectVar} from "@lib/Injection";
     import Canvas from "./components/view/Canvas.svelte";
     import Engine from "@engine-core/Engine";
+    import ToasterService from "../services/ToasterService";
+    import SettingsStore from "@lib/stores/SettingsStore";
+    import EngineStore from "@lib/stores/EngineStore";
 
     const COMPONENT_ID = crypto.randomUUID()
-    const engine = InjectVar(Engine)
     let view
     let cameraGizmoSize
     let currentViewIndex = 0
     let ready = false
 
+    const toasterService = InjectVar(ToasterService) as ToasterService
+    const settingsStore = InjectVar(SettingsStore) as SettingsStore
+    const engineStore = InjectVar(EngineStore) as EngineStore
+
     onMount(() => {
-        ProjectionEngine.SettingsStore
+        toasterService.initialize()
+        settingsStore
             .addListener(COMPONENT_ID, data => {
                 view = data.views?.[data.currentView]
                 currentViewIndex = data.currentView
                 cameraGizmoSize = data.cameraGizmoSize
             }, ["views", "currentView", "cameraGizmoSize"])
-        ProjectionEngine.EngineStore.addListener(COMPONENT_ID, data => HotKeysController.blockActions = data.executingAnimation, ["executingAnimation"])
+        engineStore.addListener(COMPONENT_ID, data => HotKeysController.blockActions = data.executingAnimation, ["executingAnimation"])
     })
 
     onDestroy(() => {
-        ProjectionEngine.EngineStore.removeListener(COMPONENT_ID)
-        ProjectionEngine.SettingsStore.removeListener(COMPONENT_ID)
+        engineStore.removeListener(COMPONENT_ID)
+        settingsStore.removeListener(COMPONENT_ID)
     })
 </script>
 

@@ -1,5 +1,5 @@
 import Entity from "@engine-core/instances/Entity"
-import {Injectable} from "@lib/ProjectionEngine";
+import {Injectable} from "@lib/Injection";
 
 @Injectable
 export default class EntityUpdateService {

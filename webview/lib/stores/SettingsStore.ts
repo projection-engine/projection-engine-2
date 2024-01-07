@@ -1,5 +1,5 @@
 import AbstractStore from "./AbstractStore"
-import ProjectionEngine, {Injectable} from "../ProjectionEngine";
+import {Injectable} from "@lib/Injection";
 import SETTINGS from "../../window/editor/static/SETTINGS";
 
 @Injectable

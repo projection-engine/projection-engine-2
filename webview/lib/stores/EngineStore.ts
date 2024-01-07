@@ -1,6 +1,6 @@
 import AbstractStore from "./AbstractStore"
 import ENGINE from "../../window/editor/static/ENGINE";
-import {Injectable} from "@lib/ProjectionEngine";
+import {Injectable} from "@lib/Injection";
 
 
 @Injectable

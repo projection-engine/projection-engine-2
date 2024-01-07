@@ -1,6 +1,6 @@
 import ElectronResources from "../../ElectronResources"
 import IPCRoutes from "@enums/IPCRoutes";
-import ProjectionEngine from "../../ProjectionEngine";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 export default function getContextAction() {
     let startPosition = undefined

@@ -25,12 +25,13 @@ import TranslationGizmo from "../tools/gizmo/transformation/TranslationGizmo";
 import DualAxisGizmo from "../tools/gizmo/transformation/DualAxisGizmo";
 import ScreenSpaceGizmo from "../tools/gizmo/transformation/ScreenSpaceGizmo";
 import CameraNotificationDecoder from "./lib/CameraNotificationDecoder";
-import ProjectionEngine, {Injectable} from "@lib/ProjectionEngine";
-import ISystemComponent from "@lib/ISystemComponent";
+import {Injectable} from "@lib/Injection";
+import ProjectionEngine from "@lib/ProjectionEngine";
+import IInjectable from "@lib/IInjectable";
 
 
 @Injectable
-export default class Engine extends ISystemComponent {
+export default class Engine extends IInjectable {
     #development = false
     #onLevelLoadListeners = new DynamicMap<string, Function>()
     UILayouts = new Map()

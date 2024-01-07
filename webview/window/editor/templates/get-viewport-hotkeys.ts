@@ -1,15 +1,10 @@
-import ViewportActionService from "../../services/ViewportActionService"
-import SettingsStore from "@lib/stores/SettingsStore"
 import GIZMOS from "@enums/Gizmos"
-import EditorActionHistoryService from "../../services/EditorActionHistoryService"
 import QueryAPI from "@engine-core/lib/utils/QueryAPI"
 import GizmoTransformationType from "@enums/GizmoTransformationType"
 import EntityFactoryService from "../../services/EntityFactoryService"
 import CAMERA_ROTATIONS from "../../../engine/tools/static/CAMERA_ROTATIONS"
-import LevelService from "../../services/LevelService"
 import CameraTracker from "../../../engine/tools/utils/CameraTracker"
 import ContextMenuOption from "@lib/context-menu/templates/ContextMenuOptions"
-import EntityHierarchyService from "../../services/EntityHierarchyService"
 import EngineStateService from "../../services/EngineStateService"
 import LocalizationEN from "@enums/LocalizationEN"
 import EditorUtil from "../util/EditorUtil"
@@ -163,14 +158,7 @@ export default function getViewportHotkeys(): { [key: string]: ContextMenuOption
             require: viewportHotkeys.ROTATION_GIZMO,
             callback: () => ProjectionEngine.SettingsStore.updateStore({gizmo: GIZMOS.ROTATION})
         },
-        UNDO: {
-            require: viewportHotkeys.UNDO,
-            callback: ProjectionEngine.EditorActionHistory.undo
-        },
-        REDO: {
-            require: viewportHotkeys.REDO,
-            callback: ProjectionEngine.EditorActionHistory.redo
-        },
+
         GROUP: {
             label: "Group selected",
             require: viewportHotkeys.GROUP,

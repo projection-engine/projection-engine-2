@@ -133,10 +133,8 @@ export default class EngineResourceLoaderService {
 				if (!entity || !entity.meshComponent) return
 				const result = await FileSystemAPI.loadMaterial(data)
 				if (result) {
-					ProjectionEngine.EditorActionHistory.save(entity)
 					const component = entity.meshComponent
 					component.materialID = data
-					ProjectionEngine.EditorActionHistory.save(entity)
 				} else
 					console.error(LocalizationEN.SOME_ERROR_OCCURRED + ` (Material: ${data})`)
 				break

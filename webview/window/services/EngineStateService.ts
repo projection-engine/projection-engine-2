@@ -59,12 +59,10 @@ export default class EngineStateService {
 
     @checkLevel
     static appendBlock(block: Entity[]) {
-        ProjectionEngine.EditorActionHistory.save(block, true)
         EntityAPI.addGroup(block)
         ProjectionEngine.EntityNamingService.renameInBlock(block)
         for (let i = 0; i < block.length; i++)
             GizmoUtil.createTransformationCache(block[i])
-        ProjectionEngine.EditorActionHistory.save(block)
         EngineStateService.#updateStructure()
     }
 
@@ -80,9 +78,6 @@ export default class EngineStateService {
         }
 
         const entities = Object.values(hierarchy)
-        ProjectionEngine.EditorActionHistory.save(entities)
-        ProjectionEngine.EditorActionHistory.save(entities, true)
-
         EntityAPI.removeGroup(entities, false)
 
         ProjectionEngine.EntitySelectionStore.updateStore({
@@ -94,9 +89,6 @@ export default class EngineStateService {
 
     @checkLevel
     static add(entity: Entity) {
-        ProjectionEngine.EditorActionHistory.save(entity, true)
-        ProjectionEngine.EditorActionHistory.save(entity)
-
         ProjectionEngine.EntityNamingService.renameEntity(entity.name, entity)
         GizmoUtil.createTransformationCache(entity)
         EntityAPI.addEntity(entity)

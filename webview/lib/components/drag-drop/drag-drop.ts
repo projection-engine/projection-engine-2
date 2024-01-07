@@ -1,4 +1,4 @@
-import ProjectionEngine from "../../ProjectionEngine";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 interface DragDropAttributes {
     noTransformation?: boolean

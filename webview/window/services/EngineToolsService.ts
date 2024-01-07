@@ -11,18 +11,35 @@ import EngineToolsState from "../../engine/tools/EngineToolsState"
 import EngineState from "@engine-core/EngineState"
 import SETTINGS from "../editor/static/SETTINGS"
 import GizmoState from "../../engine/tools/gizmo/util/GizmoState"
-import ProjectionEngine from "@lib/ProjectionEngine";
+import {Inject} from "@lib/Injection";
+import VisualsStore from "@lib/stores/VisualsStore";
+import EngineStore from "@lib/stores/EngineStore";
+import SettingsStore from "@lib/stores/SettingsStore";
 
 export default class EngineToolsService {
+    @Inject(Engine)
+    static engine: Engine
+
+    @Inject(VisualsStore)
+    static visualsStore: VisualsStore
+
+    @Inject(EngineStore)
+    static engineStore: EngineStore
+
+    @Inject(SettingsStore)
+    static settingsStore: SettingsStore
+
+    @Inject(EntitySelectionStore)
+    static entitySelectionStore: EntitySelectionStore
 
     static initialize() {
-        ProjectionEngine.EntitySelectionStore
+        EngineToolsService.entitySelectionStore
             .addListener("EngineToolsService", EngineToolsService.#updateSelection)
-        ProjectionEngine.EngineStore
+        EngineToolsService.engineStore
             .addListener("EngineToolsService", EngineToolsService.#updateCameraTracker)
-        ProjectionEngine.SettingsStore
+        EngineToolsService.settingsStore
             .addListener("EngineToolsService_camera", EngineToolsService.#updateWithSettings)
-        ProjectionEngine.VisualsStore
+        EngineToolsService.visualsStore
             .addListener("EngineToolsService", EngineToolsService.#updateEngineSettings)
     }
 
@@ -31,7 +48,7 @@ export default class EngineToolsService {
     }
 
     static #updateEngineState() {
-        const visualSettings = ProjectionEngine.VisualsStore.getData()
+        const visualSettings = EngineToolsService.visualsStore.getData()
         EngineState.fxaaEnabled = visualSettings.FXAA
         EngineState.fxaaSpanMax = visualSettings.FXAASpanMax
         EngineState.fxaaReduceMin = visualSettings.FXAAReduceMin
@@ -63,11 +80,11 @@ export default class EngineToolsService {
     }
 
     static #updateEngineSettings() {
-        const visualSettings = ProjectionEngine.VisualsStore.getData()
+        const visualSettings = EngineToolsService.visualsStore.getData()
         GPU.canvas.width = visualSettings.resolutionX
         GPU.canvas.height = visualSettings.resolutionY
 
-        if (ProjectionEngine.Engine.environment === ENVIRONMENT.DEV)
+        if (EngineToolsService.engine.environment === ENVIRONMENT.DEV)
             EngineTools.bindSystems()
         else
             EngineTools.unbindSystems()
@@ -75,25 +92,25 @@ export default class EngineToolsService {
     }
 
     static #updateCameraTracker() {
-        const engine = ProjectionEngine.EngineStore.getData()
-        const settings = ProjectionEngine.SettingsStore.getData()
+        const engine = EngineToolsService.engineStore.getData()
+        const settings = EngineToolsService.settingsStore.getData()
         if (engine.executingAnimation)
             UIAPI.showUI()
-        if (ProjectionEngine.Engine.environment === ENVIRONMENT.DEV && !engine.focusedCamera) {
-            ProjectionEngine.Engine.CameraAPI.trackingEntity = undefined
+        if (EngineToolsService.engine.environment === ENVIRONMENT.DEV && !engine.focusedCamera) {
+            EngineToolsService.engine.CameraAPI.trackingEntity = undefined
             if (settings.camera !== undefined) {
                 CameraTracker.screenSpaceMovementSpeed = settings.camera.screenSpaceMovementSpeed || 1
                 CameraTracker.movementSpeed = settings.camera.movementSpeed * .1
                 CameraTracker.turnSpeed = settings.camera.turnSpeed * .01
                 if (settings.camera.smoothing != null)
-                    ProjectionEngine.Engine.CameraAPI.translationSmoothing = settings.screenSpaceMovement ? 0 : settings.camera.smoothing * .001
-                ProjectionEngine.Engine.CameraAPI.updateViewTarget(settings.camera)
+                    EngineToolsService.engine.CameraAPI.translationSmoothing = settings.screenSpaceMovement ? 0 : settings.camera.smoothing * .001
+                EngineToolsService.engine.CameraAPI.updateViewTarget(settings.camera)
             }
         }
     }
 
     static #updateEngineToolsState() {
-        const settings = ProjectionEngine.SettingsStore.getData() as typeof SETTINGS
+        const settings = EngineToolsService.settingsStore.getData() as typeof SETTINGS
         EngineToolsState.gridColor = settings.gridColor
         EngineToolsState.gridScale = settings.gridScale * 10
         EngineToolsState.gridThreshold = settings.gridThreshold
@@ -108,7 +125,7 @@ export default class EngineToolsService {
     }
 
     static #updateWithSettings() {
-        const settings = ProjectionEngine.SettingsStore.getData()
+        const settings = EngineToolsService.settingsStore.getData()
         EngineState.debugShadingModel = settings.shadingModel
         GizmoState.rotationGridSize = settings.gizmoGrid.rotationGizmo || 1
         GizmoState.translationGridSize = settings.gizmoGrid.translationGizmo || 1
@@ -118,6 +135,6 @@ export default class EngineToolsService {
         GizmoState.gizmoType = settings.gizmo
         EngineToolsService.#updateCameraTracker()
         EngineToolsService.#updateEngineToolsState()
-        ProjectionEngine.Engine.CameraAPI.isOrthographic = settings.camera.ortho
+        EngineToolsService.engine.CameraAPI.isOrthographic = settings.camera.ortho
     }
 }

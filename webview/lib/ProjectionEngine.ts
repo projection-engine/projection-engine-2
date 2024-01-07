@@ -1,111 +1,67 @@
+import IInjectable from "@lib/IInjectable";
+import ToasterService from "../window/services/ToasterService";
+import ViewportActionService from "../window/services/ViewportActionService";
+import ContentBrowserStore from "./stores/ContentBrowserStore";
 import DragDropService from "../window/services/DragDropService";
 import EntityNamingService from "../window/services/EntityNamingService";
 import EntityUpdateService from "../window/services/EntityUpdateService";
 import LevelService from "../window/services/LevelService";
 import ExecutionService from "../window/services/ExecutionService";
-import ChangesTrackerStore from "./stores/ChangesTrackerStore";
-import ContentBrowserHierarchyStore from "./stores/ContentBrowserHierarchyStore";
-import ContentBrowserStore from "./stores/ContentBrowserStore";
 import EngineStore from "./stores/EngineStore";
-import EntitySelectionStore from "./stores/EntitySelectionStore";
 import SettingsStore from "./stores/SettingsStore";
 import TabsStore from "./stores/TabsStore";
-import VisualsStore from "./stores/VisualsStore";
 import Engine from "@engine-core/Engine";
-import ToolTipService from "../window/services/ToolTipService";
-import ViewportActionService from "../window/services/ViewportActionService";
-import ToasterService from "../window/services/ToasterService";
-import EditorActionHistoryService from "../window/services/EditorActionHistoryService";
 import EntityHierarchyService from "../window/services/EntityHierarchyService";
 import ContextMenuService from "../window/services/ContextMenuService";
-import ISystemComponent from "@lib/ISystemComponent";
+import EntitySelectionStore from "./stores/EntitySelectionStore";
+import {Inject} from "@lib/Injection";
 
-class ProjectionEngine extends ISystemComponent {
+export default class ProjectionEngine extends IInjectable {
 
-    static ChangesTrackerStore: ChangesTrackerStore
-    static ContentBrowserHierarchyStore: ContentBrowserHierarchyStore
+    @Inject(ContentBrowserStore)
     static ContentBrowserStore: ContentBrowserStore
-    static EngineStore: EngineStore
-    static EntitySelectionStore: EntitySelectionStore
+
+    @Inject(SettingsStore)
     static SettingsStore: SettingsStore
+
+    @Inject(TabsStore)
     static TabsStore: TabsStore
-    static VisualsStore: VisualsStore
+
+    @Inject(Engine)
     static Engine: Engine
 
-
+    @Inject(ContextMenuService)
     static ContextMenuService: ContextMenuService
+
+    @Inject(DragDropService)
     static DragDropService: DragDropService
-    static EditorActionHistory: EditorActionHistoryService
+
+    @Inject(EntityHierarchyService)
     static EntityHierarchyService: EntityHierarchyService
+
+    @Inject(EntityNamingService)
     static EntityNamingService: EntityNamingService
+
+    @Inject(EntityUpdateService)
     static EntityUpdateService: EntityUpdateService
+
+    @Inject(ExecutionService)
     static ExecutionService: ExecutionService
+
+    @Inject(LevelService)
     static LevelService: LevelService
+
+    @Inject(ToasterService)
     static ToastNotificationSystem: ToasterService
-    static ToolTipService: ToolTipService
+
+    @Inject(ViewportActionService)
     static ViewportActionUtil: ViewportActionService
 
+    @Inject(EngineStore)
+    static EngineStore: EngineStore
 
-    static createContext() {
-        ProjectionEngine.#createStores()
-        ProjectionEngine.#createServices()
-    }
+    @Inject(EntitySelectionStore)
+    static EntitySelectionStore: EntitySelectionStore
 
-    static #createServices() {
-        ProjectionEngine.ContextMenuService = new ContextMenuService();
-        ProjectionEngine.DragDropService = new DragDropService();
-        ProjectionEngine.EditorActionHistory = new EditorActionHistoryService();
-        ProjectionEngine.EntityHierarchyService = new EntityHierarchyService();
-        ProjectionEngine.EntityNamingService = new EntityNamingService();
-        ProjectionEngine.EntityUpdateService = new EntityUpdateService();
-        ProjectionEngine.ExecutionService = new ExecutionService();
-        ProjectionEngine.LevelService = new LevelService();
-        ProjectionEngine.ToastNotificationSystem = new ToasterService();
-        ProjectionEngine.ToolTipService = new ToolTipService();
-        ProjectionEngine.ViewportActionUtil = new ViewportActionService();
-    }
-
-    static #createStores() {
-        ProjectionEngine.ChangesTrackerStore = new ChangesTrackerStore()
-        ProjectionEngine.ContentBrowserHierarchyStore = new ContentBrowserHierarchyStore()
-        ProjectionEngine.ContentBrowserStore = new ContentBrowserStore()
-        ProjectionEngine.EngineStore = new EngineStore()
-        ProjectionEngine.EntitySelectionStore = new EntitySelectionStore()
-        ProjectionEngine.SettingsStore = new SettingsStore()
-        ProjectionEngine.TabsStore = new TabsStore()
-        ProjectionEngine.VisualsStore = new VisualsStore()
-    }
 }
-
-interface ExtendedWindow extends Window {
-    __instances: Map<ISystemComponent, typeof ISystemComponent>
-}
-
-function Inject(Clazz: ISystemComponent) {
-    return (target: ISystemComponent, propertyKey: string) => {
-        const P = window as unknown as ExtendedWindow
-        target[propertyKey] = P.__instances.get(Clazz)
-    }
-}
-
-function Injectable(Clazz: ISystemComponent) {
-    const P = window as unknown as ExtendedWindow
-    if (P.__instances && P.__instances.has(Clazz)) {
-        return;
-    }
-    // @ts-ignore
-    const instance = new Clazz();
-    if (P.__instances == null) {
-        P.__instances = new Map()
-    }
-    P.__instances.set(Clazz, instance);
-}
-
-function InjectVar(Clazz: ISystemComponent){
-    const P = window as unknown as ExtendedWindow
-    return  P.__instances.get(Clazz)
-}
-
-export default ProjectionEngine
-export {Injectable, Inject, InjectVar}
 

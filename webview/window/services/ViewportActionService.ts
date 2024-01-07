@@ -5,7 +5,8 @@ import CameraTracker from "../../engine/tools/utils/CameraTracker"
 import Engine from "@engine-core/Engine"
 import EngineStateService from "./EngineStateService"
 import EntitySelectionStore from "@lib/stores/EntitySelectionStore";
-import ProjectionEngine, {Injectable} from "@lib/ProjectionEngine";
+import {Injectable} from "@lib/Injection";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 
 @Injectable

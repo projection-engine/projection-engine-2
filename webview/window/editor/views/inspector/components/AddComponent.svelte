@@ -49,10 +49,7 @@
                     data-sveltebuttondefault="-"
                     data-svelteinline="-"
                     on:click={(e) =>{
-                        ProjectionEngine.EditorActionHistory.save(entity)
                         entity.addComponent(component.data[0])
-                        ProjectionEngine.EditorActionHistory.save(entity)
-                        e.target.closeDropdown()
                     }}
             >
                 <Icon styles="font-size: 1rem">{component.data[2]}</Icon>

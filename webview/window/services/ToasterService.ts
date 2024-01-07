@@ -1,4 +1,4 @@
-import {Injectable} from "@lib/ProjectionEngine";
+import {Injectable} from "@lib/Injection";
 
 @Injectable
 export default class ToasterService {
@@ -9,7 +9,13 @@ export default class ToasterService {
     log = (...messages: string[]): void => null
     target: HTMLElement
 
-    constructor() {
+    #initialized = false
+
+    initialize() {
+        if(this.#initialized){
+            return
+        }
+        this.#initialized = true
         const target = this.target = document.createElement("div")
         Object.assign(target.style, {
                 "position": "fixed",
