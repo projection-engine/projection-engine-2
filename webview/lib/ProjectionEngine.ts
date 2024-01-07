@@ -12,7 +12,7 @@ import SettingsStore from "./stores/SettingsStore";
 import Engine from "@engine-core/Engine";
 import EntityHierarchyService from "@services/EntityHierarchyService";
 import ContextMenuService from "@services/ContextMenuService";
-import EntitySelectionStore from "./stores/EntitySelectionStore";
+import SelectionStore from "./stores/SelectionStore";
 import {Inject} from "@lib/Injection";
 
 export default class ProjectionEngine extends IInjectable {
@@ -56,8 +56,8 @@ export default class ProjectionEngine extends IInjectable {
     @Inject(EngineStore)
     static EngineStore: EngineStore
 
-    @Inject(EntitySelectionStore)
-    static EntitySelectionStore: EntitySelectionStore
+    @Inject(SelectionStore)
+    static EntitySelectionStore: SelectionStore
 
 }
 

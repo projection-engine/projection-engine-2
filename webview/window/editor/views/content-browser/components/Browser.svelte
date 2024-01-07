@@ -4,7 +4,7 @@
     import VirtualList from "@sveltejs/svelte-virtual-list"
     import {onDestroy, onMount} from "svelte"
     import HotKeysController from "@lib/HotKeysController"
-    import EntitySelectionStore from "@lib/stores/EntitySelectionStore"
+    import SelectionStore from "@lib/stores/SelectionStore"
 
     import ITEM_TYPES from "../static/ITEM_TYPES"
     import BrowserHeader from "./BrowserHeader.svelte"

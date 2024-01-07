@@ -2,7 +2,7 @@ import LocalizationEN from "@enums/LocalizationEN"
 import COMPONENTS from "@engine-core/static/COMPONENTS"
 import EngineResourceLoaderService from "@services/EngineResourceLoaderService"
 import FileSystemAPI from "@engine-core/lib/utils/FileSystemAPI"
-import EntitySelectionStore from "@lib/stores/EntitySelectionStore"
+import SelectionStore from "@lib/stores/SelectionStore"
 import LightComponent from "@engine-core/instances/components/LightComponent"
 import LightsAPI from "@engine-core/lib/utils/LightsAPI"
 import CameraComponent from "@engine-core/instances/components/CameraComponent"
@@ -73,7 +73,7 @@ export default class InspectorUtil {
             entity.removeComponent(key)
 
         ProjectionEngine.EntityHierarchyService.updateHierarchy()
-        ProjectionEngine.EntitySelectionStore.updateStore({array: EntitySelectionStore.getEntitiesSelected()})
+        ProjectionEngine.EntitySelectionStore.updateStore({array: SelectionStore.getEntitiesSelected()})
     }
 
     static async handleComponentDrop(entity, data) {

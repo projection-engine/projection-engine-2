@@ -1,7 +1,7 @@
 import Engine from "@engine-core/Engine"
 import AXIS from "@engine-tools/static/AXIS"
 import EntityAPI from "@engine-core/lib/utils/EntityAPI"
-import EntitySelectionStore from "@lib/stores/EntitySelectionStore"
+import SelectionStore from "@lib/stores/SelectionStore"
 import Entity from "@engine-core/instances/Entity"
 import PickingAPI from "@engine-core/lib/utils/PickingAPI"
 
@@ -83,7 +83,7 @@ export default class EngineStateService {
         ProjectionEngine.EntitySelectionStore.updateStore({
             array: []
         })
-        EntitySelectionStore.setLockedEntity(ProjectionEngine.Engine.entities.array[0]?.id)
+        SelectionStore.setLockedEntity(ProjectionEngine.Engine.entities.array[0]?.id)
         EngineStateService.#updateStructure()
     }
 
@@ -95,7 +95,7 @@ export default class EngineStateService {
         ProjectionEngine.EntitySelectionStore.updateStore({
             array: [entity.id]
         })
-        EntitySelectionStore.setLockedEntity(entity.id)
+        SelectionStore.setLockedEntity(entity.id)
         EngineStateService.#updateStructure()
     }
 

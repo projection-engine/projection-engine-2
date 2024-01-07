@@ -4,12 +4,11 @@ import EngineTools from "@engine-tools/EngineTools"
 import CameraAPI from "@engine-core/lib/utils/CameraAPI"
 import ENVIRONMENT from "@engine-core/static/ENVIRONMENT"
 import EngineResources from "@engine-core/lib/EngineResources"
-import EntitySelectionStore from "@lib/stores/EntitySelectionStore"
+import SelectionStore from "@lib/stores/SelectionStore"
 import UIAPI from "@engine-core/lib/rendering/UIAPI"
 import GPU from "@engine-core/GPU"
 import EngineToolsState from "@engine-tools/EngineToolsState"
 import EngineState from "@engine-core/EngineState"
-import SETTINGS from "../window/editor/static/SETTINGS"
 import GizmoState from "@engine-tools/gizmo/util/GizmoState"
 import {Inject} from "@lib/Injection";
 import VisualsStore from "@lib/stores/VisualsStore";
@@ -29,8 +28,8 @@ export default class EngineToolsService {
     @Inject(SettingsStore)
     static settingsStore: SettingsStore
 
-    @Inject(EntitySelectionStore)
-    static entitySelectionStore: EntitySelectionStore
+    @Inject(SelectionStore)
+    static entitySelectionStore: SelectionStore
 
     static initialize() {
         EngineToolsService.entitySelectionStore
@@ -44,7 +43,7 @@ export default class EngineToolsService {
     }
 
     static #updateSelection() {
-        EngineTools.updateSelectionData(EntitySelectionStore.getEntitiesSelected())
+        EngineTools.updateSelectionData(SelectionStore.getEntitiesSelected())
     }
 
     static #updateEngineState() {
@@ -110,7 +109,7 @@ export default class EngineToolsService {
     }
 
     static #updateEngineToolsState() {
-        const settings = EngineToolsService.settingsStore.getData() as typeof SETTINGS
+        const settings = EngineToolsService.settingsStore.getData()
         EngineToolsState.gridColor = settings.gridColor
         EngineToolsState.gridScale = settings.gridScale * 10
         EngineToolsState.gridThreshold = settings.gridThreshold

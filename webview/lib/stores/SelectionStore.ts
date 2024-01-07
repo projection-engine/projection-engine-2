@@ -1,11 +1,12 @@
 import AbstractStore from "./AbstractStore"
 import {Injectable} from "@lib/Injection";
 import ProjectionEngine from "@lib/ProjectionEngine";
+import SelectionStateDTO from "@lib/stores/state/SelectionStateDTO";
 
 @Injectable
-export default class EntitySelectionStore extends AbstractStore{
+export default class SelectionStore extends AbstractStore<SelectionStateDTO>{
 	constructor() {
-		super({lockedEntity: undefined, array: []})
+		super(new SelectionStateDTO())
 	}
 
 	static setEntitiesSelected(data:string[]|string)	 {
@@ -17,8 +18,8 @@ export default class EntitySelectionStore extends AbstractStore{
 	}
 
 	static getMainEntity() {
-		const lockedEntity = EntitySelectionStore.getLockedEntity()
-		const firstSelected = EntitySelectionStore.getEntitiesSelected()[0]
+		const lockedEntity = SelectionStore.getLockedEntity()
+		const firstSelected = SelectionStore.getEntitiesSelected()[0]
 		return firstSelected ? firstSelected : lockedEntity
 	}
 

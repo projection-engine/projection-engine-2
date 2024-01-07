@@ -1,5 +1,5 @@
 import ScriptsAPI from "@engine-core/lib/utils/ScriptsAPI"
-import EntitySelectionStore from "@lib/stores/EntitySelectionStore"
+import SelectionStore from "@lib/stores/SelectionStore"
 import LocalizationEN from "@enums/LocalizationEN"
 import Entity from "@engine-core/instances/Entity"
 import Engine from "@engine-core/Engine"
@@ -18,7 +18,7 @@ export default class EditorUtil {
     static async componentConstructor(entity, scriptID, autoUpdate = true) {
         await ScriptsAPI.linkScript(entity, scriptID)
         if (autoUpdate)
-            ProjectionEngine.EntitySelectionStore.updateStore({array: EntitySelectionStore.getEntitiesSelected()})
+            ProjectionEngine.EntitySelectionStore.updateStore({array: SelectionStore.getEntitiesSelected()})
         ProjectionEngine.ToastNotificationSystem.success(LocalizationEN.ADDED_COMPONENT)
     }
 
@@ -27,7 +27,7 @@ export default class EditorUtil {
         const focused = engineInstance.getData().focusedCamera
         const isCamera = cameraTarget instanceof Entity
         if (!focused || isCamera && cameraTarget.id !== focused) {
-            const current = isCamera ? cameraTarget : ProjectionEngine.Engine.entities.get(EntitySelectionStore.getMainEntity())
+            const current = isCamera ? cameraTarget : ProjectionEngine.Engine.entities.get(SelectionStore.getMainEntity())
             if (current && current.cameraComponent) {
                 ProjectionEngine.ExecutionService.cameraSerialization = ProjectionEngine.Engine.CameraAPI.serializeState()
                 CameraTracker.stopTracking()
@@ -120,7 +120,7 @@ export default class EditorUtil {
     }
 
     static snap(grid?: number) {
-        const selected = EntitySelectionStore.getEntitiesSelected()
+        const selected = SelectionStore.getEntitiesSelected()
         for (let i = 0; i < selected.length; i++) {
             const entity = QueryAPI.getEntityByID(selected[i])
             const currentGizmo = ProjectionEngine.SettingsStore.getData().gizmo

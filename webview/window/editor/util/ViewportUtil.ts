@@ -6,7 +6,7 @@ import QueryAPI from "@engine-core/lib/utils/QueryAPI"
 import VisibilityRenderer from "@engine-core/runtime/VisibilityRenderer"
 import EngineTools from "../../../engine/tools/EngineTools"
 import StaticFBO from "@engine-core/lib/StaticFBO";
-import EntitySelectionStore from "@lib/stores/EntitySelectionStore";
+import SelectionStore from "@lib/stores/SelectionStore";
 import ProjectionEngine from "@lib/ProjectionEngine";
 import {ViewType} from "../components/view/ViewDefinitions";
 
@@ -31,7 +31,7 @@ export default class ViewportUtil {
         const deltaY = Math.abs(mouseDelta.y - event.clientY)
         if (deltaX >= MAX_DELTA || deltaY >= MAX_DELTA)
             return
-        const selected = EntitySelectionStore.getEntitiesSelected()
+        const selected = SelectionStore.getEntitiesSelected()
         EngineTools.drawIconsToBuffer()
 
         const clickedEntity = PickingAPI.readEntityID(event.clientX, event.clientY, 1, StaticFBO.visibility.FBO)

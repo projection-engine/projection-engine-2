@@ -7,7 +7,7 @@
     import ModalInput from "../../../components/modal-input/ModalInput.svelte";
     import LocalizationEN from "@enums/LocalizationEN";
     import HierarchyUtil from "../../../util/HierarchyUtil";
-    import EntitySelectionStore from "@lib/stores/EntitySelectionStore";
+    import SelectionStore from "@lib/stores/SelectionStore";
     import ProjectionEngine from "@lib/ProjectionEngine";
 
     export let entity: Entity
@@ -54,7 +54,7 @@
         draggable.onMount({
             targetElement: ref,
             onDragStart: () => entity,
-            dragImage: _ => `<div style="display: flex; gap: 4px"><span style="font-size: .9rem;" data-svelteicon="-">view_in_ar</span> ${EntitySelectionStore.getEntitiesSelected().length > 1 ? EntitySelectionStore.getEntitiesSelected().length + " Entities" : entity.name}</div>`,
+            dragImage: _ => `<div style="display: flex; gap: 4px"><span style="font-size: .9rem;" data-svelteicon="-">view_in_ar</span> ${SelectionStore.getEntitiesSelected().length > 1 ? SelectionStore.getEntitiesSelected().length + " Entities" : entity.name}</div>`,
         })
     })
     onDestroy(() => {
@@ -71,7 +71,7 @@
             data-sveltelocked={isLocked ? "-" : ""}
             class="button-icon hierarchy-branch"
             style={`--button-color: ${entity.isCollection ? "rgb(" + entity.colorIdentifier + ")" : !isLocked ? "var(--folder-color-darker)" : "var(--folder-color)" }`}
-            on:click={() => EntitySelectionStore.setLockedEntity(entity.id)}
+            on:click={() => SelectionStore.setLockedEntity(entity.id)}
     >
         {#if entity.isCollection}
             <Icon styles="font-size: 1rem">inventory_2</Icon>

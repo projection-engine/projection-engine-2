@@ -1,13 +1,13 @@
 import AbstractStore from "./AbstractStore"
-import ENGINE from "../../window/editor/static/ENGINE";
 import {Injectable} from "@lib/Injection";
+import EngineStateDTO from "@lib/stores/state/EngineStateDTO";
 
 
 @Injectable
-export default class EngineStore extends AbstractStore{
-	constructor() {
-		super(ENGINE)
-	}
+export default class EngineStore extends AbstractStore<EngineStateDTO> {
+    constructor() {
+        super(new EngineStateDTO())
+    }
 }
 
 

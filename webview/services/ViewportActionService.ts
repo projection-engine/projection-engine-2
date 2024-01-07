@@ -4,7 +4,7 @@ import CameraAPI from "@engine-core/lib/utils/CameraAPI"
 import CameraTracker from "@engine-tools/utils/CameraTracker"
 import Engine from "@engine-core/Engine"
 import EngineStateService from "./EngineStateService"
-import EntitySelectionStore from "@lib/stores/EntitySelectionStore";
+import SelectionStore from "@lib/stores/SelectionStore";
 import {Injectable} from "@lib/Injection";
 import ProjectionEngine from "@lib/ProjectionEngine";
 
@@ -14,7 +14,7 @@ export default class ViewportActionService {
     toCopy = []
 
     copy(single?: boolean, target?: string) {
-        const selected = EntitySelectionStore.getEntitiesSelected()
+        const selected = SelectionStore.getEntitiesSelected()
         if (target)
             this.toCopy = [target]
         else if (single && selected[0])
@@ -24,7 +24,7 @@ export default class ViewportActionService {
     }
 
     focus() {
-        const entity = QueryAPI.getEntityByID(EntitySelectionStore.getMainEntity())
+        const entity = QueryAPI.getEntityByID(SelectionStore.getMainEntity())
         if (!entity)
             return
 
@@ -38,13 +38,13 @@ export default class ViewportActionService {
     }
 
     deleteSelected() {
-        EngineStateService.removeBlock(EntitySelectionStore.getEntitiesSelected())
+        EngineStateService.removeBlock(SelectionStore.getEntitiesSelected())
     }
 
     invertSelection() {
         const newArr = []
         const notValid = {}
-        const oldSelected = EntitySelectionStore.getEntitiesSelected()
+        const oldSelected = SelectionStore.getEntitiesSelected()
         for (let i = 0; i < oldSelected.length; i++)
             notValid[oldSelected[i]] = true
         const entities = ProjectionEngine.Engine.entities.array
@@ -53,7 +53,7 @@ export default class ViewportActionService {
                 newArr.push(entities[i].id)
         }
 
-        EntitySelectionStore.setEntitiesSelected(newArr)
+        SelectionStore.setEntitiesSelected(newArr)
     }
 
     paste(parent?: string) {
@@ -80,19 +80,19 @@ export default class ViewportActionService {
     }
 
     group() {
-        const selected = EntitySelectionStore.getEntitiesSelected()
+        const selected = SelectionStore.getEntitiesSelected()
         this.toCopy = selected
         if (selected.length > 1)
             EngineStateService.linkMultiple(selected)
     }
 
     selectAll() {
-        EntitySelectionStore.setEntitiesSelected(Array.from(ProjectionEngine.Engine.entities.keys()))
+        SelectionStore.setEntitiesSelected(Array.from(ProjectionEngine.Engine.entities.keys()))
     }
 
     fixateActive() {
-        const selected = EntitySelectionStore.getEntitiesSelected()
+        const selected = SelectionStore.getEntitiesSelected()
         if (selected[0])
-            EntitySelectionStore.setLockedEntity(selected[0])
+            SelectionStore.setLockedEntity(selected[0])
     }
 }

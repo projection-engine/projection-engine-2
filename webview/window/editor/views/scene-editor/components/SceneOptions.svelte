@@ -25,7 +25,7 @@
         ProjectionEngine.SettingsStore.addListener(COMPONENT_ID, data => {
     		spawnOnOrigin = data.spawnOnOrigin
     		spawnDistanceFromCamera = data.spawnDistanceFromCamera
-    		options = SceneEditorUtil.getSceneOptions(data)
+    		options = SceneEditorUtil.getSceneOptions()
     		shadingModel = data.shadingModel
     		shadingModelLabel = LocalizationEN.SHADING + LocalizationEN[SceneEditorUtil.getLabel(data.shadingModel)]
     	})

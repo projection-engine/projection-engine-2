@@ -1,7 +1,7 @@
 import Engine from "@engine-core/Engine"
 import Entity from "@engine-core/instances/Entity"
 import HierarchyToRenderElement from "../window/editor/views/hierarchy/template/ToRenderElement"
-import EntitySelectionStore from "@lib/stores/EntitySelectionStore";
+import SelectionStore from "@lib/stores/SelectionStore";
 import {Injectable} from "@lib/Injection";
 import ProjectionEngine from "@lib/ProjectionEngine";
 
@@ -41,7 +41,7 @@ export default class EntityHierarchyService {
     }
 
     openTree() {
-        const node = ProjectionEngine.Engine.entities.get(EntitySelectionStore.getMainEntity())
+        const node = ProjectionEngine.Engine.entities.get(SelectionStore.getMainEntity())
         if (!node)
             return {}
         const open = {}

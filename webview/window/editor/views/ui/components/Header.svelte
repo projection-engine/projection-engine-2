@@ -8,7 +8,7 @@
     import EngineStateService from "@services/EngineStateService"
     import EntityAPI from "@engine-core/lib/utils/EntityAPI"
     import LocalizationEN from "@enums/LocalizationEN"
-    import EntitySelectionStore from "@lib/stores/EntitySelectionStore";
+    import SelectionStore from "@lib/stores/SelectionStore";
     import type Entity from "@engine-core/instances/Entity";
     import ProjectionEngine from "@lib/ProjectionEngine";
 
@@ -25,7 +25,7 @@
     		if (e.uiComponent)
     			m.push(e.id)
     	}
-    	EntitySelectionStore.setEntitiesSelected(m)
+    	SelectionStore.setEntitiesSelected(m)
     }
 
     function addUI() {

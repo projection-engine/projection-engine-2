@@ -4,7 +4,7 @@ import ViewportUtil from "../../../util/ViewportUtil"
 import GizmoState from "../../../../../engine/tools/gizmo/util/GizmoState"
 import GizmoMouseUtil from "../../../../../engine/tools/gizmo/util/GizmoMouseUtil"
 import EngineTools from "../../../../../engine/tools/EngineTools";
-import EntitySelectionStore from "@lib/stores/EntitySelectionStore";
+import SelectionStore from "@lib/stores/SelectionStore";
 import ProjectionEngine from "@lib/ProjectionEngine";
 
 
@@ -48,7 +48,7 @@ export default class ViewportInteractionService {
                     GizmoState.wasOnGizmo = false
                     return
                 }
-                EntitySelectionStore.setEntitiesSelected(data)
+                SelectionStore.setEntitiesSelected(data)
             })
     }
 }

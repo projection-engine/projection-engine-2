@@ -1,7 +1,7 @@
 import FileSystemUtil from "@lib/FileSystemUtil"
 import Engine from "@engine-core/Engine"
 import EditorFSUtil from "../window/editor/util/EditorFSUtil"
-import EntitySelectionStore from "@lib/stores/EntitySelectionStore"
+import SelectionStore from "@lib/stores/SelectionStore"
 import CameraAPI from "@engine-core/lib/utils/CameraAPI"
 import CameraTracker from "@engine-tools/utils/CameraTracker"
 import serializeStructure from "@engine-core/utils/serialize-structure"
@@ -45,7 +45,7 @@ export default class LevelService {
         ProjectionEngine.EntitySelectionStore.updateStore({
             array: []
         })
-        EntitySelectionStore.setLockedEntity(undefined)
+        SelectionStore.setLockedEntity(undefined)
 
         await ProjectionEngine.Engine.loadLevel(levelID, false)
         const entities = ProjectionEngine.Engine.entities.array
@@ -54,7 +54,7 @@ export default class LevelService {
             entity.setPickID(PickingAPI.getPickerId(i + AXIS.ZY + 1))
         }
         if (ProjectionEngine.Engine.loadedLevel)
-            EntitySelectionStore.setLockedEntity(ProjectionEngine.Engine.loadedLevel.id)
+            SelectionStore.setLockedEntity(ProjectionEngine.Engine.loadedLevel.id)
         ProjectionEngine.EntityHierarchyService.updateHierarchy()
     }
 

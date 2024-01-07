@@ -1,5 +1,5 @@
 <script>
-    import EntitySelectionStore from "@lib/stores/EntitySelectionStore"
+    import SelectionStore from "@lib/stores/SelectionStore"
     import Engine from "@engine-core/Engine"
 
     import {onDestroy, onMount} from "svelte"
@@ -30,7 +30,7 @@
     onMount(() => {
         ProjectionEngine.EntitySelectionStore.addListener(COMPONENT_ID, () => {
             const cache = []
-            const entitiesSelected = EntitySelectionStore.getEntitiesSelected()
+            const entitiesSelected = SelectionStore.getEntitiesSelected()
             for (let i = 0; i < entitiesSelected.length; i++) {
                 const e = entitiesSelected[i]
                 const c = ProjectionEngine.Engine.entities.get(e)
@@ -43,7 +43,7 @@
                 }
             }
             if (cache.length === 0) {
-                const fallback = ProjectionEngine.Engine.entities.get(EntitySelectionStore.getMainEntity())
+                const fallback = ProjectionEngine.Engine.entities.get(SelectionStore.getMainEntity())
                 if (fallback)
                     fallback.__originalQuat = undefined
                 fallback && cache.push(fallback)

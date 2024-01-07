@@ -1,19 +1,11 @@
 import AbstractStore from "./AbstractStore"
 import {Injectable} from "@lib/Injection";
-import SETTINGS from "../../window/editor/static/SETTINGS";
+import SettingsStateDTO from "@lib/stores/state/SettingsStateDTO";
 
 @Injectable
-export default class SettingsStore extends AbstractStore{
+export default class SettingsStore extends AbstractStore<SettingsStateDTO>{
 	constructor() {
-		super(SETTINGS)
-	}
-
-	updateStore(value) {
-		super.updateStore(value)
-	}
-
-	getData(): typeof SETTINGS {
-		return super.getData() as typeof SETTINGS
+		super(new SettingsStateDTO())
 	}
 }
 

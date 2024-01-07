@@ -3,7 +3,7 @@ import EntityFactoryService from "@services/EntityFactoryService"
 import QueryAPI from "@engine-core/lib/utils/QueryAPI"
 import getEntityCreationOptions from "./get-entity-creation-options"
 import ContextMenuOption from "@lib/context-menu/templates/ContextMenuOptions"
-import EntitySelectionStore from "@lib/stores/EntitySelectionStore";
+import SelectionStore from "@lib/stores/SelectionStore";
 
 
 export function getViewportOptionsForDropdown() {
@@ -52,7 +52,7 @@ export default function getViewportContext(forDropdown?: boolean): ContextMenuOp
 				{
 					label: "Pivot point to origin",
 					onClick: () => {
-						const selected = QueryAPI.getEntityByID(EntitySelectionStore.getEntitiesSelected()[0])
+						const selected = QueryAPI.getEntityByID(SelectionStore.getEntitiesSelected()[0])
 						if (selected) {
 							selected.pivotPoint[0] = 0
 							selected.pivotPoint[1] = 0
@@ -67,7 +67,7 @@ export default function getViewportContext(forDropdown?: boolean): ContextMenuOp
 				{
 					label: "Translate to screen",
 					onClick: () => {
-						const selected = EntitySelectionStore.getEntitiesSelected()
+						const selected = SelectionStore.getEntitiesSelected()
 						for (let i = 0; i < selected.length; i++)
 							EntityFactoryService.translateEntity(QueryAPI.getEntityByID(selected[i]))
 					}
@@ -75,7 +75,7 @@ export default function getViewportContext(forDropdown?: boolean): ContextMenuOp
 				{
 					label: "Apply transformation",
 					onClick: () => {
-						const comp = QueryAPI.getEntityByID(EntitySelectionStore.getMainEntity())
+						const comp = QueryAPI.getEntityByID(SelectionStore.getMainEntity())
 						comp.baseTransformationMatrix = comp.matrix
 
 						comp.translation[0] = 0

@@ -1,16 +1,11 @@
 import AbstractStore from "./AbstractStore"
 import {Injectable} from "@lib/Injection";
-import ProjectionEngine from "@lib/ProjectionEngine";
-import VISUAL_SETTINGS from "../../window/editor/static/VISUAL_SETTINGS";
+import VisualsStateDTO from "@lib/stores/state/VisualsStateDTO";
 
 @Injectable
-export default class VisualsStore extends AbstractStore{
+export default class VisualsStore extends AbstractStore<VisualsStateDTO>{
 	constructor() {
-		super(VISUAL_SETTINGS)
-	}
-
-	updateStore(value) {
-		super.updateStore(value)
+		super(new VisualsStateDTO)
 	}
 }
 

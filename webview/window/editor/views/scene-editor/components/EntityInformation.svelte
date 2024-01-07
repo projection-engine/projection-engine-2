@@ -5,7 +5,7 @@
 
     import GizmoSystem from "../../../../../engine/tools/gizmo/GizmoSystem"
     import LocalizationEN from "@enums/LocalizationEN"
-    import EntitySelectionStore from "@lib/stores/EntitySelectionStore"
+    import SelectionStore from "@lib/stores/SelectionStore"
     import GizmoState from "../../../../../engine/tools/gizmo/util/GizmoState"
     import SceneEditorUtil from "../../../util/SceneEditorUtil"
     import ProjectionEngine from "@lib/ProjectionEngine";
@@ -41,7 +41,7 @@
     		}
     		}
     	})
-        ProjectionEngine.EntitySelectionStore.addListener(COMPONENT_ID, () => selectedSize = EntitySelectionStore.getEntitiesSelected().length)
+        ProjectionEngine.EntitySelectionStore.addListener(COMPONENT_ID, () => selectedSize = SelectionStore.getEntitiesSelected().length)
         ProjectionEngine.SettingsStore.addListener(COMPONENT_ID, data => {
     		gizmo = data.gizmo
     		isValidPivot = gizmo === GIZMOS.TRANSLATION && selectedSize === 1

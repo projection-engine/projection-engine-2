@@ -1,50 +1,45 @@
-import SHADING_MODELS from "@engine-core/static/SHADING_MODELS"
-import GIZMOS from "@enums/Gizmos"
-import GizmoTransformationType from "@enums/GizmoTransformationType"
-import KEYS from "./KEYS"
-import {glMatrix} from "gl-matrix"
-import ViewTabDTO from "../components/view/ViewTabDTO";
+import IStateDTO from "@lib/stores/state/IStateDTO";
+import SHADING_MODELS from "@engine-core/static/SHADING_MODELS";
+import GIZMOS from "@enums/Gizmos";
+import GizmoTransformationType from "@enums/GizmoTransformationType";
+import {glMatrix} from "gl-matrix";
+import KEYS from "../../../window/editor/static/KEYS";
+import ViewTabDTO from "../../../window/editor/components/view/ViewTabDTO";
 import LocalizationEN from "@enums/LocalizationEN";
-import {ViewType} from "../components/view/ViewDefinitions";
+import {ViewType} from "../../../window/editor/components/view/ViewDefinitions";
 
-export default {
-    spawnOnOrigin: false,
-    maxDistanceIcon: 50,
-    cameraGizmoSize: 25,
-
-    showOutline: true,
-    showLines: true,
-    showIcons: true,
-    showGrid: true,
-    outlineWidth: .5,
-    outlineColor: [.5, .5, .5],
-    hideFooter: false,
-    projectCreationDate: (new Date()).toDateString(),
-
-    screenSpaceMovement: false,
-    gridOpacity: 1,
-    gridColor: .3,
-    gridScale: 1,
-    gridThreshold: 100,
-    iconScale: 1,
-    spawnDistanceFromCamera: 10,
-    shadingModel: SHADING_MODELS.DETAIL,
-    gizmo: GIZMOS.TRANSLATION,
-    transformationType: GizmoTransformationType.GLOBAL,
-    backgroundColor: [.2, .2, .2],
-    fov: glMatrix.toRadian(60),
-    zNear: .1,
-    zFar: 5000,
-
-    viewportHotkeys: {
+export default class SettingsStateDTO extends IStateDTO {
+    spawnOnOrigin = false
+    maxDistanceIcon = 50
+    cameraGizmoSize = 25
+    showOutline = true
+    showLines = true
+    showIcons = true
+    showGrid = true
+    outlineWidth = .5
+    outlineColor = [.5, .5, .5]
+    hideFooter = false
+    screenSpaceMovement = false
+    gridOpacity = 1
+    gridColor = .3
+    gridScale = 1
+    gridThreshold = 100
+    iconScale = 1
+    spawnDistanceFromCamera = 10
+    shadingModel = SHADING_MODELS.DETAIL
+    gizmo = GIZMOS.TRANSLATION
+    transformationType = GizmoTransformationType.GLOBAL
+    backgroundColor = [.2, .2, .2]
+    fov = glMatrix.toRadian(60)
+    zNear = .1
+    zFar = 5000
+    viewportHotkeys = {
         FORWARD_MOVEMENT_CAMERA: [KEYS.KeyW],
         SHOW_SELECTED: [KEYS.ControlLeft, KEYS.KeyH],
         BACKWARD_MOVEMENT_CAMERA: [KEYS.KeyS],
         LEFT_MOVEMENT_CAMERA: [KEYS.KeyA],
         RIGHT_MOVEMENT_CAMERA: [KEYS.KeyD],
         FASTER_MOVEMENT_CAMERA: [KEYS.ShiftLeft],
-
-
         HIDE_ACTIVE: [KEYS.AltLeft, KEYS.KeyH],
         DUPLICATE: [KEYS.ShiftLeft, KEYS.KeyD],
         SAVE: [KEYS.ControlLeft, KEYS.KeyS],
@@ -53,7 +48,6 @@ export default {
         SELECT_NONE: [KEYS.AltLeft, KEYS.KeyA],
         TRANSLATION_GIZMO: [KEYS.KeyG],
         SELECT_HIERARCHY: [KEYS.KeyH],
-
         FOCUS: [KEYS.Home],
         SCALE_GIZMO: [KEYS.KeyM],
         ROTATION_GIZMO: [KEYS.KeyR],
@@ -64,24 +58,19 @@ export default {
         COPY: [KEYS.ControlLeft, KEYS.KeyC],
         DELETE: [KEYS.Delete],
         PASTE: [KEYS.ControlLeft, KEYS.KeyV],
-
-
         SNAP_TO_GRID: [KEYS.ControlLeft, KEYS.KeyG],
         SNAP_TO_ORIGIN: [KEYS.ControlLeft, KEYS.KeyO],
         ROUND_TRANSFORMATION: [KEYS.ControlLeft, KEYS.KeyI],
-
         CYCLE_GIZMOS: [KEYS.Space],
         SWITCH_TRANSFORMATION: [KEYS.ControlLeft, KEYS.KeyT],
-
-
         CAMERA_TOP: [KEYS.Digit1],
         CAMERA_BOTTOM: [KEYS.Digit2],
         CAMERA_LEFT: [KEYS.Digit3],
         CAMERA_RIGHT: [KEYS.Digit4],
         CAMERA_FRONT: [KEYS.Digit5],
         FOCUS_ON_CAMERA: [KEYS.Digit0]
-    },
-    contentBrowserHotkeys: {
+    }
+    contentBrowserHotkeys = {
         BACK: [KEYS.AltLeft, KEYS.ArrowLeft],
         FORWARD: [KEYS.AltLeft, KEYS.ArrowRight],
         SELECT_ALL: [KEYS.KeyA],
@@ -93,8 +82,8 @@ export default {
         DELETE: [KEYS.Delete],
         CUT: [KEYS.ControlLeft, KEYS.KeyX],
         PASTE: [KEYS.ControlLeft, KEYS.KeyV]
-    },
-    shaderEditorHotkeys: {
+    }
+    shaderEditorHotkeys = {
         SELECT_ALL: [KEYS.KeyA],
         CREATE_COMMENT: [KEYS.KeyG],
         UNDO: [KEYS.ControlLeft, KEYS.KeyZ],
@@ -104,11 +93,8 @@ export default {
         DELETE: [KEYS.Delete],
         PASTE: [KEYS.ControlLeft, KEYS.KeyV],
         FOCUS: [KEYS.Home]
-    },
-
-    camera: {
-
-        // PROPERTIES
+    }
+    camera = {
         fov: 90,
         dynamicAspectRatio: true,
         aspectRatio: 1,
@@ -139,24 +125,20 @@ export default {
         enabledDOF: false,
         mbVelocityScale: 1,
         mbSamples: 50,
-
         screenSpaceMovementSpeed: 1,
         cameraTranslation: [0, 0, 0],
         cameraRotation: [0, 0, 0, 1],
         movementSpeed: 1,
         smoothing: 1,
         turnSpeed: .25,
-    },
-
-    gizmoGrid: {
+    }
+    gizmoGrid = {
         rotationGizmo: 1,
         translationGizmo: 1,
         scaleGizmo: 1,
         sensitivity: 1
-    },
-
-    background: true,
-    views: [new ViewTabDTO(LocalizationEN.SCENE, [ViewType.FILES], [], ViewType.EDITOR, [ViewType.HIERARCHY, ViewType.INSPECTOR])],
-    currentView: 0,
-    INITIALIZED: false
+    }
+    background = true
+    views = [new ViewTabDTO(LocalizationEN.SCENE, [ViewType.FILES], [], ViewType.EDITOR, [ViewType.HIERARCHY, ViewType.INSPECTOR])]
+    currentView = 0
 }
