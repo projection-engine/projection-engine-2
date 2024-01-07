@@ -11,5 +11,9 @@ export default class SettingsStore extends AbstractStore{
 	updateStore(value) {
 		super.updateStore(value)
 	}
+
+	getData(): typeof SETTINGS {
+		return super.getData() as typeof SETTINGS
+	}
 }
 

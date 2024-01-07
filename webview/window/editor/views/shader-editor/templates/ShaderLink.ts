@@ -1,6 +1,6 @@
 import type ShaderNode from "./ShaderNode"
 import type Canvas from "../libs/Canvas"
-import ToasterService from "../../../../services/ToasterService"
+import ToasterService from "@services/ToasterService"
 
 import {Input} from "../static/Input"
 import {Output} from "../static/Output"

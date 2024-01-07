@@ -1,20 +1,18 @@
 import FileSystemUtil from "@lib/FileSystemUtil"
 import Engine from "@engine-core/Engine"
-import EditorFSUtil from "../editor/util/EditorFSUtil"
+import EditorFSUtil from "../window/editor/util/EditorFSUtil"
 import EntitySelectionStore from "@lib/stores/EntitySelectionStore"
 import CameraAPI from "@engine-core/lib/utils/CameraAPI"
-import CameraTracker from "../../engine/tools/utils/CameraTracker"
+import CameraTracker from "@engine-tools/utils/CameraTracker"
 import serializeStructure from "@engine-core/utils/serialize-structure"
 import QueryAPI from "@engine-core/lib/utils/QueryAPI"
 import PickingAPI from "@engine-core/lib/utils/PickingAPI"
-import AXIS from "../../engine/tools/static/AXIS"
+import AXIS from "@engine-tools/static/AXIS"
 import LocalizationEN from "@enums/LocalizationEN"
 import FileTypes from "@enums/FileTypes"
-import EditorUtil from "../editor/util/EditorUtil"
-import TabsStoreUtil from "../editor/util/TabsStoreUtil"
+import EditorUtil from "../window/editor/util/EditorUtil"
 import {Inject, Injectable} from "@lib/Injection";
 import VisualsStore from "@lib/stores/VisualsStore";
-import TabsStore from "@lib/stores/TabsStore";
 import ProjectionEngine from "@lib/ProjectionEngine";
 
 
@@ -27,9 +25,6 @@ export default class LevelService {
 
     @Inject(Engine)
     static engine: Engine
-
-    @Inject(TabsStore)
-    static tabsStore: TabsStore
 
     getLevelToLoad() {
         const old = this.#levelToLoad
@@ -73,20 +68,11 @@ export default class LevelService {
         try {
             const metadata = ProjectionEngine.EngineStore.getData().meta
             const settings = {...ProjectionEngine.SettingsStore.getData()}
-            const tabIndexViewport = TabsStoreUtil.getCurrentTabByCurrentView("viewport")
-            const viewMetadata = <MutableObject | undefined>settings.views[settings.currentView].viewport[tabIndexViewport]
-            if (viewMetadata !== undefined) {
-                viewMetadata.cameraMetadata = ProjectionEngine.Engine.CameraAPI.serializeState()
-                viewMetadata.cameraMetadata.prevX = CameraTracker.xRotation
-                viewMetadata.cameraMetadata.prevY = CameraTracker.yRotation
-            }
-
             await FileSystemUtil.writeFile(
                 FileSystemUtil.path + FileSystemUtil.sep + FileTypes.PROJECT,
                 JSON.stringify({
                     ...metadata,
                     settings,
-                    layout: LevelService.tabsStore.getData(),
                     visualSettings: LevelService.visualsStore.getData(),
                     level: LevelService.engine.loadedLevel?.id
                 }), true)

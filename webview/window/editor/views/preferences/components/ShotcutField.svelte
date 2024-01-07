@@ -1,8 +1,8 @@
 <script>
 
-    import SETTINGS from "../../editor/static/SETTINGS"
+    import SETTINGS from "../../../static/SETTINGS"
 
-    import KEYS from "../../editor/static/KEYS.ts"
+    import KEYS from "../../../static/KEYS.ts"
     import ToolTip from "@lib/components/tooltip/ToolTip.svelte"
     import Icon from "@lib/components/icon/Icon.svelte"
     import LocalizationEN from "@enums/LocalizationEN"

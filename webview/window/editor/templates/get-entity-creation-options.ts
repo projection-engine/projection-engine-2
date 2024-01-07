@@ -1,4 +1,4 @@
-import EntityFactoryService from "../../services/EntityFactoryService"
+import EntityFactoryService from "@services/EntityFactoryService"
 
 import LIGHT_TYPES from "@engine-core/static/LIGHT_TYPES"
 import EmbeddedMeshes from "@engine-core/static/EmbeddedMeshes"

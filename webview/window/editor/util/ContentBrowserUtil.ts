@@ -1,8 +1,7 @@
 import SELECTION_TYPES from "../views/content-browser/static/SELECTION_TYPES"
 import FileTypes from "@enums/FileTypes"
-import EngineResourceLoaderService from "../../services/EngineResourceLoaderService"
+import EngineResourceLoaderService from "@services/EngineResourceLoaderService"
 import ShaderEditorTools from "../views/shader-editor/libs/ShaderEditorTools"
-import VIEWS from "../components/view/static/VIEWS"
 import EditorFSUtil from "./EditorFSUtil"
 import {SORTS} from "../views/content-browser/static/SORT_INFO"
 import COMPONENT_TEMPLATE from "@engine-core/static/templates/COMPONENT_TEMPLATE"
@@ -84,10 +83,6 @@ export default class ContentBrowserUtil {
                     break
                 case FileTypes.LEVEL:
                     ProjectionEngine.LevelService.loadLevel(data.registryID).catch(console.error)
-                    break
-                case FileTypes.MATERIAL:
-                    ShaderEditorTools.toOpenFile = data
-                    EditorUtil.openBottomView(VIEWS.SHADER_EDITOR)
                     break
             }
         } else {

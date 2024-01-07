@@ -3,7 +3,7 @@
 
     import Selector from "../../../components/selector/Selector.svelte";
     import Checkbox from "@lib/components/checkbox/Checkbox.svelte";
-    import EntityFactoryService from "../../../../services/EntityFactoryService";
+    import EntityFactoryService from "@services/EntityFactoryService";
 
     import Input from "@lib/components/input/Input.svelte";
     import ColorPicker from "@lib/components/color-picker/ColorPicker.svelte";

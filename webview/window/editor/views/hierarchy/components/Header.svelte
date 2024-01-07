@@ -1,12 +1,12 @@
 <script>
-    import ViewHeader from "../../../components/view/components/ViewHeader.svelte"
+    import ViewHeader from "../../../components/view/ViewHeader.svelte"
     import Dropdown from "@lib/components/dropdown/Dropdown.svelte"
     import Icon from "@lib/components/icon/Icon.svelte"
     import ToolTip from "@lib/components/tooltip/ToolTip.svelte"
     import Input from "@lib/components/input/Input.svelte"
     import getDropdownHeaderStyles from "@lib/components/dropdown/utils/get-dropdown-header-styles"
     import NATIVE_COMPONENTS from "../../inspector/static/NATIVE_COMPONENTS"
-    import EntityFactoryService from "../../../../services/EntityFactoryService"
+    import EntityFactoryService from "@services/EntityFactoryService"
     import LocalizationEN from "@enums/LocalizationEN"
     import EmptyIcon from "@lib/components/icon/EmptyIcon.svelte"
     import ProjectionEngine from "@lib/ProjectionEngine";

@@ -1,4 +1,4 @@
-import PREFERENCES from "../../../../preferences/static/PREFERENCES"
+import PREFERENCES from "../../preferences/static/PREFERENCES"
 import LocalizationEN from "@enums/LocalizationEN"
 
 export default [

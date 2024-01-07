@@ -1,7 +1,7 @@
 import QueryAPI from "@engine-core/lib/utils/QueryAPI"
 import {vec3, vec4} from "gl-matrix"
 import CameraAPI from "@engine-core/lib/utils/CameraAPI"
-import CameraTracker from "../../engine/tools/utils/CameraTracker"
+import CameraTracker from "@engine-tools/utils/CameraTracker"
 import Engine from "@engine-core/Engine"
 import EngineStateService from "./EngineStateService"
 import EntitySelectionStore from "@lib/stores/EntitySelectionStore";

@@ -1,6 +1,6 @@
 import EngineTools from "../../EngineTools"
 import StaticEditorMeshes from "../../utils/StaticEditorMeshes"
-import EngineStateService from "../../../../window/services/EngineStateService"
+import EngineStateService from "@services/EngineStateService"
 import {vec3} from "gl-matrix"
 import GizmoUtil from "../util/GizmoUtil"
 import GizmoState from "../util/GizmoState"

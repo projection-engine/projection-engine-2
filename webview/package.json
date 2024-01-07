@@ -13,16 +13,12 @@
     "@sveltejs/svelte-virtual-list": "3.0.1",
     "atob": "2.1.2",
     "gl-matrix": "3.4.3",
-    "hotkeys-js": "3.10.1",
-    "image-size": "1.0.2",
-    "sharp": "0.32.4",
-    "sortablejs": "1.15.0"
+    "hotkeys-js": "3.10.1"
   },
   "devDependencies": {
     "@tsconfig/svelte": "5.0.0",
     "@types/node": "20.4.5",
     "@types/offscreencanvas": "2019.7.0",
-    "@types/sortablejs": "1.15.1",
     "@types/webgl2": "0.0.7",
     "esbuild": "0.18.17",
     "esbuild-plugin-copy": "2.1.1",

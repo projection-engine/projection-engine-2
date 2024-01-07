@@ -1,7 +1,7 @@
 <script lang="ts">
     import {onDestroy, onMount} from "svelte"
     import {InjectVar} from "@lib/Injection";
-    import ToolTipService from "../../../window/services/ToolTipService";
+    import ToolTipService from "@services/ToolTipService";
 
     let open = false
     export let content = ""

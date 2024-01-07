@@ -7,10 +7,10 @@
     import Icon from "@lib/components/icon/Icon.svelte"
     import ToolTip from "@lib/components/tooltip/ToolTip.svelte"
     import CameraPreferences from "./components/CameraPreferences.svelte"
-    import ContentWrapper from "../../../preferences/components/content/ContentWrapper.svelte"
     import InspectorUtil from "../../util/InspectorUtil"
     import INSPECTOR_TABS from "./static/INSPECTOR_TABS"
     import ProjectionEngine from "@lib/ProjectionEngine";
+    import ContentWrapper from "../preferences/components/content/ContentWrapper.svelte";
 
     const COMPONENT_ID = crypto.randomUUID()
     let selectedEntity

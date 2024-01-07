@@ -1,5 +1,5 @@
 import ENVIRONMENT from "@engine-core/static/ENVIRONMENT"
-import CameraTracker from "../../engine/tools/utils/CameraTracker"
+import CameraTracker from "@engine-tools/utils/CameraTracker"
 import UIAPI from "@engine-core/lib/rendering/UIAPI"
 import Engine from "@engine-core/Engine"
 import CameraAPI from "@engine-core/lib/utils/CameraAPI"

@@ -1,6 +1,6 @@
 import Component from "@engine-core/instances/components/Component"
 import LocalizationEN from "@enums/LocalizationEN"
-import EngineToolsState from "../../../engine/tools/EngineToolsState"
+import EngineToolsState from "@engine-tools/EngineToolsState"
 
 export default [
 	{label: LocalizationEN.GLOBAL, type: "global", icon: "public"},

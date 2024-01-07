@@ -1,6 +1,6 @@
 <script>
 
-    import ViewHeader from "../../components/view/components/ViewHeader.svelte"
+    import ViewHeader from "../../components/view/ViewHeader.svelte"
     import MetricsController from "@engine-core/lib/utils/MetricsController"
     import Icon from "@lib/components/icon/Icon.svelte"
     import ToolTip from "@lib/components/tooltip/ToolTip.svelte"

@@ -6,7 +6,7 @@
     import GPUAPI from "@engine-core/lib/rendering/GPUAPI"
     import MaterialUniforms from "../../../../components/MaterialUniformsForm.svelte"
     import Icon from "@lib/components/icon/Icon.svelte"
-    import ToasterService from "../../../../../services/ToasterService"
+    import ToasterService from "@services/ToasterService"
     import LocalizationEN from "@enums/LocalizationEN"
     import InspectorUtil from "../../../../util/InspectorUtil"
     import ProjectionEngine from "@lib/ProjectionEngine";

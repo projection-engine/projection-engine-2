@@ -8,7 +8,7 @@
     import Icon from "@lib/components/icon/Icon.svelte"
     import SveltePortal from "@lib/SveltePortal"
     import LocalizationEN from "@enums/LocalizationEN"
-    import ViewHeader from "../../components/view/components/ViewHeader.svelte"
+    import ViewHeader from "../../components/view/ViewHeader.svelte"
     import ProjectionEngine from "@lib/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()

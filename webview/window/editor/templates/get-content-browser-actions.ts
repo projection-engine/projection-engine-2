@@ -1,6 +1,6 @@
 import SELECTION_TYPES from "../views/content-browser/static/SELECTION_TYPES"
 import EditorFSUtil from "../util/EditorFSUtil"
-import ToasterService from "../../services/ToasterService"
+import ToasterService from "@services/ToasterService"
 import LocalizationEN from "@enums/LocalizationEN"
 import ContentBrowserUtil from "../util/ContentBrowserUtil"
 import EditorUtil from "../util/EditorUtil"
