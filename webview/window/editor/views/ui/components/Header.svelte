@@ -5,7 +5,7 @@
     import ViewHeader from "../../../components/view/components/ViewHeader.svelte"
     import Icon from "@lib/components/icon/Icon.svelte"
     import ToolTip from "@lib/components/tooltip/ToolTip.svelte"
-    import EngineStateService from "../../../../services/EngineStateService"
+    import EngineStateService from "@services/EngineStateService"
     import EntityAPI from "@engine-core/lib/utils/EntityAPI"
     import LocalizationEN from "@enums/LocalizationEN"
     import EntitySelectionStore from "@lib/stores/EntitySelectionStore";

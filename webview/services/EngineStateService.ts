@@ -1,5 +1,5 @@
 import Engine from "@engine-core/Engine"
-import AXIS from "../../engine/tools/static/AXIS"
+import AXIS from "@engine-tools/static/AXIS"
 import EntityAPI from "@engine-core/lib/utils/EntityAPI"
 import EntitySelectionStore from "@lib/stores/EntitySelectionStore"
 import Entity from "@engine-core/instances/Entity"
@@ -7,7 +7,7 @@ import PickingAPI from "@engine-core/lib/utils/PickingAPI"
 
 import QueryAPI from "@engine-core/lib/utils/QueryAPI"
 import LocalizationEN from "@enums/LocalizationEN"
-import GizmoUtil from "../../engine/tools/gizmo/util/GizmoUtil"
+import GizmoUtil from "@engine-tools/gizmo/util/GizmoUtil"
 import ProjectionEngine from "@lib/ProjectionEngine";
 
 

@@ -6,7 +6,7 @@
     import ToolTip from "@lib/components/tooltip/ToolTip.svelte"
     import Engine from "@engine-core/Engine"
     import {onDestroy, onMount} from "svelte"
-    import EntityUpdateService from "../../../services/EntityUpdateService"
+    import EntityUpdateService from "@services/EntityUpdateService"
     import LocalizationEN from "@enums/LocalizationEN"
     import SettingsStore from "@lib/stores/SettingsStore"
     import ProjectionEngine from "@lib/ProjectionEngine";

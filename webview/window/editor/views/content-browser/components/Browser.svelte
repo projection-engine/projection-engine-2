@@ -9,7 +9,7 @@
     import ITEM_TYPES from "../static/ITEM_TYPES"
     import BrowserHeader from "./BrowserHeader.svelte"
     import Icon from "@lib/components/icon/Icon.svelte"
-    import ContextMenuService from "../../../../services/ContextMenuService"
+    import ContextMenuService from "@services/ContextMenuService"
     import LocalizationEN from "@enums/LocalizationEN"
     import ContentBrowserUtil from "../../../util/ContentBrowserUtil"
     import ContentBrowserStore from "@lib/stores/ContentBrowserStore"

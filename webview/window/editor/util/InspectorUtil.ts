@@ -1,6 +1,6 @@
 import LocalizationEN from "@enums/LocalizationEN"
 import COMPONENTS from "@engine-core/static/COMPONENTS"
-import EngineResourceLoaderService from "../../services/EngineResourceLoaderService"
+import EngineResourceLoaderService from "@services/EngineResourceLoaderService"
 import FileSystemAPI from "@engine-core/lib/utils/FileSystemAPI"
 import EntitySelectionStore from "@lib/stores/EntitySelectionStore"
 import LightComponent from "@engine-core/instances/components/LightComponent"

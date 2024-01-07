@@ -1,27 +1,18 @@
 <script>
 
-    import EngineStore from "@lib/stores/EngineStore"
     import {onDestroy, onMount} from "svelte"
     import VIEWPORT_TABS from "../../static/VIEWPORT_TABS.ts"
     import HotKeysController from "@lib/HotKeysController"
     import getViewportHotkeys from "../../templates/get-viewport-hotkeys"
-    import Tabs from "../tabs/Tabs.svelte"
-    import VIEWS from "./static/VIEWS"
     import View from "./components/View.svelte"
-    import TabsStore from "@lib/stores/TabsStore"
     import GPU from "@engine-core/GPU"
     import ViewportUtil from "../../util/ViewportUtil"
     import ViewsUtil from "../../util/ViewsUtil"
     import TabsStoreUtil from "../../util/TabsStoreUtil"
     import LocalizationEN from "@enums/LocalizationEN";
-    import Canvas from "./Canvas.svelte";
     import ProjectionEngine from "@lib/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
-    const VIEW_TEMPLATES = [...Object.values(VIEWS), ...Object.values(VIEWPORT_TABS)].map(value => ({
-        name: LocalizationEN[value],
-        id: value
-    }))
 
     export let updateView
     export let viewTab
@@ -29,10 +20,7 @@
     export let currentViewIndex
 
     let currentTab = TabsStoreUtil.getCurrentTabByCurrentView("viewport")
-    let executingAnimation = false
     let ref
-    let focused = false
-
 
     const setViewportTab = (value, index = currentTab) => {
         const clone = [...viewTab]
@@ -63,7 +51,6 @@
         ProjectionEngine.EngineStore.addListener(COMPONENT_ID, data => {
             if (data.executingAnimation && viewTab[currentTab].type !== VIEWPORT_TABS.EDITOR)
                 setViewportTab(VIEWPORT_TABS.EDITOR)
-            executingAnimation = data.executingAnimation
         }, ["executingAnimation"])
         HotKeysController.bindAction(ref, Object.values(getViewportHotkeys()), "public", LocalizationEN.VIEWPORT)
         ref.addEventListener("mousedown", () => TabsStoreUtil.setFocusedTab(ref))
@@ -75,35 +62,9 @@
         HotKeysController.unbindAction(ref)
     })
 
-    const addNewTab = item => {
-        const clone = [...viewTab]
-        clone.push({color: [255, 255, 255], type: item?.id || VIEWS.INSPECTOR})
-        updateView(clone)
-    }
-
-    const removeMultipleTabs = () => {
-        const current = viewTab[currentTab]
-        TabsStoreUtil.updateByAttributes("viewport", undefined, 0)
-        updateView([current])
-    }
 </script>
 
 <div class="viewport" bind:this={ref}>
-    <div style="height: 30px">
-        <Tabs
-                addNewTab={addNewTab}
-                allowDeletion={false}
-                currentTab={currentTab}
-                disabled={executingAnimation}
-                focused={focused}
-                removeMultipleTabs={removeMultipleTabs}
-                removeTab={i => ViewportUtil.removeTab(i, viewTab,  updateView, currentTab, v => TabsStoreUtil.updateByAttributes("viewport", undefined, v))}
-                setCurrentView={v => TabsStoreUtil.updateByAttributes("viewport", undefined, v)}
-                tabs={viewTab}
-                templates={VIEW_TEMPLATES}
-                updateView={setViewportTab}
-        />
-    </div>
     <div class="wrapper">
         {#if ready}
             <View

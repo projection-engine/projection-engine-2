@@ -1,6 +1,6 @@
 <script>
     import ShotcutField from "./ShotcutField.svelte"
-    import SETTINGS from "../../editor/static/SETTINGS"
+    import SETTINGS from "../../../static/SETTINGS"
     import SettingsStore from "@lib/stores/SettingsStore"
     import PropertyHeader from "@lib/components/PropertyHeader.svelte"
     import LocalizationEN from "@enums/LocalizationEN"

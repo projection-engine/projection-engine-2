@@ -4,7 +4,7 @@
     import PrimitiveProcessor from "@engine-core/lib/math/PrimitiveProcessor"
     import FileSystemUtil from "@lib/FileSystemUtil"
     import GPUAPI from "@engine-core/lib/rendering/GPUAPI"
-    import ToasterService from "../../../../../services/ToasterService"
+    import ToasterService from "@services/ToasterService"
     import LocalizationEN from "@enums/LocalizationEN"
     import EditorFSUtil from "../../../../util/EditorFSUtil"
     import ProjectionEngine from "@lib/ProjectionEngine";

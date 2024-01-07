@@ -8,7 +8,7 @@
     import Canvas from "./libs/Canvas"
     import getShaderActions from "../../templates/get-shader-actions"
     import HotKeysController from "@lib/HotKeysController"
-    import ContextMenuService from "../../../services/ContextMenuService"
+    import ContextMenuService from "@services/ContextMenuService"
     import SideBar from "./components/SideBar.svelte"
     import NODE_MAP from "./static/NODE_MAP"
     import LocalizationEN from "@enums/LocalizationEN"

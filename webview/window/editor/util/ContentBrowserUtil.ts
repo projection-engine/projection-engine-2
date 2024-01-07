@@ -1,6 +1,6 @@
 import SELECTION_TYPES from "../views/content-browser/static/SELECTION_TYPES"
 import FileTypes from "@enums/FileTypes"
-import EngineResourceLoaderService from "../../services/EngineResourceLoaderService"
+import EngineResourceLoaderService from "@services/EngineResourceLoaderService"
 import ShaderEditorTools from "../views/shader-editor/libs/ShaderEditorTools"
 import VIEWS from "../components/view/static/VIEWS"
 import EditorFSUtil from "./EditorFSUtil"

@@ -4,7 +4,7 @@ import Canvas from "../views/shader-editor/libs/Canvas"
 import type ShaderNode from "../views/shader-editor/templates/ShaderNode"
 import ShaderComment from "../views/shader-editor/templates/ShaderComment"
 import ALL_NODES from "../views/shader-editor/static/ALL_NODES"
-import ContextMenuService from "../../services/ContextMenuService"
+import ContextMenuService from "@services/ContextMenuService"
 import NODE_MAP from "../views/shader-editor/static/NODE_MAP"
 import ShaderEditorUtil from "../util/ShaderEditorUtil"
 import ProjectionEngine from "@lib/ProjectionEngine";

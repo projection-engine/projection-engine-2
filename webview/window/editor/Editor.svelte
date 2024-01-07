@@ -9,7 +9,7 @@
     import {InjectVar} from "@lib/Injection";
     import Canvas from "./components/view/Canvas.svelte";
     import Engine from "@engine-core/Engine";
-    import ToasterService from "../services/ToasterService";
+    import ToasterService from "@services/ToasterService";
     import SettingsStore from "@lib/stores/SettingsStore";
     import EngineStore from "@lib/stores/EngineStore";
 
@@ -56,17 +56,6 @@
                 />
             {/if}
             <div class="content">
-                {#if ready}
-
-                    <ViewsContainer
-                            id="bottom"
-                            setTabs={(tabs) => EditorUtil.updateView("top", tabs)}
-                            tabs={view.top}
-                            {currentViewIndex}
-                            resizePosition={"bottom"}
-                            orientation={"horizontal"}
-                    />
-                {/if}
                 <Viewport
                         {ready}
                         {currentViewIndex}

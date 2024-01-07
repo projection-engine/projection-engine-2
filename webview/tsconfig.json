@@ -18,6 +18,7 @@
       "@enums/*":  ["./enums/*"],
       "@engine-tools/*": ["./engine/tools/*"],
       "@lib/*": ["./lib/*"],
+      "@services/*": ["./services/*"]
     }
   },
   "exclude": [

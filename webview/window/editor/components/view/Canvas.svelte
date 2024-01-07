@@ -5,7 +5,7 @@
     import EditorFSUtil from "../../util/EditorFSUtil";
     import EngineTools from "../../../../engine/tools/EngineTools";
     import UIAPI from "@engine-core/lib/rendering/UIAPI";
-    import EngineToolsService from "../../../services/EngineToolsService";
+    import EngineToolsService from "@services/EngineToolsService";
     import GPU from "@engine-core/GPU";
     import  {InjectVar} from "@lib/Injection";
     import ViewportInteractionService from "../../views/scene-editor/lib/ViewportInteractionService";

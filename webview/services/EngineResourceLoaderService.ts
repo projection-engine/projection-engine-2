@@ -1,5 +1,5 @@
 import FileSystemUtil from "@lib/FileSystemUtil"
-import EditorFSUtil from "../editor/util/EditorFSUtil"
+import EditorFSUtil from "../window/editor/util/EditorFSUtil"
 
 import COMPONENTS from "@engine-core/static/COMPONENTS"
 import PickingAPI from "@engine-core/lib/utils/PickingAPI"

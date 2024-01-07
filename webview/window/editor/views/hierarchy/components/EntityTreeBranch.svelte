@@ -1,7 +1,7 @@
 <script lang="ts">
     import TreeBranchContent from "./EntityTreeBranchContent.svelte";
 
-    import EntityFactoryService from "../../../../services/EntityFactoryService";
+    import EntityFactoryService from "@services/EntityFactoryService";
     import Icon from "@lib/components/icon/Icon.svelte";
     import ToolTip from "@lib/components/tooltip/ToolTip.svelte";
     import Entity from "@engine-core/instances/Entity";

@@ -6,7 +6,7 @@
     import ToolTip from "@lib/components/tooltip/ToolTip.svelte"
     import Dropdown from "@lib/components/dropdown/Dropdown.svelte"
     import Input from "@lib/components/input/Input.svelte"
-    import ToasterService from "../../../../services/ToasterService"
+    import ToasterService from "@services/ToasterService"
     import SortingOptions from "./SortingOptions.svelte"
     import LocalizationEN from "@enums/LocalizationEN"
     import FileTypes from "@enums/FileTypes"
