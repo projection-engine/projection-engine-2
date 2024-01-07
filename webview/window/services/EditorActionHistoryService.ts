@@ -6,7 +6,7 @@ import serializeStructure from "@engine-core/utils/serialize-structure"
 import EngineStateService from "./EngineStateService"
 import Entity from "@engine-core/instances/Entity"
 import LocalizationEN from "@enums/LocalizationEN"
-import ProjectionEngine from "@lib/ProjectionEngine";
+import ProjectionEngine, {Injectable} from "@lib/ProjectionEngine";
 
 interface Action {
     nameCache: Map<string, string>
@@ -14,6 +14,7 @@ interface Action {
     toAdd: string | undefined
 }
 
+@Injectable
 export default class EditorActionHistoryService {
     #cache = new UndoRedo<Action>()
 

@@ -1,3 +1,6 @@
+import {Injectable} from "@lib/ProjectionEngine";
+
+@Injectable
 export default class ToasterService {
     defaultDelay = 3500
     success = (...messages: string[]): void => null

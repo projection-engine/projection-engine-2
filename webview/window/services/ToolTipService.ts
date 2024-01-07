@@ -1,5 +1,7 @@
 import SveltePortal from "@lib/SveltePortal"
+import {Injectable} from "@lib/ProjectionEngine";
 
+@Injectable
 export default class ToolTipService  {
 	portal = new SveltePortal(999, false)
 	element

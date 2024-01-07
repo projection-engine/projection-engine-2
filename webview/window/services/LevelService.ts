@@ -12,9 +12,10 @@ import LocalizationEN from "@enums/LocalizationEN"
 import FileTypes from "@enums/FileTypes"
 import EditorUtil from "../editor/util/EditorUtil"
 import TabsStoreUtil from "../editor/util/TabsStoreUtil"
-import ProjectionEngine from "@lib/ProjectionEngine";
+import ProjectionEngine, {Injectable} from "@lib/ProjectionEngine";
 
 
+@Injectable
 export default class LevelService {
     #levelToLoad
 

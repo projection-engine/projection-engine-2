@@ -5,9 +5,10 @@ import CameraTracker from "../../engine/tools/utils/CameraTracker"
 import Engine from "@engine-core/Engine"
 import EngineStateService from "./EngineStateService"
 import EntitySelectionStore from "@lib/stores/EntitySelectionStore";
-import ProjectionEngine from "@lib/ProjectionEngine";
+import ProjectionEngine, {Injectable} from "@lib/ProjectionEngine";
 
 
+@Injectable
 export default class ViewportActionService {
     toCopy = []
 

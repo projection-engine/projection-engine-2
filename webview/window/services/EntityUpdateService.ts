@@ -1,5 +1,7 @@
 import Entity from "@engine-core/instances/Entity"
+import {Injectable} from "@lib/ProjectionEngine";
 
+@Injectable
 export default class EntityUpdateService {
     #listeners = new Map<string, { callback: Function, id: string }[]>()
 

@@ -5,7 +5,9 @@ import ElectronResources from "@lib/ElectronResources"
 import IPCRoutes from "@enums/IPCRoutes"
 import MappedOption from "@lib/context-menu/templates/MappedOption"
 import getOptionID from "@lib/context-menu/utils/get-option-id"
+import {Injectable} from "@lib/ProjectionEngine";
 
+@Injectable
 export default class ContextMenuService {
 	blockContext = false
 	currentX = -1
