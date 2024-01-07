@@ -92,10 +92,10 @@ export default class Engine extends IInjectable {
             this.CameraAPI.updateAspectRatio()
     }
 
-    async initialize(canvas: HTMLCanvasElement, mainResolution: {
+    async initialize(canvas: HTMLElement, mainResolution: {
         w: number,
         h: number
-    } | undefined, readAsset: Function, devAmbient: boolean, whenReady: VoidFunction) {
+    }, readAsset: Function, devAmbient: boolean) {
         this.CameraNotificationDecoder = new CameraNotificationDecoder();
         this.CameraAPI = new CameraAPI();
         this.RotationGizmo = new RotationGizmo();
@@ -104,7 +104,7 @@ export default class Engine extends IInjectable {
         this.DualAxisGizmo = new DualAxisGizmo();
         this.ScreenSpaceGizmo = new ScreenSpaceGizmo();
         this.#development = devAmbient
-        await this.initializeAsync(canvas, mainResolution, readAsset)
+        await this.initializeAsync(canvas as HTMLCanvasElement, mainResolution, readAsset)
         ConversionAPI.canvasBBox = GPU.canvas.getBoundingClientRect()
         const OBS = new ResizeObserver(() => {
             const bBox = GPU.canvas.getBoundingClientRect()
@@ -118,7 +118,6 @@ export default class Engine extends IInjectable {
         this.#isReady = true
         GPU.skylightProbe = new LightProbe(128)
         this.addSystem("start", Renderer.loop)
-        whenReady()
         this.start()
     }
 

@@ -1,5 +1,5 @@
 <script>
-    import ViewHeader from "../../../components/view/components/ViewHeader.svelte"
+    import ViewHeader from "../../../components/view/ViewHeader.svelte"
     import Dropdown from "@lib/components/dropdown/Dropdown.svelte"
     import Icon from "@lib/components/icon/Icon.svelte"
     import ToolTip from "@lib/components/tooltip/ToolTip.svelte"

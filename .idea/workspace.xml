@@ -19,48 +19,43 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-37] Dependency injection&#10;- Making all injectables injections">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-26] Tabs&#10;- Starting tabs rework&#10;- Moving systems and creating path alias">
+      <change afterPath="$PROJECT_DIR$/webview/window/editor/components/view/View.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webview/window/editor/components/view/ViewHeader.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/gizmo/transformation/TranslationGizmo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/gizmo/transformation/TranslationGizmo.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/Engine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/Engine.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/lib/ProjectionEngine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/ProjectionEngine.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/components/tooltip/ToolTip.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/components/tooltip/ToolTip.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/webview/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/stores/SettingsStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/SettingsStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/webview/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/services/LevelService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/LevelService.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/Editor.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/Editor.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/footer/Footer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/footer/Footer.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/tabs/Tabs.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/tabs/components/Tab.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/tabs/static/TabData.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/Canvas.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/Canvas.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/templates/get-content-browser-actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/templates/get-content-browser-actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/templates/get-entity-creation-options.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/templates/get-entity-creation-options.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/templates/get-shader-actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/templates/get-shader-actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/templates/get-viewport-context.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/templates/get-viewport-context.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/templates/get-viewport-hotkeys.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/templates/get-viewport-hotkeys.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/CentralView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/CentralView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/SideView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/SideView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/components/View.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/components/ViewGroup.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/components/ViewHeader.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/static/VIEWS.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/static/ViewMetadataContext.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/static/ViewTemplates.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/static/INITIAL_LAYOUT.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/static/SETTINGS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/static/SETTINGS.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/static/ViewTabItem.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/util/ContentBrowserUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/ContentBrowserUtil.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/HierarchyUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/HierarchyUtil.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/InspectorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/InspectorUtil.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/SceneEditorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/SceneEditorUtil.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/Browser.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/Browser.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/EditorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/EditorUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/TabsStoreUtil.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/ViewportUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/ViewportUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/ViewsUtil.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/console/ConsoleView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/console/ConsoleView.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/Header.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/Header.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/MaterialItem.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/MaterialItem.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/MeshItem.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/MeshItem.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/EntityTreeBranch.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/EntityTreeBranch.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/Header.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/Header.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/EntityInformation.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/EntityInformation.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/ShaderEditorView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/ShaderEditorView.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/ShaderLink.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/templates/ShaderLink.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/metrics/MetricsView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/metrics/MetricsView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/SceneEditorView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/SceneEditorView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/components/HeaderOptions.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/components/HeaderOptions.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/views/ui/components/Header.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/ui/components/Header.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/services/ContextMenuService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/ContextMenuService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/services/DragDropService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/DragDropService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/services/EngineResourceLoaderService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/EngineResourceLoaderService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/services/EngineStateService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/EngineStateService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/services/EngineToolsService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/EngineToolsService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/services/EntityFactoryService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/EntityFactoryService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/services/EntityHierarchyService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/EntityHierarchyService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/services/EntityNamingService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/EntityNamingService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/services/EntityUpdateService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/EntityUpdateService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/services/ExecutionService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/ExecutionService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/services/LevelService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/LevelService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/services/ToasterService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/ToasterService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/services/ToolTipService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/ToolTipService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/services/ViewportActionService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/ViewportActionService.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,49 +118,50 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;C/C++ File.main.cpp.executor&quot;: &quot;Run&quot;,
-    &quot;CMake Application.Projection.executor&quot;: &quot;Run&quot;,
-    &quot;CMake Application.projection.executor&quot;: &quot;Debug&quot;,
-    &quot;CMake Debug.projection.executor&quot;: &quot;Debug&quot;,
-    &quot;CMake Debug.projectioncmake.executor&quot;: &quot;Debug&quot;,
-    &quot;Catch.File-system test.executor&quot;: &quot;Debug&quot;,
-    &quot;Catch.JSON test.executor&quot;: &quot;Run&quot;,
-    &quot;Catch.Run all.executor&quot;: &quot;Run&quot;,
-    &quot;Catch.main_test.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;Shell Script.copy-files.executor&quot;: &quot;Run&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;37-projectionengine-registration-of-singletons&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/russi/WebstormProjects/projection-engine-2/test/core&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.bdev.executor&quot;: &quot;Run&quot;,
-    &quot;npm.dev-build.executor&quot;: &quot;Run&quot;,
-    &quot;npm.sdev.executor&quot;: &quot;Run&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.C/C++&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\russi\\WebstormProjects\\projection-engine-2\\webview\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "C/C++ File.main.cpp.executor": "Run",
+    "CMake Application.Projection.executor": "Run",
+    "CMake Application.projection.executor": "Debug",
+    "CMake Debug.projection.executor": "Debug",
+    "CMake Debug.projectioncmake.executor": "Debug",
+    "Catch.File-system test.executor": "Debug",
+    "Catch.JSON test.executor": "Run",
+    "Catch.Run all.executor": "Run",
+    "Catch.main_test.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "Shell Script.copy-files.executor": "Run",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "26-tabseditor-layout-rework",
+    "last_opened_file_path": "C:/Users/russi/WebstormProjects/projection-engine-2/test/core",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.bdev.executor": "Run",
+    "npm.dev-build.executor": "Run",
+    "npm.sdev.executor": "Run",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.C/C++",
+    "ts.external.directory.path": "C:\\Users\\russi\\WebstormProjects\\projection-engine-2\\webview\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\test\core" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\window\editor\components\view" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\window\editor\views" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\lib" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\window\shared" />
-      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\engine\core\lib" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -298,7 +294,8 @@
       <workItem from="1704569235593" duration="952000" />
       <workItem from="1704573755312" duration="4919000" />
       <workItem from="1704626399644" duration="4997000" />
-      <workItem from="1704638211069" duration="2000" />
+      <workItem from="1704638211069" duration="2252000" />
+      <workItem from="1704649399093" duration="6608000" />
     </task>
     <task id="LOCAL-00001" summary="[STD-1] Organizing project&#10;- removing unused C++ classes&#10;- Refactoring files&#10;- Renaming c++ namespaces and project &#10;- Moving future webview stuff">
       <option name="closed" value="true" />
@@ -548,7 +545,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704630162546</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="[STD-26] Tabs&#10;- Starting tabs rework&#10;- Moving systems and creating path alias">
+      <option name="closed" value="true" />
+      <created>1704638465778</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1704638465778</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -572,7 +577,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-7] Implementing issue&#10;- Refactoring IWindow and EditorWindow&#10;- Adding integration with WebViewWindow to IWindow" />
     <MESSAGE value="[STD-8] Webview build&#10;- Added build directory to be the same as C++&#10;- Improvements to adding listeners&#10;- Fixed async initialization of listeners&#10;- Added reload option to window" />
     <MESSAGE value="[STD-3] Virtual file system&#10;- Refactoring webview files&#10;- Refactoring directory names" />
     <MESSAGE value="[STD-3] Project window&#10;- Removing old ui&#10;- Creating libs for integration with c++ backend&#10;- Starting project window" />
@@ -597,7 +601,8 @@
     <MESSAGE value="[STD-37] Dependency injection&#10;- Making stores injectable&#10;- Creating inject method for variables" />
     <MESSAGE value="[STD-37] Dependency injection&#10;- Making services injectable" />
     <MESSAGE value="[STD-37] Dependency injection&#10;- Making all injectables injections" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-37] Dependency injection&#10;- Making all injectables injections" />
+    <MESSAGE value="[STD-26] Tabs&#10;- Starting tabs rework&#10;- Moving systems and creating path alias" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-26] Tabs&#10;- Starting tabs rework&#10;- Moving systems and creating path alias" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

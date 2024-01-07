@@ -1,46 +1,50 @@
-<script>
-    import ViewGroup from "./components/ViewGroup.svelte"
+<script lang="ts">
     import ResizableBar from "@lib/components/resizable/ResizableBar.svelte"
-    import ViewsUtil from "../../util/ViewsUtil"
     import {onDestroy, onMount} from "svelte"
-    import EngineStore from "@lib/stores/EngineStore"
     import ProjectionEngine from "@lib/ProjectionEngine";
+    import View from "./View.svelte";
+    import {ViewOrientation, ViewPlacement, ViewPlacementMetadata, ViewResizePosition} from "./ViewDefinitions";
 
     const COMPONENT_ID = crypto.randomUUID()
 
-    export let resizePosition
-    export let orientation
     export let tabs
-    export let setTabs
-    export let id
-    export let currentViewIndex
+    export let placement: ViewPlacement
 
-    let ref
+
+    let resizePosition: ViewResizePosition
+    let orientation: ViewOrientation
+
+    $: {
+        resizePosition = ViewPlacementMetadata[placement].resizePosition
+        orientation = ViewPlacementMetadata[placement].orientation
+    }
+
+    let ref: HTMLElement
     let reducedOpacity = false
-    $: orientationNameMin = orientation === "horizontal" ? "minHeight" : "minWidth"
-    $: orientationName = orientation === "horizontal" ? "height" : "width"
-    $: invOrientation = orientation === "horizontal" ? "width" : "height"
+    $: orientationNameMin = orientation === ViewOrientation.HORIZONTAL ? "minHeight" : "minWidth"
+    $: orientationName = orientation === ViewOrientation.HORIZONTAL ? "height" : "width"
+    $: invOrientation = orientation === ViewOrientation.HORIZONTAL ? "width" : "height"
 
     function onResizeStart(isWindowResize) {
-    	let obj = {}
-    	if (!isWindowResize || tabs.length === 0) {
-    		obj[orientationNameMin] = "unset"
-    		obj[orientationNameMin.replace("min", "max")] = tabs.length === 0 ? "0px" : "unset"
-    	} else if (tabs.length > 0) {
-    		obj[orientationNameMin] = "250px"
-    		obj[orientationNameMin.replace("min", "max")] = "250px"
-    	}
+        let obj = {}
+        if (!isWindowResize || tabs.length === 0) {
+            obj[orientationNameMin] = "unset"
+            obj[orientationNameMin.replace("min", "max")] = tabs.length === 0 ? "0px" : "unset"
+        } else if (tabs.length > 0) {
+            obj[orientationNameMin] = "250px"
+            obj[orientationNameMin.replace("min", "max")] = "250px"
+        }
 
-    	Object.assign(ref.style, obj)
+        Object.assign(ref.style, obj)
     }
 
     $: {
-    	if (tabs.length === 0 && ref) {
-    		const obj = {}
-    		obj[orientationNameMin] = "unset"
-    		obj[orientationNameMin.replace("min", "max")] = "0"
-    		Object.assign(ref.style, obj)
-    	}
+        if (tabs.length === 0 && ref) {
+            const obj = {}
+            obj[orientationNameMin] = "unset"
+            obj[orientationNameMin.replace("min", "max")] = "0"
+            Object.assign(ref.style, obj)
+        }
     }
 
     onMount(() => ProjectionEngine.EngineStore.addListener(COMPONENT_ID, data => reducedOpacity = data.executingAnimation, ["executingAnimation"]))
@@ -48,7 +52,7 @@
 </script>
 
 
-{#if resizePosition !== "bottom" && tabs.length > 0 && resizePosition !== "left"}
+{#if resizePosition !== ViewResizePosition.BOTTOM && tabs.length > 0 && resizePosition !== ViewResizePosition.LEFT}
     <ResizableBar
             type={orientationName}
             onResizeStart={onResizeStart}
@@ -59,39 +63,20 @@
         class="wrapper"
         data-svelteorientation={orientation}
         style={`
-            flex-direction: ${orientation === "horizontal" ? "row" : "column"};
+            flex-direction: ${orientation === ViewOrientation.HORIZONTAL ? "row" : "column"};
             opacity: ${reducedOpacity ? ".75" : "1"};
             ${orientation}: 250px;
             ${"min-" + orientation}: 35px;
         `}
 >
-    {#each tabs as views, groupIndex}
-        <ViewGroup
-                {currentViewIndex}
-                {views}
-                {groupIndex}
-                id={id}
-                let:view
-                let:index
-                switchView={(newView, index) =>  ViewsUtil.switchView(newView, groupIndex, tabs, index, setTabs)}
-                addNewTab={item => ViewsUtil.addTab(tabs, setTabs, groupIndex, item)}
-                removeTab={(indexToRemove, onBeforeDelete, currentTab) =>  ViewsUtil.removeTab(indexToRemove, tabs, groupIndex, setTabs, currentTab, onBeforeDelete)}
-                removeMultipleTabs={() => {
-                    const clone = [...tabs]
-                    clone.splice(groupIndex, 1)
-                    setTabs(clone)
-                }}
-        />
+    {#each tabs as view, groupIndex}
+        <View {view} index={groupIndex} {placement}/>
         {#if groupIndex < tabs.length - 1 && tabs.length > 1}
-            <ResizableBar
-                    type={invOrientation}
-                    resetWhen={tabs}
-                    onResizeEnd={(next, prev) => ViewsUtil.onResizeEndSplitter(next, prev, invOrientation, setTabs, tabs, groupIndex)}
-            />
+            <ResizableBar type={invOrientation}/>
         {/if}
     {/each}
 </div>
-{#if resizePosition !== "top" && (orientation === "vertical" && tabs.length > 1 || orientation === "horizontal" && tabs.length > 0) || resizePosition === "left" && tabs.length > 0}
+{#if resizePosition !== ViewResizePosition.TOP && (orientation === ViewOrientation.VERTICAL && tabs.length > 1 || orientation === ViewOrientation.HORIZONTAL && tabs.length > 0) || resizePosition === ViewResizePosition.LEFT && tabs.length > 0}
     <ResizableBar type={orientationName} onResizeStart={onResizeStart}/>
 {/if}
 

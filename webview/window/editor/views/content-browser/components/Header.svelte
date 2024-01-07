@@ -1,6 +1,6 @@
 <script lang="ts">
     import ITEM_TYPES from "../static/ITEM_TYPES"
-    import ViewHeader from "../../../components/view/components/ViewHeader.svelte"
+    import ViewHeader from "../../../components/view/ViewHeader.svelte"
     import getDropdownHeaderStyles from "@lib/components/dropdown/utils/get-dropdown-header-styles"
     import Icon from "@lib/components/icon/Icon.svelte"
     import ToolTip from "@lib/components/tooltip/ToolTip.svelte"

@@ -1,5 +1,3 @@
-import ViewTabItem from "../static/ViewTabItem"
-import VIEWPORT_TABS from "../static/VIEWPORT_TABS"
 import CameraTracker from "../../../engine/tools/utils/CameraTracker"
 import Engine from "@engine-core/Engine"
 import GPU from "@engine-core/GPU"
@@ -7,32 +5,22 @@ import PickingAPI from "@engine-core/lib/utils/PickingAPI"
 import QueryAPI from "@engine-core/lib/utils/QueryAPI"
 import VisibilityRenderer from "@engine-core/runtime/VisibilityRenderer"
 import EngineTools from "../../../engine/tools/EngineTools"
-import LocalizationEN from "@enums/LocalizationEN"
-import VIEWS from "../components/view/static/VIEWS"
 import StaticFBO from "@engine-core/lib/StaticFBO";
 import EntitySelectionStore from "@lib/stores/EntitySelectionStore";
 import ProjectionEngine from "@lib/ProjectionEngine";
+import {ViewType} from "../components/view/ViewDefinitions";
 
 export default class ViewportUtil {
-    static updateViewport(currentView: ViewTabItem) {
-        if (ProjectionEngine.EngineStore.getData().focusedCamera)
+    static updateViewport(currentView: ViewType) {
+        if (ProjectionEngine.EngineStore.getData().focusedCamera || !GPU.context)
             return
-        if (currentView.type === VIEWPORT_TABS.EDITOR) {
+        if (currentView === ViewType.EDITOR) {
             CameraTracker.startTracking()
             ProjectionEngine.Engine.start()
         } else {
             CameraTracker.stopTracking()
             ProjectionEngine.Engine.stop()
         }
-    }
-
-    static removeTab(i: number, tabs: MutableObject[], setTabs: GenericVoidFunctionWithP<MutableObject[]>, currentTab: number, cb: GenericVoidFunctionWithP<number>) {
-        const clone = [...tabs]
-        clone.splice(i, 1)
-        if (i === currentTab || i < currentTab)
-            cb(currentTab === 0 ? 0 : currentTab - 1)
-
-        setTabs(clone)
     }
 
     static onViewportClick(event, mouseDelta, settings, setContext) {
@@ -63,19 +51,6 @@ export default class ViewportUtil {
             setContext([entity.id])
 
         VisibilityRenderer.needsUpdate = true
-    }
-
-    static addNewTab() {
-        const views =ProjectionEngine. SettingsStore.getData().views
-        views.push({
-            name: LocalizationEN.NEW_TAB + views.length,
-            bottom: [[{color: [255, 255, 255], type: VIEWS.FILES}]],
-            right: [[{color: [255, 255, 255], type: VIEWS.HIERARCHY}]],
-            viewport: [{color: [255, 255, 255], type: VIEWPORT_TABS.EDITOR}],
-            left: [],
-            top: []
-        })
-        ProjectionEngine. SettingsStore.updateStore({views: views})
     }
 
 }

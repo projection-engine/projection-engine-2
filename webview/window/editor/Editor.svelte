@@ -1,7 +1,6 @@
 <script lang="ts">
     import {onDestroy, onMount} from "svelte"
     import Viewport from "./components/view/CentralView.svelte"
-    import Footer from "./components/footer/Footer.svelte"
     import ViewsContainer from "./components/view/SideView.svelte"
     import HotKeysController from "@lib/HotKeysController"
     import EditorUtil from "./util/EditorUtil"
@@ -12,11 +11,13 @@
     import ToasterService from "@services/ToasterService";
     import SettingsStore from "@lib/stores/SettingsStore";
     import EngineStore from "@lib/stores/EngineStore";
+    import {ViewPlacement} from "./components/view/ViewDefinitions";
+    import ViewTabDTO from "./components/view/ViewTabDTO";
+    import SETTINGS from "./static/SETTINGS";
 
     const COMPONENT_ID = crypto.randomUUID()
-    let view
-    let cameraGizmoSize
-    let currentViewIndex = 0
+    let view: ViewTabDTO
+    let cameraGizmoSize: number
     let ready = false
 
     const toasterService = InjectVar(ToasterService) as ToasterService
@@ -26,9 +27,9 @@
     onMount(() => {
         toasterService.initialize()
         settingsStore
-            .addListener(COMPONENT_ID, data => {
-                view = data.views?.[data.currentView]
-                currentViewIndex = data.currentView
+            .addListener(COMPONENT_ID, (d) => {
+                const data = d as typeof SETTINGS
+                view = data.views[data.currentView]
                 cameraGizmoSize = data.cameraGizmoSize
             }, ["views", "currentView", "cameraGizmoSize"])
         engineStore.addListener(COMPONENT_ID, data => HotKeysController.blockActions = data.executingAnimation, ["executingAnimation"])
@@ -45,51 +46,21 @@
     <div class="wrapper" style={`--cube-size: ${cameraGizmoSize}px;`}>
         <div class="middle">
             {#if ready}
-                <ViewsContainer
-                        id="left"
-                        setTabs={(tabs) => EditorUtil.updateView("left", tabs)}
-                        tabs={view.left}
-                        leftOffset={"8px"}
-                        {currentViewIndex}
-                        orientation={"vertical"}
-                        resizePosition={"left"}
-                />
+                <ViewsContainer placement={ViewPlacement.LEFT} tabs={view.getLeft()}/>
             {/if}
             <div class="content">
-                <Viewport
-                        {ready}
-                        {currentViewIndex}
-                        viewTab={view.viewport}
-                        updateView={(viewTab) => EditorUtil.updateView("viewport", viewTab)}
-                >
+                <Viewport {ready} view={view.getCenter()}>
                     <Canvas onReady={() => ready = true}/>
                 </Viewport>
                 {#if ready}
-
-                    <ViewsContainer
-                            {currentViewIndex}
-                            id="bottom"
-                            setTabs={(tabs) => EditorUtil.updateView("bottom", tabs)}
-                            tabs={view.bottom}
-                            resizePosition={"top"}
-                            orientation={"horizontal"}
-                    />
+                    <ViewsContainer placement={ViewPlacement.BOTTOM} tabs={view.getBottom()}/>
                 {/if}
             </div>
             {#if ready}
 
-                <ViewsContainer
-                        id="right"
-                        {currentViewIndex}
-                        setTabs={(tabs) => EditorUtil.updateView("right", tabs)}
-                        tabs={view.right}
-                        orientation={"vertical"}
-                        leftOffset={"0%"}
-                        resizePosition={"top"}
-                />
+                <ViewsContainer placement={ViewPlacement.RIGHT} tabs={view.getRight()}/>
             {/if}
         </div>
-        <Footer/>
     </div>
 {/if}
 

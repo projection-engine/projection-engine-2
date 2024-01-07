@@ -4,7 +4,7 @@
     import Selector from "../../../components/selector/Selector.svelte"
     import ToolTip from "@lib/components/tooltip/ToolTip.svelte"
     import Icon from "@lib/components/icon/Icon.svelte"
-    import ViewHeader from "../../../components/view/components/ViewHeader.svelte"
+    import ViewHeader from "../../../components/view/ViewHeader.svelte"
     import LocalizationEN from "@enums/LocalizationEN"
     import ShaderEditorUtil from "../../../util/ShaderEditorUtil"
 

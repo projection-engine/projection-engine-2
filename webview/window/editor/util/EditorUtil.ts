@@ -9,7 +9,6 @@ import COMPONENTS from "@engine-core/static/COMPONENTS"
 import IPCRoutes from "@enums/IPCRoutes"
 import QueryAPI from "@engine-core/lib/utils/QueryAPI"
 import GIZMOS from "@enums/Gizmos"
-import TabsStoreUtil from "./TabsStoreUtil"
 import ContentBrowserUtil from "./ContentBrowserUtil"
 import GizmoState from "../../../engine/tools/gizmo/util/GizmoState";
 import GizmoUtil from "../../../engine/tools/gizmo/util/GizmoUtil";
@@ -108,25 +107,6 @@ export default class EditorUtil {
         }
     }
 
-    static openBottomView(view) {
-        const settingsStore = ProjectionEngine.SettingsStore
-        const views = [...settingsStore.getData().views]
-        const tab = views[settingsStore.getData().currentView]
-        const existingTab = tab.bottom[0].findIndex(v => v?.type === view)
-        if (existingTab > -1) {
-            TabsStoreUtil.updateByAttributes("bottom", 0, existingTab)
-            return
-        }
-
-        if (tab.bottom.length > 0)
-            tab.bottom[0].push({type: view, color: [255, 255, 255]})
-        else
-            tab.bottom[0] = [{type: view, color: [255, 255, 255]}]
-
-        settingsStore.updateStore({views})
-        TabsStoreUtil.updateByAttributes("bottom", 0, tab.bottom[0].length - 1)
-    }
-
     static async resolveFileName(path: string, ext: string): Promise<string> {
         return await EditorUtil.getCall(IPCRoutes.RESOLVE_NAME, {path, ext}, false)
     }
@@ -173,14 +153,6 @@ export default class EditorUtil {
         }
     }
 
-    static updateView(key, newView) {
-        const settingsData = ProjectionEngine.SettingsStore.getData()
-        const view = settingsData.views[settingsData.currentView]
-        const copy = [...settingsData.views]
-        copy[settingsData.currentView] = {...view, [key]: newView}
-
-        ProjectionEngine.SettingsStore.updateStore({views: copy})
-    }
 
     static getCall<T>(channel, data, addMiddle = true): Promise<T> {
         return new Promise(resolve => {

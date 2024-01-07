@@ -7,7 +7,7 @@
     import dragDrop from "@lib/components/drag-drop/drag-drop"
     import CameraSettings from "./components/CameraSettings.svelte"
     import SceneOptions from "./components/SceneOptions.svelte"
-    import ViewHeader from "../../components/view/components/ViewHeader.svelte"
+    import ViewHeader from "../../components/view/ViewHeader.svelte"
     import EntityInformation from "./components/EntityInformation.svelte"
     import Engine from "@engine-core/Engine"
     import GizmoSettings from "./components/GizmoSettings.svelte"

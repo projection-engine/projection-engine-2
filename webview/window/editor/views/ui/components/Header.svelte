@@ -2,7 +2,7 @@
     import Engine from "@engine-core/Engine"
     import COMPONENTS from "@engine-core/static/COMPONENTS"
     import UIAPI from "@engine-core/lib/rendering/UIAPI"
-    import ViewHeader from "../../../components/view/components/ViewHeader.svelte"
+    import ViewHeader from "../../../components/view/ViewHeader.svelte"
     import Icon from "@lib/components/icon/Icon.svelte"
     import ToolTip from "@lib/components/tooltip/ToolTip.svelte"
     import EngineStateService from "@services/EngineStateService"

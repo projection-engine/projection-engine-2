@@ -9,7 +9,6 @@ import LevelService from "@services/LevelService";
 import ExecutionService from "@services/ExecutionService";
 import EngineStore from "./stores/EngineStore";
 import SettingsStore from "./stores/SettingsStore";
-import TabsStore from "./stores/TabsStore";
 import Engine from "@engine-core/Engine";
 import EntityHierarchyService from "@services/EntityHierarchyService";
 import ContextMenuService from "@services/ContextMenuService";
@@ -23,9 +22,6 @@ export default class ProjectionEngine extends IInjectable {
 
     @Inject(SettingsStore)
     static SettingsStore: SettingsStore
-
-    @Inject(TabsStore)
-    static TabsStore: TabsStore
 
     @Inject(Engine)
     static Engine: Engine

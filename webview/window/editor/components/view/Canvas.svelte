@@ -9,31 +9,16 @@
     import GPU from "@engine-core/GPU";
     import  {InjectVar} from "@lib/Injection";
     import ViewportInteractionService from "../../views/scene-editor/lib/ViewportInteractionService";
+    import CanvasContextService from "@services/CanvasContextService";
+    import RENDER_TARGET from "../../static/RENDER_TARGET";
 
     let canvasRef: HTMLCanvasElement
     export let onReady: VoidFunction
 
-    const visualsStore = InjectVar(VisualsStore) as VisualsStore
-    const engine = InjectVar(Engine) as Engine
+    const canvasContextService = InjectVar(CanvasContextService) as CanvasContextService
 
     onMount(() => {
-        engine.initialize(
-            canvasRef,
-            {
-                w: visualsStore.getData().resolutionX,
-                h: visualsStore.getData().resolutionY
-            },
-            EditorFSUtil.readAsset,
-            true,
-            async () => {
-                await EngineTools.initialize().catch(console.error)
-                UIAPI.buildUI(GPU.canvas.parentElement)
-                UIAPI.hideUI()
-                EngineToolsService.initialize()
-                ViewportInteractionService.initialize()
-                onReady()
-            }
-        )
+        canvasContextService.createCanvas().then(onReady)
     })
 
 </script>
@@ -41,6 +26,7 @@
 
 <div class="stretch">
     <canvas
+            id={RENDER_TARGET}
             class="stretch"
             data-svelteviewport="-"
             bind:this={canvasRef}
