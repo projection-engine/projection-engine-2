@@ -1,6 +1,6 @@
 <script>
     import ContentGroup from "./ContentGroup.svelte"
-    import PropertyHeader from "../../../shared/components/PropertyHeader.svelte"
+    import PropertyHeader from "@lib/components/PropertyHeader.svelte"
 
     export let data
 </script>

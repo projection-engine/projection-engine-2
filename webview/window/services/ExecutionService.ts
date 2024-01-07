@@ -1,14 +1,16 @@
-import ENVIRONMENT from "../../engine/core/static/ENVIRONMENT"
+import ENVIRONMENT from "@engine-core/static/ENVIRONMENT"
 import CameraTracker from "../../engine/tools/utils/CameraTracker"
-import UIAPI from "../../engine/core/lib/rendering/UIAPI"
-import Engine from "../../engine/core/Engine"
-import CameraAPI from "../../engine/core/lib/utils/CameraAPI"
-import ScriptsAPI from "../../engine/core/lib/utils/ScriptsAPI"
+import UIAPI from "@engine-core/lib/rendering/UIAPI"
+import Engine from "@engine-core/Engine"
+import CameraAPI from "@engine-core/lib/utils/CameraAPI"
+import ScriptsAPI from "@engine-core/lib/utils/ScriptsAPI"
 
-import ResourceEntityMapper from "../../engine/core/resource-libs/ResourceEntityMapper"
-import LocalizationEN from "../../enums/LocalizationEN"
-import ProjectionEngine from "../ProjectionEngine";
+import ResourceEntityMapper from "@engine-core/lib/ResourceEntityMapper"
+import LocalizationEN from "@enums/LocalizationEN"
+import {Injectable} from "@lib/Injection";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
+@Injectable
 export default class ExecutionService {
     #currentLevelID
     #isPlaying = false

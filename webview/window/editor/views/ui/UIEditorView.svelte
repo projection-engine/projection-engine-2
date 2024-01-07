@@ -1,14 +1,13 @@
 <script lang="ts">
     import {onDestroy, onMount} from "svelte"
-    import UIAPI from "../../../../engine/core/lib/rendering/UIAPI"
-    import QueryAPI from "../../../../engine/core/lib/utils/QueryAPI"
+    import UIAPI from "@engine-core/lib/rendering/UIAPI"
+    import QueryAPI from "@engine-core/lib/utils/QueryAPI"
     import Header from "./components/Header.svelte"
-    import GPU from "../../../../engine/core/GPU"
-    import LocalizationEN from "../../../../enums/LocalizationEN"
-    import EntitySelectionStore from "../../../shared/stores/EntitySelectionStore";
-    import type Entity from "../../../../engine/core/instances/Entity";
-    import SerializedState from "../../components/view/SerializedState.svelte";
-    import ProjectionEngine from "../../../ProjectionEngine";
+    import GPU from "@engine-core/GPU"
+    import LocalizationEN from "@enums/LocalizationEN"
+    import EntitySelectionStore from "@lib/stores/EntitySelectionStore";
+    import type Entity from "@engine-core/instances/Entity";
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
 
@@ -84,14 +83,6 @@
     })
 </script>
 
-<SerializedState
-        state={{isOnSelection, isAutoUpdateEnabled, selectedEntity}}
-        onStateInitialize={ state => {
-            isOnSelection = state.isOnSelection
-            isAutoUpdateEnabled = state.isAutoUpdateEnabled
-            selectedEntity = state.selectedEntity
-        }}
-/>
 <Header
         selected={selectedEntity}
         isOnSelection={isOnSelection}

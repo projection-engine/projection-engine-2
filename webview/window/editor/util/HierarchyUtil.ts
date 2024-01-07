@@ -1,13 +1,13 @@
 import HierarchyToRenderElement from "../views/hierarchy/template/ToRenderElement"
-import LocalizationEN from "../../../enums/LocalizationEN"
-import Entity from "../../../engine/core/instances/Entity"
-import Engine from "../../../engine/core/Engine"
+import LocalizationEN from "@enums/LocalizationEN"
+import Entity from "@engine-core/instances/Entity"
+import Engine from "@engine-core/Engine"
 import EngineStateService from "../../services/EngineStateService"
 import EditorUtil from "./EditorUtil"
-import HotKeysController from "../../shared/lib/HotKeysController";
+import HotKeysController from "@lib/HotKeysController";
 import getViewportHotkeys from "../templates/get-viewport-hotkeys";
-import EntitySelectionStore from "../../shared/stores/EntitySelectionStore";
-import ProjectionEngine from "../../ProjectionEngine";
+import EntitySelectionStore from "@lib/stores/EntitySelectionStore";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 export default class HierarchyUtil {
     static buildTree(openTree: {

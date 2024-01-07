@@ -13,10 +13,10 @@ import ScriptsAPI from "./lib/utils/ScriptsAPI"
 import UIAPI from "./lib/rendering/UIAPI"
 import LightProbe from "./instances/LightProbe"
 import Entity from "./instances/Entity"
-import DynamicMap from "./resource-libs/DynamicMap"
+import DynamicMap from "./lib/DynamicMap"
 import GPUAPI from "./lib/rendering/GPUAPI"
 import EntityAPI from "./lib/utils/EntityAPI"
-import ResourceEntityMapper from "./resource-libs/ResourceEntityMapper"
+import ResourceEntityMapper from "./lib/ResourceEntityMapper"
 import ResourceManager from "./runtime/ResourceManager"
 import LightsAPI from "./lib/utils/LightsAPI"
 import RotationGizmo from "../tools/gizmo/transformation/RotationGizmo";
@@ -25,10 +25,13 @@ import TranslationGizmo from "../tools/gizmo/transformation/TranslationGizmo";
 import DualAxisGizmo from "../tools/gizmo/transformation/DualAxisGizmo";
 import ScreenSpaceGizmo from "../tools/gizmo/transformation/ScreenSpaceGizmo";
 import CameraNotificationDecoder from "./lib/CameraNotificationDecoder";
-import ProjectionEngine from "../../window/ProjectionEngine";
+import {Injectable} from "@lib/Injection";
+import ProjectionEngine from "@lib/ProjectionEngine";
+import IInjectable from "@lib/IInjectable";
 
 
-export default class Engine {
+@Injectable
+export default class Engine extends IInjectable {
     #development = false
     #onLevelLoadListeners = new DynamicMap<string, Function>()
     UILayouts = new Map()
@@ -147,18 +150,18 @@ export default class Engine {
         if (!this.isExecuting && this.#isReady) {
             Physics.start()
             ResourceManager.start()
-            this.#frameID = requestAnimationFrame(Engine.#loop)
+            this.#frameID = requestAnimationFrame(Engine._loop)
         }
     }
 
-   static #loop(c) {
+    static _loop(c) {
         const queue = ProjectionEngine.Engine.#executionQueue.array
         const queueLength = queue.length
         Renderer.currentTimeStamp = c
         for (let i = 0; i < queueLength; i++) {
             queue[i]()
         }
-        ProjectionEngine.Engine.#frameID = requestAnimationFrame(Engine.#loop)
+        ProjectionEngine.Engine.#frameID = requestAnimationFrame(Engine._loop)
     }
 
     stop() {

@@ -1,17 +1,17 @@
 import materialCompiler from "./material-compiler/material-compiler"
 
-import ContentBrowserStore from "../../../../shared/stores/ContentBrowserStore"
+import ContentBrowserStore from "@lib/stores/ContentBrowserStore"
 import Canvas from "./Canvas"
 import type ShaderNode from "../templates/ShaderNode"
-import GPU from "../../../../../engine/core/GPU"
-import UberShader from "../../../../../engine/core/resource-libs/UberShader"
-import GPUAPI from "../../../../../engine/core/lib/rendering/GPUAPI"
+import GPU from "@engine-core/GPU"
+import UberShader from "@engine-core/lib/UberShader"
+import GPUAPI from "@engine-core/lib/rendering/GPUAPI"
 import NodesIndex from "../static/NODE_MAP"
 import ShaderLink from "../templates/ShaderLink"
 import ShaderComment from "../templates/ShaderComment"
-import LocalizationEN from "../../../../../enums/LocalizationEN"
+import LocalizationEN from "@enums/LocalizationEN"
 import EditorFSUtil from "../../../util/EditorFSUtil"
-import ProjectionEngine from "../../../../ProjectionEngine";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 export default class ShaderEditorTools {
 
@@ -28,7 +28,7 @@ export default class ShaderEditorTools {
 		if (!nodeInstance)
 			return
 		Object.keys(node).forEach(o => {
-			if (o === "texture" && nodeInstance instanceof NodesIndex.TextureSample) nodeInstance[o] = ContentBrowserStore.getData().textures.find(i => i.registryID === node[o].registryID)
+			if (o === "texture" && nodeInstance instanceof NodesIndex.TextureSample) nodeInstance[o] = ProjectionEngine.ContentBrowserStore.getData().textures.find(i => i.registryID === node[o].registryID)
 			else {
 				const input = nodeInstance.inputs.find(i => i.key === o)
 				if (!input && !nodeInstance.output.find(i => i.key === o))

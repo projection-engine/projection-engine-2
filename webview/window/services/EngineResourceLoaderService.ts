@@ -1,23 +1,23 @@
-import FileSystemUtil from "../shared/FileSystemUtil"
+import FileSystemUtil from "@lib/FileSystemUtil"
 import EditorFSUtil from "../editor/util/EditorFSUtil"
 
-import COMPONENTS from "../../engine/core/static/COMPONENTS"
-import PickingAPI from "../../engine/core/lib/utils/PickingAPI"
-import QueryAPI from "../../engine/core/lib/utils/QueryAPI"
+import COMPONENTS from "@engine-core/static/COMPONENTS"
+import PickingAPI from "@engine-core/lib/utils/PickingAPI"
+import QueryAPI from "@engine-core/lib/utils/QueryAPI"
 import EntityFactoryService from "./EntityFactoryService"
-import GPU from "../../engine/core/GPU"
-import GPUAPI from "../../engine/core/lib/rendering/GPUAPI"
+import GPU from "@engine-core/GPU"
+import GPUAPI from "@engine-core/lib/rendering/GPUAPI"
 
-import FileSystemAPI from "../../engine/core/lib/utils/FileSystemAPI"
-import MeshComponent from "../../engine/core/instances/components/MeshComponent"
-import SpriteComponent from "../../engine/core/instances/components/SpriteComponent"
+import FileSystemAPI from "@engine-core/lib/utils/FileSystemAPI"
+import MeshComponent from "@engine-core/instances/components/MeshComponent"
+import SpriteComponent from "@engine-core/instances/components/SpriteComponent"
 import EngineStateService from "./EngineStateService"
-import EntityAPI from "../../engine/core/lib/utils/EntityAPI"
-import FileTypes from "../../enums/FileTypes"
-import LocalizationEN from "../../enums/LocalizationEN"
-import Entity from "../../engine/core/instances/Entity"
-import StaticFBO from "../../engine/core/lib/StaticFBO";
-import ProjectionEngine from "../ProjectionEngine";
+import EntityAPI from "@engine-core/lib/utils/EntityAPI"
+import FileTypes from "@enums/FileTypes"
+import LocalizationEN from "@enums/LocalizationEN"
+import Entity from "@engine-core/instances/Entity"
+import StaticFBO from "@engine-core/lib/StaticFBO";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 
 export default class EngineResourceLoaderService {
@@ -133,10 +133,8 @@ export default class EngineResourceLoaderService {
 				if (!entity || !entity.meshComponent) return
 				const result = await FileSystemAPI.loadMaterial(data)
 				if (result) {
-					ProjectionEngine.EditorActionHistory.save(entity)
 					const component = entity.meshComponent
 					component.materialID = data
-					ProjectionEngine.EditorActionHistory.save(entity)
 				} else
 					console.error(LocalizationEN.SOME_ERROR_OCCURRED + ` (Material: ${data})`)
 				break

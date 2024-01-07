@@ -6,7 +6,7 @@ import EngineTools from "../../EngineTools"
 import StaticEditorMeshes from "../../utils/StaticEditorMeshes"
 import StaticEditorShaders from "../../utils/StaticEditorShaders"
 import GizmoUtil from "../util/GizmoUtil"
-import GizmoTransformationType from "../../../../enums/GizmoTransformationType"
+import GizmoTransformationType from "@enums/GizmoTransformationType"
 import Movable from "../../../core/instances/components/Movable"
 import GizmoState from "../util/GizmoState"
 import GizmoSystem from "../GizmoSystem"
@@ -15,7 +15,7 @@ import GPUUtil from "../../../core/utils/GPUUtil";
 import StaticEditorFBO from "../../utils/StaticEditorFBO";
 import EngineToolsState from "../../EngineToolsState";
 import Engine from "../../../core/Engine";
-import ProjectionEngine from "../../../../window/ProjectionEngine";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 const toDeg = 180 / Math.PI
 const uniformCache = new Float32Array(4)

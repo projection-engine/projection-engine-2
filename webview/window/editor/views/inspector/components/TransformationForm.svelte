@@ -1,18 +1,18 @@
 <script>
-    import EntitySelectionStore from "../../../../shared/stores/EntitySelectionStore"
-    import Engine from "../../../../../engine/core/Engine"
+    import EntitySelectionStore from "@lib/stores/EntitySelectionStore"
+    import Engine from "@engine-core/Engine"
 
     import {onDestroy, onMount} from "svelte"
-    import Checkbox from "../../../../shared/components/checkbox/Checkbox.svelte"
-    import Range from "../../../../shared/components/range/Range.svelte"
-    import Icon from "../../../../shared/components/icon/Icon.svelte"
-    import Dropdown from "../../../../shared/components/dropdown/Dropdown.svelte"
-    import Accordion from "../../../../shared/components/accordion/Accordion.svelte"
+    import Checkbox from "@lib/components/checkbox/Checkbox.svelte"
+    import Range from "@lib/components/range/Range.svelte"
+    import Icon from "@lib/components/icon/Icon.svelte"
+    import Dropdown from "@lib/components/dropdown/Dropdown.svelte"
+    import Accordion from "@lib/components/accordion/Accordion.svelte"
     import ROTATION_TYPES from "../static/ROTATION_TYPES"
-    import Movable from "../../../../../engine/core/instances/components/Movable"
-    import LocalizationEN from "../../../../../enums/LocalizationEN"
-    import EmptyIcon from "../../../../shared/components/icon/EmptyIcon.svelte"
-    import ProjectionEngine from "../../../../ProjectionEngine";
+    import Movable from "@engine-core/instances/components/Movable"
+    import LocalizationEN from "@enums/LocalizationEN"
+    import EmptyIcon from "@lib/components/icon/EmptyIcon.svelte"
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     let targets = []
@@ -25,7 +25,6 @@
     let lockedRotation
     let lockedTranslation
     let lockedScaling
-    let hasStarted = false
     let lockedCache = [false, false, false]
 
     onMount(() => {
@@ -76,11 +75,6 @@
     }
 
     function rotate(axis, value) {
-        if (!hasStarted) {
-            hasStarted = true
-            ProjectionEngine.EditorActionHistory.save(targets)
-        }
-
         if (rotationType === Movable.ROTATION_QUATERNION)
             mainEntity.rotationQuaternion[axis] = value
         else
@@ -89,10 +83,6 @@
     }
 
     function transformScaleTranslation(axis, value, isTranslation) {
-        if (!hasStarted) {
-            hasStarted = true
-            ProjectionEngine.EditorActionHistory.save(targets)
-        }
         for (let i = 0; i < targets.length; i++) {
             const entity = targets[i]
             if (!isTranslation) {
@@ -115,11 +105,6 @@
     }
 
     function transformPivot(axis, value) {
-        if (!hasStarted) {
-            hasStarted = true
-            ProjectionEngine.EditorActionHistory.save(targets)
-        }
-
         for (let i = 0; i < targets.length; i++) {
             const entity = targets[i]
             if (!entity.__originalPivot)
@@ -131,7 +116,6 @@
     }
 
     function onFinish() {
-        ProjectionEngine.EditorActionHistory.save(targets)
         hasStarted = false
     }
 </script>

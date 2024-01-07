@@ -1,5 +1,5 @@
 import UndoRedo from "../../../components/UndoRedo"
-import FileSystemUtil from "../../../../shared/FileSystemUtil"
+import FileSystemUtil from "@lib/FileSystemUtil"
 
 export default class NavigationHistory {
     #cache = new UndoRedo<string>()

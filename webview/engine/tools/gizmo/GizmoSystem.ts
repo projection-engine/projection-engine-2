@@ -2,7 +2,7 @@ import GPU from "../../core/GPU"
 import GizmoUtil from "./util/GizmoUtil"
 import GizmoState from "./util/GizmoState"
 import GizmoLineSystem from "./GizmoLineSystem"
-import DynamicMap from "../../core/resource-libs/DynamicMap"
+import DynamicMap from "../../core/lib/DynamicMap"
 
 
 export default class GizmoSystem {

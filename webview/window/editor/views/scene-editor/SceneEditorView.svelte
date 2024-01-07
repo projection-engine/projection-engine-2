@@ -1,22 +1,22 @@
 <script>
     import {onDestroy, onMount} from "svelte"
     import RENDER_TARGET from "../../static/RENDER_TARGET"
-    import SelectBox from "../../../shared/components/select-box/SelectBox.svelte"
-    import GIZMOS from "../../../../enums/Gizmos.ts"
+    import SelectBox from "@lib/components/select-box/SelectBox.svelte"
+    import GIZMOS from "@enums/Gizmos.ts"
     import GizmoSystem from "../../../../engine/tools/gizmo/GizmoSystem"
-    import dragDrop from "../../../shared/components/drag-drop/drag-drop"
+    import dragDrop from "@lib/components/drag-drop/drag-drop"
     import CameraSettings from "./components/CameraSettings.svelte"
     import SceneOptions from "./components/SceneOptions.svelte"
     import ViewHeader from "../../components/view/components/ViewHeader.svelte"
     import EntityInformation from "./components/EntityInformation.svelte"
-    import Engine from "../../../../engine/core/Engine"
+    import Engine from "@engine-core/Engine"
     import GizmoSettings from "./components/GizmoSettings.svelte"
-    import SHADING_MODELS from "../../../../engine/core/static/SHADING_MODELS"
-    import Icon from "../../../shared/components/icon/Icon.svelte"
-    import GPU from "../../../../engine/core/GPU"
-    import LocalizationEN from "../../../../enums/LocalizationEN"
+    import SHADING_MODELS from "@engine-core/static/SHADING_MODELS"
+    import Icon from "@lib/components/icon/Icon.svelte"
+    import GPU from "@engine-core/GPU"
+    import LocalizationEN from "@enums/LocalizationEN"
     import SceneEditorUtil from "../../util/SceneEditorUtil"
-    import ProjectionEngine from "../../../ProjectionEngine";
+    import ProjectionEngine from "@lib/ProjectionEngine";
     import ViewportInteractionService from "./lib/ViewportInteractionService";
 
     const COMPONENT_ID = crypto.randomUUID()

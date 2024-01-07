@@ -1,13 +1,13 @@
 <script lang="ts">
     import {onDestroy, onMount} from "svelte"
 
-    import Icon from "../../../../shared/components/icon/Icon.svelte"
-    import Dropdown from "../../../../shared/components/dropdown/Dropdown.svelte"
-    import LocalizationEN from "../../../../../enums/LocalizationEN"
+    import Icon from "@lib/components/icon/Icon.svelte"
+    import Dropdown from "@lib/components/dropdown/Dropdown.svelte"
+    import LocalizationEN from "@enums/LocalizationEN"
     import EditorUtil from "../../../util/EditorUtil"
     import NATIVE_COMPONENTS from "../static/NATIVE_COMPONENTS";
-    import Entity from "../../../../../engine/core/instances/Entity";
-    import ProjectionEngine from "../../../../ProjectionEngine";
+    import Entity from "@engine-core/instances/Entity";
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     export let entity: Entity
@@ -49,10 +49,7 @@
                     data-sveltebuttondefault="-"
                     data-svelteinline="-"
                     on:click={(e) =>{
-                        ProjectionEngine.EditorActionHistory.save(entity)
                         entity.addComponent(component.data[0])
-                        ProjectionEngine.EditorActionHistory.save(entity)
-                        e.target.closeDropdown()
                     }}
             >
                 <Icon styles="font-size: 1rem">{component.data[2]}</Icon>

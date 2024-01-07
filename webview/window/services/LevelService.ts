@@ -1,22 +1,35 @@
-import FileSystemUtil from "../shared/FileSystemUtil"
-import Engine from "../../engine/core/Engine"
+import FileSystemUtil from "@lib/FileSystemUtil"
+import Engine from "@engine-core/Engine"
 import EditorFSUtil from "../editor/util/EditorFSUtil"
-import EntitySelectionStore from "../shared/stores/EntitySelectionStore"
-import CameraAPI from "../../engine/core/lib/utils/CameraAPI"
+import EntitySelectionStore from "@lib/stores/EntitySelectionStore"
+import CameraAPI from "@engine-core/lib/utils/CameraAPI"
 import CameraTracker from "../../engine/tools/utils/CameraTracker"
-import serializeStructure from "../../engine/core/utils/serialize-structure"
-import QueryAPI from "../../engine/core/lib/utils/QueryAPI"
-import PickingAPI from "../../engine/core/lib/utils/PickingAPI"
+import serializeStructure from "@engine-core/utils/serialize-structure"
+import QueryAPI from "@engine-core/lib/utils/QueryAPI"
+import PickingAPI from "@engine-core/lib/utils/PickingAPI"
 import AXIS from "../../engine/tools/static/AXIS"
-import LocalizationEN from "../../enums/LocalizationEN"
-import FileTypes from "../../enums/FileTypes"
+import LocalizationEN from "@enums/LocalizationEN"
+import FileTypes from "@enums/FileTypes"
 import EditorUtil from "../editor/util/EditorUtil"
 import TabsStoreUtil from "../editor/util/TabsStoreUtil"
-import ProjectionEngine from "../ProjectionEngine";
+import {Inject, Injectable} from "@lib/Injection";
+import VisualsStore from "@lib/stores/VisualsStore";
+import TabsStore from "@lib/stores/TabsStore";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 
+@Injectable
 export default class LevelService {
     #levelToLoad
+
+    @Inject(VisualsStore)
+    static visualsStore: VisualsStore
+
+    @Inject(Engine)
+    static engine: Engine
+
+    @Inject(TabsStore)
+    static tabsStore: TabsStore
 
     getLevelToLoad() {
         const old = this.#levelToLoad
@@ -31,15 +44,6 @@ export default class LevelService {
             return
         }
 
-        if (ProjectionEngine.ChangesTrackerStore.getData() && ProjectionEngine.Engine.loadedLevel) {
-            ProjectionEngine.WindowChangeStore.updateStore({
-                message: LocalizationEN.UNSAVED_CHANGES, callback: async () => {
-                    await this.save().catch(console.error)
-                    this.loadLevel(levelID).catch(console.error)
-                }
-            })
-            return
-        }
 
         await EditorFSUtil.readRegistry()
         ProjectionEngine.EntityNamingService.clear()
@@ -47,8 +51,6 @@ export default class LevelService {
             array: []
         })
         EntitySelectionStore.setLockedEntity(undefined)
-        ProjectionEngine.EditorActionHistory.clear()
-
 
         await ProjectionEngine.Engine.loadLevel(levelID, false)
         const entities = ProjectionEngine.Engine.entities.array
@@ -62,9 +64,6 @@ export default class LevelService {
     }
 
     async save() {
-        if (!ProjectionEngine.ChangesTrackerStore.getData().changed)
-            return
-
         if (ProjectionEngine.EngineStore.getData().executingAnimation) {
             ProjectionEngine.ToastNotificationSystem.warn(LocalizationEN.EXECUTING_SIMULATION)
             return
@@ -87,9 +86,9 @@ export default class LevelService {
                 JSON.stringify({
                     ...metadata,
                     settings,
-                    layout: ProjectionEngine.TabsStore.getData(),
-                    visualSettings: ProjectionEngine.VisualsStore.getData(),
-                    level: ProjectionEngine.Engine.loadedLevel?.id
+                    layout: LevelService.tabsStore.getData(),
+                    visualSettings: LevelService.visualsStore.getData(),
+                    level: LevelService.engine.loadedLevel?.id
                 }), true)
 
             await this.saveCurrentLevel().catch(console.error)
@@ -123,7 +122,6 @@ export default class LevelService {
             path,
             serializeStructure(serialized)
         )
-        ProjectionEngine.ChangesTrackerStore.updateStore({changed: false})
     }
 }
 

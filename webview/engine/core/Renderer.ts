@@ -17,7 +17,7 @@ import GPUAPI from "./lib/rendering/GPUAPI"
 import StaticFBO from "./lib/StaticFBO"
 import ScriptsAPI from "./lib/utils/ScriptsAPI"
 import METRICS_FLAGS from "./static/METRICS_FLAGS"
-import ProjectionEngine from "../../window/ProjectionEngine";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 let previous = 0
 

@@ -1,17 +1,17 @@
 <script>
 
-    import TEXTURE_FORMATS from "../../../../../../engine/core/static/texture/TEXTURE_FORMATS"
-    import Checkbox from "../../../../../shared/components/checkbox/Checkbox.svelte"
-    import GPU from "../../../../../../engine/core/GPU"
-    import TEXTURE_FILTERING from "../../../../../../engine/core/static/texture/TEXTURE_FILTERING"
-    import TEXTURE_WRAPPING from "../../../../../../engine/core/static/texture/TEXTURE_WRAPPING"
-    import Dropdown from "../../../../../shared/components/dropdown/Dropdown.svelte"
-    import Accordion from "../../../../../shared/components/accordion/Accordion.svelte"
-    import Range from "../../../../../shared/components/range/Range.svelte"
-    import TEXTURE_TEMPLATE from "../../../../../../engine/core/static/TEXTURE_TEMPLATE"
+    import TEXTURE_FORMATS from "@engine-core/static/texture/TEXTURE_FORMATS"
+    import Checkbox from "@lib/components/checkbox/Checkbox.svelte"
+    import GPU from "@engine-core/GPU"
+    import TEXTURE_FILTERING from "@engine-core/static/texture/TEXTURE_FILTERING"
+    import TEXTURE_WRAPPING from "@engine-core/static/texture/TEXTURE_WRAPPING"
+    import Dropdown from "@lib/components/dropdown/Dropdown.svelte"
+    import Accordion from "@lib/components/accordion/Accordion.svelte"
+    import Range from "@lib/components/range/Range.svelte"
+    import TEXTURE_TEMPLATE from "@engine-core/static/TEXTURE_TEMPLATE"
 
     import EditorFSUtil from "../../../../util/EditorFSUtil"
-    import LocalizationEN from "../../../../../../enums/LocalizationEN";
+    import LocalizationEN from "@enums/LocalizationEN";
 
     const B = "height: 22px; border-radius: 3px; background: var(--pj-background-tertiary); border:var(--pj-border-primary) 1px solid;"
     export let item

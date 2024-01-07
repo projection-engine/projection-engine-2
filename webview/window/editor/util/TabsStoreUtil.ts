@@ -1,8 +1,7 @@
-import ProjectionEngine from "../../ProjectionEngine";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 export default class TabsStoreUtil {
 	static updateByAttributes(direction:"left"|"right"|"top"|"bottom"|"viewport", group:number, value:number) {
-		ProjectionEngine.ChangesTrackerStore.updateStore({changed: true})
 		const settingsData = ProjectionEngine.SettingsStore.getData()
 		const clone = {...ProjectionEngine.TabsStore.getData()}
 		if (!clone[settingsData.currentView])

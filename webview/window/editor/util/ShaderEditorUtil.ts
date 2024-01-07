@@ -3,7 +3,7 @@ import ShaderNode from "../views/shader-editor/templates/ShaderNode"
 import ShaderComment from "../views/shader-editor/templates/ShaderComment"
 import OpenFile from "../views/shader-editor/static/OPEN_FILE"
 import EditorFSUtil from "./EditorFSUtil"
-import FileSystemUtil from "../../shared/FileSystemUtil"
+import FileSystemUtil from "@lib/FileSystemUtil"
 import ShaderEditorTools from "../views/shader-editor/libs/ShaderEditorTools"
 import ShaderLink from "../views/shader-editor/templates/ShaderLink"
 import CanvasResources from "../views/shader-editor/libs/CanvasResources"
@@ -11,9 +11,9 @@ import DraggableNodeUtils from "../views/shader-editor/libs/DraggableNodeUtils"
 import {Output} from "../views/shader-editor/static/Output"
 import {Input} from "../views/shader-editor/static/Input"
 import CanvasRenderer from "../views/shader-editor/libs/CanvasRenderer"
-import DATA_TYPES from "../../../engine/core/static/DATA_TYPES"
+import DATA_TYPES from "@engine-core/static/DATA_TYPES"
 import Draggable from "../views/shader-editor/templates/Draggable"
-import ProjectionEngine from "../../ProjectionEngine";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 export default class ShaderEditorUtil{
 	static  addComment(canvasAPI: Canvas) {

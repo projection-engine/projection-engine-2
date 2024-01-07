@@ -1,14 +1,14 @@
 <script>
     import CameraGizmo from "./CameraGizmo.svelte"
-    import Dropdown from "../../../../shared/components/dropdown/Dropdown.svelte"
-    import ToolTip from "../../../../shared/components/tooltip/ToolTip.svelte"
-    import Icon from "../../../../shared/components/icon/Icon.svelte"
+    import Dropdown from "@lib/components/dropdown/Dropdown.svelte"
+    import ToolTip from "@lib/components/tooltip/ToolTip.svelte"
+    import Icon from "@lib/components/icon/Icon.svelte"
     import CameraTracker from "../../../../../engine/tools/utils/CameraTracker"
     import {onDestroy, onMount} from "svelte"
-    import LocalizationEN from "../../../../../enums/LocalizationEN"
-    import EmptyIcon from "../../../../shared/components/icon/EmptyIcon.svelte"
+    import LocalizationEN from "@enums/LocalizationEN"
+    import EmptyIcon from "@lib/components/icon/EmptyIcon.svelte"
     import EditorUtil from "../../../util/EditorUtil"
-    import ProjectionEngine from "../../../../ProjectionEngine";
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     let cameras = []

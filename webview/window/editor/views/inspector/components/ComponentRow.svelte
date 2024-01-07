@@ -1,7 +1,7 @@
 <script>
     import NATIVE_COMPONENTS from "../static/NATIVE_COMPONENTS"
-    import Icon from "../../../../shared/components/icon/Icon.svelte"
-    import ProjectionEngine from "../../../../ProjectionEngine";
+    import Icon from "@lib/components/icon/Icon.svelte"
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     export let offset
     export let entity
@@ -12,9 +12,7 @@
             <button
                     data-svelteinline="-"
                     on:click={(e) =>{
-                    ProjectionEngine.EditorActionHistory.save(entity)
                     entity.addComponent(data[0])
-                    ProjectionEngine.EditorActionHistory.save(entity)
                     e.target.closeDropdown()
 
                 }}

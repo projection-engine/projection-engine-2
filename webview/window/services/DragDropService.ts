@@ -1,5 +1,7 @@
-import STYLES from "../shared/components/drag-drop/STYLES"
+import STYLES from "@lib/components/drag-drop/STYLES"
+import {Injectable} from "@lib/Injection";
 
+@Injectable
 export default class DragDropService {
 	dropTarget?:HTMLElement
 	dragData

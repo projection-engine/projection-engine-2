@@ -1,11 +1,11 @@
 <script lang="ts">
     import Attribute from "./Attribute.svelte";
 
-    import ColorPicker from "../../../../shared/components/color-picker/ColorPicker.svelte";
-    import Input from "../../../../shared/components/input/Input.svelte";
+    import ColorPicker from "@lib/components/color-picker/ColorPicker.svelte";
+    import Input from "@lib/components/input/Input.svelte";
     import type ShaderNode from "../templates/ShaderNode";
     import ShaderComment from "../templates/ShaderComment";
-    import LocalizationEN from "../../../../../enums/LocalizationEN";
+    import LocalizationEN from "@enums/LocalizationEN";
 
     export let node: ShaderNode | ShaderComment
     export let updateCanvas: Function

@@ -1,15 +1,15 @@
-import COMPONENTS from "../../engine/core/static/COMPONENTS"
+import COMPONENTS from "@engine-core/static/COMPONENTS"
 import {vec3, vec4} from "gl-matrix"
 
 
-import CameraAPI from "../../engine/core/lib/utils/CameraAPI"
-import EntityAPI from "../../engine/core/lib/utils/EntityAPI"
-import MeshComponent from "../../engine/core/instances/components/MeshComponent"
-import LightComponent from "../../engine/core/instances/components/LightComponent"
+import CameraAPI from "@engine-core/lib/utils/CameraAPI"
+import EntityAPI from "@engine-core/lib/utils/EntityAPI"
+import MeshComponent from "@engine-core/instances/components/MeshComponent"
+import LightComponent from "@engine-core/instances/components/LightComponent"
 import EngineStateService from "./EngineStateService"
-import Engine from "../../engine/core/Engine"
-import LocalizationEN from "../../enums/LocalizationEN"
-import ProjectionEngine from "../ProjectionEngine";
+import Engine from "@engine-core/Engine"
+import LocalizationEN from "@enums/LocalizationEN"
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 
 export default class EntityFactoryService {

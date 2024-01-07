@@ -2,14 +2,14 @@
 
     import FrameMetadata from "./components/PerformanceStatistics.svelte"
     import SceneStats from "./components/SceneStats.svelte"
-    import Icon from "../../../shared/components/icon/Icon.svelte"
-    import ToolTip from "../../../shared/components/tooltip/ToolTip.svelte"
-    import Engine from "../../../../engine/core/Engine"
+    import Icon from "@lib/components/icon/Icon.svelte"
+    import ToolTip from "@lib/components/tooltip/ToolTip.svelte"
+    import Engine from "@engine-core/Engine"
     import {onDestroy, onMount} from "svelte"
     import EntityUpdateService from "../../../services/EntityUpdateService"
-    import LocalizationEN from "../../../../enums/LocalizationEN"
-    import SettingsStore from "../../../shared/stores/SettingsStore"
-    import ProjectionEngine from "../../../ProjectionEngine";
+    import LocalizationEN from "@enums/LocalizationEN"
+    import SettingsStore from "@lib/stores/SettingsStore"
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     let settings = {}

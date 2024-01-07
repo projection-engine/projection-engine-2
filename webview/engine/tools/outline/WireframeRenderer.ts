@@ -6,11 +6,11 @@ import StaticEditorShaders from "../utils/StaticEditorShaders"
 import Engine from "../../core/Engine"
 import StaticFBO from "../../core/lib/StaticFBO"
 import StaticEditorMeshes from "../utils/StaticEditorMeshes"
-import ResourceEntityMapper from "../../core/resource-libs/ResourceEntityMapper"
+import ResourceEntityMapper from "../../core/lib/ResourceEntityMapper"
 import CameraIconRenderer from "../icons/CameraIconRenderer"
 import EngineToolsState from "../EngineToolsState"
 import GPUUtil from "../../core/utils/GPUUtil";
-import ProjectionEngine from "../../../window/ProjectionEngine";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 const EMPTY_MATRIX = mat4.create()
 const translationCache = vec3.create()

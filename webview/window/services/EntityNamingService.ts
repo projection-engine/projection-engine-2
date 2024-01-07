@@ -1,7 +1,9 @@
-import QueryAPI from "../../engine/core/lib/utils/QueryAPI"
-import Entity from "../../engine/core/instances/Entity"
-import ProjectionEngine from "../ProjectionEngine";
+import QueryAPI from "@engine-core/lib/utils/QueryAPI"
+import Entity from "@engine-core/instances/Entity"
+import {Injectable} from "@lib/Injection";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
+@Injectable
 export default class EntityNamingService {
     #byName = new Map<string, string>()
     get byName() {

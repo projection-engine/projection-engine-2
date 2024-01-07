@@ -2,14 +2,13 @@
 
     import Tree from "./components/Tree.svelte"
     import {onDestroy, onMount} from "svelte"
-    import HotKeysController from "../../../shared/lib/HotKeysController"
-    import dragDrop from "../../../shared/components/drag-drop/drag-drop"
+    import HotKeysController from "@lib/HotKeysController"
+    import dragDrop from "@lib/components/drag-drop/drag-drop"
     import Header from "./components/Header.svelte"
     import HierarchyUtil from "../../util/HierarchyUtil"
-    import SerializedState from "../../components/view/SerializedState.svelte";
     import getViewportContext from "../../templates/get-viewport-context";
     import HierarchyToRenderElement from "./template/ToRenderElement";
-    import ProjectionEngine from "../../../ProjectionEngine";
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     const ID = crypto.randomUUID()
     const draggable = dragDrop()
@@ -48,15 +47,6 @@
     })
 </script>
 
-<SerializedState
-        state={{search, filteredComponent, openTree}}
-        onStateInitialize={ state => {
-             search = state.search
-             filteredComponent = state.filteredComponent
-             openTree  = state.openTree
-             updateHierarchy()
-        }}
-/>
 <Header
         setFilteredComponent={v => {filteredComponent = v; updateHierarchy()}}
         setSearch={v => {search = v; updateHierarchy()}}

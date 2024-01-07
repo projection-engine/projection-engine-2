@@ -1,10 +1,10 @@
 <script>
     import Options from "./components/Options.svelte"
-    import EmbeddedMeshes from "../../../../engine/core/static/EmbeddedMeshes"
-    import Icon from "../../../shared/components/icon/Icon.svelte"
-    import ToolTip from "../../../shared/components/tooltip/ToolTip.svelte"
-    import Dropdown from "../../../shared/components/dropdown/Dropdown.svelte"
-    import LocalizationEN from "../../../../enums/LocalizationEN"
+    import EmbeddedMeshes from "@engine-core/static/EmbeddedMeshes"
+    import Icon from "@lib/components/icon/Icon.svelte"
+    import ToolTip from "@lib/components/tooltip/ToolTip.svelte"
+    import Dropdown from "@lib/components/dropdown/Dropdown.svelte"
+    import LocalizationEN from "@enums/LocalizationEN"
     import SelectorUtil from "../../util/SelectorUtil"
 
     export let type

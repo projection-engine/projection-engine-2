@@ -1,14 +1,14 @@
 <script>
     import {onDestroy, onMount} from "svelte"
-    import GIZMOS from "../../../../../enums/Gizmos.ts"
-    import Gizmos from "../../../../../enums/Gizmos.ts"
+    import GIZMOS from "@enums/Gizmos.ts"
+    import Gizmos from "@enums/Gizmos.ts"
 
     import GizmoSystem from "../../../../../engine/tools/gizmo/GizmoSystem"
-    import LocalizationEN from "../../../../../enums/LocalizationEN"
-    import EntitySelectionStore from "../../../../shared/stores/EntitySelectionStore"
+    import LocalizationEN from "@enums/LocalizationEN"
+    import EntitySelectionStore from "@lib/stores/EntitySelectionStore"
     import GizmoState from "../../../../../engine/tools/gizmo/util/GizmoState"
     import SceneEditorUtil from "../../../util/SceneEditorUtil"
-    import ProjectionEngine from "../../../../ProjectionEngine";
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     /** @type boolean */
     export let isOnGizmo

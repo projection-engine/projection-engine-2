@@ -1,7 +1,7 @@
 import {mat4, vec3, vec4} from "gl-matrix"
 import CameraAPI from "../utils/CameraAPI"
 import Engine from "../../Engine";
-import ProjectionEngine from "../../../../window/ProjectionEngine";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 /**
  * @field canvasBBox - Bounding box for canvas; updated on engine resize observer

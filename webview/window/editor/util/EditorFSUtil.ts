@@ -1,9 +1,9 @@
-import ElectronResources from "../../shared/lib/ElectronResources"
-import IPCRoutes from "../../../enums/IPCRoutes"
-import Folders from "../../../enums/Folders"
-import FileTypes from "../../../enums/FileTypes"
+import ElectronResources from "@lib/ElectronResources"
+import IPCRoutes from "@enums/IPCRoutes"
+import Folders from "@enums/Folders"
+import FileTypes from "@enums/FileTypes"
 import EditorUtil from "./EditorUtil"
-import FileSystemUtil from "../../shared/FileSystemUtil"
+import FileSystemUtil from "@lib/FileSystemUtil"
 
 export default class EditorFSUtil {
 	static registry: { [key: string]: RegistryFile } = {}

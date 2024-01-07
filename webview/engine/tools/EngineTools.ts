@@ -17,7 +17,7 @@ import StaticEditorFBO from "./utils/StaticEditorFBO";
 import GPUUtil from "../core/utils/GPUUtil";
 import ConversionAPI from "../core/lib/math/ConversionAPI";
 import EngineToolsState from "./EngineToolsState";
-import ProjectionEngine from "../../window/ProjectionEngine";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 export default class EngineTools {
     static selected: Entity[] = []

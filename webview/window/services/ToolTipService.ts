@@ -1,11 +1,18 @@
-import SveltePortal from "../shared/lib/SveltePortal"
+import SveltePortal from "@lib/SveltePortal"
+import {Injectable} from "@lib/Injection";
 
+@Injectable
 export default class ToolTipService  {
 	portal = new SveltePortal(999, false)
 	element
 	closeCurrent
+	#initialized =false
 
-	constructor() {
+	initialize() {
+		if(this.#initialized){
+			return
+		}
+		this.#initialized = true
 		document.addEventListener("dragstart", () => {
 			this.portal.close()
 			if (this.closeCurrent)

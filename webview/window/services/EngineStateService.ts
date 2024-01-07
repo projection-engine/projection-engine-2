@@ -1,14 +1,14 @@
-import Engine from "../../engine/core/Engine"
+import Engine from "@engine-core/Engine"
 import AXIS from "../../engine/tools/static/AXIS"
-import EntityAPI from "../../engine/core/lib/utils/EntityAPI"
-import EntitySelectionStore from "../shared/stores/EntitySelectionStore"
-import Entity from "../../engine/core/instances/Entity"
-import PickingAPI from "../../engine/core/lib/utils/PickingAPI"
+import EntityAPI from "@engine-core/lib/utils/EntityAPI"
+import EntitySelectionStore from "@lib/stores/EntitySelectionStore"
+import Entity from "@engine-core/instances/Entity"
+import PickingAPI from "@engine-core/lib/utils/PickingAPI"
 
-import QueryAPI from "../../engine/core/lib/utils/QueryAPI"
-import LocalizationEN from "../../enums/LocalizationEN"
+import QueryAPI from "@engine-core/lib/utils/QueryAPI"
+import LocalizationEN from "@enums/LocalizationEN"
 import GizmoUtil from "../../engine/tools/gizmo/util/GizmoUtil"
-import ProjectionEngine from "../ProjectionEngine";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 
 function checkLevel(_, propertyKey: string, descriptor: PropertyDescriptor) {
@@ -59,12 +59,10 @@ export default class EngineStateService {
 
     @checkLevel
     static appendBlock(block: Entity[]) {
-        ProjectionEngine.EditorActionHistory.save(block, true)
         EntityAPI.addGroup(block)
         ProjectionEngine.EntityNamingService.renameInBlock(block)
         for (let i = 0; i < block.length; i++)
             GizmoUtil.createTransformationCache(block[i])
-        ProjectionEngine.EditorActionHistory.save(block)
         EngineStateService.#updateStructure()
     }
 
@@ -80,9 +78,6 @@ export default class EngineStateService {
         }
 
         const entities = Object.values(hierarchy)
-        ProjectionEngine.EditorActionHistory.save(entities)
-        ProjectionEngine.EditorActionHistory.save(entities, true)
-
         EntityAPI.removeGroup(entities, false)
 
         ProjectionEngine.EntitySelectionStore.updateStore({
@@ -94,9 +89,6 @@ export default class EngineStateService {
 
     @checkLevel
     static add(entity: Entity) {
-        ProjectionEngine.EditorActionHistory.save(entity, true)
-        ProjectionEngine.EditorActionHistory.save(entity)
-
         ProjectionEngine.EntityNamingService.renameEntity(entity.name, entity)
         GizmoUtil.createTransformationCache(entity)
         EntityAPI.addEntity(entity)

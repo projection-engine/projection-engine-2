@@ -3,8 +3,8 @@ import type Canvas from "./Canvas"
 import ShaderNode from "../templates/ShaderNode"
 import ShaderComment from "../templates/ShaderComment"
 import ShaderEditorTools from "./ShaderEditorTools"
-import LocalizationEN from "../../../../../enums/LocalizationEN";
-import ProjectionEngine from "../../../../ProjectionEngine";
+import LocalizationEN from "@enums/LocalizationEN";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 
 interface Action {

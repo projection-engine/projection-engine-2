@@ -1,16 +1,16 @@
 <script lang="ts">
-    import Engine from "../../../../../engine/core/Engine"
-    import COMPONENTS from "../../../../../engine/core/static/COMPONENTS"
-    import UIAPI from "../../../../../engine/core/lib/rendering/UIAPI"
+    import Engine from "@engine-core/Engine"
+    import COMPONENTS from "@engine-core/static/COMPONENTS"
+    import UIAPI from "@engine-core/lib/rendering/UIAPI"
     import ViewHeader from "../../../components/view/components/ViewHeader.svelte"
-    import Icon from "../../../../shared/components/icon/Icon.svelte"
-    import ToolTip from "../../../../shared/components/tooltip/ToolTip.svelte"
+    import Icon from "@lib/components/icon/Icon.svelte"
+    import ToolTip from "@lib/components/tooltip/ToolTip.svelte"
     import EngineStateService from "../../../../services/EngineStateService"
-    import EntityAPI from "../../../../../engine/core/lib/utils/EntityAPI"
-    import LocalizationEN from "../../../../../enums/LocalizationEN"
-    import EntitySelectionStore from "../../../../shared/stores/EntitySelectionStore";
-    import type Entity from "../../../../../engine/core/instances/Entity";
-    import ProjectionEngine from "../../../../ProjectionEngine";
+    import EntityAPI from "@engine-core/lib/utils/EntityAPI"
+    import LocalizationEN from "@enums/LocalizationEN"
+    import EntitySelectionStore from "@lib/stores/EntitySelectionStore";
+    import type Entity from "@engine-core/instances/Entity";
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     export let isOnSelection:boolean
     export let toggleOnSelection:GenericVoidFunction

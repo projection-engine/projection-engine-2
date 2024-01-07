@@ -1,17 +1,16 @@
 <script>
 
     import {onDestroy, onMount} from "svelte"
-    import QueryAPI from "../../../../engine/core/lib/utils/QueryAPI"
+    import QueryAPI from "@engine-core/lib/utils/QueryAPI"
     import EntityInspector from "./components/EntityAttributes.svelte"
 
-    import Icon from "../../../shared/components/icon/Icon.svelte"
-    import ToolTip from "../../../shared/components/tooltip/ToolTip.svelte"
+    import Icon from "@lib/components/icon/Icon.svelte"
+    import ToolTip from "@lib/components/tooltip/ToolTip.svelte"
     import CameraPreferences from "./components/CameraPreferences.svelte"
     import ContentWrapper from "../../../preferences/components/content/ContentWrapper.svelte"
     import InspectorUtil from "../../util/InspectorUtil"
     import INSPECTOR_TABS from "./static/INSPECTOR_TABS"
-    import SerializedState from "../../components/view/SerializedState.svelte";
-    import ProjectionEngine from "../../../ProjectionEngine";
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     let selectedEntity
@@ -48,7 +47,6 @@
     $: isOnDynamicTab = tabIndex > 2 && selectedEntity !== undefined
 </script>
 
-<SerializedState state={{tabIndex}} onStateInitialize={state => tabIndex = state.tabIndex}/>
 <div class="wrapper">
     <div class="tabs">
         {#each tabs as button, index}

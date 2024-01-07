@@ -1,8 +1,8 @@
 <script>
-    import Dropdown from "../../../../shared/components/dropdown/Dropdown.svelte"
-    import ColorPicker from "../../../../shared/components/color-picker/ColorPicker.svelte"
-    import Icon from "../../../../shared/components/icon/Icon.svelte"
-    import LocalizationEN from "../../../../../enums/LocalizationEN"
+    import Dropdown from "@lib/components/dropdown/Dropdown.svelte"
+    import ColorPicker from "@lib/components/color-picker/ColorPicker.svelte"
+    import Icon from "@lib/components/icon/Icon.svelte"
+    import LocalizationEN from "@enums/LocalizationEN"
 
     /** @type {function} */
     export let handler

@@ -1,10 +1,10 @@
 <script>
 
     import ViewHeader from "../../components/view/components/ViewHeader.svelte"
-    import MetricsController from "../../../../engine/core/lib/utils/MetricsController"
-    import Icon from "../../../shared/components/icon/Icon.svelte"
-    import ToolTip from "../../../shared/components/tooltip/ToolTip.svelte"
-    import LocalizationEN from "../../../../enums/LocalizationEN"
+    import MetricsController from "@engine-core/lib/utils/MetricsController"
+    import Icon from "@lib/components/icon/Icon.svelte"
+    import ToolTip from "@lib/components/tooltip/ToolTip.svelte"
+    import LocalizationEN from "@enums/LocalizationEN"
 
     let isRecording = false
     let isSampling = false

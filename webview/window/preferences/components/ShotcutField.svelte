@@ -3,10 +3,10 @@
     import SETTINGS from "../../editor/static/SETTINGS"
 
     import KEYS from "../../editor/static/KEYS.ts"
-    import ToolTip from "../../shared/components/tooltip/ToolTip.svelte"
-    import Icon from "../../shared/components/icon/Icon.svelte"
-    import LocalizationEN from "../../../enums/LocalizationEN"
-    import ProjectionEngine from "../../ProjectionEngine";
+    import ToolTip from "@lib/components/tooltip/ToolTip.svelte"
+    import Icon from "@lib/components/icon/Icon.svelte"
+    import LocalizationEN from "@enums/LocalizationEN"
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     export let shortcut = []
     export let key

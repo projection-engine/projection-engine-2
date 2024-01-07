@@ -1,9 +1,9 @@
 <script>
-    import ResizableBar from "../shared/components/resizable/ResizableBar.svelte"
+    import ResizableBar from "@lib/components/resizable/ResizableBar.svelte"
     import ContentWrapper from "./components/content/ContentWrapper.svelte"
     import Shortcuts from "./components/Shortcuts.svelte"
     import PREFERENCES from "./static/PREFERENCES"
-    import Icon from "../shared/components/icon/Icon.svelte"
+    import Icon from "@lib/components/icon/Icon.svelte"
 
     let tab = 0
 

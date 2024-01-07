@@ -1,4 +1,4 @@
-import CameraEffects from "../../resource-libs/CameraEffects"
+import CameraEffects from "../CameraEffects"
 import Engine from "../../Engine"
 import ENVIRONMENT from "../../static/ENVIRONMENT"
 import {glMatrix, vec3, vec4} from "gl-matrix"
@@ -10,12 +10,12 @@ import GPU from "../../GPU"
 import StaticUBOs from "../StaticUBOs"
 import Entity from "../../instances/Entity"
 import CameraComponent from "../../instances/components/CameraComponent"
-import CameraResources from "../../resource-libs/CameraResources"
+import CameraResources from "../CameraResources"
 import CameraSerialization from "../../static/CameraSerialization"
 import CameraNotificationDecoder from "../CameraNotificationDecoder"
 import Renderer from "../../Renderer"
 import cameraWorker from "../../workers/camera-worker";
-import ProjectionEngine from "../../../../window/ProjectionEngine";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 
 const TEMPLATE_CAMERA = new CameraComponent()

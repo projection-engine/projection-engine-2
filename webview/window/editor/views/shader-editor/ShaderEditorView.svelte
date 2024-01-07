@@ -1,20 +1,19 @@
 <script>
-    import FileSystemUtil from "../../../shared/FileSystemUtil"
+    import FileSystemUtil from "@lib/FileSystemUtil"
     import {onDestroy, onMount} from "svelte"
     import ShaderEditorTools from "./libs/ShaderEditorTools"
     import materialCompiler from "./libs/material-compiler/material-compiler"
     import HeaderOptions from "./components/HeaderOptions.svelte"
-    import Icon from "../../../shared/components/icon/Icon.svelte"
+    import Icon from "@lib/components/icon/Icon.svelte"
     import Canvas from "./libs/Canvas"
     import getShaderActions from "../../templates/get-shader-actions"
-    import HotKeysController from "../../../shared/lib/HotKeysController"
+    import HotKeysController from "@lib/HotKeysController"
     import ContextMenuService from "../../../services/ContextMenuService"
     import SideBar from "./components/SideBar.svelte"
     import NODE_MAP from "./static/NODE_MAP"
-    import LocalizationEN from "../../../../enums/LocalizationEN"
+    import LocalizationEN from "@enums/LocalizationEN"
     import ShaderEditorUtil from "../../util/ShaderEditorUtil"
-    import SerializedState from "../../components/view/SerializedState.svelte";
-    import ProjectionEngine from "../../../ProjectionEngine";
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
 
@@ -68,32 +67,6 @@
     }
 </script>
 
-<SerializedState
-        state={{
-    			openFile,
-    			comments: canvas.comments,
-    			selection: Array.from(canvas.selectionMap.keys()),
-    			nodes: canvas.nodes,
-    			links: canvas.links
-    		}}
-        onStateInitialize={state => {
-    		const newFile = ShaderEditorTools.toOpenFile || state?.openFile
-    		initializeFromFile(newFile)
-    		ShaderEditorTools.toOpenFile = undefined
-    		if (state != null && newFile) {
-    			canvas.clearState()
-    			state.nodes.forEach(n => canvas.addNode(n, true, true))
-    			state.links.forEach(n => canvas.addLink(n, true))
-    			state.comments.forEach(n => canvas.addComment(n, true, true))
-
-    			state.selection.forEach(k => {
-    				const found = canvas.nodes.find(n => n.id === k) || canvas.comments.find(n => n.id === k)
-    				canvas.selectionMap.set(k, found)
-    			})
-    			canvas.clear()
-    		}
-        }}
-/>
 <HeaderOptions
 
         openFile={openFile}

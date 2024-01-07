@@ -1,7 +1,7 @@
 <!--suppress ALL -->
 <script lang="ts">
-    import Icon from "../../../../shared/components/icon/Icon.svelte";
-    import Component from "../../../../../engine/core/instances/components/Component";
+    import Icon from "@lib/components/icon/Icon.svelte";
+    import Component from "@engine-core/instances/components/Component";
     import HierarchyUtil from "../../../util/HierarchyUtil";
     import EditorUtil from "../../../util/EditorUtil";
 

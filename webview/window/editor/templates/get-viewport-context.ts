@@ -1,9 +1,9 @@
 import getViewportHotkeys from "./get-viewport-hotkeys"
 import EntityFactoryService from "../../services/EntityFactoryService"
-import QueryAPI from "../../../engine/core/lib/utils/QueryAPI"
+import QueryAPI from "@engine-core/lib/utils/QueryAPI"
 import getEntityCreationOptions from "./get-entity-creation-options"
-import ContextMenuOption from "../../shared/lib/context-menu/templates/ContextMenuOptions"
-import EntitySelectionStore from "../../shared/stores/EntitySelectionStore";
+import ContextMenuOption from "@lib/context-menu/templates/ContextMenuOptions"
+import EntitySelectionStore from "@lib/stores/EntitySelectionStore";
 
 
 export function getViewportOptionsForDropdown() {

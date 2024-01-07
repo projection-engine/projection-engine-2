@@ -16,7 +16,7 @@ import StaticShaders from "./lib/StaticShaders"
 import StaticMeshes from "./lib/StaticMeshes"
 import StaticFBO from "./lib/StaticFBO"
 import StaticUBOs from "./lib/StaticUBOs"
-import DynamicMap from "./resource-libs/DynamicMap"
+import DynamicMap from "./lib/DynamicMap"
 import Engine from "./Engine";
 
 export default class GPU {

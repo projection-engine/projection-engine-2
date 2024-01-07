@@ -1,21 +1,22 @@
-import ContentBrowserStore from "../../shared/stores/ContentBrowserStore"
 import SELECTION_TYPES from "../views/content-browser/static/SELECTION_TYPES"
-import LocalizationEN from "../../../enums/LocalizationEN"
-import FileTypes from "../../../enums/FileTypes"
+import FileTypes from "@enums/FileTypes"
 import EngineResourceLoaderService from "../../services/EngineResourceLoaderService"
 import ShaderEditorTools from "../views/shader-editor/libs/ShaderEditorTools"
 import VIEWS from "../components/view/static/VIEWS"
 import EditorFSUtil from "./EditorFSUtil"
-import FileSystemUtil from "../../shared/FileSystemUtil"
 import {SORTS} from "../views/content-browser/static/SORT_INFO"
-import COMPONENT_TEMPLATE from "../../../engine/core/static/templates/COMPONENT_TEMPLATE"
-import UI_TEMPLATE from "../../../engine/core/static/templates/UI_TEMPLATE"
+import COMPONENT_TEMPLATE from "@engine-core/static/templates/COMPONENT_TEMPLATE"
+import UI_TEMPLATE from "@engine-core/static/templates/UI_TEMPLATE"
 import EditorUtil from "./EditorUtil"
-import IPCRoutes from "../../../enums/IPCRoutes"
+import IPCRoutes from "@enums/IPCRoutes"
 import getContentBrowserActions from "../templates/get-content-browser-actions"
-import HotKeysController from "../../shared/lib/HotKeysController"
 import NavigationHistory from "../views/content-browser/libs/NavigationHistory"
-import ProjectionEngine from "../../ProjectionEngine";
+import ProjectionEngine from "@lib/ProjectionEngine";
+import ContentBrowserStore from "@lib/stores/ContentBrowserStore"
+import LocalizationEN from "@enums/LocalizationEN";
+import FileSystemUtil from "@lib/FileSystemUtil";
+import HotKeysController from "@lib/HotKeysController";
+
 
 export default class ContentBrowserUtil {
     static sortItems(arr: MutableObject[], isDSC: boolean, sortKey: string) {
@@ -403,9 +404,6 @@ export default class ContentBrowserUtil {
 
 
     static initializeContentBrowser() {
-        ProjectionEngine.ContentBrowserStore.addListener("self-update", () => {
-            ProjectionEngine.ContentBrowserHierarchyStore.updateStore({})
-        })
         ContentBrowserUtil.refreshFiles().catch(console.error)
     }
 
@@ -447,42 +445,9 @@ export default class ContentBrowserUtil {
     }
 
     static updateHierarchy() {
-        const items = ProjectionEngine.ContentBrowserStore.getData().items
-        if (!items)
-            return
-        const open = ProjectionEngine.ContentBrowserHierarchyStore.getData().open
-        const folders = items.filter(item => item.isFolder)
-        const cache = {
-            [FileSystemUtil.sep]: {
-                depth: 0,
-                item: {id: FileSystemUtil.sep, name: "Assets", isFolder: true},
-                childQuantity: folders.length
-            }
-        }
-        if (open[FileSystemUtil.sep]) {
-            for (let i = 0; i < folders.length; i++) {
-                const item = folders[i]
-                if (item.parent)
-                    continue
-                ContentBrowserUtil.#getHierarchy(cache, item, 1, folders)
-            }
-        }
-        return Object.values(cache)
+        return []
     }
 
-    static #getHierarchy(cache, item, depth = 0, folders) {
-        cache[item.id] = {item, depth, childQuantity: 0, children: []}
-        const isOpen = ProjectionEngine.ContentBrowserHierarchyStore.getData().open[item.id]
-        for (let i = 0; i < folders.length; i++) {
-            const current = folders[i]
-            if (current.parent === item.id && !cache[current.id]) {
-                cache[item.id].childQuantity++
-                cache[item.id].children.push(current.id)
-                if (isOpen)
-                    ContentBrowserUtil.#getHierarchy(cache, current, depth + 1, folders)
-            }
-        }
-    }
 
     static buildContextMenuAndHotKeys(
         COMPONENT_ID: string,

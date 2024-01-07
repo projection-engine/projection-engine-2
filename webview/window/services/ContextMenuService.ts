@@ -1,11 +1,13 @@
-import ContextMenuOption from "../shared/lib/context-menu/templates/ContextMenuOptions"
-import ContextMenuTarget from "../shared/lib/context-menu/templates/ContextMenuTarget"
-import getContextAction from "../shared/lib/context-menu/utils/get-context-action"
-import ElectronResources from "../shared/lib/ElectronResources"
-import IPCRoutes from "../../enums/IPCRoutes"
-import MappedOption from "../shared/lib/context-menu/templates/MappedOption"
-import getOptionID from "../shared/lib/context-menu/utils/get-option-id"
+import ContextMenuOption from "@lib/context-menu/templates/ContextMenuOptions"
+import ContextMenuTarget from "@lib/context-menu/templates/ContextMenuTarget"
+import getContextAction from "@lib/context-menu/utils/get-context-action"
+import ElectronResources from "@lib/ElectronResources"
+import IPCRoutes from "@enums/IPCRoutes"
+import MappedOption from "@lib/context-menu/templates/MappedOption"
+import getOptionID from "@lib/context-menu/utils/get-option-id"
+import {Injectable} from "@lib/Injection";
 
+@Injectable
 export default class ContextMenuService {
 	blockContext = false
 	currentX = -1

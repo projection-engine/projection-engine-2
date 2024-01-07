@@ -1,13 +1,13 @@
 <script>
 
-    import GPU from "../../../../../../engine/core/GPU"
-    import PrimitiveProcessor from "../../../../../../engine/core/lib/math/PrimitiveProcessor"
-    import FileSystemUtil from "../../../../../shared/FileSystemUtil"
-    import GPUAPI from "../../../../../../engine/core/lib/rendering/GPUAPI"
+    import GPU from "@engine-core/GPU"
+    import PrimitiveProcessor from "@engine-core/lib/math/PrimitiveProcessor"
+    import FileSystemUtil from "@lib/FileSystemUtil"
+    import GPUAPI from "@engine-core/lib/rendering/GPUAPI"
     import ToasterService from "../../../../../services/ToasterService"
-    import LocalizationEN from "../../../../../../enums/LocalizationEN"
+    import LocalizationEN from "@enums/LocalizationEN"
     import EditorFSUtil from "../../../../util/EditorFSUtil"
-    import ProjectionEngine from "../../../../../ProjectionEngine";
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     export let item
     let wasUpdated = false

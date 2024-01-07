@@ -1,17 +1,17 @@
 <script>
 
-    import FileSystemUtil from "../../../../../shared/FileSystemUtil"
+    import FileSystemUtil from "@lib/FileSystemUtil"
     import TextureItem from "./TextureItem.svelte"
     import CodeItem from "./CodeItem.svelte"
     import ItemMetadata from "./ItemMetadata.svelte"
     import MaterialItem from "./MaterialItem.svelte"
     import MeshItem from "./MeshItem.svelte"
-    import Icon from "../../../../../shared/components/icon/Icon.svelte"
-    import LocalizationEN from "../../../../../../enums/LocalizationEN"
-    import FileTypes from "../../../../../../enums/FileTypes"
+    import Icon from "@lib/components/icon/Icon.svelte"
+    import LocalizationEN from "@enums/LocalizationEN"
+    import FileTypes from "@enums/FileTypes"
     import {onDestroy, onMount} from "svelte";
-    import ContentBrowserStore from "../../../../../shared/stores/ContentBrowserStore";
-    import ProjectionEngine from "../../../../../ProjectionEngine";
+    import ContentBrowserStore from "@lib/stores/ContentBrowserStore";
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     const VALID = [FileTypes.TEXTURE, FileTypes.COLLECTION, FileTypes.MATERIAL]
     const COMPONENT_ID = crypto.randomUUID()

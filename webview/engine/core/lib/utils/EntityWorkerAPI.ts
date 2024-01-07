@@ -4,7 +4,7 @@ import Entity from "../../instances/Entity"
 import QueryAPI from "./QueryAPI"
 import entityWorker from "../../workers/entity-worker";
 import Engine from "../../Engine";
-import ProjectionEngine from "../../../../window/ProjectionEngine";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 export default class EntityWorkerAPI {
     static hasChangeBuffer = new Uint8Array(new ArrayBuffer(1))

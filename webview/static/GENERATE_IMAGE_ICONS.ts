@@ -1,5 +1,5 @@
 import {getFontEmbedCSS, toPng} from "html-to-image"
-import ElectronResources from "../window/shared/lib/ElectronResources"
+import ElectronResources from "@lib/lib/ElectronResources"
 
 const W = 7 * 512
 const H = 512

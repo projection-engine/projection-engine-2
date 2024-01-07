@@ -1,11 +1,11 @@
 <script>
     import ShotcutField from "./ShotcutField.svelte"
     import SETTINGS from "../../editor/static/SETTINGS"
-    import SettingsStore from "../../shared/stores/SettingsStore"
-    import PropertyHeader from "../../shared/components/PropertyHeader.svelte"
-    import LocalizationEN from "../../../enums/LocalizationEN"
+    import SettingsStore from "@lib/stores/SettingsStore"
+    import PropertyHeader from "@lib/components/PropertyHeader.svelte"
+    import LocalizationEN from "@enums/LocalizationEN"
     import {onDestroy, onMount} from "svelte"
-    import ProjectionEngine from "../../ProjectionEngine";
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
 

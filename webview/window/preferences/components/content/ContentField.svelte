@@ -1,10 +1,12 @@
-<script>
+<script lang="ts">
 
-    import Checkbox from "../../../shared/components/checkbox/Checkbox.svelte"
-    import ColorPicker from "../../../shared/components/color-picker/ColorPicker.svelte"
-    import Range from "../../../shared/components/range/Range.svelte"
-    import Component from "../../../../engine/core/instances/components/Component"
-    import ProjectionEngine from "../../../ProjectionEngine";
+    import Checkbox from "@lib/components/checkbox/Checkbox.svelte"
+    import ColorPicker from "@lib/components/color-picker/ColorPicker.svelte"
+    import Range from "@lib/components/range/Range.svelte"
+    import Component from "@engine-core/instances/components/Component"
+    import {InjectVar} from "@lib/Injection";
+    import VisualsStore from "@lib/stores/VisualsStore";
+    import SettingsStore from "@lib/stores/SettingsStore";
 
     export let toRender
     export let settings
@@ -12,6 +14,10 @@
 
     let fieldValue
     let timeout
+
+    const settingsStore = InjectVar(SettingsStore) as SettingsStore
+    const visualsStore = InjectVar(VisualsStore) as VisualsStore
+
 
     function getValue(s) {
     	if (!toRender)
@@ -43,9 +49,9 @@
     		s[key] = value
     	if (save) {
     		if (toRender?.target === "settings")
-                ProjectionEngine.SettingsStore.updateStore(s)
+                settingsStore.updateStore(s)
     		else
-                ProjectionEngine.VisualsStore.updateStore(s)
+                visualsStore.updateStore(s)
     	}
     }
 

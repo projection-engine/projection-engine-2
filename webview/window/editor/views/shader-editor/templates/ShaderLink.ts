@@ -5,8 +5,8 @@ import ToasterService from "../../../../services/ToasterService"
 import {Input} from "../static/Input"
 import {Output} from "../static/Output"
 import CanvasResources from "../libs/CanvasResources"
-import LocalizationEN from "../../../../../enums/LocalizationEN";
-import ProjectionEngine from "../../../../ProjectionEngine";
+import LocalizationEN from "@enums/LocalizationEN";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 export default class ShaderLink {
 	targetRef: Input

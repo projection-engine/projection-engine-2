@@ -1,21 +1,21 @@
 <script lang="ts">
     import ITEM_TYPES from "../static/ITEM_TYPES"
     import ViewHeader from "../../../components/view/components/ViewHeader.svelte"
-    import getDropdownHeaderStyles from "../../../../shared/components/dropdown/utils/get-dropdown-header-styles"
-    import Icon from "../../../../shared/components/icon/Icon.svelte"
-    import ToolTip from "../../../../shared/components/tooltip/ToolTip.svelte"
-    import Dropdown from "../../../../shared/components/dropdown/Dropdown.svelte"
-    import Input from "../../../../shared/components/input/Input.svelte"
+    import getDropdownHeaderStyles from "@lib/components/dropdown/utils/get-dropdown-header-styles"
+    import Icon from "@lib/components/icon/Icon.svelte"
+    import ToolTip from "@lib/components/tooltip/ToolTip.svelte"
+    import Dropdown from "@lib/components/dropdown/Dropdown.svelte"
+    import Input from "@lib/components/input/Input.svelte"
     import ToasterService from "../../../../services/ToasterService"
     import SortingOptions from "./SortingOptions.svelte"
-    import LocalizationEN from "../../../../../enums/LocalizationEN"
-    import FileTypes from "../../../../../enums/FileTypes"
-    import EmptyIcon from "../../../../shared/components/icon/EmptyIcon.svelte"
+    import LocalizationEN from "@enums/LocalizationEN"
+    import FileTypes from "@enums/FileTypes"
+    import EmptyIcon from "@lib/components/icon/EmptyIcon.svelte"
     import ContentBrowserUtil from "../../../util/ContentBrowserUtil"
     import EditorUtil from "../../../util/EditorUtil"
-    import FileSystemUtil from "../../../../shared/FileSystemUtil"
+    import FileSystemUtil from "@lib/FileSystemUtil"
     import NavigationHistory from "../libs/NavigationHistory";
-    import ProjectionEngine from "../../../../ProjectionEngine";
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     export let currentDirectory: { id: string }
     export let fileType: string

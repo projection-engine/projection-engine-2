@@ -1,8 +1,8 @@
 <script>
     import {onDestroy, onMount} from "svelte"
-    import Renderer from "../../../../../engine/core/Renderer"
-    import Engine from "../../../../../engine/core/Engine"
-    import ProjectionEngine from "../../../../ProjectionEngine";
+    import Renderer from "@engine-core/Renderer"
+    import Engine from "@engine-core/Engine"
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
     const MEMORY_UPDATE_INTERVAL = 2000

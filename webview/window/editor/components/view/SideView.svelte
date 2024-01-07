@@ -1,10 +1,10 @@
 <script>
     import ViewGroup from "./components/ViewGroup.svelte"
-    import ResizableBar from "../../../shared/components/resizable/ResizableBar.svelte"
+    import ResizableBar from "@lib/components/resizable/ResizableBar.svelte"
     import ViewsUtil from "../../util/ViewsUtil"
     import {onDestroy, onMount} from "svelte"
-    import EngineStore from "../../../shared/stores/EngineStore"
-    import ProjectionEngine from "../../../ProjectionEngine";
+    import EngineStore from "@lib/stores/EngineStore"
+    import ProjectionEngine from "@lib/ProjectionEngine";
 
     const COMPONENT_ID = crypto.randomUUID()
 
