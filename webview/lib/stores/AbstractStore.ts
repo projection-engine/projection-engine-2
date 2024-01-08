@@ -4,8 +4,8 @@ import * as crypto from "crypto";
 
 export default class AbstractStore<T extends IStateDTO> {
     #data: T
-    #globalSubscriptions = new Map<string, GenericVoidFunctionWithP<T>>()
-    #subscriptionsByDependencyKey = new Map<string, Map<string, GenericVoidFunctionWithP<T>>>()
+    #globalSubs = new Map<string, GenericVoidFunctionWithP<T>>()
+    #subsByField = new Map<string, Map<string, GenericVoidFunctionWithP<T>>>()
 
     constructor(data: T) {
         this.#data = data
@@ -13,21 +13,19 @@ export default class AbstractStore<T extends IStateDTO> {
 
     updateStore(data: MutableObject = {}) {
         const callbacks: GenericVoidFunctionWithP<T>[] = []
-
-        this.#data
-            .getKeys()
-            .forEach(key => {
-                if (data[key] !== undefined && data[key] !== this.#data[key]) {
-                    this.#subscriptionsByDependencyKey
-                        .get(key)
-                        .forEach(callback => {
-                            callbacks.push(callback)
-                        })
-                }
-            })
-        this.#globalSubscriptions
-            .forEach(callback => callbacks.push(callback))
-        Object.assign(this.#data, data)
+        for (const key of this.#data.getKeys()) {
+            if (!Object.hasOwn(data, key)) {
+                continue;
+            }
+            const dataValue = data[key];
+            if (dataValue !== this.#data[key] && this.#subsByField.has(key)) {
+                this.#subsByField
+                    .get(key)
+                    .forEach(c => callbacks.push(c))
+            }
+            this.#data[key] = dataValue
+        }
+        this.#globalSubs.forEach(callback => callbacks.push(callback))
         callbacks.forEach(c => c(this.#data))
     }
 
@@ -41,23 +39,23 @@ export default class AbstractStore<T extends IStateDTO> {
         callback(this.#data)
         const id = crypto.randomUUID()
         if (dependencies.length === 0) {
-            this.#globalSubscriptions.set(id, callback)
+            this.#globalSubs.set(id, callback)
             return () => {
-                this.#globalSubscriptions.delete(id)
+                this.#globalSubs.delete(id)
             }
         } else {
             dependencies.forEach(d => {
-                if (!this.#subscriptionsByDependencyKey.has(d)) {
-                    this.#subscriptionsByDependencyKey.set(d, new Map())
+                if (!this.#subsByField.has(d)) {
+                    this.#subsByField.set(d, new Map())
                 }
-                this.#subscriptionsByDependencyKey.get(d).set(id, callback)
+                this.#subsByField.get(d).set(id, callback)
             })
             return () => {
                 dependencies.forEach(d => {
-                    const map = this.#subscriptionsByDependencyKey.get(d);
+                    const map = this.#subsByField.get(d);
                     map.delete(id)
                     if (map.size === 0) {
-                        this.#subscriptionsByDependencyKey.delete(d)
+                        this.#subsByField.delete(d)
                     }
                 })
             }

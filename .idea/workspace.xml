@@ -21,8 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-34] Stores&#10;- Creating DTOs&#10;- Creating new subscribe method&#10;- Removing old objects">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/stores/AbstractStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/AbstractStore.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/webview/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/webview/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,6 +96,8 @@
     "Catch.JSON test.executor": "Run",
     "Catch.Run all.executor": "Run",
     "Catch.main_test.executor": "Run",
+    "Jest.Should trigger global subscriber.executor": "Run",
+    "Jest.Should unsubscribe.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
@@ -109,10 +111,12 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs.jest.jest_package": "C:/Users/russi/WebstormProjects/projection-engine-2/webview/node_modules/jest",
     "nodejs_package_manager_path": "npm",
     "npm.bdev.executor": "Run",
     "npm.dev-build.executor": "Run",
     "npm.sdev.executor": "Run",
+    "npm.test.executor": "Run",
     "run.code.analysis.last.selected.profile": "pProject Default",
     "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.C/C++",
     "ts.external.directory.path": "C:\\Users\\russi\\WebstormProjects\\projection-engine-2\\webview\\node_modules\\typescript\\lib",
@@ -124,11 +128,11 @@
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\test\core" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\tests\stores" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\lib\stores\state" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\window\editor\components\view" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\window\editor\views" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview" />
-      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\lib" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -139,7 +143,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="CMake Application.Projection">
+  <component name="RunManager" selected="Jest.Should trigger global subscriber">
     <configuration name="File-system test" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="build" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_CLASS="[fs-test]" TEST_METHOD="File-system test" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -152,18 +156,29 @@
         <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Run all" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="build" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_CLASS="[RUN_ALL]" TEST_METHOD="Run all" TEST_MODE="SUITE_TEST">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-        <option name="BeforeTestRunTask" enabled="true" />
-      </method>
+    <configuration name="Should trigger global subscriber" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/webview/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$/webview" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/webview/tests/stores/Store.test.ts" />
+      <test-names>
+        <test-name value="Should trigger global subscriber" />
+      </test-names>
+      <method v="2" />
     </configuration>
-    <configuration name="main.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main.cpp - Visual Studio" CONFIG_NAME="main.cpp">
-      <option name="sourceFile" value="src\main.cpp" />
-      <option name="toolchainName" value="Visual Studio" />
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
-      </method>
+    <configuration name="Should unsubscribe" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/webview/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$/webview" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/webview/tests/stores/Store.test.ts" />
+      <test-names>
+        <test-name value="Should unsubscribe" />
+      </test-names>
+      <method v="2" />
     </configuration>
     <configuration name="copy-files" type="ShConfigurationType">
       <option name="SCRIPT_TEXT" value="cp -r -Force &quot;src/ui/webview/build&quot; &quot;cmake-build-debug-visual-studio/src&quot;" />
@@ -190,36 +205,36 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="sdev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/src/ui/webview/package.json" />
+    <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/webview/package.json" />
       <command value="run" />
       <scripts>
-        <script value="sdev" />
+        <script value="test" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="C/C++ File.main.cpp" />
       <item itemvalue="Catch.main_test" />
       <item itemvalue="Catch.JSON test" />
       <item itemvalue="Catch.File-system test" />
-      <item itemvalue="Catch.Run all" />
       <item itemvalue="CMake Application.Projection" />
       <item itemvalue="CMake Debug.projectioncmake" />
+      <item itemvalue="Jest.Should trigger global subscriber" />
+      <item itemvalue="Jest.Should unsubscribe" />
       <item itemvalue="npm.dev-build" />
       <item itemvalue="npm.bdev" />
-      <item itemvalue="npm.sdev" />
+      <item itemvalue="npm.test" />
       <item itemvalue="Shell Script.copy-files" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Jest.Should trigger global subscriber" />
+        <item itemvalue="npm.test" />
+        <item itemvalue="Jest.Should unsubscribe" />
         <item itemvalue="Catch.JSON test" />
         <item itemvalue="Catch.File-system test" />
-        <item itemvalue="Catch.Run all" />
-        <item itemvalue="C/C++ File.main.cpp" />
-        <item itemvalue="npm.sdev" />
       </list>
     </recent_temporary>
   </component>
@@ -264,6 +279,8 @@
       <workItem from="1704638211069" duration="2252000" />
       <workItem from="1704649399093" duration="7499000" />
       <workItem from="1704665675871" duration="3600000" />
+      <workItem from="1704751396678" duration="815000" />
+      <workItem from="1704752227514" duration="1083000" />
     </task>
     <task id="LOCAL-00001" summary="[STD-1] Organizing project&#10;- removing unused C++ classes&#10;- Refactoring files&#10;- Renaming c++ namespaces and project &#10;- Moving future webview stuff">
       <option name="closed" value="true" />
