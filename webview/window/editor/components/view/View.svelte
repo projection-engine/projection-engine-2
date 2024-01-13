@@ -1,6 +1,5 @@
 <script lang="ts">
     import Hierarchy from "../../views/hierarchy/HierarchyView.svelte"
-    import ContentBrowser from "../../views/content-browser/ContentBrowserView.svelte"
     import Inspector from "../../views/inspector/InspectorView.svelte"
     import ShaderEditor from "../../views/shader-editor/ShaderEditorView.svelte"
     import UIEditor from "../../views/ui/UIEditorView.svelte"
@@ -11,6 +10,7 @@
     import {onMount, setContext} from "svelte";
     import SettingsStore from "@lib/stores/SettingsStore";
     import {InjectVar} from "@lib/Injection";
+    import FileSystemView from "../../views/fs/FileSystemView.svelte";
 
     export let styles: string = ""
     export let index: number
@@ -29,7 +29,7 @@
             case ViewType.INSPECTOR:
                 return Inspector
             case ViewType.FILES:
-                return ContentBrowser
+                return FileSystemView
             case ViewType.UI:
                 return UIEditor
             case ViewType.EDITOR:

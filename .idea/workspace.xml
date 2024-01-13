@@ -19,24 +19,16 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-34] Stores&#10;- Merging Visuals and Engine stores into Settings store">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-21]  New project architecture&#10;- Removing old level stuff&#10;- Refactoring services&#10;- Adding new events for project path">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/Engine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/Engine.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/lib/utils/EntityAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/utils/EntityAPI.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/enums/FileTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/enums/FileTypes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/enums/IPCRoutes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/enums/IPCRoutes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/FS.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/FS.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/FS.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/FS.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/enums/LocalizationEN.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/enums/LocalizationEN.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/FileSystemUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/FileSystemUtil.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/ProjectionEngine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/ProjectionEngine.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/components/frame/MenuBar.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/components/frame/MenuBar.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/stores/state/SettingsStateDTO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/state/SettingsStateDTO.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/webview/WebViewSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/webview/WebViewService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/services/EngineStateService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/EngineStateService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/services/ExecutionService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/ExecutionService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/services/LevelService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/ProjectService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/ContentBrowserUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/ContentBrowserUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/FSService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/FSService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/services/ProjectService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/ProjectService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/View.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/View.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +42,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="FileSystem" />
+        <option value="FSSideBar" />
         <option value="TypeScript File" />
+        <option value="Files" />
       </list>
     </option>
   </component>
@@ -146,11 +141,11 @@
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\test\core" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\lib\dto\fs" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\tests\injection" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\tests\stores" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\lib\stores\state" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\window\editor\components\view" />
-      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\window\editor\views" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -161,7 +156,12 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Jest.Should be lazily obtained">
+  <component name="RunManager" selected="npm.dev-build">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Should be lazily obtained" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <jest-package value="$PROJECT_DIR$/webview/node_modules/jest" />
@@ -312,7 +312,8 @@
       <workItem from="1704751396678" duration="815000" />
       <workItem from="1704752227514" duration="1722000" />
       <workItem from="1704754038431" duration="8000" />
-      <workItem from="1705147573913" duration="12827000" />
+      <workItem from="1705147573913" duration="14465000" />
+      <workItem from="1705173861585" duration="6499000" />
     </task>
     <task id="LOCAL-00001" summary="[STD-1] Organizing project&#10;- removing unused C++ classes&#10;- Refactoring files&#10;- Renaming c++ namespaces and project &#10;- Moving future webview stuff">
       <option name="closed" value="true" />
@@ -618,7 +619,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705158882379</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="[STD-21]  New project architecture&#10;- Removing old level stuff&#10;- Refactoring services&#10;- Adding new events for project path">
+      <option name="closed" value="true" />
+      <created>1705164031936</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1705164031936</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -642,7 +651,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-6] Project window&#10;- Improving event system&#10;- Adding basic functions for project window" />
     <MESSAGE value="[STD-6] Project window&#10;- Creating &quot;create project&quot; callback" />
     <MESSAGE value="[STD-6] Project window&#10;- creating system for projects &#10;- Completing tests for file system&#10;- Continuing create project" />
     <MESSAGE value="[STD-6] Project window&#10;- JSON util&#10;- JSON util tests" />
@@ -667,7 +675,8 @@
     <MESSAGE value="[STD-34] Stores&#10;- Fixing subscribe and unsubscribe&#10;- Creating test for store" />
     <MESSAGE value="[STD-34] Stores&#10;- Completing change to subscribe&#10;- Creating test for Injection &#10;- Improving store update method" />
     <MESSAGE value="[STD-34] Stores&#10;- Merging Visuals and Engine stores into Settings store" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-34] Stores&#10;- Merging Visuals and Engine stores into Settings store" />
+    <MESSAGE value="[STD-21]  New project architecture&#10;- Removing old level stuff&#10;- Refactoring services&#10;- Adding new events for project path" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-21]  New project architecture&#10;- Removing old level stuff&#10;- Refactoring services&#10;- Adding new events for project path" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -683,9 +692,25 @@
           <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp</url>
-          <line>96</line>
-          <option name="timeStamp" value="42" />
+          <url>file://$PROJECT_DIR$/src/ui/editor/Editor.cpp</url>
+          <line>28</line>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/util/FS.cpp</url>
+          <line>119</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/util/FS.cpp</url>
+          <line>107</line>
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/webview/lib/FSService.ts</url>
+          <line>9</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="43" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

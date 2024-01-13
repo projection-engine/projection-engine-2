@@ -71,7 +71,6 @@ export default class ProjectService extends IInjectable {
             return
         }
         ProjectService.toasterService.success(LocalizationEN.PROJECT_SAVED)
-        await EditorFSUtil.readRegistry()
     }
 }
 

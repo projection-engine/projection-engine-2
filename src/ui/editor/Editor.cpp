@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Editor.h"
 #include "../shared/webview/WebViewWindow.h"
 #include "../shared/webview/WebViewPayload.h"
@@ -20,6 +21,7 @@ namespace PEngine {
         WindowRepository::Get().getWebView()->addMessageListener(RELOAD, onMessage);
         WindowRepository::Get().getWebView()->addMessageListener(GET_PROJECT_PATH, onMessage);
         WindowRepository::Get().getWebView()->addMessageListener(SET_PROJECT_PATH, onMessage);
+        FS::BindEvents(WindowRepository::Get().getWebView());
         return new Runner();
     }
 
