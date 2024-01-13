@@ -5,9 +5,7 @@
     import Range from "@lib/components/range/Range.svelte"
     import Component from "@engine-core/instances/components/Component"
     import {InjectVar} from "@lib/Injection";
-    import VisualsStore from "@lib/stores/VisualsStore";
     import SettingsStore from "@lib/stores/SettingsStore";
-    import CAMERA_PROPS from "@engine-core/static/component-props/CAMERA_PROPS";
     import {onDestroy} from "svelte";
 
     export let toRender
@@ -16,8 +14,6 @@
     let timeout
 
     const settingsStore = InjectVar(SettingsStore)
-    const visualsStore = InjectVar(VisualsStore)
-
 
     function getValue(s) {
         if (!toRender)
@@ -36,22 +32,19 @@
         if (!toRender)
             return
         const key = toRender.key
-        let s = toRender?.target === "settings" ? settingsStore.getData() : visualsStore.getData()
+        let storeData = settingsStore.getData()
         if (save)
-            s = {...s}
+            storeData = {...storeData}
         if (Array.isArray(key)) {
-            let current = s
+            let current = storeData
             for (let i = 0; i < key.length - 1; i++)
                 current = current[key[i]]
             current[[...key].pop()] = value
 
         } else
-            s[key] = value
+            storeData[key] = value
         if (save) {
-            if (toRender?.target === "settings")
-                settingsStore.updateStore(s)
-            else
-                visualsStore.updateStore(s)
+            settingsStore.updateStore(storeData)
         }
     }
 
@@ -60,13 +53,7 @@
             fieldValue = getValue(data)
     })
 
-    const unsubVisuals = visualsStore.subscribe(data => {
-        if (toRender?.target !== "settings")
-            fieldValue = getValue(data)
-    })
-
     onDestroy(() => {
-        unsubVisuals()
         unsubSettings()
     })
 </script>

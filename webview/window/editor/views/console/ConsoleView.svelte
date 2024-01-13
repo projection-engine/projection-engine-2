@@ -11,7 +11,7 @@
     import ViewHeader from "../../components/view/ViewHeader.svelte"
     import ProjectionEngine from "@lib/ProjectionEngine";
     import {InjectVar} from "@lib/Injection";
-    import EngineStore from "@lib/stores/EngineStore";
+    import SettingsStore from "@lib/stores/SettingsStore";
 
     const COMPONENT_ID = crypto.randomUUID()
     const TYPES = ConsoleAPI.TYPES
@@ -22,7 +22,7 @@
     let modal
     let objectOpen
 
-    const unsubEngine = InjectVar(EngineStore)
+    const unsubSettings = InjectVar(SettingsStore)
         .subscribe(() => ConsoleAPI.clear(), ["executingAnimation"])
 
 
@@ -41,7 +41,7 @@
     })
 
     onDestroy(() => {
-        unsubEngine()
+        unsubSettings()
         ConsoleAPI.removeListener(COMPONENT_ID)
         portal.destroy()
         document.removeEventListener("mousedown", handler)

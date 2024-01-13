@@ -12,12 +12,10 @@ import GIZMOS from "@enums/Gizmos"
 import ContentBrowserUtil from "./ContentBrowserUtil"
 import GizmoState from "../../../engine/tools/gizmo/util/GizmoState";
 import GizmoUtil from "../../../engine/tools/gizmo/util/GizmoUtil";
-import ProjectionEngine from "@lib/ProjectionEngine";
 import {Inject, Injectable} from "@lib/Injection";
 import IInjectable from "@lib/IInjectable";
 import ToasterService from "@services/ToasterService";
 import ExecutionService from "@services/ExecutionService";
-import EngineStore from "@lib/stores/EngineStore";
 import SettingsStore from "@lib/stores/SettingsStore";
 
 
@@ -37,9 +35,6 @@ export default class EditorUtil extends IInjectable {
     @Inject(ExecutionService)
     static executionService: ExecutionService
 
-    @Inject(EngineStore)
-    static engineStore: EngineStore
-
     @Inject(SettingsStore)
     static settingsStore: SettingsStore
 
@@ -51,8 +46,7 @@ export default class EditorUtil extends IInjectable {
     }
 
     static focusOnCamera(cameraTarget) {
-        const engineInstance = EditorUtil.engineStore
-        const focused = engineInstance.getData().focusedCamera
+        const focused = EditorUtil.settingsStore.getData().focusedCamera
         const isCamera = cameraTarget instanceof Entity
         if (!focused || isCamera && cameraTarget.id !== focused) {
             const current = isCamera ? cameraTarget : EditorUtil.engine.entities.get(SelectionStore.getMainEntity())
@@ -60,12 +54,12 @@ export default class EditorUtil extends IInjectable {
                 EditorUtil.executionService.cameraSerialization = EditorUtil.engine.CameraAPI.serializeState()
                 CameraTracker.stopTracking()
                 EditorUtil.engine.CameraAPI.updateViewTarget(current)
-                engineInstance.updateStore({focusedCamera: current.id})
+                EditorUtil.settingsStore.updateStore({focusedCamera: current.id})
             }
         } else {
             EditorUtil.engine.CameraAPI.restoreState(EditorUtil.executionService.cameraSerialization)
             CameraTracker.startTracking()
-            engineInstance.updateStore({focusedCamera: undefined})
+            EditorUtil.settingsStore.updateStore({focusedCamera: undefined})
         }
     }
 

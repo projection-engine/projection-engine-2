@@ -10,18 +10,16 @@
     import ViewportUtil from "../../util/ViewportUtil";
     import {InjectVar} from "@lib/Injection";
     import SettingsStore from "@lib/stores/SettingsStore";
-    import EngineStore from "@lib/stores/EngineStore";
 
     export let view: ViewType
     export let ready: boolean
 
     const settings = InjectVar(SettingsStore)
-    const unsubEngine = InjectVar(EngineStore).subscribe(data => {
-        const settingsData = settings.getData()
-        const currentView = settingsData.views[settingsData.currentView]
+    const unsubSettings = settings.subscribe(data => {
+        const currentView = data.views[data.currentView]
         if (data.executingAnimation && currentView.getCenter() !== ViewType.EDITOR) {
             currentView.replaceViewType(0, ViewType.EDITOR, ViewPlacement.CENTER)
-            settings.updateStore(settingsData)
+            settings.updateStore(data)
         }
     }, ["executingAnimation"])
 
@@ -43,7 +41,7 @@
     })
 
     onDestroy(() => {
-        unsubEngine()
+        unsubSettings()
         HotKeysController.unbindAction(ref)
     })
 

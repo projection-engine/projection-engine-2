@@ -7,25 +7,24 @@ import VisibilityRenderer from "@engine-core/runtime/VisibilityRenderer"
 import EngineTools from "../../../engine/tools/EngineTools"
 import StaticFBO from "@engine-core/lib/StaticFBO";
 import SelectionStore from "@lib/stores/SelectionStore";
-import ProjectionEngine from "@lib/ProjectionEngine";
 import {ViewType} from "../components/view/ViewDefinitions";
 import {Inject, Injectable} from "@lib/Injection";
 import IInjectable from "@lib/IInjectable";
-import EngineStore from "@lib/stores/EngineStore";
+import SettingsStore from "@lib/stores/SettingsStore";
 
 // TODO -  REMOVE STATIC MEMBERS
 
 @Injectable
 export default class ViewportUtil extends IInjectable {
 
-    @Inject(EngineStore)
-    static engineStore: EngineStore
+    @Inject(SettingsStore)
+    static settingsStore: SettingsStore
 
     @Inject(Engine)
     static engine: Engine
 
     static updateViewport(currentView: ViewType) {
-        if (ViewportUtil.engineStore.getData().focusedCamera || !GPU.context)
+        if (ViewportUtil.settingsStore.getData().focusedCamera || !GPU.context)
             return
         if (currentView === ViewType.EDITOR) {
             CameraTracker.startTracking()

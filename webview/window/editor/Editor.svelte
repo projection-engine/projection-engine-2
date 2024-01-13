@@ -8,7 +8,6 @@
     import Canvas from "./components/view/Canvas.svelte";
     import ToasterService from "@services/ToasterService";
     import SettingsStore from "@lib/stores/SettingsStore";
-    import EngineStore from "@lib/stores/EngineStore";
     import {ViewPlacement} from "./components/view/ViewDefinitions";
     import ViewTabDTO from "./components/view/ViewTabDTO";
 
@@ -18,22 +17,17 @@
 
     const toasterService = InjectVar(ToasterService)
     const settingsStore = InjectVar(SettingsStore)
-    const engineStore = InjectVar(EngineStore)
     const unsubSettings = settingsStore.subscribe(
         data => {
             view = data.views[data.currentView]
             cameraGizmoSize = data.cameraGizmoSize
+            HotKeysController.blockActions = data.executingAnimation
         },
-        ["views", "currentView", "cameraGizmoSize"]
+        ["views", "currentView", "cameraGizmoSize", "executingAnimation"]
     );
-    const unsubEngine = engineStore.subscribe(data => HotKeysController.blockActions = data.executingAnimation, ["executingAnimation"])
 
     onMount(() => toasterService.initialize())
-
-    onDestroy(() => {
-        unsubEngine()
-        unsubSettings()
-    })
+    onDestroy(unsubSettings)
 </script>
 
 <MenuBar/>

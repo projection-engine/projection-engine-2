@@ -10,7 +10,6 @@
     import EditorUtil from "../../../util/EditorUtil"
     import ProjectionEngine from "@lib/ProjectionEngine";
     import {InjectVar} from "@lib/Injection";
-    import EngineStore from "@lib/stores/EngineStore";
     import SettingsStore from "@lib/stores/SettingsStore";
 
     const COMPONENT_ID = crypto.randomUUID()
@@ -18,14 +17,12 @@
     let focusedCamera
     let screenSpaceMovement = false
     let camera = {}
-    const unsubEngine = InjectVar(EngineStore).subscribe(data => {
-        focusedCamera = data.focusedCamera
-    }, ["focusedCamera"])
 
     const unsubSettings = InjectVar(SettingsStore).subscribe(data => {
         CameraTracker.screenSpaceMovement = screenSpaceMovement = data.screenSpaceMovement
         camera = data.camera
-    }, ["screenSpaceMovement", "camera"])
+        focusedCamera = data.focusedCamera
+    }, ["screenSpaceMovement", "camera", "focusedCamera"])
 
     onMount(() => {
         ProjectionEngine.EntityHierarchyService.registerListener(COMPONENT_ID, () => {
@@ -34,7 +31,6 @@
     })
 
     onDestroy(() => {
-        unsubEngine()
         unsubSettings()
         ProjectionEngine.EntityHierarchyService.removeListener(COMPONENT_ID)
     })

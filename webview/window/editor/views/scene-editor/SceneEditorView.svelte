@@ -19,7 +19,6 @@
     import ViewportInteractionService from "./lib/ViewportInteractionService";
     import {InjectVar} from "@lib/Injection";
     import SettingsStore from "@lib/stores/SettingsStore";
-    import EngineStore from "@lib/stores/EngineStore";
 
     const draggable = dragDrop(false)
 
@@ -32,12 +31,9 @@
     const unsubSettings = InjectVar(SettingsStore).subscribe(data => {
         isSelectBoxDisabled = data.gizmo !== GIZMOS.NONE
         shadingModel = data.shadingModel
-    }, ["gizmo", "shadingModel"])
-
-    const unsubEngine = InjectVar(EngineStore).subscribe(data => {
         executingAnimation = data.executingAnimation
         focusedCamera = data.focusedCamera ? ProjectionEngine.Engine.entities.get(data.focusedCamera) : null
-    }, ["focusedCamera", "executingAnimation"])
+    }, ["gizmo", "shadingModel", "focusedCamera", "executingAnimation"])
 
     onMount(() => {
         GizmoSystem.onStart = () => isOnGizmo = true
@@ -46,9 +42,7 @@
     })
 
     onDestroy(() => {
-        unsubEngine()
         unsubSettings()
-
         GizmoSystem.onStop = GizmoSystem.onStart = undefined
         ProjectionEngine.ContextMenuService.destroy(RENDER_TARGET)
         draggable.onDestroy()

@@ -1,7 +1,6 @@
 import {Inject, Injectable} from "@lib/Injection";
 import IInjectable from "@lib/IInjectable";
 import Engine from "@engine-core/Engine";
-import VisualsStore from "@lib/stores/VisualsStore";
 import EditorFSUtil from "../window/editor/util/EditorFSUtil";
 import EngineTools from "@engine-tools/EngineTools";
 import UIAPI from "@engine-core/lib/rendering/UIAPI";
@@ -9,14 +8,15 @@ import GPU from "@engine-core/GPU";
 import EngineToolsService from "@services/EngineToolsService";
 import ViewportInteractionService from "../window/editor/views/scene-editor/lib/ViewportInteractionService";
 import RENDER_TARGET from "../window/editor/static/RENDER_TARGET";
+import SettingsStore from "@lib/stores/SettingsStore";
 
 @Injectable
 export default class CanvasContextService extends IInjectable {
     @Inject(Engine)
     static engine: Engine
 
-    @Inject(VisualsStore)
-    static visualsStore: VisualsStore
+    @Inject(SettingsStore)
+    static settingsStore: SettingsStore
 
     #isInitialized = false
 
@@ -25,7 +25,7 @@ export default class CanvasContextService extends IInjectable {
             return
         }
         this.#isInitialized = true
-        const visualsData = CanvasContextService.visualsStore.getData();
+        const visualsData = CanvasContextService.settingsStore.getData();
         await CanvasContextService.engine.initialize(
             document.getElementById(RENDER_TARGET),
             {

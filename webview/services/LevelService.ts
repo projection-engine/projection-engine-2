@@ -2,8 +2,6 @@ import FileSystemUtil from "@lib/FileSystemUtil"
 import Engine from "@engine-core/Engine"
 import EditorFSUtil from "../window/editor/util/EditorFSUtil"
 import SelectionStore from "@lib/stores/SelectionStore"
-import CameraAPI from "@engine-core/lib/utils/CameraAPI"
-import CameraTracker from "@engine-tools/utils/CameraTracker"
 import serializeStructure from "@engine-core/utils/serialize-structure"
 import QueryAPI from "@engine-core/lib/utils/QueryAPI"
 import PickingAPI from "@engine-core/lib/utils/PickingAPI"
@@ -12,8 +10,6 @@ import LocalizationEN from "@enums/LocalizationEN"
 import FileTypes from "@enums/FileTypes"
 import EditorUtil from "../window/editor/util/EditorUtil"
 import {Inject, Injectable} from "@lib/Injection";
-import VisualsStore from "@lib/stores/VisualsStore";
-import EngineStore from "@lib/stores/EngineStore";
 import ToasterService from "@services/ToasterService";
 import EntityHierarchyService from "@services/EntityHierarchyService";
 import SettingsStore from "@lib/stores/SettingsStore";
@@ -25,14 +21,8 @@ import IInjectable from "@lib/IInjectable";
 export default class LevelService extends IInjectable{
     #levelToLoad
 
-    @Inject(VisualsStore)
-    static visualsStore: VisualsStore
-
     @Inject(Engine)
     static engine: Engine
-
-    @Inject(EngineStore)
-    static engineStore: EngineStore
 
     @Inject(SelectionStore)
     static selectionStore: SelectionStore
@@ -82,21 +72,20 @@ export default class LevelService extends IInjectable{
     }
 
     async save() {
-        if (LevelService.engineStore.getData().executingAnimation) {
+        if (LevelService.settingsStore.getData().executingAnimation) {
             LevelService.toasterService.warn(LocalizationEN.EXECUTING_SIMULATION)
             return
         }
 
         LevelService.toasterService.warn(LocalizationEN.SAVING)
         try {
-            const metadata = LevelService.engineStore.getData().meta
+            const metadata = LevelService.settingsStore.getData().meta
             const settings = {...LevelService.settingsStore.getData()}
             await FileSystemUtil.writeFile(
                 FileSystemUtil.path + FileSystemUtil.sep + FileTypes.PROJECT,
                 JSON.stringify({
                     ...metadata,
                     settings,
-                    visualSettings: LevelService.visualsStore.getData(),
                     level: LevelService.engine.loadedLevel?.id
                 }), true)
 

@@ -12,10 +12,10 @@ import type Component from "@engine-core/instances/components/Component";
 import Engine from "@engine-core/Engine";
 import IInjectable from "@lib/IInjectable";
 import {Inject, Injectable} from "@lib/Injection";
-import EngineStore from "@lib/stores/EngineStore";
 import EntityHierarchyService from "@services/EntityHierarchyService";
 import ToasterService from "@services/ToasterService";
 import ContentBrowserStore from "@lib/stores/ContentBrowserStore";
+import SettingsStore from "@lib/stores/SettingsStore";
 
 
 // TODO - REMOVE STATIC MEMBERS
@@ -25,8 +25,8 @@ export default class InspectorUtil extends IInjectable {
     @Inject(SelectionStore)
     static selectionStore: SelectionStore
 
-    @Inject(EngineStore)
-    static engineStore: EngineStore
+    @Inject(SettingsStore)
+    static settingsStore: SettingsStore
 
     @Inject(Engine)
     static engine: Engine
@@ -86,7 +86,7 @@ export default class InspectorUtil extends IInjectable {
             entity.__cameraNeedsUpdate = true
         }
         component[key] = value
-        if (component.componentKey === COMPONENTS.CAMERA && entity.id === InspectorUtil.engineStore.getData().focusedCamera)
+        if (component.componentKey === COMPONENTS.CAMERA && entity.id === InspectorUtil.settingsStore.getData().focusedCamera)
             InspectorUtil.engine.CameraAPI.updateViewTarget(entity)
     }
 

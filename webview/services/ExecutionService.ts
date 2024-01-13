@@ -6,10 +6,10 @@ import ScriptsAPI from "@engine-core/lib/utils/ScriptsAPI"
 import ResourceEntityMapper from "@engine-core/lib/ResourceEntityMapper"
 import LocalizationEN from "@enums/LocalizationEN"
 import {Inject, Injectable, LazyInject} from "@lib/Injection";
-import EngineStore from "@lib/stores/EngineStore";
 import LevelService from "@services/LevelService";
 import ToasterService from "@services/ToasterService";
 import IInjectable from "@lib/IInjectable";
+import SettingsStore from "@lib/stores/SettingsStore";
 
 @Injectable
 export default class ExecutionService extends IInjectable{
@@ -17,8 +17,8 @@ export default class ExecutionService extends IInjectable{
     #isPlaying = false
     cameraSerialization
 
-    @Inject(EngineStore)
-    static engineStore: EngineStore
+    @Inject(SettingsStore)
+    static settingsStore: SettingsStore
 
     @Inject(Engine)
     static engine: Engine
@@ -42,7 +42,7 @@ export default class ExecutionService extends IInjectable{
         await ExecutionService.levelService.saveCurrentLevel().catch(console.error)
         this.#currentLevelID = ExecutionService.engine.loadedLevel.id
         await ExecutionService.engine.startSimulation()
-        ExecutionService.engineStore.updateStore({focusedCamera: undefined, executingAnimation: true})
+        ExecutionService.settingsStore.updateStore({focusedCamera: undefined, executingAnimation: true})
     }
 
     async stopPlayState() {
@@ -63,7 +63,7 @@ export default class ExecutionService extends IInjectable{
 
         ExecutionService.engine.CameraAPI.trackingEntity = undefined
         CameraTracker.startTracking()
-        ExecutionService.engineStore.updateStore({executingAnimation: false})
+        ExecutionService.settingsStore.updateStore({executingAnimation: false})
         ExecutionService.engine.CameraAPI.restoreState(this.cameraSerialization)
     }
 

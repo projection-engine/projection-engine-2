@@ -1,18 +1,16 @@
 <script lang="ts">
     import ResizableBar from "@lib/components/resizable/ResizableBar.svelte"
     import {onDestroy, onMount} from "svelte"
-    import ProjectionEngine from "@lib/ProjectionEngine";
     import View from "./View.svelte";
     import {ViewOrientation, ViewPlacement, ViewPlacementMetadata, ViewResizePosition} from "./ViewDefinitions";
     import {InjectVar} from "@lib/Injection";
     import SettingsStore from "@lib/stores/SettingsStore";
-    import EngineStore from "@lib/stores/EngineStore";
 
     export let tabs
     export let placement: ViewPlacement
     let reducedOpacity = false
 
-    const unsubEngine = InjectVar(EngineStore).subscribe(data => {
+    const unsubSettings = InjectVar(SettingsStore).subscribe(data => {
         reducedOpacity = data.executingAnimation
     }, ["executingAnimation"])
 
@@ -52,7 +50,7 @@
     }
 
 
-    onDestroy(unsubEngine)
+    onDestroy(unsubSettings)
 </script>
 
 

@@ -11,19 +11,11 @@ import EngineToolsState from "@engine-tools/EngineToolsState"
 import EngineState from "@engine-core/EngineState"
 import GizmoState from "@engine-tools/gizmo/util/GizmoState"
 import {Inject} from "@lib/Injection";
-import VisualsStore from "@lib/stores/VisualsStore";
-import EngineStore from "@lib/stores/EngineStore";
 import SettingsStore from "@lib/stores/SettingsStore";
 
 export default class EngineToolsService {
     @Inject(Engine)
     static engine: Engine
-
-    @Inject(VisualsStore)
-    static visualsStore: VisualsStore
-
-    @Inject(EngineStore)
-    static engineStore: EngineStore
 
     @Inject(SettingsStore)
     static settingsStore: SettingsStore
@@ -34,64 +26,16 @@ export default class EngineToolsService {
     static initialize() {
         EngineToolsService.selectionStore
             .subscribe(EngineToolsService.#updateSelection)
-        EngineToolsService.engineStore
-            .subscribe(EngineToolsService.#updateCameraTracker)
         EngineToolsService.settingsStore
             .subscribe(EngineToolsService.#updateWithSettings)
-        EngineToolsService.visualsStore
-            .subscribe(EngineToolsService.#updateEngineSettings)
     }
 
     static #updateSelection() {
         EngineTools.updateSelectionData(SelectionStore.getEntitiesSelected())
     }
 
-    static #updateEngineState() {
-        const visualSettings = EngineToolsService.visualsStore.getData()
-        EngineState.fxaaEnabled = visualSettings.FXAA
-        EngineState.fxaaSpanMax = visualSettings.FXAASpanMax
-        EngineState.fxaaReduceMin = visualSettings.FXAAReduceMin
-        EngineState.fxaaReduceMul = visualSettings.FXAAReduceMul
-        EngineState.ssgiEnabled = visualSettings.SSGI.enabled
-        EngineState.ssgiBlurSamples = visualSettings.SSGI.blurSamples
-        EngineState.ssgiBlurRadius = visualSettings.SSGI.blurRadius
-        EngineState.ssgiStepSize = visualSettings.SSGI.stepSize
-        EngineState.ssgiMaxSteps = visualSettings.SSGI.maxSteps
-        EngineState.ssgiStrength = visualSettings.SSGI.strength
-        EngineState.ssrFalloff = visualSettings.SSR.falloff
-        EngineState.ssrStepSize = visualSettings.SSR.stepSize
-        EngineState.ssrMaxSteps = visualSettings.SSR.maxSteps
-        EngineState.sssMaxDistance = visualSettings.SSS.maxDistance
-        EngineState.sssDepthThickness = visualSettings.SSS.depthThickness
-        EngineState.sssEdgeFalloff = visualSettings.SSS.edgeFalloff
-        EngineState.sssDepthDelta = visualSettings.SSS.depthDelta
-        EngineState.sssMaxSteps = visualSettings.SSS.maxSteps
-        EngineState.ssaoEnabled = visualSettings.SSAO.enabled
-        EngineState.ssaoFalloffDistance = visualSettings.SSAO.falloffDistance
-        EngineState.ssaoRadius = visualSettings.SSAO.radius
-        EngineState.ssaoPower = visualSettings.SSAO.power
-        EngineState.ssaoBias = visualSettings.SSAO.bias
-        EngineState.ssaoBlurSamples = visualSettings.SSAO.blurSamples
-        EngineState.ssaoMaxSamples = visualSettings.SSAO.maxSamples
-        EngineState.physicsSubSteps = visualSettings.physicsSubSteps
-        EngineState.physicsSimulationStep = visualSettings.physicsSimulationStep
-        EngineResources.updateParams()
-    }
-
-    static #updateEngineSettings() {
-        const visualSettings = EngineToolsService.visualsStore.getData()
-        GPU.canvas.width = visualSettings.resolutionX
-        GPU.canvas.height = visualSettings.resolutionY
-
-        if (EngineToolsService.engine.environment === ENVIRONMENT.DEV)
-            EngineTools.bindSystems()
-        else
-            EngineTools.unbindSystems()
-        EngineToolsService.#updateEngineState()
-    }
-
     static #updateCameraTracker() {
-        const engine = EngineToolsService.engineStore.getData()
+        const engine = EngineToolsService.settingsStore.getData()
         const settings = EngineToolsService.settingsStore.getData()
         if (engine.executingAnimation)
             UIAPI.showUI()
@@ -135,5 +79,48 @@ export default class EngineToolsService {
         EngineToolsService.#updateCameraTracker()
         EngineToolsService.#updateEngineToolsState()
         EngineToolsService.engine.CameraAPI.isOrthographic = settings.camera.ortho
+
+        GPU.canvas.width = settings.resolutionX
+        GPU.canvas.height = settings.resolutionY
+
+        if (EngineToolsService.engine.environment === ENVIRONMENT.DEV)
+            EngineTools.bindSystems()
+        else
+            EngineTools.unbindSystems()
+        EngineToolsService.#updateEngineState()
+
+        EngineToolsService.#updateCameraTracker()
+    }
+
+    static #updateEngineState() {
+        const visualSettings = EngineToolsService.settingsStore.getData()
+        EngineState.fxaaEnabled = visualSettings.FXAA
+        EngineState.fxaaSpanMax = visualSettings.FXAASpanMax
+        EngineState.fxaaReduceMin = visualSettings.FXAAReduceMin
+        EngineState.fxaaReduceMul = visualSettings.FXAAReduceMul
+        EngineState.ssgiEnabled = visualSettings.SSGI.enabled
+        EngineState.ssgiBlurSamples = visualSettings.SSGI.blurSamples
+        EngineState.ssgiBlurRadius = visualSettings.SSGI.blurRadius
+        EngineState.ssgiStepSize = visualSettings.SSGI.stepSize
+        EngineState.ssgiMaxSteps = visualSettings.SSGI.maxSteps
+        EngineState.ssgiStrength = visualSettings.SSGI.strength
+        EngineState.ssrFalloff = visualSettings.SSR.falloff
+        EngineState.ssrStepSize = visualSettings.SSR.stepSize
+        EngineState.ssrMaxSteps = visualSettings.SSR.maxSteps
+        EngineState.sssMaxDistance = visualSettings.SSS.maxDistance
+        EngineState.sssDepthThickness = visualSettings.SSS.depthThickness
+        EngineState.sssEdgeFalloff = visualSettings.SSS.edgeFalloff
+        EngineState.sssDepthDelta = visualSettings.SSS.depthDelta
+        EngineState.sssMaxSteps = visualSettings.SSS.maxSteps
+        EngineState.ssaoEnabled = visualSettings.SSAO.enabled
+        EngineState.ssaoFalloffDistance = visualSettings.SSAO.falloffDistance
+        EngineState.ssaoRadius = visualSettings.SSAO.radius
+        EngineState.ssaoPower = visualSettings.SSAO.power
+        EngineState.ssaoBias = visualSettings.SSAO.bias
+        EngineState.ssaoBlurSamples = visualSettings.SSAO.blurSamples
+        EngineState.ssaoMaxSamples = visualSettings.SSAO.maxSamples
+        EngineState.physicsSubSteps = visualSettings.physicsSubSteps
+        EngineState.physicsSimulationStep = visualSettings.physicsSimulationStep
+        EngineResources.updateParams()
     }
 }
