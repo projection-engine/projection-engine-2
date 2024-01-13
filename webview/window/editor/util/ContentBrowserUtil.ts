@@ -89,9 +89,6 @@ export default class ContentBrowserUtil extends IInjectable {
                     EngineResourceLoaderService.load(data.registryID, true).catch(console.error)
                     ContentBrowserUtil.toasterService.warn(LocalizationEN.CREATING_ENTITY)
                     break
-                case FileTypes.LEVEL:
-                    ProjectionEngine.LevelService.loadLevel(data.registryID).catch(console.error)
-                    break
             }
         } else {
             reset()
@@ -184,7 +181,7 @@ export default class ContentBrowserUtil extends IInjectable {
             const relatedFiles = items.filter(item => item.id.includes(currentItem.id))
             for (let j = 0; j < relatedFiles.length; j++) {
                 const currentFile = relatedFiles[j]
-                await FileSystemUtil.deleteFile(
+                await FileSystemUtil.delete(
                     FileSystemUtil.ASSETS_PATH + FileSystemUtil.sep + currentFile.id,
                     {
                         recursive: true,
@@ -193,7 +190,7 @@ export default class ContentBrowserUtil extends IInjectable {
                 if (currentDirectory.id === currentFile.id)
                     setCurrentDirectory({id: FileSystemUtil.sep})
             }
-            await FileSystemUtil.deleteFile(
+            await FileSystemUtil.delete(
                 FileSystemUtil.ASSETS_PATH + FileSystemUtil.sep + file.id,
                 {
                     recursive: true,
@@ -211,8 +208,6 @@ export default class ContentBrowserUtil extends IInjectable {
         switch ("." + type) {
             case FileTypes.PRIMITIVE:
                 return "Mesh"
-            case FileTypes.LEVEL:
-                return "Level"
             case FileTypes.UI_LAYOUT:
                 return "UI layout"
             case FileTypes.COMPONENT:
@@ -239,8 +234,6 @@ export default class ContentBrowserUtil extends IInjectable {
                     return "code"
                 case FileTypes.COLLECTION:
                     return "inventory_2"
-                case FileTypes.LEVEL:
-                    return "forest"
                 case FileTypes.UI_LAYOUT:
                     return "view_quilt"
                 case FileTypes.JAVASCRIPT:
@@ -380,11 +373,6 @@ export default class ContentBrowserUtil extends IInjectable {
             {
                 label: LocalizationEN.JAVASCRIPT_PACKAGE,
                 onClick: async () => ContentBrowserUtil.createFile(currentDirectory, LocalizationEN.JAVASCRIPT, FileTypes.JAVASCRIPT, "")
-            },
-            {divider: true},
-            {
-                label: LocalizationEN.LEVEL,
-                onClick: async () => ContentBrowserUtil.createFile(currentDirectory, LocalizationEN.LEVEL, FileTypes.LEVEL, {entities: []})
             },
             {divider: true},
             {
@@ -566,10 +554,6 @@ export default class ContentBrowserUtil extends IInjectable {
                 case registryEntry.path.includes(FileTypes.COMPONENT):
                     type = FileTypes.COMPONENT
                     slot = result.components
-                    break
-                case registryEntry.path.includes(FileTypes.LEVEL):
-                    type = FileTypes.LEVEL
-                    slot = result.levels
                     break
                 case registryEntry.path.includes(FileTypes.UI_LAYOUT):
                     type = FileTypes.UI_LAYOUT

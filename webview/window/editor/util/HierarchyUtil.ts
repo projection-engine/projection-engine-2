@@ -110,12 +110,12 @@ export default class HierarchyUtil {
 
         for (let i = 0; i < toSave.length; i++) {
             const currentEntity = <Entity>toSave[i]
-            if (currentEntity === ProjectionEngine.Engine.loadedLevel)
+            if (currentEntity === ProjectionEngine.Engine.getRootEntity())
                 continue
             if (event.ctrlKey || dropTargetEntity?.isCollection) {
                 if (!dropTargetEntity) {
                     currentEntity.removeParent()
-                    currentEntity.addParent(ProjectionEngine.Engine.loadedLevel)
+                    currentEntity.addParent(ProjectionEngine.Engine.getRootEntity())
                 } else
                     currentEntity.addParent(dropTargetEntity)
             } else if (event.shiftKey) {

@@ -6,14 +6,13 @@ import ScriptsAPI from "@engine-core/lib/utils/ScriptsAPI"
 import ResourceEntityMapper from "@engine-core/lib/ResourceEntityMapper"
 import LocalizationEN from "@enums/LocalizationEN"
 import {Inject, Injectable, LazyInject} from "@lib/Injection";
-import LevelService from "@services/LevelService";
+import ProjectService from "@services/ProjectService";
 import ToasterService from "@services/ToasterService";
 import IInjectable from "@lib/IInjectable";
 import SettingsStore from "@lib/stores/SettingsStore";
 
 @Injectable
 export default class ExecutionService extends IInjectable{
-    #currentLevelID
     #isPlaying = false
     cameraSerialization
 
@@ -23,15 +22,14 @@ export default class ExecutionService extends IInjectable{
     @Inject(Engine)
     static engine: Engine
 
-    @LazyInject(LevelService)
-    static levelService: LevelService
+    @LazyInject(ProjectService)
+    static levelService: ProjectService
 
     @Inject(ToasterService)
     static toasterService: ToasterService
     
     async startPlayState() {
-        if (this.#isPlaying || !ExecutionService.engine.loadedLevel) {
-            ExecutionService.toasterService.error(LocalizationEN.NO_LEVEL_LOADED)
+        if (this.#isPlaying) {
             return
         }
         ExecutionService.toasterService.warn(LocalizationEN.SAVING_STATE)
@@ -39,8 +37,6 @@ export default class ExecutionService extends IInjectable{
         this.cameraSerialization = ExecutionService.engine.CameraAPI.serializeState()
         this.#isPlaying = true
         CameraTracker.stopTracking()
-        await ExecutionService.levelService.saveCurrentLevel().catch(console.error)
-        this.#currentLevelID = ExecutionService.engine.loadedLevel.id
         await ExecutionService.engine.startSimulation()
         ExecutionService.settingsStore.updateStore({focusedCamera: undefined, executingAnimation: true})
     }
@@ -58,7 +54,6 @@ export default class ExecutionService extends IInjectable{
         ExecutionService.engine.environment = ENVIRONMENT.DEV
 
         UIAPI.destroyUI()
-        await ExecutionService.levelService.loadLevel(this.#currentLevelID).catch(console.error)
         await ScriptsAPI.updateAllScripts()
 
         ExecutionService.engine.CameraAPI.trackingEntity = undefined

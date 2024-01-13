@@ -15,19 +15,6 @@ import EntityNamingService from "@services/EntityNamingService";
 import EntityHierarchyService from "@services/EntityHierarchyService";
 
 
-function checkLevel(_, propertyKey: string, descriptor: PropertyDescriptor) {
-    const original = descriptor.value
-    descriptor.value = function (...args) {
-        if (!EngineStateService.engine.loadedLevel) {
-            ProjectionEngine.ToastNotificationSystem.error(LocalizationEN.NO_LEVEL_LOADED)
-            return
-        }
-        return original.call(this, ...args)
-    }
-}
-
-
-
 // TODO - REMOVE STATIC MEMBERS
 @Injectable
 export default class EngineStateService extends IInjectable {
@@ -63,7 +50,6 @@ export default class EngineStateService extends IInjectable {
         EngineStateService.entityHierarchyService.updateHierarchy()
     }
 
-    @checkLevel
     static replaceBlock(toRemove: string[], toAdd: Entity[]) {
 
         const replacedMap = {}
@@ -77,7 +63,6 @@ export default class EngineStateService extends IInjectable {
         EngineStateService.updateStructure(replacedMap)
     }
 
-    @checkLevel
     static appendBlock(block: Entity[]) {
         EntityAPI.addGroup(block)
         EngineStateService.entityNamingService.renameInBlock(block)
@@ -86,7 +71,6 @@ export default class EngineStateService extends IInjectable {
         EngineStateService.updateStructure()
     }
 
-    @checkLevel
     static removeBlock(payload: string[]) {
         const hierarchy: { [key: string]: Entity } = {}
         for (let i = 0; i < payload.length; i++) {
@@ -107,7 +91,6 @@ export default class EngineStateService extends IInjectable {
         EngineStateService.updateStructure()
     }
 
-    @checkLevel
     static add(entity: Entity) {
         EngineStateService.entityNamingService.renameEntity(entity.name, entity)
         GizmoUtil.createTransformationCache(entity)
@@ -119,7 +102,6 @@ export default class EngineStateService extends IInjectable {
         EngineStateService.updateStructure()
     }
 
-    @checkLevel
     static linkMultiple(payload: string[]) {
         const values = EngineStateService.engine.entities.array
         for (let i = 0; i < values.length; i++) {

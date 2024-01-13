@@ -13,7 +13,7 @@ export default class EntityHierarchyService extends IInjectable{
     #listening: { [key: string]: Function } = {}
 
     updateHierarchy() {
-        const data = [], root = ProjectionEngine.Engine.loadedLevel
+        const data = [], root = ProjectionEngine.Engine.getRootEntity()
         if (!root)
             return
 

@@ -100,10 +100,12 @@ export default class GizmoUtil {
     }
 
     static drawToDepth(data, mesh, transformation, pickId) {
-        data.transformMatrix = transformation
-        data.uID = pickId
-        StaticEditorShaders.toDepthBuffer.bindForUse(data)
-        mesh.draw()
+        if(mesh != null) {
+            data.transformMatrix = transformation
+            data.uID = pickId
+            StaticEditorShaders.toDepthBuffer.bindForUse(data)
+            mesh.draw()
+        }
     }
 
     static translateMatrix(entity: Entity) {

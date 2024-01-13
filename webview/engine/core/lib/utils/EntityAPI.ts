@@ -33,7 +33,7 @@ export default class EntityAPI {
     }
 
     static addGroup(entities: Entity[]) {
-        const levelEntity = ProjectionEngine.Engine.loadedLevel
+        const levelEntity = ProjectionEngine.Engine.getRootEntity()
         if (!levelEntity)
             return
         const map = {}
@@ -68,7 +68,7 @@ export default class EntityAPI {
             return ProjectionEngine.Engine.entities.get(entity.id)
         const target = entity ?? EntityAPI.getNewEntityInstance()
         if (!entity.parent && !entity.parentID)
-            entity.addParent(ProjectionEngine.Engine.loadedLevel)
+            entity.addParent(ProjectionEngine.Engine.getRootEntity())
         ProjectionEngine.Engine.entities.set(target.id, target)
         EntityWorkerAPI.registerEntity(target)
         EntityAPI.registerEntityComponents(target)
@@ -105,7 +105,7 @@ export default class EntityAPI {
 
     static removeEntity(entityToRemove: string | Entity) {
         const entity = entityToRemove instanceof Entity ? entityToRemove : ProjectionEngine.Engine.entities.get(entityToRemove)
-        if (!entity || entity === ProjectionEngine.Engine.loadedLevel)
+        if (!entity || entity === ProjectionEngine.Engine.getRootEntity())
             return
         entity.removeParent()
         EntityAPI.removeGroup([entity], true)
@@ -115,7 +115,7 @@ export default class EntityAPI {
         const hierarchy: { [key: string]: Entity } = {}
         for (let i = 0; i < toRemove.length; i++) {
             const entity = toRemove[i]
-            if (entity !== ProjectionEngine.Engine.loadedLevel)
+            if (entity !== ProjectionEngine.Engine.getRootEntity())
                 hierarchy[entity.id] = entity
             if (searchHierarchy)
                 QueryAPI.getHierarchyToObject(entity, hierarchy)
@@ -130,7 +130,7 @@ export default class EntityAPI {
         let didLightsChange
         for (let i = 0; i < entities.length; i++) {
             const entity = entities[i]
-            if (entity === ProjectionEngine.Engine.loadedLevel)
+            if (entity === ProjectionEngine.Engine.getRootEntity())
                 continue
 
             if (entity.parent && !hierarchy[entity.parent.id])
@@ -179,7 +179,7 @@ export default class EntityAPI {
             }
         }
 
-        parsedEntity.parentID = entity.parent ?? ProjectionEngine.Engine.loadedLevel?.id
+        parsedEntity.parentID = entity.parent ?? ProjectionEngine.Engine.getRootEntity()?.id
 
         for (const k in entity.components) {
             const component = parsedEntity.addComponent(k)

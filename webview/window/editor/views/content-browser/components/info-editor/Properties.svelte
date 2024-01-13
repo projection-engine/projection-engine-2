@@ -28,7 +28,7 @@
         if (selectedFile) {
             fileType = "." + selectedFile.type
             data = undefined
-            if (fileType !== FileTypes.PRIMITIVE && fileType !== FileTypes.LEVEL) {
+            if (fileType !== FileTypes.PRIMITIVE ) {
                 const fType = VALID.includes(fileType) ? "json" : undefined
                 FileSystemUtil.readFile(FileSystemUtil.ASSETS_PATH + selectedFile.id, fType)
                     .then(res => data = res)

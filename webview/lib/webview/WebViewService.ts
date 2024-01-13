@@ -1,11 +1,14 @@
 import WebViewPayload from "./WebViewPayload";
+import IInjectable from "@lib/IInjectable";
+import {Injectable} from "@lib/Injection";
 
-export default class WebViewSystem {
-    private static listeners: Map<string, GenericVoidFunctionWithP<WebViewPayload>> = new Map()
-    private static initialized = false
+@Injectable
+export default class WebViewService extends IInjectable {
+    private listeners: Map<string, GenericVoidFunctionWithP<WebViewPayload>> = new Map()
+    private initialized = false
 
-    private static addGlobalListener() {
-        if (!WebViewSystem.initialized) {
+    private addGlobalListener() {
+        if (!this.initialized) {
             // @ts-ignore
             window.chrome.webview.addEventListener('message', event => {
                 try {
@@ -21,7 +24,7 @@ export default class WebViewSystem {
                     console.error(ex)
                 }
             })
-            WebViewSystem.initialized = true
+            this.initialized = true
         }
     }
 
@@ -30,7 +33,7 @@ export default class WebViewSystem {
      * @param message
      * @param id
      */
-    static beam(message: string | null, id: string) {
+    beam(id: string, message?: string) {
         // @ts-ignore
         window.chrome.webview.postMessage(JSON.stringify(new WebViewPayload(id, message)))
     }
@@ -41,9 +44,9 @@ export default class WebViewSystem {
      * @param id
      * @param callback
      */
-    static hardWire(message: string | null, id: string, callback: GenericVoidFunctionWithP<WebViewPayload>) {
-        WebViewSystem.addGlobalListener()
-        WebViewSystem.listeners.set(id, callback)
+    hardWire(id: string, callback: GenericVoidFunctionWithP<WebViewPayload>, message?: string) {
+        this.addGlobalListener()
+        this.listeners.set(id, callback)
         // @ts-ignore
         window.chrome.webview.postMessage(JSON.stringify(new WebViewPayload(id, message)))
     }
@@ -53,11 +56,7 @@ export default class WebViewSystem {
      * @param message
      * @param id
      */
-    static async wire(message: string | null, id: string): Promise<WebViewPayload> {
-        return new Promise(resolve => {
-            WebViewSystem.hardWire(message, id, result => {
-                resolve(result);
-            });
-        })
+    async wire(id: string, message?: string): Promise<WebViewPayload> {
+        return new Promise(resolve => this.hardWire(id, resolve, message))
     }
 }
