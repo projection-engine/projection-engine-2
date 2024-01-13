@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 
     import {onDestroy, onMount} from "svelte"
     import QueryAPI from "@engine-core/lib/utils/QueryAPI"
@@ -11,31 +11,28 @@
     import INSPECTOR_TABS from "./static/INSPECTOR_TABS"
     import ProjectionEngine from "@lib/ProjectionEngine";
     import ContentWrapper from "../preferences/components/content/ContentWrapper.svelte";
+    import {InjectVar} from "@lib/Injection";
+    import SelectionStore from "@lib/stores/SelectionStore";
+    import Entity from "@engine-core/instances/Entity";
 
-    const COMPONENT_ID = crypto.randomUUID()
-    let selectedEntity
+    let selectedEntity: Entity
     let tabIndex = 0
     let tabs = []
     let isOnDynamicTab = false
+    const unsubSelection = InjectVar(SelectionStore).subscribe(data => {
+        const temp = QueryAPI.getEntityByID(data.array[0] || data.lockedEntity)
+        if (temp === selectedEntity)
+            return
+        selectedEntity = temp
+        tabIndex = INSPECTOR_TABS.length
+        if (selectedEntity) {
+            const entityTabs = InspectorUtil.getEntityTabs(selectedEntity.allComponents, selectedEntity.isCollection)
+            setTabs(entityTabs)
+        } else
+            setTabs([])
+    }, ["array", "lockedEntity"])
 
-    onMount(() => {
-        ProjectionEngine.EntitySelectionStore.addListener(COMPONENT_ID, data => {
-            const temp = QueryAPI.getEntityByID(data.array[0] || data.lockedEntity)
-            if (temp === selectedEntity)
-                return
-            selectedEntity = temp
-            tabIndex = INSPECTOR_TABS.length
-            if (selectedEntity) {
-                const entityTabs = InspectorUtil.getEntityTabs(selectedEntity.allComponents, selectedEntity.isCollection)
-                setTabs(entityTabs)
-            } else
-                setTabs([])
-        }, ["array", "lockedEntity"])
-    })
-
-    onDestroy(() => {
-        ProjectionEngine.EntitySelectionStore.removeListener(COMPONENT_ID)
-    })
+    onDestroy(unsubSelection)
 
     function setTabs(data) {
         const TABS = [...INSPECTOR_TABS]

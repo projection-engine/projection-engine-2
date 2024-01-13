@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 
     import FrameMetadata from "./components/PerformanceStatistics.svelte"
     import SceneStats from "./components/SceneStats.svelte"
@@ -10,51 +10,20 @@
     import LocalizationEN from "@enums/LocalizationEN"
     import SettingsStore from "@lib/stores/SettingsStore"
     import ProjectionEngine from "@lib/ProjectionEngine";
+    import {Inject, InjectVar} from "@lib/Injection";
 
-    const COMPONENT_ID = crypto.randomUUID()
-    let settings = {}
+    let hideFooter = false
 
-    let loadedLevel
-    let entityID
+    const unsubSettings = InjectVar(SettingsStore).subscribe(data => {
+        hideFooter = data.hideFooter
+    }, ["hideFooter"])
 
-    function load() {
-        loadedLevel = ProjectionEngine.Engine.loadedLevel?.name
-        entityID = ProjectionEngine.Engine.loadedLevel?.id
-
-        if (entityID)
-            ProjectionEngine.EntityUpdateService.removeListener(entityID, COMPONENT_ID)
-
-        if (!loadedLevel)
-            return
-        ProjectionEngine.EntityUpdateService.addListener(entityID, COMPONENT_ID, () => {
-            loadedLevel = ProjectionEngine.Engine.loadedLevel.name
-        })
-    }
-
-    onMount(() => {
-        ProjectionEngine.SettingsStore.addListener(COMPONENT_ID, data => settings = data, ["hideFooter"])
-        ProjectionEngine.Engine.addLevelLoaderListener(COMPONENT_ID, load)
-        load()
-    })
-
-    onDestroy(() => {
-        ProjectionEngine.SettingsStore.removeListener(COMPONENT_ID)
-        ProjectionEngine.Engine.removeLevelLoaderListener(COMPONENT_ID)
-    })
+    onDestroy(unsubSettings)
 </script>
 
-<div class="container" style={settings.hideFooter ? "display: none" : undefined}>
+<div class="container" style={hideFooter ? "display: none" : undefined}>
 
     <div class="meta-data" style="justify-content: flex-start">
-        {#if loadedLevel}
-            <div class="wrapper footer-header"
-                 style="max-width: clamp(100px, 5vw, 100px); background: var(--pj-background-primary)">
-                <Icon styles="font-size: .9rem">forest</Icon>
-                <small data-svelteoverflow="-">{loadedLevel}</small>
-                <ToolTip content={LocalizationEN.LOADED_LEVEL}/>
-            </div>
-            <div data-sveltevertdivider="-" style="margin: 0 2px"></div>
-        {/if}
         <FrameMetadata/>
     </div>
 

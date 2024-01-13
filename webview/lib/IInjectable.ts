@@ -1,6 +1,4 @@
-
-class IInjectable {
+export default class IInjectable {
 
 }
 
-export default IInjectable

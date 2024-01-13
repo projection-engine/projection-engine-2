@@ -4,51 +4,96 @@ import EngineTools from "@engine-tools/EngineTools"
 import CameraAPI from "@engine-core/lib/utils/CameraAPI"
 import ENVIRONMENT from "@engine-core/static/ENVIRONMENT"
 import EngineResources from "@engine-core/lib/EngineResources"
-import EntitySelectionStore from "@lib/stores/EntitySelectionStore"
+import SelectionStore from "@lib/stores/SelectionStore"
 import UIAPI from "@engine-core/lib/rendering/UIAPI"
 import GPU from "@engine-core/GPU"
 import EngineToolsState from "@engine-tools/EngineToolsState"
 import EngineState from "@engine-core/EngineState"
-import SETTINGS from "../window/editor/static/SETTINGS"
 import GizmoState from "@engine-tools/gizmo/util/GizmoState"
 import {Inject} from "@lib/Injection";
-import VisualsStore from "@lib/stores/VisualsStore";
-import EngineStore from "@lib/stores/EngineStore";
 import SettingsStore from "@lib/stores/SettingsStore";
 
 export default class EngineToolsService {
     @Inject(Engine)
     static engine: Engine
 
-    @Inject(VisualsStore)
-    static visualsStore: VisualsStore
-
-    @Inject(EngineStore)
-    static engineStore: EngineStore
-
     @Inject(SettingsStore)
     static settingsStore: SettingsStore
 
-    @Inject(EntitySelectionStore)
-    static entitySelectionStore: EntitySelectionStore
+    @Inject(SelectionStore)
+    static selectionStore: SelectionStore
 
     static initialize() {
-        EngineToolsService.entitySelectionStore
-            .addListener("EngineToolsService", EngineToolsService.#updateSelection)
-        EngineToolsService.engineStore
-            .addListener("EngineToolsService", EngineToolsService.#updateCameraTracker)
+        EngineToolsService.selectionStore
+            .subscribe(EngineToolsService.#updateSelection)
         EngineToolsService.settingsStore
-            .addListener("EngineToolsService_camera", EngineToolsService.#updateWithSettings)
-        EngineToolsService.visualsStore
-            .addListener("EngineToolsService", EngineToolsService.#updateEngineSettings)
+            .subscribe(EngineToolsService.#updateWithSettings)
     }
 
     static #updateSelection() {
-        EngineTools.updateSelectionData(EntitySelectionStore.getEntitiesSelected())
+        EngineTools.updateSelectionData(SelectionStore.getEntitiesSelected())
+    }
+
+    static #updateCameraTracker() {
+        const engine = EngineToolsService.settingsStore.getData()
+        const settings = EngineToolsService.settingsStore.getData()
+        if (engine.executingAnimation)
+            UIAPI.showUI()
+        if (EngineToolsService.engine.environment === ENVIRONMENT.DEV && !engine.focusedCamera) {
+            EngineToolsService.engine.CameraAPI.trackingEntity = undefined
+            if (settings.camera !== undefined) {
+                CameraTracker.screenSpaceMovementSpeed = settings.camera.screenSpaceMovementSpeed || 1
+                CameraTracker.movementSpeed = settings.camera.movementSpeed * .1
+                CameraTracker.turnSpeed = settings.camera.turnSpeed * .01
+                if (settings.camera.smoothing != null)
+                    EngineToolsService.engine.CameraAPI.translationSmoothing = settings.screenSpaceMovement ? 0 : settings.camera.smoothing * .001
+                EngineToolsService.engine.CameraAPI.updateViewTarget(settings.camera)
+            }
+        }
+    }
+
+    static #updateEngineToolsState() {
+        const settings = EngineToolsService.settingsStore.getData()
+        EngineToolsState.gridColor = settings.gridColor
+        EngineToolsState.gridScale = settings.gridScale * 10
+        EngineToolsState.gridThreshold = settings.gridThreshold
+        EngineToolsState.gridOpacity = settings.gridOpacity
+        EngineToolsState.showGrid = settings.showGrid
+        EngineToolsState.showIcons = settings.showIcons
+        EngineToolsState.showLines = settings.showLines
+        EngineToolsState.iconScale = settings.iconScale
+        EngineToolsState.showOutline = settings.showOutline
+        EngineToolsState.outlineColor = settings.outlineColor
+        EngineToolsState.outlineWidth = settings.outlineWidth
+    }
+
+    static #updateWithSettings() {
+        const settings = EngineToolsService.settingsStore.getData()
+        EngineState.debugShadingModel = settings.shadingModel
+        GizmoState.rotationGridSize = settings.gizmoGrid.rotationGizmo || 1
+        GizmoState.translationGridSize = settings.gizmoGrid.translationGizmo || 1
+        GizmoState.scalingGridSize = settings.gizmoGrid.scaleGizmo || 1
+        GizmoState.transformationType = settings.transformationType
+        GizmoState.sensitivity = settings?.gizmoGrid?.sensitivity / 100 || .001
+        GizmoState.gizmoType = settings.gizmo
+        EngineToolsService.#updateCameraTracker()
+        EngineToolsService.#updateEngineToolsState()
+        EngineToolsService.engine.CameraAPI.isOrthographic = settings.camera.ortho
+
+        GPU.canvas.width = settings.resolutionX
+        GPU.canvas.height = settings.resolutionY
+
+        if (EngineToolsService.engine.environment === ENVIRONMENT.DEV)
+            EngineTools.bindSystems()
+        else
+            EngineTools.unbindSystems()
+        EngineToolsService.#updateEngineState()
+
+        EngineToolsService.#updateCameraTracker()
     }
 
     static #updateEngineState() {
-        const visualSettings = EngineToolsService.visualsStore.getData()
+        const visualSettings = EngineToolsService.settingsStore.getData()
         EngineState.fxaaEnabled = visualSettings.FXAA
         EngineState.fxaaSpanMax = visualSettings.FXAASpanMax
         EngineState.fxaaReduceMin = visualSettings.FXAAReduceMin
@@ -77,64 +122,5 @@ export default class EngineToolsService {
         EngineState.physicsSubSteps = visualSettings.physicsSubSteps
         EngineState.physicsSimulationStep = visualSettings.physicsSimulationStep
         EngineResources.updateParams()
-    }
-
-    static #updateEngineSettings() {
-        const visualSettings = EngineToolsService.visualsStore.getData()
-        GPU.canvas.width = visualSettings.resolutionX
-        GPU.canvas.height = visualSettings.resolutionY
-
-        if (EngineToolsService.engine.environment === ENVIRONMENT.DEV)
-            EngineTools.bindSystems()
-        else
-            EngineTools.unbindSystems()
-        EngineToolsService.#updateEngineState()
-    }
-
-    static #updateCameraTracker() {
-        const engine = EngineToolsService.engineStore.getData()
-        const settings = EngineToolsService.settingsStore.getData()
-        if (engine.executingAnimation)
-            UIAPI.showUI()
-        if (EngineToolsService.engine.environment === ENVIRONMENT.DEV && !engine.focusedCamera) {
-            EngineToolsService.engine.CameraAPI.trackingEntity = undefined
-            if (settings.camera !== undefined) {
-                CameraTracker.screenSpaceMovementSpeed = settings.camera.screenSpaceMovementSpeed || 1
-                CameraTracker.movementSpeed = settings.camera.movementSpeed * .1
-                CameraTracker.turnSpeed = settings.camera.turnSpeed * .01
-                if (settings.camera.smoothing != null)
-                    EngineToolsService.engine.CameraAPI.translationSmoothing = settings.screenSpaceMovement ? 0 : settings.camera.smoothing * .001
-                EngineToolsService.engine.CameraAPI.updateViewTarget(settings.camera)
-            }
-        }
-    }
-
-    static #updateEngineToolsState() {
-        const settings = EngineToolsService.settingsStore.getData() as typeof SETTINGS
-        EngineToolsState.gridColor = settings.gridColor
-        EngineToolsState.gridScale = settings.gridScale * 10
-        EngineToolsState.gridThreshold = settings.gridThreshold
-        EngineToolsState.gridOpacity = settings.gridOpacity
-        EngineToolsState.showGrid = settings.showGrid
-        EngineToolsState.showIcons = settings.showIcons
-        EngineToolsState.showLines = settings.showLines
-        EngineToolsState.iconScale = settings.iconScale
-        EngineToolsState.showOutline = settings.showOutline
-        EngineToolsState.outlineColor = settings.outlineColor
-        EngineToolsState.outlineWidth = settings.outlineWidth
-    }
-
-    static #updateWithSettings() {
-        const settings = EngineToolsService.settingsStore.getData()
-        EngineState.debugShadingModel = settings.shadingModel
-        GizmoState.rotationGridSize = settings.gizmoGrid.rotationGizmo || 1
-        GizmoState.translationGridSize = settings.gizmoGrid.translationGizmo || 1
-        GizmoState.scalingGridSize = settings.gizmoGrid.scaleGizmo || 1
-        GizmoState.transformationType = settings.transformationType
-        GizmoState.sensitivity = settings?.gizmoGrid?.sensitivity / 100 || .001
-        GizmoState.gizmoType = settings.gizmo
-        EngineToolsService.#updateCameraTracker()
-        EngineToolsService.#updateEngineToolsState()
-        EngineToolsService.engine.CameraAPI.isOrthographic = settings.camera.ortho
     }
 }

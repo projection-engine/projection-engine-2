@@ -18,7 +18,7 @@
     export let placement: ViewPlacement
 
     let ref: HTMLElement
-    const settings = InjectVar(SettingsStore) as SettingsStore
+    const settings = InjectVar(SettingsStore)
 
     function getComponent(view: ViewType) {
         switch (view) {

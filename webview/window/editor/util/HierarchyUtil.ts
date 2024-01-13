@@ -5,7 +5,7 @@ import EngineStateService from "@services/EngineStateService"
 import EditorUtil from "./EditorUtil"
 import HotKeysController from "@lib/HotKeysController";
 import getViewportHotkeys from "../templates/get-viewport-hotkeys";
-import EntitySelectionStore from "@lib/stores/EntitySelectionStore";
+import SelectionStore from "@lib/stores/SelectionStore";
 import ProjectionEngine from "@lib/ProjectionEngine";
 
 export default class HierarchyUtil {
@@ -130,7 +130,7 @@ export default class HierarchyUtil {
         if (toAdd.length > 0)
             EngineStateService.appendBlock(toAdd)
         else {
-            EntitySelectionStore.setEntitiesSelected(newSelection)
+            SelectionStore.setEntitiesSelected(newSelection)
             ProjectionEngine.EntityHierarchyService.updateHierarchy()
         }
     }
@@ -161,13 +161,13 @@ export default class HierarchyUtil {
 
     static updateSelection(entityID: string, ctrlKey?: boolean) {
         if (ctrlKey) {
-            const entitiesSelected = EntitySelectionStore.getEntitiesSelected()
+            const entitiesSelected = SelectionStore.getEntitiesSelected()
             if (!entitiesSelected.includes(entityID))
-                EntitySelectionStore.setEntitiesSelected([...entitiesSelected, entityID])
+                SelectionStore.setEntitiesSelected([...entitiesSelected, entityID])
             else
-                EntitySelectionStore.setEntitiesSelected(entitiesSelected.filter(e => e !== entityID))
+                SelectionStore.setEntitiesSelected(entitiesSelected.filter(e => e !== entityID))
         } else
-            EntitySelectionStore.setEntitiesSelected(entityID)
+            SelectionStore.setEntitiesSelected(entityID)
     }
 
     static initializeView(draggable, ref: HTMLElement) {

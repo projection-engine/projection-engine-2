@@ -9,6 +9,8 @@
     import EmptyIcon from "@lib/components/icon/EmptyIcon.svelte"
     import EditorUtil from "../../../util/EditorUtil"
     import ProjectionEngine from "@lib/ProjectionEngine";
+    import {InjectVar} from "@lib/Injection";
+    import SettingsStore from "@lib/stores/SettingsStore";
 
     const COMPONENT_ID = crypto.randomUUID()
     let cameras = []
@@ -16,31 +18,27 @@
     let screenSpaceMovement = false
     let camera = {}
 
+    const unsubSettings = InjectVar(SettingsStore).subscribe(data => {
+        CameraTracker.screenSpaceMovement = screenSpaceMovement = data.screenSpaceMovement
+        camera = data.camera
+        focusedCamera = data.focusedCamera
+    }, ["screenSpaceMovement", "camera", "focusedCamera"])
 
     onMount(() => {
-        ProjectionEngine.SettingsStore.addListener(COMPONENT_ID, data => {
-    		CameraTracker.screenSpaceMovement = screenSpaceMovement = data.screenSpaceMovement
-    		camera = data.camera
-    	}, ["screenSpaceMovement", "camera"])
-        ProjectionEngine.EngineStore.addListener(COMPONENT_ID, data => focusedCamera = data.focusedCamera, ["focusedCamera"])
         ProjectionEngine.EntityHierarchyService.registerListener(COMPONENT_ID, () => {
-    		// TODO - CONSUME FROM DYNAMIC LIST OF ENTITIES WITH COMPONENT AFTER ECS
-    		cameras = ProjectionEngine.Engine.entities.array.filter(entity => entity.cameraComponent != null)
-    	})
+            cameras = ProjectionEngine.Engine.entities.array.filter(entity => entity.cameraComponent != null)
+        })
     })
 
     onDestroy(() => {
-        ProjectionEngine.SettingsStore.removeListener(COMPONENT_ID)
-        ProjectionEngine.EngineStore.removeListener(COMPONENT_ID)
+        unsubSettings()
         ProjectionEngine.EntityHierarchyService.removeListener(COMPONENT_ID)
     })
-    
+
     const toggleProjection = () => {
         ProjectionEngine.SettingsStore.updateStore({camera: {...camera, ortho: !camera.ortho}})
     }
-
 </script>
-
 
 <div class="wrapper">
     <Dropdown

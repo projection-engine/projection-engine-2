@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import OptionDropdown from "@lib/components/dropdown/OptionDropdown.svelte"
     import LocalizationEN from "@enums/LocalizationEN"
     import SceneEditorUtil from "../../../util/SceneEditorUtil"
@@ -10,30 +10,30 @@
     import Dropdown from "@lib/components/dropdown/Dropdown.svelte"
     import {onDestroy, onMount} from "svelte"
     import ProjectionEngine from "@lib/ProjectionEngine";
+    import SettingsStore from "@lib/stores/SettingsStore";
+    import {InjectVar} from "@lib/Injection";
+    import ShadingModel from "@engine-core/static/ShadingModel";
 
     /** @type boolean */
     export let isOnGizmo
 
     const COMPONENT_ID = crypto.randomUUID()
     let options = []
-    let spawnDistanceFromCamera
-    let shadingModelLabel
-    let shadingModel
-    let spawnOnOrigin
+    let spawnDistanceFromCamera: number
+    let shadingModelLabel: string
+    let shadingModel: ShadingModel
+    let spawnOnOrigin: boolean
 
-    onMount(() => {
-        ProjectionEngine.SettingsStore.addListener(COMPONENT_ID, data => {
-    		spawnOnOrigin = data.spawnOnOrigin
-    		spawnDistanceFromCamera = data.spawnDistanceFromCamera
-    		options = SceneEditorUtil.getSceneOptions(data)
-    		shadingModel = data.shadingModel
-    		shadingModelLabel = LocalizationEN.SHADING + LocalizationEN[SceneEditorUtil.getLabel(data.shadingModel)]
-    	})
-    })
+    const settings = InjectVar(SettingsStore)
+    const unsubSettings = settings.subscribe(data => {
+        spawnOnOrigin = data.spawnOnOrigin
+        spawnDistanceFromCamera = data.spawnDistanceFromCamera
+        options = SceneEditorUtil.getSceneOptions()
+        shadingModel = data.shadingModel
+        shadingModelLabel = LocalizationEN.SHADING + LocalizationEN[SceneEditorUtil.getLabel(data.shadingModel)]
+    }, ["shadingModel", "spawnOnOrigin", "spawnDistanceFromCamera"])
 
-    onDestroy(() => {
-        ProjectionEngine.SettingsStore.removeListener(COMPONENT_ID)
-    })
+    onDestroy(unsubSettings)
 </script>
 
 <div class="left-content" style={!isOnGizmo ? undefined : "display: none"}>

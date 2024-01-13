@@ -5,63 +5,57 @@
     import Range from "@lib/components/range/Range.svelte"
     import Component from "@engine-core/instances/components/Component"
     import {InjectVar} from "@lib/Injection";
-    import VisualsStore from "@lib/stores/VisualsStore";
     import SettingsStore from "@lib/stores/SettingsStore";
+    import {onDestroy} from "svelte";
 
     export let toRender
-    export let settings
-    export let visualSettings
 
     let fieldValue
     let timeout
 
-    const settingsStore = InjectVar(SettingsStore) as SettingsStore
-    const visualsStore = InjectVar(VisualsStore) as VisualsStore
-
+    const settingsStore = InjectVar(SettingsStore)
 
     function getValue(s) {
-    	if (!toRender)
-    		return
-    	let current = s
-    	const key = toRender.key
-    	if (Array.isArray(key)) {
-    		for (let i = 0; i < key.length; i++)
-    			current = current[key[i]]
-    		return current
-    	}
-    	return current[key]
+        if (!toRender)
+            return
+        let current = s
+        const key = toRender.key
+        if (Array.isArray(key)) {
+            for (let i = 0; i < key.length; i++)
+                current = current[key[i]]
+            return current
+        }
+        return current[key]
     }
 
     function setValue(value, save) {
-    	if (!toRender)
-    		return
-    	const key = toRender.key
-    	let s = toRender?.target === "settings" ? settings : visualSettings
-    	if (save)
-    		s = {...s}
-    	if (Array.isArray(key)) {
-    		let current = s
-    		for (let i = 0; i < key.length - 1; i++)
-    			current = current[key[i]]
-    		current[[...key].pop()] = value
+        if (!toRender)
+            return
+        const key = toRender.key
+        let storeData = settingsStore.getData()
+        if (save)
+            storeData = {...storeData}
+        if (Array.isArray(key)) {
+            let current = storeData
+            for (let i = 0; i < key.length - 1; i++)
+                current = current[key[i]]
+            current[[...key].pop()] = value
 
-    	} else
-    		s[key] = value
-    	if (save) {
-    		if (toRender?.target === "settings")
-                settingsStore.updateStore(s)
-    		else
-                visualsStore.updateStore(s)
-    	}
+        } else
+            storeData[key] = value
+        if (save) {
+            settingsStore.updateStore(storeData)
+        }
     }
 
-    $: {
-    	if (toRender?.target === "settings")
-    		fieldValue = getValue(settings)
-    	else
-    		fieldValue = getValue(visualSettings)
-    }
+    const unsubSettings = settingsStore.subscribe(data => {
+        if (toRender?.target === "settings")
+            fieldValue = getValue(data)
+    })
 
+    onDestroy(() => {
+        unsubSettings()
+    })
 </script>
 
 

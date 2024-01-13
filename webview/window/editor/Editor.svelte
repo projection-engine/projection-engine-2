@@ -3,42 +3,31 @@
     import Viewport from "./components/view/CentralView.svelte"
     import ViewsContainer from "./components/view/SideView.svelte"
     import HotKeysController from "@lib/HotKeysController"
-    import EditorUtil from "./util/EditorUtil"
     import MenuBar from "@lib/components/frame/MenuBar.svelte";
     import {InjectVar} from "@lib/Injection";
     import Canvas from "./components/view/Canvas.svelte";
-    import Engine from "@engine-core/Engine";
     import ToasterService from "@services/ToasterService";
     import SettingsStore from "@lib/stores/SettingsStore";
-    import EngineStore from "@lib/stores/EngineStore";
     import {ViewPlacement} from "./components/view/ViewDefinitions";
     import ViewTabDTO from "./components/view/ViewTabDTO";
-    import SETTINGS from "./static/SETTINGS";
 
-    const COMPONENT_ID = crypto.randomUUID()
     let view: ViewTabDTO
     let cameraGizmoSize: number
     let ready = false
 
-    const toasterService = InjectVar(ToasterService) as ToasterService
-    const settingsStore = InjectVar(SettingsStore) as SettingsStore
-    const engineStore = InjectVar(EngineStore) as EngineStore
+    const toasterService = InjectVar(ToasterService)
+    const settingsStore = InjectVar(SettingsStore)
+    const unsubSettings = settingsStore.subscribe(
+        data => {
+            view = data.views[data.currentView]
+            cameraGizmoSize = data.cameraGizmoSize
+            HotKeysController.blockActions = data.executingAnimation
+        },
+        ["views", "currentView", "cameraGizmoSize", "executingAnimation"]
+    );
 
-    onMount(() => {
-        toasterService.initialize()
-        settingsStore
-            .addListener(COMPONENT_ID, (d) => {
-                const data = d as typeof SETTINGS
-                view = data.views[data.currentView]
-                cameraGizmoSize = data.cameraGizmoSize
-            }, ["views", "currentView", "cameraGizmoSize"])
-        engineStore.addListener(COMPONENT_ID, data => HotKeysController.blockActions = data.executingAnimation, ["executingAnimation"])
-    })
-
-    onDestroy(() => {
-        engineStore.removeListener(COMPONENT_ID)
-        settingsStore.removeListener(COMPONENT_ID)
-    })
+    onMount(() => toasterService.initialize())
+    onDestroy(unsubSettings)
 </script>
 
 <MenuBar/>

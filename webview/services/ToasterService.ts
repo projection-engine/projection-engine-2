@@ -1,7 +1,8 @@
 import {Injectable} from "@lib/Injection";
+import IInjectable from "@lib/IInjectable";
 
 @Injectable
-export default class ToasterService {
+export default class ToasterService extends IInjectable{
     defaultDelay = 3500
     success = (...messages: string[]): void => null
     error = (...messages: string[]): void => null

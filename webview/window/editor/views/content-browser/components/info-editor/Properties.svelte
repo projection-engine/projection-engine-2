@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 
     import FileSystemUtil from "@lib/FileSystemUtil"
     import TextureItem from "./TextureItem.svelte"
@@ -12,13 +12,17 @@
     import {onDestroy, onMount} from "svelte";
     import ContentBrowserStore from "@lib/stores/ContentBrowserStore";
     import ProjectionEngine from "@lib/ProjectionEngine";
+    import {InjectVar} from "@lib/Injection";
 
     const VALID = [FileTypes.TEXTURE, FileTypes.COLLECTION, FileTypes.MATERIAL]
-    const COMPONENT_ID = crypto.randomUUID()
 
     let selectedFile
     let data
     let fileType
+
+    const unsubCB= InjectVar(ContentBrowserStore).subscribe(data => {
+        selectedFile = data.selectedItems[0]
+    }, ["selectedItems"])
 
     $: {
         if (selectedFile) {
@@ -32,10 +36,7 @@
         }
     }
 
-    onMount(() => {
-        ProjectionEngine.ContentBrowserStore.addListener(COMPONENT_ID, data => selectedFile = data.selectedItems[0], ["selectedItems"])
-    })
-    onDestroy(() => ProjectionEngine.ContentBrowserStore.removeListener(COMPONENT_ID))
+    onDestroy(unsubCB)
 </script>
 
 <div class="wrapper">

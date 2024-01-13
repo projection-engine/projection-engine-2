@@ -2,9 +2,10 @@ import QueryAPI from "@engine-core/lib/utils/QueryAPI"
 import Entity from "@engine-core/instances/Entity"
 import {Injectable} from "@lib/Injection";
 import ProjectionEngine from "@lib/ProjectionEngine";
+import IInjectable from "@lib/IInjectable";
 
 @Injectable
-export default class EntityNamingService {
+export default class EntityNamingService extends IInjectable{
     #byName = new Map<string, string>()
     get byName() {
         return this.#byName

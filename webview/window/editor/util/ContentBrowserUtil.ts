@@ -15,9 +15,17 @@ import ContentBrowserStore from "@lib/stores/ContentBrowserStore"
 import LocalizationEN from "@enums/LocalizationEN";
 import FileSystemUtil from "@lib/FileSystemUtil";
 import HotKeysController from "@lib/HotKeysController";
+import {Inject, Injectable} from "@lib/Injection";
+import IInjectable from "@lib/IInjectable";
+import ToasterService from "@services/ToasterService";
 
 
-export default class ContentBrowserUtil {
+@Injectable
+export default class ContentBrowserUtil extends IInjectable {
+
+    @Inject(ToasterService)
+    static toasterService: ToasterService
+
     static sortItems(arr: MutableObject[], isDSC: boolean, sortKey: string) {
         function compare(A, B) {
             if (A[sortKey] < B[sortKey])
@@ -63,7 +71,7 @@ export default class ContentBrowserUtil {
             return
         if (!data.isFolder) {
             const fileType = "." + data.type
-            ProjectionEngine.ToastNotificationSystem.warn(LocalizationEN.OPENING_ASSET + " (" + data.name + ")")
+            ContentBrowserUtil.toasterService.warn(LocalizationEN.OPENING_ASSET + " (" + data.name + ")")
             switch (fileType) {
                 // case FileTypes.UI_LAYOUT:
                 // case FileTypes.COMPONENT:
@@ -79,7 +87,7 @@ export default class ContentBrowserUtil {
                 case FileTypes.COLLECTION:
                 case FileTypes.TEXTURE:
                     EngineResourceLoaderService.load(data.registryID, true).catch(console.error)
-                    ProjectionEngine.ToastNotificationSystem.warn(LocalizationEN.CREATING_ENTITY)
+                    ContentBrowserUtil.toasterService.warn(LocalizationEN.CREATING_ENTITY)
                     break
                 case FileTypes.LEVEL:
                     ProjectionEngine.LevelService.loadLevel(data.registryID).catch(console.error)
@@ -155,7 +163,7 @@ export default class ContentBrowserUtil {
                     if (!FileSystemUtil.exists(newPath)) {
                         await ContentBrowserUtil.rename(FileSystemUtil.resolvePath(FileSystemUtil.ASSETS_PATH + FileSystemUtil.sep + textData), FileSystemUtil.resolvePath(newPath))
                         await ContentBrowserUtil.refreshFiles()
-                    } else ProjectionEngine.ToastNotificationSystem.error(LocalizationEN.ITEM_ALREADY_EXISTS)
+                    } else ContentBrowserUtil.toasterService.error(LocalizationEN.ITEM_ALREADY_EXISTS)
                 }
             }
         } catch (error) {
@@ -167,7 +175,7 @@ export default class ContentBrowserUtil {
         const items = ProjectionEngine.ContentBrowserStore.getData().items
         const itemsToDelete = !Array.isArray(entries) ? [entries] : entries
 
-        ProjectionEngine.ToastNotificationSystem.warn(LocalizationEN.DELETING_ITEMS)
+        ContentBrowserUtil.toasterService.warn(LocalizationEN.DELETING_ITEMS)
         for (let i = 0; i < itemsToDelete.length; i++) {
             const currentItem = itemsToDelete[i]
             const file = items.find(e => e.id === currentItem)
@@ -196,7 +204,7 @@ export default class ContentBrowserUtil {
         }
 
         await ContentBrowserUtil.refreshFiles().catch(console.error)
-        ProjectionEngine.ToastNotificationSystem.success(LocalizationEN.SUCCESSFUL_DELETE)
+        ContentBrowserUtil.toasterService.success(LocalizationEN.SUCCESSFUL_DELETE)
     }
 
     static getTypeName(type: string): string {
@@ -276,7 +284,7 @@ export default class ContentBrowserUtil {
     static getItemDragData(data, setOnDrag: Function) {
         return {
             dragImage: `
-                <span data-svelteicon="-" style="font-size: 70px">${ContentBrowserUtil.#getDragIcon(ContentBrowserUtil.getItemIcon(data), data)}</span>
+                <span data-svelteicon="-" style="font-size: 70px">${ContentBrowserUtil.getDragIcon(ContentBrowserUtil.getItemIcon(data), data)}</span>
                 ${data.name}
             `,
             onDragOver: () => data.isFolder ? "Link folder" : undefined,
@@ -291,7 +299,7 @@ export default class ContentBrowserUtil {
         }
     }
 
-    static #getDragIcon(icon: string, data) {
+    static getDragIcon(icon: string, data) {
         if (icon)
             return icon
         if (data.isFolder)
@@ -301,7 +309,7 @@ export default class ContentBrowserUtil {
         return "texture"
     }
 
-    static #map(check, items, elementsPerRow) {
+    static map(check, items, elementsPerRow) {
         const newArr = []
         let offset = 0
         for (let i = 0; i < items.length; i++) {
@@ -332,19 +340,19 @@ export default class ContentBrowserUtil {
         const items = ContentBrowserUtil.sortItems(itemsToMap, sortDirection === SORTS[1], sortKey)
 
         if (inputValue || fileType)
-            return ContentBrowserUtil.#map(
+            return ContentBrowserUtil.map(
                 file => inputValue.trim() && file.name.includes(inputValue) || type && file.type === type && !file.isFolder,
                 items,
                 elementsPerRow
             )
         if (currentDirectory.id !== FileSystemUtil.sep)
-            return ContentBrowserUtil.#map(
+            return ContentBrowserUtil.map(
                 file => file.parent === currentDirectory.id,
                 items,
                 elementsPerRow
             )
 
-        return ContentBrowserUtil.#map(file => !file.parent, items, elementsPerRow)
+        return ContentBrowserUtil.map(file => !file.parent, items, elementsPerRow)
     }
 
     static getFileTypes() {
@@ -352,7 +360,7 @@ export default class ContentBrowserUtil {
         return Object.keys(c).map(m => m === FileTypes.PROJECT ? undefined : [m, LocalizationEN[m]]).filter(e => e[1] != null)
     }
 
-    static async #createFile(currentDirectory, name, type, data) {
+    static async createFile(currentDirectory, name, type, data) {
         const path = await EditorUtil.resolveFileName(currentDirectory.id + FileSystemUtil.sep + name, type)
         await EditorFSUtil.writeAsset(path, typeof data === "object" ? JSON.stringify(data) : data)
         await ContentBrowserUtil.refreshFiles()
@@ -367,31 +375,31 @@ export default class ContentBrowserUtil {
             {divider: true},
             {
                 label: LocalizationEN.JSON_OBJECT,
-                onClick: async () => ContentBrowserUtil.#createFile(currentDirectory, LocalizationEN.JSON, FileTypes.JSON, "")
+                onClick: async () => ContentBrowserUtil.createFile(currentDirectory, LocalizationEN.JSON, FileTypes.JSON, "")
             },
             {
                 label: LocalizationEN.JAVASCRIPT_PACKAGE,
-                onClick: async () => ContentBrowserUtil.#createFile(currentDirectory, LocalizationEN.JAVASCRIPT, FileTypes.JAVASCRIPT, "")
+                onClick: async () => ContentBrowserUtil.createFile(currentDirectory, LocalizationEN.JAVASCRIPT, FileTypes.JAVASCRIPT, "")
             },
             {divider: true},
             {
                 label: LocalizationEN.LEVEL,
-                onClick: async () => ContentBrowserUtil.#createFile(currentDirectory, LocalizationEN.LEVEL, FileTypes.LEVEL, {entities: []})
+                onClick: async () => ContentBrowserUtil.createFile(currentDirectory, LocalizationEN.LEVEL, FileTypes.LEVEL, {entities: []})
             },
             {divider: true},
             {
                 label: LocalizationEN.MATERIAL,
-                onClick: async () => ContentBrowserUtil.#createFile(currentDirectory, LocalizationEN.MATERIAL, FileTypes.MATERIAL, {})
+                onClick: async () => ContentBrowserUtil.createFile(currentDirectory, LocalizationEN.MATERIAL, FileTypes.MATERIAL, {})
             },
 
             {divider: true},
             {
                 label: LocalizationEN.COMPONENT,
-                onClick: async () => ContentBrowserUtil.#createFile(currentDirectory, LocalizationEN.COMPONENT, FileTypes.COMPONENT, COMPONENT_TEMPLATE)
+                onClick: async () => ContentBrowserUtil.createFile(currentDirectory, LocalizationEN.COMPONENT, FileTypes.COMPONENT, COMPONENT_TEMPLATE)
             },
             {
                 label: LocalizationEN.UI_LAYOUT,
-                onClick: async () => ContentBrowserUtil.#createFile(currentDirectory, LocalizationEN.UI_LAYOUT, FileTypes.UI_LAYOUT, UI_TEMPLATE)
+                onClick: async () => ContentBrowserUtil.createFile(currentDirectory, LocalizationEN.UI_LAYOUT, FileTypes.UI_LAYOUT, UI_TEMPLATE)
             },
 
         ]
@@ -476,7 +484,7 @@ export default class ContentBrowserUtil {
         )
     }
 
-    static #mapRegistryAsset(reg, type) {
+    static mapRegistryAsset(reg, type) {
         const split = reg.path.split(FileSystemUtil.sep)
         return {
             type,
@@ -573,7 +581,7 @@ export default class ContentBrowserUtil {
                     break
             }
             if (type && slot)
-                slot.push(ContentBrowserUtil.#mapRegistryAsset(registryEntry, type))
+                slot.push(ContentBrowserUtil.mapRegistryAsset(registryEntry, type))
         }
 
         return result

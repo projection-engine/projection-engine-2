@@ -1,9 +1,7 @@
 import FileSystemUtil from "@lib/FileSystemUtil"
 import Engine from "@engine-core/Engine"
 import EditorFSUtil from "../window/editor/util/EditorFSUtil"
-import EntitySelectionStore from "@lib/stores/EntitySelectionStore"
-import CameraAPI from "@engine-core/lib/utils/CameraAPI"
-import CameraTracker from "@engine-tools/utils/CameraTracker"
+import SelectionStore from "@lib/stores/SelectionStore"
 import serializeStructure from "@engine-core/utils/serialize-structure"
 import QueryAPI from "@engine-core/lib/utils/QueryAPI"
 import PickingAPI from "@engine-core/lib/utils/PickingAPI"
@@ -12,19 +10,34 @@ import LocalizationEN from "@enums/LocalizationEN"
 import FileTypes from "@enums/FileTypes"
 import EditorUtil from "../window/editor/util/EditorUtil"
 import {Inject, Injectable} from "@lib/Injection";
-import VisualsStore from "@lib/stores/VisualsStore";
-import ProjectionEngine from "@lib/ProjectionEngine";
+import ToasterService from "@services/ToasterService";
+import EntityHierarchyService from "@services/EntityHierarchyService";
+import SettingsStore from "@lib/stores/SettingsStore";
+import EntityNamingService from "@services/EntityNamingService";
+import IInjectable from "@lib/IInjectable";
 
 
 @Injectable
-export default class LevelService {
+export default class LevelService extends IInjectable{
     #levelToLoad
-
-    @Inject(VisualsStore)
-    static visualsStore: VisualsStore
 
     @Inject(Engine)
     static engine: Engine
+
+    @Inject(SelectionStore)
+    static selectionStore: SelectionStore
+
+    @Inject(ToasterService)
+    static toasterService: ToasterService
+
+    @Inject(EntityHierarchyService)
+    static entityHierarchyService: EntityHierarchyService
+
+    @Inject(SettingsStore)
+    static settingsStore: SettingsStore
+
+    @Inject(EntityNamingService)
+    static entityNamingService: EntityNamingService
 
     getLevelToLoad() {
         const old = this.#levelToLoad
@@ -33,47 +46,46 @@ export default class LevelService {
     }
 
     async loadLevel(levelID?: string) {
-        if (!levelID || levelID && levelID === ProjectionEngine.Engine.loadedLevel?.id) {
-            if (levelID && levelID === ProjectionEngine.Engine.loadedLevel?.id)
-                ProjectionEngine.ToastNotificationSystem.error(LocalizationEN.LEVEL_ALREADY_LOADED)
+        if (!levelID || levelID && levelID === LevelService.engine.loadedLevel?.id) {
+            if (levelID && levelID === LevelService.engine.loadedLevel?.id)
+                LevelService.toasterService.error(LocalizationEN.LEVEL_ALREADY_LOADED)
             return
         }
 
 
         await EditorFSUtil.readRegistry()
-        ProjectionEngine.EntityNamingService.clear()
-        ProjectionEngine.EntitySelectionStore.updateStore({
+        LevelService.entityNamingService.clear()
+        LevelService.selectionStore.updateStore({
             array: []
         })
-        EntitySelectionStore.setLockedEntity(undefined)
+        SelectionStore.setLockedEntity(undefined)
 
-        await ProjectionEngine.Engine.loadLevel(levelID, false)
-        const entities = ProjectionEngine.Engine.entities.array
+        await LevelService.engine.loadLevel(levelID, false)
+        const entities = LevelService.engine.entities.array
         for (let i = 0; i < entities.length; i++) {
             const entity = entities[i];
             entity.setPickID(PickingAPI.getPickerId(i + AXIS.ZY + 1))
         }
-        if (ProjectionEngine.Engine.loadedLevel)
-            EntitySelectionStore.setLockedEntity(ProjectionEngine.Engine.loadedLevel.id)
-        ProjectionEngine.EntityHierarchyService.updateHierarchy()
+        if (LevelService.engine.loadedLevel)
+            SelectionStore.setLockedEntity(LevelService.engine.loadedLevel.id)
+        LevelService.entityHierarchyService.updateHierarchy()
     }
 
     async save() {
-        if (ProjectionEngine.EngineStore.getData().executingAnimation) {
-            ProjectionEngine.ToastNotificationSystem.warn(LocalizationEN.EXECUTING_SIMULATION)
+        if (LevelService.settingsStore.getData().executingAnimation) {
+            LevelService.toasterService.warn(LocalizationEN.EXECUTING_SIMULATION)
             return
         }
 
-        ProjectionEngine.ToastNotificationSystem.warn(LocalizationEN.SAVING)
+        LevelService.toasterService.warn(LocalizationEN.SAVING)
         try {
-            const metadata = ProjectionEngine.EngineStore.getData().meta
-            const settings = {...ProjectionEngine.SettingsStore.getData()}
+            const metadata = LevelService.settingsStore.getData().meta
+            const settings = {...LevelService.settingsStore.getData()}
             await FileSystemUtil.writeFile(
                 FileSystemUtil.path + FileSystemUtil.sep + FileTypes.PROJECT,
                 JSON.stringify({
                     ...metadata,
                     settings,
-                    visualSettings: LevelService.visualsStore.getData(),
                     level: LevelService.engine.loadedLevel?.id
                 }), true)
 
@@ -82,24 +94,24 @@ export default class LevelService {
             console.error(err)
             return
         }
-        ProjectionEngine.ToastNotificationSystem.success(LocalizationEN.PROJECT_SAVED)
+        LevelService.toasterService.success(LocalizationEN.PROJECT_SAVED)
         await EditorFSUtil.readRegistry()
     }
 
     async saveCurrentLevel() {
-        if (!ProjectionEngine.Engine.loadedLevel)
+        if (!LevelService.engine.loadedLevel)
             return
         const serialized = {
-            entity: ProjectionEngine.Engine.loadedLevel.serializable(),
-            entities: QueryAPI.getHierarchy(ProjectionEngine.Engine.loadedLevel).map(e => e.serializable()),
+            entity: LevelService.engine.loadedLevel.serializable(),
+            entities: QueryAPI.getHierarchy(LevelService.engine.loadedLevel).map(e => e.serializable()),
         }
 
-        const assetReg = EditorFSUtil.getRegistryEntry(ProjectionEngine.Engine.loadedLevel.id)
+        const assetReg = EditorFSUtil.getRegistryEntry(LevelService.engine.loadedLevel.id)
         let path = assetReg?.path
 
         if (!assetReg) {
-            path = FileSystemUtil.resolvePath(await EditorUtil.resolveFileName(FileSystemUtil.ASSETS_PATH + FileSystemUtil.sep + ProjectionEngine.Engine.loadedLevel.name, FileTypes.LEVEL))
-            await EditorFSUtil.createRegistryEntry(ProjectionEngine.Engine.loadedLevel.id, FileSystemUtil.sep + path.split(FileSystemUtil.sep).pop())
+            path = FileSystemUtil.resolvePath(await EditorUtil.resolveFileName(FileSystemUtil.ASSETS_PATH + FileSystemUtil.sep + LevelService.engine.loadedLevel.name, FileTypes.LEVEL))
+            await EditorFSUtil.createRegistryEntry(LevelService.engine.loadedLevel.id, FileSystemUtil.sep + path.split(FileSystemUtil.sep).pop())
             EditorFSUtil.readRegistry().catch(console.error)
         } else
             path = FileSystemUtil.ASSETS_PATH + FileSystemUtil.sep + path

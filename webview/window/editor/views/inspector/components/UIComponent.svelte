@@ -1,6 +1,6 @@
-<script>
+<script lang="ts">
     import StyleField from "./UIStyles.svelte"
-    import COMPONENTS from "@engine-core/static/COMPONENTS.ts"
+    import COMPONENTS from "@engine-core/static/COMPONENTS"
 
     import Selector from "../../../components/selector/Selector.svelte"
     import EditorFSUtil from "../../../util/EditorFSUtil"

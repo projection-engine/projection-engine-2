@@ -4,7 +4,7 @@
     import VirtualList from "@sveltejs/svelte-virtual-list"
     import {onDestroy, onMount} from "svelte"
     import HotKeysController from "@lib/HotKeysController"
-    import EntitySelectionStore from "@lib/stores/EntitySelectionStore"
+    import SelectionStore from "@lib/stores/SelectionStore"
 
     import ITEM_TYPES from "../static/ITEM_TYPES"
     import BrowserHeader from "./BrowserHeader.svelte"
@@ -60,7 +60,7 @@
 
     onMount(() => {
     	ContentBrowserUtil.buildContextMenuAndHotKeys(COMPONENT_ID, ref, navigationHistory, () => currentDirectory, setCurrentDirectory, v => currentItem = v)
-        ProjectionEngine.ContentBrowserStore.addListener(COMPONENT_ID, v => store = v)
+        // ProjectionEngine.ContentBrowserStore.addListener(COMPONENT_ID, v => store = v)
     	resizeOBS = new ResizeObserver(() => {
     		if (isRowType)
     			return
@@ -75,8 +75,7 @@
 
     onDestroy(() => {
 
-        ProjectionEngine.ContentBrowserStore.removeListener(COMPONENT_ID)
-        ProjectionEngine.EntitySelectionStore.removeListener(COMPONENT_ID)
+        // ProjectionEngine.ContentBrowserStore.removeListener(COMPONENT_ID)
     	HotKeysController.unbindAction(ref)
         ProjectionEngine.ContextMenuService.destroy(COMPONENT_ID)
     	clearTimeout(timeout)

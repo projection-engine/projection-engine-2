@@ -13,6 +13,7 @@
       "./global.d.ts",
       "node_modules/@types"
     ],
+    "esModuleInterop": true,
     "paths": {
       "@engine-core/*":  ["./engine/core/*"],
       "@enums/*":  ["./enums/*"],

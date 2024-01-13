@@ -1,26 +1,12 @@
 import AbstractStore from "./AbstractStore"
 import {Injectable} from "@lib/Injection";
 import ProjectionEngine from "@lib/ProjectionEngine";
+import CBStateDTO from "@lib/stores/state/CBStateDTO";
 
 @Injectable
-export default class ContentBrowserStore extends AbstractStore{
+export default class ContentBrowserStore extends AbstractStore<CBStateDTO>{
 	constructor() {
-		super({
-			selectedItems: [],
-			items: [],
-			textures: [],
-			meshes: [],
-			levels: [],
-			materials: [],
-			materialInstances: [],
-			simpleMaterials: [],
-			components: [],
-			uiLayouts: [],
-			terrains: [],
-			terrainMaterials: [],
-			toCut: [],
-			collections: []
-		})
+		super(new CBStateDTO())
 	}
 
 	static setContentBrowserSelected(data:MutableObject[]) {

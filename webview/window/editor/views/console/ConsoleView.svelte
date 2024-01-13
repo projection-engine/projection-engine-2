@@ -10,36 +10,41 @@
     import LocalizationEN from "@enums/LocalizationEN"
     import ViewHeader from "../../components/view/ViewHeader.svelte"
     import ProjectionEngine from "@lib/ProjectionEngine";
+    import {InjectVar} from "@lib/Injection";
+    import SettingsStore from "@lib/stores/SettingsStore";
 
     const COMPONENT_ID = crypto.randomUUID()
     const TYPES = ConsoleAPI.TYPES
     const portal = new SveltePortal(999)
 
-    let toRender:{type: string, object?: Object, message: string, src?: string}[] = []
+    let toRender: { type: string, object?: Object, message: string, src?: string }[] = []
     let newMessages = false
     let modal
     let objectOpen
 
+    const unsubSettings = InjectVar(SettingsStore)
+        .subscribe(() => ConsoleAPI.clear(), ["executingAnimation"])
+
+
     function handler(event) {
-    	if (!modal.firstChild.contains(event.target))
-    		objectOpen = undefined
+        if (!modal.firstChild.contains(event.target))
+            objectOpen = undefined
     }
 
     onMount(() => {
-        ProjectionEngine.EngineStore.addListener(COMPONENT_ID, () => ConsoleAPI.clear(), ["executingAnimation"])
-    	ConsoleAPI.addListener(COMPONENT_ID, (md, messages) => {
-    		toRender = messages
-    		newMessages = messages.length > 0
-    	})
-    	portal.create(modal, {background: "rgba(0,0,0,.2)"})
-    	document.addEventListener("mousedown", handler)
+        ConsoleAPI.addListener(COMPONENT_ID, (md, messages) => {
+            toRender = messages
+            newMessages = messages.length > 0
+        })
+        portal.create(modal, {background: "rgba(0,0,0,.2)"})
+        document.addEventListener("mousedown", handler)
     })
 
     onDestroy(() => {
-        ProjectionEngine.EngineStore.removeListener(COMPONENT_ID)
-    	ConsoleAPI.removeListener(COMPONENT_ID)
-    	portal.destroy()
-    	document.removeEventListener("mousedown", handler)
+        unsubSettings()
+        ConsoleAPI.removeListener(COMPONENT_ID)
+        portal.destroy()
+        document.removeEventListener("mousedown", handler)
     })
 
     $: objectOpen != null ? portal.open() : portal.close()

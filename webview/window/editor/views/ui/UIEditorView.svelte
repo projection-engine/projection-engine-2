@@ -5,7 +5,7 @@
     import Header from "./components/Header.svelte"
     import GPU from "@engine-core/GPU"
     import LocalizationEN from "@enums/LocalizationEN"
-    import EntitySelectionStore from "@lib/stores/EntitySelectionStore";
+    import SelectionStore from "@lib/stores/SelectionStore";
     import type Entity from "@engine-core/instances/Entity";
     import ProjectionEngine from "@lib/ProjectionEngine";
 
@@ -35,9 +35,9 @@
         tooltipRef.style.opacity = "1"
 
         if (e.ctrl)
-            EntitySelectionStore.setEntitiesSelected([...EntitySelectionStore.getEntitiesSelected(), tooltipRef.hovered.id])
+            SelectionStore.setEntitiesSelected([...SelectionStore.getEntitiesSelected(), tooltipRef.hovered.id])
         else
-            EntitySelectionStore.setEntitiesSelected(entity.id)
+            SelectionStore.setEntitiesSelected(entity.id)
         selectedEntity = entity
     }
 

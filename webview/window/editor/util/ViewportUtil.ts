@@ -6,20 +6,32 @@ import QueryAPI from "@engine-core/lib/utils/QueryAPI"
 import VisibilityRenderer from "@engine-core/runtime/VisibilityRenderer"
 import EngineTools from "../../../engine/tools/EngineTools"
 import StaticFBO from "@engine-core/lib/StaticFBO";
-import EntitySelectionStore from "@lib/stores/EntitySelectionStore";
-import ProjectionEngine from "@lib/ProjectionEngine";
+import SelectionStore from "@lib/stores/SelectionStore";
 import {ViewType} from "../components/view/ViewDefinitions";
+import {Inject, Injectable} from "@lib/Injection";
+import IInjectable from "@lib/IInjectable";
+import SettingsStore from "@lib/stores/SettingsStore";
 
-export default class ViewportUtil {
+// TODO -  REMOVE STATIC MEMBERS
+
+@Injectable
+export default class ViewportUtil extends IInjectable {
+
+    @Inject(SettingsStore)
+    static settingsStore: SettingsStore
+
+    @Inject(Engine)
+    static engine: Engine
+
     static updateViewport(currentView: ViewType) {
-        if (ProjectionEngine.EngineStore.getData().focusedCamera || !GPU.context)
+        if (ViewportUtil.settingsStore.getData().focusedCamera || !GPU.context)
             return
         if (currentView === ViewType.EDITOR) {
             CameraTracker.startTracking()
-            ProjectionEngine.Engine.start()
+            ViewportUtil.engine.start()
         } else {
             CameraTracker.stopTracking()
-            ProjectionEngine.Engine.stop()
+            ViewportUtil.engine.stop()
         }
     }
 
@@ -31,7 +43,7 @@ export default class ViewportUtil {
         const deltaY = Math.abs(mouseDelta.y - event.clientY)
         if (deltaX >= MAX_DELTA || deltaY >= MAX_DELTA)
             return
-        const selected = EntitySelectionStore.getEntitiesSelected()
+        const selected = SelectionStore.getEntitiesSelected()
         EngineTools.drawIconsToBuffer()
 
         const clickedEntity = PickingAPI.readEntityID(event.clientX, event.clientY, 1, StaticFBO.visibility.FBO)

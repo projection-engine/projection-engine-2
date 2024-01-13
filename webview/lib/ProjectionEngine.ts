@@ -6,13 +6,10 @@ import DragDropService from "@services/DragDropService";
 import EntityNamingService from "@services/EntityNamingService";
 import EntityUpdateService from "@services/EntityUpdateService";
 import LevelService from "@services/LevelService";
-import ExecutionService from "@services/ExecutionService";
-import EngineStore from "./stores/EngineStore";
 import SettingsStore from "./stores/SettingsStore";
 import Engine from "@engine-core/Engine";
 import EntityHierarchyService from "@services/EntityHierarchyService";
 import ContextMenuService from "@services/ContextMenuService";
-import EntitySelectionStore from "./stores/EntitySelectionStore";
 import {Inject} from "@lib/Injection";
 
 export default class ProjectionEngine extends IInjectable {
@@ -41,9 +38,6 @@ export default class ProjectionEngine extends IInjectable {
     @Inject(EntityUpdateService)
     static EntityUpdateService: EntityUpdateService
 
-    @Inject(ExecutionService)
-    static ExecutionService: ExecutionService
-
     @Inject(LevelService)
     static LevelService: LevelService
 
@@ -52,12 +46,6 @@ export default class ProjectionEngine extends IInjectable {
 
     @Inject(ViewportActionService)
     static ViewportActionUtil: ViewportActionService
-
-    @Inject(EngineStore)
-    static EngineStore: EngineStore
-
-    @Inject(EntitySelectionStore)
-    static EntitySelectionStore: EntitySelectionStore
 
 }
 

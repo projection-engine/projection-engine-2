@@ -1,5 +1,5 @@
 import ScriptsAPI from "@engine-core/lib/utils/ScriptsAPI"
-import EntitySelectionStore from "@lib/stores/EntitySelectionStore"
+import SelectionStore from "@lib/stores/SelectionStore"
 import LocalizationEN from "@enums/LocalizationEN"
 import Entity from "@engine-core/instances/Entity"
 import Engine from "@engine-core/Engine"
@@ -12,32 +12,54 @@ import GIZMOS from "@enums/Gizmos"
 import ContentBrowserUtil from "./ContentBrowserUtil"
 import GizmoState from "../../../engine/tools/gizmo/util/GizmoState";
 import GizmoUtil from "../../../engine/tools/gizmo/util/GizmoUtil";
-import ProjectionEngine from "@lib/ProjectionEngine";
+import {Inject, Injectable} from "@lib/Injection";
+import IInjectable from "@lib/IInjectable";
+import ToasterService from "@services/ToasterService";
+import ExecutionService from "@services/ExecutionService";
+import SettingsStore from "@lib/stores/SettingsStore";
 
-export default class EditorUtil {
+
+// TODO - REMOVE STATIC MEMBERS
+@Injectable
+export default class EditorUtil extends IInjectable {
+
+    @Inject(SelectionStore)
+    static selectionStore: SelectionStore
+
+    @Inject(ToasterService)
+    static toasterService: ToasterService
+
+    @Inject(Engine)
+    static engine: Engine
+
+    @Inject(ExecutionService)
+    static executionService: ExecutionService
+
+    @Inject(SettingsStore)
+    static settingsStore: SettingsStore
+
     static async componentConstructor(entity, scriptID, autoUpdate = true) {
         await ScriptsAPI.linkScript(entity, scriptID)
         if (autoUpdate)
-            ProjectionEngine.EntitySelectionStore.updateStore({array: EntitySelectionStore.getEntitiesSelected()})
-        ProjectionEngine.ToastNotificationSystem.success(LocalizationEN.ADDED_COMPONENT)
+            EditorUtil.selectionStore.updateStore({array: SelectionStore.getEntitiesSelected()})
+        EditorUtil.toasterService.success(LocalizationEN.ADDED_COMPONENT)
     }
 
     static focusOnCamera(cameraTarget) {
-        const engineInstance = ProjectionEngine.EngineStore
-        const focused = engineInstance.getData().focusedCamera
+        const focused = EditorUtil.settingsStore.getData().focusedCamera
         const isCamera = cameraTarget instanceof Entity
         if (!focused || isCamera && cameraTarget.id !== focused) {
-            const current = isCamera ? cameraTarget : ProjectionEngine.Engine.entities.get(EntitySelectionStore.getMainEntity())
+            const current = isCamera ? cameraTarget : EditorUtil.engine.entities.get(SelectionStore.getMainEntity())
             if (current && current.cameraComponent) {
-                ProjectionEngine.ExecutionService.cameraSerialization = ProjectionEngine.Engine.CameraAPI.serializeState()
+                EditorUtil.executionService.cameraSerialization = EditorUtil.engine.CameraAPI.serializeState()
                 CameraTracker.stopTracking()
-                ProjectionEngine.Engine.CameraAPI.updateViewTarget(current)
-                engineInstance.updateStore({focusedCamera: current.id})
+                EditorUtil.engine.CameraAPI.updateViewTarget(current)
+                EditorUtil.settingsStore.updateStore({focusedCamera: current.id})
             }
         } else {
-            ProjectionEngine.Engine.CameraAPI.restoreState(ProjectionEngine.ExecutionService.cameraSerialization)
+            EditorUtil.engine.CameraAPI.restoreState(EditorUtil.executionService.cameraSerialization)
             CameraTracker.startTracking()
-            engineInstance.updateStore({focusedCamera: undefined})
+            EditorUtil.settingsStore.updateStore({focusedCamera: undefined})
         }
     }
 
@@ -102,7 +124,7 @@ export default class EditorUtil {
     static async importFile(currentDirectory) {
         const {filesImported} = await EditorUtil.getCall<MutableObject>(IPCRoutes.FILE_DIALOG, {currentDirectory: currentDirectory.id}, false)
         if (filesImported.length > 0) {
-            ProjectionEngine.ToastNotificationSystem.success(LocalizationEN.IMPORT_SUCCESSFUL)
+            EditorUtil.toasterService.success(LocalizationEN.IMPORT_SUCCESSFUL)
             await ContentBrowserUtil.refreshFiles()
         }
     }
@@ -120,10 +142,10 @@ export default class EditorUtil {
     }
 
     static snap(grid?: number) {
-        const selected = EntitySelectionStore.getEntitiesSelected()
+        const selected = SelectionStore.getEntitiesSelected()
         for (let i = 0; i < selected.length; i++) {
             const entity = QueryAPI.getEntityByID(selected[i])
-            const currentGizmo = ProjectionEngine.SettingsStore.getData().gizmo
+            const currentGizmo = EditorUtil.settingsStore.getData().gizmo
 
             switch (currentGizmo) {
                 case GIZMOS.TRANSLATION: {

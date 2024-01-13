@@ -1,4 +1,3 @@
-
 import IInjectable from "@lib/IInjectable";
 
 interface ExtendedWindow extends Window {
@@ -10,6 +9,19 @@ function Inject(Clazz: typeof IInjectable) {
         const P = window as unknown as ExtendedWindow
         Injectable(Clazz)
         target[propertyKey] = P.__instances.get(Clazz)
+    }
+}
+
+function LazyInject(Clazz: typeof IInjectable) {
+    const P = window as unknown as ExtendedWindow
+    return (target: IInjectable, key: string) => {
+        Object.defineProperty(target, key, {
+            get() {
+                return P.__instances.get(Clazz)
+            },
+            enumerable: true,
+            configurable: true,
+        });
     }
 }
 
@@ -26,12 +38,13 @@ function Injectable(Clazz: typeof IInjectable) {
     P.__instances.set(Clazz, instance);
 }
 
-function InjectVar(Clazz: typeof IInjectable): IInjectable {
+function InjectVar<T>(Clazz: new () => T): T | null{
     const P = window as unknown as ExtendedWindow
-    Injectable(Clazz)
-    return P.__instances.get(Clazz)
+    if (P.__instances.has(Clazz))
+        return P.__instances.get(Clazz) as T
+    return null
 }
 
 
-export {Injectable, Inject, InjectVar}
+export {Injectable, Inject, InjectVar, LazyInject}
 
