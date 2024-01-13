@@ -9,10 +9,37 @@ import CameraComponent from "@engine-core/instances/components/CameraComponent"
 import EditorUtil from "./EditorUtil"
 import type Entity from "@engine-core/instances/Entity";
 import type Component from "@engine-core/instances/components/Component";
-import ProjectionEngine from "@lib/ProjectionEngine";
 import Engine from "@engine-core/Engine";
+import IInjectable from "@lib/IInjectable";
+import {Inject, Injectable} from "@lib/Injection";
+import EngineStore from "@lib/stores/EngineStore";
+import EntityHierarchyService from "@services/EntityHierarchyService";
+import ToasterService from "@services/ToasterService";
+import ContentBrowserStore from "@lib/stores/ContentBrowserStore";
 
-export default class InspectorUtil {
+
+// TODO - REMOVE STATIC MEMBERS
+@Injectable
+export default class InspectorUtil extends IInjectable {
+
+    @Inject(SelectionStore)
+    static selectionStore: SelectionStore
+
+    @Inject(EngineStore)
+    static engineStore: EngineStore
+
+    @Inject(Engine)
+    static engine: Engine
+
+    @Inject(EntityHierarchyService)
+    static entityHierarchyService: EntityHierarchyService
+
+    @Inject(ToasterService)
+    static toasterService: ToasterService
+
+    @Inject(ContentBrowserStore)
+    static contentBrowserStore: ContentBrowserStore
+
     static compareObjects(obj1, obj2) {
         let isValid = true
         Object.entries(obj1).forEach(([k, v]) => {
@@ -50,7 +77,7 @@ export default class InspectorUtil {
         ]
     }
 
-    static updateEntityComponent(entity:Entity, key:string, value:any, component:typeof Component) {
+    static updateEntityComponent(entity: Entity, key: string, value: any, component: typeof Component) {
         if (component instanceof LightComponent) {
             entity.needsLightUpdate = true
             LightsAPI.packageLights(true)
@@ -59,8 +86,8 @@ export default class InspectorUtil {
             entity.__cameraNeedsUpdate = true
         }
         component[key] = value
-        if (component.componentKey === COMPONENTS.CAMERA && entity.id === ProjectionEngine.EngineStore.getData().focusedCamera)
-            ProjectionEngine.Engine.CameraAPI.updateViewTarget(entity)
+        if (component.componentKey === COMPONENTS.CAMERA && entity.id === InspectorUtil.engineStore.getData().focusedCamera)
+            InspectorUtil.engine.CameraAPI.updateViewTarget(entity)
     }
 
     static removeComponent(entity, index, key) {
@@ -72,14 +99,14 @@ export default class InspectorUtil {
         } else
             entity.removeComponent(key)
 
-        ProjectionEngine.EntityHierarchyService.updateHierarchy()
-        ProjectionEngine.EntitySelectionStore.updateStore({array: SelectionStore.getEntitiesSelected()})
+        InspectorUtil.entityHierarchyService.updateHierarchy()
+        InspectorUtil.selectionStore.updateStore({array: SelectionStore.getEntitiesSelected()})
     }
 
     static async handleComponentDrop(entity, data) {
         try {
             const id = JSON.parse(data)[0]
-            const type = InspectorUtil.#getItemFound(id)
+            const type = InspectorUtil.getItemFound(id)
             if (type == null)
                 return
 
@@ -108,8 +135,8 @@ export default class InspectorUtil {
 
     }
 
-    static #getItemFound(id) {
-        const filesStoreData =ProjectionEngine. ContentBrowserStore.getData()
+    static getItemFound(id) {
+        const filesStoreData = InspectorUtil.contentBrowserStore.getData()
         let type = "SCRIPT"
         let itemFound = filesStoreData.components.find(s => s.registryID === id)
         if (!itemFound) {
@@ -126,7 +153,7 @@ export default class InspectorUtil {
         }
 
         if (!itemFound) {
-            ProjectionEngine.   ToastNotificationSystem.error(LocalizationEN.FILE_NOT_FOUND)
+            InspectorUtil.toasterService.error(LocalizationEN.FILE_NOT_FOUND)
             return null
         }
         return type

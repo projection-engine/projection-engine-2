@@ -1,25 +1,26 @@
-<script>
+<script lang="ts">
     import {onDestroy, onMount} from "svelte"
     import RENDER_TARGET from "../../static/RENDER_TARGET"
     import SelectBox from "@lib/components/select-box/SelectBox.svelte"
-    import GIZMOS from "@enums/Gizmos.ts"
+    import GIZMOS from "@enums/Gizmos"
     import GizmoSystem from "../../../../engine/tools/gizmo/GizmoSystem"
     import dragDrop from "@lib/components/drag-drop/drag-drop"
     import CameraSettings from "./components/CameraSettings.svelte"
     import SceneOptions from "./components/SceneOptions.svelte"
     import ViewHeader from "../../components/view/ViewHeader.svelte"
     import EntityInformation from "./components/EntityInformation.svelte"
-    import Engine from "@engine-core/Engine"
     import GizmoSettings from "./components/GizmoSettings.svelte"
-    import SHADING_MODELS from "@engine-core/static/SHADING_MODELS"
+    import SHADING_MODELS from "@engine-core/static/ShadingModel"
     import Icon from "@lib/components/icon/Icon.svelte"
     import GPU from "@engine-core/GPU"
     import LocalizationEN from "@enums/LocalizationEN"
     import SceneEditorUtil from "../../util/SceneEditorUtil"
     import ProjectionEngine from "@lib/ProjectionEngine";
     import ViewportInteractionService from "./lib/ViewportInteractionService";
+    import {InjectVar} from "@lib/Injection";
+    import SettingsStore from "@lib/stores/SettingsStore";
+    import EngineStore from "@lib/stores/EngineStore";
 
-    const COMPONENT_ID = crypto.randomUUID()
     const draggable = dragDrop(false)
 
     let isOnGizmo = false
@@ -28,23 +29,26 @@
     let shadingModel
     let focusedCamera
 
+    const unsubSettings = InjectVar(SettingsStore).subscribe(data => {
+        isSelectBoxDisabled = data.gizmo !== GIZMOS.NONE
+        shadingModel = data.shadingModel
+    }, ["gizmo", "shadingModel"])
+
+    const unsubEngine = InjectVar(EngineStore).subscribe(data => {
+        executingAnimation = data.executingAnimation
+        focusedCamera = data.focusedCamera ? ProjectionEngine.Engine.entities.get(data.focusedCamera) : null
+    }, ["focusedCamera", "executingAnimation"])
+
     onMount(() => {
-        ProjectionEngine.SettingsStore.addListener(COMPONENT_ID, data => {
-            isSelectBoxDisabled = data.gizmo !== GIZMOS.NONE
-            shadingModel = data.shadingModel
-        }, ["gizmo", "shadingModel"])
-        ProjectionEngine.EngineStore.addListener(COMPONENT_ID, data => {
-            executingAnimation = data.executingAnimation
-            focusedCamera = data.focusedCamera ? ProjectionEngine.Engine.entities.get(data.focusedCamera) : null
-        }, ["focusedCamera", "executingAnimation"])
         GizmoSystem.onStart = () => isOnGizmo = true
         GizmoSystem.onStop = () => isOnGizmo = false
         SceneEditorUtil.onSceneEditorMount(draggable)
     })
 
     onDestroy(() => {
-        ProjectionEngine.SettingsStore.removeListener(COMPONENT_ID)
-        ProjectionEngine.EngineStore.removeListener(COMPONENT_ID)
+        unsubEngine()
+        unsubSettings()
+
         GizmoSystem.onStop = GizmoSystem.onStart = undefined
         ProjectionEngine.ContextMenuService.destroy(RENDER_TARGET)
         draggable.onDestroy()

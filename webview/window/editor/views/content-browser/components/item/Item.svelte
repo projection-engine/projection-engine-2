@@ -8,8 +8,6 @@
     import Folders from "@enums/Folders"
     import ContentBrowserUtil from "../../../../util/ContentBrowserUtil"
     import FileSystemUtil from "@lib/FileSystemUtil"
-    import ContentBrowserStore from "@lib/stores/ContentBrowserStore";
-    import ProjectionEngine from "@lib/ProjectionEngine";
 
     export let reset
     export let data
@@ -67,7 +65,6 @@
 
     onDestroy(() => {
         draggable.onDestroy()
-        ProjectionEngine.ContentBrowserStore.removeListener(COMPONENT_ID)
     })
 </script>
 

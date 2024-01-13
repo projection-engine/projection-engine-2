@@ -1,4 +1,4 @@
-import SHADING_MODELS from "@engine-core/static/SHADING_MODELS"
+import SHADING_MODELS from "@engine-core/static/ShadingModel"
 import LocalizationEN from "@enums/LocalizationEN"
 import ConversionAPI from "@engine-core/lib/math/ConversionAPI"
 import GPU from "@engine-core/GPU"

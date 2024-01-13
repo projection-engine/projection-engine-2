@@ -1,14 +1,14 @@
-<script>
+<script lang="ts">
     import {onDestroy, onMount} from "svelte"
-    import GIZMOS from "@enums/Gizmos.ts"
-    import Gizmos from "@enums/Gizmos.ts"
+    import GIZMOS from "@enums/Gizmos"
 
     import GizmoSystem from "../../../../../engine/tools/gizmo/GizmoSystem"
     import LocalizationEN from "@enums/LocalizationEN"
     import SelectionStore from "@lib/stores/SelectionStore"
     import GizmoState from "../../../../../engine/tools/gizmo/util/GizmoState"
     import SceneEditorUtil from "../../../util/SceneEditorUtil"
-    import ProjectionEngine from "@lib/ProjectionEngine";
+    import {InjectVar} from "@lib/Injection";
+    import SettingsStore from "@lib/stores/SettingsStore";
 
     /** @type boolean */
     export let isOnGizmo
@@ -22,37 +22,42 @@
     let isValidPivot = false
     let isValidScaling = false
 
+    const unsubSelection = InjectVar(SelectionStore).subscribe(data => {
+        selectedSize = data.array.length
+    }, ["array"])
+
+    const unsubSettings = InjectVar(SettingsStore).subscribe(data => {
+        gizmo = data.gizmo
+        isValidPivot = gizmo === GIZMOS.TRANSLATION && selectedSize === 1
+        isValidScaling = gizmo === GIZMOS.SCALE
+    }, ["gizmo"])
+
     onMount(() => {
     	GizmoSystem.addListener(COMPONENT_ID, () => {
     		const mainEntity = GizmoState.mainEntity
     		switch (GizmoState.gizmoType) {
-    		case Gizmos.TRANSLATION: {
+    		case GIZMOS.TRANSLATION: {
     			translationRef.textContent = `X ${mainEntity.translation[0].toFixed(2)} | Y ${mainEntity.translation[1].toFixed(2)} | Z ${mainEntity.translation[2].toFixed(2)}`
     			break
     		}
-    		case Gizmos.ROTATION: {
+    		case GIZMOS.ROTATION: {
     			const {roll, pitch, yaw} = SceneEditorUtil.quaternionToEulerAngles(mainEntity.rotationQuaternion)
     			rotationRef.textContent = `X ${roll.toFixed(2)} | Y ${yaw.toFixed(2)} | Z ${pitch.toFixed(2)}`
     			break
     		}
-    		case Gizmos.SCALE: {
+    		case GIZMOS.SCALE: {
     			scaleRef.textContent = `X ${mainEntity.translation[0].toFixed(2)} | Y ${mainEntity.translation[1].toFixed(2)} | Z ${mainEntity.translation[2].toFixed(2)}`
     			break
     		}
     		}
     	})
-        ProjectionEngine.EntitySelectionStore.addListener(COMPONENT_ID, () => selectedSize = SelectionStore.getEntitiesSelected().length)
-        ProjectionEngine.SettingsStore.addListener(COMPONENT_ID, data => {
-    		gizmo = data.gizmo
-    		isValidPivot = gizmo === GIZMOS.TRANSLATION && selectedSize === 1
-    		isValidScaling = gizmo === GIZMOS.SCALE
-    	}, ["gizmo"])
+
     	GizmoSystem.scaleRef = scaleRef
     })
 
     onDestroy(() => {
-        ProjectionEngine.EntitySelectionStore.removeListener(COMPONENT_ID)
-        ProjectionEngine.SettingsStore.removeListener(COMPONENT_ID)
+        unsubSelection()
+        unsubSettings()
     	GizmoSystem.removeListener(COMPONENT_ID)
     })
 </script>

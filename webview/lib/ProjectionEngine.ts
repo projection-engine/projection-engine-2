@@ -41,9 +41,6 @@ export default class ProjectionEngine extends IInjectable {
     @Inject(EntityUpdateService)
     static EntityUpdateService: EntityUpdateService
 
-    @Inject(ExecutionService)
-    static ExecutionService: ExecutionService
-
     @Inject(LevelService)
     static LevelService: LevelService
 
@@ -52,12 +49,6 @@ export default class ProjectionEngine extends IInjectable {
 
     @Inject(ViewportActionService)
     static ViewportActionUtil: ViewportActionService
-
-    @Inject(EngineStore)
-    static EngineStore: EngineStore
-
-    @Inject(SelectionStore)
-    static EntitySelectionStore: SelectionStore
 
 }
 

@@ -9,38 +9,40 @@
     import EmptyIcon from "@lib/components/icon/EmptyIcon.svelte"
     import EditorUtil from "../../../util/EditorUtil"
     import ProjectionEngine from "@lib/ProjectionEngine";
+    import {InjectVar} from "@lib/Injection";
+    import EngineStore from "@lib/stores/EngineStore";
+    import SettingsStore from "@lib/stores/SettingsStore";
 
     const COMPONENT_ID = crypto.randomUUID()
     let cameras = []
     let focusedCamera
     let screenSpaceMovement = false
     let camera = {}
+    const unsubEngine = InjectVar(EngineStore).subscribe(data => {
+        focusedCamera = data.focusedCamera
+    }, ["focusedCamera"])
 
+    const unsubSettings = InjectVar(SettingsStore).subscribe(data => {
+        CameraTracker.screenSpaceMovement = screenSpaceMovement = data.screenSpaceMovement
+        camera = data.camera
+    }, ["screenSpaceMovement", "camera"])
 
     onMount(() => {
-        ProjectionEngine.SettingsStore.addListener(COMPONENT_ID, data => {
-    		CameraTracker.screenSpaceMovement = screenSpaceMovement = data.screenSpaceMovement
-    		camera = data.camera
-    	}, ["screenSpaceMovement", "camera"])
-        ProjectionEngine.EngineStore.addListener(COMPONENT_ID, data => focusedCamera = data.focusedCamera, ["focusedCamera"])
         ProjectionEngine.EntityHierarchyService.registerListener(COMPONENT_ID, () => {
-    		// TODO - CONSUME FROM DYNAMIC LIST OF ENTITIES WITH COMPONENT AFTER ECS
-    		cameras = ProjectionEngine.Engine.entities.array.filter(entity => entity.cameraComponent != null)
-    	})
+            cameras = ProjectionEngine.Engine.entities.array.filter(entity => entity.cameraComponent != null)
+        })
     })
 
     onDestroy(() => {
-        ProjectionEngine.SettingsStore.removeListener(COMPONENT_ID)
-        ProjectionEngine.EngineStore.removeListener(COMPONENT_ID)
+        unsubEngine()
+        unsubSettings()
         ProjectionEngine.EntityHierarchyService.removeListener(COMPONENT_ID)
     })
-    
+
     const toggleProjection = () => {
         ProjectionEngine.SettingsStore.updateStore({camera: {...camera, ortho: !camera.ortho}})
     }
-
 </script>
-
 
 <div class="wrapper">
     <Dropdown

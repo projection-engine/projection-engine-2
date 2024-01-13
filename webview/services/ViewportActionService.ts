@@ -7,10 +7,11 @@ import EngineStateService from "./EngineStateService"
 import SelectionStore from "@lib/stores/SelectionStore";
 import {Injectable} from "@lib/Injection";
 import ProjectionEngine from "@lib/ProjectionEngine";
+import IInjectable from "@lib/IInjectable";
 
 
 @Injectable
-export default class ViewportActionService {
+export default class ViewportActionService extends IInjectable{
     toCopy = []
 
     copy(single?: boolean, target?: string) {

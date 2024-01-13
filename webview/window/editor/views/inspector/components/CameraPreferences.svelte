@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import CameraTracker from "../../../../../engine/tools/utils/CameraTracker"
     import Layout from "./dynamic-form/Layout.svelte"
     import CAMERA_PROPS from "@engine-core/static/component-props/CAMERA_PROPS"
@@ -9,27 +9,25 @@
     import CAMERA_PREFERENCES from "../static/CAMERA_PREFERENCES"
     import ProjectionEngine from "@lib/ProjectionEngine";
     import ContentField from "../../preferences/components/content/ContentField.svelte";
+    import {InjectVar} from "@lib/Injection";
+    import SettingsStore from "@lib/stores/SettingsStore";
 
-    const COMPONENT_ID = crypto.randomUUID()
     let cameraSettings = {}
-    let settings
     let camera
 
-    onMount(() => {
-        ProjectionEngine.SettingsStore.addListener(COMPONENT_ID, data => {
-    		cameraSettings = {...data.camera, props: CAMERA_PROPS}
-    		settings = data
-    		camera = data.camera
-    	}, ["camera"])
-    })
+    const settings = InjectVar(SettingsStore)
+    const unsubSettings = settings.subscribe(data => {
+        cameraSettings = {...data.camera, props: CAMERA_PROPS}
+        camera = data.camera
+    }, ["camera"])
 
-    onDestroy(() => ProjectionEngine.SettingsStore.removeListener(COMPONENT_ID))
+    onDestroy(unsubSettings)
 
     const updateCamera = (key, value, full) => {
-    	if (full)
-            ProjectionEngine.	SettingsStore.updateStore({camera: {...camera, [key]: value}})
-    	if (CameraTracker[key] !== undefined)
-    		CameraTracker[key] = value
+        if (full)
+            settings.updateStore({camera: {...camera, [key]: value}})
+        if (CameraTracker[key] !== undefined)
+            CameraTracker[key] = value
     }
 </script>
 
@@ -38,7 +36,7 @@
     {#if settings !== undefined}
         <div data-svelteform="-">
             {#each CAMERA_PREFERENCES as toRender}
-                <ContentField {settings} toRender={toRender}/>
+                <ContentField toRender={toRender}/>
             {/each}
         </div>
     {/if}

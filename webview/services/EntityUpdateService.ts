@@ -1,8 +1,9 @@
 import Entity from "@engine-core/instances/Entity"
 import {Injectable} from "@lib/Injection";
+import IInjectable from "@lib/IInjectable";
 
 @Injectable
-export default class EntityUpdateService {
+export default class EntityUpdateService extends IInjectable{
     #listeners = new Map<string, { callback: Function, id: string }[]>()
 
     addListener(entityID: string, id: string, callback: Function) {

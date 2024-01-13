@@ -9,7 +9,7 @@
     import {InjectVar} from "@lib/Injection";
     import KEYS from "../../../static/KEYS";
 
-    const settings = InjectVar(SettingsStore) as SettingsStore
+    const settings = InjectVar(SettingsStore)
     const unsubSettings = settings.subscribe(
         data => {
             const vp = Object.entries(data.viewportHotkeys).map(v => ([...v, "viewportHotkeys", (keys) => updateHotKey("viewportHotkeys", v[0], keys)]))

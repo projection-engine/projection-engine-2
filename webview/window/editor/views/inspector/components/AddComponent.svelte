@@ -14,9 +14,9 @@
 
     let components = []
     let scripts = []
-
-    onMount(() => ProjectionEngine.ContentBrowserStore.addListener(COMPONENT_ID, data => scripts = data.components, ["components"]))
-    onDestroy(() => ProjectionEngine.ContentBrowserStore.removeListener(COMPONENT_ID))
+    // TODO - REWRITE
+    // onMount(() => ProjectionEngine.ContentBrowserStore.addListener(COMPONENT_ID, data => scripts = data.components, ["components"]))
+    // onDestroy(() => ProjectionEngine.ContentBrowserStore.removeListener(COMPONENT_ID))
 
     $:components = [
         ...scripts.map(s => ({type: "script", data: s})),

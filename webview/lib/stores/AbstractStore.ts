@@ -1,13 +1,14 @@
 import DynamicMap from "@engine-core/lib/DynamicMap"
 import IStateDTO from "@lib/stores/state/IStateDTO";
-import * as crypto from "crypto";
+import IInjectable from "@lib/IInjectable";
 
-export default class AbstractStore<T extends IStateDTO> {
-    #data: T
+export default class AbstractStore<T extends IStateDTO> extends IInjectable {
+    readonly #data: T
     #globalSubs = new Map<string, GenericVoidFunctionWithP<T>>()
     #subsByField = new Map<string, Map<string, GenericVoidFunctionWithP<T>>>()
 
     constructor(data: T) {
+        super()
         this.#data = data
     }
 
@@ -18,7 +19,7 @@ export default class AbstractStore<T extends IStateDTO> {
                 continue;
             }
             const dataValue = data[key];
-            if (dataValue !== this.#data[key] && this.#subsByField.has(key)) {
+            if (this.#subsByField.has(key)) {
                 this.#subsByField
                     .get(key)
                     .forEach(c => callbacks.push(c))
@@ -60,17 +61,6 @@ export default class AbstractStore<T extends IStateDTO> {
                 })
             }
         }
-    }
-
-    addListener(id: string, callback: Function, dependencies = []) {
-        // if (this.#listeners.has(id))
-        //     return
-        // this.#listeners.set(id, {callback, dependencies})
-        // callback(this.#data)
-    }
-
-    removeListener(id: string) {
-        // this.#listeners.delete(id)
     }
 
     getData(): T {

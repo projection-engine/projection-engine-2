@@ -40,6 +40,21 @@ test('Should trigger subscriber', () => {
     unsub()
 });
 
+test('Should trigger subscriber with same value', () => {
+    const store = new Store()
+    let called = 0
+    const unsub = store.subscribe(() => {
+        called++
+    }, ["valueA"])
+
+    store.updateStore({valueA: 2})
+    store.updateStore({valueA: 2})
+
+    expect(called).toBe(3)
+    expect(store.getData().valueA).toBe(2)
+    unsub()
+});
+
 test('Should not trigger subscriber', () => {
     const store = new Store()
     let called = 0

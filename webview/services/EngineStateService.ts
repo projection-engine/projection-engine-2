@@ -9,12 +9,16 @@ import QueryAPI from "@engine-core/lib/utils/QueryAPI"
 import LocalizationEN from "@enums/LocalizationEN"
 import GizmoUtil from "@engine-tools/gizmo/util/GizmoUtil"
 import ProjectionEngine from "@lib/ProjectionEngine";
+import {Inject, Injectable} from "@lib/Injection";
+import IInjectable from "@lib/IInjectable";
+import EntityNamingService from "@services/EntityNamingService";
+import EntityHierarchyService from "@services/EntityHierarchyService";
 
 
 function checkLevel(_, propertyKey: string, descriptor: PropertyDescriptor) {
     const original = descriptor.value
     descriptor.value = function (...args) {
-        if (!ProjectionEngine.Engine.loadedLevel) {
+        if (!EngineStateService.engine.loadedLevel) {
             ProjectionEngine.ToastNotificationSystem.error(LocalizationEN.NO_LEVEL_LOADED)
             return
         }
@@ -23,9 +27,25 @@ function checkLevel(_, propertyKey: string, descriptor: PropertyDescriptor) {
 }
 
 
-export default class EngineStateService {
-    static #updateStructure(replacedMap?: { [key: string]: boolean }) {
-        const arr = ProjectionEngine.Engine.entities.array
+
+// TODO - REMOVE STATIC MEMBERS
+@Injectable
+export default class EngineStateService extends IInjectable {
+
+    @Inject(SelectionStore)
+    static selectionStore: SelectionStore
+
+    @Inject(EntityNamingService)
+    static entityNamingService: EntityNamingService
+
+    @Inject(EntityHierarchyService)
+    static entityHierarchyService: EntityHierarchyService
+
+    @Inject(Engine)
+    static engine: Engine
+
+    static updateStructure(replacedMap?: { [key: string]: boolean }) {
+        const arr = EngineStateService.engine.entities.array
         for (let i = 0; i < arr.length; i++) {
             const entity = arr[i]
             entity.setPickID(PickingAPI.getPickerId(i + AXIS.ZY + 1))
@@ -33,14 +53,14 @@ export default class EngineStateService {
                 continue
             if (entity.parent && !replacedMap?.[entity.parent?.id])
                 entity.parentID = entity.parent.id
-            const parent = ProjectionEngine.Engine.entities.get(entity.parentID)
+            const parent = EngineStateService.engine.entities.get(entity.parentID)
             if (parent) {
                 entity.parentID = undefined
                 entity.addParent(parent)
             }
         }
 
-        ProjectionEngine.EntityHierarchyService.updateHierarchy()
+        EngineStateService.entityHierarchyService.updateHierarchy()
     }
 
     @checkLevel
@@ -52,25 +72,25 @@ export default class EngineStateService {
             const entity = toAdd[i]
             EntityAPI.addEntity(entity)
             replacedMap[entity.id] = true
-            ProjectionEngine.EntityNamingService.renameEntity(entity.name, entity)
+            EngineStateService.entityNamingService.renameEntity(entity.name, entity)
         }
-        EngineStateService.#updateStructure(replacedMap)
+        EngineStateService.updateStructure(replacedMap)
     }
 
     @checkLevel
     static appendBlock(block: Entity[]) {
         EntityAPI.addGroup(block)
-        ProjectionEngine.EntityNamingService.renameInBlock(block)
+        EngineStateService.entityNamingService.renameInBlock(block)
         for (let i = 0; i < block.length; i++)
             GizmoUtil.createTransformationCache(block[i])
-        EngineStateService.#updateStructure()
+        EngineStateService.updateStructure()
     }
 
     @checkLevel
     static removeBlock(payload: string[]) {
         const hierarchy: { [key: string]: Entity } = {}
         for (let i = 0; i < payload.length; i++) {
-            const entity = ProjectionEngine.Engine.entities.get(payload[i])
+            const entity = EngineStateService.engine.entities.get(payload[i])
             if (!entity)
                 continue
             hierarchy[entity.id] = entity
@@ -80,35 +100,35 @@ export default class EngineStateService {
         const entities = Object.values(hierarchy)
         EntityAPI.removeGroup(entities, false)
 
-        ProjectionEngine.EntitySelectionStore.updateStore({
+        EngineStateService.selectionStore.updateStore({
             array: []
         })
-        SelectionStore.setLockedEntity(ProjectionEngine.Engine.entities.array[0]?.id)
-        EngineStateService.#updateStructure()
+        SelectionStore.setLockedEntity(EngineStateService.engine.entities.array[0]?.id)
+        EngineStateService.updateStructure()
     }
 
     @checkLevel
     static add(entity: Entity) {
-        ProjectionEngine.EntityNamingService.renameEntity(entity.name, entity)
+        EngineStateService.entityNamingService.renameEntity(entity.name, entity)
         GizmoUtil.createTransformationCache(entity)
         EntityAPI.addEntity(entity)
-        ProjectionEngine.EntitySelectionStore.updateStore({
+        EngineStateService.selectionStore.updateStore({
             array: [entity.id]
         })
         SelectionStore.setLockedEntity(entity.id)
-        EngineStateService.#updateStructure()
+        EngineStateService.updateStructure()
     }
 
     @checkLevel
     static linkMultiple(payload: string[]) {
-        const values = ProjectionEngine.Engine.entities.array
+        const values = EngineStateService.engine.entities.array
         for (let i = 0; i < values.length; i++) {
             const s = values[i]
             if (payload.indexOf(s.id) > 0) {
-                const found = ProjectionEngine.Engine.entities.get(payload[0])
+                const found = EngineStateService.engine.entities.get(payload[0])
                 s.addParent(found)
             }
         }
-        EngineStateService.#updateStructure()
+        EngineStateService.updateStructure()
     }
 }

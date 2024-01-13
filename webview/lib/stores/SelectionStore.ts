@@ -1,6 +1,5 @@
 import AbstractStore from "./AbstractStore"
-import {Injectable} from "@lib/Injection";
-import ProjectionEngine from "@lib/ProjectionEngine";
+import {Injectable, InjectVar} from "@lib/Injection";
 import SelectionStateDTO from "@lib/stores/state/SelectionStateDTO";
 
 @Injectable
@@ -10,11 +9,11 @@ export default class SelectionStore extends AbstractStore<SelectionStateDTO>{
 	}
 
 	static setEntitiesSelected(data:string[]|string)	 {
-		ProjectionEngine.EntitySelectionStore.updateStore({array: Array.isArray(data) ? data : [data]})
+		InjectVar(SelectionStore).updateStore({array: Array.isArray(data) ? data : [data]})
 	}
 
 	static getEntitiesSelected() {
-		return ProjectionEngine.EntitySelectionStore.getData().array
+		return InjectVar(SelectionStore).getData().array
 	}
 
 	static getMainEntity() {
@@ -24,10 +23,10 @@ export default class SelectionStore extends AbstractStore<SelectionStateDTO>{
 	}
 
 	static getLockedEntity() {
-		return ProjectionEngine.EntitySelectionStore.getData().lockedEntity
+		return InjectVar(SelectionStore).getData().lockedEntity
 	}
 
 	static setLockedEntity(data:string) {
-		ProjectionEngine.EntitySelectionStore.updateStore({lockedEntity: data})
+		InjectVar(SelectionStore).updateStore({lockedEntity: data})
 	}
 }

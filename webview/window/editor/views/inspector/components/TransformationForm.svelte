@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import SelectionStore from "@lib/stores/SelectionStore"
     import Engine from "@engine-core/Engine"
 
@@ -13,57 +13,56 @@
     import LocalizationEN from "@enums/LocalizationEN"
     import EmptyIcon from "@lib/components/icon/EmptyIcon.svelte"
     import ProjectionEngine from "@lib/ProjectionEngine";
+    import {InjectVar} from "@lib/Injection";
+    import Entity from "@engine-core/instances/Entity";
 
-    const COMPONENT_ID = crypto.randomUUID()
     let targets = []
     let rotationType = Movable.ROTATION_QUATERNION
     let totalTranslated = [0, 0, 0]
     let totalScaled = [0, 0, 0]
     let totalPivot = [0, 0, 0]
-    let mainEntity
+    let mainEntity: Entity
     let isSingle
     let lockedRotation
     let lockedTranslation
     let lockedScaling
     let lockedCache = [false, false, false]
 
-    onMount(() => {
-        ProjectionEngine.EntitySelectionStore.addListener(COMPONENT_ID, () => {
-            const cache = []
-            const entitiesSelected = SelectionStore.getEntitiesSelected()
-            for (let i = 0; i < entitiesSelected.length; i++) {
-                const e = entitiesSelected[i]
-                const c = ProjectionEngine.Engine.entities.get(e)
-                if (c) {
-                    cache.push(c)
-                    c.__originalTranslation = undefined
-                    c.__originalPivot = undefined
-                    c.__originalScaling = undefined
-                    c.__originalQuat = undefined
-                }
+    const unsubSelection = InjectVar(SelectionStore).subscribe(() => {
+        const cache = []
+        const entitiesSelected = SelectionStore.getEntitiesSelected()
+        for (let i = 0; i < entitiesSelected.length; i++) {
+            const e = entitiesSelected[i]
+            const c = ProjectionEngine.Engine.entities.get(e)
+            if (c) {
+                cache.push(c)
+                c.__originalTranslation = undefined
+                c.__originalPivot = undefined
+                c.__originalScaling = undefined
+                c.__originalQuat = undefined
             }
-            if (cache.length === 0) {
-                const fallback = ProjectionEngine.Engine.entities.get(SelectionStore.getMainEntity())
-                if (fallback)
-                    fallback.__originalQuat = undefined
-                fallback && cache.push(fallback)
-            }
+        }
+        if (cache.length === 0) {
+            const fallback = ProjectionEngine.Engine.entities.get(SelectionStore.getMainEntity())
+            if (fallback)
+                fallback.__originalQuat = undefined
+            fallback && cache.push(fallback)
+        }
 
-            targets = cache
+        targets = cache
 
-            if (cache.length === 1) {
-                totalTranslated = Array.from(cache[0]._translation)
-                totalScaled = Array.from(cache[0]._scaling)
-                totalPivot = Array.from(cache[0].pivotPoint)
-            } else {
-                totalTranslated = [0, 0, 0]
-                totalScaled = [0, 0, 0]
-                totalPivot = [0, 0, 0]
-            }
-        })
+        if (cache.length === 1) {
+            totalTranslated = Array.from(cache[0]._translation)
+            totalScaled = Array.from(cache[0]._scaling)
+            totalPivot = Array.from(cache[0].pivotPoint)
+        } else {
+            totalTranslated = [0, 0, 0]
+            totalScaled = [0, 0, 0]
+            totalPivot = [0, 0, 0]
+        }
     })
 
-    onDestroy(() => ProjectionEngine.EntitySelectionStore.removeListener(COMPONENT_ID))
+    onDestroy(unsubSelection)
 
     $: {
         mainEntity = targets[0]
@@ -115,9 +114,6 @@
         totalPivot[axis] = value
     }
 
-    function onFinish() {
-        hasStarted = false
-    }
 </script>
 {#if mainEntity}
 
@@ -131,19 +127,16 @@
                 <legend>{LocalizationEN.PIVOT_POINT}</legend>
                 <div data-svelteinline="-">
                     <Range
-                            onFinish={onFinish}
                             label="X"
                             value={totalPivot[0]}
                             handleChange={v => transformPivot(0, v)}
                     />
                     <Range
-                            onFinish={onFinish}
                             label="Y"
                             value={totalPivot[1]}
                             handleChange={v => transformPivot(1, v)}
                     />
                     <Range
-                            onFinish={onFinish}
                             label="Z"
                             value={totalPivot[2]}
                             handleChange={v => transformPivot(2, v)}
@@ -166,21 +159,18 @@
             {/if}
             <div data-svelteinline="-">
                 <Range
-                        onFinish={onFinish}
                         disabled={lockedTranslation}
                         label="X"
                         value={totalTranslated[0]}
                         handleChange={v => transformScaleTranslation(0, v, true)}
                 />
                 <Range
-                        onFinish={onFinish}
                         disabled={lockedTranslation}
                         label="Y"
                         value={totalTranslated[1]}
                         handleChange={v => transformScaleTranslation(1, v, true)}
                 />
                 <Range
-                        onFinish={onFinish}
                         disabled={lockedTranslation}
                         label="Z"
                         value={totalTranslated[2]}
@@ -203,21 +193,18 @@
             {/if}
             <div data-svelteinline="-">
                 <Range
-                        onFinish={onFinish}
                         disabled={lockedScaling}
                         label="X"
                         value={totalScaled[0]}
                         handleChange={v => transformScaleTranslation(0, v)}
                 />
                 <Range
-                        onFinish={onFinish}
                         disabled={lockedScaling}
                         label="Y"
                         value={totalScaled[1]}
                         handleChange={v => transformScaleTranslation(1, v)}
                 />
                 <Range
-                        onFinish={onFinish}
                         disabled={lockedScaling}
                         label="Z"
                         value={totalScaled[2]}
@@ -259,28 +246,24 @@
                     />
                     {#if rotationType === Movable.ROTATION_QUATERNION}
                         <Range
-                                onFinish={onFinish}
                                 disabled={lockedRotation}
                                 label="X"
                                 value={mainEntity.rotationQuaternion[0]}
                                 handleChange={v => rotate(0, v)}
                         />
                         <Range
-                                onFinish={onFinish}
                                 disabled={lockedRotation}
                                 label="Y"
                                 value={mainEntity.rotationQuaternion[1]}
                                 handleChange={v => rotate(1, v)}
                         />
                         <Range
-                                onFinish={onFinish}
                                 disabled={lockedRotation}
                                 label="Z"
                                 value={mainEntity.rotationQuaternion[2]}
                                 handleChange={v => rotate(2, v)}
                         />
                         <Range
-                                onFinish={onFinish}
                                 disabled={lockedRotation}
                                 label="W"
                                 value={mainEntity.rotationQuaternion[3]}
@@ -289,21 +272,18 @@
                     {:else}
 
                         <Range
-                                onFinish={onFinish}
                                 value={mainEntity.rotationEuler[0]}
                                 disabled={lockedRotation}
                                 label="X"
                                 handleChange={v => rotate(0, v)}
                         />
                         <Range
-                                onFinish={onFinish}
                                 value={mainEntity.rotationEuler[1]}
                                 disabled={lockedRotation}
                                 label="Y"
                                 handleChange={v => rotate(1, v)}
                         />
                         <Range
-                                onFinish={onFinish}
                                 value={mainEntity.rotationEuler[2]}
                                 disabled={lockedRotation}
                                 label="Z"

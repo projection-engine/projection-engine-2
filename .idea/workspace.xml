@@ -19,10 +19,63 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-34] Stores&#10;- Creating DTOs&#10;- Creating new subscribe method&#10;- Removing old objects">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-34] Stores&#10;- Fixing subscribe and unsubscribe&#10;- Creating test for store">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/static/SHADING_MODELS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/static/ShadingModel.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/jest.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webview/jest.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/IInjectable.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/IInjectable.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/Injection.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/Injection.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/ProjectionEngine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/ProjectionEngine.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/components/tooltip/ToolTip.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/components/tooltip/ToolTip.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/lib/stores/AbstractStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/AbstractStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/stores/SelectionStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/SelectionStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/stores/state/SettingsStateDTO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/state/SettingsStateDTO.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/webview/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/services/ContextMenuService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/ContextMenuService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/services/DragDropService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/DragDropService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/services/EngineResourceLoaderService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/EngineResourceLoaderService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/services/EngineStateService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/EngineStateService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/services/EngineToolsService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/EngineToolsService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/services/EntityHierarchyService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/EntityHierarchyService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/services/EntityNamingService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/EntityNamingService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/services/EntityUpdateService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/EntityUpdateService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/services/ExecutionService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/ExecutionService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/services/LevelService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/LevelService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/services/ToasterService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/ToasterService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/services/ToolTipService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/ToolTipService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/services/ViewportActionService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/ViewportActionService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/tests/stores/Store.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/tests/stores/Store.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/webview/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/Editor.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/Editor.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/footer/Footer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/footer/Footer.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/Canvas.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/Canvas.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/CentralView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/CentralView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/SideView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/SideView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/View.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/View.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/ViewHeader.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/ViewHeader.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/ContentBrowserUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/ContentBrowserUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/EditorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/EditorUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/InspectorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/InspectorUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/SceneEditorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/SceneEditorUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/ViewportUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/ViewportUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/console/ConsoleView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/console/ConsoleView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/Browser.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/Browser.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/Properties.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/Properties.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/item/ItemInput.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/item/ItemInput.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/HierarchyView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/HierarchyView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/InspectorView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/InspectorView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/AddComponent.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/AddComponent.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/CameraPreferences.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/CameraPreferences.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/TransformationForm.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/TransformationForm.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/UIComponent.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/UIComponent.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/preferences/components/Shortcuts.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/preferences/components/Shortcuts.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/preferences/components/content/ContentField.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/preferences/components/content/ContentField.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/preferences/components/content/ContentGroup.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/preferences/components/content/ContentGroup.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/SceneEditorView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/SceneEditorView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/CameraSettings.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/CameraSettings.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/EntityInformation.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/EntityInformation.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/GizmoSettings.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/GizmoSettings.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/SceneOptions.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/SceneOptions.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +149,11 @@
     "Catch.JSON test.executor": "Run",
     "Catch.Run all.executor": "Run",
     "Catch.main_test.executor": "Run",
+    "Jest.Should be lazily obtained.executor": "Run",
+    "Jest.Should be the same instance (1).executor": "Run",
+    "Jest.Should be the same instance.executor": "Run",
     "Jest.Should trigger global subscriber.executor": "Run",
+    "Jest.Should trigger subscriber with same value.executor": "Run",
     "Jest.Should unsubscribe.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -128,11 +185,11 @@
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\test\core" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\tests\injection" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\tests\stores" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\lib\stores\state" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\window\editor\components\view" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\window\editor\views" />
-      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -143,32 +200,44 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Jest.Should trigger global subscriber">
-    <configuration name="File-system test" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="build" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_CLASS="[fs-test]" TEST_METHOD="File-system test" TEST_MODE="SUITE_TEST">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-        <option name="BeforeTestRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="JSON test" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="build" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_CLASS="[json-test]" TEST_METHOD="JSON test" TEST_MODE="SUITE_TEST">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-        <option name="BeforeTestRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Should trigger global subscriber" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Jest.Should be lazily obtained">
+    <configuration name="Should be lazily obtained" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <jest-package value="$PROJECT_DIR$/webview/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$/webview" />
       <envs />
       <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/webview/tests/stores/Store.test.ts" />
+      <test-file value="$PROJECT_DIR$/webview/tests/injection/Injection.test.ts" />
       <test-names>
-        <test-name value="Should trigger global subscriber" />
+        <test-name value="Should be lazily obtained" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="Should unsubscribe" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="Should be the same instance (1)" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/webview/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$/webview" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/webview/tests/injection/Injection.test.ts" />
+      <test-names>
+        <test-name value="Should be the same instance" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Should be the same instance" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/webview/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$/webview" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/webview/tests/Injection.test.ts" />
+      <test-names>
+        <test-name value="Should be the same instance" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Should trigger subscriber with same value" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <jest-package value="$PROJECT_DIR$/webview/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$/webview" />
@@ -176,7 +245,7 @@
       <scope-kind value="TEST" />
       <test-file value="$PROJECT_DIR$/webview/tests/stores/Store.test.ts" />
       <test-names>
-        <test-name value="Should unsubscribe" />
+        <test-name value="Should trigger subscriber with same value" />
       </test-names>
       <method v="2" />
     </configuration>
@@ -217,12 +286,12 @@
     </configuration>
     <list>
       <item itemvalue="Catch.main_test" />
-      <item itemvalue="Catch.JSON test" />
-      <item itemvalue="Catch.File-system test" />
       <item itemvalue="CMake Application.Projection" />
       <item itemvalue="CMake Debug.projectioncmake" />
-      <item itemvalue="Jest.Should trigger global subscriber" />
-      <item itemvalue="Jest.Should unsubscribe" />
+      <item itemvalue="Jest.Should be lazily obtained" />
+      <item itemvalue="Jest.Should be the same instance" />
+      <item itemvalue="Jest.Should be the same instance (1)" />
+      <item itemvalue="Jest.Should trigger subscriber with same value" />
       <item itemvalue="npm.dev-build" />
       <item itemvalue="npm.bdev" />
       <item itemvalue="npm.test" />
@@ -230,11 +299,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Jest.Should trigger global subscriber" />
         <item itemvalue="npm.test" />
-        <item itemvalue="Jest.Should unsubscribe" />
-        <item itemvalue="Catch.JSON test" />
-        <item itemvalue="Catch.File-system test" />
+        <item itemvalue="Jest.Should be lazily obtained" />
+        <item itemvalue="Jest.Should be the same instance (1)" />
+        <item itemvalue="Jest.Should be the same instance" />
+        <item itemvalue="Jest.Should trigger subscriber with same value" />
       </list>
     </recent_temporary>
   </component>
@@ -280,7 +349,9 @@
       <workItem from="1704649399093" duration="7499000" />
       <workItem from="1704665675871" duration="3600000" />
       <workItem from="1704751396678" duration="815000" />
-      <workItem from="1704752227514" duration="1083000" />
+      <workItem from="1704752227514" duration="1722000" />
+      <workItem from="1704754038431" duration="8000" />
+      <workItem from="1705147573913" duration="8961000" />
     </task>
     <task id="LOCAL-00001" summary="[STD-1] Organizing project&#10;- removing unused C++ classes&#10;- Refactoring files&#10;- Renaming c++ namespaces and project &#10;- Moving future webview stuff">
       <option name="closed" value="true" />
@@ -562,7 +633,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704668806461</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="[STD-34] Stores&#10;- Fixing subscribe and unsubscribe&#10;- Creating test for store">
+      <option name="closed" value="true" />
+      <created>1704753409489</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1704753409489</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -586,7 +665,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-3] Project window&#10;- Removing old ui&#10;- Creating libs for integration with c++ backend&#10;- Starting project window" />
     <MESSAGE value="[STD-3] Project window&#10;- Improving event system structure" />
     <MESSAGE value="[STD-13] WindowSystem&#10;- Created windowSystem&#10;- Improved Runner class&#10;- Created Projects window" />
     <MESSAGE value="[STD-6] Project window&#10;- Improving event system&#10;- Adding basic functions for project window" />
@@ -611,7 +689,8 @@
     <MESSAGE value="[STD-26] Tabs&#10;- Starting tabs rework&#10;- Moving systems and creating path alias" />
     <MESSAGE value="[STD-26] Tabs&#10;- Adding types and enums&#10;- Removing unused code&#10;- Reworking views to be simpler&#10;- Removing TabsStore" />
     <MESSAGE value="[STD-34] Stores&#10;- Creating DTOs&#10;- Creating new subscribe method&#10;- Removing old objects" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-34] Stores&#10;- Creating DTOs&#10;- Creating new subscribe method&#10;- Removing old objects" />
+    <MESSAGE value="[STD-34] Stores&#10;- Fixing subscribe and unsubscribe&#10;- Creating test for store" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-34] Stores&#10;- Fixing subscribe and unsubscribe&#10;- Creating test for store" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -630,11 +709,6 @@
           <url>file://$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp</url>
           <line>96</line>
           <option name="timeStamp" value="42" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/webview/window/editor/views/scene-editor/SceneEditorView.svelte</url>
-          <line>36</line>
-          <option name="timeStamp" value="43" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

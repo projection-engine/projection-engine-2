@@ -4,10 +4,11 @@ import HierarchyToRenderElement from "../window/editor/views/hierarchy/template/
 import SelectionStore from "@lib/stores/SelectionStore";
 import {Injectable} from "@lib/Injection";
 import ProjectionEngine from "@lib/ProjectionEngine";
+import IInjectable from "@lib/IInjectable";
 
 
 @Injectable
-export default class EntityHierarchyService {
+export default class EntityHierarchyService extends IInjectable{
     hierarchy: HierarchyToRenderElement[] = []
     #listening: { [key: string]: Function } = {}
 

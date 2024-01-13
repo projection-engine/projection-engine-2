@@ -9,7 +9,7 @@
     let bBox, bodyBBox
     let isMounted
     let targetParent
-    const toolTipService = InjectVar(ToolTipService) as  ToolTipService
+    const toolTipService = InjectVar(ToolTipService)
 
     const handleMouseMove = (event) => {
 

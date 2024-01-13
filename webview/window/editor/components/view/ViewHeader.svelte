@@ -1,18 +1,22 @@
 <script lang="ts">
     import Icon from "@lib/components/icon/Icon.svelte";
-    import {getContext, onMount} from "svelte";
+    import {getContext, onDestroy, onMount} from "svelte";
     import {ViewContextPath, ViewPlacement, ViewType, ViewTypeMetadata} from "./ViewDefinitions";
     import Dropdown from "@lib/components/dropdown/Dropdown.svelte";
     import {InjectVar} from "@lib/Injection";
     import SettingsStore from "@lib/stores/SettingsStore";
     import LocalizationEN from "@enums/LocalizationEN";
 
-    const COMPONENT_ID = crypto.randomUUID()
     let view: ViewType
     let index: number
     let isActive: boolean = false
     let placement: ViewPlacement
-    const settings = InjectVar(SettingsStore) as SettingsStore
+    const settings = InjectVar(SettingsStore)
+
+    const unsubSettings = settings.subscribe(data => {
+        const currentView = data.views[data.currentView];
+        isActive = (currentView.getActiveViewIndex() === index || currentView.getActiveViewPlacement() === ViewPlacement.CENTER) && currentView.getActiveViewPlacement() === placement
+    }, ["views", "currentView"])
 
     $: {
         const context = getContext(ViewContextPath) as { view: ViewType, index: number, placement: ViewPlacement }
@@ -34,13 +38,7 @@
         }
     }
 
-    onMount(() => {
-        settings.addListener(COMPONENT_ID, () => {
-            const data = settings.getData();
-            const currentView = data.views[data.currentView];
-            isActive = (currentView.getActiveViewIndex() === index || currentView.getActiveViewPlacement() === ViewPlacement.CENTER) && currentView.getActiveViewPlacement() === placement
-        })
-    })
+    onDestroy(unsubSettings)
 </script>
 
 {#if view != null}

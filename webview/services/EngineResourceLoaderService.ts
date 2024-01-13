@@ -18,9 +18,15 @@ import LocalizationEN from "@enums/LocalizationEN"
 import Entity from "@engine-core/instances/Entity"
 import StaticFBO from "@engine-core/lib/StaticFBO";
 import ProjectionEngine from "@lib/ProjectionEngine";
+import {Inject} from "@lib/Injection";
+import ToasterService from "@services/ToasterService";
 
 
 export default class EngineResourceLoaderService {
+
+	@Inject(ToasterService)
+	static toasterService: ToasterService
+	
 	static #initializeEntity(data: MutableObject, meshID: string, parent?: Entity, index?: number) {
 		const entity = EntityAPI.getNewEntityInstance(data?.id)
 		entity.name = data.name ? data.name : "primitive-" + (index || 0)
@@ -75,7 +81,7 @@ export default class EngineResourceLoaderService {
 				}
 				EngineStateService.appendBlock(entities)
 			} else
-				ProjectionEngine.ToastNotificationSystem.error(LocalizationEN.COLLECTION_NOT_FOUND)
+				EngineResourceLoaderService.toasterService.error(LocalizationEN.COLLECTION_NOT_FOUND)
 		} catch (error) {
 			console.error(error)
 		}
@@ -147,7 +153,7 @@ export default class EngineResourceLoaderService {
 
 		if (entitiesToPush.length > 0) {
 			EngineStateService.appendBlock(entitiesToPush)
-			ProjectionEngine.ToastNotificationSystem.success(LocalizationEN.ENTITIES_CREATED)
+			EngineResourceLoaderService.toasterService.success(LocalizationEN.ENTITIES_CREATED)
 		}
 	}
 

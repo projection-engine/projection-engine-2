@@ -4,12 +4,17 @@
     import ProjectionEngine from "@lib/ProjectionEngine";
     import View from "./View.svelte";
     import {ViewOrientation, ViewPlacement, ViewPlacementMetadata, ViewResizePosition} from "./ViewDefinitions";
-
-    const COMPONENT_ID = crypto.randomUUID()
+    import {InjectVar} from "@lib/Injection";
+    import SettingsStore from "@lib/stores/SettingsStore";
+    import EngineStore from "@lib/stores/EngineStore";
 
     export let tabs
     export let placement: ViewPlacement
+    let reducedOpacity = false
 
+    const unsubEngine = InjectVar(EngineStore).subscribe(data => {
+        reducedOpacity = data.executingAnimation
+    }, ["executingAnimation"])
 
     let resizePosition: ViewResizePosition
     let orientation: ViewOrientation
@@ -20,7 +25,6 @@
     }
 
     let ref: HTMLElement
-    let reducedOpacity = false
     $: orientationNameMin = orientation === ViewOrientation.HORIZONTAL ? "minHeight" : "minWidth"
     $: orientationName = orientation === ViewOrientation.HORIZONTAL ? "height" : "width"
     $: invOrientation = orientation === ViewOrientation.HORIZONTAL ? "width" : "height"
@@ -47,8 +51,8 @@
         }
     }
 
-    onMount(() => ProjectionEngine.EngineStore.addListener(COMPONENT_ID, data => reducedOpacity = data.executingAnimation, ["executingAnimation"]))
-    onDestroy(() => ProjectionEngine.EngineStore.removeListener(COMPONENT_ID))
+
+    onDestroy(unsubEngine)
 </script>
 
 

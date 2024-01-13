@@ -1,5 +1,5 @@
 import IStateDTO from "@lib/stores/state/IStateDTO";
-import SHADING_MODELS from "@engine-core/static/SHADING_MODELS";
+import SHADING_MODELS from "@engine-core/static/ShadingModel";
 import GIZMOS from "@enums/Gizmos";
 import GizmoTransformationType from "@enums/GizmoTransformationType";
 import {glMatrix} from "gl-matrix";

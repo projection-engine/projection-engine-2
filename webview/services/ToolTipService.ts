@@ -1,8 +1,9 @@
 import SveltePortal from "@lib/SveltePortal"
 import {Injectable} from "@lib/Injection";
+import IInjectable from "@lib/IInjectable";
 
 @Injectable
-export default class ToolTipService  {
+export default class ToolTipService  extends IInjectable{
 	portal = new SveltePortal(999, false)
 	element
 	closeCurrent

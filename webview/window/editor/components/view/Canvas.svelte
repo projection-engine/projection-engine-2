@@ -15,7 +15,7 @@
     let canvasRef: HTMLCanvasElement
     export let onReady: VoidFunction
 
-    const canvasContextService = InjectVar(CanvasContextService) as CanvasContextService
+    const canvasContextService = InjectVar(CanvasContextService)
 
     onMount(() => {
         canvasContextService.createCanvas().then(onReady)

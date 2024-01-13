@@ -9,6 +9,8 @@
     import getViewportContext from "../../templates/get-viewport-context";
     import HierarchyToRenderElement from "./template/ToRenderElement";
     import ProjectionEngine from "@lib/ProjectionEngine";
+    import {InjectVar} from "@lib/Injection";
+    import SelectionStore from "@lib/stores/SelectionStore";
 
     const ID = crypto.randomUUID()
     const draggable = dragDrop()
@@ -18,7 +20,12 @@
     let openTree = {}
     let toRender: HierarchyToRenderElement[] = []
     let selectedList: string[] = []
-    let lockedEntity
+    let lockedEntity: string
+
+    const unsubSelection = InjectVar(SelectionStore).subscribe(data => {
+        selectedList = data.array
+        lockedEntity = data.lockedEntity
+    }, ["array", "lockedEntity"])
 
     function updateHierarchy(op?: MutableObject) {
         const openLocal = op ?? openTree
@@ -32,16 +39,13 @@
         HierarchyUtil.initializeView(draggable, ref)
         ProjectionEngine.EntityHierarchyService.registerListener(ID, updateHierarchy)
         ProjectionEngine.ContextMenuService.mount(getViewportContext(), ID)
-        ProjectionEngine.EntitySelectionStore.addListener(ID, data => {
-            selectedList = data.array
-            lockedEntity = data.lockedEntity
-        })
+
     })
 
     onDestroy(() => {
         HotKeysController.unbindAction(ref)
         draggable.onDestroy()
-        ProjectionEngine.EntitySelectionStore.removeListener(ID)
+        unsubSelection()
         ProjectionEngine.EntityHierarchyService.removeListener(ID)
         ProjectionEngine.ContextMenuService.destroy(ID)
     })
@@ -67,7 +71,6 @@
                 {toRender}
                 {selectedList}
                 {lockedEntity}
-                {filteredComponent}
                 {ID}
                 testSearch={node => HierarchyUtil.testSearch(filteredComponent, search, node)}
         />

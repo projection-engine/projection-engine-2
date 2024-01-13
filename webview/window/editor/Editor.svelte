@@ -16,9 +16,9 @@
     let cameraGizmoSize: number
     let ready = false
 
-    const toasterService = InjectVar(ToasterService) as ToasterService
-    const settingsStore = InjectVar(SettingsStore) as SettingsStore
-    const engineStore = InjectVar(EngineStore) as EngineStore
+    const toasterService = InjectVar(ToasterService)
+    const settingsStore = InjectVar(SettingsStore)
+    const engineStore = InjectVar(EngineStore)
     const unsubSettings = settingsStore.subscribe(
         data => {
             view = data.views[data.currentView]

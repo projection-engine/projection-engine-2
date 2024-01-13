@@ -12,13 +12,19 @@
     import SettingsStore from "@lib/stores/SettingsStore";
     import EngineStore from "@lib/stores/EngineStore";
 
-    const COMPONENT_ID = crypto.randomUUID()
-
     export let view: ViewType
     export let ready: boolean
 
-    const settings = InjectVar(SettingsStore) as SettingsStore
-    const engineStore = InjectVar(EngineStore) as EngineStore
+    const settings = InjectVar(SettingsStore)
+    const unsubEngine = InjectVar(EngineStore).subscribe(data => {
+        const settingsData = settings.getData()
+        const currentView = settingsData.views[settingsData.currentView]
+        if (data.executingAnimation && currentView.getCenter() !== ViewType.EDITOR) {
+            currentView.replaceViewType(0, ViewType.EDITOR, ViewPlacement.CENTER)
+            settings.updateStore(settingsData)
+        }
+    }, ["executingAnimation"])
+
     let ref: HTMLElement
 
     $: {
@@ -33,19 +39,11 @@
     }
 
     onMount(() => {
-        engineStore.addListener(COMPONENT_ID, data => {
-            const settingsData = settings.getData()
-            const currentView = settingsData.views[settingsData.currentView]
-            if (data.executingAnimation && currentView.getCenter() !== ViewType.EDITOR) {
-                currentView.replaceViewType(0, ViewType.EDITOR, ViewPlacement.CENTER)
-                settings.updateStore(settingsData)
-            }
-        }, ["executingAnimation"])
         HotKeysController.bindAction(ref, Object.values(getViewportHotkeys()), "public", LocalizationEN.VIEWPORT)
     })
 
     onDestroy(() => {
-        engineStore.removeListener(COMPONENT_ID)
+        unsubEngine()
         HotKeysController.unbindAction(ref)
     })
 

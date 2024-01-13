@@ -5,23 +5,19 @@
     import {InjectVar} from "@lib/Injection";
     import VisualsStore from "@lib/stores/VisualsStore";
     import SettingsStore from "@lib/stores/SettingsStore";
+    import SettingsStateDTO from "@lib/stores/state/SettingsStateDTO";
+    import VisualsStateDTO from "@lib/stores/state/VisualsStateDTO";
 
-    const COMPONENT_ID = crypto.randomUUID()
     export let toRender
 
-    let settings
-    let visualSettings
-    const visualsStore = InjectVar(VisualsStore) as VisualsStore
-    const settingsStore = InjectVar(SettingsStore) as SettingsStore
-
-    onMount(() => {
-        visualsStore.addListener(COMPONENT_ID, v => visualSettings = v)
-        settingsStore.addListener(COMPONENT_ID, v => settings = v)
-    })
+    let settings: SettingsStateDTO
+    let visualSettings: VisualsStateDTO
+    const unsubVisuals = InjectVar(VisualsStore).subscribe(data => visualSettings = data)
+    const unsubSettings = InjectVar(SettingsStore).subscribe(data => settings = data)
 
     onDestroy(() => {
-        visualsStore.removeListener(COMPONENT_ID)
-        settingsStore.removeListener(COMPONENT_ID)
+        unsubVisuals()
+        unsubSettings()
     })
 </script>
 

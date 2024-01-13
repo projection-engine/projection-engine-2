@@ -9,17 +9,30 @@ import StaticFBO from "@engine-core/lib/StaticFBO";
 import SelectionStore from "@lib/stores/SelectionStore";
 import ProjectionEngine from "@lib/ProjectionEngine";
 import {ViewType} from "../components/view/ViewDefinitions";
+import {Inject, Injectable} from "@lib/Injection";
+import IInjectable from "@lib/IInjectable";
+import EngineStore from "@lib/stores/EngineStore";
 
-export default class ViewportUtil {
+// TODO -  REMOVE STATIC MEMBERS
+
+@Injectable
+export default class ViewportUtil extends IInjectable {
+
+    @Inject(EngineStore)
+    static engineStore: EngineStore
+
+    @Inject(Engine)
+    static engine: Engine
+
     static updateViewport(currentView: ViewType) {
-        if (ProjectionEngine.EngineStore.getData().focusedCamera || !GPU.context)
+        if (ViewportUtil.engineStore.getData().focusedCamera || !GPU.context)
             return
         if (currentView === ViewType.EDITOR) {
             CameraTracker.startTracking()
-            ProjectionEngine.Engine.start()
+            ViewportUtil.engine.start()
         } else {
             CameraTracker.stopTracking()
-            ProjectionEngine.Engine.stop()
+            ViewportUtil.engine.stop()
         }
     }
 

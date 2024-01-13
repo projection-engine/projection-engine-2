@@ -1,6 +1,6 @@
-<script>
-    import GizmoTransformationType from "@enums/GizmoTransformationType.ts"
-    import Gizmos from "@enums/Gizmos.ts"
+<script lang="ts">
+    import GizmoTransformationType from "@enums/GizmoTransformationType"
+    import Gizmos from "@enums/Gizmos"
     import ROTATION_GRID from "../static/ROTATION_GRID"
     import SCALE_GRID from "../static/SCALE_GRID"
     import TRANSLATION_GRID from "../static/TRANSLATION_GRID"
@@ -12,8 +12,9 @@
     import {onDestroy, onMount} from "svelte"
     import SceneEditorUtil from "../../../util/SceneEditorUtil"
     import ProjectionEngine from "@lib/ProjectionEngine";
+    import {InjectVar} from "@lib/Injection";
+    import SettingsStore from "@lib/stores/SettingsStore";
 
-    const COMPONENT_ID = crypto.randomUUID()
     const BUTTON_DROPDOWN = "border-radius: 25px; height: 25px; background: var(--pj-background-tertiary);"
     const BUTTON_DROPDOWN_INT = "background: transparent; box-shadow: none; width: 50px; justify-content: center; gap: 6px"
 
@@ -21,19 +22,19 @@
     let gizmoGrid = {}
     let gizmo
 
-    onMount(() => {
-        ProjectionEngine.SettingsStore.addListener(COMPONENT_ID, data => {
-    		transformationType = data.transformationType
-    		gizmoGrid = data.gizmoGrid
-    		gizmo = data.gizmo
-    	}, ["transformationType", "gizmoGrid", "gizmo"])
-    })
-    onDestroy(() => ProjectionEngine.SettingsStore.removeListener(COMPONENT_ID))
+    const settings = InjectVar(SettingsStore)
+    const unsubSettings = settings.subscribe(data => {
+        transformationType = data.transformationType
+        gizmoGrid = data.gizmoGrid
+        gizmo = data.gizmo
+    }, ["transformationType", "gizmoGrid", "gizmo"])
+
+    onDestroy(unsubSettings)
 </script>
 
 <div class="wrapper">
     <button data-sveltebuttondefault="-"
-            on:click={() => ProjectionEngine.SettingsStore.updateStore({transformationType: transformationType === GizmoTransformationType.RELATIVE ? GizmoTransformationType.GLOBAL : GizmoTransformationType.RELATIVE})}
+            on:click={() => settings.updateStore({transformationType: transformationType === GizmoTransformationType.RELATIVE ? GizmoTransformationType.GLOBAL : GizmoTransformationType.RELATIVE})}
             class="button viewport"
     >
         {#if transformationType === GizmoTransformationType.RELATIVE}
@@ -121,7 +122,7 @@
             class="button viewport"
             style="margin-left: 8px"
             data-sveltehighlight={gizmo === Gizmos.NONE ? "-" : undefined}
-            on:click={() =>ProjectionEngine.SettingsStore.updateStore({gizmo: Gizmos.NONE})}>
+            on:click={() =>settings.updateStore({gizmo: Gizmos.NONE})}>
         <Icon styles="font-size: 1rem; color: #FFC757">highlight_alt</Icon>
 
         {LocalizationEN.SELECTION}
@@ -131,7 +132,7 @@
     <button data-sveltebuttondefault="-"
             class="button viewport"
             data-sveltehighlight={gizmo === Gizmos.TRANSLATION ? "-" : undefined}
-            on:click={() => ProjectionEngine.SettingsStore.updateStore({gizmo: Gizmos.TRANSLATION})}>
+            on:click={() => settings.updateStore({gizmo: Gizmos.TRANSLATION})}>
         <Icon styles="font-size: 1rem; color: var(--pj-color-quaternary)">open_with</Icon>
         {LocalizationEN.T_GIZMO}
 
@@ -142,7 +143,7 @@
 
             class="button viewport"
             data-sveltehighlight={gizmo === Gizmos.SCALE ? "-" : undefined}
-            on:click={() => ProjectionEngine.SettingsStore.updateStore({gizmo: Gizmos.SCALE})}>
+            on:click={() => settings.updateStore({gizmo: Gizmos.SCALE})}>
         <Icon styles="font-size: 1rem; color: var(--pj-color-quaternary)">open_in_full</Icon>
         {LocalizationEN.S_GIZMO}
         <ToolTip content={LocalizationEN.S_GIZMO}/>

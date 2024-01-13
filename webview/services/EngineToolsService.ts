@@ -29,17 +29,17 @@ export default class EngineToolsService {
     static settingsStore: SettingsStore
 
     @Inject(SelectionStore)
-    static entitySelectionStore: SelectionStore
+    static selectionStore: SelectionStore
 
     static initialize() {
-        EngineToolsService.entitySelectionStore
-            .addListener("EngineToolsService", EngineToolsService.#updateSelection)
+        EngineToolsService.selectionStore
+            .subscribe(EngineToolsService.#updateSelection)
         EngineToolsService.engineStore
-            .addListener("EngineToolsService", EngineToolsService.#updateCameraTracker)
+            .subscribe(EngineToolsService.#updateCameraTracker)
         EngineToolsService.settingsStore
-            .addListener("EngineToolsService_camera", EngineToolsService.#updateWithSettings)
+            .subscribe(EngineToolsService.#updateWithSettings)
         EngineToolsService.visualsStore
-            .addListener("EngineToolsService", EngineToolsService.#updateEngineSettings)
+            .subscribe(EngineToolsService.#updateEngineSettings)
     }
 
     static #updateSelection() {

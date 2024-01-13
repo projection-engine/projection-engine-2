@@ -6,9 +6,10 @@ import IPCRoutes from "@enums/IPCRoutes"
 import MappedOption from "@lib/context-menu/templates/MappedOption"
 import getOptionID from "@lib/context-menu/utils/get-option-id"
 import {Injectable} from "@lib/Injection";
+import IInjectable from "@lib/IInjectable";
 
 @Injectable
-export default class ContextMenuService {
+export default class ContextMenuService extends IInjectable{
 	blockContext = false
 	currentX = -1
 	currentY = -1
@@ -19,6 +20,7 @@ export default class ContextMenuService {
 	}
 
 	constructor() {
+		super()
 		// ElectronResources.ipcRenderer.on(IPCRoutes.CONTEXT_MENU_CALLBACK, (ev, {id, group}) => {
 		// 	const groupData = this.data.targets[group]
 		// 	if (!groupData)
