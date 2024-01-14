@@ -11,7 +11,7 @@ namespace PEngine {
     class Editor : public AbstractWindow {
     private:
         static void onMessage(WebViewPayload &payload);
-
+        static std::string projectPath;
     public:
 
         explicit Editor() : AbstractWindow("Project Editor") {}

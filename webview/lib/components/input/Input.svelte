@@ -2,22 +2,22 @@
     import {onMount} from "svelte";
 
     const DELAY = 250, ENTER = "Enter"
-    export let width:string
-    export let height:string
-    export let onBlur:Function
-    export let onChange:Function
-    export let inputValue:string
+    export let width: string = ""
+    export let height: string = ""
+    export let onBlur: Function = () => null
+    export let onChange: Function = () => null
+    export let inputValue: string = ""
     export let noAutoSubmit = false
     export let placeholder = undefined
     export let onEnter = undefined
     export let directChange = undefined
     export let minWidth = undefined
     export let hasBorder = undefined
-    export let disabled:boolean
+    export let disabled: boolean = false
 
     let changed = false
-    let timeout:NodeJS.Timeout
-    let input:HTMLInputElement
+    let timeout: NodeJS.Timeout
+    let input: HTMLInputElement
 
     const handler = (input) => {
         clearTimeout(timeout)
@@ -26,8 +26,8 @@
             changed = false
         }, DELAY)
     }
-    onMount(() => input.value = inputValue|| "")
-    $: if (input) input.value = inputValue|| ""
+    onMount(() => input.value = inputValue || "")
+    $: if (input) input.value = inputValue || ""
 
 </script>
 
@@ -67,11 +67,12 @@
 </div>
 
 <style>
-    .with-label{
+    .with-label {
         display: grid !important;
         align-items: unset;
         height: fit-content !important;
     }
+
     .wrapper {
         height: 23px;
         display: flex;

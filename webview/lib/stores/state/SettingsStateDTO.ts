@@ -9,6 +9,8 @@ import LocalizationEN from "@enums/LocalizationEN";
 import {ViewType} from "../../../window/editor/components/view/ViewDefinitions";
 
 export default class SettingsStateDTO extends IStateDTO {
+    filesInUse: string[] = []
+
     spawnOnOrigin = false
     maxDistanceIcon = 50
     cameraGizmoSize = 25
@@ -29,7 +31,6 @@ export default class SettingsStateDTO extends IStateDTO {
     shadingModel = SHADING_MODELS.DETAIL
     gizmo = GIZMOS.TRANSLATION
     transformationType = GizmoTransformationType.GLOBAL
-    backgroundColor = [.2, .2, .2]
     fov = glMatrix.toRadian(60)
     zNear = .1
     zFar = 5000
@@ -192,8 +193,6 @@ export default class SettingsStateDTO extends IStateDTO {
     }
 
 
-    meta = {}
-    cameraInitialized = false
     executingAnimation = false
     scripts = []
     focusedCamera = undefined

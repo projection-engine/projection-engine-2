@@ -13,19 +13,6 @@ export default class FileSystemUtil {
     static ASSETS_PATH?: string
     static sep = "/"//ElectronResources.path.sep
 
-    static async initializeFolders(pathToProject): Promise<void> {
-
-        // FileSystemUtil.path = ElectronResources.path.resolve(pathToProject.replace(FileTypes.PROJECT, "") + FileSystemUtil.sep)
-        // FileSystemUtil.TEMP = ElectronResources.path.resolve(FileSystemUtil.path + FileSystemUtil.sep + Folders.TEMP + FileSystemUtil.sep)
-        // FileSystemUtil.PREVIEW_PATH = ElectronResources.path.resolve(FileSystemUtil.path + FileSystemUtil.sep + Folders.PREVIEWS + FileSystemUtil.sep)
-        // FileSystemUtil.ASSETS_PATH = ElectronResources.path.resolve(FileSystemUtil.path + FileSystemUtil.sep + Folders.ASSETS + FileSystemUtil.sep)
-        //
-        if (FileSystemUtil.exists(FileSystemUtil.path + FileSystemUtil.sep + Folders.PREVIEWS)) await FileSystemUtil.mkdir(FileSystemUtil.path + FileSystemUtil.sep + Folders.PREVIEWS)
-        if (FileSystemUtil.exists(FileSystemUtil.path + FileSystemUtil.sep + Folders.ASSETS)) await FileSystemUtil.mkdir(FileSystemUtil.path + FileSystemUtil.sep + Folders.ASSETS)
-        if (FileSystemUtil.exists(FileSystemUtil.path + FileSystemUtil.sep + Folders.REGISTRY)) await FileSystemUtil.mkdir(FileSystemUtil.path + FileSystemUtil.sep + Folders.REGISTRY)
-        if (FileSystemUtil.exists(FileSystemUtil.path + FileSystemUtil.sep + Folders.TEMP)) await FileSystemUtil.mkdir(FileSystemUtil.path + FileSystemUtil.sep + Folders.TEMP)
-    }
-
 
     static async writeFile(pathName: string, data: any, absolute: boolean) {
         try {
@@ -44,19 +31,8 @@ export default class FileSystemUtil {
     }
 
 
-    static async deleteFile(pathName, options) {
-        const currentPath = FileSystemUtil.resolvePath(pathName)
-        const registry = EditorFSUtil.registryList
-        for (let i = 0; i < registry.length; i++) {
-            const r = registry[i]
-            const rPath = FileSystemUtil.resolvePath(FileSystemUtil.ASSETS_PATH + FileSystemUtil.sep + r.path)
-            if (rPath.includes(currentPath))
-                await FileSystemUtil.rm(FileSystemUtil.resolvePath(FileSystemUtil.path + FileSystemUtil.sep + Folders.REGISTRY + FileSystemUtil.sep + r.id + ".reg"))
-        }
-        await FileSystemUtil.rm(currentPath, options)
+    static async delete(pathName: string) {
 
-        const rs = await EditorFSUtil.findRegistry(currentPath)
-        if (rs) await FileSystemUtil.rm(FileSystemUtil.resolvePath(FileSystemUtil.path + FileSystemUtil.sep + Folders.REGISTRY + FileSystemUtil.sep + rs.id + ".reg"))
     }
 
     static resolvePath(path: string): string {

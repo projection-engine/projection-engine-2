@@ -32,7 +32,7 @@ const ViewTypeMetadata = Object.seal({
     },
     [ViewType.FILES]: {
         icon: "folder",
-        label: LocalizationEN.FILE_TYPE
+        label: LocalizationEN.FILE_BROWSER
     },
     [ViewType.SHADER_EDITOR]: {
         icon: "texture",

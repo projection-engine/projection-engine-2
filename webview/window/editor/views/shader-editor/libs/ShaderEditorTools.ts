@@ -1,6 +1,5 @@
 import materialCompiler from "./material-compiler/material-compiler"
 
-import ContentBrowserStore from "@lib/stores/ContentBrowserStore"
 import Canvas from "./Canvas"
 import type ShaderNode from "../templates/ShaderNode"
 import GPU from "@engine-core/GPU"
@@ -19,7 +18,6 @@ export default class ShaderEditorTools {
 	static scale = 1
 	static grid = ShaderEditorTools.GRID_SIZE
 	static copied = new Map()
-	static toOpenFile
 
 	static parseNode(node) {
 		if (!node)
@@ -28,7 +26,9 @@ export default class ShaderEditorTools {
 		if (!nodeInstance)
 			return
 		Object.keys(node).forEach(o => {
-			if (o === "texture" && nodeInstance instanceof NodesIndex.TextureSample) nodeInstance[o] = ProjectionEngine.ContentBrowserStore.getData().textures.find(i => i.registryID === node[o].registryID)
+			if (o === "texture" && nodeInstance instanceof NodesIndex.TextureSample) {
+				// nodeInstance[o] = ProjectionEngine.ContentBrowserStore.getData().textures.find(i => i.registryID === node[o].registryID)
+			}
 			else {
 				const input = nodeInstance.inputs.find(i => i.key === o)
 				if (!input && !nodeInstance.output.find(i => i.key === o))

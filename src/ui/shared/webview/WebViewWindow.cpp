@@ -93,7 +93,7 @@ namespace PEngine {
         jsonObj.set("payload", message.c_str());
         jsonObj.set("id", id.c_str());
         std::string messagePayload = jsonObj.stringify();
-        CONSOLE_WARN("Posting message")
+        CONSOLE_WARN("Posting message to {0}", id)
         webview->PostWebMessageAsString(std::wstring(messagePayload.begin(), messagePayload.end()).c_str());
     }
 

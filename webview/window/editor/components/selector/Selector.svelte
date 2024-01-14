@@ -16,28 +16,10 @@
     export let disabled
     export let terrainMaterials
 
+    // TODO - REWORK THIS COMPONENT
+
 
     let state
-    $: {
-    	if (type === "parent")
-    		state = selected ? selected : {name: LocalizationEN.EMPTY}
-    	else if (selected) {
-    		if (Object.values(EmbeddedMeshes).find(s => s === selected))
-    			state = {
-    				name: LocalizationEN[Object.values(EmbeddedMeshes).find(s => s === selected)],
-    				registryID: selected
-    			}
-    		else {
-    			const rID = selected?.registryID ? selected?.registryID : selected
-    			let data = SelectorUtil.getType(type, mergeMaterials, terrainMaterials).find(e => e.registryID === rID || e.id === rID)
-    			if (data?.registryID !== undefined)
-    				state = data
-    			else
-    				state = {name: LocalizationEN.EMPTY}
-    		}
-    	} else
-    		state = {name: LocalizationEN.EMPTY}
-    }
 </script>
 
 <div data-svelteinline="-" class="wrapper" style={styles}>

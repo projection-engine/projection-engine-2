@@ -2,9 +2,16 @@
 #define PROJECTION_FS_H
 
 #include <string>
+#include <vector>
 
 namespace PEngine {
+    class WebViewPayload;
+
+    class WebViewWindow;
+
     class FS {
+    private:
+        static void HandleEvent(WebViewPayload &payload);
     public:
         static std::string SEP;
 
@@ -19,6 +26,12 @@ namespace PEngine {
         static bool Exists(const std::string &path);
 
         static bool CreateDir(const std::string &path);
+
+        static std::string ReadDirectory(const std::string &directoryPath);
+
+        static std::string GetRootDir();
+
+        static void BindEvents(WebViewWindow *pWindow);
     };
 }
 

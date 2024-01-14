@@ -33,13 +33,11 @@ import IInjectable from "@lib/IInjectable";
 @Injectable
 export default class Engine extends IInjectable {
     #development = false
-    #onLevelLoadListeners = new DynamicMap<string, Function>()
     UILayouts = new Map()
     isDev = true
     #environment: number = ENVIRONMENT.DEV
     #isReady = false
     CameraAPI: CameraAPI
-    #loadedLevel: Entity
     #executionQueue = new DynamicMap<string, Function>()
     #frameID: number = undefined
     RotationGizmo: RotationGizmo
@@ -48,17 +46,10 @@ export default class Engine extends IInjectable {
     DualAxisGizmo: DualAxisGizmo
     ScreenSpaceGizmo: ScreenSpaceGizmo
     CameraNotificationDecoder: CameraNotificationDecoder
+    #rootEntity = new Entity()
 
     get isExecuting() {
         return this.#frameID !== undefined
-    }
-
-    removeLevelLoaderListener(id: string) {
-        this.#onLevelLoadListeners.delete(id)
-    }
-
-    addLevelLoaderListener(id: string, callback: Function) {
-        this.#onLevelLoadListeners.set(id, callback)
     }
 
     get entities(): DynamicMap<string, Entity> {
@@ -71,10 +62,6 @@ export default class Engine extends IInjectable {
 
     get isReady() {
         return this.#isReady
-    }
-
-    get loadedLevel(): Entity {
-        return this.#loadedLevel
     }
 
     get developmentMode() {
@@ -170,74 +157,15 @@ export default class Engine extends IInjectable {
         Physics.stop()
     }
 
-    async loadLevel(levelID: string, cleanEngine?: boolean) {
-        if (!levelID || this.#loadedLevel?.id === levelID && !cleanEngine)
-            return []
-        try {
-
-            if (cleanEngine) {
-                GPU.meshes.forEach(m => GPUAPI.destroyMesh(m))
-                GPU.textures.forEach(m => GPUAPI.destroyTexture(m.id))
-                GPU.materials.clear()
-            }
-
-            const asset = await FileSystemAPI.readAsset(levelID)
-            const {entities, entity} = JSON.parse(asset)
-            let levelEntity
-            if (!entity)
-                levelEntity = EntityAPI.getNewEntityInstance(levelID, true)
-            else
-                levelEntity = EntityAPI.parseEntityObject({...entity, isCollection: true})
-            if (!levelEntity.name)
-                levelEntity.name = "New level"
-            levelEntity.parentID = undefined
-            this.#replaceLevel(levelEntity)
-            const allEntities = []
-            for (let i = 0; i < entities.length; i++) {
-                try {
-                    const entity = EntityAPI.parseEntityObject(entities[i])
-
-                    for (let i = 0; i < entity.scripts.length; i++) {
-                        await ScriptsAPI.linkScript(entity, entity.scripts[i].id)
-                    }
-                    const imgID = entity.spriteComponent?.imageID
-                    if (imgID) {
-                        const textures = GPU.textures
-                        if (!textures.get(imgID))
-                            await FileSystemAPI.loadTexture(imgID)
-                    }
-                    const uiID = entity.uiComponent?.uiLayoutID
-                    const file = FileSystemAPI.readAsset(uiID)
-                    if (file)
-                        this.UILayouts.set(uiID, file)
-                    allEntities.push(entity)
-                } catch (err) {
-                    console.error(err)
-                }
-            }
-
-            EntityAPI.addGroup(allEntities)
-        } catch (err) {
-            console.error(err)
-        }
-        this.#onLevelLoadListeners.array.forEach(callback => callback())
-    }
-
-    #replaceLevel(newLevel?: Entity) {
-        const oldLevel = this.#loadedLevel
-        this.#loadedLevel = newLevel
-        if (oldLevel) {
-            EntityAPI.removeEntity(oldLevel)
-        }
-        if (newLevel)
-            EntityAPI.addEntity(newLevel)
-    }
-
     addSystem(id: string, callback: Function) {
         this.#executionQueue.set(id, callback)
     }
 
     removeSystem(id: string) {
         this.#executionQueue.delete(id)
+    }
+
+    getRootEntity(): Entity {
+        return this.#rootEntity
     }
 }

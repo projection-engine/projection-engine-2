@@ -14,7 +14,6 @@ import IInjectable from "@lib/IInjectable";
 import {Inject, Injectable} from "@lib/Injection";
 import EntityHierarchyService from "@services/EntityHierarchyService";
 import ToasterService from "@services/ToasterService";
-import ContentBrowserStore from "@lib/stores/ContentBrowserStore";
 import SettingsStore from "@lib/stores/SettingsStore";
 
 
@@ -36,9 +35,6 @@ export default class InspectorUtil extends IInjectable {
 
     @Inject(ToasterService)
     static toasterService: ToasterService
-
-    @Inject(ContentBrowserStore)
-    static contentBrowserStore: ContentBrowserStore
 
     static compareObjects(obj1, obj2) {
         let isValid = true
@@ -136,27 +132,8 @@ export default class InspectorUtil extends IInjectable {
     }
 
     static getItemFound(id) {
-        const filesStoreData = InspectorUtil.contentBrowserStore.getData()
-        let type = "SCRIPT"
-        let itemFound = filesStoreData.components.find(s => s.registryID === id)
-        if (!itemFound) {
-            itemFound = filesStoreData.meshes.find(s => s.registryID === id)
-            type = "MESH"
-        }
-        if (!itemFound) {
-            itemFound = filesStoreData.textures.find(s => s.registryID === id)
-            type = "IMAGE"
-        }
-        if (!itemFound) {
-            itemFound = filesStoreData.materials.find(s => s.registryID === id)
-            type = "MATERIAL"
-        }
-
-        if (!itemFound) {
-            InspectorUtil.toasterService.error(LocalizationEN.FILE_NOT_FOUND)
-            return null
-        }
-        return type
+        // TODO
+        return null
     }
 
 

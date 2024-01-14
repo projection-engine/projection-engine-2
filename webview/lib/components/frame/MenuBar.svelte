@@ -1,14 +1,16 @@
 <script lang="ts">
     import OptionDropdown from "../dropdown/OptionDropdown.svelte";
-    import WebViewSystem from "../../webview/WebViewSystem";
+    import WebViewService from "../../webview/WebViewService";
+    import {InjectVar} from "@lib/Injection";
 
     export let options: { label: string, options: [{ label: string, onClick: GenericVoidFunction }] }[] = []
+    const webView = InjectVar(WebViewService)
 
     $: optionsMapped = [
         ...options,
         {
             label: "Window",
-            options: [{label: "Reload", onClick: () => WebViewSystem.beam(null, "RELOAD")}]
+            options: [{label: "Reload", onClick: () => webView.beam("RELOAD")}]
         }
     ]
 </script>
