@@ -19,16 +19,44 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-21]  New project architecture&#10;- Creating new file system structure&#10;- Creating new events&#10;- Creating new file browser">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-21]  New project architecture&#10;- Finishing new file browser">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/FS.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/FS.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/FS.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/FS.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/JSON.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/JSON.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/FSService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/FSService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/components/input/Input.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/components/input/Input.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/dto/fs/ItemDTO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/dto/fs/ItemDTO.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/fs/FileSystemView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/fs/FileSystemView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/enums/LocalizationEN.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/enums/LocalizationEN.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/ProjectionEngine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/ProjectionEngine.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/stores/ContentBrowserStore.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/selector/Selector.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/selector/Selector.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/selector/components/Options.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/selector/components/Options.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/ViewDefinitions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/ViewDefinitions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/templates/get-content-browser-actions.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/ContentBrowserUtil.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/EditorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/EditorUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/InspectorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/InspectorUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/SelectorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/SelectorUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/ContentBrowserView.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/Browser.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/BrowserHeader.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/Header.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/SideBar.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/SideBarItem.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/SortingOptions.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/CodeItem.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/ItemMetadata.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/MaterialItem.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/MeshItem.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/Properties.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/TextureItem.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/item/Card.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/item/Item.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/item/ItemInput.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/item/Row.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/libs/GlobalContentBrowserController.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/libs/NavigationHistory.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/static/ITEM_TYPES.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/static/SELECTION_TYPES.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/static/SORT_INFO.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/fs/FSSideBar.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/fs/FSSideBar.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/views/fs/Files.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/fs/Files.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/libs/ShaderEditorTools.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/libs/ShaderEditorTools.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -314,7 +342,7 @@
       <workItem from="1704754038431" duration="8000" />
       <workItem from="1705147573913" duration="14465000" />
       <workItem from="1705173861585" duration="7770000" />
-      <workItem from="1705231012356" duration="4934000" />
+      <workItem from="1705231012356" duration="5971000" />
     </task>
     <task id="LOCAL-00001" summary="[STD-1] Organizing project&#10;- removing unused C++ classes&#10;- Refactoring files&#10;- Renaming c++ namespaces and project &#10;- Moving future webview stuff">
       <option name="closed" value="true" />
@@ -636,7 +664,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705180450786</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="[STD-21]  New project architecture&#10;- Finishing new file browser">
+      <option name="closed" value="true" />
+      <created>1705236708959</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1705236708959</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -660,7 +696,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-6] Project window&#10;- creating system for projects &#10;- Completing tests for file system&#10;- Continuing create project" />
     <MESSAGE value="[STD-6] Project window&#10;- JSON util&#10;- JSON util tests" />
     <MESSAGE value="[STD-6] Project window&#10;- Completing createProject&#10;- Fixing bugs JSON and FS&#10;- Refactoring FileSystemUtil&#10;- Removing imgui stuff from IWindow" />
     <MESSAGE value="[STD-6] Project window&#10;- Fixing build issues" />
@@ -685,7 +720,8 @@
     <MESSAGE value="[STD-34] Stores&#10;- Merging Visuals and Engine stores into Settings store" />
     <MESSAGE value="[STD-21]  New project architecture&#10;- Removing old level stuff&#10;- Refactoring services&#10;- Adding new events for project path" />
     <MESSAGE value="[STD-21]  New project architecture&#10;- Creating new file system structure&#10;- Creating new events&#10;- Creating new file browser" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-21]  New project architecture&#10;- Creating new file system structure&#10;- Creating new events&#10;- Creating new file browser" />
+    <MESSAGE value="[STD-21]  New project architecture&#10;- Finishing new file browser" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-21]  New project architecture&#10;- Finishing new file browser" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

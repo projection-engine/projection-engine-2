@@ -6,6 +6,7 @@
     import DirectoryDTO from "@lib/dto/fs/DirectoryDTO";
     import ResizableBar from "@lib/components/resizable/ResizableBar.svelte";
     import LocalizationEN from "@enums/LocalizationEN";
+    import Icon from "@lib/components/icon/Icon.svelte";
 
     export let rootDir: string
     export let setCurrentDirectory: GenericVoidFunctionWithP<DirectoryDTO>
@@ -27,6 +28,7 @@
             data-sveltehighlight={currentDirectory.getPath() === rootDir ? "-" : ""}
             data-sveltebuttondefault="-"
             on:click={() => setCurrentDirectory(new DirectoryDTO(LocalizationEN.HOME, rootDir))}>
+        <Icon styles="color: var(--folder-color)">home</Icon>
         {LocalizationEN.HOME}
     </button>
     {#each folders as folder}
@@ -34,6 +36,7 @@
                 data-sveltehighlight={currentDirectory === folder ? "-" : ""}
                 data-sveltebuttondefault="-"
                 on:click={() => setCurrentDirectory(folder)}>
+            <Icon styles="color: var(--folder-color)">folder</Icon>
             {folder.getName()}
         </button>
     {/each}
@@ -51,6 +54,14 @@
     button {
         border: none;
         text-align: left;
-        border-bottom: var(--pj-border-primary) 1px solid;
+        border-radius: 0;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: .7rem;
+    }
+
+    button:nth-child(odd) {
+        background: var(--pj-background-tertiary);
     }
 </style>

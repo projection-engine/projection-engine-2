@@ -84,6 +84,7 @@
         align-items: center;
         min-height: 25px;
         max-height: 25px;
+        border-bottom: var(--pj-border-primary) 1px solid;
     }
 
     .header > div {

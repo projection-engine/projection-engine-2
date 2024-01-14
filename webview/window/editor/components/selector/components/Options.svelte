@@ -19,27 +19,6 @@
     let inputValue = ""
     let filtered
 
-
-    $: {
-    	const temp = SelectorUtil.getType(type, mergeMaterials, terrainMaterials)
-    	let current
-    	if (inputValue)
-    		current = temp.filter(e => e.name.includes(inputValue))
-    	else
-    		current = [...temp]
-    	if (!noDefault) {
-    		if (type === "mesh")
-    			Object.entries(EmbeddedMeshes).forEach(sm => {
-    				if (LocalizationEN[sm[0]] != null)
-    					current.push({
-    						name: LocalizationEN[sm[0]],
-    						registryID: sm[1]
-    					})
-    			})
-    	}
-    	filtered = current
-    }
-
 </script>
 
 <div class="modal-available-nodes selector">

@@ -1,7 +1,6 @@
 import IInjectable from "@lib/IInjectable";
 import ToasterService from "@services/ToasterService";
 import ViewportActionService from "@services/ViewportActionService";
-import ContentBrowserStore from "./stores/ContentBrowserStore";
 import DragDropService from "@services/DragDropService";
 import EntityNamingService from "@services/EntityNamingService";
 import EntityUpdateService from "@services/EntityUpdateService";
@@ -13,9 +12,6 @@ import ContextMenuService from "@services/ContextMenuService";
 import {Inject} from "@lib/Injection";
 
 export default class ProjectionEngine extends IInjectable {
-
-    @Inject(ContentBrowserStore)
-    static ContentBrowserStore: ContentBrowserStore
 
     @Inject(SettingsStore)
     static SettingsStore: SettingsStore

@@ -3,13 +3,11 @@ import SelectionStore from "@lib/stores/SelectionStore"
 import LocalizationEN from "@enums/LocalizationEN"
 import Entity from "@engine-core/instances/Entity"
 import Engine from "@engine-core/Engine"
-import CameraAPI from "@engine-core/lib/utils/CameraAPI"
 import CameraTracker from "../../../engine/tools/utils/CameraTracker"
 import COMPONENTS from "@engine-core/static/COMPONENTS"
 import IPCRoutes from "@enums/IPCRoutes"
 import QueryAPI from "@engine-core/lib/utils/QueryAPI"
 import GIZMOS from "@enums/Gizmos"
-import ContentBrowserUtil from "./ContentBrowserUtil"
 import GizmoState from "../../../engine/tools/gizmo/util/GizmoState";
 import GizmoUtil from "../../../engine/tools/gizmo/util/GizmoUtil";
 import {Inject, Injectable} from "@lib/Injection";
@@ -118,14 +116,6 @@ export default class EditorUtil extends IInjectable {
                 return LocalizationEN.CULLING
             case COMPONENTS.UI:
                 return LocalizationEN.UI_WRAPPER
-        }
-    }
-
-    static async importFile(currentDirectory) {
-        const {filesImported} = await EditorUtil.getCall<MutableObject>(IPCRoutes.FILE_DIALOG, {currentDirectory: currentDirectory.id}, false)
-        if (filesImported.length > 0) {
-            EditorUtil.toasterService.success(LocalizationEN.IMPORT_SUCCESSFUL)
-            await ContentBrowserUtil.refreshFiles()
         }
     }
 

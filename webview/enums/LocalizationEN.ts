@@ -10,6 +10,7 @@ export default {
     [FileTypes.JAVASCRIPT]: "Javascript package",
     [FileTypes.JSON]: "JSON object",
 
+    FILE_BROWSER: "File browser",
     LOGGER_SILENT: "Writes log/error/warning to terminal (integrated) only",
     LOGGER_DETAILED: "Writes every log/error/warning to file and to terminal (integrated)",
     HOME: "Home",
