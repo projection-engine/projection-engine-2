@@ -29,11 +29,11 @@ export default class ViewportActionService extends IInjectable{
         if (!entity)
             return
 
-        vec3.copy(ProjectionEngine.Engine.CameraAPI.translationBuffer, entity.absoluteTranslation)
+        vec3.copy(ProjectionEngine.Engine.getCamera().translationBuffer, entity.absoluteTranslation)
 
         const position = <vec4>[0, 0, 5, 1]
-        vec4.transformQuat(position, position, ProjectionEngine.Engine.CameraAPI.rotationBuffer)
-        vec3.add(ProjectionEngine.Engine.CameraAPI.translationBuffer, ProjectionEngine.Engine.CameraAPI.translationBuffer, <vec3>position)
+        vec4.transformQuat(position, position, ProjectionEngine.Engine.getCamera().rotationBuffer)
+        vec3.add(ProjectionEngine.Engine.getCamera().translationBuffer, ProjectionEngine.Engine.getCamera().translationBuffer, <vec3>position)
 
         CameraTracker.forceUpdate = true
     }

@@ -34,7 +34,7 @@ export default class ExecutionService extends IInjectable{
         }
         ExecutionService.toasterService.warn(LocalizationEN.SAVING_STATE)
 
-        this.cameraSerialization = ExecutionService.engine.CameraAPI.serializeState()
+        this.cameraSerialization = ExecutionService.engine.camera.serializeState()
         this.#isPlaying = true
         CameraTracker.stopTracking()
         await ExecutionService.engine.startSimulation()
@@ -56,10 +56,10 @@ export default class ExecutionService extends IInjectable{
         UIAPI.destroyUI()
         await ScriptsAPI.updateAllScripts()
 
-        ExecutionService.engine.CameraAPI.trackingEntity = undefined
+        ExecutionService.engine.camera.trackingEntity = undefined
         CameraTracker.startTracking()
         ExecutionService.settingsStore.updateStore({executingAnimation: false})
-        ExecutionService.engine.CameraAPI.restoreState(this.cameraSerialization)
+        ExecutionService.engine.camera.restoreState(this.cameraSerialization)
     }
 
 }

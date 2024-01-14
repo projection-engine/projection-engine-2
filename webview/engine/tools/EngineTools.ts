@@ -23,8 +23,9 @@ import ScalingGizmo from "@engine-tools/gizmo/transformation/ScalingGizmo";
 import TranslationGizmo from "@engine-tools/gizmo/transformation/TranslationGizmo";
 import DualAxisGizmo from "@engine-tools/gizmo/transformation/DualAxisGizmo";
 import ScreenSpaceGizmo from "@engine-tools/gizmo/transformation/ScreenSpaceGizmo";
+import AbstractSystem from "@engine-core/AbstractSystem";
 
-export default class EngineTools {
+export default class EngineTools extends AbstractSystem {
     static selected: Entity[] = []
     static #initialized = false
     static RotationGizmo: RotationGizmo
@@ -87,7 +88,7 @@ export default class EngineTools {
         GPU.context.enable(GPU.context.DEPTH_TEST)
     }
 
-    static #loop() {
+    execute(gl: WebGL2RenderingContext) {
         const coords = ConversionAPI.toQuadCoordinates(EngineToolsState.unconvertedMouseCoordinates[0], EngineToolsState.unconvertedMouseCoordinates[1], GPU.internalResolution.w, GPU.internalResolution.h)
         EngineToolsState.mouseCoordinates[0] = coords.x
         EngineToolsState.mouseCoordinates[1] = coords.y
@@ -102,11 +103,11 @@ export default class EngineTools {
     }
 
     static bindSystems() {
-        ProjectionEngine.Engine.addSystem("ENGINE_TOOLS_RENDERER", EngineTools.#loop)
+        ProjectionEngine.Engine.addSystem(EngineTools)
     }
 
     static unbindSystems() {
-        ProjectionEngine.Engine.removeSystem("ENGINE_TOOLS_RENDERER")
+        ProjectionEngine.Engine.removeSystem(EngineTools)
     }
 
     static #setContextState() {

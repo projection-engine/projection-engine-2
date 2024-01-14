@@ -1,12 +1,13 @@
-import WORKER_MESSAGES from "../../static/WORKER_MESSAGES"
-import CameraAPI from "./CameraAPI"
-import Entity from "../../instances/Entity"
-import QueryAPI from "./QueryAPI"
-import entityWorker from "../../workers/entity-worker";
-import Engine from "../../Engine";
+import WORKER_MESSAGES from "../static/WORKER_MESSAGES"
+import CameraAPI from "../lib/utils/CameraAPI"
+import Entity from "../instances/Entity"
+import QueryAPI from "../lib/utils/QueryAPI"
+import entityWorker from "../workers/entity-worker";
+import Engine from "../Engine";
 import ProjectionEngine from "@lib/ProjectionEngine";
+import AbstractSystem from "@engine-core/AbstractSystem";
 
-export default class EntityWorkerAPI {
+export default class TransformationSystem extends AbstractSystem {
     static hasChangeBuffer = new Uint8Array(new ArrayBuffer(1))
 
     static linkedEntities = new Map()
@@ -14,19 +15,19 @@ export default class EntityWorkerAPI {
 
 
     static updateEntityReference(entity: Entity) {
-        EntityWorkerAPI.removeEntity(entity)
-        EntityWorkerAPI.registerEntity(entity)
+        TransformationSystem.removeEntity(entity)
+        TransformationSystem.registerEntity(entity)
     }
 
 
     static initialize() {
-        if (EntityWorkerAPI.#initialized)
+        if (TransformationSystem.#initialized)
             return
-        EntityWorkerAPI.#initialized = true
+        TransformationSystem.#initialized = true
 
         entityWorker({
             type: WORKER_MESSAGES.INITIALIZE,
-            payload: [EntityWorkerAPI.hasChangeBuffer, ProjectionEngine.Engine.CameraAPI.notificationBuffers, ProjectionEngine.Engine.CameraAPI.position, 0, 1]
+            payload: [TransformationSystem.hasChangeBuffer, ProjectionEngine.Engine.getCamera().notificationBuffers, ProjectionEngine.Engine.getCamera().position, 0, 1]
         })
     }
 
@@ -36,7 +37,7 @@ export default class EntityWorkerAPI {
             return
 
         entityWorker({type: WORKER_MESSAGES.REMOVE_ENTITY, payload: entity.id})
-        EntityWorkerAPI.linkedEntities.delete(entity.id)
+        TransformationSystem.linkedEntities.delete(entity.id)
         entity.hasWorkerBound = false
     }
 
@@ -47,7 +48,7 @@ export default class EntityWorkerAPI {
             const entity = entities[i]
             if (entity.hasWorkerBound) {
                 toRemove.push(entity.id)
-                EntityWorkerAPI.linkedEntities.delete(entity.id)
+                TransformationSystem.linkedEntities.delete(entity.id)
                 entity.hasWorkerBound = false
             }
         }
@@ -84,31 +85,33 @@ export default class EntityWorkerAPI {
     }
 
     static registerEntity(entity: Entity) {
-        if (entity.isCollection || !EntityWorkerAPI.#initialized || (entity.hasWorkerBound && EntityWorkerAPI.linkedEntities.get(entity.id)))
+        if (entity.isCollection || !TransformationSystem.#initialized || (entity.hasWorkerBound && TransformationSystem.linkedEntities.get(entity.id)))
             return
-        EntityWorkerAPI.linkedEntities.set(entity.id, entity)
+        TransformationSystem.linkedEntities.set(entity.id, entity)
         entityWorker({
             type: WORKER_MESSAGES.REGISTER_ENTITY,
-            payload: EntityWorkerAPI.#getEntityInfo(entity)
+            payload: TransformationSystem.#getEntityInfo(entity)
         })
     }
 
     static registerBlock(entities: Entity[]) {
-        if (!EntityWorkerAPI.#initialized)
+        if (!TransformationSystem.#initialized)
             return
         for (let i = 0; i < entities.length; i++) {
             const e = entities[i]
             if (e.hasWorkerBound || e.isCollection)
                 continue
-            EntityWorkerAPI.linkedEntities.set(e.id, e)
+            TransformationSystem.linkedEntities.set(e.id, e)
             entityWorker({
                 type: WORKER_MESSAGES.REGISTER_ENTITY,
-                payload: EntityWorkerAPI.#getEntityInfo(e)
+                payload: TransformationSystem.#getEntityInfo(e)
             })
         }
     }
 
-    static syncThreads() {
+    execute(gl: WebGL2RenderingContext) {
+        TransformationSystem.hasChangeBuffer[0] = 0
+
         entityWorker()
     }
 }

@@ -7,12 +7,13 @@ import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import GPUUtil from "../utils/GPUUtil";
 import Engine from "../Engine";
 import ProjectionEngine from "@lib/ProjectionEngine";
+import AbstractSystem from "@engine-core/AbstractSystem";
 
 
-export default class Bokeh {
-	static execute() {
+export default class DoFSystem extends AbstractSystem{
+	 execute(gl: WebGL2RenderingContext) {
 
-		if (!ProjectionEngine.Engine.CameraAPI.DOF)
+		if (!ProjectionEngine.Engine.getCamera().DOF)
 			return
 
 		StaticShaders.bokeh.bind()

@@ -3,7 +3,7 @@ import getComponentInstance from "../utils/get-component-instance"
 import serializeStructure from "../utils/serialize-structure"
 import Component from "./components/Component"
 import ComponentResources from "./components/ComponentResources"
-import EntityWorkerAPI from "../lib/utils/EntityWorkerAPI"
+import TransformationSystem from "../runtime/TransformationSystem"
 import QueryAPI from "../lib/utils/QueryAPI"
 import DynamicMap from "../lib/DynamicMap"
 
@@ -142,7 +142,7 @@ export default class Entity extends ComponentResources {
     	this.#parent = parent
     	parent.addChild(this)
     	if (EntityAPI.isRegistered(this)) {
-    		EntityWorkerAPI.updateEntityReference(this)
+    		TransformationSystem.updateEntityReference(this)
     		this.changed = true
     	}
     }

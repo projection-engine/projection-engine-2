@@ -24,7 +24,7 @@ export default class AtmosphereRenderer {
 			if (i === 0) {
 				shader.bind()
 				context.disable(context.DEPTH_TEST)
-				context.uniformMatrix4fv(uniforms.invSkyProjectionMatrix, false, ProjectionEngine.Engine.CameraAPI.invSkyboxProjectionMatrix)
+				context.uniformMatrix4fv(uniforms.invSkyProjectionMatrix, false, ProjectionEngine.Engine.getCamera().invSkyboxProjectionMatrix)
 			}
 			const entity = entities[i]
 			const component = entity.atmosphereComponent

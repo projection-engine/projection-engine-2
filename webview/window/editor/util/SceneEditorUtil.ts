@@ -4,7 +4,7 @@ import ConversionAPI from "@engine-core/lib/math/ConversionAPI"
 import GPU from "@engine-core/GPU"
 import PickingAPI from "@engine-core/lib/utils/PickingAPI"
 import Engine from "@engine-core/Engine"
-import VisibilityRenderer from "@engine-core/runtime/VisibilityRenderer"
+import DepthPrePassSystem from "@engine-core/runtime/DepthPrePassSystem"
 import EngineTools from "../../../engine/tools/EngineTools"
 import {glMatrix, quat} from "gl-matrix"
 import CameraAPI from "@engine-core/lib/utils/CameraAPI"
@@ -103,7 +103,7 @@ export default class SceneEditorUtil extends IInjectable {
                 console.error(err, startCoords, nStart)
             }
 
-            VisibilityRenderer.needsUpdate = true
+            DepthPrePassSystem.needsUpdate = true
         }
     }
 
@@ -150,11 +150,11 @@ export default class SceneEditorUtil extends IInjectable {
             if (!cameraMetadata) {
                 const pitch = quat.fromEuler(quat.create(), -45, 0, 0)
                 const yaw = quat.fromEuler(quat.create(), 0, 45, 0)
-                ProjectionEngine.Engine.CameraAPI.update([5, 10, 5], quat.multiply(quat.create(), yaw, pitch))
+                ProjectionEngine.Engine.getCamera().update([5, 10, 5], quat.multiply(quat.create(), yaw, pitch))
                 CameraTracker.xRotation = glMatrix.toRadian(45)
                 CameraTracker.yRotation = -glMatrix.toRadian(45)
             } else {
-                ProjectionEngine.Engine.CameraAPI.restoreState(cameraMetadata)
+                ProjectionEngine.Engine.getCamera().restoreState(cameraMetadata)
                 CameraTracker.xRotation = cameraMetadata.prevX
                 CameraTracker.yRotation = cameraMetadata.prevY
             }

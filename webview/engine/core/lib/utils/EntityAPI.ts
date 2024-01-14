@@ -1,12 +1,12 @@
 import COMPONENTS from "../../static/COMPONENTS"
 import Engine from "../../Engine"
-import EntityWorkerAPI from "./EntityWorkerAPI"
+import TransformationSystem from "../../runtime/TransformationSystem"
 import UIAPI from "../rendering/UIAPI"
 import PhysicsAPI from "../rendering/PhysicsAPI"
 import Entity from "../../instances/Entity"
 import ENTITY_TYPED_ATTRIBUTES from "../../static/ENTITY_TYPED_ATTRIBUTES"
-import LightsAPI from "./LightsAPI"
-import VisibilityRenderer from "../../runtime/VisibilityRenderer"
+import LightsService from "./LightsService"
+import DepthPrePassSystem from "../../runtime/DepthPrePassSystem"
 import ResourceEntityMapper from "../ResourceEntityMapper"
 import MeshResourceMapper from "../MeshResourceMapper"
 import MaterialResourceMapper from "../MaterialResourceMapper"
@@ -57,7 +57,7 @@ export default class EntityAPI {
             entity.parentID = undefined
         }
         ProjectionEngine.Engine.entities.addBlock(entities, e => e.id)
-        // EntityWorkerAPI.registerBlock(entities)
+        // TransformationSystem.registerBlock(entities)
         ResourceEntityMapper.addBlock(entities)
     }
 
@@ -70,7 +70,7 @@ export default class EntityAPI {
         if (!entity.parent && !entity.parentID)
             entity.addParent(ProjectionEngine.Engine.getRootEntity())
         ProjectionEngine.Engine.entities.set(target.id, target)
-        EntityWorkerAPI.registerEntity(target)
+        TransformationSystem.registerEntity(target)
         EntityAPI.registerEntityComponents(target)
         return entity
     }
@@ -88,8 +88,8 @@ export default class EntityAPI {
         })
 
         if (needsLightUpdate)
-            LightsAPI.packageLights(false, true)
-        VisibilityRenderer.needsUpdate = needsVisibilityUpdate
+            LightsService.packageLights(false, true)
+        DepthPrePassSystem.needsUpdate = needsVisibilityUpdate
     }
 
     static registerEntityComponents(entity: Entity, previouslyRemoved?: string): void {
@@ -99,8 +99,8 @@ export default class EntityAPI {
         ProjectionEngine.Engine.queryMap.set(entity.queryKey, entity)
         ResourceEntityMapper.addEntity(entity)
         if (COMPONENT_TRIGGER_UPDATE.indexOf(<COMPONENTS | undefined>previouslyRemoved) || !!COMPONENT_TRIGGER_UPDATE.find(v => entity.components.get(v) != null))
-            LightsAPI.packageLights(false, true)
-        VisibilityRenderer.needsUpdate = true
+            LightsService.packageLights(false, true)
+        DepthPrePassSystem.needsUpdate = true
     }
 
     static removeEntity(entityToRemove: string | Entity) {
@@ -125,7 +125,7 @@ export default class EntityAPI {
         MeshResourceMapper.removeBlock(entities)
         MaterialResourceMapper.removeBlock(entities)
         ResourceEntityMapper.removeBlock(entities)
-        EntityWorkerAPI.removeBlock(entities)
+        TransformationSystem.removeBlock(entities)
 
         let didLightsChange
         for (let i = 0; i < entities.length; i++) {
@@ -149,7 +149,7 @@ export default class EntityAPI {
         }
 
         if (didLightsChange)
-            LightsAPI.packageLights(false, true)
+            LightsService.packageLights(false, true)
     }
 
     static parseEntityObject(entity: MutableObject, asNew?: boolean): Entity {
