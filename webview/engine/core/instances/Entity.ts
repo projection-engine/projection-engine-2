@@ -142,7 +142,6 @@ export default class Entity extends ComponentResources {
     	this.#parent = parent
     	parent.addChild(this)
     	if (EntityAPI.isRegistered(this)) {
-    		TransformationSystem.updateEntityReference(this)
     		this.changed = true
     	}
     }

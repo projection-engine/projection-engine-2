@@ -1,15 +1,11 @@
 import Engine from "@engine-core/Engine";
 import GPU from "@engine-core/GPU";
+import IManageable from "@engine-core/IManageable";
 
-export default class AbstractSystem {
-    protected engine: Engine
+export default class AbstractSystem extends IManageable {
 
-    constructor(engine: Engine) {
-        this.engine = engine
-    }
-
-
-    initialize() {
+    shouldExecute(): boolean {
+        return true;
     }
 
     execute(gl: WebGL2RenderingContext) {

@@ -33,6 +33,7 @@ export default class EngineTools extends AbstractSystem {
     static TranslationGizmo: TranslationGizmo
     static DualAxisGizmo: DualAxisGizmo
     static ScreenSpaceGizmo: ScreenSpaceGizmo
+    static isRunning = true
 
     static async initialize() {
         if (EngineTools.#initialized)
@@ -106,8 +107,8 @@ export default class EngineTools extends AbstractSystem {
         ProjectionEngine.Engine.addSystem(EngineTools)
     }
 
-    static unbindSystems() {
-        ProjectionEngine.Engine.removeSystem(EngineTools)
+    shouldExecute(){
+        return EngineTools.isRunning
     }
 
     static #setContextState() {

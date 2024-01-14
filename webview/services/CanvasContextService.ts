@@ -27,7 +27,7 @@ export default class CanvasContextService extends IInjectable {
         this.#isInitialized = true
         const visualsData = CanvasContextService.settingsStore.getData();
         await CanvasContextService.engine.initialize(
-            document.getElementById(RENDER_TARGET),
+            document.getElementById(RENDER_TARGET) as HTMLCanvasElement,
             {
                 w: visualsData.resolutionX,
                 h: visualsData.resolutionY

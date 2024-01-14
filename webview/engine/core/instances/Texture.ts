@@ -2,7 +2,6 @@ import IMAGE_WORKER_ACTIONS from "../static/IMAGE_WORKER_ACTIONS"
 import TEXTURE_WRAPPING from "../static/texture/TEXTURE_WRAPPING"
 import TEXTURE_FILTERING from "../static/texture/TEXTURE_FILTERING"
 import TEXTURE_FORMATS from "../static/texture/TEXTURE_FORMATS"
-import ImageProcessor from "../lib/math/ImageProcessor"
 import GPU from "../GPU"
 import TextureParams from "../static/TextureParams"
 import imageToBitmap from "@engine-core/utils/image-to-bitmap";

@@ -1,6 +1,6 @@
 import GPU from "../GPU"
 import TransformationSystem from "./TransformationSystem"
-import SSAO from "./SSAO"
+import AOSystem from "./AOSystem"
 import {mat4} from "gl-matrix"
 import StaticShaders from "../lib/StaticShaders"
 import StaticFBO from "../lib/StaticFBO"
@@ -20,21 +20,8 @@ const entityMetadata = new Float32Array(16)
 let uniforms, VP
 export default class DepthPrePassSystem extends AbstractSystem {
     static needsUpdate = true
-    static #isSecondPass = false
-
 
     execute(gl: WebGL2RenderingContext) {
-        if (!DepthPrePassSystem.needsUpdate && !TransformationSystem.hasChangeBuffer[0])
-            return
-
-        if (!DepthPrePassSystem.#isSecondPass) {
-            DepthPrePassSystem.#isSecondPass = true
-            DepthPrePassSystem.needsUpdate = true
-        } else {
-            DepthPrePassSystem.needsUpdate = false
-            DepthPrePassSystem.#isSecondPass = false
-        }
-
         StaticShaders.visibility.bind()
         StaticFBO.visibility.startMapping()
         this.#bindUniforms(gl)
@@ -44,9 +31,6 @@ export default class DepthPrePassSystem extends AbstractSystem {
         this.#drawSprites(gl)
         StaticFBO.visibility.stopMapping()
         MetricsController.currentState = METRICS_FLAGS.VISIBILITY
-
-
-        SSAO.execute()
     }
 
     #drawSprites(gl: WebGL2RenderingContext) {

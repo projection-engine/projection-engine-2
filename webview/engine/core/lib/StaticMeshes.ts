@@ -4,8 +4,9 @@ import VertexBuffer from "../instances/VertexBuffer"
 import Mesh from "../instances/Mesh"
 import GPUAPI from "./rendering/GPUAPI"
 import EmbeddedMeshes from "../static/EmbeddedMeshes"
+import IManageable from "@engine-core/IManageable";
 
-export default class StaticMeshes {
+export default class StaticMeshes extends IManageable {
 	static #initialized = false
     
 	static quad?:Mesh
@@ -15,7 +16,7 @@ export default class StaticMeshes {
 	static plane?:Mesh
 	static cubeBuffer?:VertexBuffer
 
-	static async initialize() {
+	 async initialize() {
 		if(StaticMeshes.#initialized)
 			return
 		StaticMeshes.#initialized = true

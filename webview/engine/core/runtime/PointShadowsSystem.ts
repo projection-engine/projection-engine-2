@@ -24,7 +24,7 @@ export default class PointShadowsSystem extends AbstractSystem {
     static sampler?: WebGLTexture
     static lightsToUpdate: LightComponent[] = []
 
-    initialize() {
+  async  initialize() {
         PointShadowsSystem.shadowMap = new ShadowProbe(512)
         PointShadowsSystem.sampler = PointShadowsSystem.shadowMap.texture
         lightsToUpdate = PointShadowsSystem.lightsToUpdate

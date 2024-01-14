@@ -1,5 +1,4 @@
 import LineAPI from "./lib/rendering/LineAPI"
-import ImageProcessor from "./lib/math/ImageProcessor"
 import TerrainGenerator from "./lib/math/TerrainGenerator"
 import CameraAPI from "./lib/utils/CameraAPI"
 import TransformationSystem from "./runtime/TransformationSystem"
@@ -18,8 +17,9 @@ import StaticFBO from "./lib/StaticFBO"
 import StaticUBOs from "./lib/StaticUBOs"
 import DynamicMap from "./lib/DynamicMap"
 import Engine from "./Engine";
+import IManageable from "@engine-core/IManageable";
 
-export default class GPU {
+export default class GPU extends IManageable{
 	static context?: WebGL2RenderingContext
 	static canvas?: HTMLCanvasElement
 	static activeShader?: Shader
@@ -35,10 +35,26 @@ export default class GPU {
 	static skylightProbe: LightProbe
 	static bufferResolution = new Float32Array([0,0])
 
-	static async initializeContext(canvas: HTMLCanvasElement, mainResolution: { w: number, h: number } | undefined) {
+	async initialize() {
 		if (GPU.context != null)
 			return
+		this.initializeWebGLContext(this.engine.getMainResolution(), this.engine.getCanvas());
+		this.generateBRDF();
+	}
 
+	private generateBRDF() {
+		const FBO = new Framebuffer(512, 512).texture({precision: GPU.context.RG32F, format: GPU.context.RG})
+		const brdfShader = new Shader(QUAD_VERT, BRDF_FRAG)
+
+		FBO.startMapping()
+		brdfShader.bind()
+		StaticMeshes.drawQuad()
+		FBO.stopMapping()
+		GPU.BRDF = FBO.colors[0]
+		GPU.context.deleteProgram(brdfShader.program)
+	}
+
+	private initializeWebGLContext(mainResolution: { w: number; h: number }, canvas: HTMLCanvasElement) {
 		const screen = window.screen
 		GPU.internalResolution.w = mainResolution?.w || screen.width
 		GPU.internalResolution.h = mainResolution?.h || screen.height
@@ -62,28 +78,5 @@ export default class GPU {
 		GPU.context.enable(GPU.context.DEPTH_TEST)
 		GPU.context.depthFunc(GPU.context.LESS)
 		GPU.context.frontFace(GPU.context.CCW)
-
-
-		StaticUBOs.initialize()
-		await StaticMeshes.initialize()
-		StaticShaders.initialize()
-		StaticFBO.initialize()
-		TransformationSystem.initialize()
-		TerrainGenerator.initialize()
-		ImageProcessor.initialize()
-
-		CubeMapAPI.initialize()
-		LineAPI.initialize()
-
-		const FBO = new Framebuffer(512, 512).texture({precision: GPU.context.RG32F, format: GPU.context.RG})
-		const brdfShader = new Shader(QUAD_VERT, BRDF_FRAG)
-
-		FBO.startMapping()
-		brdfShader.bind()
-		StaticMeshes.drawQuad()
-		FBO.stopMapping()
-		GPU.BRDF = FBO.colors[0]
-		GPU.context.deleteProgram(brdfShader.program)
 	}
-
 }

@@ -14,7 +14,7 @@ export default class CompositionSystem extends AbstractSystem {
     static lookUpIndex = 0
     static currentNoise = 0
 
-    initialize() {
+   async initialize() {
         StaticUBOs.frameCompositionUBO.bind()
         StaticUBOs.frameCompositionUBO.updateData("FXAASpanMax", new Float32Array([8.0]))
         StaticUBOs.frameCompositionUBO.updateData("FXAAReduceMin", new Float32Array([1.0 / 128.0]))

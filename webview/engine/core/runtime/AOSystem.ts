@@ -7,12 +7,13 @@ import MetricsController from "../lib/utils/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import EngineState from "../EngineState"
 import GPUUtil from "../utils/GPUUtil";
+import AbstractSystem from "@engine-core/AbstractSystem";
 
 
-export default class SSAO {
+export default class SSAO extends AbstractSystem{
 	static noiseScale = new Float32Array(2)
 
-	static async initialize() {
+	 async initialize() {
 		const RESOLUTION = 4
 		SSAO.noiseScale[0] = GPU.internalResolution.w / RESOLUTION
 		SSAO.noiseScale[1] = GPU.internalResolution.h / RESOLUTION

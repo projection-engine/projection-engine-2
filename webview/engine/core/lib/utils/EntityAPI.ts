@@ -70,7 +70,6 @@ export default class EntityAPI {
         if (!entity.parent && !entity.parentID)
             entity.addParent(ProjectionEngine.Engine.getRootEntity())
         ProjectionEngine.Engine.entities.set(target.id, target)
-        TransformationSystem.registerEntity(target)
         EntityAPI.registerEntityComponents(target)
         return entity
     }
@@ -125,7 +124,6 @@ export default class EntityAPI {
         MeshResourceMapper.removeBlock(entities)
         MaterialResourceMapper.removeBlock(entities)
         ResourceEntityMapper.removeBlock(entities)
-        TransformationSystem.removeBlock(entities)
 
         let didLightsChange
         for (let i = 0; i < entities.length; i++) {

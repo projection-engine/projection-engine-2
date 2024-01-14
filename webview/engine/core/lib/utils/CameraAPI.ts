@@ -12,22 +12,17 @@ import Entity from "../../instances/Entity"
 import CameraComponent from "../../instances/components/CameraComponent"
 import CameraResources from "../CameraResources"
 import CameraSerialization from "../../static/CameraSerialization"
-import CameraNotificationDecoder from "../CameraNotificationDecoder"
-import Renderer from "../../Renderer"
 import cameraWorker from "../../workers/camera-worker";
-import ProjectionEngine from "@lib/ProjectionEngine";
 
 
 const TEMPLATE_CAMERA = new CameraComponent()
 export default class CameraAPI extends CameraResources {
     #dynamicAspectRatio = false
-    metadata = new CameraEffects()
     trackingEntity
 
-    constructor() {
-        super()
+    async initialize(): Promise<void> {
         this.projectionBuffer[4] = 10
-        ProjectionEngine.Engine.CameraNotificationDecoder.initialize(this.notificationBuffers)
+        this.engine.CameraNotificationDecoder.initialize(this.notificationBuffers)
         cameraWorker([
             this.notificationBuffers,
             this.position,
@@ -48,7 +43,7 @@ export default class CameraAPI extends CameraResources {
     }
 
     syncThreads() {
-        ProjectionEngine.Engine.CameraNotificationDecoder.elapsed = Renderer.elapsed
+        this.engine.CameraNotificationDecoder.elapsed = this.engine.elapsed
         cameraWorker()
     }
 
@@ -57,7 +52,7 @@ export default class CameraAPI extends CameraResources {
         if (entity && entity.__changedBuffer[1])
             this.update(entity.translation, entity.rotationQuaternionFinal)
 
-        if (ProjectionEngine.Engine.CameraNotificationDecoder.hasChangedProjection === 1) {
+        if (this.engine.CameraNotificationDecoder.hasChangedProjection === 1) {
             const UBO = StaticUBOs.cameraProjectionUBO
 
             UBO.bind()
@@ -71,7 +66,7 @@ export default class CameraAPI extends CameraResources {
             DepthPrePassSystem.needsUpdate = true
         }
 
-        if (ProjectionEngine.Engine.CameraNotificationDecoder.hasChangedView === 1) {
+        if (this.engine.CameraNotificationDecoder.hasChangedView === 1) {
             const UBO = StaticUBOs.cameraViewUBO
             UBO.bind()
             UBO.updateBuffer(this.viewUBOBuffer)
@@ -84,7 +79,7 @@ export default class CameraAPI extends CameraResources {
     updateAspectRatio() {
         const bBox = GPU.canvas.getBoundingClientRect()
         ConversionAPI.canvasBBox = bBox
-        if (ProjectionEngine.Engine.environment === ENVIRONMENT.DEV || this.#dynamicAspectRatio) {
+        if (this.engine.environment === ENVIRONMENT.DEV || this.#dynamicAspectRatio) {
             this.aspectRatio = bBox.width / bBox.height
             this.updateProjection()
         }
@@ -95,7 +90,7 @@ export default class CameraAPI extends CameraResources {
             vec3.copy(this.translationBuffer, translation)
         if (rotation != null)
             vec4.copy(this.rotationBuffer, rotation)
-        ProjectionEngine.Engine.CameraNotificationDecoder.viewNeedsUpdate = 1
+        this.engine.CameraNotificationDecoder.viewNeedsUpdate = 1
     }
 
     serializeState(): CameraSerialization {
@@ -109,38 +104,38 @@ export default class CameraAPI extends CameraResources {
     }
 
     get hasChangedView() {
-        return ProjectionEngine.Engine.CameraNotificationDecoder.hasChangedView === 1
+        return this.engine.CameraNotificationDecoder.hasChangedView === 1
     }
 
     get isOrthographic(): boolean {
-        return ProjectionEngine.Engine.CameraNotificationDecoder.projectionType === ProjectionEngine.Engine.CameraNotificationDecoder.ORTHOGRAPHIC
+        return this.engine.CameraNotificationDecoder.projectionType === this.engine.CameraNotificationDecoder.ORTHOGRAPHIC
     }
 
     set isOrthographic(data) {
-        ProjectionEngine.Engine.CameraNotificationDecoder.projectionType = data ? ProjectionEngine.Engine.CameraNotificationDecoder.ORTHOGRAPHIC : ProjectionEngine.Engine.CameraNotificationDecoder.PERSPECTIVE
-        ProjectionEngine.Engine.CameraNotificationDecoder.projectionNeedsUpdate = 1
+        this.engine.CameraNotificationDecoder.projectionType = data ? this.engine.CameraNotificationDecoder.ORTHOGRAPHIC : this.engine.CameraNotificationDecoder.PERSPECTIVE
+        this.engine.CameraNotificationDecoder.projectionNeedsUpdate = 1
     }
 
     set translationSmoothing(data) {
-        ProjectionEngine.Engine.CameraNotificationDecoder.translationSmoothing = data
+        this.engine.CameraNotificationDecoder.translationSmoothing = data
     }
 
     get translationSmoothing() {
-        return ProjectionEngine.Engine.CameraNotificationDecoder.translationSmoothing
+        return this.engine.CameraNotificationDecoder.translationSmoothing
     }
 
 
     updateProjection() {
-        ProjectionEngine.Engine.CameraNotificationDecoder.projectionNeedsUpdate = 1
+        this.engine.CameraNotificationDecoder.projectionNeedsUpdate = 1
     }
 
     updateView() {
-        ProjectionEngine.Engine.CameraNotificationDecoder.viewNeedsUpdate = 1
+        this.engine.CameraNotificationDecoder.viewNeedsUpdate = 1
     }
 
     restoreState(state: CameraSerialization) {
         const {rotation, translation, translationSmoothing, metadata} = state
-        this.restoreMetadata(metadata)
+        // this.restoreMetadata(metadata)
         this.updateTranslation(translation)
         this.updateRotation(rotation)
         this.translationSmoothing = translationSmoothing

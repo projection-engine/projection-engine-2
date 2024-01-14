@@ -1,8 +1,9 @@
 import SHADERS from "../static/SHADERS"
 import Shader from "../instances/Shader"
 import UberShader from "./UberShader"
+import IManageable from "@engine-core/IManageable";
 
-export default class StaticShaders {
+export default class StaticShaders extends IManageable {
 
 	static sprite?: Shader
 	static spriteUniforms?: { [key: string]: WebGLUniformLocation }
@@ -68,7 +69,7 @@ export default class StaticShaders {
 
 	static #initialized = false
 
-	static initialize() {
+	async initialize() {
 		if (StaticShaders.#initialized)
 			return
 		StaticShaders.#initialized = true

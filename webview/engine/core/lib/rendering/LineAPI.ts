@@ -1,112 +1,102 @@
 import VertexBuffer from "../../instances/VertexBuffer"
 import Mesh from "../../instances/Mesh"
 import GPU from "../../GPU"
-
-const X = [
-		0, 0, 0,
-		1, 0, 0
-	],
-	Y = [
-		0, 0, 0,
-		0, 1, 0
-	],
-	Z = [
-		0, 0, 0,
-		0, 0, 1
-	]
-export default class LineAPI {
-	static vaoX
-	static vboX
-
-	static vaoY
-	static vboY
-
-	static vaoZ
-	static vboZ
-	static #initialized = false
+import IManageable from "@engine-core/IManageable";
 
 
-	static initialize() {
-		if (LineAPI.#initialized) return
-		LineAPI.#initialized = true
+export default class LineAPI extends IManageable{
+    static vaoX
+    static vboX
+    static vaoY
+    static vboY
+    static vaoZ
+    static vboZ
+    static #initialized = false
 
-		LineAPI.vaoX = GPU.context.createVertexArray()
-		GPU.context.bindVertexArray(LineAPI.vaoX)
-		LineAPI.vboX = new VertexBuffer(
-			0,
-			new Float32Array(X),
-			GPU.context.ARRAY_BUFFER,
-			3,
-			GPU.context.FLOAT
-		)
-		GPU.context.bindVertexArray(null)
+    async initialize() {
+        const X = [0, 0, 0, 1, 0, 0]
+        const Y = [0, 0, 0, 0, 1, 0]
+        const Z = [0, 0, 0, 0, 0, 1]
+        if (LineAPI.#initialized) return
+        LineAPI.#initialized = true
 
-		LineAPI.vaoY = GPU.context.createVertexArray()
-		GPU.context.bindVertexArray(LineAPI.vaoY)
-		LineAPI.vboY = new VertexBuffer(
-			0,
-			new Float32Array(Y),
-			GPU.context.ARRAY_BUFFER,
-			3,
-			GPU.context.FLOAT
-		)
-		GPU.context.bindVertexArray(null)
+        LineAPI.vaoX = GPU.context.createVertexArray()
+        GPU.context.bindVertexArray(LineAPI.vaoX)
+        LineAPI.vboX = new VertexBuffer(
+            0,
+            new Float32Array(X),
+            GPU.context.ARRAY_BUFFER,
+            3,
+            GPU.context.FLOAT
+        )
+        GPU.context.bindVertexArray(null)
 
-		LineAPI.vaoZ = GPU.context.createVertexArray()
-		GPU.context.bindVertexArray(LineAPI.vaoZ)
-		LineAPI.vboZ = new VertexBuffer(
-			0,
-			new Float32Array(Z),
-			GPU.context.ARRAY_BUFFER,
-			3,
-			GPU.context.FLOAT
-		)
+        LineAPI.vaoY = GPU.context.createVertexArray()
+        GPU.context.bindVertexArray(LineAPI.vaoY)
+        LineAPI.vboY = new VertexBuffer(
+            0,
+            new Float32Array(Y),
+            GPU.context.ARRAY_BUFFER,
+            3,
+            GPU.context.FLOAT
+        )
+        GPU.context.bindVertexArray(null)
 
-	}
+        LineAPI.vaoZ = GPU.context.createVertexArray()
+        GPU.context.bindVertexArray(LineAPI.vaoZ)
+        LineAPI.vboZ = new VertexBuffer(
+            0,
+            new Float32Array(Z),
+            GPU.context.ARRAY_BUFFER,
+            3,
+            GPU.context.FLOAT
+        )
 
-	static drawX() {
-		const vbo = LineAPI.vboX,
-			vao = LineAPI.vaoX
+    }
 
-		Mesh.finishIfUsed()
+    static drawX() {
+        const vbo = LineAPI.vboX,
+            vao = LineAPI.vaoX
 
-		GPU.context.bindVertexArray(vao)
-		vbo.enable()
-		GPU.context.drawArrays(GPU.context.LINES, 0, 2)
+        Mesh.finishIfUsed()
 
-		GPU.context.bindVertexArray(null)
-		vbo.disable()
-	}
+        GPU.context.bindVertexArray(vao)
+        vbo.enable()
+        GPU.context.drawArrays(GPU.context.LINES, 0, 2)
 
-	static drawY() {
-		const vbo = LineAPI.vboY,
-			vao = LineAPI.vaoY
+        GPU.context.bindVertexArray(null)
+        vbo.disable()
+    }
 
-
-		Mesh.finishIfUsed()
-
-		GPU.context.bindVertexArray(vao)
-		vbo.enable()
-		GPU.context.drawArrays(GPU.context.LINES, 0, 2)
-
-
-		GPU.context.bindVertexArray(null)
-		vbo.disable()
-	}
+    static drawY() {
+        const vbo = LineAPI.vboY,
+            vao = LineAPI.vaoY
 
 
-	static drawZ() {
-		const vbo = LineAPI.vboZ,
-			vao = LineAPI.vaoZ
+        Mesh.finishIfUsed()
 
-		Mesh.finishIfUsed()
+        GPU.context.bindVertexArray(vao)
+        vbo.enable()
+        GPU.context.drawArrays(GPU.context.LINES, 0, 2)
 
-		GPU.context.bindVertexArray(vao)
-		vbo.enable()
-		GPU.context.drawArrays(GPU.context.LINES, 0, 2)
 
-		GPU.context.bindVertexArray(null)
-		vbo.disable()
-	}
+        GPU.context.bindVertexArray(null)
+        vbo.disable()
+    }
+
+
+    static drawZ() {
+        const vbo = LineAPI.vboZ,
+            vao = LineAPI.vaoZ
+
+        Mesh.finishIfUsed()
+
+        GPU.context.bindVertexArray(vao)
+        vbo.enable()
+        GPU.context.drawArrays(GPU.context.LINES, 0, 2)
+
+        GPU.context.bindVertexArray(null)
+        vbo.disable()
+    }
 
 }

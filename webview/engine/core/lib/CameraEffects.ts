@@ -1,9 +1,10 @@
 import StaticUBOs from "./StaticUBOs"
 import CameraEffectsSerialization from "../static/CameraEffectsSerialization"
+import IManageable from "@engine-core/IManageable";
 
 const U_INT = new Uint8Array(1)
 const FLOAT = new Float32Array(1)
-export default class CameraEffects {
+export default class CameraEffects extends IManageable{
     cameraMotionBlur = false
     #bloom = false
     #filmGrain = false

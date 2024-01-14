@@ -1,12 +1,13 @@
 import GPU from "../../GPU"
 import LightProbe from "../../instances/LightProbe"
+import IManageable from "@engine-core/IManageable";
 
 
-export default class CubeMapAPI{
+export default class CubeMapAPI extends IManageable{
 	static frameBuffer?:WebGLFramebuffer
 
 	static #initialized = false
-	static initialize() {
+	async initialize() {
 		if (CubeMapAPI.#initialized)
 			return
 		CubeMapAPI.#initialized = true

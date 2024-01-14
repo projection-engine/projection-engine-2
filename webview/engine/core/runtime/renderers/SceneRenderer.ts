@@ -12,7 +12,6 @@ import Material from "../../instances/Material"
 import UberShader from "../../lib/UberShader"
 import MaterialResourceMapper from "../../lib/MaterialResourceMapper"
 import ResourceEntityMapper from "../../lib/ResourceEntityMapper"
-import Renderer from "../../Renderer"
 import Mesh from "../../instances/Mesh"
 import loopMeshes from "../loop-meshes"
 import EngineState from "../../EngineState"
@@ -41,7 +40,7 @@ export default class SceneRenderer {
         texOffset = 7
 
         context.uniformMatrix4fv(uniforms.skyProjectionMatrix, false, ProjectionEngine.Engine.getCamera().skyboxProjectionMatrix)
-        context.uniform1f(uniforms.elapsedTime, Renderer.elapsed)
+        context.uniform1f(uniforms.elapsedTime, ProjectionEngine.Engine.elapsed)
         context.uniformMatrix4fv(uniforms.viewMatrix, false, ProjectionEngine.Engine.getCamera().viewMatrix)
         context.uniformMatrix4fv(uniforms.invViewMatrix, false, ProjectionEngine.Engine.getCamera().invViewMatrix)
         context.uniformMatrix4fv(uniforms.viewProjection, false, ProjectionEngine.Engine.getCamera().viewProjectionMatrix)

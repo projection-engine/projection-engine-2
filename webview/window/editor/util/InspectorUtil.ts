@@ -83,7 +83,7 @@ export default class InspectorUtil extends IInjectable {
         }
         component[key] = value
         if (component.componentKey === COMPONENTS.CAMERA && entity.id === InspectorUtil.settingsStore.getData().focusedCamera)
-            InspectorUtil.engine.camera.updateViewTarget(entity)
+            InspectorUtil.engine.getCamera().updateViewTarget(entity)
     }
 
     static removeComponent(entity, index, key) {

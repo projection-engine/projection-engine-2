@@ -7,16 +7,17 @@ import MetricsController from "../lib/utils/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import EngineState from "../EngineState"
 import GPUUtil from "../utils/GPUUtil";
-import Renderer from "@engine-core/Renderer";
 import AbstractSystem from "@engine-core/AbstractSystem";
+import GPUAPI from "@engine-core/lib/rendering/GPUAPI";
 
 let cleared = false
 export default class SSGISystem extends AbstractSystem{
     static uniformSettings = new Float32Array(3)
 
     execute(gl: WebGL2RenderingContext) {
-        Renderer.copyToCurrentFrame()
-        
+        GPUAPI.copyTexture(StaticFBO.postProcessing1, StaticFBO.postProcessing2, GPU.context.COLOR_BUFFER_BIT)
+
+
         if (!EngineState.ssgiEnabled) {
             if (!cleared) {
                 StaticFBO.ssgi.clear()
