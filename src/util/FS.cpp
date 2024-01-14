@@ -81,19 +81,6 @@ namespace PEngine {
         }
     }
 
-    std::vector<std::string> FS::ReadDirectory(const std::string &directoryPath) {
-        std::vector<std::string> paths;
-        try {
-            for (const auto &entry: std::filesystem::directory_iterator(directoryPath)) {
-                paths.push_back(entry.path().string());
-            }
-        } catch (const std::filesystem::filesystem_error &e) {
-            std::cerr << "Error while reading directory: " << e.what() << std::endl;
-        }
-
-        return paths;
-    }
-
     std::string FS::GetRootDir() {
         try {
             const char *homePath = std::getenv("HOME");
@@ -112,6 +99,50 @@ namespace PEngine {
         }
     }
 
+    template <typename TP>
+    std::time_t to_time_t(TP tp)
+    {
+        using namespace std::chrono;
+        auto sctp = time_point_cast<system_clock::duration>(tp - TP::clock::now()
+                                                            + system_clock::now());
+        return system_clock::to_time_t(sctp);
+    }
+
+    std::string getLastWriteTimeAsString(const std::filesystem::path& filePath) {
+        auto timePoint = std::filesystem::last_write_time(filePath);
+        std::time_t tt = to_time_t(timePoint);
+        std::tm *gmt = std::gmtime(&tt);
+        std::stringstream buffer;
+        buffer << std::put_time(gmt, "%Y-%m-%d %H:%M:%S");
+        return buffer.str();
+    }
+
+    nlohmann::json getFileInfo(const std::filesystem::path& filePath) {
+        nlohmann::json fileInfo;
+
+        fileInfo["path"] = filePath.string();
+        fileInfo["lastModified"] = getLastWriteTimeAsString(filePath);
+
+        if (std::filesystem::is_regular_file(filePath)) {
+            fileInfo["size"] = static_cast<double>(std::filesystem::file_size(filePath)) / (1024 * 1024);
+        }
+
+        return fileInfo;
+    }
+
+    std::string FS::ReadDirectory(const std::string& directoryPath) {
+        nlohmann::json result;
+        try {
+            for (const auto& entry : std::filesystem::directory_iterator(directoryPath)) {
+                nlohmann::json fileInfo = getFileInfo(entry.path());
+                result.push_back(fileInfo);
+            }
+        } catch (const std::filesystem::filesystem_error& e) {
+            std::cerr << "Error while reading directory: " << e.what() << std::endl;
+        }
+        return result.dump(-1, ' ', false, nlohmann::json::error_handler_t::replace);
+    }
+
     void FS::HandleEvent(WebViewPayload &payload) {
         payload.webview->getLogger()->info("HANDLING FS EVENT");
         if (payload.id == GET_ROOT_DIRECTORY) {
@@ -123,11 +154,7 @@ namespace PEngine {
             payload.resolve(SEP);
         } else if (payload.id == READ_DIRECTORY) {
             payload.webview->getLogger()->info("READING DIR {0}", payload.payload);
-            JSON json;
-            for (const auto &path: ReadDirectory(payload.payload)) {
-                json.pushItem(path);
-            }
-            payload.resolve(json.stringify());
+            payload.resolve(ReadDirectory(payload.payload));
         }
     }
 

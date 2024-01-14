@@ -36,21 +36,34 @@ export default class FSService extends IInjectable {
         const payload = await FSService.webViewService.wire(FSService.READ_DIRECTORY, path);
         if (payload.getPayload() != null) {
             const separator = await this.getSeparator()
-            const paths = JSON.parse(payload.getPayload()) as string[];
-            const DTOs: ItemDTO[] = []
-            for (const currentItem of paths) {
-                const name = currentItem.split(separator).pop();
-                if (currentItem.includes(".")) {
-                    const extension = currentItem.split(".").pop();
-                    DTOs.push(new FileDTO(name, currentItem, extension))
-                } else {
-                    DTOs.push(new DirectoryDTO(name, currentItem))
+            try {
+                const paths = JSON.parse(payload.getPayload()) as {
+                    path: string,
+                    size: string,
+                    lastModified: string
+                }[];
+                console.trace(paths)
+                const DTOs: ItemDTO[] = []
+                for (const {path, size, lastModified} of paths) {
+                    const name = path.split(separator).pop();
+                    if (path.includes(".")) {
+                        const extension = path.split(".").pop();
+                        DTOs.push(new FileDTO(name, path, extension))
+                    } else {
+                        DTOs.push(new DirectoryDTO(name, path))
+                    }
+                    const item = DTOs[DTOs.length - 1];
+                    item.setSize(size)
+                    item.setLastModified(lastModified)
                 }
+                return DTOs;
+            } catch (ex) {
+                console.error(ex)
             }
-            return DTOs;
         }
         return []
     }
+
 
     async delete(path: string) {
 

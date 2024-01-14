@@ -46,7 +46,11 @@ namespace PEngine {
         }
 
         std::string stringify() {
-            return data.dump();
+            try {
+                return data.dump(-1, ' ', false, nlohmann::json::error_handler_t::replace);
+            } catch (nlohmann::json::exception &exception) {
+                return "";
+            }
         }
 
         nlohmann::json &getData() {

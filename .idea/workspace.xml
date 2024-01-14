@@ -19,16 +19,16 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-21]  New project architecture&#10;- Removing old level stuff&#10;- Refactoring services&#10;- Adding new events for project path">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-21]  New project architecture&#10;- Creating new file system structure&#10;- Creating new events&#10;- Creating new file browser">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/FS.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/FS.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/FS.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/FS.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/enums/LocalizationEN.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/enums/LocalizationEN.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/JSON.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/JSON.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/lib/FSService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/FSService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/services/ProjectService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/ProjectService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/View.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/View.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/components/input/Input.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/components/input/Input.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/dto/fs/ItemDTO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/dto/fs/ItemDTO.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/fs/FileSystemView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/fs/FileSystemView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/fs/Files.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/fs/Files.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,9 +157,9 @@
     </option>
   </component>
   <component name="RunManager" selected="npm.dev-build">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="Should be lazily obtained" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
@@ -313,7 +313,8 @@
       <workItem from="1704752227514" duration="1722000" />
       <workItem from="1704754038431" duration="8000" />
       <workItem from="1705147573913" duration="14465000" />
-      <workItem from="1705173861585" duration="6499000" />
+      <workItem from="1705173861585" duration="7770000" />
+      <workItem from="1705231012356" duration="4934000" />
     </task>
     <task id="LOCAL-00001" summary="[STD-1] Organizing project&#10;- removing unused C++ classes&#10;- Refactoring files&#10;- Renaming c++ namespaces and project &#10;- Moving future webview stuff">
       <option name="closed" value="true" />
@@ -627,7 +628,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705164031936</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="[STD-21]  New project architecture&#10;- Creating new file system structure&#10;- Creating new events&#10;- Creating new file browser">
+      <option name="closed" value="true" />
+      <created>1705180450786</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1705180450786</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -651,7 +660,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-6] Project window&#10;- Creating &quot;create project&quot; callback" />
     <MESSAGE value="[STD-6] Project window&#10;- creating system for projects &#10;- Completing tests for file system&#10;- Continuing create project" />
     <MESSAGE value="[STD-6] Project window&#10;- JSON util&#10;- JSON util tests" />
     <MESSAGE value="[STD-6] Project window&#10;- Completing createProject&#10;- Fixing bugs JSON and FS&#10;- Refactoring FileSystemUtil&#10;- Removing imgui stuff from IWindow" />
@@ -676,7 +684,8 @@
     <MESSAGE value="[STD-34] Stores&#10;- Completing change to subscribe&#10;- Creating test for Injection &#10;- Improving store update method" />
     <MESSAGE value="[STD-34] Stores&#10;- Merging Visuals and Engine stores into Settings store" />
     <MESSAGE value="[STD-21]  New project architecture&#10;- Removing old level stuff&#10;- Refactoring services&#10;- Adding new events for project path" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-21]  New project architecture&#10;- Removing old level stuff&#10;- Refactoring services&#10;- Adding new events for project path" />
+    <MESSAGE value="[STD-21]  New project architecture&#10;- Creating new file system structure&#10;- Creating new events&#10;- Creating new file browser" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-21]  New project architecture&#10;- Creating new file system structure&#10;- Creating new events&#10;- Creating new file browser" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -698,18 +707,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/src/util/FS.cpp</url>
-          <line>119</line>
-          <option name="timeStamp" value="51" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/util/FS.cpp</url>
-          <line>107</line>
+          <line>94</line>
           <option name="timeStamp" value="53" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/webview/lib/FSService.ts</url>
           <line>9</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="43" />
         </line-breakpoint>
       </breakpoints>

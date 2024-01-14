@@ -27,7 +27,7 @@ namespace PEngine {
 
         static bool CreateDir(const std::string &path);
 
-        static std::vector<std::string> ReadDirectory(const std::string &directoryPath);
+        static std::string ReadDirectory(const std::string &directoryPath);
 
         static std::string GetRootDir();
 
