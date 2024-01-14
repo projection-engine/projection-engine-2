@@ -18,10 +18,20 @@ import GPUUtil from "../core/utils/GPUUtil";
 import ConversionAPI from "../core/lib/math/ConversionAPI";
 import EngineToolsState from "./EngineToolsState";
 import ProjectionEngine from "@lib/ProjectionEngine";
+import RotationGizmo from "@engine-tools/gizmo/transformation/RotationGizmo";
+import ScalingGizmo from "@engine-tools/gizmo/transformation/ScalingGizmo";
+import TranslationGizmo from "@engine-tools/gizmo/transformation/TranslationGizmo";
+import DualAxisGizmo from "@engine-tools/gizmo/transformation/DualAxisGizmo";
+import ScreenSpaceGizmo from "@engine-tools/gizmo/transformation/ScreenSpaceGizmo";
 
 export default class EngineTools {
     static selected: Entity[] = []
     static #initialized = false
+    static RotationGizmo: RotationGizmo
+    static ScalingGizmo: ScalingGizmo
+    static TranslationGizmo: TranslationGizmo
+    static DualAxisGizmo: DualAxisGizmo
+    static ScreenSpaceGizmo: ScreenSpaceGizmo
 
     static async initialize() {
         if (EngineTools.#initialized)
@@ -34,6 +44,12 @@ export default class EngineTools {
         ProjectionEngine.Engine.environment = ENVIRONMENT.DEV
         LineRenderer.initialize()
         StaticEditorFBO.initialize()
+
+        EngineTools.RotationGizmo = new RotationGizmo();
+        EngineTools.ScalingGizmo = new ScalingGizmo();
+        EngineTools.TranslationGizmo = new TranslationGizmo();
+        EngineTools.DualAxisGizmo = new DualAxisGizmo();
+        EngineTools.ScreenSpaceGizmo = new ScreenSpaceGizmo();
     }
 
     static onMouseMove(event: MouseEvent) {

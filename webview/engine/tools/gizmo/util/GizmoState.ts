@@ -39,20 +39,20 @@ export default class GizmoState {
     }
 
     static set gizmoType(data: Gizmos) {
-        if(!ProjectionEngine.Engine.isReady){
+        if (!ProjectionEngine.Engine.isReady) {
             return
         }
         GizmoState.#gizmoType = data
         GizmoState.#targetGizmos.length = 0
         switch (data) {
             case Gizmos.TRANSLATION:
-                GizmoState.#targetGizmos.push(ProjectionEngine.Engine.TranslationGizmo, ProjectionEngine.Engine.DualAxisGizmo, ProjectionEngine.Engine.ScreenSpaceGizmo)
+                GizmoState.#targetGizmos.push(EngineTools.TranslationGizmo, EngineTools.DualAxisGizmo, EngineTools.ScreenSpaceGizmo)
                 break
             case Gizmos.ROTATION:
-                GizmoState.#targetGizmos.push(ProjectionEngine.Engine.RotationGizmo)
+                GizmoState.#targetGizmos.push(EngineTools.RotationGizmo)
                 break
             case Gizmos.SCALE:
-                GizmoState.#targetGizmos.push(ProjectionEngine.Engine.ScalingGizmo, ProjectionEngine.Engine.DualAxisGizmo, ProjectionEngine.Engine.ScreenSpaceGizmo)
+                GizmoState.#targetGizmos.push(EngineTools.ScalingGizmo, EngineTools.DualAxisGizmo, EngineTools.ScreenSpaceGizmo)
                 break
         }
         GizmoUtil.updateGizmosTransformation(true)

@@ -40,11 +40,6 @@ export default class Engine extends IInjectable {
     CameraAPI: CameraAPI
     #executionQueue = new DynamicMap<string, Function>()
     #frameID: number = undefined
-    RotationGizmo: RotationGizmo
-    ScalingGizmo: ScalingGizmo
-    TranslationGizmo: TranslationGizmo
-    DualAxisGizmo: DualAxisGizmo
-    ScreenSpaceGizmo: ScreenSpaceGizmo
     CameraNotificationDecoder: CameraNotificationDecoder
     #rootEntity = new Entity()
 
@@ -85,12 +80,9 @@ export default class Engine extends IInjectable {
     }, readAsset: Function, devAmbient: boolean) {
         this.CameraNotificationDecoder = new CameraNotificationDecoder();
         this.CameraAPI = new CameraAPI();
-        this.RotationGizmo = new RotationGizmo();
-        this.ScalingGizmo = new ScalingGizmo();
-        this.TranslationGizmo = new TranslationGizmo();
-        this.DualAxisGizmo = new DualAxisGizmo();
-        this.ScreenSpaceGizmo = new ScreenSpaceGizmo();
         this.#development = devAmbient
+
+        ResourceEntityMapper.addEntity(this.#rootEntity)
         await this.initializeAsync(canvas as HTMLCanvasElement, mainResolution, readAsset)
         ConversionAPI.canvasBBox = GPU.canvas.getBoundingClientRect()
         const OBS = new ResizeObserver(() => {
@@ -140,7 +132,7 @@ export default class Engine extends IInjectable {
         }
     }
 
-    static _loop(c) {
+    static _loop(c: number) {
         const queue = ProjectionEngine.Engine.#executionQueue.array
         const queueLength = queue.length
         Renderer.currentTimeStamp = c

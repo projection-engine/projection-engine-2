@@ -179,4 +179,25 @@ export default class GPUAPI {
 		GPU.context.deleteProgram(instance.program)
 		GPU.shaders.delete(id)
 	}
+
+	static getWebGLErrorString(errorCode) {
+		switch (errorCode) {
+			case GPU.context.NO_ERROR:
+				return "No error";
+			case GPU.context.INVALID_ENUM:
+				return "Invalid enum";
+			case GPU.context.INVALID_VALUE:
+				return "Invalid value";
+			case GPU.context.INVALID_OPERATION:
+				return "Invalid operation";
+			case GPU.context.INVALID_FRAMEBUFFER_OPERATION:
+				return "Invalid framebuffer operation";
+			case GPU.context.OUT_OF_MEMORY:
+				return "Out of memory";
+			case GPU.context.CONTEXT_LOST_WEBGL:
+				return "Context lost";
+			default:
+				return "Unknown error code: " + errorCode;
+		}
+	}
 }

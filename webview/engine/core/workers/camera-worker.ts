@@ -163,7 +163,6 @@ class CameraWorker {
             ProjectionEngine.Engine.CameraNotificationDecoder.hasChangedView = 1
             ProjectionEngine.Engine.CameraNotificationDecoder.projectionNeedsUpdate = 0
         }
-
     }
 }
 

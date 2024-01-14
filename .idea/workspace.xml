@@ -21,42 +21,19 @@
   <component name="ChangeListManager">
     <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-21]  New project architecture&#10;- Finishing new file browser">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/enums/LocalizationEN.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/enums/LocalizationEN.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/ProjectionEngine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/ProjectionEngine.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/stores/ContentBrowserStore.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/selector/Selector.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/selector/Selector.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/selector/components/Options.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/selector/components/Options.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/ViewDefinitions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/ViewDefinitions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/templates/get-content-browser-actions.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/ContentBrowserUtil.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/EditorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/EditorUtil.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/InspectorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/InspectorUtil.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/SelectorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/SelectorUtil.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/ContentBrowserView.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/Browser.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/BrowserHeader.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/Header.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/SideBar.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/SideBarItem.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/SortingOptions.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/CodeItem.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/ItemMetadata.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/MaterialItem.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/MeshItem.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/Properties.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/TextureItem.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/item/Card.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/item/Item.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/item/ItemInput.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/item/Row.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/libs/GlobalContentBrowserController.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/libs/NavigationHistory.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/static/ITEM_TYPES.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/static/SELECTION_TYPES.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/static/SORT_INFO.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/fs/FSSideBar.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/fs/FSSideBar.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/fs/Files.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/fs/Files.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/libs/ShaderEditorTools.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/libs/ShaderEditorTools.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/Engine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/Engine.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/Shader.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/Shader.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/Texture.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/Texture.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/UBO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/UBO.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/lib/rendering/GPUAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/rendering/GPUAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/workers/camera-worker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/workers/camera-worker.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/tools/EngineTools.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/EngineTools.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/tools/gizmo/transformation/AbstractXYZGizmo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/gizmo/transformation/AbstractXYZGizmo.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/tools/gizmo/util/GizmoState.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/gizmo/util/GizmoState.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/tools/gizmo/util/GizmoUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/gizmo/util/GizmoUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/tools/utils/StaticEditorMeshes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/utils/StaticEditorMeshes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/FSService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/FSService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/services/CanvasContextService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/CanvasContextService.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,15 +49,15 @@
       <list>
         <option value="FileSystem" />
         <option value="FSSideBar" />
-        <option value="TypeScript File" />
         <option value="Files" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="34-interfaces-for-stores" />
+        <entry key="$PROJECT_DIR$" value="42-window-frame" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -146,7 +123,7 @@
     "Shell Script.copy-files.executor": "Run",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "21-new-project-scheme",
+    "git-widget-placeholder": "33-engine-refactoring-1",
     "last_opened_file_path": "C:/Users/russi/WebstormProjects/projection-engine-2/test/core",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -176,6 +153,11 @@
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\window\editor\components\view" />
     </key>
   </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="ex" />
+    </option>
+  </component>
   <component name="RunDashboard">
     <option name="configurationTypes">
       <set>
@@ -185,11 +167,6 @@
     </option>
   </component>
   <component name="RunManager" selected="npm.dev-build">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Should be lazily obtained" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <jest-package value="$PROJECT_DIR$/webview/node_modules/jest" />
@@ -343,6 +320,7 @@
       <workItem from="1705147573913" duration="14465000" />
       <workItem from="1705173861585" duration="7770000" />
       <workItem from="1705231012356" duration="5971000" />
+      <workItem from="1705255663671" duration="4751000" />
     </task>
     <task id="LOCAL-00001" summary="[STD-1] Organizing project&#10;- removing unused C++ classes&#10;- Refactoring files&#10;- Renaming c++ namespaces and project &#10;- Moving future webview stuff">
       <option name="closed" value="true" />
@@ -735,11 +713,6 @@
           <url>file://$PROJECT_DIR$/src/ui/shared/webview/WebViewPayload.cpp</url>
           <line>6</line>
           <option name="timeStamp" value="41" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/ui/editor/Editor.cpp</url>
-          <line>28</line>
-          <option name="timeStamp" value="45" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/src/util/FS.cpp</url>

@@ -42,7 +42,6 @@ export default class FSService extends IInjectable {
                     size: string,
                     lastModified: string
                 }[];
-                console.trace(paths)
                 const DTOs: ItemDTO[] = []
                 for (const {path, size, lastModified} of paths) {
                     const name = path.split(separator).pop();

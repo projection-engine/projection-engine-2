@@ -7,7 +7,7 @@ import StaticEditorShaders from "../../utils/StaticEditorShaders"
 import GPU from "../../../core/GPU"
 import CameraAPI from "../../../core/lib/utils/CameraAPI"
 import GizmoState from "./GizmoState"
-import AXIS from "../../static/AXIS"
+import Axis from "../../static/AXIS"
 import ConversionAPI from "../../../core/lib/math/ConversionAPI"
 import Mesh from "../../../core/instances/Mesh";
 import StaticEditorFBO from "../../utils/StaticEditorFBO";
@@ -72,7 +72,7 @@ export default class GizmoUtil {
         return entity
     }
 
-    static drawGizmo(mesh: Mesh, transformMatrix: mat4, axis: AXIS) {
+    static drawGizmo(mesh: Mesh, transformMatrix: mat4, axis: Axis) {
         StaticEditorShaders.gizmo.bind()
         const uniforms = StaticEditorShaders.gizmoUniforms
         GPUUtil.bind2DTextureForDrawing(uniforms.gizmoIDS, 0, StaticEditorFBO.gizmo.colors[0])
@@ -159,7 +159,7 @@ export default class GizmoUtil {
     }
 
     static mapToScreenMovement(event: MouseEvent, scaleVec = false): vec3 {
-        if (GizmoState.clickedAxis === AXIS.NONE)
+        if (GizmoState.clickedAxis === Axis.NONE)
             return [0, 0, 0]
         const distanceFrom = <vec3>ProjectionEngine.Engine.CameraAPI.position
         const scale = vec3.len(distanceFrom)
@@ -174,28 +174,28 @@ export default class GizmoUtil {
 
     static #mapToAxis(vec: vec3 | Float32Array) {
         switch (GizmoState.clickedAxis) {
-            case AXIS.X:
+            case Axis.X:
                 vec[1] = 0
                 vec[2] = 0
                 break
-            case AXIS.Y:
+            case Axis.Y:
                 vec[0] = 0
                 vec[2] = 0
                 break
-            case AXIS.Z:
+            case Axis.Z:
                 vec[0] = 0
                 vec[1] = 0
                 break
-            case AXIS.XZ:
+            case Axis.XZ:
                 vec[1] = 0
                 break
-            case AXIS.XY:
+            case Axis.XY:
                 vec[2] = 0
                 break
-            case AXIS.ZY:
+            case Axis.ZY:
                 vec[0] = 0
                 break
-            case AXIS.NONE:
+            case Axis.NONE:
                 vec[0] = 0
                 vec[1] = 0
                 vec[2] = 0
