@@ -19,10 +19,9 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-33]  Starting refactoring&#10;- Fixing camera decoder&#10;- Introducing Engine resource class&#10;- Fixing initialization problems&#10;- Creating new system pipeline&#10;- Fixing engine rendering">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-33] Engine refactoring: systems&#10;- Moving to service things related to systems&#10;- Organizing engine&#10;- Optimizing imports">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/engine/core/Engine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/Engine.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/lib/utils/CameraAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/utils/CameraAPI.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -311,7 +310,7 @@
       <workItem from="1705173861585" duration="7770000" />
       <workItem from="1705231012356" duration="5971000" />
       <workItem from="1705255663671" duration="13236000" />
-      <workItem from="1705441389560" duration="4819000" />
+      <workItem from="1705441389560" duration="4973000" />
     </task>
     <task id="LOCAL-00001" summary="[STD-1] Organizing project&#10;- removing unused C++ classes&#10;- Refactoring files&#10;- Renaming c++ namespaces and project &#10;- Moving future webview stuff">
       <option name="closed" value="true" />
@@ -681,7 +680,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705445561953</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="[STD-33] Engine refactoring: systems&#10;- Moving to service things related to systems&#10;- Organizing engine&#10;- Optimizing imports">
+      <option name="closed" value="true" />
+      <created>1705446355163</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1705446355163</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -705,7 +712,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-6] Project window&#10;- Starting rework of window system" />
     <MESSAGE value="[STD-6] Project window&#10;- Finishing rework of window system" />
     <MESSAGE value="[STD-6] Project scheme&#10;- Removing unused classes&#10;- Removing project window&#10;- Adding window resize&#10;- Fixing fetch errors&#10;- Enabling editor initialization without project path" />
     <MESSAGE value="[STD-30] Engine initialization&#10;- Removed async engine initalization&#10;- Fixed window name" />
@@ -730,7 +736,8 @@
     <MESSAGE value="[STD-33]  Starting refactoring&#10;- Initiating systems refactoring" />
     <MESSAGE value="[STD-33]  Starting refactoring&#10;- Engine refactoring&#10;- Improving systems&#10;- Creating IManageable class&#10;- Creating structure for managing classes with async initialization&#10;- Removing footer component&#10;- Removing unused classes &#10;- Refactoring worker methods into normal functions" />
     <MESSAGE value="[STD-33]  Starting refactoring&#10;- Fixing camera decoder&#10;- Introducing Engine resource class&#10;- Fixing initialization problems&#10;- Creating new system pipeline&#10;- Fixing engine rendering" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-33]  Starting refactoring&#10;- Fixing camera decoder&#10;- Introducing Engine resource class&#10;- Fixing initialization problems&#10;- Creating new system pipeline&#10;- Fixing engine rendering" />
+    <MESSAGE value="[STD-33] Engine refactoring: systems&#10;- Moving to service things related to systems&#10;- Organizing engine&#10;- Optimizing imports" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-33] Engine refactoring: systems&#10;- Moving to service things related to systems&#10;- Organizing engine&#10;- Optimizing imports" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

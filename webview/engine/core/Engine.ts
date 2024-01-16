@@ -28,7 +28,7 @@ export default class Engine extends IInjectable {
     isDev = true
     #environment: number = ENVIRONMENT.DEV
     #isReady = false
-    #singletons = new DynamicMap<typeof IEngineSingleton, IEngineSingleton>()
+    #singletons = new DynamicMap<string, IEngineSingleton>()
 
     #rootEntity = new Entity()
     #camera: CameraAPI
@@ -67,13 +67,13 @@ export default class Engine extends IInjectable {
 
     async addSingleton(Singleton: typeof IEngineSingleton): Promise<IEngineSingleton> {
         const instance = new Singleton(this);
-        this.#singletons.set(Singleton, instance)
+        this.#singletons.set(Singleton.name, instance)
         await instance.initialize()
         return instance
     }
 
     getSingleton(Singleton: typeof IEngineSingleton): IEngineSingleton{
-        return this.#singletons.get(Singleton)
+        return this.#singletons.get(Singleton.name)
     }
 
     async addSystem(System: typeof IEngineSystem): Promise<IEngineSystem> {
@@ -91,7 +91,6 @@ export default class Engine extends IInjectable {
     start() {
         (this.getSingleton(SystemService) as SystemService).start()
     }
-
 
     // TODO - MAKE THIS MORE STRUCTURED AND MOVE IT TO A SYSTEM
     createResource<T extends IEngineResource<any>>(Resource: new (engine: Engine) => T): T {

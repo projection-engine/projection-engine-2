@@ -41,8 +41,6 @@ export default class UBO extends IEngineResource<UBO>{
         this.blockPoint = UBO.#blockPointIncrement
         UBO.#blockPointIncrement += 1
 
-        console.log(this)
-
         this.buffer = this.gl.createBuffer()
         this.gl.bindBuffer(this.gl.UNIFORM_BUFFER, this.buffer)
         this.gl.bufferData(this.gl.UNIFORM_BUFFER, bufferSize, this.gl.DYNAMIC_DRAW)
