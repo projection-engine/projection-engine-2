@@ -2,7 +2,26 @@ import ArrayBufferAPI from "./utils/ArrayBufferAPI"
 
 export default class CameraNotificationDecoder {
     #buffer: Float32Array
-    #initialized = false
+
+    constructor(buffer?: Float32Array) {
+        if (buffer) {
+            this.#buffer = buffer
+        } else {
+            const b = <Float32Array>ArrayBufferAPI.allocateVector(7, 0)
+            b[0] = 1
+            b[1] = 1
+            b[2] = 0
+            b[3] = 0
+            b[4] = 0
+            b[5] = .001
+            b[6] = 0
+            this.#buffer = b
+        }
+    }
+
+    getBuffer(): Float32Array {
+        return this.#buffer
+    }
 
     get ORTHOGRAPHIC() {
         return 1
@@ -10,27 +29,6 @@ export default class CameraNotificationDecoder {
 
     get PERSPECTIVE() {
         return 0
-    }
-
-    generateBuffer() {
-        const b = <Float32Array>ArrayBufferAPI.allocateVector(7, 0)
-        b[0] = 1
-        b[1] = 1
-        b[2] = 0
-
-        b[3] = 0
-        b[4] = 0
-
-        b[5] = .001
-        b[6] = 0
-        return b
-    }
-
-    initialize(buffer: Float32Array) {
-        if (this.#initialized)
-            return
-        this.#initialized = true
-        this.#buffer = buffer
     }
 
     get viewNeedsUpdate() {

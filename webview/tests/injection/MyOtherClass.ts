@@ -1,4 +1,4 @@
-import {Inject, Injectable} from "@lib/Injection";
+import {Inject} from "@lib/Injection";
 import IInjectable from "@lib/IInjectable";
 import {MyInjectable} from "./MyInjectable";
 

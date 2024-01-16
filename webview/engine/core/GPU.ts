@@ -1,9 +1,3 @@
-import LineAPI from "./lib/rendering/LineAPI"
-import ImageProcessor from "./lib/math/ImageProcessor"
-import TerrainGenerator from "./lib/math/TerrainGenerator"
-import CameraAPI from "./lib/utils/CameraAPI"
-import EntityWorkerAPI from "./lib/utils/EntityWorkerAPI"
-import CubeMapAPI from "./lib/rendering/CubeMapAPI"
 import QUAD_VERT from "./shaders/post-processing/QUAD.vert"
 import BRDF_FRAG from "./shaders/post-processing/BRDF_GEN.frag"
 import Shader from "./instances/Shader"
@@ -12,14 +6,11 @@ import Material from "./instances/Material"
 import Mesh from "./instances/Mesh"
 import Texture from "./instances/Texture"
 import LightProbe from "./instances/LightProbe"
-import StaticShaders from "./lib/StaticShaders"
 import StaticMeshes from "./lib/StaticMeshes"
-import StaticFBO from "./lib/StaticFBO"
-import StaticUBOs from "./lib/StaticUBOs"
 import DynamicMap from "./lib/DynamicMap"
-import Engine from "./Engine";
+import IEngineSingleton from "@engine-core/IEngineSingleton";
 
-export default class GPU {
+export default class GPU extends IEngineSingleton{
 	static context?: WebGL2RenderingContext
 	static canvas?: HTMLCanvasElement
 	static activeShader?: Shader
@@ -35,10 +26,26 @@ export default class GPU {
 	static skylightProbe: LightProbe
 	static bufferResolution = new Float32Array([0,0])
 
-	static async initializeContext(canvas: HTMLCanvasElement, mainResolution: { w: number, h: number } | undefined) {
+	async initialize() {
 		if (GPU.context != null)
 			return
+		this.initializeWebGLContext(this.engine.getMainResolution(), this.engine.getCanvas());
+		GPU.skylightProbe = new LightProbe(128)
+	}
 
+	static generateBRDF() {
+		const FBO = new Framebuffer(512, 512).texture({precision: GPU.context.RG32F, format: GPU.context.RG})
+		const brdfShader = new Shader(QUAD_VERT, BRDF_FRAG)
+
+		FBO.startMapping()
+		brdfShader.bind()
+		StaticMeshes.drawQuad()
+		FBO.stopMapping()
+		GPU.BRDF = FBO.colors[0]
+		GPU.context.deleteProgram(brdfShader.program)
+	}
+
+	private initializeWebGLContext(mainResolution: { w: number; h: number }, canvas: HTMLCanvasElement) {
 		const screen = window.screen
 		GPU.internalResolution.w = mainResolution?.w || screen.width
 		GPU.internalResolution.h = mainResolution?.h || screen.height
@@ -62,28 +69,5 @@ export default class GPU {
 		GPU.context.enable(GPU.context.DEPTH_TEST)
 		GPU.context.depthFunc(GPU.context.LESS)
 		GPU.context.frontFace(GPU.context.CCW)
-
-
-		StaticUBOs.initialize()
-		await StaticMeshes.initialize()
-		StaticShaders.initialize()
-		StaticFBO.initialize()
-		EntityWorkerAPI.initialize()
-		TerrainGenerator.initialize()
-		ImageProcessor.initialize()
-
-		CubeMapAPI.initialize()
-		LineAPI.initialize()
-
-		const FBO = new Framebuffer(512, 512).texture({precision: GPU.context.RG32F, format: GPU.context.RG})
-		const brdfShader = new Shader(QUAD_VERT, BRDF_FRAG)
-
-		FBO.startMapping()
-		brdfShader.bind()
-		StaticMeshes.drawQuad()
-		FBO.stopMapping()
-		GPU.BRDF = FBO.colors[0]
-		GPU.context.deleteProgram(brdfShader.program)
 	}
-
 }

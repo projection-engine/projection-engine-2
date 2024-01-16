@@ -13,7 +13,7 @@ import ProjectionEngine from "@lib/ProjectionEngine";
 
 
 export default class EntityFactoryService {
-    static translateEntity(entity, rotation = ProjectionEngine.Engine.CameraAPI.rotationBuffer, translation = ProjectionEngine.Engine.CameraAPI.translationBuffer) {
+    static translateEntity(entity, rotation = ProjectionEngine.Engine.getCamera().rotationBuffer, translation = ProjectionEngine.Engine.getCamera().translationBuffer) {
         if (ProjectionEngine.SettingsStore.getData().spawnOnOrigin) {
             vec3.copy(entity._translation, [0, 0, 0])
             entity.__changedBuffer[0] = 1

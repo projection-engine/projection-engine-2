@@ -1,7 +1,4 @@
-import ElectronResources from "./ElectronResources"
-import Folders from "@enums/Folders"
 import IPCRoutes from "@enums/IPCRoutes"
-import EditorFSUtil from "../window/editor/util/EditorFSUtil";
 import EditorUtil from "../window/editor/util/EditorUtil";
 
 

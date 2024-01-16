@@ -1,6 +1,3 @@
-import Engine from "@engine-core/Engine"
-import ProjectionEngine from "@lib/ProjectionEngine";
-
 export default class SelectorUtil {
     static getIcon(type) {
         switch (type) {

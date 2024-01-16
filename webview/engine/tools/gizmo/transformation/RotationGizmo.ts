@@ -1,5 +1,4 @@
 import {glMatrix, quat, vec3} from "gl-matrix"
-import CameraAPI from "../../../core/lib/utils/CameraAPI"
 import AXIS from "../../static/AXIS"
 import GPU from "../../../core/GPU"
 import EngineTools from "../../EngineTools"
@@ -14,7 +13,6 @@ import AbstractXYZGizmo from "./AbstractXYZGizmo";
 import GPUUtil from "../../../core/utils/GPUUtil";
 import StaticEditorFBO from "../../utils/StaticEditorFBO";
 import EngineToolsState from "../../EngineToolsState";
-import Engine from "../../../core/Engine";
 import ProjectionEngine from "@lib/ProjectionEngine";
 
 const toDeg = 180 / Math.PI
@@ -66,7 +64,7 @@ export default class RotationGizmo extends AbstractXYZGizmo {
 
             context.uniformMatrix4fv(uniforms.transformMatrix, false, transformMatrix)
             context.uniform3fv(uniforms.translation, GizmoState.mainEntity.__pivotOffset)
-            context.uniform1i(uniforms.cameraIsOrthographic, ProjectionEngine.Engine.CameraAPI.notificationBuffers[2])
+            context.uniform1i(uniforms.cameraIsOrthographic, ProjectionEngine.Engine.getCamera().notificationBuffers[2])
 
             GPUUtil.bind2DTextureForDrawing(uniforms.gizmoIDS, 0, StaticEditorFBO.gizmo.colors[0])
             GPU.context.uniform2fv(uniforms.mouseCoordinates, EngineToolsState.mouseCoordinates)

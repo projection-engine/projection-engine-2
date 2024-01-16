@@ -4,7 +4,7 @@ import EngineResourceLoaderService from "@services/EngineResourceLoaderService"
 import FileSystemAPI from "@engine-core/lib/utils/FileSystemAPI"
 import SelectionStore from "@lib/stores/SelectionStore"
 import LightComponent from "@engine-core/instances/components/LightComponent"
-import LightsAPI from "@engine-core/lib/utils/LightsAPI"
+import LightsService from "@engine-core/lib/utils/LightsService"
 import CameraComponent from "@engine-core/instances/components/CameraComponent"
 import EditorUtil from "./EditorUtil"
 import type Entity from "@engine-core/instances/Entity";
@@ -76,14 +76,14 @@ export default class InspectorUtil extends IInjectable {
     static updateEntityComponent(entity: Entity, key: string, value: any, component: typeof Component) {
         if (component instanceof LightComponent) {
             entity.needsLightUpdate = true
-            LightsAPI.packageLights(true)
+            LightsService.packageLights(true)
         }
         if (component instanceof CameraComponent) {
             entity.__cameraNeedsUpdate = true
         }
         component[key] = value
         if (component.componentKey === COMPONENTS.CAMERA && entity.id === InspectorUtil.settingsStore.getData().focusedCamera)
-            InspectorUtil.engine.CameraAPI.updateViewTarget(entity)
+            InspectorUtil.engine.getCamera().updateViewTarget(entity)
     }
 
     static removeComponent(entity, index, key) {

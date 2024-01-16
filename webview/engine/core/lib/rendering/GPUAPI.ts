@@ -6,7 +6,7 @@ import Mesh, {MeshProps} from "../../instances/Mesh"
 import Shader from "../../instances/Shader"
 import GPU from "../../GPU"
 import MaterialAPI from "./MaterialAPI"
-import VisibilityRenderer from "../../runtime/VisibilityRenderer"
+import DepthPrePassSystem from "../../runtime/DepthPrePassSystem"
 import UberShader from "../UberShader"
 import StaticMeshes from "../StaticMeshes"
 import TextureParams from "../../static/TextureParams"
@@ -68,7 +68,7 @@ export default class GPUAPI {
 		GPU.materials.set(id, material)
 
 		UberShader.compile()
-		VisibilityRenderer.needsUpdate = true
+		DepthPrePassSystem.needsUpdate = true
 		return material
 	}
 
@@ -144,7 +144,7 @@ export default class GPUAPI {
 			GPUAPI.destroyMesh(GPU.meshes.get(id))
 		const instance = new Mesh({...bufferData, id})
 		GPU.meshes.set(id, instance)
-		VisibilityRenderer.needsUpdate = true
+		DepthPrePassSystem.needsUpdate = true
 		return instance
 	}
 
@@ -163,7 +163,7 @@ export default class GPUAPI {
 				mesh.normalVBO.delete()
 			GPU.meshes.delete(mesh.id)
 		}
-		VisibilityRenderer.needsUpdate = true
+		DepthPrePassSystem.needsUpdate = true
 	}
 
 	static allocateShader(id, vertex, fragment) {
@@ -178,5 +178,26 @@ export default class GPUAPI {
 			return
 		GPU.context.deleteProgram(instance.program)
 		GPU.shaders.delete(id)
+	}
+
+	static getWebGLErrorString(errorCode) {
+		switch (errorCode) {
+			case GPU.context.NO_ERROR:
+				return "No error";
+			case GPU.context.INVALID_ENUM:
+				return "Invalid enum";
+			case GPU.context.INVALID_VALUE:
+				return "Invalid value";
+			case GPU.context.INVALID_OPERATION:
+				return "Invalid operation";
+			case GPU.context.INVALID_FRAMEBUFFER_OPERATION:
+				return "Invalid framebuffer operation";
+			case GPU.context.OUT_OF_MEMORY:
+				return "Out of memory";
+			case GPU.context.CONTEXT_LOST_WEBGL:
+				return "Context lost";
+			default:
+				return "Unknown error code: " + errorCode;
+		}
 	}
 }

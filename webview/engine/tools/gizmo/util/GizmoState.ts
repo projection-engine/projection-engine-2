@@ -6,14 +6,8 @@ import GizmoTransformationType from "@enums/GizmoTransformationType"
 import EngineTools from "../../EngineTools"
 import IGizmo from "../IGizmo"
 import Gizmos from "@enums/Gizmos"
-import TranslationGizmo from "../transformation/TranslationGizmo"
-import DualAxisGizmo from "../transformation/DualAxisGizmo"
-import ScreenSpaceGizmo from "../transformation/ScreenSpaceGizmo"
-import ScalingGizmo from "../transformation/ScalingGizmo"
-import RotationGizmo from "../transformation/RotationGizmo"
 import {vec3} from "gl-matrix"
 import ProjectionEngine from "@lib/ProjectionEngine";
-import Engine from "../../../core/Engine";
 
 export default class GizmoState {
     static #mainEntity?: Entity
@@ -39,20 +33,20 @@ export default class GizmoState {
     }
 
     static set gizmoType(data: Gizmos) {
-        if(!ProjectionEngine.Engine.isReady){
+        if (!ProjectionEngine.Engine.isReady) {
             return
         }
         GizmoState.#gizmoType = data
         GizmoState.#targetGizmos.length = 0
         switch (data) {
             case Gizmos.TRANSLATION:
-                GizmoState.#targetGizmos.push(ProjectionEngine.Engine.TranslationGizmo, ProjectionEngine.Engine.DualAxisGizmo, ProjectionEngine.Engine.ScreenSpaceGizmo)
+                GizmoState.#targetGizmos.push(EngineTools.TranslationGizmo, EngineTools.DualAxisGizmo, EngineTools.ScreenSpaceGizmo)
                 break
             case Gizmos.ROTATION:
-                GizmoState.#targetGizmos.push(ProjectionEngine.Engine.RotationGizmo)
+                GizmoState.#targetGizmos.push(EngineTools.RotationGizmo)
                 break
             case Gizmos.SCALE:
-                GizmoState.#targetGizmos.push(ProjectionEngine.Engine.ScalingGizmo, ProjectionEngine.Engine.DualAxisGizmo, ProjectionEngine.Engine.ScreenSpaceGizmo)
+                GizmoState.#targetGizmos.push(EngineTools.ScalingGizmo, EngineTools.DualAxisGizmo, EngineTools.ScreenSpaceGizmo)
                 break
         }
         GizmoUtil.updateGizmosTransformation(true)

@@ -1,4 +1,3 @@
-import DynamicMap from "@engine-core/lib/DynamicMap"
 import IStateDTO from "@lib/stores/state/IStateDTO";
 import IInjectable from "@lib/IInjectable";
 

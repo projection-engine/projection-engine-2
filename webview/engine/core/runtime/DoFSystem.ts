@@ -1,18 +1,17 @@
 import StaticMeshes from "../lib/StaticMeshes"
 import StaticFBO from "../lib/StaticFBO"
 import StaticShaders from "../lib/StaticShaders"
-import CameraAPI from "../lib/utils/CameraAPI"
 import MetricsController from "../lib/utils/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import GPUUtil from "../utils/GPUUtil";
-import Engine from "../Engine";
 import ProjectionEngine from "@lib/ProjectionEngine";
+import IEngineSystem from "@engine-core/IEngineSystem";
 
 
-export default class Bokeh {
-	static execute() {
+export default class DoFSystem extends IEngineSystem{
+	 execute(gl: WebGL2RenderingContext) {
 
-		if (!ProjectionEngine.Engine.CameraAPI.DOF)
+		if (!ProjectionEngine.Engine.getCamera().DOF)
 			return
 
 		StaticShaders.bokeh.bind()

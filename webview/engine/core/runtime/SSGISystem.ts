@@ -7,12 +7,17 @@ import MetricsController from "../lib/utils/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import EngineState from "../EngineState"
 import GPUUtil from "../utils/GPUUtil";
+import AbstractSystem from "@engine-core/IEngineSystem";
+import GPUAPI from "@engine-core/lib/rendering/GPUAPI";
 
 let cleared = false
-export default class SSGI {
+export default class SSGISystem extends AbstractSystem{
     static uniformSettings = new Float32Array(3)
 
-    static execute() {
+    execute(gl: WebGL2RenderingContext) {
+        GPUAPI.copyTexture(StaticFBO.postProcessing1, StaticFBO.postProcessing2, GPU.context.COLOR_BUFFER_BIT)
+
+
         if (!EngineState.ssgiEnabled) {
             if (!cleared) {
                 StaticFBO.ssgi.clear()
@@ -21,7 +26,6 @@ export default class SSGI {
             return
         }
         cleared = false
-        const context = GPU.context
         const uniforms = StaticShaders.ssgiUniforms
         StaticFBO.ssgi.startMapping()
         StaticShaders.ssgi.bind()
@@ -31,29 +35,28 @@ export default class SSGI {
 
         GPUUtil.bind2DTextureForDrawing(uniforms.previousFrame, 1, StaticFBO.postProcessing2Sampler)
 
-        context.uniform3fv(uniforms.rayMarchSettings, SSGI.uniformSettings)
+        gl.uniform3fv(uniforms.rayMarchSettings, SSGISystem.uniformSettings)
 
         StaticMeshes.drawQuad()
-        SSGI.#applyBlur(context, StaticFBO.ssgiFallback, StaticFBO.ssgiSampler, true)
-        SSGI.#applyBlur(context, StaticFBO.ssgi, StaticFBO.ssgiFallbackSampler, false)
+        this.#applyBlur(gl, StaticFBO.ssgiFallback, StaticFBO.ssgiSampler, true)
+        this.#applyBlur(gl, StaticFBO.ssgi, StaticFBO.ssgiFallbackSampler, false)
 
         MetricsController.currentState = METRICS_FLAGS.SSGI
     }
 
-    static #applyBlur(context: WebGL2RenderingContext, FBO: Framebuffer, color: WebGLTexture, first: boolean) {
+     #applyBlur(gl: WebGL2RenderingContext, FBO: Framebuffer, color: WebGLTexture, first: boolean) {
         const uniforms = StaticShaders.bilateralBlurUniforms
-
 
         if (first) {
             StaticShaders.bilateralBlur.bind()
 
-            context.uniform1f(uniforms.blurRadius, EngineState.ssgiBlurRadius)
-            context.uniform1i(uniforms.samples, EngineState.ssgiBlurSamples)
-            context.uniform2fv(uniforms.bufferResolution, StaticFBO.ssgiFallback.resolution)
+            gl.uniform1f(uniforms.blurRadius, EngineState.ssgiBlurRadius)
+            gl.uniform1i(uniforms.samples, EngineState.ssgiBlurSamples)
+            gl.uniform2fv(uniforms.bufferResolution, StaticFBO.ssgiFallback.resolution)
 
             GPUUtil.bind2DTextureForDrawing(uniforms.entityIDSampler, 0, StaticFBO.entityIDSampler)
         } else
-            context.uniform1i(uniforms.samples, EngineState.ssgiBlurSamples / 2)
+            gl.uniform1i(uniforms.samples, EngineState.ssgiBlurSamples / 2)
         FBO.startMapping()
         GPUUtil.bind2DTextureForDrawing(uniforms.sceneColor, 1, color)
 

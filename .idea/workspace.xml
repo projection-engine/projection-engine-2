@@ -19,44 +19,9 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-21]  New project architecture&#10;- Finishing new file browser">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-33] Engine refactoring: systems&#10;- Moving to service things related to systems&#10;- Organizing engine&#10;- Optimizing imports">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/enums/LocalizationEN.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/enums/LocalizationEN.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/ProjectionEngine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/ProjectionEngine.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/stores/ContentBrowserStore.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/selector/Selector.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/selector/Selector.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/selector/components/Options.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/selector/components/Options.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/ViewDefinitions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/ViewDefinitions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/templates/get-content-browser-actions.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/ContentBrowserUtil.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/EditorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/EditorUtil.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/InspectorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/InspectorUtil.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/SelectorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/SelectorUtil.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/ContentBrowserView.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/Browser.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/BrowserHeader.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/Header.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/SideBar.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/SideBarItem.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/SortingOptions.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/CodeItem.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/ItemMetadata.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/MaterialItem.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/MeshItem.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/Properties.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/info-editor/TextureItem.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/item/Card.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/item/Item.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/item/ItemInput.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/components/item/Row.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/libs/GlobalContentBrowserController.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/libs/NavigationHistory.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/static/ITEM_TYPES.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/static/SELECTION_TYPES.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/content-browser/static/SORT_INFO.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/fs/FSSideBar.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/fs/FSSideBar.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/fs/Files.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/fs/Files.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/libs/ShaderEditorTools.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/shader-editor/libs/ShaderEditorTools.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/Engine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/Engine.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,15 +37,15 @@
       <list>
         <option value="FileSystem" />
         <option value="FSSideBar" />
-        <option value="TypeScript File" />
         <option value="Files" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="34-interfaces-for-stores" />
+        <entry key="$PROJECT_DIR$" value="42-window-frame" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -122,59 +87,65 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "C/C++ File.main.cpp.executor": "Run",
-    "CMake Application.Projection.executor": "Run",
-    "CMake Application.projection.executor": "Debug",
-    "CMake Debug.projection.executor": "Debug",
-    "CMake Debug.projectioncmake.executor": "Debug",
-    "Catch.File-system test.executor": "Debug",
-    "Catch.JSON test.executor": "Run",
-    "Catch.Run all.executor": "Run",
-    "Catch.main_test.executor": "Run",
-    "Jest.Should be lazily obtained.executor": "Run",
-    "Jest.Should be the same instance (1).executor": "Run",
-    "Jest.Should be the same instance.executor": "Run",
-    "Jest.Should trigger global subscriber.executor": "Run",
-    "Jest.Should trigger subscriber with same value.executor": "Run",
-    "Jest.Should unsubscribe.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "Shell Script.copy-files.executor": "Run",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "21-new-project-scheme",
-    "last_opened_file_path": "C:/Users/russi/WebstormProjects/projection-engine-2/test/core",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs.jest.jest_package": "C:/Users/russi/WebstormProjects/projection-engine-2/webview/node_modules/jest",
-    "nodejs_package_manager_path": "npm",
-    "npm.bdev.executor": "Run",
-    "npm.dev-build.executor": "Run",
-    "npm.sdev.executor": "Run",
-    "npm.test.executor": "Run",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.C/C++",
-    "ts.external.directory.path": "C:\\Users\\russi\\WebstormProjects\\projection-engine-2\\webview\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;C/C++ File.main.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;CMake Application.Projection.executor&quot;: &quot;Run&quot;,
+    &quot;CMake Application.projection.executor&quot;: &quot;Debug&quot;,
+    &quot;CMake Debug.projection.executor&quot;: &quot;Debug&quot;,
+    &quot;CMake Debug.projectioncmake.executor&quot;: &quot;Debug&quot;,
+    &quot;Catch.File-system test.executor&quot;: &quot;Debug&quot;,
+    &quot;Catch.JSON test.executor&quot;: &quot;Run&quot;,
+    &quot;Catch.Run all.executor&quot;: &quot;Run&quot;,
+    &quot;Catch.main_test.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should be lazily obtained.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should be the same instance (1).executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should be the same instance.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should trigger global subscriber.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should trigger subscriber with same value.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should unsubscribe.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;Shell Script.copy-files.executor&quot;: &quot;Run&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;33-engine-refactoring-1&quot;,
+    &quot;js.last.introduce.type&quot;: &quot;CONST&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/russi/WebstormProjects/projection-engine-2/test/core&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs.jest.jest_package&quot;: &quot;C:/Users/russi/WebstormProjects/projection-engine-2/webview/node_modules/jest&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.bdev.executor&quot;: &quot;Run&quot;,
+    &quot;npm.dev-build.executor&quot;: &quot;Run&quot;,
+    &quot;npm.sdev.executor&quot;: &quot;Run&quot;,
+    &quot;npm.test.executor&quot;: &quot;Run&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.C/C++&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\russi\\WebstormProjects\\projection-engine-2\\webview\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\test\core" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\engine\core\runtime" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\lib\dto\fs" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\tests\injection" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\tests\stores" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\lib\stores\state" />
-      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\window\editor\components\view" />
     </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="ex" />
+    </option>
   </component>
   <component name="RunDashboard">
     <option name="configurationTypes">
@@ -185,11 +156,6 @@
     </option>
   </component>
   <component name="RunManager" selected="npm.dev-build">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Should be lazily obtained" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <jest-package value="$PROJECT_DIR$/webview/node_modules/jest" />
@@ -343,6 +309,8 @@
       <workItem from="1705147573913" duration="14465000" />
       <workItem from="1705173861585" duration="7770000" />
       <workItem from="1705231012356" duration="5971000" />
+      <workItem from="1705255663671" duration="13236000" />
+      <workItem from="1705441389560" duration="4973000" />
     </task>
     <task id="LOCAL-00001" summary="[STD-1] Organizing project&#10;- removing unused C++ classes&#10;- Refactoring files&#10;- Renaming c++ namespaces and project &#10;- Moving future webview stuff">
       <option name="closed" value="true" />
@@ -672,7 +640,55 @@
       <option name="project" value="LOCAL" />
       <updated>1705236708959</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="[STD-3]  Starting refactoring&#10;- Fixing texture initialization">
+      <option name="closed" value="true" />
+      <created>1705260478098</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1705260478098</updated>
+    </task>
+    <task id="LOCAL-00043" summary="[STD-3]  Starting refactoring&#10;- Fixing texture initialization">
+      <option name="closed" value="true" />
+      <created>1705260492870</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1705260492870</updated>
+    </task>
+    <task id="LOCAL-00044" summary="[STD-33]  Starting refactoring&#10;- Initiating systems refactoring">
+      <option name="closed" value="true" />
+      <created>1705266958233</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1705266958233</updated>
+    </task>
+    <task id="LOCAL-00045" summary="[STD-33]  Starting refactoring&#10;- Engine refactoring&#10;- Improving systems&#10;- Creating IManageable class&#10;- Creating structure for managing classes with async initialization&#10;- Removing footer component&#10;- Removing unused classes &#10;- Refactoring worker methods into normal functions">
+      <option name="closed" value="true" />
+      <created>1705273761380</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1705273761380</updated>
+    </task>
+    <task id="LOCAL-00046" summary="[STD-33]  Starting refactoring&#10;- Fixing camera decoder&#10;- Introducing Engine resource class&#10;- Fixing initialization problems&#10;- Creating new system pipeline&#10;- Fixing engine rendering">
+      <option name="closed" value="true" />
+      <created>1705445561953</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1705445561953</updated>
+    </task>
+    <task id="LOCAL-00047" summary="[STD-33] Engine refactoring: systems&#10;- Moving to service things related to systems&#10;- Organizing engine&#10;- Optimizing imports">
+      <option name="closed" value="true" />
+      <created>1705446355163</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1705446355163</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -696,11 +712,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-6] Project window&#10;- JSON util&#10;- JSON util tests" />
-    <MESSAGE value="[STD-6] Project window&#10;- Completing createProject&#10;- Fixing bugs JSON and FS&#10;- Refactoring FileSystemUtil&#10;- Removing imgui stuff from IWindow" />
-    <MESSAGE value="[STD-6] Project window&#10;- Fixing build issues" />
-    <MESSAGE value="[STD-6] Project window&#10;- Organizing webview communication stuff on the frontend side&#10;- Fixing communication bugs with the editor window" />
-    <MESSAGE value="[STD-6] Project window&#10;- Starting rework of window system" />
     <MESSAGE value="[STD-6] Project window&#10;- Finishing rework of window system" />
     <MESSAGE value="[STD-6] Project scheme&#10;- Removing unused classes&#10;- Removing project window&#10;- Adding window resize&#10;- Fixing fetch errors&#10;- Enabling editor initialization without project path" />
     <MESSAGE value="[STD-30] Engine initialization&#10;- Removed async engine initalization&#10;- Fixed window name" />
@@ -721,7 +732,12 @@
     <MESSAGE value="[STD-21]  New project architecture&#10;- Removing old level stuff&#10;- Refactoring services&#10;- Adding new events for project path" />
     <MESSAGE value="[STD-21]  New project architecture&#10;- Creating new file system structure&#10;- Creating new events&#10;- Creating new file browser" />
     <MESSAGE value="[STD-21]  New project architecture&#10;- Finishing new file browser" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-21]  New project architecture&#10;- Finishing new file browser" />
+    <MESSAGE value="[STD-3]  Starting refactoring&#10;- Fixing texture initialization" />
+    <MESSAGE value="[STD-33]  Starting refactoring&#10;- Initiating systems refactoring" />
+    <MESSAGE value="[STD-33]  Starting refactoring&#10;- Engine refactoring&#10;- Improving systems&#10;- Creating IManageable class&#10;- Creating structure for managing classes with async initialization&#10;- Removing footer component&#10;- Removing unused classes &#10;- Refactoring worker methods into normal functions" />
+    <MESSAGE value="[STD-33]  Starting refactoring&#10;- Fixing camera decoder&#10;- Introducing Engine resource class&#10;- Fixing initialization problems&#10;- Creating new system pipeline&#10;- Fixing engine rendering" />
+    <MESSAGE value="[STD-33] Engine refactoring: systems&#10;- Moving to service things related to systems&#10;- Organizing engine&#10;- Optimizing imports" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-33] Engine refactoring: systems&#10;- Moving to service things related to systems&#10;- Organizing engine&#10;- Optimizing imports" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -735,11 +751,6 @@
           <url>file://$PROJECT_DIR$/src/ui/shared/webview/WebViewPayload.cpp</url>
           <line>6</line>
           <option name="timeStamp" value="41" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/ui/editor/Editor.cpp</url>
-          <line>28</line>
-          <option name="timeStamp" value="45" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/src/util/FS.cpp</url>

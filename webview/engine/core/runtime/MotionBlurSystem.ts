@@ -5,16 +5,17 @@ import StaticShaders from "../lib/StaticShaders"
 import MetricsController from "../lib/utils/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import GPUUtil from "../utils/GPUUtil";
+import IEngineSystem from "@engine-core/IEngineSystem";
 
 
-export default class MotionBlur {
+export default class MotionBlurSystem extends IEngineSystem{
 	static velocityScale = 1
 	static maxSamples = 50
 	static enabled = false
 
-	static execute() {
+	 execute(gl: WebGL2RenderingContext) {
 
-		if (!MotionBlur.enabled)
+		if (!MotionBlurSystem.enabled)
 			return
 		StaticFBO.postProcessing1.startMapping()
 		StaticShaders.mb.bind()
@@ -26,8 +27,8 @@ export default class MotionBlur {
 
 		GPU.context.uniform2fv(uniforms.bufferResolution, GPU.bufferResolution)
 
-		GPU.context.uniform1f(uniforms.velocityScale, MotionBlur.velocityScale)
-		GPU.context.uniform1i(uniforms.maxSamples, MotionBlur.maxSamples)
+		GPU.context.uniform1f(uniforms.velocityScale, MotionBlurSystem.velocityScale)
+		GPU.context.uniform1i(uniforms.maxSamples, MotionBlurSystem.maxSamples)
 
 		StaticMeshes.drawQuad()
 		StaticFBO.postProcessing1.stopMapping()

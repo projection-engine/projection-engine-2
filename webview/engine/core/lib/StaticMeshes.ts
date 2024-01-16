@@ -4,10 +4,9 @@ import VertexBuffer from "../instances/VertexBuffer"
 import Mesh from "../instances/Mesh"
 import GPUAPI from "./rendering/GPUAPI"
 import EmbeddedMeshes from "../static/EmbeddedMeshes"
+import IEngineSingleton from "@engine-core/IEngineSingleton";
 
-export default class StaticMeshes {
-	static #initialized = false
-    
+export default class StaticMeshes extends IEngineSingleton {
 	static quad?:Mesh
 	static sphere?:Mesh
 	static cube?:Mesh
@@ -15,10 +14,7 @@ export default class StaticMeshes {
 	static plane?:Mesh
 	static cubeBuffer?:VertexBuffer
 
-	static async initialize() {
-		if(StaticMeshes.#initialized)
-			return
-		StaticMeshes.#initialized = true
+	 async initialize() {
 		try {
 			const res = await fetch("./STATIC_MESHES.json")
 			const {QUAD, SPHERE, CUBE, CYLINDER, PLANE, CUBE_LINEAR} = await res.json()

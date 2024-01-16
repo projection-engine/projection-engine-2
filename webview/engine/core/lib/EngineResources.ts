@@ -1,10 +1,10 @@
 import Physics from "../runtime/Physics"
 import StaticUBOs from "./StaticUBOs"
-import VisibilityRenderer from "../runtime/VisibilityRenderer"
+import DepthPrePassSystem from "../runtime/DepthPrePassSystem"
 import EngineState from "../EngineState"
-import SSGI from "../runtime/SSGI"
+import SSGISystem from "../runtime/SSGISystem"
 import StaticFBO from "./StaticFBO"
-import DirectionalShadows from "../runtime/DirectionalShadows"
+import DirectionalShadowsSystem from "../runtime/DirectionalShadowsSystem"
 
 
 export default class EngineResources {
@@ -16,9 +16,9 @@ export default class EngineResources {
 		Physics.stop()
 		Physics.start()
 
-		SSGI.uniformSettings[0] = EngineState.ssgiStepSize
-		SSGI.uniformSettings[1] = EngineState.ssgiMaxSteps
-		SSGI.uniformSettings[2] = EngineState.ssgiStrength
+		SSGISystem.uniformSettings[0] = EngineState.ssgiStepSize
+		SSGISystem.uniformSettings[1] = EngineState.ssgiMaxSteps
+		SSGISystem.uniformSettings[2] = EngineState.ssgiStrength
 
 		StaticUBOs.uberUBO.bind()
 		EngineResources.#FLOAT_BUFFER[0] = EngineState.ssrFalloff
@@ -65,11 +65,11 @@ export default class EngineResources {
 		StaticUBOs.frameCompositionUBO.updateData("FXAAReduceMul", EngineResources.#FLOAT_BUFFER)
 		StaticUBOs.frameCompositionUBO.unbind()
 
-		VisibilityRenderer.needsUpdate = true
+		DepthPrePassSystem.needsUpdate = true
 		EngineResources.#allocateDirectionalShadowsBuffers()
 
-		DirectionalShadows.resolutionPerTexture = DirectionalShadows.maxResolution / (EngineState.shadowAtlasQuantity || 1)
-		DirectionalShadows.atlasRatio = DirectionalShadows.maxResolution / DirectionalShadows.resolutionPerTexture
+		DirectionalShadowsSystem.resolutionPerTexture = DirectionalShadowsSystem.maxResolution / (EngineState.shadowAtlasQuantity || 1)
+		DirectionalShadowsSystem.atlasRatio = DirectionalShadowsSystem.maxResolution / DirectionalShadowsSystem.resolutionPerTexture
 		StaticUBOs.uberUBO.bind()
 		StaticUBOs.uberUBO.updateData("shadowMapsQuantity", new Float32Array([EngineState.shadowAtlasQuantity]))
 		StaticUBOs.uberUBO.updateData("shadowMapResolution", new Float32Array([EngineState.shadowMapResolution]))
@@ -77,11 +77,11 @@ export default class EngineResources {
 	}
 
 	static #allocateDirectionalShadowsBuffers() {
-		if (DirectionalShadows.maxResolution === EngineState.shadowMapResolution || EngineState.shadowMapResolution < 1024)
+		if (DirectionalShadowsSystem.maxResolution === EngineState.shadowMapResolution || EngineState.shadowMapResolution < 1024)
 			return
-		DirectionalShadows.maxResolution = EngineState.shadowMapResolution
+		DirectionalShadowsSystem.maxResolution = EngineState.shadowMapResolution
 		StaticFBO.updateDirectionalShadowsFBO()
-		DirectionalShadows.changed = true
+		DirectionalShadowsSystem.changed = true
 	}
 
 }

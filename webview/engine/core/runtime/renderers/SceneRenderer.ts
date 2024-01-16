@@ -2,17 +2,14 @@ import GPU from "../../GPU"
 import StaticMeshes from "../../lib/StaticMeshes"
 import type Entity from "../../instances/Entity"
 import Shader from "../../instances/Shader"
-import Engine from "../../Engine"
-import CameraAPI from "../../lib/utils/CameraAPI"
 import StaticFBO from "../../lib/StaticFBO"
-import OmnidirectionalShadows from "../OmnidirectionalShadows"
+import PointShadowsSystem from "../PointShadowsSystem"
 import UberMaterialAttributeGroup from "../../lib/UberMaterialAttributeGroup"
 import MATERIAL_RENDERING_TYPES from "../../static/MATERIAL_RENDERING_TYPES"
 import Material from "../../instances/Material"
 import UberShader from "../../lib/UberShader"
 import MaterialResourceMapper from "../../lib/MaterialResourceMapper"
 import ResourceEntityMapper from "../../lib/ResourceEntityMapper"
-import Renderer from "../../Renderer"
 import Mesh from "../../instances/Mesh"
 import loopMeshes from "../loop-meshes"
 import EngineState from "../../EngineState"
@@ -40,12 +37,12 @@ export default class SceneRenderer {
         stateWasCleared = isDoubleSided = isSky = false
         texOffset = 7
 
-        context.uniformMatrix4fv(uniforms.skyProjectionMatrix, false, ProjectionEngine.Engine.CameraAPI.skyboxProjectionMatrix)
-        context.uniform1f(uniforms.elapsedTime, Renderer.elapsed)
-        context.uniformMatrix4fv(uniforms.viewMatrix, false, ProjectionEngine.Engine.CameraAPI.viewMatrix)
-        context.uniformMatrix4fv(uniforms.invViewMatrix, false, ProjectionEngine.Engine.CameraAPI.invViewMatrix)
-        context.uniformMatrix4fv(uniforms.viewProjection, false, ProjectionEngine.Engine.CameraAPI.viewProjectionMatrix)
-        context.uniform3fv(uniforms.cameraPosition, ProjectionEngine.Engine.CameraAPI.position)
+        context.uniformMatrix4fv(uniforms.skyProjectionMatrix, false, ProjectionEngine.Engine.getCamera().skyboxProjectionMatrix)
+        context.uniform1f(uniforms.elapsedTime, ProjectionEngine.Engine.elapsed)
+        context.uniformMatrix4fv(uniforms.viewMatrix, false, ProjectionEngine.Engine.getCamera().viewMatrix)
+        context.uniformMatrix4fv(uniforms.invViewMatrix, false, ProjectionEngine.Engine.getCamera().invViewMatrix)
+        context.uniformMatrix4fv(uniforms.viewProjection, false, ProjectionEngine.Engine.getCamera().viewProjectionMatrix)
+        context.uniform3fv(uniforms.cameraPosition, ProjectionEngine.Engine.getCamera().position)
 
         SceneRenderer.#bindTexture(context, uniforms.brdf_sampler, 0, GPU.BRDF, false)
         SceneRenderer.#bindTexture(context, uniforms.SSAO, 1, StaticFBO.ssaoBlurredSampler, false)
@@ -54,7 +51,7 @@ export default class SceneRenderer {
 
         SceneRenderer.#bindTexture(context, uniforms.previousFrame, 4, StaticFBO.lensSampler, false)
         SceneRenderer.#bindTexture(context, uniforms.shadow_atlas, 5, StaticFBO.shadowsSampler, false)
-        SceneRenderer.#bindTexture(context, uniforms.shadow_cube, 6, OmnidirectionalShadows.sampler, true)
+        SceneRenderer.#bindTexture(context, uniforms.shadow_cube, 6, PointShadowsSystem.sampler, true)
 
         // if (!!GPU.activeSkylightEntity) {
         //     texOffset++

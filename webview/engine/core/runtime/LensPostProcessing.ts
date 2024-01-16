@@ -1,23 +1,15 @@
-import GPU from "../GPU"
 import StaticMeshes from "../lib/StaticMeshes"
 import StaticFBO from "../lib/StaticFBO"
 import StaticShaders from "../lib/StaticShaders"
-import Bloom from "./Bloom"
-import Bokeh from "./Bokeh"
-import MotionBlur from "./MotionBlur"
 import MetricsController from "../lib/utils/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import GPUUtil from "../utils/GPUUtil";
+import IEngineSystem from "@engine-core/IEngineSystem";
 
 
-export default class LensPostProcessing {
+export default class LensPostProcessing extends IEngineSystem{
 
-	static execute() {
-		const context = GPU.context
-
-		Bokeh.execute()
-		MotionBlur.execute()
-		Bloom.execute()
+	 execute(gl: WebGL2RenderingContext) {
 
 		StaticFBO.lens.startMapping()
 		StaticShaders.lens.bind()

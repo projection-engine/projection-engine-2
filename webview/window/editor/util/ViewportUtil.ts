@@ -3,7 +3,7 @@ import Engine from "@engine-core/Engine"
 import GPU from "@engine-core/GPU"
 import PickingAPI from "@engine-core/lib/utils/PickingAPI"
 import QueryAPI from "@engine-core/lib/utils/QueryAPI"
-import VisibilityRenderer from "@engine-core/runtime/VisibilityRenderer"
+import DepthPrePassSystem from "@engine-core/runtime/DepthPrePassSystem"
 import EngineTools from "../../../engine/tools/EngineTools"
 import StaticFBO from "@engine-core/lib/StaticFBO";
 import SelectionStore from "@lib/stores/SelectionStore";
@@ -62,7 +62,7 @@ export default class ViewportUtil extends IInjectable {
         } else
             setContext([entity.id])
 
-        VisibilityRenderer.needsUpdate = true
+        DepthPrePassSystem.needsUpdate = true
     }
 
 }

@@ -1,8 +1,9 @@
 import SHADERS from "../static/SHADERS"
 import Shader from "../instances/Shader"
 import UberShader from "./UberShader"
+import IEngineSingleton from "@engine-core/IEngineSingleton";
 
-export default class StaticShaders {
+export default class StaticShaders extends IEngineSingleton {
 
 	static sprite?: Shader
 	static spriteUniforms?: { [key: string]: WebGLUniformLocation }
@@ -66,13 +67,7 @@ export default class StaticShaders {
 	static upSamplingUniforms?: { [key: string]: WebGLUniformLocation }
 
 
-	static #initialized = false
-
-	static initialize() {
-		if (StaticShaders.#initialized)
-			return
-		StaticShaders.#initialized = true
-
+	async initialize() {
 
 		StaticShaders.sprite = new Shader(SHADERS.SPRITE_VERTEX, SHADERS.SPRITE_FRAG)
 		StaticShaders.visibility = new Shader(SHADERS.V_BUFFER_VERT, SHADERS.V_BUFFER_FRAG)

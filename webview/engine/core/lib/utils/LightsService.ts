@@ -1,8 +1,8 @@
 import ArrayBufferAPI from "./ArrayBufferAPI"
 import LIGHT_TYPES from "../../static/LIGHT_TYPES"
 import {glMatrix, mat4, vec3} from "gl-matrix"
-import DirectionalShadows from "../../runtime/DirectionalShadows"
-import OmnidirectionalShadows from "../../runtime/OmnidirectionalShadows"
+import DirectionalShadowsSystem from "../../runtime/DirectionalShadowsSystem"
+import PointShadowsSystem from "../../runtime/PointShadowsSystem"
 import type Entity from "../../instances/Entity"
 import UberShader from "../UberShader"
 import StaticUBOs from "../StaticUBOs"
@@ -18,30 +18,30 @@ const quantity = new Uint8Array(1)
  */
 const cache1Mat4 = mat4.create()
 const cache2Mat4 = mat4.create()
-export default class LightsAPI {
+export default class LightsService {
     
 	static primaryBuffer?: Float32Array
 	static secondaryBuffer?: Float32Array
 	static lightsQuantity = 0
 
 	static initialize() {
-		LightsAPI.primaryBuffer = <Float32Array>ArrayBufferAPI.allocateVector(UberShader.MAX_LIGHTS * 16, 0, false, false, false)
-		LightsAPI.secondaryBuffer = <Float32Array>ArrayBufferAPI.allocateVector(UberShader.MAX_LIGHTS * 16, 0, false, false, false)
+		LightsService.primaryBuffer = <Float32Array>ArrayBufferAPI.allocateVector(UberShader.MAX_LIGHTS * 16, 0, false, false, false)
+		LightsService.secondaryBuffer = <Float32Array>ArrayBufferAPI.allocateVector(UberShader.MAX_LIGHTS * 16, 0, false, false, false)
 	}
 
 	static packageLights(keepOld?: boolean, force?: boolean) {
 		if (force) {
-			LightsAPI.#package(keepOld)
+			LightsService.#package(keepOld)
 			return
 		}
 		clearTimeout(lightTimeout)
-		lightTimeout = setTimeout(() => LightsAPI.#package(keepOld), 50)
+		lightTimeout = setTimeout(() => LightsService.#package(keepOld), 50)
 	}
 
 	static #package(keepOld) {
 		const lights = ResourceEntityMapper.lights.array
-		const primaryBuffer = LightsAPI.primaryBuffer,
-			secondaryBuffer = LightsAPI.secondaryBuffer
+		const primaryBuffer = LightsService.primaryBuffer,
+			secondaryBuffer = LightsService.secondaryBuffer
 		let size = 0, offset = 0
 
 
@@ -58,7 +58,7 @@ export default class LightsAPI {
 				break
 			if (!current.active || !current.changesApplied && !current.needsLightUpdate && keepOld)
 				continue
-			LightsAPI.#updateBuffer(current, primaryBuffer, secondaryBuffer, offset)
+			LightsService.#updateBuffer(current, primaryBuffer, secondaryBuffer, offset)
 
 			offset += 16
 			size++
@@ -71,21 +71,21 @@ export default class LightsAPI {
 				break
 			if (!current.active || !current.changesApplied && !current.needsLightUpdate && keepOld)
 				continue
-			LightsAPI.#updateAtmosphereLight(current, primaryBuffer, offset)
+			LightsService.#updateAtmosphereLight(current, primaryBuffer, offset)
 
 			offset += 16
 			size++
 		}
 
-		LightsAPI.lightsQuantity = size
-		if (LightsAPI.lightsQuantity > 0 || !keepOld) {
+		LightsService.lightsQuantity = size
+		if (LightsService.lightsQuantity > 0 || !keepOld) {
 			StaticUBOs.lightsUBO.bind()
-			StaticUBOs.lightsUBO.updateData("lightPrimaryBuffer", LightsAPI.primaryBuffer)
-			StaticUBOs.lightsUBO.updateData("lightSecondaryBuffer", LightsAPI.secondaryBuffer)
+			StaticUBOs.lightsUBO.updateData("lightPrimaryBuffer", LightsService.primaryBuffer)
+			StaticUBOs.lightsUBO.updateData("lightSecondaryBuffer", LightsService.secondaryBuffer)
 			StaticUBOs.lightsUBO.unbind()
 
 			StaticUBOs.uberUBO.bind()
-			quantity[0] = Math.min(LightsAPI.lightsQuantity, UberShader.MAX_LIGHTS)
+			quantity[0] = Math.min(LightsService.lightsQuantity, UberShader.MAX_LIGHTS)
 			StaticUBOs.uberUBO.updateData("lightQuantity", quantity)
 			StaticUBOs.uberUBO.unbind()
 		}
@@ -143,7 +143,7 @@ export default class LightsAPI {
 				for (let i = 0; i < 16; i++)
 					secondaryBuffer[offset + i] = lightViewProjection[i]
 
-				DirectionalShadows.lightsToUpdate.push(component)
+				DirectionalShadowsSystem.lightsToUpdate.push(component)
 			}
 			break
 		}
@@ -160,7 +160,7 @@ export default class LightsAPI {
 
 			secondaryBuffer[0] = component.shadowBias
 			if (component.shadowMap)
-				OmnidirectionalShadows.lightsToUpdate.push(component)
+				PointShadowsSystem.lightsToUpdate.push(component)
 			break
 		}
 		case LIGHT_TYPES.SPOT: {

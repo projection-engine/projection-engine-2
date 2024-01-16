@@ -9,7 +9,6 @@
     import SveltePortal from "@lib/SveltePortal"
     import LocalizationEN from "@enums/LocalizationEN"
     import ViewHeader from "../../components/view/ViewHeader.svelte"
-    import ProjectionEngine from "@lib/ProjectionEngine";
     import {InjectVar} from "@lib/Injection";
     import SettingsStore from "@lib/stores/SettingsStore";
 

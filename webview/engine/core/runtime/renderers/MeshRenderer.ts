@@ -1,8 +1,9 @@
 import MetricsController from "../../lib/utils/MetricsController"
 import METRICS_FLAGS from "../../static/METRICS_FLAGS"
 import SceneRenderer from "./SceneRenderer"
-import Renderer from "../../Renderer"
 import StaticFBO from "../../lib/StaticFBO"
+import GPUAPI from "@engine-core/lib/rendering/GPUAPI";
+import GPU from "@engine-core/GPU";
 
 export default class MeshRenderer {
 	static execute(transparencyOnly: boolean) {
@@ -11,7 +12,7 @@ export default class MeshRenderer {
 			MetricsController.currentState = METRICS_FLAGS.OPAQUE
 			return
 		}
-		Renderer.copyToCurrentFrame()
+		GPUAPI.copyTexture(StaticFBO.postProcessing1, StaticFBO.postProcessing2, GPU.context.COLOR_BUFFER_BIT)
 		StaticFBO.postProcessing2.use()
 		SceneRenderer.drawTransparency()
 		StaticFBO.postProcessing2.stopMapping()

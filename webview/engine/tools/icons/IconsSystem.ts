@@ -1,6 +1,4 @@
-import Engine from "../../core/Engine"
 import GPU from "../../core/GPU"
-import CameraAPI from "../../core/lib/utils/CameraAPI"
 import LIGHT_TYPES from "../../core/static/LIGHT_TYPES"
 import LineRenderer from "./LineRenderer"
 import StaticMeshes from "../../core/lib/StaticMeshes"
@@ -20,7 +18,7 @@ export default class IconsSystem {
 	static iconsTexture?: WebGLTexture
 
 	static loop(cb, uniforms?: MutableObject) {
-		const tracking = ProjectionEngine.Engine.CameraAPI.trackingEntity
+		const tracking = ProjectionEngine.Engine.getCamera().trackingEntity
 		const entities = ProjectionEngine.Engine.entities.array
 		const size = entities.length
 
@@ -166,8 +164,8 @@ export default class IconsSystem {
 
 		GPUUtil.bind2DTextureForDrawing(uniforms.sceneDepth, 1, StaticFBO.sceneDepthVelocity)
 
-		context.uniformMatrix4fv(uniforms.projectionM, false, ProjectionEngine.Engine.CameraAPI.projectionMatrix)
-		context.uniformMatrix4fv(uniforms.viewM, false, ProjectionEngine.Engine.CameraAPI.viewMatrix)
+		context.uniformMatrix4fv(uniforms.projectionM, false, ProjectionEngine.Engine.getCamera().projectionMatrix)
+		context.uniformMatrix4fv(uniforms.viewM, false, ProjectionEngine.Engine.getCamera().viewMatrix)
 
 		if (EngineToolsState.showIcons)
 			IconsSystem.loop(IconsSystem.drawIcon)

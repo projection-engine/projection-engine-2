@@ -1,4 +1,3 @@
-import Engine from "../Engine"
 import PhysicsAPI from "../lib/rendering/PhysicsAPI"
 import MetricsController from "../lib/utils/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"

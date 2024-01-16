@@ -2,7 +2,7 @@ import Component from "./Component"
 import ATMOSPHERE_PROPS from "../../static/component-props/ATMOSPHERE_PROPS"
 import ATMOSPHERE_TYPES from "../../static/ATMOSPHERE_TYPES"
 import {mat4, vec3} from "gl-matrix"
-import LightsAPI from "../../lib/utils/LightsAPI"
+import LightsService from "../../lib/utils/LightsService"
 import COMPONENTS from "../../static/COMPONENTS"
 
 
@@ -44,7 +44,7 @@ export default class AtmosphereComponent extends Component {
 		vec3.normalize(this.#sunDirection, [Math.sin(this._elapsedTime), Math.cos(this._elapsedTime), 1.0])
 		if (this.entity?.active) {
 			this.entity.needsLightUpdate = true
-			LightsAPI.packageLights(true, true)
+			LightsService.packageLights(true, true)
 		}
 	}
 

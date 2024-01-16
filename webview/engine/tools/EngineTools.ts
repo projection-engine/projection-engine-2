@@ -2,7 +2,6 @@ import GridSystem from "./icons/GridSystem"
 import IconsSystem from "./icons/IconsSystem"
 import GizmoSystem from "./gizmo/GizmoSystem"
 import SelectedSystem from "./outline/SelectedSystem"
-import Engine from "../core/Engine"
 import CameraTracker from "./utils/CameraTracker"
 import WireframeRenderer from "./outline/WireframeRenderer"
 import ENVIRONMENT from "../core/static/ENVIRONMENT"
@@ -18,22 +17,34 @@ import GPUUtil from "../core/utils/GPUUtil";
 import ConversionAPI from "../core/lib/math/ConversionAPI";
 import EngineToolsState from "./EngineToolsState";
 import ProjectionEngine from "@lib/ProjectionEngine";
+import RotationGizmo from "@engine-tools/gizmo/transformation/RotationGizmo";
+import ScalingGizmo from "@engine-tools/gizmo/transformation/ScalingGizmo";
+import TranslationGizmo from "@engine-tools/gizmo/transformation/TranslationGizmo";
+import DualAxisGizmo from "@engine-tools/gizmo/transformation/DualAxisGizmo";
+import ScreenSpaceGizmo from "@engine-tools/gizmo/transformation/ScreenSpaceGizmo";
+import IEngineSystem from "@engine-core/IEngineSystem";
 
-export default class EngineTools {
+export default class EngineTools extends IEngineSystem {
     static selected: Entity[] = []
-    static #initialized = false
+    static RotationGizmo: RotationGizmo
+    static ScalingGizmo: ScalingGizmo
+    static TranslationGizmo: TranslationGizmo
+    static DualAxisGizmo: DualAxisGizmo
+    static ScreenSpaceGizmo: ScreenSpaceGizmo
+    static isRunning = true
 
-    static async initialize() {
-        if (EngineTools.#initialized)
-            return
-
-        EngineTools.#initialized = true
+    async initialize() {
         StaticEditorShaders.initialize()
         await StaticEditorMeshes.initialize()
-
         ProjectionEngine.Engine.environment = ENVIRONMENT.DEV
         LineRenderer.initialize()
         StaticEditorFBO.initialize()
+
+        EngineTools.RotationGizmo = new RotationGizmo();
+        EngineTools.ScalingGizmo = new ScalingGizmo();
+        EngineTools.TranslationGizmo = new TranslationGizmo();
+        EngineTools.DualAxisGizmo = new DualAxisGizmo();
+        EngineTools.ScreenSpaceGizmo = new ScreenSpaceGizmo();
     }
 
     static onMouseMove(event: MouseEvent) {
@@ -71,7 +82,7 @@ export default class EngineTools {
         GPU.context.enable(GPU.context.DEPTH_TEST)
     }
 
-    static #loop() {
+    execute(gl: WebGL2RenderingContext) {
         const coords = ConversionAPI.toQuadCoordinates(EngineToolsState.unconvertedMouseCoordinates[0], EngineToolsState.unconvertedMouseCoordinates[1], GPU.internalResolution.w, GPU.internalResolution.h)
         EngineToolsState.mouseCoordinates[0] = coords.x
         EngineToolsState.mouseCoordinates[1] = coords.y
@@ -85,12 +96,8 @@ export default class EngineTools {
         GizmoSystem.execute()
     }
 
-    static bindSystems() {
-        ProjectionEngine.Engine.addSystem("ENGINE_TOOLS_RENDERER", EngineTools.#loop)
-    }
-
-    static unbindSystems() {
-        ProjectionEngine.Engine.removeSystem("ENGINE_TOOLS_RENDERER")
+    shouldExecute() {
+        return EngineTools.isRunning
     }
 
     static #setContextState() {
