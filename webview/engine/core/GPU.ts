@@ -1,8 +1,3 @@
-import LineAPI from "./lib/rendering/LineAPI"
-import TerrainGenerator from "./lib/math/TerrainGenerator"
-import CameraAPI from "./lib/utils/CameraAPI"
-import TransformationSystem from "./runtime/TransformationSystem"
-import CubeMapAPI from "./lib/rendering/CubeMapAPI"
 import QUAD_VERT from "./shaders/post-processing/QUAD.vert"
 import BRDF_FRAG from "./shaders/post-processing/BRDF_GEN.frag"
 import Shader from "./instances/Shader"
@@ -11,12 +6,8 @@ import Material from "./instances/Material"
 import Mesh from "./instances/Mesh"
 import Texture from "./instances/Texture"
 import LightProbe from "./instances/LightProbe"
-import StaticShaders from "./lib/StaticShaders"
 import StaticMeshes from "./lib/StaticMeshes"
-import StaticFBO from "./lib/StaticFBO"
-import StaticUBOs from "./lib/StaticUBOs"
 import DynamicMap from "./lib/DynamicMap"
-import Engine from "./Engine";
 import IEngineSingleton from "@engine-core/IEngineSingleton";
 
 export default class GPU extends IEngineSingleton{

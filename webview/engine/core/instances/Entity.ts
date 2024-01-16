@@ -3,7 +3,6 @@ import getComponentInstance from "../utils/get-component-instance"
 import serializeStructure from "../utils/serialize-structure"
 import Component from "./components/Component"
 import ComponentResources from "./components/ComponentResources"
-import TransformationSystem from "../runtime/TransformationSystem"
 import QueryAPI from "../lib/utils/QueryAPI"
 import DynamicMap from "../lib/DynamicMap"
 

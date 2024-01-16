@@ -1,4 +1,3 @@
-import GPU from "../GPU"
 import StaticFBO from "../lib/StaticFBO"
 import StaticShaders from "../lib/StaticShaders"
 import ResourceEntityMapper from "../lib/ResourceEntityMapper"

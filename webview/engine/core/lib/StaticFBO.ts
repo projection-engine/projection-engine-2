@@ -1,6 +1,5 @@
 import GPU from "../GPU"
 import Framebuffer from "../instances/Framebuffer"
-import IMAGE_WORKER_ACTIONS from "../static/IMAGE_WORKER_ACTIONS"
 import StaticUBOs from "./StaticUBOs"
 import EngineState from "../EngineState"
 import generateSsaoNoise from "@engine-core/utils/generate-ssao-noise";

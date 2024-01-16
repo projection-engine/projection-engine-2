@@ -1,6 +1,5 @@
 import {mat4, quat, vec3} from "gl-matrix"
 import copyWithOffset from "../utils/copy-with-offset"
-import ProjectionEngine from "@lib/ProjectionEngine";
 import CameraNotificationDecoder from "@engine-core/lib/CameraNotificationDecoder";
 
 

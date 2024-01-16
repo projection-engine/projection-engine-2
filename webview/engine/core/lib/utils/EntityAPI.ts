@@ -1,6 +1,4 @@
 import COMPONENTS from "../../static/COMPONENTS"
-import Engine from "../../Engine"
-import TransformationSystem from "../../runtime/TransformationSystem"
 import UIAPI from "../rendering/UIAPI"
 import PhysicsAPI from "../rendering/PhysicsAPI"
 import Entity from "../../instances/Entity"

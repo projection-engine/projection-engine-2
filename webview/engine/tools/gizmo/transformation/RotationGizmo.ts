@@ -1,5 +1,4 @@
 import {glMatrix, quat, vec3} from "gl-matrix"
-import CameraAPI from "../../../core/lib/utils/CameraAPI"
 import AXIS from "../../static/AXIS"
 import GPU from "../../../core/GPU"
 import EngineTools from "../../EngineTools"
@@ -14,7 +13,6 @@ import AbstractXYZGizmo from "./AbstractXYZGizmo";
 import GPUUtil from "../../../core/utils/GPUUtil";
 import StaticEditorFBO from "../../utils/StaticEditorFBO";
 import EngineToolsState from "../../EngineToolsState";
-import Engine from "../../../core/Engine";
 import ProjectionEngine from "@lib/ProjectionEngine";
 
 const toDeg = 180 / Math.PI

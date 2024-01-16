@@ -1,8 +1,6 @@
 import {quat, vec3} from "gl-matrix"
 import ArrayBufferAPI from "./utils/ArrayBufferAPI"
 import CameraEffects from "./CameraEffects"
-import ProjectionEngine from "@lib/ProjectionEngine";
-import Engine from "../Engine";
 
 
 /**

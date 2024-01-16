@@ -1,5 +1,4 @@
 import GPU from "../GPU"
-import Engine from "../Engine"
 import DEBUG_FRAG from "../shaders/uber-shader/UBER-MATERIAL-DEBUG.frag"
 import BASIS_FRAG from "../shaders/uber-shader/UBER-MATERIAL-BASIS.frag"
 import VERTEX_SHADER from "../shaders/uber-shader/UBER-MATERIAL.vert"

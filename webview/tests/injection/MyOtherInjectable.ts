@@ -1,4 +1,4 @@
-import {Inject, Injectable} from "@lib/Injection";
+import {Injectable} from "@lib/Injection";
 import IInjectable from "@lib/IInjectable";
 
 Object.assign(global, {window: global.window ?? {}})

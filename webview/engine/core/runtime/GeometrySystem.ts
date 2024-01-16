@@ -6,7 +6,6 @@ import DecalRenderer from "./renderers/DecalRenderer"
 import MeshRenderer from "./renderers/MeshRenderer"
 import AtmosphereRenderer from "./renderers/AtmosphereRenderer"
 import Mesh from "../instances/Mesh"
-import GPU from "../GPU"
 import IEngineSystem from "@engine-core/IEngineSystem";
 
 

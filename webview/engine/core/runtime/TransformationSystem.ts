@@ -1,10 +1,3 @@
-import WORKER_MESSAGES from "../static/WORKER_MESSAGES"
-import CameraAPI from "../lib/utils/CameraAPI"
-import Entity from "../instances/Entity"
-import QueryAPI from "../lib/utils/QueryAPI"
-import entityWorker from "../workers/entity-worker";
-import Engine from "../Engine";
-import ProjectionEngine from "@lib/ProjectionEngine";
 import IEngineSystem from "@engine-core/IEngineSystem";
 
 export default class TransformationSystem extends IEngineSystem {

@@ -5,7 +5,6 @@ import PickingAPI from "../../../core/lib/utils/PickingAPI"
 import EntityAPI from "../../../core/lib/utils/EntityAPI"
 import StaticEditorShaders from "../../utils/StaticEditorShaders"
 import GPU from "../../../core/GPU"
-import CameraAPI from "../../../core/lib/utils/CameraAPI"
 import GizmoState from "./GizmoState"
 import Axis from "../../static/AXIS"
 import ConversionAPI from "../../../core/lib/math/ConversionAPI"
@@ -13,7 +12,6 @@ import Mesh from "../../../core/instances/Mesh";
 import StaticEditorFBO from "../../utils/StaticEditorFBO";
 import GPUUtil from "../../../core/utils/GPUUtil";
 import EngineToolsState from "../../EngineToolsState";
-import Engine from "../../../core/Engine";
 import ProjectionEngine from "@lib/ProjectionEngine";
 
 

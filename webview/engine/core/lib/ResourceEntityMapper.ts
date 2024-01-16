@@ -1,6 +1,5 @@
 import DynamicMap from "./DynamicMap"
 import type Entity from "../instances/Entity"
-import Engine from "../Engine"
 import ENVIRONMENT from "../static/ENVIRONMENT"
 import PhysicsAPI from "./rendering/PhysicsAPI"
 import UIAPI from "./rendering/UIAPI"

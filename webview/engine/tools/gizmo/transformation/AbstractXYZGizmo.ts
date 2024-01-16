@@ -3,7 +3,6 @@ import GizmoUtil from "../util/GizmoUtil";
 import AXIS from "../../static/AXIS";
 import Mesh from "../../../core/instances/Mesh";
 import Entity from "../../../core/instances/Entity";
-import StaticEditorMeshes from "@engine-tools/utils/StaticEditorMeshes";
 
 export default abstract class AbstractXYZGizmo  implements IGizmo {
     declare mesh: Mesh;

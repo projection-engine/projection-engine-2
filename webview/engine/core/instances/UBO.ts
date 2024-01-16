@@ -1,5 +1,4 @@
 import getGlslSizes from "../utils/get-glsl-sizes"
-import GPU from "../GPU"
 import GPUAPI from "@engine-core/lib/rendering/GPUAPI";
 import IEngineResource from "@engine-core/IEngineResource";
 

@@ -18,7 +18,6 @@ export default class CameraAPI extends CameraResources {
     #dynamicAspectRatio = false
     trackingEntity: Entity
     #cameraNotificationDecoder: CameraNotificationDecoder
-   #notificationBuffers: Float32Array
 
     async initialize(): Promise<void> {
         this.projectionBuffer[4] = 10
@@ -40,6 +39,21 @@ export default class CameraAPI extends CameraResources {
             this.viewUBOBuffer,
             this.projectionUBOBuffer
         ])
+
+        this.addResizeObserver();
+    }
+
+    private addResizeObserver() {
+        ConversionAPI.canvasBBox = GPU.canvas.getBoundingClientRect()
+        const OBS = new ResizeObserver(() => {
+            const bBox = GPU.canvas.getBoundingClientRect()
+            ConversionAPI.canvasBBox = bBox
+            this.aspectRatio = bBox.width / bBox.height
+            this.updateProjection()
+            this.updateAspectRatio()
+        })
+        OBS.observe(GPU.canvas.parentElement)
+        OBS.observe(GPU.canvas)
     }
 
     syncThreads() {

@@ -6,14 +6,8 @@ import GizmoTransformationType from "@enums/GizmoTransformationType"
 import EngineTools from "../../EngineTools"
 import IGizmo from "../IGizmo"
 import Gizmos from "@enums/Gizmos"
-import TranslationGizmo from "../transformation/TranslationGizmo"
-import DualAxisGizmo from "../transformation/DualAxisGizmo"
-import ScreenSpaceGizmo from "../transformation/ScreenSpaceGizmo"
-import ScalingGizmo from "../transformation/ScalingGizmo"
-import RotationGizmo from "../transformation/RotationGizmo"
 import {vec3} from "gl-matrix"
 import ProjectionEngine from "@lib/ProjectionEngine";
-import Engine from "../../../core/Engine";
 
 export default class GizmoState {
     static #mainEntity?: Entity

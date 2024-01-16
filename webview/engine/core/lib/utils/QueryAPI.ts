@@ -1,4 +1,3 @@
-import Engine from "../../Engine"
 import Entity from "../../instances/Entity"
 import ProjectionEngine from "@lib/ProjectionEngine";
 

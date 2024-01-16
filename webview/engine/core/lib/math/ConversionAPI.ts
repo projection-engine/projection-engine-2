@@ -1,6 +1,4 @@
 import {mat4, vec3, vec4} from "gl-matrix"
-import CameraAPI from "../utils/CameraAPI"
-import Engine from "../../Engine";
 import ProjectionEngine from "@lib/ProjectionEngine";
 
 /**

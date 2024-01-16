@@ -1,5 +1,3 @@
-import Engine from "@engine-core/Engine";
-import GPU from "@engine-core/GPU";
 import IEngineSingleton from "@engine-core/IEngineSingleton";
 
 export default class IEngineSystem extends IEngineSingleton {

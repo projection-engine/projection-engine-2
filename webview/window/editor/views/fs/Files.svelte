@@ -1,6 +1,5 @@
 <script lang="ts">
     import DirectoryDTO from "@lib/dto/fs/DirectoryDTO";
-    import {onMount} from "svelte";
     import {InjectVar} from "@lib/Injection";
     import FSService from "@lib/FSService";
     import ItemDTO from "@lib/dto/fs/ItemDTO";

@@ -1,6 +1,3 @@
-import GPU from "../GPU"
-import TransformationSystem from "./TransformationSystem"
-import AOSystem from "./AOSystem"
 import {mat4} from "gl-matrix"
 import StaticShaders from "../lib/StaticShaders"
 import StaticFBO from "../lib/StaticFBO"

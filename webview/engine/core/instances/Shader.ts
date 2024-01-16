@@ -3,7 +3,6 @@ import applyShaderMethods from "../utils/apply-shader-methods"
 import GLSL_TYPES from "../static/GLSL_TYPES"
 import StaticUBOs, {StaticUBONames} from "../lib/StaticUBOs"
 import GPUUtil from "../utils/GPUUtil";
-import GPUAPI from "@engine-core/lib/rendering/GPUAPI";
 
 const regex = /uniform(\s+)(highp|mediump|lowp)?(\s*)((\w|_)+)((\s|\w|_)*);/gm
 const structRegex = (type) => {

@@ -2,7 +2,6 @@
     import {InjectVar} from "@lib/Injection";
     import FSService from "@lib/FSService";
     import {onMount} from "svelte";
-    import ItemDTO from "@lib/dto/fs/ItemDTO";
     import DirectoryDTO from "@lib/dto/fs/DirectoryDTO";
     import ResizableBar from "@lib/components/resizable/ResizableBar.svelte";
     import LocalizationEN from "@enums/LocalizationEN";
