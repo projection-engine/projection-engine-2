@@ -1,9 +1,9 @@
 import GPU from "../../GPU"
 import LightProbe from "../../instances/LightProbe"
-import IManageable from "@engine-core/IManageable";
+import IEngineSingleton from "@engine-core/IEngineSingleton";
 
 
-export default class CubeMapAPI extends IManageable{
+export default class CubeMapAPI extends IEngineSingleton{
 	static frameBuffer?:WebGLFramebuffer
 
 	static #initialized = false

@@ -1,10 +1,10 @@
 import VertexBuffer from "../../instances/VertexBuffer"
 import Mesh from "../../instances/Mesh"
 import GPU from "../../GPU"
-import IManageable from "@engine-core/IManageable";
+import IEngineSingleton from "@engine-core/IEngineSingleton";
 
 
-export default class LineAPI extends IManageable{
+export default class LineAPI extends IEngineSingleton{
     static vaoX
     static vboX
     static vaoY

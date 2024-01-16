@@ -1,10 +1,10 @@
 import StaticUBOs from "./StaticUBOs"
 import CameraEffectsSerialization from "../static/CameraEffectsSerialization"
-import IManageable from "@engine-core/IManageable";
+import IEngineSingleton from "@engine-core/IEngineSingleton";
 
 const U_INT = new Uint8Array(1)
 const FLOAT = new Float32Array(1)
-export default class CameraEffects extends IManageable{
+export default class CameraEffects extends IEngineSingleton {
     cameraMotionBlur = false
     #bloom = false
     #filmGrain = false
@@ -12,10 +12,10 @@ export default class CameraEffects extends IManageable{
     #chromaticAberration = false
     #distortion = false
     DOF = false
-    zNear = .1
-    zFar = 1000
-    fov = Math.PI / 2
-    aspectRatio = 1
+    #zNear = .1
+    #zFar = 1000
+    #fov = Math.PI / 2
+    #aspectRatio = 1
     size = 50
     #focusDistanceDOF = 10
     #apertureDOF = 1.2
@@ -31,41 +31,12 @@ export default class CameraEffects extends IManageable{
     #chromaticAberrationStrength = 1
     #distortionStrength = 1
 
-
-    restoreMetadata(data: CameraEffectsSerialization) {
-        this.DOF = data.DOF
-        this.bloom = data.bloom
-        this.filmGrain = data.filmGrain
-        this.vignetteEnabled = data.vignetteEnabled
-        this.chromaticAberration = data.chromaticAberration
-        this.distortion = data.distortion
-        this.cameraMotionBlur = data.cameraMotionBlur
-        this.zNear = data.zNear
-        this.zFar = data.zFar
-        this.fov = data.fov
-        this.aspectRatio = data.aspectRatio
-        this.size = data.size
-        this.focusDistanceDOF = data.focusDistanceDOF
-        this.apertureDOF = data.apertureDOF
-        this.focalLengthDOF = data.focalLengthDOF
-        this.samplesDOF = data.samplesDOF
-        this.filmGrainStrength = data.filmGrainStrength
-        this.vignetteStrength = data.vignetteStrength
-        this.bloomThreshold = data.bloomThreshold
-        this.bloomQuality = data.bloomQuality
-        this.bloomOffset = data.bloomOffset
-        this.gamma = data.gamma
-        this.exposure = data.exposure
-        this.chromaticAberrationStrength = data.chromaticAberrationStrength
-        this.distortionStrength = data.distortionStrength
-    }
-
     dumpEffects(): CameraEffectsSerialization {
         return {
-            zNear: this.zNear,
-            zFar: this.zFar,
-            fov: this.fov,
-            aspectRatio: this.aspectRatio,
+            zNear: this.#zNear,
+            zFar: this.#zFar,
+            fov: this.#fov,
+            aspectRatio: this.#aspectRatio,
             size: this.size,
             focusDistanceDOF: this.#focusDistanceDOF,
             apertureDOF: this.#apertureDOF,
@@ -137,7 +108,6 @@ export default class CameraEffects extends IManageable{
         StaticUBOs.frameCompositionUBO.updateData("filmGrainStrength", FLOAT)
         StaticUBOs.frameCompositionUBO.unbind()
     }
-
 
     get gamma() {
         return this.#gamma

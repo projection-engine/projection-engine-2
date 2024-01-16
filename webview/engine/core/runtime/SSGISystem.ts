@@ -7,7 +7,7 @@ import MetricsController from "../lib/utils/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import EngineState from "../EngineState"
 import GPUUtil from "../utils/GPUUtil";
-import AbstractSystem from "@engine-core/AbstractSystem";
+import AbstractSystem from "@engine-core/IEngineSystem";
 import GPUAPI from "@engine-core/lib/rendering/GPUAPI";
 
 let cleared = false

@@ -1,8 +1,7 @@
 import {mat4, quat, vec3} from "gl-matrix"
 import copyWithOffset from "../utils/copy-with-offset"
-import CameraNotificationDecoder from "../lib/CameraNotificationDecoder"
 import ProjectionEngine from "@lib/ProjectionEngine";
-import Engine from "../Engine";
+import CameraNotificationDecoder from "@engine-core/lib/CameraNotificationDecoder";
 
 
 class CameraWorker {
@@ -25,6 +24,7 @@ class CameraWorker {
     static currentRotation = quat.create()
     static projectionUBOBuffer: Float32Array
     static viewUBOBuffer: Float32Array
+    static decoder: CameraNotificationDecoder;
 
     static initialize(data: Float32Array[]) {
         const [
@@ -65,13 +65,13 @@ class CameraWorker {
         quat.copy(CameraWorker.currentRotation, CameraWorker.rotationBuffer)
         CameraWorker.viewUBOBuffer = viewUBOBuffer
         CameraWorker.projectionUBOBuffer = projectionUBOBuffer
-        ProjectionEngine.Engine.CameraNotificationDecoder.initialize(notificationBuffers)
+        CameraWorker.decoder = new CameraNotificationDecoder(notificationBuffers)
 
         mat4.multiply(CameraWorker.viewProjectionMatrix, CameraWorker.projectionMatrix, CameraWorker.viewMatrix)
     }
 
     static updateProjection() {
-        const isOrthographic = ProjectionEngine.Engine.CameraNotificationDecoder.projectionType === ProjectionEngine.Engine.CameraNotificationDecoder.ORTHOGRAPHIC
+        const isOrthographic = CameraWorker.decoder.projectionType === CameraWorker.decoder.ORTHOGRAPHIC
         const buffer = CameraWorker.projectionBuffer
 
 
@@ -126,14 +126,14 @@ class CameraWorker {
     }
 
     static execute() {
-        const didViewChange = ProjectionEngine.Engine.CameraNotificationDecoder.viewNeedsUpdate === 1
+        const didViewChange = CameraWorker.decoder.viewNeedsUpdate === 1
         CameraWorker.needsUpdate = CameraWorker.needsUpdate || didViewChange
-        const elapsed = ProjectionEngine.Engine.CameraNotificationDecoder.elapsed
-        ProjectionEngine.Engine.CameraNotificationDecoder.hasChangedView = 0
-        ProjectionEngine.Engine.CameraNotificationDecoder.hasChangedProjection = 0
+        const elapsed = CameraWorker.decoder.elapsed
+        CameraWorker.decoder.hasChangedView = 0
+        CameraWorker.decoder.hasChangedProjection = 0
 
         if (CameraWorker.needsUpdate) {
-            const tSmoothing = ProjectionEngine.Engine.CameraNotificationDecoder.translationSmoothing
+            const tSmoothing = CameraWorker.decoder.translationSmoothing
             const incrementTranslation = tSmoothing === 0 ? 1 : 1 - Math.pow(.001, elapsed * tSmoothing)
 
             const lengthTranslationPrev = vec3.length(CameraWorker.currentTranslation)
@@ -147,21 +147,21 @@ class CameraWorker {
             const offsetTranslation = Math.abs(lengthTranslationPrev - lengthTranslationAfter)
             if (offsetRotation > 0 || offsetTranslation > 1e-6) {
                 CameraWorker.updateView()
-                ProjectionEngine.Engine.CameraNotificationDecoder.viewNeedsUpdate = 0
-                ProjectionEngine.Engine.CameraNotificationDecoder.hasChangedView = 1
+                CameraWorker.decoder.viewNeedsUpdate = 0
+                CameraWorker.decoder.hasChangedView = 1
             } else {
                 CameraWorker.needsUpdate = false
-                ProjectionEngine.Engine.CameraNotificationDecoder.viewNeedsUpdate = 0
-                ProjectionEngine.Engine.CameraNotificationDecoder.hasChangedView = 0
+                CameraWorker.decoder.viewNeedsUpdate = 0
+                CameraWorker.decoder.hasChangedView = 0
             }
         }
 
-        const cameraIsOrthographic = ProjectionEngine.Engine.CameraNotificationDecoder.projectionType === ProjectionEngine.Engine.CameraNotificationDecoder.ORTHOGRAPHIC
-        if (ProjectionEngine.Engine.CameraNotificationDecoder.projectionNeedsUpdate === 1 || cameraIsOrthographic && didViewChange) {
+        const cameraIsOrthographic = CameraWorker.decoder.projectionType === CameraWorker.decoder.ORTHOGRAPHIC
+        if (CameraWorker.decoder.projectionNeedsUpdate === 1 || cameraIsOrthographic && didViewChange) {
             CameraWorker.updateProjection()
-            ProjectionEngine.Engine.CameraNotificationDecoder.hasChangedProjection = 1
-            ProjectionEngine.Engine.CameraNotificationDecoder.hasChangedView = 1
-            ProjectionEngine.Engine.CameraNotificationDecoder.projectionNeedsUpdate = 0
+            CameraWorker.decoder.hasChangedProjection = 1
+            CameraWorker.decoder.hasChangedView = 1
+            CameraWorker.decoder.projectionNeedsUpdate = 0
         }
     }
 }

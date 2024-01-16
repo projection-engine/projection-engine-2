@@ -7,10 +7,10 @@ import MetricsController from "../lib/utils/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import EngineState from "../EngineState"
 import GPUUtil from "../utils/GPUUtil";
-import AbstractSystem from "@engine-core/AbstractSystem";
+import IEngineSystem from "@engine-core/IEngineSystem";
 
 
-export default class SSAO extends AbstractSystem{
+export default class SSAO extends IEngineSystem{
 	static noiseScale = new Float32Array(2)
 
 	 async initialize() {

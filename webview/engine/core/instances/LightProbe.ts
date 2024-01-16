@@ -26,7 +26,8 @@ export default class LightProbe {
 		if (this.texture instanceof WebGLTexture)
 			GPU.context.deleteTexture(this.texture)
 
-		this.texture = CubeMapAPI.initializeTexture(false, data, false)
+		// TODO - THIS CAUSES UNDEFINED BECAUSE CUBEMAPAPI HASNT YET BEEN INITIALIZED (ESBUILD)
+		// this.texture = CubeMapAPI.initializeTexture(false, data, false)
 	}
 
 	get resolution(): number {

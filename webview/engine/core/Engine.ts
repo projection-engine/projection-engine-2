@@ -17,7 +17,7 @@ import ResourceManager from "./runtime/ResourceManager"
 import {Injectable} from "@lib/Injection";
 import ProjectionEngine from "@lib/ProjectionEngine";
 import IInjectable from "@lib/IInjectable";
-import AbstractSystem from "@engine-core/AbstractSystem";
+import IEngineSystem from "@engine-core/IEngineSystem";
 import CameraSystem from "@engine-core/runtime/CameraSystem";
 import StartupSystem from "@engine-core/runtime/StartupSystem";
 import ScriptingSystem from "@engine-core/runtime/ScriptingSystem";
@@ -36,8 +36,8 @@ import StaticShaders from "@engine-core/lib/StaticShaders";
 import StaticFBO from "@engine-core/lib/StaticFBO";
 import CubeMapAPI from "@engine-core/lib/rendering/CubeMapAPI";
 import LineAPI from "@engine-core/lib/rendering/LineAPI";
-import IManageable from "@engine-core/IManageable";
-import {ResizeObserver} from "svelte/src/runtime/internal/private";
+import IEngineSingleton from "@engine-core/IEngineSingleton";
+import IEngineResource from "@engine-core/IEngineResource";
 
 @Injectable
 export default class Engine extends IInjectable {
@@ -57,21 +57,19 @@ export default class Engine extends IInjectable {
     #canvas: HTMLCanvasElement
     #mainResolution: { w: number, h: number }
 
+
     async initialize(canvas: HTMLCanvasElement, mainResolution: {
         w: number,
         h: number
     }, readAsset: Function, devAmbient: boolean) {
-        this.#camera = this.addManaged(CameraAPI);
         this.#development = devAmbient
 
         this.#canvas = canvas
         this.#mainResolution = mainResolution
+        await this.createSingletons()
 
         ResourceEntityMapper.addEntity(this.#rootEntity)
         this.createViewportObserver();
-        GPU.skylightProbe = new LightProbe(128)
-        this.createSingletons()
-        await this.initializeAll()
         this.#isReady = true
         this.start()
     }
@@ -89,55 +87,66 @@ export default class Engine extends IInjectable {
         OBS.observe(GPU.canvas)
     }
 
-    private createSingletons() {
-        this.addManaged(StaticUBOs)
-        this.addManaged(StaticMeshes)
-        this.addManaged(StaticShaders)
-        this.addManaged(StaticFBO)
-        this.addManaged(CubeMapAPI)
-        this.addManaged(LineAPI)
+    private async createSingletons() {
+        this.#camera = (await this.addManaged(CameraAPI)) as CameraAPI;
+        this.#gpu = (await this.addManaged(GPU)) as GPU
+        await this.addManaged(StaticUBOs)
+        await this.addManaged(StaticMeshes)
+        await this.addManaged(StaticShaders)
+        await this.addManaged(StaticFBO)
+        await this.addManaged(CubeMapAPI)
+        await this.addManaged(LineAPI)
 
-        this.addSystem(CameraSystem)
-        this.addSystem(StartupSystem)
-        this.addSystem(ScriptingSystem)
-        this.addSystem(DirectionalShadowsSystem)
-        this.addSystem(PointShadowsSystem)
-        this.addSystem(DepthPrePassSystem)
-        this.addSystem(AOSystem)
-        this.addSystem(GeometrySystem)
-        this.addSystem(SSGISystem)
-        this.addSystem(DoFSystem)
-        this.addSystem(MotionBlurSystem)
-        this.addSystem(BloomSystem)
-        this.addSystem(LensPostProcessing)
-        this.addSystem(CompositionSystem)
-        this.addSystem(TransformationSystem)
+        await this.addSystem(CameraSystem)
+        await this.addSystem(StartupSystem)
+        await this.addSystem(ScriptingSystem)
+        await this.addSystem(DirectionalShadowsSystem)
+        await this.addSystem(PointShadowsSystem)
+        await this.addSystem(DepthPrePassSystem)
+        await this.addSystem(AOSystem)
+        await this.addSystem(GeometrySystem)
+        await this.addSystem(SSGISystem)
+        await this.addSystem(DoFSystem)
+        await this.addSystem(MotionBlurSystem)
+        await this.addSystem(BloomSystem)
+        await this.addSystem(LensPostProcessing)
+        await this.addSystem(CompositionSystem)
+        await this.addSystem(TransformationSystem);
+
+        GPU.generateBRDF()
     }
 
-    // TODO - MOVE THIS TO OTHER CLASS (
-    #executionQueue: AbstractSystem[] = []
-    #managed = new DynamicMap<typeof IManageable, IManageable>()
+    // TODO - MOVE THIS TO OTHER CLASS (EngineSystemService)
+    #rootSystem: IEngineSystem
+    #executionQueue: IEngineSystem[] = []
+    #managed = new DynamicMap<typeof IEngineSingleton, IEngineSingleton>()
 
-    addSystem(System: typeof AbstractSystem) {
-        const instance = this.addManaged(System);
-        if (instance instanceof AbstractSystem) {
-            this.#executionQueue.push(instance)
+    async addSystem(System: typeof IEngineSystem): Promise<IEngineSystem> {
+        const system = new System(this);
+        if (this.#rootSystem == null) {
+            this.#rootSystem = system
+        } else {
+            let currentSystem: IEngineSystem = this.#rootSystem
+            while (currentSystem.getNext() != null) {
+                currentSystem = currentSystem.getNext()
+            }
+            currentSystem.setNext(System)
         }
+        await system.initialize();
+        return system;
     }
 
-    addManaged<T extends IManageable>(Manageable: new (engine: Engine) => IManageable): T {
+    // TODO - MOVE THIS TO OTHER CLASS (EngineSystemService)
+
+    // TODO - MOVE THIS TO OTHER CLASS (EngineSingletonService)
+    async addManaged(Manageable: typeof IEngineSingleton): Promise<IEngineSingleton> {
         const instance = new Manageable(this);
         this.#managed.set(Manageable, instance)
-        return instance as T
+        await instance.initialize()
+        return instance
     }
 
-    private async initializeAll() {
-        for (const m of this.#managed.array) {
-            await m.initialize()
-        }
-    }
-
-    // TODO - MOVE THIS TO OTHER CLASS
+    // TODO - MOVE THIS TO OTHER CLASS (EngineSingletonService)
 
 
     // TODO - MOVE THIS TO OTHER CLASS (maybe EngineSchedulerService?)
@@ -174,17 +183,25 @@ export default class Engine extends IInjectable {
         const queueLength = queue.length
         ProjectionEngine.Engine.currentTimeStamp = c
         const context = this.getContext();
-        for (let i = 0; i < queueLength; i++) {
-            const system = queue[i];
-            if (system.shouldExecute()) {
-                system.execute(context)
+        let currentSystem: IEngineSystem = this.#rootSystem
+        while (currentSystem != null) {
+            if (currentSystem.shouldExecute()) {
+                currentSystem.execute(context)
             }
+            currentSystem = currentSystem.getNext()
         }
         this.#frameID = requestAnimationFrame(v => this.#loop(v))
     }
 
     // TODO - MOVE THIS TO OTHER CLASS (maybe EngineSchedulerService?)
 
+
+    // TODO - MOVE THIS
+    createResource<T extends IEngineResource<any>>(Resource: new (engine: Engine) => T): T {
+        return new Resource(this)
+    }
+
+    // TODO - MOVE THIS
 
     getCanvas(): HTMLCanvasElement {
         return this.#canvas;
@@ -207,7 +224,7 @@ export default class Engine extends IInjectable {
     }
 
     getContext(): WebGL2RenderingContext {
-        return this.#gpu.context
+        return GPU.context
     }
 
     get entities(): DynamicMap<string, Entity> {

@@ -1,11 +1,11 @@
-import AbstractSystem from "@engine-core/AbstractSystem";
+import IEngineSystem from "@engine-core/IEngineSystem";
 import GPU from "@engine-core/GPU";
 import TransformationSystem from "@engine-core/runtime/TransformationSystem";
 import LightsService from "@engine-core/lib/utils/LightsService";
 import ProjectionEngine from "@lib/ProjectionEngine";
 
 let previous
-export default class StartupSystem extends AbstractSystem{
+export default class StartupSystem extends IEngineSystem{
     execute(gl: WebGL2RenderingContext) {
         const current = ProjectionEngine.Engine.currentTimeStamp
         this.engine.elapsed = current - previous

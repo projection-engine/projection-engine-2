@@ -6,10 +6,10 @@ import StaticUBOs from "../lib/StaticUBOs"
 import MetricsController from "../lib/utils/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import GPUUtil from "../utils/GPUUtil";
-import AbstractSystem from "@engine-core/AbstractSystem";
+import IEngineSystem from "@engine-core/IEngineSystem";
 
 
-export default class CompositionSystem extends AbstractSystem {
+export default class CompositionSystem extends IEngineSystem {
     static lookUpRandom = new Float32Array(2e+3)
     static lookUpIndex = 0
     static currentNoise = 0

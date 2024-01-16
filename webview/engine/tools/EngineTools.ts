@@ -23,11 +23,10 @@ import ScalingGizmo from "@engine-tools/gizmo/transformation/ScalingGizmo";
 import TranslationGizmo from "@engine-tools/gizmo/transformation/TranslationGizmo";
 import DualAxisGizmo from "@engine-tools/gizmo/transformation/DualAxisGizmo";
 import ScreenSpaceGizmo from "@engine-tools/gizmo/transformation/ScreenSpaceGizmo";
-import AbstractSystem from "@engine-core/AbstractSystem";
+import IEngineSystem from "@engine-core/IEngineSystem";
 
-export default class EngineTools extends AbstractSystem {
+export default class EngineTools extends IEngineSystem {
     static selected: Entity[] = []
-    static #initialized = false
     static RotationGizmo: RotationGizmo
     static ScalingGizmo: ScalingGizmo
     static TranslationGizmo: TranslationGizmo
@@ -35,14 +34,9 @@ export default class EngineTools extends AbstractSystem {
     static ScreenSpaceGizmo: ScreenSpaceGizmo
     static isRunning = true
 
-    static async initialize() {
-        if (EngineTools.#initialized)
-            return
-
-        EngineTools.#initialized = true
+    async initialize() {
         StaticEditorShaders.initialize()
         await StaticEditorMeshes.initialize()
-
         ProjectionEngine.Engine.environment = ENVIRONMENT.DEV
         LineRenderer.initialize()
         StaticEditorFBO.initialize()
@@ -103,11 +97,7 @@ export default class EngineTools extends AbstractSystem {
         GizmoSystem.execute()
     }
 
-    static bindSystems() {
-        ProjectionEngine.Engine.addSystem(EngineTools)
-    }
-
-    shouldExecute(){
+    shouldExecute() {
         return EngineTools.isRunning
     }
 

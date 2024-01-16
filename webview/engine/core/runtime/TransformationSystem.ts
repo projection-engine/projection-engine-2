@@ -5,9 +5,9 @@ import QueryAPI from "../lib/utils/QueryAPI"
 import entityWorker from "../workers/entity-worker";
 import Engine from "../Engine";
 import ProjectionEngine from "@lib/ProjectionEngine";
-import AbstractSystem from "@engine-core/AbstractSystem";
+import IEngineSystem from "@engine-core/IEngineSystem";
 
-export default class TransformationSystem extends AbstractSystem {
+export default class TransformationSystem extends IEngineSystem {
     static isChanged = false
 
     // TODO - JUST ACCESS THESE PROPERTIES DIRECTLY

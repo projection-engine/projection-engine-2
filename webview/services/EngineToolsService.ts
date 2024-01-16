@@ -83,10 +83,7 @@ export default class EngineToolsService {
         GPU.canvas.width = settings.resolutionX
         GPU.canvas.height = settings.resolutionY
 
-        if (EngineToolsService.engine.environment === ENVIRONMENT.DEV)
-            EngineTools.bindSystems()
-        else
-            EngineTools.isRunning = false
+        EngineTools.isRunning = EngineToolsService.engine.environment === ENVIRONMENT.DEV
         EngineToolsService.#updateEngineState()
 
         EngineToolsService.#updateCameraTracker()

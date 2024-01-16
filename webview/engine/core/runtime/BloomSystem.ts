@@ -9,9 +9,9 @@ import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import GPUUtil from "../utils/GPUUtil";
 import Engine from "../Engine";
 import ProjectionEngine from "@lib/ProjectionEngine";
-import AbstractSystem from "@engine-core/AbstractSystem";
+import IEngineSystem from "@engine-core/IEngineSystem";
 
-export default class BloomSystem extends AbstractSystem{
+export default class BloomSystem extends IEngineSystem{
 	 execute(gl: WebGL2RenderingContext) {
 
 		if (!ProjectionEngine.Engine.getCamera().bloom)

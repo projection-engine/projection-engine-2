@@ -26,7 +26,6 @@ export default class CameraResources extends CameraEffects {
     projectionBuffer = ArrayBufferAPI.allocateVector(5)
     translationBuffer = <vec3>ArrayBufferAPI.allocateVector(3)
     rotationBuffer = <quat>ArrayBufferAPI.allocateVector(4, 0, true)
-    notificationBuffers = ProjectionEngine.Engine.CameraNotificationDecoder.generateBuffer()
 
 
     addTranslation(data: number[] | Float32Array) {

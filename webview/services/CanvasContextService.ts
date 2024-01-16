@@ -35,8 +35,7 @@ export default class CanvasContextService extends IInjectable {
             EditorFSUtil.readAsset,
             true
         )
-        await EngineTools.initialize()
-            .catch(console.error)
+        await CanvasContextService.engine.addSystem(EngineTools);
         UIAPI.buildUI(GPU.canvas.parentElement)
         UIAPI.hideUI()
         EngineToolsService.initialize()

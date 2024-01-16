@@ -10,14 +10,14 @@ import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import loopMeshes from "./loop-meshes"
 import Entity from "../instances/Entity"
 import Mesh from "../instances/Mesh"
-import AbstractSystem from "@engine-core/AbstractSystem";
+import IEngineSystem from "@engine-core/IEngineSystem";
 
 const cacheVec3 = vec3.create()
 const cacheViewMatrix = mat4.create()
 let cacheProjection
 let currentEntity
 let lightsToUpdate: LightComponent[]
-export default class PointShadowsSystem extends AbstractSystem {
+export default class PointShadowsSystem extends IEngineSystem {
     static changed = false
     static maxCubeMaps = 2
     static shadowMap?: ShadowProbe

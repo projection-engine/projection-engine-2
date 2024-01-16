@@ -5,10 +5,10 @@ import StaticShaders from "../lib/StaticShaders"
 import MetricsController from "../lib/utils/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import GPUUtil from "../utils/GPUUtil";
-import AbstractSystem from "@engine-core/AbstractSystem";
+import IEngineSystem from "@engine-core/IEngineSystem";
 
 
-export default class MotionBlurSystem extends AbstractSystem{
+export default class MotionBlurSystem extends IEngineSystem{
 	static velocityScale = 1
 	static maxSamples = 50
 	static enabled = false

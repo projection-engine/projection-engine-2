@@ -7,10 +7,10 @@ import MeshRenderer from "./renderers/MeshRenderer"
 import AtmosphereRenderer from "./renderers/AtmosphereRenderer"
 import Mesh from "../instances/Mesh"
 import GPU from "../GPU"
-import AbstractSystem from "@engine-core/AbstractSystem";
+import IEngineSystem from "@engine-core/IEngineSystem";
 
 
-export default class GeometrySystem extends AbstractSystem {
+export default class GeometrySystem extends IEngineSystem {
     execute(gl: WebGL2RenderingContext) {
         if (!UberShader.uber)
             return

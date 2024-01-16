@@ -14,11 +14,11 @@ import loopMeshes from "./loop-meshes"
 import Entity from "../instances/Entity"
 import Mesh from "../instances/Mesh"
 import ProjectionEngine from "@lib/ProjectionEngine";
-import AbstractSystem from "@engine-core/AbstractSystem";
+import IEngineSystem from "@engine-core/IEngineSystem";
 
 const entityMetadata = new Float32Array(16)
 let uniforms, VP
-export default class DepthPrePassSystem extends AbstractSystem {
+export default class DepthPrePassSystem extends IEngineSystem {
     static needsUpdate = true
 
     execute(gl: WebGL2RenderingContext) {

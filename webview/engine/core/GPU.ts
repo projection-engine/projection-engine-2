@@ -17,9 +17,9 @@ import StaticFBO from "./lib/StaticFBO"
 import StaticUBOs from "./lib/StaticUBOs"
 import DynamicMap from "./lib/DynamicMap"
 import Engine from "./Engine";
-import IManageable from "@engine-core/IManageable";
+import IEngineSingleton from "@engine-core/IEngineSingleton";
 
-export default class GPU extends IManageable{
+export default class GPU extends IEngineSingleton{
 	static context?: WebGL2RenderingContext
 	static canvas?: HTMLCanvasElement
 	static activeShader?: Shader
@@ -39,10 +39,10 @@ export default class GPU extends IManageable{
 		if (GPU.context != null)
 			return
 		this.initializeWebGLContext(this.engine.getMainResolution(), this.engine.getCanvas());
-		this.generateBRDF();
+		GPU.skylightProbe = new LightProbe(128)
 	}
 
-	private generateBRDF() {
+	static generateBRDF() {
 		const FBO = new Framebuffer(512, 512).texture({precision: GPU.context.RG32F, format: GPU.context.RG})
 		const brdfShader = new Shader(QUAD_VERT, BRDF_FRAG)
 

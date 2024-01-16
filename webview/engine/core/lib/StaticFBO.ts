@@ -4,11 +4,11 @@ import IMAGE_WORKER_ACTIONS from "../static/IMAGE_WORKER_ACTIONS"
 import StaticUBOs from "./StaticUBOs"
 import EngineState from "../EngineState"
 import generateSsaoNoise from "@engine-core/utils/generate-ssao-noise";
-import IManageable from "@engine-core/IManageable";
+import IEngineSingleton from "@engine-core/IEngineSingleton";
 
 const RESOLUTION = 4
 
-export default class StaticFBO extends IManageable {
+export default class StaticFBO extends IEngineSingleton {
     static visibility?: Framebuffer
     static sceneDepthVelocity?: WebGLTexture
     static entityIDSampler?: WebGLTexture

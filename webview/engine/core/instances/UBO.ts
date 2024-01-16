@@ -1,6 +1,7 @@
 import getGlslSizes from "../utils/get-glsl-sizes"
 import GPU from "../GPU"
 import GPUAPI from "@engine-core/lib/rendering/GPUAPI";
+import IEngineResource from "@engine-core/IEngineResource";
 
 interface Item {
     offset: number,
@@ -17,17 +18,16 @@ interface Data {
     dataLength?: number
 }
 
-export default class UBO {
+export default class UBO extends IEngineResource<UBO>{
     items: Item[] = []
     keys: string[] = []
     buffer?: WebGLBuffer
     blockName?: string
     blockPoint?: number
-
     static #blockPointIncrement = 0
 
-    constructor(blockName: string, dataArray: Data[]) {
-
+ 
+    initialize(blockName: string, dataArray: Data[]){
         const bufferSize = UBO.#calculate(dataArray)
         for (let i = 0; i < dataArray.length; i++) {
             this.items[dataArray[i].name] = {
@@ -42,39 +42,42 @@ export default class UBO {
         this.blockPoint = UBO.#blockPointIncrement
         UBO.#blockPointIncrement += 1
 
-        this.buffer = GPU.context.createBuffer()
-        GPU.context.bindBuffer(GPU.context.UNIFORM_BUFFER, this.buffer)
-        GPU.context.bufferData(GPU.context.UNIFORM_BUFFER, bufferSize, GPU.context.DYNAMIC_DRAW)
-        GPU.context.bindBuffer(GPU.context.UNIFORM_BUFFER, null)
-        GPU.context.bindBufferBase(GPU.context.UNIFORM_BUFFER, this.blockPoint, this.buffer)
+        console.log(this)
+
+        this.buffer = this.gl.createBuffer()
+        this.gl.bindBuffer(this.gl.UNIFORM_BUFFER, this.buffer)
+        this.gl.bufferData(this.gl.UNIFORM_BUFFER, bufferSize, this.gl.DYNAMIC_DRAW)
+        this.gl.bindBuffer(this.gl.UNIFORM_BUFFER, null)
+        this.gl.bindBufferBase(this.gl.UNIFORM_BUFFER, this.blockPoint, this.buffer)
+        return this
     }
 
     bindWithShader(shaderProgram: WebGLProgram) {
-        GPU.context.useProgram(shaderProgram)
-        const index = GPU.context.getUniformBlockIndex(shaderProgram, this.blockName)
-        GPU.context.uniformBlockBinding(shaderProgram, index, this.blockPoint)
-        GPU.context.bindBuffer(GPU.context.UNIFORM_BUFFER, null)
+        this.gl.useProgram(shaderProgram)
+        const index = this.gl.getUniformBlockIndex(shaderProgram, this.blockName)
+        this.gl.uniformBlockBinding(shaderProgram, index, this.blockPoint)
+        this.gl.bindBuffer(this.gl.UNIFORM_BUFFER, null)
 
-        const error = GPU.context.getError();
-        if (error !== GPU.context.NO_ERROR) {
+        const error = this.gl.getError();
+        if (error !== this.gl.NO_ERROR) {
             throw new Error(`(Binding UBO to shader) WebGL error: ${GPUAPI.getWebGLErrorString(error)} ${index} ${this.blockName}`)
         }
     }
 
     bind() {
-        GPU.context.bindBuffer(GPU.context.UNIFORM_BUFFER, this.buffer)
+        this.gl.bindBuffer(this.gl.UNIFORM_BUFFER, this.buffer)
     }
 
     unbind() {
-        GPU.context.bindBuffer(GPU.context.UNIFORM_BUFFER, null)
+        this.gl.bindBuffer(this.gl.UNIFORM_BUFFER, null)
     }
 
     updateData(name, data) {
-        GPU.context.bufferSubData(GPU.context.UNIFORM_BUFFER, this.items[name].offset, data, 0, null)
+        this.gl.bufferSubData(this.gl.UNIFORM_BUFFER, this.items[name].offset, data, 0, null)
     }
 
     updateBuffer(data) {
-        GPU.context.bufferSubData(GPU.context.UNIFORM_BUFFER, 0, data, 0, null)
+        this.gl.bufferSubData(this.gl.UNIFORM_BUFFER, 0, data, 0, null)
     }
 
     static #calculate(dataArray: Data[]): number {
