@@ -1,4 +1,4 @@
-import METRICS_FLAGS, {REVERSED_METRICS_FLAGS} from "../../static/METRICS_FLAGS"
+import METRICS_FLAGS, {REVERSED_METRICS_FLAGS} from "../static/METRICS_FLAGS"
 
 let started = false
 export default class MetricsController {

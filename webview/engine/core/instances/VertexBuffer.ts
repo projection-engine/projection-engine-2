@@ -1,4 +1,4 @@
-import GPUAPI from "../lib/rendering/GPUAPI"
+import GPUAPI from "../services/GPUAPI"
 import GPU from "../GPU"
 
 export default class VertexBuffer {

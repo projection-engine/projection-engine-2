@@ -1,11 +1,11 @@
 import CameraTracker from "../../../engine/tools/utils/CameraTracker"
 import Engine from "@engine-core/Engine"
 import GPU from "@engine-core/GPU"
-import PickingAPI from "@engine-core/lib/utils/PickingAPI"
-import QueryAPI from "@engine-core/lib/utils/QueryAPI"
+import PickingAPI from "@engine-core/services/PickingAPI"
+import QueryAPI from "@engine-core/services/QueryAPI"
 import DepthPrePassSystem from "@engine-core/runtime/DepthPrePassSystem"
 import EngineTools from "../../../engine/tools/EngineTools"
-import StaticFBO from "@engine-core/lib/StaticFBO";
+import StaticFBO from "@engine-core/repositories/StaticFBO";
 import SelectionStore from "@lib/stores/SelectionStore";
 import {ViewType} from "../components/view/ViewDefinitions";
 import {Inject, Injectable} from "@lib/Injection";

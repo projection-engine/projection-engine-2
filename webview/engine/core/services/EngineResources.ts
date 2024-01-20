@@ -1,9 +1,9 @@
 import Physics from "../runtime/Physics"
-import StaticUBOs from "./StaticUBOs"
+import StaticUBOs from "../repositories/StaticUBOs"
 import DepthPrePassSystem from "../runtime/DepthPrePassSystem"
 import EngineState from "../EngineState"
 import SSGISystem from "../runtime/SSGISystem"
-import StaticFBO from "./StaticFBO"
+import StaticFBO from "../repositories/StaticFBO"
 import DirectionalShadowsSystem from "../runtime/DirectionalShadowsSystem"
 
 

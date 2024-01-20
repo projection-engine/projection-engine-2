@@ -1,5 +1,5 @@
 import getGlslSizes from "../utils/get-glsl-sizes"
-import GPUAPI from "@engine-core/lib/rendering/GPUAPI";
+import GPUAPI from "@engine-core/services/GPUAPI";
 import IEngineResource from "@engine-core/IEngineResource";
 
 interface Item {
@@ -25,7 +25,7 @@ export default class UBO extends IEngineResource<UBO>{
     blockPoint?: number
     static #blockPointIncrement = 0
 
- 
+
     initialize(blockName: string, dataArray: Data[]){
         const bufferSize = UBO.#calculate(dataArray)
         for (let i = 0; i < dataArray.length; i++) {
@@ -69,8 +69,10 @@ export default class UBO extends IEngineResource<UBO>{
         this.gl.bindBuffer(this.gl.UNIFORM_BUFFER, null)
     }
 
-    updateData(name, data) {
-        this.gl.bufferSubData(this.gl.UNIFORM_BUFFER, this.items[name].offset, data, 0, null)
+    updateData(name: string, data: Float32Array | Uint8Array) {
+        if(this.items[name] != null) {
+            this.gl.bufferSubData(this.gl.UNIFORM_BUFFER, this.items[name].offset, data, 0, null)
+        }
     }
 
     updateBuffer(data) {

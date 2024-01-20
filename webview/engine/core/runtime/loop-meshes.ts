@@ -1,4 +1,4 @@
-import MeshResourceMapper from "../lib/MeshResourceMapper"
+import MeshResourceMapper from "../repositories/MeshResourceMapper"
 import Entity from "@engine-core/instances/Entity";
 import Mesh from "@engine-core/instances/Mesh";
 

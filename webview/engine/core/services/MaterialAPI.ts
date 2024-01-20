@@ -1,12 +1,12 @@
-import GPU from "../../GPU"
-import DATA_TYPES from "../../static/DATA_TYPES"
+import GPU from "../GPU"
+import DATA_TYPES from "../static/DATA_TYPES"
 import GPUAPI from "./GPUAPI"
 
-import FileSystemAPI from "../utils/FileSystemAPI"
-import Material from "../../instances/Material"
-import MaterialUniform from "../../static/MaterialUniform"
-import TextureParams from "../../static/TextureParams"
-import TextureInUse from "../../static/TextureInUse"
+import FileSystemAPI from "./FileSystemAPI"
+import Material from "../instances/Material"
+import MaterialUniform from "../static/MaterialUniform"
+import TextureParams from "../static/TextureParams"
+import TextureInUse from "../static/TextureInUse"
 
 export default class MaterialAPI {
 	static #generator?: Generator<number>

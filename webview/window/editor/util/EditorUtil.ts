@@ -1,4 +1,4 @@
-import ScriptsAPI from "@engine-core/lib/utils/ScriptsAPI"
+import ScriptsAPI from "@engine-core/services/ScriptsAPI"
 import SelectionStore from "@lib/stores/SelectionStore"
 import LocalizationEN from "@enums/LocalizationEN"
 import Entity from "@engine-core/instances/Entity"
@@ -6,7 +6,7 @@ import Engine from "@engine-core/Engine"
 import CameraTracker from "../../../engine/tools/utils/CameraTracker"
 import COMPONENTS from "@engine-core/static/COMPONENTS"
 import IPCRoutes from "@enums/IPCRoutes"
-import QueryAPI from "@engine-core/lib/utils/QueryAPI"
+import QueryAPI from "@engine-core/services/QueryAPI"
 import GIZMOS from "@enums/Gizmos"
 import GizmoState from "../../../engine/tools/gizmo/util/GizmoState";
 import GizmoUtil from "../../../engine/tools/gizmo/util/GizmoUtil";
@@ -49,13 +49,13 @@ export default class EditorUtil extends IInjectable {
         if (!focused || isCamera && cameraTarget.id !== focused) {
             const current = isCamera ? cameraTarget : EditorUtil.engine.entities.get(SelectionStore.getMainEntity())
             if (current && current.cameraComponent) {
-                EditorUtil.executionService.cameraSerialization = EditorUtil.engine.getCamera().serializeState()
+                // EditorUtil.executionService.cameraSerialization = EditorUtil.engine.getCamera().serializeState()
                 CameraTracker.stopTracking()
                 EditorUtil.engine.getCamera().updateViewTarget(current)
                 EditorUtil.settingsStore.updateStore({focusedCamera: current.id})
             }
         } else {
-            EditorUtil.engine.getCamera().restoreState(EditorUtil.executionService.cameraSerialization)
+            // EditorUtil.engine.getCamera().restoreState(EditorUtil.executionService.cameraSerialization)
             CameraTracker.startTracking()
             EditorUtil.settingsStore.updateStore({focusedCamera: undefined})
         }

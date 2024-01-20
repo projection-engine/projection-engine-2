@@ -1,9 +1,9 @@
 import ENVIRONMENT from "@engine-core/static/ENVIRONMENT"
 import CameraTracker from "@engine-tools/utils/CameraTracker"
-import UIAPI from "@engine-core/lib/rendering/UIAPI"
+import UIAPI from "@engine-core/services/UIAPI"
 import Engine from "@engine-core/Engine"
-import ScriptsAPI from "@engine-core/lib/utils/ScriptsAPI"
-import ResourceEntityMapper from "@engine-core/lib/ResourceEntityMapper"
+import ScriptsAPI from "@engine-core/services/ScriptsAPI"
+import ResourceEntityMapper from "@engine-core/repositories/ResourceEntityMapper"
 import LocalizationEN from "@enums/LocalizationEN"
 import {Inject, Injectable, LazyInject} from "@lib/Injection";
 import ProjectService from "@services/ProjectService";
@@ -34,7 +34,6 @@ export default class ExecutionService extends IInjectable{
         }
         ExecutionService.toasterService.warn(LocalizationEN.SAVING_STATE)
 
-        this.cameraSerialization = ExecutionService.engine.getCamera().serializeState()
         this.#isPlaying = true
         CameraTracker.stopTracking()
         await ExecutionService.engine.startSimulation()
@@ -59,7 +58,7 @@ export default class ExecutionService extends IInjectable{
         ExecutionService.engine.getCamera().trackingEntity = undefined
         CameraTracker.startTracking()
         ExecutionService.settingsStore.updateStore({executingAnimation: false})
-        ExecutionService.engine.getCamera().restoreState(this.cameraSerialization)
+        // ExecutionService.engine.getCamera().restoreState(this.cameraSerialization)
     }
 
 }

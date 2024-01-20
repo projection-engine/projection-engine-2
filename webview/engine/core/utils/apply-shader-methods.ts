@@ -12,8 +12,8 @@ import BRDF_FUNCTIONS from "../shaders/uber-shader/lights/BRDF_FUNCTIONS.glsl"
 import STRONG_BLUR from "../shaders/functions/STRONG_BLUR.glsl"
 import UBER_ATTRIBUTES from "../shaders/uber-shader/ATTRIBUTES.glsl"
 import SSS from "../shaders/uber-shader/lights/SSS.glsl"
-import UberShader from "../lib/UberShader"
-import {StaticUBONames} from "../lib/StaticUBOs"
+import UberShader from "../repositories/UberShader"
+import {StaticUBONames} from "../repositories/StaticUBOs"
 
 const METHODS = {
 	cameraViewInfo: "//import(cameraViewInfo)",

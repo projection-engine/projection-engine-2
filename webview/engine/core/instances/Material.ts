@@ -1,4 +1,4 @@
-import MaterialAPI from "../lib/rendering/MaterialAPI"
+import MaterialAPI from "../services/MaterialAPI"
 import MaterialUniform from "../static/MaterialUniform"
 import TextureInUse from "../static/TextureInUse"
 import MATERIAL_RENDERING_TYPES from "../static/MATERIAL_RENDERING_TYPES"

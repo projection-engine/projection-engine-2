@@ -1,13 +1,13 @@
 import Component from "./Component"
 
 import MESH_PROPS from "../../static/component-props/MESH_PROPS"
-import MaterialAPI from "../../lib/rendering/MaterialAPI"
+import MaterialAPI from "../../services/MaterialAPI"
 import GPU from "../../GPU"
-import FileSystemAPI from "../../lib/utils/FileSystemAPI"
-import MeshResourceMapper from "../../lib/MeshResourceMapper"
-import MaterialResourceMapper from "../../lib/MaterialResourceMapper"
+import FileSystemAPI from "../../services/FileSystemAPI"
+import MeshResourceMapper from "../../repositories/MeshResourceMapper"
+import MaterialResourceMapper from "../../repositories/MaterialResourceMapper"
 import MaterialUniform from "../../static/MaterialUniform"
-import EntityAPI from "../../lib/utils/EntityAPI"
+import EntityAPI from "../../services/EntityAPI"
 import COMPONENTS from "../../static/COMPONENTS"
 
 export default class MeshComponent extends Component {

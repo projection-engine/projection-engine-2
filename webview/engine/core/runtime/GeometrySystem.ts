@@ -1,5 +1,5 @@
-import StaticFBO from "../lib/StaticFBO"
-import UberShader from "../lib/UberShader"
+import StaticFBO from "../repositories/StaticFBO"
+import UberShader from "../repositories/UberShader"
 import SceneRenderer from "./renderers/SceneRenderer"
 import SpriteRenderer from "./renderers/SpriteRenderer"
 import DecalRenderer from "./renderers/DecalRenderer"

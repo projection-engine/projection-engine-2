@@ -1,7 +1,7 @@
 import GPU from "../../core/GPU"
 
-import StaticMeshes from "../../core/lib/StaticMeshes"
-import StaticFBO from "../../core/lib/StaticFBO"
+import StaticMeshes from "@engine-core/repositories/StaticMeshes"
+import StaticFBO from "@engine-core/repositories/StaticFBO"
 import StaticEditorShaders from "../utils/StaticEditorShaders"
 import EngineTools from "../EngineTools"
 import EngineToolsState from "../EngineToolsState"

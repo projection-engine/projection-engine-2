@@ -1,4 +1,4 @@
-import PickingAPI from "../../../core/lib/utils/PickingAPI"
+import PickingAPI from "@engine-core/services/PickingAPI"
 import AXIS from "../../static/AXIS"
 import Axis from "../../static/AXIS"
 import GizmoState from "./GizmoState"

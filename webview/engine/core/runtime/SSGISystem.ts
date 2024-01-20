@@ -1,14 +1,14 @@
 import GPU from "../GPU"
-import StaticMeshes from "../lib/StaticMeshes"
-import StaticFBO from "../lib/StaticFBO"
-import StaticShaders from "../lib/StaticShaders"
+import StaticMeshes from "../repositories/StaticMeshes"
+import StaticFBO from "../repositories/StaticFBO"
+import StaticShaders from "../repositories/StaticShaders"
 import Framebuffer from "../instances/Framebuffer"
-import MetricsController from "../lib/utils/MetricsController"
+import MetricsController from "../services/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import EngineState from "../EngineState"
 import GPUUtil from "../utils/GPUUtil";
 import AbstractSystem from "@engine-core/IEngineSystem";
-import GPUAPI from "@engine-core/lib/rendering/GPUAPI";
+import GPUAPI from "@engine-core/services/GPUAPI";
 
 let cleared = false
 export default class SSGISystem extends AbstractSystem{

@@ -1,6 +1,6 @@
-import Ammo from "../Ammo.js"
-import COLLISION_TYPES from "../../static/COLLISION_TYPES"
-import Entity from "../../instances/Entity"
+import Ammo from "../lib/Ammo.js"
+import COLLISION_TYPES from "../static/COLLISION_TYPES"
+import Entity from "../instances/Entity"
 
 const COLLISION = "COLLISION",
 	DISPATCHER = "DISPATCHER",

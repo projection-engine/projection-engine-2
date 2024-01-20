@@ -1,7 +1,7 @@
 import {mat4} from "gl-matrix"
 import Mesh from "./Mesh"
 import getProbeRotation from "../utils/get-probe-rotation"
-import CubeMapAPI from "../lib/rendering/CubeMapAPI"
+import CubeMapAPI from "../services/CubeMapAPI"
 import GPU from "../GPU"
 
 const cacheMat4 = mat4.create()

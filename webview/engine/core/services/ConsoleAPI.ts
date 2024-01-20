@@ -1,5 +1,5 @@
-import parseMessage from "./parse-console-message"
-import MessageInterface from "../../static/MessageInterface"
+import MessageInterface from "../static/MessageInterface"
+import serializeStructure from "@engine-core/utils/serialize-structure";
 
 export enum Types {
     ERROR = "ERROR",
@@ -22,7 +22,7 @@ export default class ConsoleAPI {
 	}
 
 	static #pushMessages(type, messages, src = null) {
-		ConsoleAPI.#messages.push(...parseMessage(messages, type, src))
+		ConsoleAPI.#messages.push(...ConsoleAPI.parseMessage(messages, type, src))
 
 		ConsoleAPI.#metadata.errors += type === Types.ERROR ? 1 : 0
 		ConsoleAPI.#metadata.logs += type === Types.LOG ? 1 : 0
@@ -73,6 +73,31 @@ export default class ConsoleAPI {
 
 	static get TYPES() {
 		return Types
+	}
+
+	 static parseMessage(messages: any[], type, src):MessageInterface[] {
+		const parts:MessageInterface[] = []
+		for (let i = 0; i < messages.length; i++) {
+			const blockID =crypto.randomUUID()
+			if (typeof messages[i] === "object") {
+				const str = messages[i]?.constructor === Object ? "Plain Object" : messages[i].constructor.name
+				parts.push(...str.split("\n").map((message, i) => ({
+					type,
+					message: message + " " + messages[i].toString(),
+					object: serializeStructure(messages[i]),
+					blockID,
+					src,
+					notFirstOnBlock: i > 0
+				})))
+			} else
+				parts.push({
+					type,
+					message: messages[i],
+					blockID,
+					src
+				})
+		}
+		return parts
 	}
 }
 

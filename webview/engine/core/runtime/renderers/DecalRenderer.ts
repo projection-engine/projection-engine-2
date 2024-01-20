@@ -1,5 +1,5 @@
 import GPU from "../../GPU"
-import MetricsController from "../../lib/utils/MetricsController"
+import MetricsController from "../../services/MetricsController"
 import METRICS_FLAGS from "../../static/METRICS_FLAGS"
 import SceneRenderer from "./SceneRenderer"
 

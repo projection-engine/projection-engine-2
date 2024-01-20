@@ -19,10 +19,10 @@ import ResourceManager from "@engine-core/runtime/ResourceManager";
 import Physics from "@engine-core/runtime/Physics";
 import ProjectionEngine from "@lib/ProjectionEngine";
 import ENVIRONMENT from "@engine-core/static/ENVIRONMENT";
-import UIAPI from "@engine-core/lib/rendering/UIAPI";
+import UIAPI from "@engine-core/services/UIAPI";
 import GPU from "@engine-core/GPU";
-import PhysicsSystem from "@engine-core/lib/rendering/PhysicsAPI";
-import ScriptsAPI from "@engine-core/lib/utils/ScriptsAPI";
+import PhysicsSystem from "@engine-core/services/PhysicsAPI";
+import ScriptsAPI from "@engine-core/services/ScriptsAPI";
 
 export default class SystemService extends IEngineSingleton {
     #rootSystem: IEngineSystem

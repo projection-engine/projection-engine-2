@@ -91,14 +91,14 @@ export default class CameraTracker {
 			changed = true
 		}
 		if (map.backward) {
-			if (ProjectionEngine.Engine.getCamera().isOrthographic)
+			if (ProjectionEngine.Engine.getCamera().isOrthographic())
 				ProjectionEngine.Engine.getCamera().orthographicProjectionSize += multiplier
 			else
 				toApplyTranslation[2] += multiplier
 			changed = true
 		}
 		if (map.forward) {
-			if (ProjectionEngine.Engine.getCamera().isOrthographic)
+			if (ProjectionEngine.Engine.getCamera().isOrthographic())
 				ProjectionEngine.Engine.getCamera().orthographicProjectionSize -= multiplier
 			else
 				toApplyTranslation[2] -= multiplier
@@ -259,7 +259,7 @@ export default class CameraTracker {
 
 				event.preventDefault()
 				const multiplier = event.ctrlKey ? 10 * 2 : 2
-				if (ProjectionEngine.Engine.getCamera().isOrthographic)
+				if (ProjectionEngine.Engine.getCamera().isOrthographic())
 					ProjectionEngine.Engine.getCamera().orthographicProjectionSize += multiplier * Math.sign(event.deltaY)
 				else {
 					toApplyTranslation[0] = toApplyTranslation[1] = 0

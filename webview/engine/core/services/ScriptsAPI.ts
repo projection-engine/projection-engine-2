@@ -1,12 +1,12 @@
-import GPU from "../../GPU"
-import GPUAPI from "../rendering/GPUAPI"
-import PhysicsAPI from "../rendering/PhysicsAPI"
-import UIAPI from "../rendering/UIAPI"
+import GPU from "../GPU"
+import GPUAPI from "./GPUAPI"
+import PhysicsAPI from "./PhysicsAPI"
+import UIAPI from "./UIAPI"
 import InputEventsAPI from "./InputEventsAPI"
 import ConsoleAPI from "./ConsoleAPI"
-import Component from "../../instances/components/Component"
-import COMPONENTS from "../../static/COMPONENTS"
-import CameraAPI from "./CameraAPI"
+import Component from "../instances/components/Component"
+import COMPONENTS from "../static/COMPONENTS"
+import CameraRepository from "../repositories/CameraRepository"
 import QueryAPI from "./QueryAPI"
 import FileSystemAPI from "./FileSystemAPI"
 import EntityAPI from "./EntityAPI"
@@ -54,9 +54,9 @@ export default class ScriptsAPI {
 		if (!scriptData)
 			return
 		try {
-			const generator = new Function("GPU, GPUAPI, PhysicsAPI, UIAPI, EntityAPI, InputEventsAPI, ConsoleAPI, Component, COMPONENTS, CameraAPI, QueryAPI, entity, FileSystemAPI", scriptData)
+			const generator = new Function("GPU, GPUAPI, PhysicsAPI, UIAPI, EntityAPI, InputEventsAPI, ConsoleAPI, Component, COMPONENTS, CameraRepository, QueryAPI, entity, FileSystemAPI", scriptData)
 			try {
-				const script = generator(GPU, GPUAPI, PhysicsAPI, UIAPI, EntityAPI, InputEventsAPI, ConsoleAPI, Component, COMPONENTS, CameraAPI, QueryAPI, entity, FileSystemAPI)
+				const script = generator(GPU, GPUAPI, PhysicsAPI, UIAPI, EntityAPI, InputEventsAPI, ConsoleAPI, Component, COMPONENTS, CameraRepository, QueryAPI, entity, FileSystemAPI)
 				if (index > -1) {
 					const ref = entity.scripts[index]
 					Object.entries(ref).forEach(([key, value]) => {

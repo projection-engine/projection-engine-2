@@ -10,11 +10,11 @@ import Entity from "../core/instances/Entity"
 import GPU from "../core/GPU"
 import StaticEditorMeshes from "./utils/StaticEditorMeshes"
 import StaticEditorShaders from "./utils/StaticEditorShaders"
-import StaticFBO from "../core/lib/StaticFBO"
+import StaticFBO from "@engine-core/repositories/StaticFBO"
 import GizmoState from "./gizmo/util/GizmoState"
 import StaticEditorFBO from "./utils/StaticEditorFBO";
 import GPUUtil from "../core/utils/GPUUtil";
-import ConversionAPI from "../core/lib/math/ConversionAPI";
+import ConversionAPI from "@engine-core/services/ConversionAPI";
 import EngineToolsState from "./EngineToolsState";
 import ProjectionEngine from "@lib/ProjectionEngine";
 import RotationGizmo from "@engine-tools/gizmo/transformation/RotationGizmo";

@@ -1,9 +1,9 @@
 import Component from "./Component"
 import LIGHT_PROPS from "../../static/component-props/LIGHT_PROPS"
 import LIGHT_TYPES from "../../static/LIGHT_TYPES"
-import LightsService from "../../lib/utils/LightsService"
+import LightsService from "../../services/LightsService"
 import {mat4} from "gl-matrix"
-import EntityAPI from "../../lib/utils/EntityAPI"
+import EntityAPI from "../../services/EntityAPI"
 import COMPONENTS from "../../static/COMPONENTS"
 
 

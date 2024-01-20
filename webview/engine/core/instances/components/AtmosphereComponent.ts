@@ -2,7 +2,7 @@ import Component from "./Component"
 import ATMOSPHERE_PROPS from "../../static/component-props/ATMOSPHERE_PROPS"
 import ATMOSPHERE_TYPES from "../../static/ATMOSPHERE_TYPES"
 import {mat4, vec3} from "gl-matrix"
-import LightsService from "../../lib/utils/LightsService"
+import LightsService from "../../services/LightsService"
 import COMPONENTS from "../../static/COMPONENTS"
 
 

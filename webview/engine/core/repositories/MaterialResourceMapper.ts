@@ -1,7 +1,7 @@
 import Material from "../instances/Material"
 import Entity from "../instances/Entity"
 import GPU from "../GPU"
-import ResourceMapper from "./ResourceMapper"
+import ResourceMapper from "../lib/ResourceMapper"
 
 
 type Resource = { material: Material, entities: Entity[], entitiesMap: Map<string, Entity> }[]

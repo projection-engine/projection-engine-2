@@ -1,7 +1,7 @@
 import VertexBuffer from "./VertexBuffer"
 
 import GPU from "../GPU"
-import GPUAPI from "../lib/rendering/GPUAPI"
+import GPUAPI from "../services/GPUAPI"
 import ProjectionEngine from "@lib/ProjectionEngine";
 
 export interface MeshProps {

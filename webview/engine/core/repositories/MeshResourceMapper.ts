@@ -1,7 +1,7 @@
 import Mesh from "../instances/Mesh"
 import Entity from "../instances/Entity"
 import GPU from "../GPU"
-import ResourceMapper from "./ResourceMapper"
+import ResourceMapper from "../lib/ResourceMapper"
 
 type Resource = { mesh: Mesh, entities: Entity[], entitiesMap: Map<string, Entity> }[]
 export default class MeshResourceMapper {

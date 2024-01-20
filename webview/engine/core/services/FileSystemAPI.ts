@@ -1,6 +1,6 @@
-import GPU from "../../GPU"
-import GPUAPI from "../rendering/GPUAPI"
-import MaterialInformation from "../../static/MaterialInformation"
+import GPU from "../GPU"
+import GPUAPI from "./GPUAPI"
+import MaterialInformation from "../static/MaterialInformation"
 
 
 export default class FileSystemAPI {

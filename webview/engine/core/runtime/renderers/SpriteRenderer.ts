@@ -1,8 +1,8 @@
 import GPU from "../../GPU"
-import ResourceEntityMapper from "../../lib/ResourceEntityMapper"
-import StaticShaders from "../../lib/StaticShaders"
-import StaticMeshes from "../../lib/StaticMeshes"
-import MetricsController from "../../lib/utils/MetricsController"
+import ResourceEntityMapper from "../../repositories/ResourceEntityMapper"
+import StaticShaders from "../../repositories/StaticShaders"
+import StaticMeshes from "../../repositories/StaticMeshes"
+import MetricsController from "../../services/MetricsController"
 import METRICS_FLAGS from "../../static/METRICS_FLAGS"
 import GPUUtil from "../../utils/GPUUtil";
 

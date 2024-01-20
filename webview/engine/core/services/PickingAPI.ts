@@ -1,6 +1,6 @@
-import ConversionAPI from "../math/ConversionAPI"
-import GPU from "../../GPU"
-import StaticFBO from "../StaticFBO"
+import ConversionAPI from "./ConversionAPI"
+import GPU from "../GPU"
+import StaticFBO from "../repositories/StaticFBO"
 
 export default class PickingAPI {
     static readBlock(start, end) {

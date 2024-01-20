@@ -1,4 +1,4 @@
-import Entity from "../../instances/Entity"
+import Entity from "../instances/Entity"
 import ProjectionEngine from "@lib/ProjectionEngine";
 
 export default class QueryAPI {

@@ -1,5 +1,5 @@
-import GPU from "../../GPU"
-import LightProbe from "../../instances/LightProbe"
+import GPU from "../GPU"
+import LightProbe from "../instances/LightProbe"
 import IEngineSingleton from "@engine-core/IEngineSingleton";
 
 
