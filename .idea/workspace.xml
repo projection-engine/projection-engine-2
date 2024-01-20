@@ -19,9 +19,13 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-33] Engine refactoring: systems&#10;- Moving to service things related to systems&#10;- Organizing engine&#10;- Optimizing imports">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-33] Engine refactoring: systems&#10;- Removing console.log&#10;- changing singletons map to reference class name instead of class type">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/Engine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/Engine.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/IEngineSingleton.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/IEngineSingleton.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/lib/CameraNotificationDecoder.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/lib/utils/CameraAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/utils/CameraAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/runtime/CameraSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/CameraSystem.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/workers/camera-worker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/workers/camera-worker.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +49,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="42-window-frame" />
+        <entry key="$PROJECT_DIR$" value="33-engine-refactoring-1" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -111,7 +115,7 @@
     &quot;Shell Script.copy-files.executor&quot;: &quot;Run&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;33-engine-refactoring-1&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;53-engine-refactoring-camera&quot;,
     &quot;js.last.introduce.type&quot;: &quot;CONST&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/russi/WebstormProjects/projection-engine-2/test/core&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -310,7 +314,11 @@
       <workItem from="1705173861585" duration="7770000" />
       <workItem from="1705231012356" duration="5971000" />
       <workItem from="1705255663671" duration="13236000" />
-      <workItem from="1705441389560" duration="4973000" />
+      <workItem from="1705441389560" duration="5561000" />
+      <workItem from="1705526704164" duration="3253000" />
+      <workItem from="1705530447128" duration="805000" />
+      <workItem from="1705704136356" duration="343000" />
+      <workItem from="1705745009704" duration="609000" />
     </task>
     <task id="LOCAL-00001" summary="[STD-1] Organizing project&#10;- removing unused C++ classes&#10;- Refactoring files&#10;- Renaming c++ namespaces and project &#10;- Moving future webview stuff">
       <option name="closed" value="true" />
@@ -688,11 +696,24 @@
       <option name="project" value="LOCAL" />
       <updated>1705446355163</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="[STD-33] Engine refactoring: systems&#10;- Removing console.log&#10;- changing singletons map to reference class name instead of class type">
+      <option name="closed" value="true" />
+      <created>1705446534345</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1705446534345</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/webview/engine/core/Engine.d.ts" />
+      </list>
+    </option>
   </component>
   <component name="VCPKGProject">
     <isAutomaticCheckingOnLaunch value="false" />
@@ -712,7 +733,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-6] Project window&#10;- Finishing rework of window system" />
     <MESSAGE value="[STD-6] Project scheme&#10;- Removing unused classes&#10;- Removing project window&#10;- Adding window resize&#10;- Fixing fetch errors&#10;- Enabling editor initialization without project path" />
     <MESSAGE value="[STD-30] Engine initialization&#10;- Removed async engine initalization&#10;- Fixed window name" />
     <MESSAGE value="[STD-27] Abstract singleton&#10;- Changing all stores to be accessed via the ProjectionEngine singleton" />
@@ -737,7 +757,8 @@
     <MESSAGE value="[STD-33]  Starting refactoring&#10;- Engine refactoring&#10;- Improving systems&#10;- Creating IManageable class&#10;- Creating structure for managing classes with async initialization&#10;- Removing footer component&#10;- Removing unused classes &#10;- Refactoring worker methods into normal functions" />
     <MESSAGE value="[STD-33]  Starting refactoring&#10;- Fixing camera decoder&#10;- Introducing Engine resource class&#10;- Fixing initialization problems&#10;- Creating new system pipeline&#10;- Fixing engine rendering" />
     <MESSAGE value="[STD-33] Engine refactoring: systems&#10;- Moving to service things related to systems&#10;- Organizing engine&#10;- Optimizing imports" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-33] Engine refactoring: systems&#10;- Moving to service things related to systems&#10;- Organizing engine&#10;- Optimizing imports" />
+    <MESSAGE value="[STD-33] Engine refactoring: systems&#10;- Removing console.log&#10;- changing singletons map to reference class name instead of class type" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-33] Engine refactoring: systems&#10;- Removing console.log&#10;- changing singletons map to reference class name instead of class type" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

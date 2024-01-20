@@ -1,77 +1,29 @@
 import {mat4, quat, vec3} from "gl-matrix"
 import copyWithOffset from "../utils/copy-with-offset"
-import CameraNotificationDecoder from "@engine-core/lib/CameraNotificationDecoder";
+import CameraAPI from "@engine-core/lib/utils/CameraAPI";
+import StaticUBOs from "@engine-core/lib/StaticUBOs";
+import GPU from "@engine-core/GPU";
+import DepthPrePassSystem from "@engine-core/runtime/DepthPrePassSystem";
 
 
-class CameraWorker {
+export default class CameraWorker {
     static needsUpdate = false
-    static translationBuffer: Float32Array
-    static rotationBuffer: Float32Array
-    static notificationBuffers: Float32Array
-    static position: Float32Array
-    static viewMatrix: Float32Array
-    static projectionMatrix: Float32Array
-    static invViewMatrix: Float32Array
-    static invProjectionMatrix: Float32Array
-    static viewProjectionMatrix: Float32Array
-    static staticViewMatrix: Float32Array
-    static initialized = false
-    static projectionBuffer: Float32Array
-    static skyboxProjectionMatrix: Float32Array
-    static invSkyboxProjectionMatrix: Float32Array
     static currentTranslation = vec3.create()
     static currentRotation = quat.create()
-    static projectionUBOBuffer: Float32Array
-    static viewUBOBuffer: Float32Array
-    static decoder: CameraNotificationDecoder;
+    static camera: CameraAPI;
 
-    static initialize(data: Float32Array[]) {
-        const [
-            notificationBuffers,
-            position,
-            viewMatrix,
-            projectionMatrix,
-            invViewMatrix,
-            invProjectionMatrix,
-            staticViewMatrix,
-            translationBuffer,
-            rotationBuffer,
-            skyboxProjectionMatrix,
-            invSkyboxProjectionMatrix,
-            projectionBuffer,
-            viewProjectionMatrix,
-            viewUBOBuffer,
-            projectionUBOBuffer
-        ] = data
-        if (CameraWorker.initialized)
-            return
+    static initialize(camera: CameraAPI) {
 
-        CameraWorker.viewProjectionMatrix = viewProjectionMatrix
-        CameraWorker.projectionBuffer = projectionBuffer
-        CameraWorker.initialized = true
-        CameraWorker.position = position
-        CameraWorker.viewMatrix = viewMatrix
-        CameraWorker.projectionMatrix = projectionMatrix
-        CameraWorker.invViewMatrix = invViewMatrix
-        CameraWorker.invProjectionMatrix = invProjectionMatrix
-        CameraWorker.staticViewMatrix = staticViewMatrix
-        CameraWorker.translationBuffer = translationBuffer
-        CameraWorker.rotationBuffer = rotationBuffer
-        CameraWorker.notificationBuffers = notificationBuffers
-        CameraWorker.skyboxProjectionMatrix = skyboxProjectionMatrix
-        CameraWorker.invSkyboxProjectionMatrix = invSkyboxProjectionMatrix
-        vec3.copy(CameraWorker.currentTranslation, CameraWorker.translationBuffer)
-        quat.copy(CameraWorker.currentRotation, CameraWorker.rotationBuffer)
-        CameraWorker.viewUBOBuffer = viewUBOBuffer
-        CameraWorker.projectionUBOBuffer = projectionUBOBuffer
-        CameraWorker.decoder = new CameraNotificationDecoder(notificationBuffers)
+        CameraWorker.camera = camera
+        vec3.copy(CameraWorker.currentTranslation, CameraWorker.camera.translationBuffer)
+        quat.copy(CameraWorker.currentRotation, CameraWorker.camera.rotationBuffer)
 
-        mat4.multiply(CameraWorker.viewProjectionMatrix, CameraWorker.projectionMatrix, CameraWorker.viewMatrix)
+        mat4.multiply(CameraWorker.camera.viewProjectionMatrix, CameraWorker.camera.projectionMatrix, CameraWorker.camera.viewMatrix)
     }
 
     static updateProjection() {
-        const isOrthographic = CameraWorker.decoder.projectionType === CameraWorker.decoder.ORTHOGRAPHIC
-        const buffer = CameraWorker.projectionBuffer
+        const isOrthographic = CameraWorker.camera.isOrthographic
+        const buffer = CameraWorker.camera.projectionBuffer
 
 
         const aR = buffer[3]
@@ -80,93 +32,87 @@ class CameraWorker {
         const zNear = buffer[1]
         const orthographicProjectionSize = buffer[4]
         if (isOrthographic)
-            mat4.ortho(CameraWorker.projectionMatrix, -orthographicProjectionSize, orthographicProjectionSize, -orthographicProjectionSize / aR, orthographicProjectionSize / aR, -zFar, zFar)
+            mat4.ortho(CameraWorker.camera.projectionMatrix, -orthographicProjectionSize, orthographicProjectionSize, -orthographicProjectionSize / aR, orthographicProjectionSize / aR, -zFar, zFar)
         else {
-            mat4.perspective(CameraWorker.projectionMatrix, fov, aR, zNear, zFar)
-            mat4.perspective(CameraWorker.skyboxProjectionMatrix, fov, aR, .1, 1000)
-            mat4.invert(CameraWorker.invSkyboxProjectionMatrix, CameraWorker.skyboxProjectionMatrix)
+            mat4.perspective(CameraWorker.camera.projectionMatrix, fov, aR, zNear, zFar)
+            mat4.perspective(CameraWorker.camera.skyboxProjectionMatrix, fov, aR, .1, 1000)
+            mat4.invert(CameraWorker.camera.invSkyboxProjectionMatrix, CameraWorker.camera.skyboxProjectionMatrix)
         }
 
-        mat4.invert(CameraWorker.invProjectionMatrix, CameraWorker.projectionMatrix)
-        mat4.multiply(CameraWorker.viewProjectionMatrix, CameraWorker.projectionMatrix, CameraWorker.viewMatrix)
+        mat4.invert(CameraWorker.camera.invProjectionMatrix, CameraWorker.camera.projectionMatrix)
+        mat4.multiply(CameraWorker.camera.viewProjectionMatrix, CameraWorker.camera.projectionMatrix, CameraWorker.camera.viewMatrix)
         CameraWorker.updateUBO()
     }
 
     static updateStaticViewMatrix() {
-        const matrix = mat4.copy(CameraWorker.staticViewMatrix, CameraWorker.viewMatrix)
+        const matrix = mat4.copy(CameraWorker.camera.staticViewMatrix, CameraWorker.camera.viewMatrix)
         matrix[12] = matrix[13] = matrix[14] = 0
         return matrix
     }
 
 
     static updateView() {
-        mat4.fromRotationTranslation(CameraWorker.invViewMatrix, CameraWorker.currentRotation, CameraWorker.currentTranslation)
-        mat4.invert(CameraWorker.viewMatrix, CameraWorker.invViewMatrix)
-        const m = CameraWorker.invViewMatrix
-        CameraWorker.position[0] = m[12]
-        CameraWorker.position[1] = m[13]
-        CameraWorker.position[2] = m[14]
+        mat4.fromRotationTranslation(CameraWorker.camera.invViewMatrix, CameraWorker.currentRotation, CameraWorker.currentTranslation)
+        mat4.invert(CameraWorker.camera.viewMatrix, CameraWorker.camera.invViewMatrix)
+        const m = CameraWorker.camera.invViewMatrix
+        CameraWorker.camera.position[0] = m[12]
+        CameraWorker.camera.position[1] = m[13]
+        CameraWorker.camera.position[2] = m[14]
 
-        mat4.multiply(CameraWorker.viewProjectionMatrix, CameraWorker.projectionMatrix, CameraWorker.viewMatrix)
+        mat4.multiply(CameraWorker.camera.viewProjectionMatrix, CameraWorker.camera.projectionMatrix, CameraWorker.camera.viewMatrix)
         CameraWorker.updateUBO()
         CameraWorker.updateStaticViewMatrix()
     }
 
     static updateUBO() {
-        const V = CameraWorker.viewUBOBuffer
-        copyWithOffset(V, CameraWorker.viewProjectionMatrix, 0)
-        copyWithOffset(V, CameraWorker.viewMatrix, 16)
-        copyWithOffset(V, CameraWorker.invViewMatrix, 32)
-        copyWithOffset(V, CameraWorker.position, 48)
+        const V = CameraWorker.camera.viewUBOBuffer
+        copyWithOffset(V, CameraWorker.camera.viewProjectionMatrix, 0)
+        copyWithOffset(V, CameraWorker.camera.viewMatrix, 16)
+        copyWithOffset(V, CameraWorker.camera.invViewMatrix, 32)
+        copyWithOffset(V, CameraWorker.camera.position, 48)
 
-        const P = CameraWorker.projectionUBOBuffer
-        copyWithOffset(P, CameraWorker.projectionMatrix, 0)
-        copyWithOffset(P, CameraWorker.invProjectionMatrix, 16)
+        const P = CameraWorker.camera.projectionUBOBuffer
+        copyWithOffset(P, CameraWorker.camera.projectionMatrix, 0)
+        copyWithOffset(P, CameraWorker.camera.invProjectionMatrix, 16)
     }
 
     static execute() {
-        const didViewChange = CameraWorker.decoder.viewNeedsUpdate === 1
-        CameraWorker.needsUpdate = CameraWorker.needsUpdate || didViewChange
-        const elapsed = CameraWorker.decoder.elapsed
-        CameraWorker.decoder.hasChangedView = 0
-        CameraWorker.decoder.hasChangedProjection = 0
+        CameraWorker.needsUpdate = CameraWorker.needsUpdate || CameraWorker.camera.viewNeedsUpdate
+        const elapsed = CameraWorker.camera.getEngine().elapsed
+        CameraWorker.camera.hasChangedView = false
+        CameraWorker.camera.hasChangedProjection = false
 
         if (CameraWorker.needsUpdate) {
-            const tSmoothing = CameraWorker.decoder.translationSmoothing
+            const tSmoothing = CameraWorker.camera.translationSmoothing
             const incrementTranslation = tSmoothing === 0 ? 1 : 1 - Math.pow(.001, elapsed * tSmoothing)
 
             const lengthTranslationPrev = vec3.length(CameraWorker.currentTranslation)
-            vec3.lerp(CameraWorker.currentTranslation, CameraWorker.currentTranslation, CameraWorker.translationBuffer, incrementTranslation)
+            vec3.lerp(CameraWorker.currentTranslation, CameraWorker.currentTranslation, CameraWorker.camera.translationBuffer, incrementTranslation)
             const lengthTranslationAfter = vec3.length(CameraWorker.currentTranslation)
             const lengthRotationPrev = quat.length(CameraWorker.currentRotation)
-            quat.copy(CameraWorker.currentRotation, CameraWorker.rotationBuffer)
+            quat.copy(CameraWorker.currentRotation, CameraWorker.camera.rotationBuffer)
             const lengthRotationAfter = quat.length(CameraWorker.currentRotation)
 
             const offsetRotation = Math.abs(lengthRotationPrev - lengthRotationAfter)
             const offsetTranslation = Math.abs(lengthTranslationPrev - lengthTranslationAfter)
             if (offsetRotation > 0 || offsetTranslation > 1e-6) {
                 CameraWorker.updateView()
-                CameraWorker.decoder.viewNeedsUpdate = 0
-                CameraWorker.decoder.hasChangedView = 1
+                CameraWorker.camera.viewNeedsUpdate = false
+                CameraWorker.camera.hasChangedView = true
             } else {
                 CameraWorker.needsUpdate = false
-                CameraWorker.decoder.viewNeedsUpdate = 0
-                CameraWorker.decoder.hasChangedView = 0
+                CameraWorker.camera.viewNeedsUpdate = false
+                CameraWorker.camera.hasChangedView = false
             }
         }
 
-        const cameraIsOrthographic = CameraWorker.decoder.projectionType === CameraWorker.decoder.ORTHOGRAPHIC
-        if (CameraWorker.decoder.projectionNeedsUpdate === 1 || cameraIsOrthographic && didViewChange) {
+        const cameraIsOrthographic = CameraWorker.camera.isOrthographic
+        if (CameraWorker.camera.projectionNeedsUpdate || cameraIsOrthographic && CameraWorker.camera.viewNeedsUpdate) {
             CameraWorker.updateProjection()
-            CameraWorker.decoder.hasChangedProjection = 1
-            CameraWorker.decoder.hasChangedView = 1
-            CameraWorker.decoder.projectionNeedsUpdate = 0
+            CameraWorker.camera.hasChangedProjection = true
+            CameraWorker.camera.hasChangedView = true
+            CameraWorker.camera.projectionNeedsUpdate = false
         }
     }
 }
 
-export default function cameraWorker(event?: MutableObject) {
-    if (!CameraWorker.initialized)
-        CameraWorker.initialize(<Float32Array[]>event)
-    CameraWorker.execute()
-}

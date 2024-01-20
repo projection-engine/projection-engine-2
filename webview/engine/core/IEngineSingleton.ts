@@ -18,4 +18,8 @@ export default class IEngineSingleton {
     async initialize() {
     }
 
+    getEngine(): Engine {
+        return this.engine
+    }
+
 }
