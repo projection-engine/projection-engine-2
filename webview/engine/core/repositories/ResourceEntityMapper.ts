@@ -2,7 +2,7 @@ import DynamicMap from "../lib/DynamicMap"
 import type Entity from "../instances/Entity"
 import ENVIRONMENT from "../static/ENVIRONMENT"
 import PhysicsAPI from "../services/PhysicsAPI"
-import UIAPI from "../services/UIAPI"
+import GUIService from "../services/GUIService"
 import ProjectionEngine from "@lib/ProjectionEngine";
 
 export default class ResourceEntityMapper {
@@ -58,7 +58,7 @@ export default class ResourceEntityMapper {
 				data.cameras.push(entity.id, entity)
 			if (entity.uiComponent !== undefined) {
 				data.ui.push(entity.id, entity)
-				UIAPI.createUIEntity(entity)
+				GUIService.createUIEntity(entity)
 			}
 			if (entity.meshComponent !== undefined) {
 				data.meshes.push(entity.id, entity)
@@ -96,7 +96,7 @@ export default class ResourceEntityMapper {
 			ResourceEntityMapper.cameras.set(entity.id, entity)
 		if (entity.uiComponent !== undefined) {
 			ResourceEntityMapper.ui.set(entity.id, entity)
-			UIAPI.createUIEntity(entity)
+			GUIService.createUIEntity(entity)
 		}
 		if (entity.meshComponent !== undefined) {
 			ResourceEntityMapper.meshes.set(entity.id, entity)

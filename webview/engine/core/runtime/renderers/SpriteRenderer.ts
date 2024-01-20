@@ -1,4 +1,4 @@
-import GPU from "../../GPU"
+import GPUService from "../../services/GPUService"
 import ResourceEntityMapper from "../../repositories/ResourceEntityMapper"
 import StaticShaders from "../../repositories/StaticShaders"
 import StaticMeshes from "../../repositories/StaticMeshes"
@@ -13,8 +13,8 @@ export default class SpriteRenderer{
 		if (size === 0)
 			return
 
-		const context = GPU.context
-		const textures = GPU.textures
+		const context = GPUService.context
+		const textures = GPUService.textures
 		const uniforms = StaticShaders.spriteUniforms
 		StaticShaders.sprite.bind()
 		context.activeTexture(context.TEXTURE0)

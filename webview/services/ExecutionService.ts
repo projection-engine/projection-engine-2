@@ -1,6 +1,6 @@
 import ENVIRONMENT from "@engine-core/static/ENVIRONMENT"
 import CameraTracker from "@engine-tools/utils/CameraTracker"
-import UIAPI from "@engine-core/services/UIAPI"
+import GUIService from "@engine-core/services/GUIService"
 import Engine from "@engine-core/Engine"
 import ScriptsAPI from "@engine-core/services/ScriptsAPI"
 import ResourceEntityMapper from "@engine-core/repositories/ResourceEntityMapper"
@@ -52,7 +52,7 @@ export default class ExecutionService extends IInjectable{
         this.#isPlaying = false
         ExecutionService.engine.environment = ENVIRONMENT.DEV
 
-        UIAPI.destroyUI()
+        GUIService.destroyUI()
         await ScriptsAPI.updateAllScripts()
 
         ExecutionService.engine.getCamera().trackingEntity = undefined

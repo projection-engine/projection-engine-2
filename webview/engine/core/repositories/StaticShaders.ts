@@ -1,9 +1,9 @@
 import SHADERS from "../static/SHADERS"
 import Shader from "../instances/Shader"
 import UberShader from "./UberShader"
-import IEngineSingleton from "@engine-core/IEngineSingleton";
+import AbstractEngineService from "@engine-core/AbstractEngineService";
 
-export default class StaticShaders extends IEngineSingleton {
+export default class StaticShaders extends AbstractEngineService {
 
 	static sprite?: Shader
 	static spriteUniforms?: { [key: string]: WebGLUniformLocation }

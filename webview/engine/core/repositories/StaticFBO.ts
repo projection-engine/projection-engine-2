@@ -1,13 +1,13 @@
-import GPU from "../GPU"
+import GPUService from "../services/GPUService"
 import Framebuffer from "../instances/Framebuffer"
 import StaticUBOs from "./StaticUBOs"
 import EngineState from "../EngineState"
 import generateSsaoNoise from "@engine-core/utils/generate-ssao-noise";
-import IEngineSingleton from "@engine-core/IEngineSingleton";
+import AbstractEngineService from "@engine-core/AbstractEngineService";
 
 const RESOLUTION = 4
 
-export default class StaticFBO extends IEngineSingleton {
+export default class StaticFBO extends AbstractEngineService {
     static visibility?: Framebuffer
     static sceneDepthVelocity?: WebGLTexture
     static entityIDSampler?: WebGLTexture
@@ -47,9 +47,9 @@ export default class StaticFBO extends IEngineSingleton {
         if (StaticFBO.#initialized)
             return
         StaticFBO.#initialized = true
-        const context = GPU.context
-        const halfResW = GPU.internalResolution.w / 2
-        const halfResH = GPU.internalResolution.h / 2
+        const context = GPUService.context
+        const halfResW = GPUService.internalResolution.w / 2
+        const halfResH = GPUService.internalResolution.h / 2
 
         StaticFBO.visibility = (new Framebuffer())
             .texture({
@@ -93,7 +93,7 @@ export default class StaticFBO extends IEngineSingleton {
 
 
         const Q = 7
-        let w = GPU.internalResolution.w, h = GPU.internalResolution.h
+        let w = GPUService.internalResolution.w, h = GPUService.internalResolution.h
         for (let i = 0; i < Q; i++) {
             w /= 2
             h /= 2
@@ -119,7 +119,7 @@ export default class StaticFBO extends IEngineSingleton {
     }
 
     static updateDirectionalShadowsFBO() {
-        const context = GPU.context
+        const context = GPUService.context
         if (StaticFBO.shadows)
             context.deleteTexture(StaticFBO.shadows.depthSampler)
         StaticFBO.shadows = new Framebuffer(EngineState.shadowMapResolution, EngineState.shadowMapResolution).depthTexture()
@@ -127,7 +127,7 @@ export default class StaticFBO extends IEngineSingleton {
     }
 
     static async generateSSAONoise() {
-        const context = GPU.context
+        const context = GPUService.context
         const {kernels, noise} = generateSsaoNoise(RESOLUTION, RESOLUTION)
 
         StaticUBOs.ssaoUBO.bind()

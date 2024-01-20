@@ -1,7 +1,7 @@
 import SHADING_MODELS from "@engine-core/static/ShadingModel"
 import LocalizationEN from "@enums/LocalizationEN"
 import ConversionAPI from "@engine-core/services/ConversionAPI"
-import GPU from "@engine-core/GPU"
+import GPUService from "@engine-core/services/GPUService"
 import PickingAPI from "@engine-core/services/PickingAPI"
 import DepthPrePassSystem from "@engine-core/runtime/DepthPrePassSystem"
 import EngineTools from "../../../engine/tools/EngineTools"
@@ -86,8 +86,8 @@ export default class SceneEditorUtil extends IInjectable {
         const worker = SceneEditorUtil.worker()
         if (startCoords && endCoords) {
             EngineTools.drawIconsToBuffer()
-            const nStart = ConversionAPI.toQuadCoordinates(startCoords.x, startCoords.y, GPU.internalResolution.w, GPU.internalResolution.h)
-            const nEnd = ConversionAPI.toQuadCoordinates(endCoords.x, endCoords.y, GPU.internalResolution.w, GPU.internalResolution.h)
+            const nStart = ConversionAPI.toQuadCoordinates(startCoords.x, startCoords.y, GPUService.internalResolution.w, GPUService.internalResolution.h)
+            const nEnd = ConversionAPI.toQuadCoordinates(endCoords.x, endCoords.y, GPUService.internalResolution.w, GPUService.internalResolution.h)
             try {
 
                 const data = PickingAPI.readBlock(nStart, nEnd)
@@ -165,7 +165,7 @@ export default class SceneEditorUtil extends IInjectable {
         ProjectionEngine.ContextMenuService.mount(getViewportContext(), RENDER_TARGET)
         CameraTracker.startTracking()
         draggable.onMount({
-            targetElement: GPU.canvas,
+            targetElement: GPUService.canvas,
             onDrop: (data, event) => EngineResourceLoaderService.load(data, false, event.clientX, event.clientY).catch(console.error),
             onDragOver: () => `
                 <span data-svelteicon="-" style="font-size: 70px">add</span>

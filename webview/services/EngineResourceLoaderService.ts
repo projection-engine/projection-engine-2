@@ -5,7 +5,7 @@ import COMPONENTS from "@engine-core/static/COMPONENTS"
 import PickingAPI from "@engine-core/services/PickingAPI"
 import QueryAPI from "@engine-core/services/QueryAPI"
 import EntityFactoryService from "./EntityFactoryService"
-import GPU from "@engine-core/GPU"
+import GPUService from "@engine-core/services/GPUService"
 import GPUAPI from "@engine-core/services/GPUAPI"
 
 import FileSystemAPI from "@engine-core/services/FileSystemAPI"
@@ -51,7 +51,7 @@ export default class EngineResourceLoaderService {
 		if (!objLoaded)
 			return
 		let materialID
-		if (GPU.meshes.get(objLoaded.id))
+		if (GPUService.meshes.get(objLoaded.id))
 			return
 		try {
 			GPUAPI.allocateMesh(id, objLoaded)

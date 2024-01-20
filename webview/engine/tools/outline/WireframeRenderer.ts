@@ -1,4 +1,4 @@
-import GPU from "../../core/GPU"
+import GPUService from "@engine-core/services/GPUService"
 import COLLISION_TYPES from "../../core/static/COLLISION_TYPES"
 import {mat4, vec3} from "gl-matrix"
 import StaticMeshes from "@engine-core/repositories/StaticMeshes"
@@ -20,7 +20,7 @@ export default class WireframeRenderer {
 		const entities = ProjectionEngine.Engine.entities.array
 		const size = entities.length
 		const uniforms = StaticEditorShaders.wireframeUniforms
-		const context = GPU.context
+		const context = GPUService.context
 
 		StaticEditorShaders.wireframe.bind()
 		GPUUtil.bind2DTextureForDrawing(uniforms.depth, 0,StaticFBO.sceneDepthVelocity)

@@ -1,4 +1,4 @@
-import GPU from "../../core/GPU"
+import GPUService from "@engine-core/services/GPUService"
 import LIGHT_TYPES from "../../core/static/LIGHT_TYPES"
 import LineRenderer from "./LineRenderer"
 import StaticMeshes from "@engine-core/repositories/StaticMeshes"
@@ -50,7 +50,7 @@ export default class IconsSystem {
 		U
 	) {
 		const uniforms = U || StaticEditorShaders.iconUniforms
-		const context = GPU.context
+		const context = GPUService.context
 		const lightComponent = entity.lightComponent
 		const lightType = lightComponent?.type
 		let doNotFaceCamera = 0,
@@ -155,7 +155,7 @@ export default class IconsSystem {
 	static execute() {
 		if (!IconsSystem.iconsTexture)
 			return
-		const context = GPU.context
+		const context = GPUService.context
 		const uniforms = StaticEditorShaders.iconUniforms
 
 		StaticEditorShaders.icon.bind()

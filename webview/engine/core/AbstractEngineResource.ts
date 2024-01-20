@@ -1,6 +1,6 @@
 import type Engine from "@engine-core/Engine";
 
-export default class IEngineResource<T> {
+export default class AbstractEngineResource<T> {
     protected engine: Engine
     protected gl: WebGL2RenderingContext
 

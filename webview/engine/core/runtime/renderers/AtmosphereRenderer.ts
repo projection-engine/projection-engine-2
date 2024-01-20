@@ -1,4 +1,4 @@
-import GPU from "../../GPU"
+import GPUService from "../../services/GPUService"
 import ResourceEntityMapper from "../../repositories/ResourceEntityMapper"
 import StaticShaders from "../../repositories/StaticShaders"
 import StaticMeshes from "../../repositories/StaticMeshes"
@@ -13,7 +13,7 @@ export default class AtmosphereRenderer {
 	static execute() {
 		const shader = StaticShaders.atmosphere
 		const uniforms = StaticShaders.atmosphereUniforms
-		const context = GPU.context
+		const context = GPUService.context
 		const entities = ResourceEntityMapper.atmosphere.array
 		const size = entities.length
 		if (size === 0)

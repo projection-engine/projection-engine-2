@@ -1,4 +1,4 @@
-import GPU from "../GPU"
+import GPUService from "../services/GPUService"
 import StaticMeshes from "../repositories/StaticMeshes"
 import StaticFBO from "../repositories/StaticFBO"
 import StaticShaders from "../repositories/StaticShaders"
@@ -7,7 +7,7 @@ import MetricsController from "../services/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import EngineState from "../EngineState"
 import GPUUtil from "../utils/GPUUtil";
-import AbstractSystem from "@engine-core/IEngineSystem";
+import AbstractSystem from "@engine-core/AbstractEngineSystem";
 import GPUAPI from "@engine-core/services/GPUAPI";
 
 let cleared = false
@@ -15,7 +15,7 @@ export default class SSGISystem extends AbstractSystem{
     static uniformSettings = new Float32Array(3)
 
     execute(gl: WebGL2RenderingContext) {
-        GPUAPI.copyTexture(StaticFBO.postProcessing1, StaticFBO.postProcessing2, GPU.context.COLOR_BUFFER_BIT)
+        GPUAPI.copyTexture(StaticFBO.postProcessing1, StaticFBO.postProcessing2, GPUService.context.COLOR_BUFFER_BIT)
 
 
         if (!EngineState.ssgiEnabled) {

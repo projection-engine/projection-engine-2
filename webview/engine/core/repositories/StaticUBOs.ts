@@ -1,7 +1,7 @@
 import UBO from "../instances/UBO"
 import UberShader from "./UberShader"
-import GPU from "../GPU"
-import IEngineSingleton from "@engine-core/IEngineSingleton";
+import GPUService from "../services/GPUService"
+import AbstractEngineService from "@engine-core/AbstractEngineService";
 
 export enum StaticUBONames {
     CAMERA_VIEW = "CameraViewInfo",
@@ -13,7 +13,7 @@ export enum StaticUBONames {
     CAMERA_PROJECTION = "CameraProjectionInfo"
 }
 
-export default class StaticUBOs extends IEngineSingleton {
+export default class StaticUBOs extends AbstractEngineService {
     static cameraViewUBO?: UBO
     static frameCompositionUBO?: UBO
     static lensPostProcessingUBO?: UBO
@@ -121,9 +121,9 @@ export default class StaticUBOs extends IEngineSingleton {
         StaticUBOs.lensPostProcessingUBO.updateData("gamma", F32)
         F32[0] = 1
         StaticUBOs.lensPostProcessingUBO.updateData("exposure", F32)
-        F32[0] = GPU.internalResolution.w
+        F32[0] = GPUService.internalResolution.w
         StaticUBOs.lensPostProcessingUBO.updateData("textureSizeXDOF", F32)
-        F32[0] = GPU.internalResolution.h
+        F32[0] = GPUService.internalResolution.h
         StaticUBOs.lensPostProcessingUBO.updateData("textureSizeYDOF", F32)
         StaticUBOs.lensPostProcessingUBO.unbind()
     }

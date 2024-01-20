@@ -25,8 +25,16 @@ function mapToObject(el: HTMLElement, component: UIComponent) {
     Object.assign(el.style, obj)
 }
 
-export default class UIAPI {
+export default class GUIService {
     static document?: HTMLElement
+
+    // getDocument(){
+    //     return this.#document
+    // }
+    //
+    // setDocument(el: HTMLElement){
+    //     this.#document = el
+    // }
 
     static async updateAllElements() {
         const uiElements = Array.from(ProjectionEngine.Engine.UILayouts.keys())
@@ -42,19 +50,19 @@ export default class UIAPI {
             }
             ProjectionEngine.Engine.UILayouts.set(found, await FileSystemAPI.readAsset(found))
             entities.forEach(e => {
-                UIAPI.updateUIEntity(e)
+                GUIService.updateUIEntity(e)
             })
         }
     }
 
     static deleteUIEntity(entity) {
         const UI = entity?.uiComponent
-        if (!UI?.__element || !UIAPI.document?.parentElement)
+        if (!UI?.__element || !GUIService.document?.parentElement)
             return
         const children = UI.__element.querySelectorAll("[data-enginewrapper='-']")
         children.forEach(c => {
             UI.__element.removeChild(c)
-            UIAPI.document.appendChild(c)
+            GUIService.document.appendChild(c)
             UI.anchorElement = undefined
         })
         const p = UI.__element.parentElement
@@ -63,7 +71,7 @@ export default class UIAPI {
     }
 
     static createUIEntity(entity: Entity) {
-        if (!UIAPI.document?.parentElement || !entity.active || entity.uiComponent?.__element)
+        if (!GUIService.document?.parentElement || !entity.active || entity.uiComponent?.__element)
             return
 
         const UI = entity?.uiComponent
@@ -86,7 +94,7 @@ export default class UIAPI {
                 child.setAttribute("data-engineelement", "-")
         }
 
-        UIAPI.document.appendChild(el)
+        GUIService.document.appendChild(el)
         UI.__element = el
 
         return {parent: UI.anchorElement, element: el}
@@ -94,15 +102,15 @@ export default class UIAPI {
 
     static buildUI(mounting: HTMLElement) {
         const target = mounting || InputEventsAPI.targetElement
-        UIAPI.destroyUI()
-        UIAPI.document = document.createElement("div")
-        Object.assign(UIAPI.document.style, STYLES)
-        target.appendChild(UIAPI.document)
+        GUIService.destroyUI()
+        GUIService.document = document.createElement("div")
+        Object.assign(GUIService.document.style, STYLES)
+        target.appendChild(GUIService.document)
 
         const elementsToBind = []
         const entities = ResourceEntityMapper.ui.array
         for (let i = 0; i < entities.length; i++)
-            elementsToBind.push(UIAPI.createUIEntity(entities[i]))
+            elementsToBind.push(GUIService.createUIEntity(entities[i]))
         for (let i = 0; i < elementsToBind.length; i++) {
             if (!elementsToBind[i])
                 continue
@@ -110,16 +118,16 @@ export default class UIAPI {
             const parentElement = document.getElementById(parent)
             if (!parentElement)
                 continue
-            UIAPI.document.removeChild(element)
+            GUIService.document.removeChild(element)
             parentElement.appendChild(element)
         }
     }
 
     static destroyUI() {
-        if (!UIAPI.document?.parentElement)
+        if (!GUIService.document?.parentElement)
             return
 
-        UIAPI.document.parentElement.removeChild(UIAPI.document)
+        GUIService.document.parentElement.removeChild(GUIService.document)
         const entities = ProjectionEngine.Engine.entities.array
         for (let i = 0; i < entities.length; i++) {
             const entity = entities[i]
@@ -131,7 +139,7 @@ export default class UIAPI {
     }
 
     static updateUIEntity(entity) {
-        if (!UIAPI.document?.parentElement)
+        if (!GUIService.document?.parentElement)
             return
 
         const UI = entity?.uiComponent
@@ -150,14 +158,14 @@ export default class UIAPI {
 
 
     static hideUI() {
-        if (!UIAPI.document?.parentElement)
+        if (!GUIService.document?.parentElement)
             return
-        UIAPI.document.style.display = "none"
+        GUIService.document.style.display = "none"
     }
 
     static showUI() {
-        if (!UIAPI.document?.parentElement)
+        if (!GUIService.document?.parentElement)
             return
-        UIAPI.document.style.display = "block"
+        GUIService.document.style.display = "block"
     }
 }

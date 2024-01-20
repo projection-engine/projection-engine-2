@@ -12,7 +12,7 @@
     import GizmoSettings from "./components/GizmoSettings.svelte"
     import SHADING_MODELS from "@engine-core/static/ShadingModel"
     import Icon from "@lib/components/icon/Icon.svelte"
-    import GPU from "@engine-core/GPU"
+    import GPUService from "@engine-core/services/GPUService"
     import LocalizationEN from "@enums/LocalizationEN"
     import SceneEditorUtil from "../../util/SceneEditorUtil"
     import ProjectionEngine from "@lib/ProjectionEngine";
@@ -56,7 +56,7 @@
         <SceneOptions {isOnGizmo}/>
     </ViewHeader>
     <SelectBox
-            targetElement={GPU.canvas}
+            targetElement={GPUService.canvas}
             targetElementID={RENDER_TARGET}
             disabled={isSelectBoxDisabled}
             setSelected={SceneEditorUtil.getUnderSelectionBox}

@@ -1,4 +1,4 @@
-import GPU from "../GPU"
+import GPUService from "../services/GPUService"
 import DEBUG_FRAG from "../shaders/uber-shader/UBER-MATERIAL-DEBUG.frag"
 import BASIS_FRAG from "../shaders/uber-shader/UBER-MATERIAL-BASIS.frag"
 import VERTEX_SHADER from "../shaders/uber-shader/UBER-MATERIAL.vert"
@@ -48,7 +48,7 @@ export default class UberShader {
             `
 			], uniformsToLoad = []
 		if (!forceCleanShader)
-			GPU.materials.forEach(mat => {
+			GPUService.materials.forEach(mat => {
 				const declaration = [`case ${mat.bindID}: {`, mat.functionDeclaration, "break;", "}", ""]
 				methodsToLoad.push(declaration.join("\n"))
 				uniformsToLoad.push(mat.uniformsDeclaration)
@@ -74,7 +74,7 @@ export default class UberShader {
 			return
 		}
 		if (UberShader.uber)
-			GPU.context.deleteProgram(UberShader.uber.program)
+			GPUService.context.deleteProgram(UberShader.uber.program)
 
 		UberShader.uber = shader
 		UberShader.uberUniforms = shader.uniformMap

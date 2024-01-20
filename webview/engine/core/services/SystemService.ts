@@ -1,5 +1,5 @@
-import IEngineSystem from "@engine-core/IEngineSystem";
-import IEngineSingleton from "@engine-core/IEngineSingleton";
+import AbstractEngineSystem from "@engine-core/AbstractEngineSystem";
+import AbstractEngineService from "@engine-core/AbstractEngineService";
 import CameraSystem from "@engine-core/runtime/CameraSystem";
 import StartupSystem from "@engine-core/runtime/StartupSystem";
 import ScriptingSystem from "@engine-core/runtime/ScriptingSystem";
@@ -19,13 +19,13 @@ import ResourceManager from "@engine-core/runtime/ResourceManager";
 import Physics from "@engine-core/runtime/Physics";
 import ProjectionEngine from "@lib/ProjectionEngine";
 import ENVIRONMENT from "@engine-core/static/ENVIRONMENT";
-import UIAPI from "@engine-core/services/UIAPI";
-import GPU from "@engine-core/GPU";
+import GUIService from "@engine-core/services/GUIService";
+import GPUService from "@engine-core/services/GPUService";
 import PhysicsSystem from "@engine-core/services/PhysicsAPI";
 import ScriptsAPI from "@engine-core/services/ScriptsAPI";
 
-export default class SystemService extends IEngineSingleton {
-    #rootSystem: IEngineSystem
+export default class SystemService extends AbstractEngineService {
+    #rootSystem: AbstractEngineSystem
     #frameID: number = undefined
 
     async initialize(): Promise<void> {
@@ -46,12 +46,12 @@ export default class SystemService extends IEngineSingleton {
         await this.addSystem(TransformationSystem);
     }
 
-    async addSystem(System: typeof IEngineSystem): Promise<IEngineSystem> {
+    async addSystem(System: typeof AbstractEngineSystem): Promise<AbstractEngineSystem> {
         const system = new System(this.engine);
         if (this.#rootSystem == null) {
             this.#rootSystem = system
         } else {
-            let currentSystem: IEngineSystem = this.#rootSystem
+            let currentSystem: AbstractEngineSystem = this.#rootSystem
             while (currentSystem.getNext() != null) {
                 currentSystem = currentSystem.getNext()
             }
@@ -79,7 +79,7 @@ export default class SystemService extends IEngineSingleton {
     #loop(c: number) {
         ProjectionEngine.Engine.currentTimeStamp = c
         const context = this.engine.getContext();
-        let currentSystem: IEngineSystem = this.#rootSystem
+        let currentSystem: AbstractEngineSystem = this.#rootSystem
         while (currentSystem != null) {
             if (currentSystem.shouldExecute()) {
                 currentSystem.execute(context)
@@ -91,7 +91,7 @@ export default class SystemService extends IEngineSingleton {
 
     async startSimulation() {
         this.engine.environment = ENVIRONMENT.EXECUTION
-        UIAPI.buildUI(GPU.canvas.parentElement)
+        GUIService.buildUI(GPUService.canvas.parentElement)
         const entities = this.engine.entities.array
         for (let i = 0; i < entities.length; i++) {
             const current = entities[i]

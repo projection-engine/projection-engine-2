@@ -1,4 +1,4 @@
-import GPU from "../../core/GPU"
+import GPUService from "@engine-core/services/GPUService"
 import GizmoUtil from "./util/GizmoUtil"
 import GizmoState from "./util/GizmoState"
 import GizmoLineSystem from "./GizmoLineSystem"
@@ -28,7 +28,7 @@ export default class GizmoSystem {
 	}
 
 	static execute() {
-		const context = GPU.context
+		const context = GPUService.context
 		context.enable(context.DEPTH_TEST)
 		context.clear(context.DEPTH_BUFFER_BIT)
 		const m = GizmoState.mainEntity

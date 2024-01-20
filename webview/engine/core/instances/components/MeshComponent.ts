@@ -2,7 +2,7 @@ import Component from "./Component"
 
 import MESH_PROPS from "../../static/component-props/MESH_PROPS"
 import MaterialAPI from "../../services/MaterialAPI"
-import GPU from "../../GPU"
+import GPUService from "../../services/GPUService"
 import FileSystemAPI from "../../services/FileSystemAPI"
 import MeshResourceMapper from "../../repositories/MeshResourceMapper"
 import MaterialResourceMapper from "../../repositories/MaterialResourceMapper"
@@ -47,10 +47,10 @@ export default class MeshComponent extends Component {
 
 	#bindMesh(meshID: string) {
 		if (!EntityAPI.isRegistered(this.entity) || !meshID) return
-		const found = GPU.meshes.get(meshID)
+		const found = GPUService.meshes.get(meshID)
 		if (!found)
 			FileSystemAPI.loadMesh(meshID).then(_ => {
-				const found = GPU.meshes.get(meshID)
+				const found = GPUService.meshes.get(meshID)
 				if (!found) {
 					console.error("Mesh not found")
 					return
@@ -85,10 +85,10 @@ export default class MeshComponent extends Component {
 
 	#bindMaterial(materialID: string) {
 		if (!EntityAPI.isRegistered(this.entity) || !materialID) return
-		const found = GPU.materials.get(materialID)
+		const found = GPUService.materials.get(materialID)
 		if (!found)
 			FileSystemAPI.loadMaterial(materialID).then(_ => {
-				const found = GPU.materials.get(materialID)
+				const found = GPUService.materials.get(materialID)
 				if (!found) {
 					console.error("Material not found")
 					return

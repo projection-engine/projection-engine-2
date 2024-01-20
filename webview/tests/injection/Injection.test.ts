@@ -11,8 +11,7 @@ test('Should be the same instance', () => {
 });
 
 test('Should not inject not @Injectable', () => {
-    const instanceA = InjectVar(MyOtherClass)
-    expect(instanceA).toBeNull()
+    expect(() => InjectVar(MyOtherClass)).toThrow()
 });
 
 test('Should be lazily obtained', () => {

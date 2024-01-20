@@ -1,10 +1,10 @@
-import IEngineSystem from "@engine-core/IEngineSystem";
+import AbstractEngineSystem from "@engine-core/AbstractEngineSystem";
 import StaticUBOs from "@engine-core/repositories/StaticUBOs";
-import GPU from "@engine-core/GPU";
+import GPUService from "@engine-core/services/GPUService";
 import {mat4, quat, vec3, vec4} from "gl-matrix";
 import CameraRepository from "@engine-core/repositories/CameraRepository";
 
-export default class CameraSystem extends IEngineSystem {
+export default class CameraSystem extends AbstractEngineSystem {
     camera: CameraRepository
 
     async initialize() {
@@ -130,8 +130,8 @@ export default class CameraSystem extends IEngineSystem {
             const UBO = StaticUBOs.cameraProjectionUBO
 
             UBO.bind()
-            c.projectionUBOBuffer[32] = GPU.bufferResolution[0]
-            c.projectionUBOBuffer[33] = GPU.bufferResolution[1]
+            c.projectionUBOBuffer[32] = GPUService.bufferResolution[0]
+            c.projectionUBOBuffer[33] = GPUService.bufferResolution[1]
             c.projectionUBOBuffer[34] = 2.0 / Math.log2(c.projectionBuffer[0] + 1)
 
             UBO.updateBuffer(c.projectionUBOBuffer)

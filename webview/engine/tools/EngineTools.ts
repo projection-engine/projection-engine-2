@@ -7,7 +7,7 @@ import WireframeRenderer from "./outline/WireframeRenderer"
 import ENVIRONMENT from "../core/static/ENVIRONMENT"
 import LineRenderer from "./icons/LineRenderer"
 import Entity from "../core/instances/Entity"
-import GPU from "../core/GPU"
+import GPUService from "@engine-core/services/GPUService"
 import StaticEditorMeshes from "./utils/StaticEditorMeshes"
 import StaticEditorShaders from "./utils/StaticEditorShaders"
 import StaticFBO from "@engine-core/repositories/StaticFBO"
@@ -22,9 +22,9 @@ import ScalingGizmo from "@engine-tools/gizmo/transformation/ScalingGizmo";
 import TranslationGizmo from "@engine-tools/gizmo/transformation/TranslationGizmo";
 import DualAxisGizmo from "@engine-tools/gizmo/transformation/DualAxisGizmo";
 import ScreenSpaceGizmo from "@engine-tools/gizmo/transformation/ScreenSpaceGizmo";
-import IEngineSystem from "@engine-core/IEngineSystem";
+import AbstractEngineSystem from "@engine-core/AbstractEngineSystem";
 
-export default class EngineTools extends IEngineSystem {
+export default class EngineTools extends AbstractEngineSystem {
     static selected: Entity[] = []
     static RotationGizmo: RotationGizmo
     static ScalingGizmo: ScalingGizmo
@@ -73,17 +73,17 @@ export default class EngineTools extends IEngineSystem {
     }
 
     static drawIconsToBuffer() {
-        GPU.context.disable(GPU.context.DEPTH_TEST)
+        GPUService.context.disable(GPUService.context.DEPTH_TEST)
         StaticFBO.visibility.use()
         StaticEditorShaders.iconToDepth.bind()
         GPUUtil.bind2DTextureForDrawing(StaticEditorShaders.iconToDepthUniforms.image, 0, IconsSystem.iconsTexture)
         IconsSystem.loop(IconsSystem.drawIcon, StaticEditorShaders.iconToDepthUniforms)
         StaticFBO.visibility.stopMapping()
-        GPU.context.enable(GPU.context.DEPTH_TEST)
+        GPUService.context.enable(GPUService.context.DEPTH_TEST)
     }
 
     execute(gl: WebGL2RenderingContext) {
-        const coords = ConversionAPI.toQuadCoordinates(EngineToolsState.unconvertedMouseCoordinates[0], EngineToolsState.unconvertedMouseCoordinates[1], GPU.internalResolution.w, GPU.internalResolution.h)
+        const coords = ConversionAPI.toQuadCoordinates(EngineToolsState.unconvertedMouseCoordinates[0], EngineToolsState.unconvertedMouseCoordinates[1], GPUService.internalResolution.w, GPUService.internalResolution.h)
         EngineToolsState.mouseCoordinates[0] = coords.x
         EngineToolsState.mouseCoordinates[1] = coords.y
         CameraTracker.updateFrame()
@@ -101,7 +101,7 @@ export default class EngineTools extends IEngineSystem {
     }
 
     static #setContextState() {
-        const context = GPU.context
+        const context = GPUService.context
         context.clear(context.DEPTH_BUFFER_BIT)
         context.disable(context.CULL_FACE)
         context.disable(context.DEPTH_TEST)

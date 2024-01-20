@@ -1,4 +1,4 @@
-import GPU from "../../GPU"
+import GPUService from "../../services/GPUService"
 import StaticMeshes from "../../repositories/StaticMeshes"
 import type Entity from "../../instances/Entity"
 import Shader from "../../instances/Shader"
@@ -28,7 +28,7 @@ export default class SceneRenderer {
 
     static bindGlobalResources(viewProjection?: Float32Array, viewMatrix?: Float32Array, cameraPosition?: Float32Array) {
         const uniforms = UberShader.uberUniforms
-        const context = GPU.context
+        const context = GPUService.context
 
         UberShader.uber.bind()
         if (ProjectionEngine.Engine.developmentMode)
@@ -44,7 +44,7 @@ export default class SceneRenderer {
         context.uniformMatrix4fv(uniforms.viewProjection, false, ProjectionEngine.Engine.getCamera().viewProjectionMatrix)
         context.uniform3fv(uniforms.cameraPosition, ProjectionEngine.Engine.getCamera().position)
 
-        SceneRenderer.#bindTexture(context, uniforms.brdf_sampler, 0, GPU.BRDF, false)
+        SceneRenderer.#bindTexture(context, uniforms.brdf_sampler, 0, GPUService.BRDF, false)
         SceneRenderer.#bindTexture(context, uniforms.SSAO, 1, StaticFBO.ssaoBlurredSampler, false)
         SceneRenderer.#bindTexture(context, uniforms.SSGI, 2, StaticFBO.ssgiSampler, false)
         SceneRenderer.#bindTexture(context, uniforms.sceneDepth, 3, StaticFBO.sceneDepthVelocity, false)
@@ -53,9 +53,9 @@ export default class SceneRenderer {
         SceneRenderer.#bindTexture(context, uniforms.shadow_atlas, 5, StaticFBO.shadowsSampler, false)
         SceneRenderer.#bindTexture(context, uniforms.shadow_cube, 6, PointShadowsSystem.sampler, true)
 
-        // if (!!GPU.activeSkylightEntity) {
+        // if (!!GPUService.activeSkylightEntity) {
         //     texOffset++
-        //     SceneRenderer.#bindTexture(context, uniforms.skylight_specular, 7, GPU.skylightProbe.texture, true)
+        //     SceneRenderer.#bindTexture(context, uniforms.skylight_specular, 7, GPUService.skylightProbe.texture, true)
         // }
 
         // uniform samplerCube skylight_diffuse;
@@ -125,7 +125,7 @@ export default class SceneRenderer {
     static drawDecals() {
         UberMaterialAttributeGroup.clear()
         const uniforms = UberShader.uberUniforms
-        const context = GPU.context
+        const context = GPUService.context
         const toRender = ResourceEntityMapper.decals.array
         const size = toRender.length
         if (size === 0)
@@ -153,7 +153,7 @@ export default class SceneRenderer {
     static drawTransparency() {
         UberMaterialAttributeGroup.clear()
         const uniforms = UberShader.uberUniforms
-        const context = GPU.context
+        const context = GPUService.context
         const toRender = MaterialResourceMapper.materialsArray
         const size = toRender.length
         if (size === 0)
@@ -246,7 +246,7 @@ export default class SceneRenderer {
     static drawOpaque() {
         UberMaterialAttributeGroup.clear()
         uniforms = UberShader.uberUniforms
-        context = GPU.context
+        context = GPUService.context
 
         context.uniform1i(uniforms.isDecalPass, 0)
 

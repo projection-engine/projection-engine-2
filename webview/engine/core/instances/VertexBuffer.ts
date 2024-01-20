@@ -1,5 +1,5 @@
 import GPUAPI from "../services/GPUAPI"
-import GPU from "../GPU"
+import GPUService from "../services/GPUService"
 
 export default class VertexBuffer {
 	private readonly id: WebGLBuffer
@@ -13,14 +13,14 @@ export default class VertexBuffer {
 	constructor(index: number, data, type: number, size: number, dataType: number, normalized?: boolean, renderingType?: number, stride?: number) {
 		this.id = GPUAPI.createBuffer(type, data, renderingType)
 
-		GPU.context.vertexAttribPointer(
+		GPUService.context.vertexAttribPointer(
 			index,
 			size,
 			dataType,
 			normalized,
 			stride||0,
 			0)
-		GPU.context.bindBuffer(type, null)
+		GPUService.context.bindBuffer(type, null)
 
 		this.stride = stride || 0
 		this.index = index
@@ -32,17 +32,17 @@ export default class VertexBuffer {
 	}
 
 	enable() {
-		GPU.context.enableVertexAttribArray(this.index)
-		GPU.context.bindBuffer(this.type, this.id)
-		GPU.context.vertexAttribPointer(this.index, this.size, this.type, this.normalized, this.stride, 0)
+		GPUService.context.enableVertexAttribArray(this.index)
+		GPUService.context.bindBuffer(this.type, this.id)
+		GPUService.context.vertexAttribPointer(this.index, this.size, this.type, this.normalized, this.stride, 0)
 	}
 
 	disable() {
-		GPU.context.disableVertexAttribArray(this.index)
-		GPU.context.bindBuffer(this.type, null)
+		GPUService.context.disableVertexAttribArray(this.index)
+		GPUService.context.bindBuffer(this.type, null)
 	}
 
 	delete() {
-		GPU.context.deleteBuffer(this.id)
+		GPUService.context.deleteBuffer(this.id)
 	}
 }

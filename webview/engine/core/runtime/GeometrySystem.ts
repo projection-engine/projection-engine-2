@@ -6,10 +6,10 @@ import DecalRenderer from "./renderers/DecalRenderer"
 import MeshRenderer from "./renderers/MeshRenderer"
 import AtmosphereRenderer from "./renderers/AtmosphereRenderer"
 import Mesh from "../instances/Mesh"
-import IEngineSystem from "@engine-core/IEngineSystem";
+import AbstractEngineSystem from "@engine-core/AbstractEngineSystem";
 
 
-export default class GeometrySystem extends IEngineSystem {
+export default class GeometrySystem extends AbstractEngineSystem {
     execute(gl: WebGL2RenderingContext) {
         if (!UberShader.uber)
             return

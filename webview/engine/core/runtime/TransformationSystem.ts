@@ -1,6 +1,6 @@
-import IEngineSystem from "@engine-core/IEngineSystem";
+import AbstractEngineSystem from "@engine-core/AbstractEngineSystem";
 
-export default class TransformationSystem extends IEngineSystem {
+export default class TransformationSystem extends AbstractEngineSystem {
     static isChanged = false
 
     // TODO - JUST ACCESS THESE PROPERTIES DIRECTLY
