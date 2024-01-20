@@ -1,11 +1,11 @@
 import {mat4} from "gl-matrix"
 import Mesh from "./Mesh"
 import GPU from "../GPU"
-import CubeMapAPI from "../lib/rendering/CubeMapAPI"
+import CubeMapAPI from "../services/CubeMapAPI"
 import getProbeRotation from "../utils/get-probe-rotation"
 import getProbeLookat from "../utils/get-probe-lookat"
-import StaticMeshes from "../lib/StaticMeshes"
-import StaticShaders from "../lib/StaticShaders"
+import StaticMeshes from "../repositories/StaticMeshes"
+import StaticShaders from "../repositories/StaticShaders"
 
 
 const perspective = mat4.create()

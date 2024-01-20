@@ -1,4 +1,4 @@
-import QueryAPI from "@engine-core/lib/utils/QueryAPI"
+import QueryAPI from "@engine-core/services/QueryAPI"
 import Entity from "@engine-core/instances/Entity"
 import {Injectable} from "@lib/Injection";
 import ProjectionEngine from "@lib/ProjectionEngine";

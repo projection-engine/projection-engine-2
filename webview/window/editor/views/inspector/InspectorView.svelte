@@ -1,7 +1,7 @@
 <script lang="ts">
 
     import {onDestroy, onMount} from "svelte"
-    import QueryAPI from "@engine-core/lib/utils/QueryAPI"
+    import QueryAPI from "@engine-core/services/QueryAPI"
     import EntityInspector from "./components/EntityAttributes.svelte"
 
     import Icon from "@lib/components/icon/Icon.svelte"

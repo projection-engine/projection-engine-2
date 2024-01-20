@@ -1,12 +1,12 @@
 import ArrayBufferAPI from "./ArrayBufferAPI"
-import LIGHT_TYPES from "../../static/LIGHT_TYPES"
+import LIGHT_TYPES from "../static/LIGHT_TYPES"
 import {glMatrix, mat4, vec3} from "gl-matrix"
-import DirectionalShadowsSystem from "../../runtime/DirectionalShadowsSystem"
-import PointShadowsSystem from "../../runtime/PointShadowsSystem"
-import type Entity from "../../instances/Entity"
-import UberShader from "../UberShader"
-import StaticUBOs from "../StaticUBOs"
-import ResourceEntityMapper from "../ResourceEntityMapper"
+import DirectionalShadowsSystem from "../runtime/DirectionalShadowsSystem"
+import PointShadowsSystem from "../runtime/PointShadowsSystem"
+import type Entity from "../instances/Entity"
+import UberShader from "../repositories/UberShader"
+import StaticUBOs from "../repositories/StaticUBOs"
+import ResourceEntityMapper from "../repositories/ResourceEntityMapper"
 
 
 let lightTimeout

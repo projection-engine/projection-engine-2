@@ -1,5 +1,5 @@
 import GIZMOS from "@enums/Gizmos"
-import QueryAPI from "@engine-core/lib/utils/QueryAPI"
+import QueryAPI from "@engine-core/services/QueryAPI"
 import GizmoTransformationType from "@enums/GizmoTransformationType"
 import EntityFactoryService from "@services/EntityFactoryService"
 import CAMERA_ROTATIONS from "../../../engine/tools/static/CAMERA_ROTATIONS"

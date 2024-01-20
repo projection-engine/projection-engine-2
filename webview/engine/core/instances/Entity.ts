@@ -1,9 +1,9 @@
-import EntityAPI from "../lib/utils/EntityAPI"
+import EntityAPI from "../services/EntityAPI"
 import getComponentInstance from "../utils/get-component-instance"
 import serializeStructure from "../utils/serialize-structure"
 import Component from "./components/Component"
 import ComponentResources from "./components/ComponentResources"
-import QueryAPI from "../lib/utils/QueryAPI"
+import QueryAPI from "../services/QueryAPI"
 import DynamicMap from "../lib/DynamicMap"
 
 

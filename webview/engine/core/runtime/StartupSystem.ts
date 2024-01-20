@@ -1,7 +1,7 @@
 import IEngineSystem from "@engine-core/IEngineSystem";
 import GPU from "@engine-core/GPU";
 import TransformationSystem from "@engine-core/runtime/TransformationSystem";
-import LightsService from "@engine-core/lib/utils/LightsService";
+import LightsService from "@engine-core/services/LightsService";
 import ProjectionEngine from "@lib/ProjectionEngine";
 
 let previous

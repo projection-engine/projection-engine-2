@@ -1,13 +1,13 @@
 import {mat4, quat, vec3} from "gl-matrix"
 import GizmoSystem from "../GizmoSystem"
 import Entity from "../../../core/instances/Entity"
-import PickingAPI from "../../../core/lib/utils/PickingAPI"
-import EntityAPI from "../../../core/lib/utils/EntityAPI"
+import PickingAPI from "@engine-core/services/PickingAPI"
+import EntityAPI from "@engine-core/services/EntityAPI"
 import StaticEditorShaders from "../../utils/StaticEditorShaders"
 import GPU from "../../../core/GPU"
 import GizmoState from "./GizmoState"
 import Axis from "../../static/AXIS"
-import ConversionAPI from "../../../core/lib/math/ConversionAPI"
+import ConversionAPI from "@engine-core/services/ConversionAPI"
 import Mesh from "../../../core/instances/Mesh";
 import StaticEditorFBO from "../../utils/StaticEditorFBO";
 import GPUUtil from "../../../core/utils/GPUUtil";
@@ -80,7 +80,7 @@ export default class GizmoUtil {
         GPU.context.uniform3fv(uniforms.translation, GizmoState.mainEntity.__pivotOffset)
         GPU.context.uniform1i(uniforms.axis, axis)
         GPU.context.uniform1i(uniforms.selectedAxis, GizmoState.clickedAxis)
-        GPU.context.uniform1i(uniforms.cameraIsOrthographic, ProjectionEngine.Engine.getCamera().notificationBuffers[2])
+        GPU.context.uniform1i(uniforms.cameraIsOrthographic, ProjectionEngine.Engine.getCamera().isOrthographic() ? 1 : 0)
         mesh.simplifiedDraw()
     }
 
@@ -88,7 +88,7 @@ export default class GizmoUtil {
     static drawGizmoToDepth() {
         const data = {
             translation: GizmoState.mainEntity.__pivotOffset,
-            cameraIsOrthographic: ProjectionEngine.Engine.getCamera().isOrthographic
+            cameraIsOrthographic: ProjectionEngine.Engine.getCamera().isOrthographic()
         }
         StaticEditorFBO.gizmo.startMapping()
         for (let i = 0; i < GizmoState.targetGizmos.length; i++) {

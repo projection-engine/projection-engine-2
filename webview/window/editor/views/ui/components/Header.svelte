@@ -1,11 +1,11 @@
 <script lang="ts">
     import COMPONENTS from "@engine-core/static/COMPONENTS"
-    import UIAPI from "@engine-core/lib/rendering/UIAPI"
+    import UIAPI from "@engine-core/services/UIAPI"
     import ViewHeader from "../../../components/view/ViewHeader.svelte"
     import Icon from "@lib/components/icon/Icon.svelte"
     import ToolTip from "@lib/components/tooltip/ToolTip.svelte"
     import EngineStateService from "@services/EngineStateService"
-    import EntityAPI from "@engine-core/lib/utils/EntityAPI"
+    import EntityAPI from "@engine-core/services/EntityAPI"
     import LocalizationEN from "@enums/LocalizationEN"
     import SelectionStore from "@lib/stores/SelectionStore";
     import type Entity from "@engine-core/instances/Entity";

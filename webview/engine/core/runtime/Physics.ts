@@ -1,5 +1,5 @@
-import PhysicsAPI from "../lib/rendering/PhysicsAPI"
-import MetricsController from "../lib/utils/MetricsController"
+import PhysicsAPI from "../services/PhysicsAPI"
+import MetricsController from "../services/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import EngineState from "../EngineState"
 import ProjectionEngine from "@lib/ProjectionEngine";

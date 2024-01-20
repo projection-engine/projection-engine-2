@@ -1,4 +1,4 @@
-import {Types} from "../lib/utils/ConsoleAPI"
+import {Types} from "../services/ConsoleAPI"
 
 export default interface MessageInterface {
     type: Types,

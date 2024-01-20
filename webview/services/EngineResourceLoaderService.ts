@@ -2,21 +2,21 @@ import FileSystemUtil from "@lib/FileSystemUtil"
 import EditorFSUtil from "../window/editor/util/EditorFSUtil"
 
 import COMPONENTS from "@engine-core/static/COMPONENTS"
-import PickingAPI from "@engine-core/lib/utils/PickingAPI"
-import QueryAPI from "@engine-core/lib/utils/QueryAPI"
+import PickingAPI from "@engine-core/services/PickingAPI"
+import QueryAPI from "@engine-core/services/QueryAPI"
 import EntityFactoryService from "./EntityFactoryService"
 import GPU from "@engine-core/GPU"
-import GPUAPI from "@engine-core/lib/rendering/GPUAPI"
+import GPUAPI from "@engine-core/services/GPUAPI"
 
-import FileSystemAPI from "@engine-core/lib/utils/FileSystemAPI"
+import FileSystemAPI from "@engine-core/services/FileSystemAPI"
 import MeshComponent from "@engine-core/instances/components/MeshComponent"
 import SpriteComponent from "@engine-core/instances/components/SpriteComponent"
 import EngineStateService from "./EngineStateService"
-import EntityAPI from "@engine-core/lib/utils/EntityAPI"
+import EntityAPI from "@engine-core/services/EntityAPI"
 import FileTypes from "@enums/FileTypes"
 import LocalizationEN from "@enums/LocalizationEN"
 import Entity from "@engine-core/instances/Entity"
-import StaticFBO from "@engine-core/lib/StaticFBO";
+import StaticFBO from "@engine-core/repositories/StaticFBO";
 import ProjectionEngine from "@lib/ProjectionEngine";
 import {Inject} from "@lib/Injection";
 import ToasterService from "@services/ToasterService";

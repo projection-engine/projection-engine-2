@@ -1,6 +1,6 @@
-import LineAPI from "../../core/lib/rendering/LineAPI"
+import LineAPI from "@engine-core/services/LineAPI"
 import GPU from "../../core/GPU"
-import StaticFBO from "../../core/lib/StaticFBO"
+import StaticFBO from "@engine-core/repositories/StaticFBO"
 import StaticEditorShaders from "../utils/StaticEditorShaders"
 import GPUUtil from "../../core/utils/GPUUtil";
 

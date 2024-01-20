@@ -1,11 +1,11 @@
 import Engine from "@engine-core/Engine"
 import CameraTracker from "@engine-tools/utils/CameraTracker"
 import EngineTools from "@engine-tools/EngineTools"
-import CameraAPI from "@engine-core/lib/utils/CameraAPI"
+import CameraRepository from "@engine-core/repositories/CameraRepository"
 import ENVIRONMENT from "@engine-core/static/ENVIRONMENT"
-import EngineResources from "@engine-core/lib/EngineResources"
+import EngineResources from "@engine-core/services/EngineResources"
 import SelectionStore from "@lib/stores/SelectionStore"
-import UIAPI from "@engine-core/lib/rendering/UIAPI"
+import UIAPI from "@engine-core/services/UIAPI"
 import GPU from "@engine-core/GPU"
 import EngineToolsState from "@engine-tools/EngineToolsState"
 import EngineState from "@engine-core/EngineState"
@@ -78,7 +78,7 @@ export default class EngineToolsService {
         GizmoState.gizmoType = settings.gizmo
         EngineToolsService.#updateCameraTracker()
         EngineToolsService.#updateEngineToolsState()
-        EngineToolsService.engine.getCamera().isOrthographic = settings.camera.ortho
+        EngineToolsService.engine.getCamera().setIsOrthographic(settings.camera.ortho)
 
         GPU.canvas.width = settings.resolutionX
         GPU.canvas.height = settings.resolutionY

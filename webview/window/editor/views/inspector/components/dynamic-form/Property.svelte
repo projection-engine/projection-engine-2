@@ -8,7 +8,7 @@
     import Dropdown from "@lib/components/dropdown/Dropdown.svelte"
     import Icon from "@lib/components/icon/Icon.svelte"
     import Range from "@lib/components/range/Range.svelte"
-    import FileSystemAPI from "@engine-core/lib/utils/FileSystemAPI"
+    import FileSystemAPI from "@engine-core/services/FileSystemAPI"
     import LocalizationEN from "@enums/LocalizationEN"
     import EmptyIcon from "@lib/components/icon/EmptyIcon.svelte";
 

@@ -5,7 +5,7 @@
     import Icon from "@lib/components/icon/Icon.svelte";
     import ToolTip from "@lib/components/tooltip/ToolTip.svelte";
     import Entity from "@engine-core/instances/Entity";
-    import QueryAPI from "@engine-core/lib/utils/QueryAPI";
+    import QueryAPI from "@engine-core/services/QueryAPI";
     import LocalizationEN from "@enums/LocalizationEN";
 
     export let testSearch: GenericVoidFunctionWithP<MutableObject>

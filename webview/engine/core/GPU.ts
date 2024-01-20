@@ -6,9 +6,10 @@ import Material from "./instances/Material"
 import Mesh from "./instances/Mesh"
 import Texture from "./instances/Texture"
 import LightProbe from "./instances/LightProbe"
-import StaticMeshes from "./lib/StaticMeshes"
+import StaticMeshes from "./repositories/StaticMeshes"
 import DynamicMap from "./lib/DynamicMap"
 import IEngineSingleton from "@engine-core/IEngineSingleton";
+import ConversionAPI from "@engine-core/services/ConversionAPI";
 
 export default class GPU extends IEngineSingleton{
 	static context?: WebGL2RenderingContext
@@ -31,8 +32,24 @@ export default class GPU extends IEngineSingleton{
 			return
 		this.initializeWebGLContext(this.engine.getMainResolution(), this.engine.getCanvas());
 		GPU.skylightProbe = new LightProbe(128)
+		this.addResizeObserver()
 	}
 
+	private addResizeObserver() {
+		ConversionAPI.canvasBBox = GPU.canvas.getBoundingClientRect()
+		const OBS = new ResizeObserver(() => {
+			const bBox = GPU.canvas.getBoundingClientRect()
+			ConversionAPI.canvasBBox = bBox
+			const camera = this.engine.getCamera();
+			if(camera != null) {
+				camera.aspectRatio = bBox.width / bBox.height
+				camera.updateProjection()
+				camera.updateAspectRatio()
+			}
+		})
+		OBS.observe(GPU.canvas.parentElement)
+		OBS.observe(GPU.canvas)
+	}
 	static generateBRDF() {
 		const FBO = new Framebuffer(512, 512).texture({precision: GPU.context.RG32F, format: GPU.context.RG})
 		const brdfShader = new Shader(QUAD_VERT, BRDF_FRAG)

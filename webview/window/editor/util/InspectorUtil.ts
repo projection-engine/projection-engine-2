@@ -1,10 +1,10 @@
 import LocalizationEN from "@enums/LocalizationEN"
 import COMPONENTS from "@engine-core/static/COMPONENTS"
 import EngineResourceLoaderService from "@services/EngineResourceLoaderService"
-import FileSystemAPI from "@engine-core/lib/utils/FileSystemAPI"
+import FileSystemAPI from "@engine-core/services/FileSystemAPI"
 import SelectionStore from "@lib/stores/SelectionStore"
 import LightComponent from "@engine-core/instances/components/LightComponent"
-import LightsService from "@engine-core/lib/utils/LightsService"
+import LightsService from "@engine-core/services/LightsService"
 import CameraComponent from "@engine-core/instances/components/CameraComponent"
 import EditorUtil from "./EditorUtil"
 import type Entity from "@engine-core/instances/Entity";

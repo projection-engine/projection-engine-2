@@ -1,4 +1,4 @@
-import GPU from "../../GPU"
+import GPU from "../GPU"
 
 function getTarget(key) {
 	const events = InputEventsAPI.EVENTS

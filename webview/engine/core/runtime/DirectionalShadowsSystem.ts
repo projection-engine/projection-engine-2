@@ -1,8 +1,8 @@
-import StaticFBO from "../lib/StaticFBO"
-import StaticShaders from "../lib/StaticShaders"
-import ResourceEntityMapper from "../lib/ResourceEntityMapper"
+import StaticFBO from "../repositories/StaticFBO"
+import StaticShaders from "../repositories/StaticShaders"
+import ResourceEntityMapper from "../repositories/ResourceEntityMapper"
 import MATERIAL_RENDERING_TYPES from "../static/MATERIAL_RENDERING_TYPES"
-import MetricsController from "../lib/utils/MetricsController"
+import MetricsController from "../services/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import IEngineSystem from "@engine-core/IEngineSystem";
 

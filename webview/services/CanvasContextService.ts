@@ -3,7 +3,7 @@ import IInjectable from "@lib/IInjectable";
 import Engine from "@engine-core/Engine";
 import EditorFSUtil from "../window/editor/util/EditorFSUtil";
 import EngineTools from "@engine-tools/EngineTools";
-import UIAPI from "@engine-core/lib/rendering/UIAPI";
+import UIAPI from "@engine-core/services/UIAPI";
 import GPU from "@engine-core/GPU";
 import EngineToolsService from "@services/EngineToolsService";
 import ViewportInteractionService from "../window/editor/views/scene-editor/lib/ViewportInteractionService";

@@ -1,9 +1,9 @@
-import InputEventsAPI from "../utils/InputEventsAPI"
-import QueryAPI from "../utils/QueryAPI"
-import FileSystemAPI from "../utils/FileSystemAPI"
-import UIComponent from "../../instances/components/UIComponent"
-import ResourceEntityMapper from "../ResourceEntityMapper"
-import Entity from "../../instances/Entity"
+import InputEventsAPI from "./InputEventsAPI"
+import QueryAPI from "./QueryAPI"
+import FileSystemAPI from "./FileSystemAPI"
+import UIComponent from "../instances/components/UIComponent"
+import ResourceEntityMapper from "../repositories/ResourceEntityMapper"
+import Entity from "../instances/Entity"
 import ProjectionEngine from "@lib/ProjectionEngine";
 
 const STYLES = {

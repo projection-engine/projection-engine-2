@@ -42,10 +42,6 @@ start().catch(console.error)
 
 async function start() {
     const contexts = []
-    contexts.push(esbuild.context(worker("engine/core/workers/entity-worker.ts", "entity-worker")))
-    contexts.push(esbuild.context(worker("engine/core/workers/camera-worker.ts", "camera-worker")))
-    contexts.push(esbuild.context(worker("engine/core/workers/terrain-worker.ts", "terrain-worker")))
-    contexts.push(esbuild.context(worker("engine/core/workers/image-worker.ts", "image-worker")))
     contexts.push(esbuild.context({
         ...frontend("/editor/editor-window.ts", "editor-window"),
         plugins: [

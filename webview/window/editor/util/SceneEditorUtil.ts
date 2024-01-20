@@ -1,8 +1,8 @@
 import SHADING_MODELS from "@engine-core/static/ShadingModel"
 import LocalizationEN from "@enums/LocalizationEN"
-import ConversionAPI from "@engine-core/lib/math/ConversionAPI"
+import ConversionAPI from "@engine-core/services/ConversionAPI"
 import GPU from "@engine-core/GPU"
-import PickingAPI from "@engine-core/lib/utils/PickingAPI"
+import PickingAPI from "@engine-core/services/PickingAPI"
 import DepthPrePassSystem from "@engine-core/runtime/DepthPrePassSystem"
 import EngineTools from "../../../engine/tools/EngineTools"
 import {glMatrix, quat} from "gl-matrix"
@@ -148,11 +148,11 @@ export default class SceneEditorUtil extends IInjectable {
             if (!cameraMetadata) {
                 const pitch = quat.fromEuler(quat.create(), -45, 0, 0)
                 const yaw = quat.fromEuler(quat.create(), 0, 45, 0)
-                ProjectionEngine.Engine.getCamera().update([5, 10, 5], quat.multiply(quat.create(), yaw, pitch))
+                // ProjectionEngine.Engine.getCamera().update([5, 10, 5], quat.multiply(quat.create(), yaw, pitch))
                 CameraTracker.xRotation = glMatrix.toRadian(45)
                 CameraTracker.yRotation = -glMatrix.toRadian(45)
             } else {
-                ProjectionEngine.Engine.getCamera().restoreState(cameraMetadata)
+                // ProjectionEngine.Engine.getCamera().restoreState(cameraMetadata)
                 CameraTracker.xRotation = cameraMetadata.prevX
                 CameraTracker.yRotation = cameraMetadata.prevY
             }

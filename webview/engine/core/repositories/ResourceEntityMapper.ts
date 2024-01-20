@@ -1,8 +1,8 @@
-import DynamicMap from "./DynamicMap"
+import DynamicMap from "../lib/DynamicMap"
 import type Entity from "../instances/Entity"
 import ENVIRONMENT from "../static/ENVIRONMENT"
-import PhysicsAPI from "./rendering/PhysicsAPI"
-import UIAPI from "./rendering/UIAPI"
+import PhysicsAPI from "../services/PhysicsAPI"
+import UIAPI from "../services/UIAPI"
 import ProjectionEngine from "@lib/ProjectionEngine";
 
 export default class ResourceEntityMapper {

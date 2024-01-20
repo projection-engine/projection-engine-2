@@ -2,7 +2,7 @@ import GPU from "../GPU"
 import VertexBuffer from "../instances/VertexBuffer"
 
 import Mesh from "../instances/Mesh"
-import GPUAPI from "./rendering/GPUAPI"
+import GPUAPI from "../services/GPUAPI"
 import EmbeddedMeshes from "../static/EmbeddedMeshes"
 import IEngineSingleton from "@engine-core/IEngineSingleton";
 

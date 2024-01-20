@@ -1,7 +1,7 @@
 <script lang="ts">
     import {onDestroy, onMount} from "svelte"
-    import UIAPI from "@engine-core/lib/rendering/UIAPI"
-    import QueryAPI from "@engine-core/lib/utils/QueryAPI"
+    import UIAPI from "@engine-core/services/UIAPI"
+    import QueryAPI from "@engine-core/services/QueryAPI"
     import Header from "./components/Header.svelte"
     import GPU from "@engine-core/GPU"
     import LocalizationEN from "@enums/LocalizationEN"

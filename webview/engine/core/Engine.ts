@@ -1,18 +1,18 @@
-import CameraAPI from "./lib/utils/CameraAPI"
+import CameraRepository from "./repositories/CameraRepository"
 import ENVIRONMENT from "./static/ENVIRONMENT"
 import GPU from "./GPU"
 import Entity from "./instances/Entity"
 import DynamicMap from "./lib/DynamicMap"
-import ResourceEntityMapper from "./lib/ResourceEntityMapper"
+import ResourceEntityMapper from "./repositories/ResourceEntityMapper"
 import {Injectable} from "@lib/Injection";
 import IInjectable from "@lib/IInjectable";
 import IEngineSystem from "@engine-core/IEngineSystem";
-import StaticUBOs from "@engine-core/lib/StaticUBOs";
-import StaticMeshes from "@engine-core/lib/StaticMeshes";
-import StaticShaders from "@engine-core/lib/StaticShaders";
-import StaticFBO from "@engine-core/lib/StaticFBO";
-import CubeMapAPI from "@engine-core/lib/rendering/CubeMapAPI";
-import LineAPI from "@engine-core/lib/rendering/LineAPI";
+import StaticUBOs from "@engine-core/repositories/StaticUBOs";
+import StaticMeshes from "@engine-core/repositories/StaticMeshes";
+import StaticShaders from "@engine-core/repositories/StaticShaders";
+import StaticFBO from "@engine-core/repositories/StaticFBO";
+import CubeMapAPI from "@engine-core/services/CubeMapAPI";
+import LineAPI from "@engine-core/services/LineAPI";
 import IEngineSingleton from "@engine-core/IEngineSingleton";
 import IEngineResource from "@engine-core/IEngineResource";
 import SystemService from "@engine-core/services/SystemService";
@@ -31,7 +31,7 @@ export default class Engine extends IInjectable {
     #singletons = new DynamicMap<string, IEngineSingleton>()
 
     #rootEntity = new Entity()
-    #camera: CameraAPI
+    #camera: CameraRepository
     #gpu: GPU
     #canvas: HTMLCanvasElement
     #mainResolution: { w: number, h: number }
@@ -54,7 +54,7 @@ export default class Engine extends IInjectable {
 
     private async createSingletons() {
         this.#gpu = (await this.addSingleton(GPU)) as GPU
-        this.#camera = (await this.addSingleton(CameraAPI)) as CameraAPI;
+        this.#camera = (await this.addSingleton(CameraRepository)) as CameraRepository;
         await this.addSingleton(StaticUBOs)
         await this.addSingleton(StaticMeshes)
         await this.addSingleton(StaticShaders)
@@ -109,7 +109,7 @@ export default class Engine extends IInjectable {
         return this.#rootEntity
     }
 
-    getCamera(): CameraAPI {
+    getCamera(): CameraRepository {
         return this.#camera
     }
 

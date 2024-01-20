@@ -1,6 +1,6 @@
 import GPU from "../GPU"
-import GPUAPI from "../lib/rendering/GPUAPI"
-import MeshResourceMapper from "../lib/MeshResourceMapper"
+import GPUAPI from "../services/GPUAPI"
+import MeshResourceMapper from "../repositories/MeshResourceMapper"
 
 const THRESHOLD = 120000
 const INTERVAL = 120000

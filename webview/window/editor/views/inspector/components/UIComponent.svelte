@@ -5,7 +5,7 @@
     import Selector from "../../../components/selector/Selector.svelte"
     import EditorFSUtil from "../../../util/EditorFSUtil"
     import FileSystemUtil from "@lib/FileSystemUtil"
-    import UIAPI from "@engine-core/lib/rendering/UIAPI"
+    import UIAPI from "@engine-core/services/UIAPI"
     import Engine from "@engine-core/Engine"
     import Input from "@lib/components/input/Input.svelte"
     import Icon from "@lib/components/icon/Icon.svelte"

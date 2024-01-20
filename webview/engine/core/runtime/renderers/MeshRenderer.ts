@@ -1,8 +1,8 @@
-import MetricsController from "../../lib/utils/MetricsController"
+import MetricsController from "../../services/MetricsController"
 import METRICS_FLAGS from "../../static/METRICS_FLAGS"
 import SceneRenderer from "./SceneRenderer"
-import StaticFBO from "../../lib/StaticFBO"
-import GPUAPI from "@engine-core/lib/rendering/GPUAPI";
+import StaticFBO from "../../repositories/StaticFBO"
+import GPUAPI from "@engine-core/services/GPUAPI";
 import GPU from "@engine-core/GPU";
 
 export default class MeshRenderer {
