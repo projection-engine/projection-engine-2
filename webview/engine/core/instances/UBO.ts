@@ -1,6 +1,6 @@
 import getGlslSizes from "../utils/get-glsl-sizes"
 import GPUAPI from "@engine-core/services/GPUAPI";
-import IEngineResource from "@engine-core/IEngineResource";
+import AbstractEngineResource from "@engine-core/AbstractEngineResource";
 
 interface Item {
     offset: number,
@@ -17,7 +17,7 @@ interface Data {
     dataLength?: number
 }
 
-export default class UBO extends IEngineResource<UBO>{
+export default class UBO extends AbstractEngineResource<UBO>{
     items: Item[] = []
     keys: string[] = []
     buffer?: WebGLBuffer

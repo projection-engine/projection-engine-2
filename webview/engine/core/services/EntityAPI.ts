@@ -1,5 +1,5 @@
 import COMPONENTS from "../static/COMPONENTS"
-import UIAPI from "./UIAPI"
+import GUIService from "./GUIService"
 import PhysicsAPI from "./PhysicsAPI"
 import Entity from "../instances/Entity"
 import ENTITY_TYPED_ATTRIBUTES from "../static/ENTITY_TYPED_ATTRIBUTES"
@@ -139,7 +139,7 @@ export default class EntityAPI {
                 }
             ProjectionEngine.Engine.queryMap.delete(entity.queryKey)
             PhysicsAPI.removeRigidBody(entity)
-            UIAPI.deleteUIEntity(entity)
+            GUIService.deleteUIEntity(entity)
             if (entity.lightComponent !== undefined || entity.meshComponent !== undefined)
                 didLightsChange = true
         }

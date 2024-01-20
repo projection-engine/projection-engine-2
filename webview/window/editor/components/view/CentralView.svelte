@@ -4,7 +4,7 @@
     import HotKeysController from "@lib/HotKeysController"
     import getViewportHotkeys from "../../templates/get-viewport-hotkeys"
     import View from "./View.svelte"
-    import GPU from "@engine-core/GPU"
+    import GPUService from "@engine-core/services/GPUService"
     import LocalizationEN from "@enums/LocalizationEN";
     import {ViewPlacement, ViewType} from "./ViewDefinitions";
     import ViewportUtil from "../../util/ViewportUtil";
@@ -27,12 +27,12 @@
 
     $: {
         ViewportUtil.updateViewport(view)
-        if (view !== ViewType.EDITOR && GPU.context) {
-            GPU.canvas.style.zIndex = "-1"
-            GPU.canvas.style.position = "absolute"
-        } else if (GPU.context) {
-            GPU.canvas.style.zIndex = "1"
-            GPU.canvas.style.position = "relative"
+        if (view !== ViewType.EDITOR && GPUService.context) {
+            GPUService.canvas.style.zIndex = "-1"
+            GPUService.canvas.style.position = "absolute"
+        } else if (GPUService.context) {
+            GPUService.canvas.style.zIndex = "1"
+            GPUService.canvas.style.position = "relative"
         }
     }
 

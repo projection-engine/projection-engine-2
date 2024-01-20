@@ -4,10 +4,10 @@ import ResourceEntityMapper from "../repositories/ResourceEntityMapper"
 import MATERIAL_RENDERING_TYPES from "../static/MATERIAL_RENDERING_TYPES"
 import MetricsController from "../services/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
-import IEngineSystem from "@engine-core/IEngineSystem";
+import AbstractEngineSystem from "@engine-core/AbstractEngineSystem";
 
 
-export default class DirectionalShadowsSystem extends IEngineSystem {
+export default class DirectionalShadowsSystem extends AbstractEngineSystem {
     static changed = false
     static resolutionPerTexture = 1024
     static maxResolution = 4096

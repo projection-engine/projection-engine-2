@@ -1,6 +1,6 @@
 import Mesh from "../instances/Mesh"
 import Entity from "../instances/Entity"
-import GPU from "../GPU"
+import GPUService from "../services/GPUService"
 import ResourceMapper from "../lib/ResourceMapper"
 
 type Resource = { mesh: Mesh, entities: Entity[], entitiesMap: Map<string, Entity> }[]
@@ -31,11 +31,11 @@ export default class MeshResourceMapper {
 
 	static linkEntityMesh(entity: Entity, meshID: string) {
 		let index = MeshResourceMapper.meshesArray.findIndex(m => m.mesh.id === meshID)
-		if (index < 0 && !GPU.meshes.has(meshID))
+		if (index < 0 && !GPUService.meshes.has(meshID))
 			return
 
 		if (index < 0) {
-			MeshResourceMapper.meshesArray.push({mesh: GPU.meshes.get(meshID), entitiesMap: new Map(), entities: []})
+			MeshResourceMapper.meshesArray.push({mesh: GPUService.meshes.get(meshID), entitiesMap: new Map(), entities: []})
 			index = MeshResourceMapper.meshesArray.length - 1
 		}
 		MeshResourceMapper.inUse.set(meshID, (MeshResourceMapper.inUse.get(meshID) ?? 0) + 1)

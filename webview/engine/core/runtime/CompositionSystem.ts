@@ -1,4 +1,4 @@
-import GPU from "../GPU"
+import GPUService from "../services/GPUService"
 import StaticMeshes from "../repositories/StaticMeshes"
 import StaticFBO from "../repositories/StaticFBO"
 import StaticShaders from "../repositories/StaticShaders"
@@ -6,10 +6,10 @@ import StaticUBOs from "../repositories/StaticUBOs"
 import MetricsController from "../services/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import GPUUtil from "../utils/GPUUtil";
-import IEngineSystem from "@engine-core/IEngineSystem";
+import AbstractEngineSystem from "@engine-core/AbstractEngineSystem";
 
 
-export default class CompositionSystem extends IEngineSystem {
+export default class CompositionSystem extends AbstractEngineSystem {
     static lookUpRandom = new Float32Array(2e+3)
     static lookUpIndex = 0
     static currentNoise = 0
@@ -19,7 +19,7 @@ export default class CompositionSystem extends IEngineSystem {
         StaticUBOs.frameCompositionUBO.updateData("FXAASpanMax", new Float32Array([8.0]))
         StaticUBOs.frameCompositionUBO.updateData("FXAAReduceMin", new Float32Array([1.0 / 128.0]))
         StaticUBOs.frameCompositionUBO.updateData("FXAAReduceMul", new Float32Array([1.0 / 8.0]))
-        StaticUBOs.frameCompositionUBO.updateData("inverseFilterTextureSize", new Float32Array([1 / GPU.internalResolution.w, 1 / GPU.internalResolution.h]))
+        StaticUBOs.frameCompositionUBO.updateData("inverseFilterTextureSize", new Float32Array([1 / GPUService.internalResolution.w, 1 / GPUService.internalResolution.h]))
         StaticUBOs.frameCompositionUBO.unbind()
 
         for (let i = 0; i < CompositionSystem.lookUpRandom.length; i++)

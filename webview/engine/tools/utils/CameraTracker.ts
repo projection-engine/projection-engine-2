@@ -1,6 +1,6 @@
 import {quat, vec4} from "gl-matrix"
 import CAMERA_ROTATIONS from "../static/CAMERA_ROTATIONS"
-import GPU from "../../core/GPU"
+import GPUService from "@engine-core/services/GPUService"
 import ProjectionEngine from "@lib/ProjectionEngine";
 
 let holding = false
@@ -130,7 +130,7 @@ export default class CameraTracker {
 
 	static forceRotationTracking() {
 		if (!holding) {
-			GPU.canvas.requestPointerLock()
+			GPUService.canvas.requestPointerLock()
 			document.addEventListener("mousemove", CameraTracker.#handleInput)
 			holding = true
 		}
@@ -148,7 +148,7 @@ export default class CameraTracker {
 			switch (event.type) {
 			case "mousemove": {
 				if (!document.pointerLockElement)
-					GPU.canvas.requestPointerLock()
+					GPUService.canvas.requestPointerLock()
 				if (CameraTracker.screenSpaceMovement) {
 					toApplyTranslation[0] = -event.movementX * CameraTracker.screenSpaceMovementSpeed / 2
 					toApplyTranslation[1] = event.movementY * CameraTracker.screenSpaceMovementSpeed / 2
@@ -184,7 +184,7 @@ export default class CameraTracker {
 
 				if (!holding && map.mouseRight === true) {
 					if (CameraTracker.screenSpaceMovement)
-						GPU.canvas.style.cursor = "grabbing"
+						GPUService.canvas.style.cursor = "grabbing"
 					document.addEventListener("mousemove", CameraTracker.#handleInput)
 					holding = true
 				}
@@ -201,7 +201,7 @@ export default class CameraTracker {
 
 				if (!keys.mouseRight && !keys.mouseLeft) {
 					if (CameraTracker.screenSpaceMovement)
-						GPU.canvas.style.cursor = "default"
+						GPUService.canvas.style.cursor = "default"
 					document.removeEventListener("mousemove", CameraTracker.#handleInput)
 					holding = false
 				}
@@ -285,8 +285,8 @@ export default class CameraTracker {
 			document.addEventListener("keydown", CameraTracker.#handleInput)
 			document.addEventListener("keyup", CameraTracker.#handleInput)
 			document.addEventListener("mouseup", CameraTracker.#handleInput)
-			GPU.canvas.addEventListener("mousedown", CameraTracker.#handleInput)
-			GPU.canvas.addEventListener("wheel", CameraTracker.#handleInput)
+			GPUService.canvas.addEventListener("mousedown", CameraTracker.#handleInput)
+			GPUService.canvas.addEventListener("wheel", CameraTracker.#handleInput)
 			CameraTracker.#hasInitializedEvents = true
 		}
 	}

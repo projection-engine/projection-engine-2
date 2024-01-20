@@ -1,6 +1,6 @@
 import Material from "../instances/Material"
 import Entity from "../instances/Entity"
-import GPU from "../GPU"
+import GPUService from "../services/GPUService"
 import ResourceMapper from "../lib/ResourceMapper"
 
 
@@ -29,11 +29,11 @@ export default class MaterialResourceMapper {
 
 	static linkEntityMaterial(entity: Entity, materialID: string) {
 		let index = MaterialResourceMapper.materialsArray.findIndex(m => m.material.id === materialID)
-		if (index < 0 && !GPU.materials.has(materialID))
+		if (index < 0 && !GPUService.materials.has(materialID))
 			return
 		if (index < 0) {
 			MaterialResourceMapper.materialsArray.push({
-				material: GPU.materials.get(materialID),
+				material: GPUService.materials.get(materialID),
 				entitiesMap: new Map(),
 				entities: []
 			})

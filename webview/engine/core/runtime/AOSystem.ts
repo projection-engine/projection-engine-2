@@ -1,4 +1,4 @@
-import GPU from "../GPU"
+import GPUService from "../services/GPUService"
 import StaticMeshes from "../repositories/StaticMeshes"
 import StaticFBO from "../repositories/StaticFBO"
 import StaticShaders from "../repositories/StaticShaders"
@@ -7,16 +7,16 @@ import MetricsController from "../services/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import EngineState from "../EngineState"
 import GPUUtil from "../utils/GPUUtil";
-import IEngineSystem from "@engine-core/IEngineSystem";
+import AbstractEngineSystem from "@engine-core/AbstractEngineSystem";
 
 
-export default class SSAO extends IEngineSystem{
+export default class SSAO extends AbstractEngineSystem{
 	static noiseScale = new Float32Array(2)
 
 	 async initialize() {
 		const RESOLUTION = 4
-		SSAO.noiseScale[0] = GPU.internalResolution.w / RESOLUTION
-		SSAO.noiseScale[1] = GPU.internalResolution.h / RESOLUTION
+		SSAO.noiseScale[0] = GPUService.internalResolution.w / RESOLUTION
+		SSAO.noiseScale[1] = GPUService.internalResolution.h / RESOLUTION
 
 		StaticUBOs.ssaoUBO.bind()
 		StaticUBOs.ssaoUBO.updateData("settings", new Float32Array([.5, .7, -.1, 1000]))
@@ -35,7 +35,7 @@ export default class SSAO extends IEngineSystem{
 
 		GPUUtil.bind2DTextureForDrawing(StaticShaders.ssaoUniforms.noiseSampler, 1, StaticFBO.noiseSampler)
 
-		GPU.context.uniform1i(StaticShaders.ssaoUniforms.maxSamples, EngineState.ssaoMaxSamples)
+		GPUService.context.uniform1i(StaticShaders.ssaoUniforms.maxSamples, EngineState.ssaoMaxSamples)
 
 		StaticMeshes.drawQuad()
 		StaticFBO.ssao.stopMapping()
@@ -47,7 +47,7 @@ export default class SSAO extends IEngineSystem{
 
 		GPUUtil.bind2DTextureForDrawing(StaticShaders.boxBlurUniforms.sampler, 0, StaticFBO.ssaoSampler)
 
-		GPU.context.uniform1i(StaticShaders.boxBlurUniforms.samples, EngineState.ssaoBlurSamples)
+		GPUService.context.uniform1i(StaticShaders.boxBlurUniforms.samples, EngineState.ssaoBlurSamples)
 
 		StaticMeshes.drawQuad()
 		StaticFBO.ssaoBlurred.stopMapping()

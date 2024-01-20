@@ -2,15 +2,15 @@ import ENVIRONMENT from "../static/ENVIRONMENT"
 import {glMatrix, quat, vec3, vec4} from "gl-matrix"
 import ConversionAPI from "../services/ConversionAPI"
 import MotionBlurSystem from "../runtime/MotionBlurSystem"
-import GPU from "../GPU"
+import GPUService from "../services/GPUService"
 import Entity from "../instances/Entity"
 import CameraComponent from "../instances/components/CameraComponent"
 import {CameraProjectionType} from "@engine-core/engine-d";
-import IEngineSingleton from "@engine-core/IEngineSingleton";
+import AbstractEngineService from "@engine-core/AbstractEngineService";
 import ArrayBufferAPI from "@engine-core/services/ArrayBufferAPI";
 import StaticUBOs from "@engine-core/repositories/StaticUBOs";
 
-export default class CameraRepository extends IEngineSingleton {
+export default class CameraRepository extends AbstractEngineService {
     #dynamicAspectRatio = false
     trackingEntity: Entity
     hasChangedProjection: boolean;
@@ -65,7 +65,7 @@ export default class CameraRepository extends IEngineSingleton {
     }
 
     updateAspectRatio() {
-        const bBox = GPU.canvas.getBoundingClientRect()
+        const bBox = GPUService.canvas.getBoundingClientRect()
         ConversionAPI.canvasBBox = bBox
         if (this.engine.environment === ENVIRONMENT.DEV || this.#dynamicAspectRatio) {
             this.aspectRatio = bBox.width / bBox.height

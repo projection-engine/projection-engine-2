@@ -4,7 +4,7 @@ import Material from "../instances/Material"
 import Framebuffer from "../instances/Framebuffer"
 import Mesh, {MeshProps} from "../instances/Mesh"
 import Shader from "../instances/Shader"
-import GPU from "../GPU"
+import GPUService from "./GPUService"
 import MaterialAPI from "./MaterialAPI"
 import DepthPrePassSystem from "../runtime/DepthPrePassSystem"
 import UberShader from "../repositories/UberShader"
@@ -17,12 +17,12 @@ import MaterialResourceMapper from "../repositories/MaterialResourceMapper"
 export default class GPUAPI {
 	static async allocateTexture(imageData: string | TextureParams, id: string) {
 		try {
-			if (GPU.textures.get(id) != null)
-				return GPU.textures.get(id)
+			if (GPUService.textures.get(id) != null)
+				return GPUService.textures.get(id)
 			const texture = new Texture(id)
 			await texture.initialize(typeof imageData === "string" ? {img: imageData} : imageData)
 
-			GPU.textures.set(id, texture)
+			GPUService.textures.set(id, texture)
 			return texture
 		} catch (err) {
 			console.error(err)
@@ -31,26 +31,26 @@ export default class GPUAPI {
 	}
 
 	static destroyTexture(imageID) {
-		const found = GPU.textures.get(imageID)
+		const found = GPUService.textures.get(imageID)
 		if (!found)
 			return
 		if (found.texture instanceof WebGLTexture)
-			GPU.context.deleteTexture(found.texture)
-		GPU.textures.delete(imageID)
+			GPUService.context.deleteTexture(found.texture)
+		GPUService.textures.delete(imageID)
 	}
 
 	static destroyMaterial(id: string) {
-		const mat = GPU.materials.get(id)
+		const mat = GPUService.materials.get(id)
 		if (!mat)
 			return
 		MaterialResourceMapper.deleteMaterial(id)
 		delete UberShader.uberSignature[mat.signature]
-		GPU.materials.delete(id)
+		GPUService.materials.delete(id)
 	}
 
 	static async allocateMaterial(materialInformation: MaterialInformation, id: string): Promise<Material | undefined> {
-		if (GPU.materials.get(id) !== undefined)
-			return GPU.materials.get(id)
+		if (GPUService.materials.get(id) !== undefined)
+			return GPUService.materials.get(id)
 		const signature = materialInformation.executionSignature
 		const material = new Material(id, signature)
 
@@ -65,7 +65,7 @@ export default class GPUAPI {
 		material.doubleSided = settings.doubleSided
 		material.ssrEnabled = settings.ssrEnabled
 
-		GPU.materials.set(id, material)
+		GPUService.materials.set(id, material)
 
 		UberShader.compile()
 		DepthPrePassSystem.needsUpdate = true
@@ -73,19 +73,19 @@ export default class GPUAPI {
 	}
 
 
-	static createBuffer(type, data, renderingType = GPU.context.STATIC_DRAW) {
+	static createBuffer(type, data, renderingType = GPUService.context.STATIC_DRAW) {
 		if (!data && data.buffer instanceof ArrayBuffer && data.byteLength !== undefined || data.length === 0)
 			return null
-		const buffer = GPU.context.createBuffer()
-		GPU.context.bindBuffer(type, buffer)
-		GPU.context.bufferData(type, data, renderingType)
+		const buffer = GPUService.context.createBuffer()
+		GPUService.context.bindBuffer(type, buffer)
+		GPUService.context.bufferData(type, data, renderingType)
 		return buffer
 	}
 
 
 	static cleanUpTextures() {
-		const mat = Array.from(GPU.materials.values())
-		const textures = Array.from(GPU.textures.keys())
+		const mat = Array.from(GPUService.materials.values())
+		const textures = Array.from(GPUService.textures.keys())
 		const inUse = {}
 		for (let i = 0; i < mat.length; i++) {
 			textures.forEach(t => {
@@ -101,8 +101,8 @@ export default class GPUAPI {
 		})
 	}
 
-	static copyTexture(target: Framebuffer, source: Framebuffer, type: number = GPU.context.DEPTH_BUFFER_BIT, blitType: number = GPU.context.NEAREST) {
-		const context = GPU.context
+	static copyTexture(target: Framebuffer, source: Framebuffer, type: number = GPUService.context.DEPTH_BUFFER_BIT, blitType: number = GPUService.context.NEAREST) {
+		const context = GPUService.context
 		context.bindFramebuffer(context.READ_FRAMEBUFFER, source.FBO)
 		context.bindFramebuffer(context.DRAW_FRAMEBUFFER, target.FBO)
 		context.blitFramebuffer(
@@ -116,85 +116,85 @@ export default class GPUAPI {
 		context.bindFramebuffer(context.DRAW_FRAMEBUFFER, null)
 	}
 
-	static allocateFramebuffer(id, width = GPU.internalResolution.w, height = GPU.internalResolution.h) {
-		if (GPU.frameBuffers.get(id))
-			return GPU.frameBuffers.get(id)
+	static allocateFramebuffer(id, width = GPUService.internalResolution.w, height = GPUService.internalResolution.h) {
+		if (GPUService.frameBuffers.get(id))
+			return GPUService.frameBuffers.get(id)
 		const fbo = new Framebuffer(width, height)
-		GPU.frameBuffers.set(id, fbo)
+		GPUService.frameBuffers.set(id, fbo)
 		return fbo
 	}
 
 	static destroyFramebuffer(id) {
-		const fbo = GPU.frameBuffers.get(id)
+		const fbo = GPUService.frameBuffers.get(id)
 		if (!fbo)
 			return
 		for (let i = 0; i < fbo.colors.length; i++) {
-			GPU.context.deleteTexture(fbo.colors[i])
+			GPUService.context.deleteTexture(fbo.colors[i])
 		}
 		if (fbo.depthSampler instanceof WebGLTexture)
-			GPU.context.deleteTexture(fbo.depthSampler)
+			GPUService.context.deleteTexture(fbo.depthSampler)
 		if (fbo.RBO)
-			GPU.context.deleteRenderbuffer(fbo.RBO)
-		GPU.context.deleteFramebuffer(fbo.FBO)
-		GPU.frameBuffers.delete(id)
+			GPUService.context.deleteRenderbuffer(fbo.RBO)
+		GPUService.context.deleteFramebuffer(fbo.FBO)
+		GPUService.frameBuffers.delete(id)
 	}
 
 	static allocateMesh(id: string, bufferData: MeshProps) {
-		if (GPU.meshes.get(id) != null)
-			GPUAPI.destroyMesh(GPU.meshes.get(id))
+		if (GPUService.meshes.get(id) != null)
+			GPUAPI.destroyMesh(GPUService.meshes.get(id))
 		const instance = new Mesh({...bufferData, id})
-		GPU.meshes.set(id, instance)
+		GPUService.meshes.set(id, instance)
 		DepthPrePassSystem.needsUpdate = true
 		return instance
 	}
 
 	static destroyMesh(instance: string | Mesh) {
-		const mesh = typeof instance === "string" ? GPU.meshes.get(instance) : instance
+		const mesh = typeof instance === "string" ? GPUService.meshes.get(instance) : instance
 		if ([StaticMeshes.cube, StaticMeshes.plane, StaticMeshes.cylinder, StaticMeshes.sphere].includes(mesh))
 			return
 
 		MeshResourceMapper.deleteMesh(mesh.id)
 		if (mesh instanceof Mesh) {
-			GPU.context.deleteVertexArray(mesh.VAO)
-			GPU.context.deleteBuffer(mesh.indexVBO)
+			GPUService.context.deleteVertexArray(mesh.VAO)
+			GPUService.context.deleteBuffer(mesh.indexVBO)
 			if (mesh.uvVBO)
 				mesh.uvVBO.delete()
 			if (mesh.normalVBO)
 				mesh.normalVBO.delete()
-			GPU.meshes.delete(mesh.id)
+			GPUService.meshes.delete(mesh.id)
 		}
 		DepthPrePassSystem.needsUpdate = true
 	}
 
 	static allocateShader(id, vertex, fragment) {
 		const instance = new Shader(vertex, fragment)
-		GPU.shaders.set(id, instance)
+		GPUService.shaders.set(id, instance)
 		return instance
 	}
 
 	static destroyShader(id: string) {
-		const instance = GPU.shaders.get(id)
+		const instance = GPUService.shaders.get(id)
 		if (!instance)
 			return
-		GPU.context.deleteProgram(instance.program)
-		GPU.shaders.delete(id)
+		GPUService.context.deleteProgram(instance.program)
+		GPUService.shaders.delete(id)
 	}
 
 	static getWebGLErrorString(errorCode) {
 		switch (errorCode) {
-			case GPU.context.NO_ERROR:
+			case GPUService.context.NO_ERROR:
 				return "No error";
-			case GPU.context.INVALID_ENUM:
+			case GPUService.context.INVALID_ENUM:
 				return "Invalid enum";
-			case GPU.context.INVALID_VALUE:
+			case GPUService.context.INVALID_VALUE:
 				return "Invalid value";
-			case GPU.context.INVALID_OPERATION:
+			case GPUService.context.INVALID_OPERATION:
 				return "Invalid operation";
-			case GPU.context.INVALID_FRAMEBUFFER_OPERATION:
+			case GPUService.context.INVALID_FRAMEBUFFER_OPERATION:
 				return "Invalid framebuffer operation";
-			case GPU.context.OUT_OF_MEMORY:
+			case GPUService.context.OUT_OF_MEMORY:
 				return "Out of memory";
-			case GPU.context.CONTEXT_LOST_WEBGL:
+			case GPUService.context.CONTEXT_LOST_WEBGL:
 				return "Context lost";
 			default:
 				return "Unknown error code: " + errorCode;

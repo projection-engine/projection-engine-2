@@ -1,9 +1,9 @@
 <script lang="ts">
     import {onDestroy, onMount} from "svelte"
-    import UIAPI from "@engine-core/services/UIAPI"
+    import GUIService from "@engine-core/services/GUIService"
     import QueryAPI from "@engine-core/services/QueryAPI"
     import Header from "./components/Header.svelte"
-    import GPU from "@engine-core/GPU"
+    import GPUService from "@engine-core/services/GPUService"
     import LocalizationEN from "@enums/LocalizationEN"
     import SelectionStore from "@lib/stores/SelectionStore";
     import type Entity from "@engine-core/instances/Entity";
@@ -18,7 +18,7 @@
     let selectedEntity: Entity
 
 
-    const resizeObserver = new ResizeObserver(() => UIAPI.document.style.height = ref.offsetHeight + "px")
+    const resizeObserver = new ResizeObserver(() => GUIService.document.style.height = ref.offsetHeight + "px")
 
     function clickHandler(e) {
         if (!isOnSelection)
@@ -57,7 +57,7 @@
         clearInterval(updateInterval)
         if (isAutoUpdateEnabled) {
             updateInterval = setInterval(async () => {
-                await UIAPI.updateAllElements()
+                await GUIService.updateAllElements()
                 ProjectionEngine.ToastNotificationSystem.log(LocalizationEN.UPDATING_UI)
             }, 15000)
         }
@@ -65,10 +65,10 @@
 
     onMount(() => {
         resizeObserver.observe(ref)
-        UIAPI.showUI()
+        GUIService.showUI()
 
-        UIAPI.document.style.height = (GPU.canvas.getBoundingClientRect().height - 28) + "px"
-        UIAPI.document.style.top = "28px"
+        GUIService.document.style.height = (GPUService.canvas.getBoundingClientRect().height - 28) + "px"
+        GUIService.document.style.top = "28px"
         ProjectionEngine.EntityHierarchyService.registerListener(COMPONENT_ID, update)
         update()
     })
@@ -77,9 +77,9 @@
         clearInterval(updateInterval)
         resizeObserver.disconnect()
         ProjectionEngine.EntityHierarchyService.removeListener(COMPONENT_ID)
-        UIAPI.hideUI()
-        UIAPI.document.style.height = "100%"
-        UIAPI.document.style.top = "0"
+        GUIService.hideUI()
+        GUIService.document.style.height = "100%"
+        GUIService.document.style.top = "0"
     })
 </script>
 

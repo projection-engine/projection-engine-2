@@ -1,6 +1,6 @@
 import CameraTracker from "../../../engine/tools/utils/CameraTracker"
 import Engine from "@engine-core/Engine"
-import GPU from "@engine-core/GPU"
+import GPUService from "@engine-core/services/GPUService"
 import PickingAPI from "@engine-core/services/PickingAPI"
 import QueryAPI from "@engine-core/services/QueryAPI"
 import DepthPrePassSystem from "@engine-core/runtime/DepthPrePassSystem"
@@ -24,7 +24,7 @@ export default class ViewportUtil extends IInjectable {
     static engine: Engine
 
     static updateViewport(currentView: ViewType) {
-        if (ViewportUtil.settingsStore.getData().focusedCamera || !GPU.context)
+        if (ViewportUtil.settingsStore.getData().focusedCamera || !GPUService.context)
             return
         if (currentView === ViewType.EDITOR) {
             CameraTracker.startTracking()
@@ -37,7 +37,7 @@ export default class ViewportUtil extends IInjectable {
 
     static onViewportClick(event, mouseDelta, settings, setContext) {
         const MAX_DELTA = 50, LEFT_BUTTON = 0
-        if (GPU.canvas !== event.target || event.button !== LEFT_BUTTON)
+        if (GPUService.canvas !== event.target || event.button !== LEFT_BUTTON)
             return
         const deltaX = Math.abs(mouseDelta.x - event.clientX)
         const deltaY = Math.abs(mouseDelta.y - event.clientY)

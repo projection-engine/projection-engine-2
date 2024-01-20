@@ -1,4 +1,4 @@
-import GPU from "../../core/GPU"
+import GPUService from "@engine-core/services/GPUService"
 import StaticFBO from "@engine-core/repositories/StaticFBO"
 import StaticMeshes from "@engine-core/repositories/StaticMeshes"
 import StaticEditorShaders from "../utils/StaticEditorShaders"
@@ -9,7 +9,7 @@ export default class GridSystem {
 	static #buffer = new Float32Array([.3, 20, 50, 1])
 
 	static execute() {
-		const context = GPU.context
+		const context = GPUService.context
 		if(!EngineToolsState.showGrid)
 			return
 
@@ -27,7 +27,7 @@ export default class GridSystem {
 		GPUUtil.bind2DTextureForDrawing(uniforms.sceneDepth, 0,StaticFBO.sceneDepthVelocity)
 
 
-		context.uniform2fv(uniforms.resolution, GPU.bufferResolution)
+		context.uniform2fv(uniforms.resolution, GPUService.bufferResolution)
 
 		StaticMeshes.plane.draw()
 	}

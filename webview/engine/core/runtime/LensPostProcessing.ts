@@ -4,10 +4,10 @@ import StaticShaders from "../repositories/StaticShaders"
 import MetricsController from "../services/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import GPUUtil from "../utils/GPUUtil";
-import IEngineSystem from "@engine-core/IEngineSystem";
+import AbstractEngineSystem from "@engine-core/AbstractEngineSystem";
 
 
-export default class LensPostProcessing extends IEngineSystem{
+export default class LensPostProcessing extends AbstractEngineSystem{
 
 	 execute(gl: WebGL2RenderingContext) {
 

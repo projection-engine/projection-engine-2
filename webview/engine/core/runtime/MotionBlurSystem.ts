@@ -1,14 +1,14 @@
-import GPU from "../GPU"
+import GPUService from "../services/GPUService"
 import StaticMeshes from "../repositories/StaticMeshes"
 import StaticFBO from "../repositories/StaticFBO"
 import StaticShaders from "../repositories/StaticShaders"
 import MetricsController from "../services/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import GPUUtil from "../utils/GPUUtil";
-import IEngineSystem from "@engine-core/IEngineSystem";
+import AbstractEngineSystem from "@engine-core/AbstractEngineSystem";
 
 
-export default class MotionBlurSystem extends IEngineSystem{
+export default class MotionBlurSystem extends AbstractEngineSystem{
 	static velocityScale = 1
 	static maxSamples = 50
 	static enabled = false
@@ -25,10 +25,10 @@ export default class MotionBlurSystem extends IEngineSystem{
 
 		GPUUtil.bind2DTextureForDrawing(uniforms.gVelocity, 1, StaticFBO.sceneDepthVelocity)
 
-		GPU.context.uniform2fv(uniforms.bufferResolution, GPU.bufferResolution)
+		GPUService.context.uniform2fv(uniforms.bufferResolution, GPUService.bufferResolution)
 
-		GPU.context.uniform1f(uniforms.velocityScale, MotionBlurSystem.velocityScale)
-		GPU.context.uniform1i(uniforms.maxSamples, MotionBlurSystem.maxSamples)
+		GPUService.context.uniform1f(uniforms.velocityScale, MotionBlurSystem.velocityScale)
+		GPUService.context.uniform1i(uniforms.maxSamples, MotionBlurSystem.maxSamples)
 
 		StaticMeshes.drawQuad()
 		StaticFBO.postProcessing1.stopMapping()

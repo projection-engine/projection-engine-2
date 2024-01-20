@@ -1,6 +1,6 @@
 <script lang="ts">
     import COMPONENTS from "@engine-core/static/COMPONENTS"
-    import UIAPI from "@engine-core/services/UIAPI"
+    import GUIService from "@engine-core/services/GUIService"
     import ViewHeader from "../../../components/view/ViewHeader.svelte"
     import Icon from "@lib/components/icon/Icon.svelte"
     import ToolTip from "@lib/components/tooltip/ToolTip.svelte"
@@ -49,7 +49,7 @@
         <div data-sveltevertdivider="-"></div>
         <button data-sveltebuttondefault="-"
                 on:click={() => {
-                    UIAPI.updateAllElements().then(() => {
+                    GUIService.updateAllElements().then(() => {
                         ProjectionEngine.ToastNotificationSystem.log(LocalizationEN.UPDATING_UI)
                     })
                 }}

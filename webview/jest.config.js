@@ -4,6 +4,7 @@ module.exports = {
         '^.+\\.(ts|tsx)?$': 'ts-jest'
     },
     moduleNameMapper: {
-        "^@lib/(.*)$": "<rootDir>/lib/$1"
+        "^@lib/(.*)$": "<rootDir>/lib/$1",
+        "^@engine-core/(.*)$": "<rootDir>/engine/core/$1",
     },
 };

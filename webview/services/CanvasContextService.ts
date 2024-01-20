@@ -3,8 +3,8 @@ import IInjectable from "@lib/IInjectable";
 import Engine from "@engine-core/Engine";
 import EditorFSUtil from "../window/editor/util/EditorFSUtil";
 import EngineTools from "@engine-tools/EngineTools";
-import UIAPI from "@engine-core/services/UIAPI";
-import GPU from "@engine-core/GPU";
+import GUIService from "@engine-core/services/GUIService";
+import GPUService from "@engine-core/services/GPUService";
 import EngineToolsService from "@services/EngineToolsService";
 import ViewportInteractionService from "../window/editor/views/scene-editor/lib/ViewportInteractionService";
 import RENDER_TARGET from "../window/editor/static/RENDER_TARGET";
@@ -36,8 +36,8 @@ export default class CanvasContextService extends IInjectable {
             true
         )
         await CanvasContextService.engine.addSystem(EngineTools);
-        UIAPI.buildUI(GPU.canvas.parentElement)
-        UIAPI.hideUI()
+        GUIService.buildUI(GPUService.canvas.parentElement)
+        GUIService.hideUI()
         EngineToolsService.initialize()
         ViewportInteractionService.initialize()
     }

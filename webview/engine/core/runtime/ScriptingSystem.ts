@@ -1,10 +1,10 @@
-import IEngineSystem from "@engine-core/IEngineSystem";
+import AbstractEngineSystem from "@engine-core/AbstractEngineSystem";
 import ProjectionEngine from "@lib/ProjectionEngine";
 import ScriptsAPI from "@engine-core/services/ScriptsAPI";
 import MetricsController from "@engine-core/services/MetricsController";
 import METRICS_FLAGS from "@engine-core/static/METRICS_FLAGS";
 
-export default class ScriptingSystem extends IEngineSystem{
+export default class ScriptingSystem extends AbstractEngineSystem{
     execute(gl: WebGL2RenderingContext) {
         if (ProjectionEngine.Engine.isDev)
             return

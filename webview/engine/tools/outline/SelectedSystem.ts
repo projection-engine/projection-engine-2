@@ -1,4 +1,4 @@
-import GPU from "../../core/GPU"
+import GPUService from "@engine-core/services/GPUService"
 
 import StaticMeshes from "@engine-core/repositories/StaticMeshes"
 import StaticFBO from "@engine-core/repositories/StaticFBO"
@@ -13,7 +13,7 @@ export default class SelectedSystem {
     static drawToBuffer() {
         const selected = EngineTools.selected
         const length = selected.length
-        const context = GPU.context
+        const context = GPUService.context
 
         if (length > 0) {
             StaticFBO.postProcessing1.startMapping()
@@ -53,11 +53,11 @@ export default class SelectedSystem {
     }
 
     static drawSilhouette() {
-        const context = GPU.context
+        const context = GPUService.context
 
         StaticEditorShaders.outline.bind()
         const outlineShaderUniforms = StaticEditorShaders.outlineUniforms
-        context.uniform2fv(outlineShaderUniforms.bufferSize, GPU.bufferResolution)
+        context.uniform2fv(outlineShaderUniforms.bufferSize, GPUService.bufferResolution)
         context.uniform1f(outlineShaderUniforms.outlineWidth, EngineToolsState.outlineWidth)
         if (EngineToolsState.showOutline) {
             GPUUtil.bind2DTextureForDrawing(outlineShaderUniforms.silhouette, 0, StaticFBO.entityIDSampler)

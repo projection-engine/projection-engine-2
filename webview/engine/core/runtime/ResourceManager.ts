@@ -1,4 +1,4 @@
-import GPU from "../GPU"
+import GPUService from "../services/GPUService"
 import GPUAPI from "../services/GPUAPI"
 import MeshResourceMapper from "../repositories/MeshResourceMapper"
 
@@ -18,7 +18,7 @@ export default class ResourceManager {
 	}
 
 	static execute() {
-		const meshes = GPU.meshes.array
+		const meshes = GPUService.meshes.array
 		for (let i = 0; i < meshes.length; i++) {
 			const current = meshes[i]
 			const inUse = MeshResourceMapper.inUse.get(current.id)

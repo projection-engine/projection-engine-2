@@ -1,10 +1,10 @@
 import VertexBuffer from "../instances/VertexBuffer"
 import Mesh from "../instances/Mesh"
-import GPU from "../GPU"
-import IEngineSingleton from "@engine-core/IEngineSingleton";
+import GPUService from "./GPUService"
+import AbstractEngineService from "@engine-core/AbstractEngineService";
 
 
-export default class LineAPI extends IEngineSingleton{
+export default class LineAPI extends AbstractEngineService{
     static vaoX
     static vboX
     static vaoY
@@ -20,36 +20,36 @@ export default class LineAPI extends IEngineSingleton{
         if (LineAPI.#initialized) return
         LineAPI.#initialized = true
 
-        LineAPI.vaoX = GPU.context.createVertexArray()
-        GPU.context.bindVertexArray(LineAPI.vaoX)
+        LineAPI.vaoX = GPUService.context.createVertexArray()
+        GPUService.context.bindVertexArray(LineAPI.vaoX)
         LineAPI.vboX = new VertexBuffer(
             0,
             new Float32Array(X),
-            GPU.context.ARRAY_BUFFER,
+            GPUService.context.ARRAY_BUFFER,
             3,
-            GPU.context.FLOAT
+            GPUService.context.FLOAT
         )
-        GPU.context.bindVertexArray(null)
+        GPUService.context.bindVertexArray(null)
 
-        LineAPI.vaoY = GPU.context.createVertexArray()
-        GPU.context.bindVertexArray(LineAPI.vaoY)
+        LineAPI.vaoY = GPUService.context.createVertexArray()
+        GPUService.context.bindVertexArray(LineAPI.vaoY)
         LineAPI.vboY = new VertexBuffer(
             0,
             new Float32Array(Y),
-            GPU.context.ARRAY_BUFFER,
+            GPUService.context.ARRAY_BUFFER,
             3,
-            GPU.context.FLOAT
+            GPUService.context.FLOAT
         )
-        GPU.context.bindVertexArray(null)
+        GPUService.context.bindVertexArray(null)
 
-        LineAPI.vaoZ = GPU.context.createVertexArray()
-        GPU.context.bindVertexArray(LineAPI.vaoZ)
+        LineAPI.vaoZ = GPUService.context.createVertexArray()
+        GPUService.context.bindVertexArray(LineAPI.vaoZ)
         LineAPI.vboZ = new VertexBuffer(
             0,
             new Float32Array(Z),
-            GPU.context.ARRAY_BUFFER,
+            GPUService.context.ARRAY_BUFFER,
             3,
-            GPU.context.FLOAT
+            GPUService.context.FLOAT
         )
 
     }
@@ -60,11 +60,11 @@ export default class LineAPI extends IEngineSingleton{
 
         Mesh.finishIfUsed()
 
-        GPU.context.bindVertexArray(vao)
+        GPUService.context.bindVertexArray(vao)
         vbo.enable()
-        GPU.context.drawArrays(GPU.context.LINES, 0, 2)
+        GPUService.context.drawArrays(GPUService.context.LINES, 0, 2)
 
-        GPU.context.bindVertexArray(null)
+        GPUService.context.bindVertexArray(null)
         vbo.disable()
     }
 
@@ -75,12 +75,12 @@ export default class LineAPI extends IEngineSingleton{
 
         Mesh.finishIfUsed()
 
-        GPU.context.bindVertexArray(vao)
+        GPUService.context.bindVertexArray(vao)
         vbo.enable()
-        GPU.context.drawArrays(GPU.context.LINES, 0, 2)
+        GPUService.context.drawArrays(GPUService.context.LINES, 0, 2)
 
 
-        GPU.context.bindVertexArray(null)
+        GPUService.context.bindVertexArray(null)
         vbo.disable()
     }
 
@@ -91,11 +91,11 @@ export default class LineAPI extends IEngineSingleton{
 
         Mesh.finishIfUsed()
 
-        GPU.context.bindVertexArray(vao)
+        GPUService.context.bindVertexArray(vao)
         vbo.enable()
-        GPU.context.drawArrays(GPU.context.LINES, 0, 2)
+        GPUService.context.drawArrays(GPUService.context.LINES, 0, 2)
 
-        GPU.context.bindVertexArray(null)
+        GPUService.context.bindVertexArray(null)
         vbo.disable()
     }
 

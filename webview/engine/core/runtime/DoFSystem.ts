@@ -5,10 +5,10 @@ import MetricsController from "../services/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import GPUUtil from "../utils/GPUUtil";
 import ProjectionEngine from "@lib/ProjectionEngine";
-import IEngineSystem from "@engine-core/IEngineSystem";
+import AbstractEngineSystem from "@engine-core/AbstractEngineSystem";
 
 
-export default class DoFSystem extends IEngineSystem{
+export default class DoFSystem extends AbstractEngineSystem{
 	 execute(gl: WebGL2RenderingContext) {
 
 		if (!ProjectionEngine.Engine.getCamera().DOF)
