@@ -1,38 +1,40 @@
 import {ViewOrientation, ViewPlacement, ViewType} from "./ViewDefinitions";
+import Serializable from "@engine-core/services/serialization/Serializable";
 
-export default class ViewTabDTO {
-    #name: string = "View Tab"
-    #bottom: ViewType[] = []
-    #left: ViewType[] = []
-    #center: ViewType = ViewType.EDITOR
-    #right: ViewType[] = []
-    #activeViewPlacement: ViewPlacement = ViewPlacement.CENTER
-    #activeViewIndex: number = null
+export default class ViewTabDTO extends Serializable{
+    _name: string = "View Tab"
+    _bottom: ViewType[] = []
+    _left: ViewType[] = []
+    _center: ViewType = ViewType.EDITOR
+    _right: ViewType[] = []
+    _activeViewPlacement: ViewPlacement = ViewPlacement.CENTER
+    _activeViewIndex: number = null
 
-    constructor(name: string, bottom: ViewType[], left: ViewType[], center: ViewType, right: ViewType[]) {
-        this.#name = name;
+    constructor(name?: string, bottom?: ViewType[], left?: ViewType[], center?: ViewType, right?: ViewType[]) {
+        super()
+        this._name = name;
         if (bottom != null)
-            this.#bottom = bottom;
+            this._bottom = bottom;
         if (left != null)
-            this.#left = left;
+            this._left = left;
         if (center != null)
-            this.#center = center;
+            this._center = center;
         if (right != null)
-            this.#right = right;
+            this._right = right;
     }
 
     removeView(index: number, placement: ViewPlacement) {
-        this.#activeViewPlacement = ViewPlacement.CENTER
-        this.#activeViewIndex = null
+        this._activeViewPlacement = ViewPlacement.CENTER
+        this._activeViewIndex = null
         switch (placement) {
             case ViewPlacement.BOTTOM:
-                this.#bottom.splice(index, 1)
+                this._bottom.splice(index, 1)
                 break
             case ViewPlacement.LEFT:
-                this.#left.splice(index, 1)
+                this._left.splice(index, 1)
                 break
             case ViewPlacement.RIGHT:
-                this.#right.splice(index, 1)
+                this._right.splice(index, 1)
                 break
         }
     }
@@ -40,68 +42,68 @@ export default class ViewTabDTO {
     addView(type: ViewType, placement: ViewPlacement) {
         switch (placement) {
             case ViewPlacement.BOTTOM:
-                this.#bottom.push(type)
+                this._bottom.push(type)
                 break
             case ViewPlacement.CENTER:
-                this.#center = type
+                this._center = type
                 break
             case ViewPlacement.LEFT:
-                this.#left.push(type)
+                this._left.push(type)
                 break
             case ViewPlacement.RIGHT:
-                this.#right.push(type)
+                this._right.push(type)
                 break
         }
     }
 
     setActiveView(index: number, placement: ViewPlacement): boolean {
-        const result = this.#activeViewPlacement !== placement && this.#activeViewIndex !== index
-        this.#activeViewPlacement = placement
-        this.#activeViewIndex = index
+        const result = this._activeViewPlacement !== placement && this._activeViewIndex !== index
+        this._activeViewPlacement = placement
+        this._activeViewIndex = index
         return result
     }
 
     getName(): string {
-        return this.#name;
+        return this._name;
     }
 
     getBottom(): ViewType[] {
-        return this.#bottom;
+        return this._bottom;
     }
 
     getLeft(): ViewType[] {
-        return this.#left;
+        return this._left;
     }
 
     getCenter(): ViewType {
-        return this.#center;
+        return this._center;
     }
 
     getRight(): ViewType[] {
-        return this.#right;
+        return this._right;
     }
 
     getActiveViewPlacement(): ViewPlacement {
-        return this.#activeViewPlacement;
+        return this._activeViewPlacement;
     }
 
     getActiveViewIndex(): number {
-        return this.#activeViewIndex;
+        return this._activeViewIndex;
     }
 
     replaceViewType(index: number, type: ViewType, placement: ViewPlacement) {
         switch (placement) {
             case ViewPlacement.BOTTOM:
-                this.#bottom[index] = type
+                this._bottom[index] = type
                 break
             case ViewPlacement.CENTER:
-                this.#center = type
+                this._center = type
                 break
             case ViewPlacement.LEFT:
-                this.#left[index] = type
+                this._left[index] = type
                 break
             case ViewPlacement.RIGHT:
-                this.#right[index] = type
+                this._right[index] = type
                 break
         }
     }

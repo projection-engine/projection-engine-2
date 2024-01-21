@@ -70,7 +70,6 @@
 </div>
 <div class="right-content" style={!isOnGizmo ? undefined : "display: none"}>
     <OptionDropdown
-            noPadding={true}
             options={options}
             label="layers"
             labelAsIcon={true}

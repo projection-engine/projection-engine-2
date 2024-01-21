@@ -148,6 +148,9 @@ export default class Serializable {
     }
 
     #getValue(value: SerializableAcceptedTypes, instances: Record<string, Serializable>) {
+        if(value == null){
+            return null;
+        }
         if (typeof value === "object") {
             if (Array.isArray(value)) {
                 return (value as SerializableAcceptedTypes[]).map(e => this.#getValue(e, instances))

@@ -3,22 +3,25 @@
     import Dropdown from "./Dropdown.svelte";
     import getDropdownHeaderStyles from "./utils/get-dropdown-header-styles";
     import Icon from "../icon/Icon.svelte";
-    import EmptyIcon from "../icon/EmptyIcon.svelte";
+    import Option from "@lib/components/dropdown/Option.svelte";
+    import {DropdownOption} from "@lib/components/dropdown/DropdownDefinitions";
 
-    export let label: string
-    export let labelAsIcon: boolean
-    export let autoClose: boolean
-    export let options: { id?: any, label: string, icon?: string, divider?: boolean, onClick: GenericVoidFunction }[]
-    export let cleanLayout: boolean
-    export let tooltip: string
-    export let noPadding: boolean
-    export let buttonStyles: string
-    export let highlightElementWithId: any
+    export let label: string = null
+    export let labelAsIcon: boolean = false
+    export let options: DropdownOption[]
+    export let cleanLayout: boolean = false
+    export let tooltip: string = null
+    export let disabled: boolean = false
+    export let buttonStyles: string = null
+    export let highlightElementWithId: any = null
 
 </script>
 
-<Dropdown buttonStyles={cleanLayout ? undefined : getDropdownHeaderStyles()} hideArrow={cleanLayout}>
-    <button data-sveltebuttondefault="-"
+<Dropdown buttonStyles={cleanLayout ? undefined : getDropdownHeaderStyles()} hideArrow={cleanLayout}
+          disabled={disabled}>
+    <button
+            disabled={disabled}
+            data-sveltebuttondefault="-"
             slot="button"
             data-svelteview-header-dropdown={cleanLayout? "" : "-"}
             style={buttonStyles + (cleanLayout ? "border: none; display: flex; align-items: center" : undefined)}
@@ -32,39 +35,18 @@
             {label}
             <ToolTip content={label}/>
         {/if}
-
     </button>
 
     {#each options as option}
         {#if option.divider}
             <div class="group dropdown-list">
-                <strong style="white-space: nowrap; padding-left: 4px">{option.label}</strong>
+                {#if option.label != null}
+                    <strong style="white-space: nowrap; padding-left: 4px">{option.label}</strong>
+                {/if}
                 <div data-sveltedivider="-"></div>
             </div>
         {:else}
-            <button data-sveltebuttondefault="-"
-                    disabled={option.disabled}
-
-                    on:click={e => {
-                        option.onClick()
-                        if(autoClose)
-                            e.currentTarget.closeDropdown?.()
-                    }}
-                    style={noPadding ? undefined : "padding-left: 25px;"}
-            >
-                {#if highlightElementWithId !== undefined && highlightElementWithId === option.id}
-                    <Icon>check</Icon>
-                {:else}
-                    {#if option.icon}
-                        {#if option.icon === "empty"}
-                            <EmptyIcon/>
-                        {:else}
-                            <Icon>{option.icon}</Icon>
-                        {/if}
-                    {/if}
-                {/if}
-                {option.label}
-            </button>
+            <Option {option} {highlightElementWithId}/>
         {/if}
     {/each}
 </Dropdown>

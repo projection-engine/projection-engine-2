@@ -2,23 +2,36 @@
     import OptionDropdown from "../dropdown/OptionDropdown.svelte";
     import WebViewService from "../../webview/WebViewService";
     import {InjectVar} from "@lib/Injection";
+    import ProjectService from "@services/ProjectService";
+    import {DropdownOption} from "@lib/components/dropdown/DropdownDefinitions";
 
-    export let options: { label: string, options: [{ label: string, onClick: GenericVoidFunction }] }[] = []
     const webView = InjectVar(WebViewService)
+    const projectService = InjectVar(ProjectService)
 
-    $: optionsMapped = [
-        ...options,
+    const OPTIONS: {label: string, disabled?: boolean, options: DropdownOption[]}[] = [
+        {
+            label: "File",
+            options: [
+                {label: "Open", onClick: () => projectService.open()},
+                {divider: true},
+                {label: "Save", icon: "save", onClick: () => projectService.save(), noPadding: true},
+                {label: "Save as", onClick: () => projectService.saveAs()},
+            ]
+        },
+        {label: "Edit", disabled: true, options: []},
         {
             label: "Window",
             options: [{label: "Reload", onClick: () => webView.beam("RELOAD")}]
-        }
+        },
+        {label: "Help", disabled: true, options: []},
     ]
 </script>
 
 
 <div class="container">
-    {#each optionsMapped as option}
+    {#each OPTIONS as option}
         <OptionDropdown
+                disabled={option.disabled}
                 cleanLayout={true}
                 options={option.options}
                 label={option.label}
