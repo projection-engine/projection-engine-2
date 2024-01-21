@@ -17,12 +17,11 @@ import EntityNamingService from "@services/EntityNamingService";
 import IInjectable from "@lib/IInjectable";
 import WebViewService from "@lib/webview/WebViewService";
 import FSService from "@lib/FSService";
+import RepositoryService from "@engine-core/services/serialization/RepositoryService";
 
 
 @Injectable
 export default class ProjectService extends IInjectable {
-    static SET_PROJECT_PATH = "SET_PROJECT_PATH"
-
     @Inject(Engine)
     static engine: Engine
 
@@ -47,30 +46,75 @@ export default class ProjectService extends IInjectable {
     @Inject(EntityNamingService)
     static entityNamingService: EntityNamingService
 
-    async load(pathToFile: string) {
-        ProjectService.webViewService.beam(ProjectService.SET_PROJECT_PATH, pathToFile)
-
-        // TODO - LOAD
-    }
 
     async save() {
-        if (ProjectService.settingsStore.getData().executingAnimation) {
-            ProjectService.toasterService.error(LocalizationEN.EXECUTING_SIMULATION)
-            return
-        }
-
-        ProjectService.toasterService.warn(LocalizationEN.SAVING)
         try {
-            const path = await ProjectService.fsService.requestCurrentFilePath();
-            const content = JSON.stringify(ProjectService.settingsStore.getData());
-
-            // TODO - SAVE ENGINE INFORMATION ALSO
-            ProjectService.fsService.writeFile(path, content)
-        } catch (err) {
-            console.error(err)
-            return
+            const path = await ProjectService.fsService.requestCurrentFilePath()
+            if (path == null || path.length === 0) {
+                await this.saveAs()
+                return
+            }
+            await ProjectService.fsService.writeFile(path, RepositoryService.dump())
+            await ProjectService.fsService.writeFile(path, RepositoryService.dump())
+            ProjectService.toasterService.success(LocalizationEN.SAVED)
+        } catch (ex) {
+            ProjectService.toasterService.error(ex.message)
+            console.error(ex)
         }
-        ProjectService.toasterService.success(LocalizationEN.PROJECT_SAVED)
+    }
+
+    async open() {
+        // @ts-ignore
+        const handle = await window.showOpenFilePicker({
+            types: [
+                {
+                    description: "Projection engine project file",
+                    accept: {"application/json": [".projection"]},
+                },
+            ],
+            excludeAcceptAllOption: true,
+            multiple: false,
+        }) as FileSystemFileHandle[]
+        if (handle.length > 0) {
+            const file = await handle[0].getFile()
+            const content = await file.text()
+
+            try {
+                RepositoryService.restore(content)
+                ProjectService.selectionStore.updateStore(ProjectService.selectionStore.getData())
+                ProjectService.settingsStore.updateStore(ProjectService.settingsStore.getData())
+            } catch (ex) {
+                ProjectService.toasterService.error(ex.message)
+                console.error(ex)
+            }
+        }
+    }
+
+    async saveAs() {
+        try {
+            const opts = {
+                types: [
+                    {
+                        description: "Projection engine project file",
+                        accept: {"application/json": [".projection"]},
+                    },
+                ],
+            };
+
+            // @ts-ignore
+            const fileHandle = await window.showSaveFilePicker(opts) as FileSystemFileHandle
+            await this.#write(fileHandle)
+            ProjectService.toasterService.success(LocalizationEN.SAVED)
+        } catch (ex) {
+            ProjectService.toasterService.error(ex.message)
+            console.error(ex)
+        }
+    }
+
+    async #write(fileHandle: FileSystemFileHandle) {
+        const writable = await fileHandle.createWritable();
+        await writable.write(RepositoryService.dump());
+        await writable.close();
     }
 }
 

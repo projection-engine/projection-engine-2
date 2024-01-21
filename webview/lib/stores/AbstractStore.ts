@@ -2,18 +2,18 @@ import IStateDTO from "@lib/stores/state/IStateDTO";
 import IInjectable from "@lib/IInjectable";
 
 export default class AbstractStore<T extends IStateDTO> extends IInjectable {
-    readonly #data: T
+    readonly _data: T
     #globalSubs = new Map<string, GenericVoidFunctionWithP<T>>()
     #subsByField = new Map<string, Map<string, GenericVoidFunctionWithP<T>>>()
 
     constructor(data: T) {
         super()
-        this.#data = data
+        this._data = data
     }
 
     updateStore(data: MutableObject = {}) {
         const callbacks: GenericVoidFunctionWithP<T>[] = []
-        for (const key of this.#data.getKeys()) {
+        for (const key of this._data.getKeys()) {
             if (!Object.hasOwn(data, key)) {
                 continue;
             }
@@ -23,10 +23,10 @@ export default class AbstractStore<T extends IStateDTO> extends IInjectable {
                     .get(key)
                     .forEach(c => callbacks.push(c))
             }
-            this.#data[key] = dataValue
+            this._data[key] = dataValue
         }
         this.#globalSubs.forEach(callback => callbacks.push(callback))
-        callbacks.forEach(c => c(this.#data))
+        callbacks.forEach(c => c(this._data))
     }
 
     /**
@@ -36,7 +36,7 @@ export default class AbstractStore<T extends IStateDTO> extends IInjectable {
      * @return unsubscribe callback
      */
     subscribe(callback: GenericVoidFunctionWithP<T>, dependencies: string[] = []): GenericVoidFunction {
-        callback(this.#data)
+        callback(this._data)
         const id = crypto.randomUUID()
         if (dependencies.length === 0) {
             this.#globalSubs.set(id, callback)
@@ -63,6 +63,6 @@ export default class AbstractStore<T extends IStateDTO> extends IInjectable {
     }
 
     getData(): T {
-        return this.#data
+        return this._data
     }
 }

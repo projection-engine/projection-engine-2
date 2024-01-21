@@ -8,6 +8,7 @@ import FileDTO from "@lib/dto/fs/FileDTO";
 @Injectable
 export default class FSService extends IInjectable {
     static GET_PROJECT_PATH = "GET_PROJECT_PATH"
+    static SET_PROJECT_PATH = "SET_PROJECT_PATH"
     static GET_ROOT_DIRECTORY = "GET_ROOT_DIRECTORY"
     static GET_SEPARATOR = "GET_SEPARATOR"
     static READ_DIRECTORY = "READ_DIRECTORY"
@@ -63,7 +64,6 @@ export default class FSService extends IInjectable {
         return []
     }
 
-
     async delete(path: string) {
 
     }
@@ -77,5 +77,4 @@ export default class FSService extends IInjectable {
         const payload = await FSService.webViewService.wire(FSService.GET_PROJECT_PATH);
         return payload.getPayload()
     }
-
 }
