@@ -4,9 +4,15 @@ enum CameraProjectionType {
     ORTHOGRAPHIC
 }
 
+interface SerializationPackage {
+    root: string,
+    dependencies: Record<string, SerializableClass>
+}
+
 interface SerializableClass {
     className: string,
-    value: string
+    value: string,
+    id: string
 }
 
 type AcceptedTypes = string | number | boolean | { type: "object", value: SerializableArray } | {
@@ -24,4 +30,5 @@ interface SerializableArray {
     type: "f32" | "ui8"
 }
 
-export {CameraProjectionType, SerializableArray, SerializableClass, SerializableValue, SerializableAcceptedTypes}
+
+export {CameraProjectionType, SerializableArray, SerializableClass, SerializableValue, SerializableAcceptedTypes, SerializationPackage}

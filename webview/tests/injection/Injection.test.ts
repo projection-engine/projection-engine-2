@@ -7,6 +7,7 @@ import MyOtherInjectable from "./MyOtherInjectable";
 
 test('Should be the same instance', () => {
     const instanceA = InjectVar(MyInjectable)
+    expect(instanceA).toBeDefined()
     expect(instanceA).toBe(MyOtherClass.myField)
 });
 
