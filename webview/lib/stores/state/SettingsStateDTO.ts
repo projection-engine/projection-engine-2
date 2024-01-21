@@ -7,6 +7,7 @@ import KEYS from "../../../window/editor/static/KEYS";
 import ViewTabDTO from "../../../window/editor/components/view/ViewTabDTO";
 import LocalizationEN from "@enums/LocalizationEN";
 import {ViewType} from "../../../window/editor/components/view/ViewDefinitions";
+import RepositoryService from "@engine-core/services/serialization/RepositoryService";
 
 export default class SettingsStateDTO extends IStateDTO {
     filesInUse: string[] = []
@@ -197,3 +198,5 @@ export default class SettingsStateDTO extends IStateDTO {
     scripts = []
     focusedCamera = undefined
 }
+
+RepositoryService.serializable(SettingsStateDTO)

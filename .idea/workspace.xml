@@ -19,20 +19,11 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-56] Improving serialization architecture&#10;- Added support for circular dependencies&#10;- Improved tests for serialization">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/services/serialization/Serializable.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/services/serialization/Serializable.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/FSService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/FSService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/components/dropdown/OptionDropdown.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/components/dropdown/OptionDropdown.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/components/frame/MenuBar.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/components/frame/MenuBar.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/stores/AbstractStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/AbstractStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/stores/SelectionStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/SelectionStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/stores/state/CBStateDTO.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/stores/state/IStateDTO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/state/IStateDTO.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/services/ProjectService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/ProjectService.ts" afterDir="false" />
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-60] Project service&#10;- Creating save option&#10;- Save as option&#10;- Open option&#10;- Making stores serializable">
+      <change beforePath="$PROJECT_DIR$/webview/lib/stores/state/SelectionStateDTO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/state/SelectionStateDTO.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/stores/state/SettingsStateDTO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/state/SettingsStateDTO.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/ViewTabDTO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/ViewTabDTO.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/editor-window.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/editor-window.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/SceneOptions.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/SceneOptions.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -345,15 +336,7 @@
       <workItem from="1705769927210" duration="10479000" />
       <workItem from="1705788686737" duration="1103000" />
       <workItem from="1705835439400" duration="13150000" />
-      <workItem from="1705858855353" duration="4314000" />
-    </task>
-    <task id="LOCAL-00004" summary="[STD-1] Webview2 integration&#10;- Removing electron stuff">
-      <option name="closed" value="true" />
-      <created>1702827617412</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1702827617412</updated>
+      <workItem from="1705858855353" duration="5146000" />
     </task>
     <task id="LOCAL-00005" summary="[STD-1] Webview2 integration&#10;- Removing unused files">
       <option name="closed" value="true" />
@@ -739,7 +722,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705850986735</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="[STD-60] Project service&#10;- Creating save option&#10;- Save as option&#10;- Open option&#10;- Making stores serializable">
+      <option name="closed" value="true" />
+      <created>1705863388347</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1705863388348</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -763,7 +754,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-35] Removing static members from Engine" />
     <MESSAGE value="[STD-37] Dependency injection&#10;- Adding path aliases &#10;- Fixing singleton ref errors" />
     <MESSAGE value="[STD-37] Dependency injection&#10;- Removing unused files&#10;- Adding backbone for new dependency injection architecture" />
     <MESSAGE value="[STD-37] Dependency injection&#10;- Making stores injectable&#10;- Creating inject method for variables" />
@@ -788,7 +778,8 @@
     <MESSAGE value="[STD-53] Camera refactoring&#10;- Finishing camera refactoring&#10;- Refactoring engine files" />
     <MESSAGE value="[STD-56] Creating serialization architecture" />
     <MESSAGE value="[STD-56] Improving serialization architecture&#10;- Added support for circular dependencies&#10;- Improved tests for serialization" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-56] Improving serialization architecture&#10;- Added support for circular dependencies&#10;- Improved tests for serialization" />
+    <MESSAGE value="[STD-60] Project service&#10;- Creating save option&#10;- Save as option&#10;- Open option&#10;- Making stores serializable" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-60] Project service&#10;- Creating save option&#10;- Save as option&#10;- Open option&#10;- Making stores serializable" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
