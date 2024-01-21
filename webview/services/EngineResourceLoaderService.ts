@@ -1,7 +1,7 @@
 import FileSystemUtil from "@lib/FileSystemUtil"
 import EditorFSUtil from "../window/editor/util/EditorFSUtil"
 
-import COMPONENTS from "@engine-core/static/COMPONENTS"
+import COMPONENTS from "@engine-core/static/Components"
 import PickingAPI from "@engine-core/services/PickingAPI"
 import QueryAPI from "@engine-core/services/QueryAPI"
 import EntityFactoryService from "./EntityFactoryService"

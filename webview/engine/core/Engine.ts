@@ -3,9 +3,7 @@ import ENVIRONMENT from "./static/ENVIRONMENT"
 import GPUService from "./services/GPUService"
 import Entity from "./instances/Entity"
 import DynamicMap from "./lib/DynamicMap"
-import ResourceEntityMapper from "./repositories/ResourceEntityMapper"
-import {Injectable} from "@lib/Injection";
-import IInjectable from "@lib/IInjectable";
+import World from "./repositories/World"
 import AbstractEngineSystem from "@engine-core/AbstractEngineSystem";
 import StaticUBOs from "@engine-core/repositories/StaticUBOs";
 import StaticMeshes from "@engine-core/repositories/StaticMeshes";
@@ -16,37 +14,43 @@ import LineAPI from "@engine-core/services/LineAPI";
 import AbstractEngineService from "@engine-core/AbstractEngineService";
 import AbstractEngineResource from "@engine-core/AbstractEngineResource";
 import SystemService from "@engine-core/services/SystemService";
+import Serializable from "@engine-core/services/serialization/Serializable";
+import RepositoryService from "@engine-core/services/serialization/RepositoryService";
+import Components from "@engine-core/static/Components";
 
-@Injectable
-export default class Engine extends IInjectable {
+export default class Engine extends Serializable {
     // TODO - FIND A BETTER PLACE FOR THESE VARIABLES
     elapsed = 0
     currentTimeStamp = 0
+    world: World
 
-    #development = false
     UILayouts = new Map()
     isDev = true
-    #environment: number = ENVIRONMENT.DEV
-    #isReady = false
-    #singletons = new DynamicMap<string, AbstractEngineService>()
+    environment: number = ENVIRONMENT.DEV
+    #singletons = new DynamicMap<AbstractEngineService>()
 
-    #rootEntity = new Entity()
+    rootEntity = new Entity()
     #camera: CameraRepository
     #gpu: GPUService
     #canvas: HTMLCanvasElement
-    #mainResolution: { w: number, h: number }
+    mainResolution: { w: number, h: number }
 
     async initialize(canvas: HTMLCanvasElement, mainResolution: {
         w: number,
         h: number
     }, readAsset: Function) {
+        this.world = new World()
+
         this.#canvas = canvas
-        this.#mainResolution = mainResolution
+        this.mainResolution = mainResolution
         await this.createSingletons()
 
-        ResourceEntityMapper.addEntity(this.#rootEntity)
-        this.#isReady = true
+        this.getWorld().addEntity(this.rootEntity)
         this.start()
+    }
+
+    getByComponent(component: Components): Entity[] {
+        return this.world.getByComponent(component)
     }
 
     private async createSingletons() {
@@ -99,11 +103,11 @@ export default class Engine extends IInjectable {
     }
 
     getMainResolution(): { w: number; h: number } {
-        return this.#mainResolution;
+        return this.mainResolution;
     }
 
     getRootEntity(): Entity {
-        return this.#rootEntity
+        return this.rootEntity
     }
 
     getCamera(): CameraRepository {
@@ -114,27 +118,36 @@ export default class Engine extends IInjectable {
         return this.#gpu
     }
 
+    getWorld(){
+        return this.world
+    }
+
     getContext(): WebGL2RenderingContext {
         return GPUService.context
     }
 
-    getEntities(): DynamicMap<string, Entity> {
-        return ResourceEntityMapper.entities
+    getEntities(): DynamicMap<Entity> {
+        return this.getWorld().entities
     }
 
-    getQueryMap(): Map<string, Entity> {
-        return ResourceEntityMapper.queryMap
+    getQueryMap(): DynamicMap<Entity> {
+        return this.getWorld().queryMap
+    }
+
+    get<T>(Clazz: new () => T): T {
+        return this.#singletons.get(Clazz.name) as T
     }
 
     getEnvironment(): number {
-        return this.#environment
+        return this.environment
     }
 
     setEnvironment(data: number) {
         this.isDev = data === ENVIRONMENT.DEV
-        this.#environment = data
+        this.environment = data
         if (this.isDev)
             this.#camera.updateAspectRatio()
     }
 
 }
+RepositoryService.injectable(Engine)

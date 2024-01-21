@@ -1,5 +1,5 @@
 import LocalizationEN from "@enums/LocalizationEN"
-import COMPONENTS from "@engine-core/static/COMPONENTS"
+import COMPONENTS from "@engine-core/static/Components"
 import EngineResourceLoaderService from "@services/EngineResourceLoaderService"
 import FileSystemAPI from "@engine-core/services/FileSystemAPI"
 import SelectionStore from "@lib/stores/SelectionStore"

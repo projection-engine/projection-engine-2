@@ -1,5 +1,5 @@
 <script lang="ts">
-    import COMPONENTS from "@engine-core/static/COMPONENTS"
+    import COMPONENTS from "@engine-core/static/Components"
     import GUIService from "@engine-core/services/GUIService"
     import ViewHeader from "../../../components/view/ViewHeader.svelte"
     import Icon from "@lib/components/icon/Icon.svelte"

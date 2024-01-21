@@ -3,7 +3,8 @@ import ATMOSPHERE_PROPS from "../../static/component-props/ATMOSPHERE_PROPS"
 import ATMOSPHERE_TYPES from "../../static/ATMOSPHERE_TYPES"
 import {mat4, vec3} from "gl-matrix"
 import LightsService from "../../services/LightsService"
-import COMPONENTS from "../../static/COMPONENTS"
+import COMPONENTS from "../../static/Components"
+import RepositoryService from "@engine-core/services/serialization/RepositoryService";
 
 
 export default class AtmosphereComponent extends Component {
@@ -77,3 +78,5 @@ export default class AtmosphereComponent extends Component {
 		matrix[15] = component.threshold
 	}
 }
+
+RepositoryService.serializable(AtmosphereComponent)

@@ -6,7 +6,9 @@ import PointShadowsSystem from "../runtime/PointShadowsSystem"
 import type Entity from "../instances/Entity"
 import UberShader from "../repositories/UberShader"
 import StaticUBOs from "../repositories/StaticUBOs"
-import ResourceEntityMapper from "../repositories/ResourceEntityMapper"
+import World from "../repositories/World"
+import Components from "@engine-core/static/Components";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 
 let lightTimeout
@@ -39,7 +41,7 @@ export default class LightsService {
 	}
 
 	static #package(keepOld) {
-		const lights = ResourceEntityMapper.lights.array
+		const lights = ProjectionEngine.Engine.getByComponent(Components.LIGHT)
 		const primaryBuffer = LightsService.primaryBuffer,
 			secondaryBuffer = LightsService.secondaryBuffer
 		let size = 0, offset = 0
@@ -64,7 +66,7 @@ export default class LightsService {
 			size++
 		}
 
-		const atmospheres = ResourceEntityMapper.atmosphere.array
+		const atmospheres = ProjectionEngine.Engine.getByComponent(Components.ATMOSPHERE)
 		for (let i = 0; i < atmospheres.length; i++) {
 			const current = atmospheres[i]
 			if (offset + 16 > UberShader.MAX_LIGHTS * 16)

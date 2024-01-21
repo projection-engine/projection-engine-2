@@ -8,23 +8,22 @@ import ENVIRONMENT from "@engine-core/static/ENVIRONMENT";
 
 export default class UberShader {
 
-	static #MAX_LIGHTS = 310
-	static get MAX_LIGHTS() {
-		return UberShader.#MAX_LIGHTS
-	}
+    static get MAX_LIGHTS() {
+        return 310
+    }
 
-	static #uberSignature = {}
-	static get uberSignature() {
-		return UberShader.#uberSignature
-	}
+    static #uberSignature = {}
+    static get uberSignature() {
+        return UberShader.#uberSignature
+    }
 
-	static uber?: Shader
-	static uberUniforms?: { [key: string]: WebGLUniformLocation }
+    static uber?: Shader
+    static uberUniforms?: { [key: string]: WebGLUniformLocation }
 
-	static compile(forceCleanShader?: boolean) {
-		UberShader.uber = undefined
-		const methodsToLoad = [
-				`
+    static compile(forceCleanShader?: boolean) {
+        UberShader.uber = undefined
+        const methodsToLoad = [
+            `
             if(isDecalPass){ 
                 if(useAlbedoDecal)
                     albedo = texture(sampler1, texCoords).rgb;
@@ -47,38 +46,38 @@ export default class UberShader {
             else
                 switch (materialID) {
             `
-			], uniformsToLoad = []
-		if (!forceCleanShader)
-			GPUService.materials.forEach(mat => {
-				const declaration = [`case ${mat.bindID}: {`, mat.functionDeclaration, "break;", "}", ""]
-				methodsToLoad.push(declaration.join("\n"))
-				uniformsToLoad.push(mat.uniformsDeclaration)
-			})
-		methodsToLoad.push(`
+        ], uniformsToLoad = []
+        if (!forceCleanShader)
+            GPUService.materials.forEach(mat => {
+                const declaration = [`case ${mat.bindID}: {`, mat.functionDeclaration, "break;", "}", ""]
+                methodsToLoad.push(declaration.join("\n"))
+                uniformsToLoad.push(mat.uniformsDeclaration)
+            })
+        methodsToLoad.push(`
             default:
                 N = normalVec;
                 break;
             }
         `)
 
-		let fragment = ProjectionEngine.Engine.getEnvironment() === ENVIRONMENT.DEV ? DEBUG_FRAG : BASIS_FRAG
-		fragment = fragment.replace("//--UNIFORMS--", uniformsToLoad.join("\n"))
-		fragment = fragment.replace("//--MATERIAL_SELECTION--", methodsToLoad.join("\n"))
+        let fragment = ProjectionEngine.Engine.getEnvironment() === ENVIRONMENT.DEV ? DEBUG_FRAG : BASIS_FRAG
+        fragment = fragment.replace("//--UNIFORMS--", uniformsToLoad.join("\n"))
+        fragment = fragment.replace("//--MATERIAL_SELECTION--", methodsToLoad.join("\n"))
 
-		const shader = new Shader(VERTEX_SHADER, fragment)
-		if (shader.messages.hasError) {
+        const shader = new Shader(VERTEX_SHADER, fragment)
+        if (shader.messages.hasError) {
 
-			if (!UberShader.uber && !forceCleanShader)
-				UberShader.compile(true)
-			console.error("Invalid shader", shader.messages)
+            if (!UberShader.uber && !forceCleanShader)
+                UberShader.compile(true)
+            console.error("Invalid shader", shader.messages)
 
-			return
-		}
-		if (UberShader.uber)
-			GPUService.context.deleteProgram(UberShader.uber.program)
+            return
+        }
+        if (UberShader.uber)
+            GPUService.context.deleteProgram(UberShader.uber.program)
 
-		UberShader.uber = shader
-		UberShader.uberUniforms = shader.uniformMap
+        UberShader.uber = shader
+        UberShader.uberUniforms = shader.uniformMap
 
-	}
+    }
 }

@@ -3,7 +3,7 @@ import CameraTracker from "@engine-tools/utils/CameraTracker"
 import GUIService from "@engine-core/services/GUIService"
 import Engine from "@engine-core/Engine"
 import ScriptsAPI from "@engine-core/services/ScriptsAPI"
-import ResourceEntityMapper from "@engine-core/repositories/ResourceEntityMapper"
+import World from "@engine-core/repositories/World"
 import LocalizationEN from "@enums/LocalizationEN"
 import {Inject, Injectable, LazyInject} from "@lib/Injection";
 import ProjectService from "@services/ProjectService";
@@ -43,7 +43,7 @@ export default class ExecutionService extends IInjectable{
     async stopPlayState() {
         if (!this.#isPlaying)
             return
-        ResourceEntityMapper.clear()
+        ExecutionService.engine.getWorld().clear()
 
         ExecutionService.engine.getEntities().clear()
         ExecutionService.engine.getQueryMap().clear()

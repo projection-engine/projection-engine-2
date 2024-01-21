@@ -1,7 +1,6 @@
 import {mat4} from "gl-matrix"
 import StaticShaders from "../repositories/StaticShaders"
 import StaticFBO from "../repositories/StaticFBO"
-import ResourceEntityMapper from "../repositories/ResourceEntityMapper"
 import StaticMeshes from "../repositories/StaticMeshes"
 import MATERIAL_RENDERING_TYPES from "../static/MATERIAL_RENDERING_TYPES"
 import MetricsController from "../services/MetricsController"
@@ -12,6 +11,7 @@ import Entity from "../instances/Entity"
 import Mesh from "../instances/Mesh"
 import ProjectionEngine from "@lib/ProjectionEngine";
 import AbstractEngineSystem from "@engine-core/AbstractEngineSystem";
+import Components from "@engine-core/static/Components";
 
 const entityMetadata = new Float32Array(16)
 let uniforms, VP
@@ -31,7 +31,7 @@ export default class DepthPrePassSystem extends AbstractEngineSystem {
     }
 
     #drawSprites(gl: WebGL2RenderingContext) {
-        const toRender = ResourceEntityMapper.sprites.array
+        const toRender = this.engine.getByComponent(Components.SPRITE)
         const size = toRender.length
         if (size === 0)
             return

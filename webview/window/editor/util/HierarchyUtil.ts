@@ -59,7 +59,6 @@ export default class HierarchyUtil {
     static getEngineIcon(nodeRef): { icon: string, label: string }[] {
         const icons = []
         if (nodeRef) {
-
             if (nodeRef.atmosphereComponent)
                 icons.push({
                     icon: "wb_twilight",

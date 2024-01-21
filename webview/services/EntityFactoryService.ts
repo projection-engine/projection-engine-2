@@ -1,4 +1,4 @@
-import COMPONENTS from "@engine-core/static/COMPONENTS"
+import COMPONENTS from "@engine-core/static/Components"
 import {vec3, vec4} from "gl-matrix"
 
 

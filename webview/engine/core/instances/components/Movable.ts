@@ -1,4 +1,5 @@
 import ArrayBufferAPI from "../../services/ArrayBufferAPI"
+import Serializable from "@engine-core/services/serialization/Serializable";
 
 
 /**
@@ -6,7 +7,7 @@ import ArrayBufferAPI from "../../services/ArrayBufferAPI"
  * @field __cullingMetadata [distanceFromCamera, cullingDistance, hasDistanceCullingEnabled, isDistanceCulled, screenDoorDistance, isScreenDoorEnabled]
  */
 
-export default class Movable {
+export default class Movable extends Serializable {
 	static get ROTATION_QUATERNION() {
 		return 0
 	}

@@ -1,10 +1,11 @@
 import StaticFBO from "../repositories/StaticFBO"
 import StaticShaders from "../repositories/StaticShaders"
-import ResourceEntityMapper from "../repositories/ResourceEntityMapper"
+import World from "../repositories/World"
 import MATERIAL_RENDERING_TYPES from "../static/MATERIAL_RENDERING_TYPES"
 import MetricsController from "../services/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import AbstractEngineSystem from "@engine-core/AbstractEngineSystem";
+import Components from "@engine-core/static/Components";
 
 
 export default class DirectionalShadowsSystem extends AbstractEngineSystem {
@@ -63,7 +64,7 @@ export default class DirectionalShadowsSystem extends AbstractEngineSystem {
     loopMeshes(gl: WebGL2RenderingContext, light) {
         if (!light.entity)
             return
-        const toRender = ResourceEntityMapper.meshes.array
+        const toRender = this.engine.getByComponent(Components.MESH)
         const size = toRender.length
         for (let m = 0; m < size; m++) {
             const current = toRender[m], meshComponent = current.meshComponent

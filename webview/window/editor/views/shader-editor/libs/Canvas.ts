@@ -13,7 +13,7 @@ import ShaderEditorUtil from "../../../util/ShaderEditorUtil"
 export default class Canvas {
 	#initialized = false
 	openFile?: OpenFile
-	#nodes = new DynamicMap<string, ShaderNode>()
+	#nodes = new DynamicMap<ShaderNode>()
 	#hasMaterial = false
 	history = new ShaderEditorActionHistory()
 

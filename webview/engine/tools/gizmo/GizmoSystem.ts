@@ -8,7 +8,7 @@ import DynamicMap from "../../core/lib/DynamicMap"
 export default class GizmoSystem {
 	static onStart?: Function
 	static onStop?: Function
-	static #listeners = new DynamicMap<string, Function>()
+	static #listeners = new DynamicMap<Function>()
 
 	static addListener(id: string, callback: Function) {
 		GizmoSystem.#listeners.set(id, callback)

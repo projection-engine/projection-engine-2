@@ -6,7 +6,7 @@ import MeshComponent from "./MeshComponent"
 import SpriteComponent from "./SpriteComponent"
 import Material from "../Material"
 import Mesh from "../Mesh"
-import COMPONENTS from "../../static/COMPONENTS"
+import COMPONENTS from "../../static/Components"
 import Component from "./Component"
 import AtmosphereComponent from "./AtmosphereComponent"
 import PhysicsColliderComponent from "./PhysicsColliderComponent"
@@ -17,7 +17,7 @@ import LightProbeComponent from "./LightProbeComponent"
 import DynamicMap from "../../lib/DynamicMap"
 
 export default class ComponentResources extends Movable {
-	#components = new DynamicMap<string, Component>()
+	#components = new DynamicMap<Component>()
 	#lightComponent?: LightComponent
 	#cullingComponent?: CullingComponent
 	#rigidBodyComponent?: RigidBodyComponent

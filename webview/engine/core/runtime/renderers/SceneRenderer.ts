@@ -9,12 +9,13 @@ import MATERIAL_RENDERING_TYPES from "../../static/MATERIAL_RENDERING_TYPES"
 import Material from "../../instances/Material"
 import UberShader from "../../repositories/UberShader"
 import MaterialResourceMapper from "../../repositories/MaterialResourceMapper"
-import ResourceEntityMapper from "../../repositories/ResourceEntityMapper"
+import World from "../../repositories/World"
 import Mesh from "../../instances/Mesh"
 import loopMeshes from "../loop-meshes"
 import EngineState from "../../EngineState"
 import ProjectionEngine from "@lib/ProjectionEngine";
 import ENVIRONMENT from "@engine-core/static/ENVIRONMENT";
+import Components from "@engine-core/static/Components";
 
 let stateWasCleared = false, isDoubleSided = false, isSky = false, texOffset = 0
 
@@ -127,7 +128,7 @@ export default class SceneRenderer {
         UberMaterialAttributeGroup.clear()
         const uniforms = UberShader.uberUniforms
         const context = GPUService.context
-        const toRender = ResourceEntityMapper.decals.array
+        const toRender = ProjectionEngine.Engine.getByComponent(Components.DECAL)
         const size = toRender.length
         if (size === 0)
             return

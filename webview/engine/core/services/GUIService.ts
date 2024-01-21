@@ -2,9 +2,10 @@ import InputEventsAPI from "./InputEventsAPI"
 import QueryAPI from "./QueryAPI"
 import FileSystemAPI from "./FileSystemAPI"
 import UIComponent from "../instances/components/UIComponent"
-import ResourceEntityMapper from "../repositories/ResourceEntityMapper"
+import World from "../repositories/World"
 import Entity from "../instances/Entity"
 import ProjectionEngine from "@lib/ProjectionEngine";
+import Components from "@engine-core/static/Components";
 
 const STYLES = {
     position: "absolute",
@@ -108,7 +109,7 @@ export default class GUIService {
         target.appendChild(GUIService.document)
 
         const elementsToBind = []
-        const entities = ResourceEntityMapper.ui.array
+        const entities = ProjectionEngine.Engine.getByComponent(Components.UI)
         for (let i = 0; i < entities.length; i++)
             elementsToBind.push(GUIService.createUIEntity(entities[i]))
         for (let i = 0; i < elementsToBind.length; i++) {

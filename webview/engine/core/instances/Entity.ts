@@ -5,6 +5,7 @@ import Component from "./components/Component"
 import ComponentResources from "./components/ComponentResources"
 import QueryAPI from "../services/QueryAPI"
 import DynamicMap from "../lib/DynamicMap"
+import RepositoryService from "@engine-core/services/serialization/RepositoryService";
 
 
 export default class Entity extends ComponentResources {
@@ -29,7 +30,7 @@ export default class Entity extends ComponentResources {
     parentID?: string
     #pickID = new Float32Array(3)
     #pickIndex = -1
-    #children = new DynamicMap<string, Entity>()
+    #children = new DynamicMap<Entity>()
 
     get colorIdentifier() {
     	return this.#colorIdentifier
@@ -155,3 +156,5 @@ export default class Entity extends ComponentResources {
     	return this.#children
     }
 }
+
+RepositoryService.serializable(Entity)

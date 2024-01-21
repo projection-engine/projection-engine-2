@@ -1,11 +1,11 @@
-import COMPONENTS from "../static/COMPONENTS"
+import COMPONENTS from "../static/Components"
 import GUIService from "./GUIService"
 import PhysicsAPI from "./PhysicsAPI"
 import Entity from "../instances/Entity"
 import ENTITY_TYPED_ATTRIBUTES from "../static/ENTITY_TYPED_ATTRIBUTES"
 import LightsService from "./LightsService"
 import DepthPrePassSystem from "../runtime/DepthPrePassSystem"
-import ResourceEntityMapper from "../repositories/ResourceEntityMapper"
+import World from "../repositories/World"
 import MeshResourceMapper from "../repositories/MeshResourceMapper"
 import MaterialResourceMapper from "../repositories/MaterialResourceMapper"
 import QueryAPI from "./QueryAPI"
@@ -58,7 +58,7 @@ export default class EntityAPI extends AbstractEngineSystem{
         }
         entitiesMap.addBlock(entities, e => e.id)
         // TransformationSystem.registerBlock(entities)
-        ResourceEntityMapper.addBlock(entities)
+        ProjectionEngine.Engine.getWorld().addBlock(entities)
     }
 
     static addEntity(entity?: Entity): Entity {
@@ -97,7 +97,7 @@ export default class EntityAPI extends AbstractEngineSystem{
             return
 
         ProjectionEngine.Engine.getQueryMap().set(entity.queryKey, entity)
-        ResourceEntityMapper.addEntity(entity)
+        ProjectionEngine.Engine.getWorld().addEntity(entity)
         if (COMPONENT_TRIGGER_UPDATE.indexOf(<COMPONENTS | undefined>previouslyRemoved) || !!COMPONENT_TRIGGER_UPDATE.find(v => entity.components.get(v) != null))
             LightsService.packageLights(false, true)
         DepthPrePassSystem.needsUpdate = true
@@ -124,7 +124,7 @@ export default class EntityAPI extends AbstractEngineSystem{
         ProjectionEngine.Engine.getEntities().removeBlock(entities, entity => entity.id)
         MeshResourceMapper.removeBlock(entities)
         MaterialResourceMapper.removeBlock(entities)
-        ResourceEntityMapper.removeBlock(entities)
+        ProjectionEngine.Engine.getWorld().removeBlock(entities)
 
         let didLightsChange
         for (let i = 0; i < entities.length; i++) {

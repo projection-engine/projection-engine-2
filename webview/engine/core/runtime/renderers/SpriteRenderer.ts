@@ -1,14 +1,16 @@
 import GPUService from "../../services/GPUService"
-import ResourceEntityMapper from "../../repositories/ResourceEntityMapper"
+import World from "../../repositories/World"
 import StaticShaders from "../../repositories/StaticShaders"
 import StaticMeshes from "../../repositories/StaticMeshes"
 import MetricsController from "../../services/MetricsController"
 import METRICS_FLAGS from "../../static/METRICS_FLAGS"
 import GPUUtil from "../../utils/GPUUtil";
+import Components from "@engine-core/static/Components";
+import ProjectionEngine from "@lib/ProjectionEngine";
 
 export default class SpriteRenderer{
 	static execute() {
-		const sprites = ResourceEntityMapper.sprites.array
+		const sprites = ProjectionEngine.Engine.getByComponent(Components.SPRITE)
 		const size = sprites.length
 		if (size === 0)
 			return

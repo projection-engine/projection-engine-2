@@ -6,7 +6,8 @@ import FileSystemAPI from "../../services/FileSystemAPI"
 import TextureParams from "../../static/TextureParams"
 import GPUAPI from "../../services/GPUAPI"
 import MATERIAL_RENDERING_TYPES from "../../static/MATERIAL_RENDERING_TYPES"
-import COMPONENTS from "../../static/COMPONENTS"
+import COMPONENTS from "../../static/Components"
+import RepositoryService from "@engine-core/services/serialization/RepositoryService";
 
 export default class DecalComponent extends Component {
 	static get componentKey(): string {
@@ -129,3 +130,4 @@ export default class DecalComponent extends Component {
 
 	_props = DECAL_PROPS
 }
+RepositoryService.serializable(DecalComponent)

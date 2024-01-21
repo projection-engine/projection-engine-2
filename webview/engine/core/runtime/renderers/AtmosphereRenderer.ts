@@ -1,5 +1,5 @@
 import GPUService from "../../services/GPUService"
-import ResourceEntityMapper from "../../repositories/ResourceEntityMapper"
+import World from "../../repositories/World"
 import StaticShaders from "../../repositories/StaticShaders"
 import StaticMeshes from "../../repositories/StaticMeshes"
 import MetricsController from "../../services/MetricsController"
@@ -7,6 +7,7 @@ import METRICS_FLAGS from "../../static/METRICS_FLAGS"
 import AtmosphereComponent from "../../instances/components/AtmosphereComponent"
 import {mat4} from "gl-matrix"
 import ProjectionEngine from "@lib/ProjectionEngine";
+import Components from "@engine-core/static/Components";
 
 const resources = mat4.create().fill(0)
 export default class AtmosphereRenderer {
@@ -14,7 +15,7 @@ export default class AtmosphereRenderer {
 		const shader = StaticShaders.atmosphere
 		const uniforms = StaticShaders.atmosphereUniforms
 		const context = GPUService.context
-		const entities = ResourceEntityMapper.atmosphere.array
+		const entities = ProjectionEngine.Engine.getByComponent(Components.ATMOSPHERE)
 		const size = entities.length
 		if (size === 0)
 			return

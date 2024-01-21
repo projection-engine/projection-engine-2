@@ -1,4 +1,4 @@
-import COMPONENTS from "../static/COMPONENTS"
+import COMPONENTS from "../static/Components"
 import MeshComponent from "../instances/components/MeshComponent"
 import AtmosphereComponent from "../instances/components/AtmosphereComponent"
 import CameraComponent from "../instances/components/CameraComponent"

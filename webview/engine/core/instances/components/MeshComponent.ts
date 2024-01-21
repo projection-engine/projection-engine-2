@@ -8,7 +8,8 @@ import MeshResourceMapper from "../../repositories/MeshResourceMapper"
 import MaterialResourceMapper from "../../repositories/MaterialResourceMapper"
 import MaterialUniform from "../../static/MaterialUniform"
 import EntityAPI from "../../services/EntityAPI"
-import COMPONENTS from "../../static/COMPONENTS"
+import COMPONENTS from "../../static/Components"
+import RepositoryService from "@engine-core/services/serialization/RepositoryService";
 
 export default class MeshComponent extends Component {
 	static get componentKey(): string {
@@ -143,3 +144,5 @@ export default class MeshComponent extends Component {
 	}
 
 }
+
+RepositoryService.serializable(MeshComponent)

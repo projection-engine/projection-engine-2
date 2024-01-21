@@ -5,11 +5,11 @@ import StaticMeshes from "@engine-core/repositories/StaticMeshes"
 import StaticEditorShaders from "../utils/StaticEditorShaders"
 import StaticFBO from "@engine-core/repositories/StaticFBO"
 import StaticEditorMeshes from "../utils/StaticEditorMeshes"
-import ResourceEntityMapper from "@engine-core/repositories/ResourceEntityMapper"
 import CameraIconRenderer from "../icons/CameraIconRenderer"
 import EngineToolsState from "../EngineToolsState"
 import GPUUtil from "../../core/utils/GPUUtil";
 import ProjectionEngine from "@lib/ProjectionEngine";
+import Components from "@engine-core/static/Components";
 
 const EMPTY_MATRIX = mat4.create()
 const translationCache = vec3.create()
@@ -25,7 +25,7 @@ export default class WireframeRenderer {
 		StaticEditorShaders.wireframe.bind()
 		GPUUtil.bind2DTextureForDrawing(uniforms.depth, 0,StaticFBO.sceneDepthVelocity)
 
-		const cameras = ResourceEntityMapper.cameras.array
+		const cameras = ProjectionEngine.Engine.getByComponent(Components.CAMERA)
 		const camerasSize = cameras.length
 		for (let i = 0; i < camerasSize; i++)
 			CameraIconRenderer.execute(cameras[i])

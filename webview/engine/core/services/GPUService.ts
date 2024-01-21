@@ -17,11 +17,11 @@ export default class GPUService extends AbstractEngineService{
 	static activeShader?: Shader
 	static activeFramebuffer?: Framebuffer
 	static activeMesh?: Mesh
-	static materials = new DynamicMap<string, Material>()
-	static shaders =  new DynamicMap<string, Shader>()
-	static frameBuffers =  new DynamicMap<string, Framebuffer>()
-	static meshes =  new DynamicMap<string, Mesh>()
-	static textures =  new DynamicMap<string, Texture>()
+	static materials = new DynamicMap<Material>()
+	static shaders =  new DynamicMap<Shader>()
+	static frameBuffers =  new DynamicMap<Framebuffer>()
+	static meshes =  new DynamicMap<Mesh>()
+	static textures =  new DynamicMap<Texture>()
 	static BRDF: WebGLTexture
 	static internalResolution = {w: 0, h: 0}
 	static skylightProbe: LightProbe

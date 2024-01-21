@@ -7,7 +7,7 @@
     import LocalizationEN from "@enums/LocalizationEN"
     import InspectorUtil from "../../../../util/InspectorUtil"
     import EditorUtil from "../../../../util/EditorUtil";
-    import COMPONENTS from "@engine-core/static/COMPONENTS";
+    import COMPONENTS from "@engine-core/static/Components";
     import UIComponent from "../UIComponent.svelte";
     import MaterialUniforms from "../../../../components/MaterialUniformsForm.svelte";
     import Checkbox from "@lib/components/checkbox/Checkbox.svelte";

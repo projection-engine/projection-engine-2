@@ -5,7 +5,7 @@ import GUIService from "./GUIService"
 import InputEventsAPI from "./InputEventsAPI"
 import ConsoleAPI from "./ConsoleAPI"
 import Component from "../instances/components/Component"
-import COMPONENTS from "../static/COMPONENTS"
+import COMPONENTS from "../static/Components"
 import CameraRepository from "../repositories/CameraRepository"
 import QueryAPI from "./QueryAPI"
 import FileSystemAPI from "./FileSystemAPI"
@@ -86,5 +86,3 @@ export default class ScriptsAPI {
 		}
 	}
 }
-
-//
