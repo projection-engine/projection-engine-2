@@ -47,7 +47,7 @@ export default class EditorUtil extends IInjectable {
         const focused = EditorUtil.settingsStore.getData().focusedCamera
         const isCamera = cameraTarget instanceof Entity
         if (!focused || isCamera && cameraTarget.id !== focused) {
-            const current = isCamera ? cameraTarget : EditorUtil.engine.entities.get(SelectionStore.getMainEntity())
+            const current = isCamera ? cameraTarget : EditorUtil.engine.getEntities().get(SelectionStore.getMainEntity())
             if (current && current.cameraComponent) {
                 // EditorUtil.executionService.cameraSerialization = EditorUtil.engine.getCamera().serializeState()
                 CameraTracker.stopTracking()

@@ -32,8 +32,7 @@ export default class CanvasContextService extends IInjectable {
                 w: visualsData.resolutionX,
                 h: visualsData.resolutionY
             },
-            EditorFSUtil.readAsset,
-            true
+            EditorFSUtil.readAsset
         )
         await CanvasContextService.engine.addSystem(EngineTools);
         GUIService.buildUI(GPUService.canvas.parentElement)

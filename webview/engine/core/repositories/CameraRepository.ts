@@ -67,7 +67,7 @@ export default class CameraRepository extends AbstractEngineService {
     updateAspectRatio() {
         const bBox = GPUService.canvas.getBoundingClientRect()
         ConversionAPI.canvasBBox = bBox
-        if (this.engine.environment === ENVIRONMENT.DEV || this.#dynamicAspectRatio) {
+        if (this.engine.getEnvironment() === ENVIRONMENT.DEV || this.#dynamicAspectRatio) {
             this.aspectRatio = bBox.width / bBox.height
             this.updateProjection()
         }

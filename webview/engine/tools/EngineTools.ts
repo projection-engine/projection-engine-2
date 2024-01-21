@@ -36,7 +36,7 @@ export default class EngineTools extends AbstractEngineSystem {
     async initialize() {
         StaticEditorShaders.initialize()
         await StaticEditorMeshes.initialize()
-        ProjectionEngine.Engine.environment = ENVIRONMENT.DEV
+        ProjectionEngine.Engine.setEnvironment(ENVIRONMENT.DEV)  
         LineRenderer.initialize()
         StaticEditorFBO.initialize()
 
@@ -62,7 +62,7 @@ export default class EngineTools extends AbstractEngineSystem {
         selected.length = 0
         for (let i = 0; i < data.length; i++) {
             const d = data[i]
-            const entity = ProjectionEngine.Engine.entities.get(d)
+            const entity = ProjectionEngine.Engine.getEntities().get(d)
             if (entity !== undefined) {
                 selected.push(entity)
                 entity.__isSelected = true

@@ -99,7 +99,7 @@ export default class EntityFactoryService {
     }
 
     static toggleEntityVisibility(entityID: string, noSubmit?: boolean) {
-        EntityAPI.toggleVisibility(ProjectionEngine.Engine.entities.get(entityID))
+        EntityAPI.toggleVisibility(ProjectionEngine.Engine.getEntities().get(entityID))
         if (!noSubmit)
             ProjectionEngine.EntityHierarchyService.updateHierarchy()
     }

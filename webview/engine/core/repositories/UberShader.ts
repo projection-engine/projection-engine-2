@@ -4,6 +4,7 @@ import BASIS_FRAG from "../shaders/uber-shader/UBER-MATERIAL-BASIS.frag"
 import VERTEX_SHADER from "../shaders/uber-shader/UBER-MATERIAL.vert"
 import Shader from "../instances/Shader"
 import ProjectionEngine from "@lib/ProjectionEngine";
+import ENVIRONMENT from "@engine-core/static/ENVIRONMENT";
 
 export default class UberShader {
 
@@ -60,7 +61,7 @@ export default class UberShader {
             }
         `)
 
-		let fragment = ProjectionEngine.Engine.developmentMode ? DEBUG_FRAG : BASIS_FRAG
+		let fragment = ProjectionEngine.Engine.getEnvironment() === ENVIRONMENT.DEV ? DEBUG_FRAG : BASIS_FRAG
 		fragment = fragment.replace("//--UNIFORMS--", uniformsToLoad.join("\n"))
 		fragment = fragment.replace("//--MATERIAL_SELECTION--", methodsToLoad.join("\n"))
 

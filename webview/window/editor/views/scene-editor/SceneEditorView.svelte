@@ -32,7 +32,7 @@
         isSelectBoxDisabled = data.gizmo !== GIZMOS.NONE
         shadingModel = data.shadingModel
         executingAnimation = data.executingAnimation
-        focusedCamera = data.focusedCamera ? ProjectionEngine.Engine.entities.get(data.focusedCamera) : null
+        focusedCamera = data.focusedCamera ? ProjectionEngine.Engine.getEntities().get(data.focusedCamera) : null
     }, ["gizmo", "shadingModel", "focusedCamera", "executingAnimation"])
 
     onMount(() => {

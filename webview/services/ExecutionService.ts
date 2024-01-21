@@ -45,12 +45,12 @@ export default class ExecutionService extends IInjectable{
             return
         ResourceEntityMapper.clear()
 
-        ExecutionService.engine.entities.clear()
-        ExecutionService.engine.queryMap.clear()
+        ExecutionService.engine.getEntities().clear()
+        ExecutionService.engine.getQueryMap().clear()
 
         ExecutionService.toasterService.log(LocalizationEN.RESTORING_STATE)
         this.#isPlaying = false
-        ExecutionService.engine.environment = ENVIRONMENT.DEV
+        ExecutionService.engine.setEnvironment(ENVIRONMENT.DEV)
 
         GUIService.destroyUI()
         await ScriptsAPI.updateAllScripts()

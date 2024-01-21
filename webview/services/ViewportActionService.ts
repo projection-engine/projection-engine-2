@@ -48,7 +48,7 @@ export default class ViewportActionService extends IInjectable{
         const oldSelected = SelectionStore.getEntitiesSelected()
         for (let i = 0; i < oldSelected.length; i++)
             notValid[oldSelected[i]] = true
-        const entities = ProjectionEngine.Engine.entities.array
+        const entities = ProjectionEngine.Engine.getEntities().array
         for (let i = 0; i < entities.length; i++) {
             if (!notValid[entities[i].id])
                 newArr.push(entities[i].id)
@@ -88,7 +88,7 @@ export default class ViewportActionService extends IInjectable{
     }
 
     selectAll() {
-        SelectionStore.setEntitiesSelected(Array.from(ProjectionEngine.Engine.entities.keys()))
+        SelectionStore.setEntitiesSelected(Array.from(ProjectionEngine.Engine.getEntities().keys()))
     }
 
     fixateActive() {

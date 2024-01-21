@@ -39,7 +39,7 @@ export default class EngineToolsService {
         const settings = EngineToolsService.settingsStore.getData()
         if (engine.executingAnimation)
             GUIService.showUI()
-        if (EngineToolsService.engine.environment === ENVIRONMENT.DEV && !engine.focusedCamera) {
+        if (EngineToolsService.engine.getEnvironment() === ENVIRONMENT.DEV && !engine.focusedCamera) {
             EngineToolsService.engine.getCamera().trackingEntity = undefined
             if (settings.camera !== undefined) {
                 CameraTracker.screenSpaceMovementSpeed = settings.camera.screenSpaceMovementSpeed || 1
@@ -83,7 +83,7 @@ export default class EngineToolsService {
         GPUService.canvas.width = settings.resolutionX
         GPUService.canvas.height = settings.resolutionY
 
-        EngineTools.isRunning = EngineToolsService.engine.environment === ENVIRONMENT.DEV
+        EngineTools.isRunning = EngineToolsService.engine.getEnvironment() === ENVIRONMENT.DEV
         EngineToolsService.#updateEngineState()
 
         EngineToolsService.#updateCameraTracker()

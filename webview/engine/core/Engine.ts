@@ -36,13 +36,10 @@ export default class Engine extends IInjectable {
     #canvas: HTMLCanvasElement
     #mainResolution: { w: number, h: number }
 
-
     async initialize(canvas: HTMLCanvasElement, mainResolution: {
         w: number,
         h: number
-    }, readAsset: Function, devAmbient: boolean) {
-        this.#development = devAmbient
-
+    }, readAsset: Function) {
         this.#canvas = canvas
         this.#mainResolution = mainResolution
         await this.createSingletons()
@@ -72,7 +69,7 @@ export default class Engine extends IInjectable {
         return instance
     }
 
-    getSingleton(Singleton: typeof AbstractEngineService): AbstractEngineService{
+    getSingleton(Singleton: typeof AbstractEngineService): AbstractEngineService {
         return this.#singletons.get(Singleton.name)
     }
 
@@ -121,27 +118,19 @@ export default class Engine extends IInjectable {
         return GPUService.context
     }
 
-    get entities(): DynamicMap<string, Entity> {
+    getEntities(): DynamicMap<string, Entity> {
         return ResourceEntityMapper.entities
     }
 
-    get queryMap(): Map<string, Entity> {
+    getQueryMap(): Map<string, Entity> {
         return ResourceEntityMapper.queryMap
     }
 
-    get isReady() {
-        return this.#isReady
-    }
-
-    get developmentMode() {
-        return this.#development
-    }
-
-    get environment(): number {
+    getEnvironment(): number {
         return this.#environment
     }
 
-    set environment(data: number) {
+    setEnvironment(data: number) {
         this.isDev = data === ENVIRONMENT.DEV
         this.#environment = data
         if (this.isDev)

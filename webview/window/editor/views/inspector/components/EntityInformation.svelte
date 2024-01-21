@@ -62,8 +62,8 @@
                 width="100%"
                 hasBorder={true}
                 onChange={v => {
-                    Engine.queryMap.delete(entity.queryKey)
-                    Engine.queryMap.set(v, entity)
+                    Engine.getQueryMap().delete(entity.queryKey)
+                    Engine.getQueryMap().set(v, entity)
                     entity.queryKey = v
                 }}
                 height="23px"

@@ -17,7 +17,7 @@ export default class WireframeRenderer {
 	static execute() {
 		if(!EngineToolsState.showOutline)
 			return
-		const entities = ProjectionEngine.Engine.entities.array
+		const entities = ProjectionEngine.Engine.getEntities().array
 		const size = entities.length
 		const uniforms = StaticEditorShaders.wireframeUniforms
 		const context = GPUService.context

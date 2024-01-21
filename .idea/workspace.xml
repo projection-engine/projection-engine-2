@@ -19,11 +19,39 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-60] Project service&#10;- Creating save option&#10;- Save as option&#10;- Open option&#10;- Making stores serializable">
-      <change beforePath="$PROJECT_DIR$/webview/lib/stores/state/SelectionStateDTO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/state/SelectionStateDTO.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/stores/state/SettingsStateDTO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/state/SettingsStateDTO.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/ViewTabDTO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/ViewTabDTO.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/editor-window.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/editor-window.ts" afterDir="false" />
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-52] Engine refactoring&#10;- Moving serializable registration to classes declaration">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/Engine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/Engine.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/Entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/Entity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/repositories/CameraRepository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/repositories/CameraRepository.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/repositories/ResourceEntityMapper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/repositories/ResourceEntityMapper.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/repositories/UberShader.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/repositories/UberShader.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/runtime/renderers/SceneRenderer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/renderers/SceneRenderer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/services/EntityAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/services/EntityAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/services/GUIService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/services/GUIService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/services/QueryAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/services/QueryAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/services/ScriptsAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/services/ScriptsAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/services/SystemService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/services/SystemService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/tools/EngineTools.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/EngineTools.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/tools/gizmo/util/GizmoState.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/gizmo/util/GizmoState.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/tools/icons/IconsSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/icons/IconsSystem.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/tools/outline/WireframeRenderer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/outline/WireframeRenderer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/services/CanvasContextService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/CanvasContextService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/services/EngineStateService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/EngineStateService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/services/EngineToolsService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/EngineToolsService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/services/EntityFactoryService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/EntityFactoryService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/services/EntityHierarchyService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/EntityHierarchyService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/services/ExecutionService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/ExecutionService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/services/ViewportActionService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/ViewportActionService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/EditorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/EditorUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/HierarchyUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/HierarchyUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/SceneEditorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/SceneEditorUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/EntityInformation.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/EntityInformation.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/TransformationForm.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/TransformationForm.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/SceneEditorView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/SceneEditorView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/CameraSettings.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/CameraSettings.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/lib/ViewportInteractionService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/lib/ViewportInteractionService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/ui/components/Header.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/ui/components/Header.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +77,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="56-repositories-and-serialization" />
+        <entry key="$PROJECT_DIR$" value="60-serializable-integration-with-stores" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -91,62 +119,62 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;C/C++ File.main.cpp.executor&quot;: &quot;Run&quot;,
-    &quot;CMake Application.Projection.executor&quot;: &quot;Run&quot;,
-    &quot;CMake Application.projection.executor&quot;: &quot;Debug&quot;,
-    &quot;CMake Debug.projection.executor&quot;: &quot;Debug&quot;,
-    &quot;CMake Debug.projectioncmake.executor&quot;: &quot;Debug&quot;,
-    &quot;Catch.File-system test.executor&quot;: &quot;Debug&quot;,
-    &quot;Catch.JSON test.executor&quot;: &quot;Run&quot;,
-    &quot;Catch.Run all.executor&quot;: &quot;Run&quot;,
-    &quot;Catch.main_test.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should be lazily obtained.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should be the same instance (1).executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should be the same instance.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should dump cycle.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should dump data.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should not inject not @Injectable.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should parse nested.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should parse serializable.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should parse.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should prepare ID.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should restore circular dependency.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should restore data.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should serialize nested.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should serialize.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should stringify Serializable.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should stringify.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should trigger global subscriber.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should trigger subscriber with same value.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should unsubscribe.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;Shell Script.copy-files.executor&quot;: &quot;Run&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;60-serializable-integration-with-stores&quot;,
-    &quot;js.last.introduce.type&quot;: &quot;CONST&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/russi/WebstormProjects/projection-engine-2/test/core&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs.jest.jest_package&quot;: &quot;C:/Users/russi/WebstormProjects/projection-engine-2/webview/node_modules/jest&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.bdev.executor&quot;: &quot;Run&quot;,
-    &quot;npm.dev-build.executor&quot;: &quot;Run&quot;,
-    &quot;npm.sdev.executor&quot;: &quot;Run&quot;,
-    &quot;npm.test.executor&quot;: &quot;Run&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.C/C++&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\russi\\WebstormProjects\\projection-engine-2\\webview\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "C/C++ File.main.cpp.executor": "Run",
+    "CMake Application.Projection.executor": "Run",
+    "CMake Application.projection.executor": "Debug",
+    "CMake Debug.projection.executor": "Debug",
+    "CMake Debug.projectioncmake.executor": "Debug",
+    "Catch.File-system test.executor": "Debug",
+    "Catch.JSON test.executor": "Run",
+    "Catch.Run all.executor": "Run",
+    "Catch.main_test.executor": "Run",
+    "Jest.Should be lazily obtained.executor": "Run",
+    "Jest.Should be the same instance (1).executor": "Run",
+    "Jest.Should be the same instance.executor": "Run",
+    "Jest.Should dump cycle.executor": "Run",
+    "Jest.Should dump data.executor": "Run",
+    "Jest.Should not inject not @Injectable.executor": "Run",
+    "Jest.Should parse nested.executor": "Run",
+    "Jest.Should parse serializable.executor": "Run",
+    "Jest.Should parse.executor": "Run",
+    "Jest.Should prepare ID.executor": "Run",
+    "Jest.Should restore circular dependency.executor": "Run",
+    "Jest.Should restore data.executor": "Run",
+    "Jest.Should serialize nested.executor": "Run",
+    "Jest.Should serialize.executor": "Run",
+    "Jest.Should stringify Serializable.executor": "Run",
+    "Jest.Should stringify.executor": "Run",
+    "Jest.Should trigger global subscriber.executor": "Run",
+    "Jest.Should trigger subscriber with same value.executor": "Run",
+    "Jest.Should unsubscribe.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "Shell Script.copy-files.executor": "Run",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "52-engine-refactoring-repositories-and-services",
+    "js.last.introduce.type": "CONST",
+    "last_opened_file_path": "C:/Users/russi/WebstormProjects/projection-engine-2/test/core",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs.jest.jest_package": "C:/Users/russi/WebstormProjects/projection-engine-2/webview/node_modules/jest",
+    "nodejs_package_manager_path": "npm",
+    "npm.bdev.executor": "Run",
+    "npm.dev-build.executor": "Run",
+    "npm.sdev.executor": "Run",
+    "npm.test.executor": "Run",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.C/C++",
+    "ts.external.directory.path": "C:\\Users\\russi\\WebstormProjects\\projection-engine-2\\webview\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\test\core" />
@@ -336,15 +364,7 @@
       <workItem from="1705769927210" duration="10479000" />
       <workItem from="1705788686737" duration="1103000" />
       <workItem from="1705835439400" duration="13150000" />
-      <workItem from="1705858855353" duration="5146000" />
-    </task>
-    <task id="LOCAL-00005" summary="[STD-1] Webview2 integration&#10;- Removing unused files">
-      <option name="closed" value="true" />
-      <created>1702827782890</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1702827782890</updated>
+      <workItem from="1705858855353" duration="5953000" />
     </task>
     <task id="LOCAL-00006" summary="[STD-1] Webview2 integration&#10;- Removing unused componments from ui&#10;- Removing shared array buffer dependency">
       <option name="closed" value="true" />
@@ -730,7 +750,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705863388348</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="[STD-52] Engine refactoring&#10;- Moving serializable registration to classes declaration">
+      <option name="closed" value="true" />
+      <created>1705866880814</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1705866880814</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -754,7 +782,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-37] Dependency injection&#10;- Adding path aliases &#10;- Fixing singleton ref errors" />
     <MESSAGE value="[STD-37] Dependency injection&#10;- Removing unused files&#10;- Adding backbone for new dependency injection architecture" />
     <MESSAGE value="[STD-37] Dependency injection&#10;- Making stores injectable&#10;- Creating inject method for variables" />
     <MESSAGE value="[STD-37] Dependency injection&#10;- Making services injectable" />
@@ -779,7 +806,8 @@
     <MESSAGE value="[STD-56] Creating serialization architecture" />
     <MESSAGE value="[STD-56] Improving serialization architecture&#10;- Added support for circular dependencies&#10;- Improved tests for serialization" />
     <MESSAGE value="[STD-60] Project service&#10;- Creating save option&#10;- Save as option&#10;- Open option&#10;- Making stores serializable" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-60] Project service&#10;- Creating save option&#10;- Save as option&#10;- Open option&#10;- Making stores serializable" />
+    <MESSAGE value="[STD-52] Engine refactoring&#10;- Moving serializable registration to classes declaration" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-52] Engine refactoring&#10;- Moving serializable registration to classes declaration" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

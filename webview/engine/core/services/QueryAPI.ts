@@ -3,17 +3,17 @@ import ProjectionEngine from "@lib/ProjectionEngine";
 
 export default class QueryAPI {
     static getEntityByQueryID(id: string): Entity | undefined {
-        return ProjectionEngine.Engine.queryMap.get(id)
+        return ProjectionEngine.Engine.getQueryMap().get(id)
     }
 
     static getEntityByID(id: string): Entity | undefined {
-        return ProjectionEngine.Engine.entities.get(id)
+        return ProjectionEngine.Engine.getEntities().get(id)
     }
 
     static getEntitiesWithNativeComponent(componentKey: string): Entity[] {
         const newArr = []
-        for (let i = 0; i < ProjectionEngine.Engine.entities.array.length; i++) {
-            const entity = ProjectionEngine.Engine.entities.array[i]
+        for (let i = 0; i < ProjectionEngine.Engine.getEntities().array.length; i++) {
+            const entity = ProjectionEngine.Engine.getEntities().array[i]
             if (entity.components.get(componentKey) != null)
                 newArr.push(entity)
         }
@@ -88,7 +88,7 @@ export default class QueryAPI {
     static getEntityByPickerID(id: number): Entity | undefined {
         if (id === 0)
             return
-        const entities = ProjectionEngine.Engine.entities.array
+        const entities = ProjectionEngine.Engine.getEntities().array
         const size = entities.length
         for (let i = 0; i < size; i++) {
             const current = entities[i]

@@ -19,7 +19,7 @@ export default class IconsSystem {
 
 	static loop(cb, uniforms?: MutableObject) {
 		const tracking = ProjectionEngine.Engine.getCamera().trackingEntity
-		const entities = ProjectionEngine.Engine.entities.array
+		const entities = ProjectionEngine.Engine.getEntities().array
 		const size = entities.length
 
 		for (let i = 0; i < size; i++) {

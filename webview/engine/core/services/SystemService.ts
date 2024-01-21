@@ -90,9 +90,9 @@ export default class SystemService extends AbstractEngineService {
     }
 
     async startSimulation() {
-        this.engine.environment = ENVIRONMENT.EXECUTION
+        this.engine.setEnvironment(ENVIRONMENT.EXECUTION)
         GUIService.buildUI(GPUService.canvas.parentElement)
-        const entities = this.engine.entities.array
+        const entities = this.engine.getEntities().array
         for (let i = 0; i < entities.length; i++) {
             const current = entities[i]
             PhysicsSystem.registerRigidBody(current)

@@ -40,7 +40,7 @@ export default class GUIService {
         const uiElements = Array.from(ProjectionEngine.Engine.UILayouts.keys())
         for (let i = 0; i < uiElements.length; i++) {
             const found = uiElements[i]
-            const entities = ProjectionEngine.Engine.entities.array.filter(e => {
+            const entities = ProjectionEngine.Engine.getEntities().array.filter(e => {
                 const component = e.uiComponent
                 return component?.uiLayoutID === found
             })
@@ -128,7 +128,7 @@ export default class GUIService {
             return
 
         GUIService.document.parentElement.removeChild(GUIService.document)
-        const entities = ProjectionEngine.Engine.entities.array
+        const entities = ProjectionEngine.Engine.getEntities().array
         for (let i = 0; i < entities.length; i++) {
             const entity = entities[i]
             const UI = entity.uiComponent

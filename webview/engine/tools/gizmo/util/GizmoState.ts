@@ -33,9 +33,6 @@ export default class GizmoState {
     }
 
     static set gizmoType(data: Gizmos) {
-        if (!ProjectionEngine.Engine.isReady) {
-            return
-        }
         GizmoState.#gizmoType = data
         GizmoState.#targetGizmos.length = 0
         switch (data) {

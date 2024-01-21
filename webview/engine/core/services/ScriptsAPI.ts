@@ -26,8 +26,8 @@ export default class ScriptsAPI {
 			const data = await FileSystemAPI.readAsset(current)
 			ScriptsAPI.scriptInstances.set(current, data)
 		}
-		for (let i = 0; i < ProjectionEngine.Engine.entities.array.length; i++) {
-			const current = ProjectionEngine.Engine.entities.array[i]
+		for (let i = 0; i < ProjectionEngine.Engine.getEntities().array.length; i++) {
+			const current = ProjectionEngine.Engine.getEntities().array[i]
 			for (let j = 0; j < current.scripts.length; j++)
 				ScriptsAPI.#updateEntityScript(current.scripts[j].id, current, j)
 		}

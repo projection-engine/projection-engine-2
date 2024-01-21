@@ -14,6 +14,7 @@ import Mesh from "../../instances/Mesh"
 import loopMeshes from "../loop-meshes"
 import EngineState from "../../EngineState"
 import ProjectionEngine from "@lib/ProjectionEngine";
+import ENVIRONMENT from "@engine-core/static/ENVIRONMENT";
 
 let stateWasCleared = false, isDoubleSided = false, isSky = false, texOffset = 0
 
@@ -31,7 +32,7 @@ export default class SceneRenderer {
         const context = GPUService.context
 
         UberShader.uber.bind()
-        if (ProjectionEngine.Engine.developmentMode)
+        if (ProjectionEngine.Engine.getEnvironment() === ENVIRONMENT.DEV)
             context.uniform1i(uniforms.shadingModel, EngineState.debugShadingModel)
 
         stateWasCleared = isDoubleSided = isSky = false

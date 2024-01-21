@@ -77,7 +77,7 @@ export default class ResourceEntityMapper {
 	}
 
 	static addEntity(entity: Entity) {
-		if (ProjectionEngine.Engine.environment !== ENVIRONMENT.DEV && entity.rigidBodyComponent) {
+		if (ProjectionEngine.Engine.getEnvironment() !== ENVIRONMENT.DEV && entity.rigidBodyComponent) {
 			PhysicsAPI.registerRigidBody(entity)
 		}
 		if (entity.lightComponent !== undefined)

@@ -42,7 +42,7 @@ export default class EntityHierarchyService extends IInjectable{
     }
 
     openTree() {
-        const node = ProjectionEngine.Engine.entities.get(SelectionStore.getMainEntity())
+        const node = ProjectionEngine.Engine.getEntities().get(SelectionStore.getMainEntity())
         if (!node)
             return {}
         const open = {}

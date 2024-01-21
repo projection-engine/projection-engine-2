@@ -106,8 +106,10 @@ export default class Entity extends ComponentResources {
     }
 
     clone() {
-    	const str = serializeStructure(this.serializable())
-    	return EntityAPI.parseEntityObject(JSON.parse(str), true)
+    	// const str = serializeStructure(this.serializable())
+    	// return EntityAPI.parseEntityObject(JSON.parse(str), true)
+		// TODO - REIMPLEMENT
+		return null
     }
 
 

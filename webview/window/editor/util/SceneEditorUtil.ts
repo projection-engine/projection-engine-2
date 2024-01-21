@@ -92,7 +92,7 @@ export default class SceneEditorUtil extends IInjectable {
 
                 const data = PickingAPI.readBlock(nStart, nEnd)
                 worker.postMessage({
-                    entities: ProjectionEngine.Engine.entities.array.map(e => ({id: e.id, pick: e.pickIndex})),
+                    entities: ProjectionEngine.Engine.getEntities().array.map(e => ({id: e.id, pick: e.pickIndex})),
                     data
                 }, [data.buffer])
                 worker.onmessage = ({data: selected}) => SelectionStore.setEntitiesSelected(selected)
