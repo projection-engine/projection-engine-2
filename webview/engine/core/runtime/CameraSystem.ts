@@ -5,10 +5,8 @@ import {mat4, quat, vec3} from "gl-matrix";
 import Camera from "@engine-core/core/Camera";
 
 export default class CameraSystem extends AbstractEngineSystem {
-    camera: Camera
 
     async initialize() {
-        this.camera = this.engine.getCamera()
         vec3.copy(this.camera.currentTranslation, this.camera.translationBuffer)
         quat.copy(this.camera.currentRotation, this.camera.rotationBuffer)
         mat4.multiply(this.camera.viewProjectionMatrix, this.camera.projectionMatrix, this.camera.viewMatrix)
@@ -29,21 +27,16 @@ export default class CameraSystem extends AbstractEngineSystem {
             c.hasChangedView = true
             c.projectionNeedsUpdate = false
         }
-
         this.updateUBOs();
     }
 
     updateProjection() {
         const c = this.camera;
-        const isOrthographic = c.isOrthographic()
-        const buffer = c.projectionBuffer
-        const aR = buffer[3]
-        const fov = buffer[2]
-        const zFar = buffer[0]
-        const zNear = buffer[1]
-        const orthographicProjectionSize = buffer[4]
+        const aR = c.aspectRatio
+        const zFar = c.zFar
+        const orthographicProjectionSize = c.orthographicProjectionSize
 
-        if (isOrthographic) {
+        if (c.isOrthographic()) {
             mat4.ortho(
                 c.projectionMatrix,
                 -orthographicProjectionSize,
@@ -54,8 +47,8 @@ export default class CameraSystem extends AbstractEngineSystem {
                 zFar
             )
         } else {
-            mat4.perspective(c.projectionMatrix, fov, aR, zNear, zFar)
-            mat4.perspective(c.skyboxProjectionMatrix, fov, aR, .1, 1000)
+            mat4.perspective(c.projectionMatrix, c.fov, aR, c.zNear, zFar)
+            mat4.perspective(c.skyboxProjectionMatrix, c.fov, aR, .1, 1000)
             mat4.invert(c.invSkyboxProjectionMatrix, c.skyboxProjectionMatrix)
         }
 
@@ -128,11 +121,10 @@ export default class CameraSystem extends AbstractEngineSystem {
         const c = this.camera;
         if (c.hasChangedProjection) {
             const UBO = UBORepository.cameraProjectionUBO
-
             UBO.bind()
             c.projectionUBOBuffer[32] = GPU.bufferResolution[0]
             c.projectionUBOBuffer[33] = GPU.bufferResolution[1]
-            c.projectionUBOBuffer[34] = 2.0 / Math.log2(c.projectionBuffer[0] + 1)
+            c.projectionUBOBuffer[34] = 2.0 / Math.log2(c.zFar + 1)
 
             UBO.updateBuffer(c.projectionUBOBuffer)
             UBO.unbind()

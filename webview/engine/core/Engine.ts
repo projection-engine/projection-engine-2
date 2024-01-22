@@ -40,12 +40,13 @@ export default class Engine extends Serializable {
         w: number,
         h: number
     }, readAsset: Function) {
-        this._world = new World()
-        this._camera = new Camera()
-        this._gpu = new GPU()
-
         this.#canvas = canvas
         this.mainResolution = mainResolution
+
+        this._world = new World(this)
+        this._camera = new Camera(this)
+        this._gpu = new GPU(this)
+
         await this.createSingletons()
 
         this.getWorld().addEntity(this.rootEntity)

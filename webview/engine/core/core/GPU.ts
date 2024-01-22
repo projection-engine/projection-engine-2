@@ -10,6 +10,7 @@ import StaticMeshRepository from "../repositories/StaticMeshRepository"
 import DynamicMap from "../lib/DynamicMap"
 import ConversionAPI from "@engine-core/services/ConversionAPI";
 import AbstractEngineCoreService from "@engine-core/core/AbstractEngineCoreService";
+import Engine from "@engine-core/Engine";
 
 export default class GPU extends AbstractEngineCoreService {
     static context?: WebGL2RenderingContext
@@ -27,8 +28,8 @@ export default class GPU extends AbstractEngineCoreService {
     static skylightProbe: LightProbe
     static bufferResolution = new Float32Array([0, 0])
 
-    constructor() {
-        super()
+    constructor(engine?: Engine) {
+        super(engine)
         this.initializeWebGLContext(this.engine.getMainResolution(), this.engine.getCanvas());
         GPU.skylightProbe = new LightProbe(128)
         this.addResizeObserver()

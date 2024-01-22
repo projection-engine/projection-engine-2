@@ -34,13 +34,12 @@ export default class Camera extends AbstractEngineCoreService {
     invSkyboxProjectionMatrix = ArrayBufferAPI.allocateMatrix(4, true)
     viewUBOBuffer = ArrayBufferAPI.allocateVector(52)
     projectionUBOBuffer = ArrayBufferAPI.allocateVector(35)
-    projectionBuffer = ArrayBufferAPI.allocateVector(5)
     translationBuffer = <vec3>ArrayBufferAPI.allocateVector(3)
     rotationBuffer = <quat>ArrayBufferAPI.allocateVector(4, 0, true)
-    aspectRatio: number
-    zNear: number
-    zFar: number
-    fov: number
+    aspectRatio: number = 1
+    zNear: number = .1
+    zFar: number = 100
+    fov: number = Math.PI/2
     orthographicProjectionSize: number
 
     cameraMotionBlur = false

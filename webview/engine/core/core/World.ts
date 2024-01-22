@@ -4,14 +4,15 @@ import GUIService from "../services/GUIService"
 import RepositoryService from "@engine-core/services/serialization/RepositoryService";
 import Components from "@engine-core/static/Components";
 import AbstractEngineCoreService from "@engine-core/core/AbstractEngineCoreService";
+import Engine from "@engine-core/Engine";
 
 export default class World extends AbstractEngineCoreService {
     queryMap = new DynamicMap<Entity>()
     entities = new DynamicMap<Entity>()
     byComponent = new DynamicMap<DynamicMap<Entity>>()
 
-    constructor() {
-        super();
+    constructor(engine?: Engine) {
+        super(engine);
         Object.values(Components).forEach(v => {
             this.byComponent.set(v, new DynamicMap<Entity>())
         })
