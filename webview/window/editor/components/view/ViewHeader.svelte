@@ -1,6 +1,6 @@
 <script lang="ts">
     import Icon from "@lib/components/icon/Icon.svelte";
-    import {getContext, onDestroy, onMount} from "svelte";
+    import {getContext, onDestroy} from "svelte";
     import {ViewContextPath, ViewPlacement, ViewType, ViewTypeMetadata} from "./ViewDefinitions";
     import Dropdown from "@lib/components/dropdown/Dropdown.svelte";
     import {InjectVar} from "@lib/Injection";

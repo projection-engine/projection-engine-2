@@ -1,5 +1,4 @@
 import Entity from "../Entity"
-import RepositoryService from "@engine-core/services/serialization/RepositoryService";
 import Serializable from "@engine-core/services/serialization/Serializable";
 
 interface ComponentValueGeneric {

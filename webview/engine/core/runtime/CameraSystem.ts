@@ -1,11 +1,11 @@
 import AbstractEngineSystem from "@engine-core/AbstractEngineSystem";
-import StaticUBOs from "@engine-core/repositories/StaticUBOs";
-import GPUService from "@engine-core/services/GPUService";
-import {mat4, quat, vec3, vec4} from "gl-matrix";
-import CameraRepository from "@engine-core/repositories/CameraRepository";
+import UBORepository from "@engine-core/repositories/UBORepository";
+import GPU from "@engine-core/core/GPU";
+import {mat4, quat, vec3} from "gl-matrix";
+import Camera from "@engine-core/core/Camera";
 
 export default class CameraSystem extends AbstractEngineSystem {
-    camera: CameraRepository
+    camera: Camera
 
     async initialize() {
         this.camera = this.engine.getCamera()
@@ -127,11 +127,11 @@ export default class CameraSystem extends AbstractEngineSystem {
     private updateUBOs() {
         const c = this.camera;
         if (c.hasChangedProjection) {
-            const UBO = StaticUBOs.cameraProjectionUBO
+            const UBO = UBORepository.cameraProjectionUBO
 
             UBO.bind()
-            c.projectionUBOBuffer[32] = GPUService.bufferResolution[0]
-            c.projectionUBOBuffer[33] = GPUService.bufferResolution[1]
+            c.projectionUBOBuffer[32] = GPU.bufferResolution[0]
+            c.projectionUBOBuffer[33] = GPU.bufferResolution[1]
             c.projectionUBOBuffer[34] = 2.0 / Math.log2(c.projectionBuffer[0] + 1)
 
             UBO.updateBuffer(c.projectionUBOBuffer)
@@ -139,7 +139,7 @@ export default class CameraSystem extends AbstractEngineSystem {
         }
 
         if (c.hasChangedView) {
-            const UBO = StaticUBOs.cameraViewUBO
+            const UBO = UBORepository.cameraViewUBO
             UBO.bind()
             UBO.updateBuffer(c.viewUBOBuffer)
             UBO.unbind()

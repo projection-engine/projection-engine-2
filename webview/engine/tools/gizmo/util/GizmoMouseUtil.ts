@@ -1,4 +1,4 @@
-import PickingAPI from "@engine-core/services/PickingAPI"
+import DepthPickingService from "@engine-core/services/DepthPickingService"
 import AXIS from "../../static/AXIS"
 import Axis from "../../static/AXIS"
 import GizmoState from "./GizmoState"
@@ -27,7 +27,7 @@ export default class GizmoMouseUtil {
         if (!GizmoState.mainEntity)
             return
         GizmoUtil.updateGizmosTransformation(true)
-        const axis = PickingAPI.readEntityID(event.clientX, event.clientY, 0, StaticEditorFBO.gizmo.FBO)
+        const axis = DepthPickingService.readEntityID(event.clientX, event.clientY, 0, StaticEditorFBO.gizmo.FBO)
         if (axis === 0)
             return
         vec3.copy(GizmoState.initialEntityPosition, GizmoState.mainEntity.__pivotOffset)

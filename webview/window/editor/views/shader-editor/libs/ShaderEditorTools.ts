@@ -2,8 +2,8 @@ import materialCompiler from "./material-compiler/material-compiler"
 
 import Canvas from "./Canvas"
 import type ShaderNode from "../templates/ShaderNode"
-import GPUService from "@engine-core/services/GPUService"
-import UberShader from "@engine-core/repositories/UberShader"
+import GPU from "@engine-core/core/GPU"
+import UberShaderService from "@engine-core/services/UberShaderService"
 import GPUAPI from "@engine-core/services/GPUAPI"
 import NodesIndex from "../static/NODE_MAP"
 import ShaderLink from "../templates/ShaderLink"
@@ -98,9 +98,9 @@ export default class ShaderEditorTools {
 			}
 			await EditorFSUtil.updateAsset(openFile.registryID, JSON.stringify(materialData))
 
-			const oldMaterial = GPUService.materials.get(openFile.registryID)
+			const oldMaterial = GPU.materials.get(openFile.registryID)
 			if (oldMaterial) {
-				if (!UberShader.uberSignature[compiled[1]]) {
+				if (!UberShaderService.uberSignature[compiled[1]]) {
 					GPUAPI.destroyMaterial(openFile.registryID)
 					await GPUAPI.allocateMaterial({
 						functionDeclaration: compiled[0].functionDeclaration,

@@ -1,4 +1,4 @@
-import {ViewOrientation, ViewPlacement, ViewType} from "./ViewDefinitions";
+import {ViewPlacement, ViewType} from "./ViewDefinitions";
 import Serializable from "@engine-core/services/serialization/Serializable";
 import RepositoryService from "@engine-core/services/serialization/RepositoryService";
 

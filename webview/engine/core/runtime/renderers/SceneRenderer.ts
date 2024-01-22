@@ -1,15 +1,14 @@
-import GPUService from "../../services/GPUService"
-import StaticMeshes from "../../repositories/StaticMeshes"
+import GPU from "../../core/GPU"
+import StaticMeshRepository from "../../repositories/StaticMeshRepository"
 import type Entity from "../../instances/Entity"
 import Shader from "../../instances/Shader"
-import StaticFBO from "../../repositories/StaticFBO"
+import FramebufferRepository from "../../repositories/FramebufferRepository"
 import PointShadowsSystem from "../PointShadowsSystem"
 import UberMaterialAttributeGroup from "../../lib/UberMaterialAttributeGroup"
 import MATERIAL_RENDERING_TYPES from "../../static/MATERIAL_RENDERING_TYPES"
 import Material from "../../instances/Material"
-import UberShader from "../../repositories/UberShader"
-import MaterialResourceMapper from "../../repositories/MaterialResourceMapper"
-import World from "../../repositories/World"
+import UberShaderService from "../../services/UberShaderService"
+import MaterialRepository from "../../repositories/MaterialRepository"
 import Mesh from "../../instances/Mesh"
 import loopMeshes from "../loop-meshes"
 import EngineState from "../../EngineState"
@@ -29,10 +28,10 @@ export default class SceneRenderer {
 
 
     static bindGlobalResources(viewProjection?: Float32Array, viewMatrix?: Float32Array, cameraPosition?: Float32Array) {
-        const uniforms = UberShader.uberUniforms
-        const context = GPUService.context
+        const uniforms = UberShaderService.uberUniforms
+        const context = GPU.context
 
-        UberShader.uber.bind()
+        UberShaderService.uber.bind()
         if (ProjectionEngine.Engine.getEnvironment() === ENVIRONMENT.DEV)
             context.uniform1i(uniforms.shadingModel, EngineState.debugShadingModel)
 
@@ -46,18 +45,18 @@ export default class SceneRenderer {
         context.uniformMatrix4fv(uniforms.viewProjection, false, ProjectionEngine.Engine.getCamera().viewProjectionMatrix)
         context.uniform3fv(uniforms.cameraPosition, ProjectionEngine.Engine.getCamera().position)
 
-        SceneRenderer.#bindTexture(context, uniforms.brdf_sampler, 0, GPUService.BRDF, false)
-        SceneRenderer.#bindTexture(context, uniforms.SSAO, 1, StaticFBO.ssaoBlurredSampler, false)
-        SceneRenderer.#bindTexture(context, uniforms.SSGI, 2, StaticFBO.ssgiSampler, false)
-        SceneRenderer.#bindTexture(context, uniforms.sceneDepth, 3, StaticFBO.sceneDepthVelocity, false)
+        SceneRenderer.#bindTexture(context, uniforms.brdf_sampler, 0, GPU.BRDF, false)
+        SceneRenderer.#bindTexture(context, uniforms.SSAO, 1, FramebufferRepository.ssaoBlurredSampler, false)
+        SceneRenderer.#bindTexture(context, uniforms.SSGI, 2, FramebufferRepository.ssgiSampler, false)
+        SceneRenderer.#bindTexture(context, uniforms.sceneDepth, 3, FramebufferRepository.sceneDepthVelocity, false)
 
-        SceneRenderer.#bindTexture(context, uniforms.previousFrame, 4, StaticFBO.lensSampler, false)
-        SceneRenderer.#bindTexture(context, uniforms.shadow_atlas, 5, StaticFBO.shadowsSampler, false)
+        SceneRenderer.#bindTexture(context, uniforms.previousFrame, 4, FramebufferRepository.lensSampler, false)
+        SceneRenderer.#bindTexture(context, uniforms.shadow_atlas, 5, FramebufferRepository.shadowsSampler, false)
         SceneRenderer.#bindTexture(context, uniforms.shadow_cube, 6, PointShadowsSystem.sampler, true)
 
-        // if (!!GPUService.activeSkylightEntity) {
+        // if (!!GPU.activeSkylightEntity) {
         //     texOffset++
-        //     SceneRenderer.#bindTexture(context, uniforms.skylight_specular, 7, GPUService.skylightProbe.texture, true)
+        //     SceneRenderer.#bindTexture(context, uniforms.skylight_specular, 7, GPU.skylightProbe.texture, true)
         // }
 
         // uniform samplerCube skylight_diffuse;
@@ -126,14 +125,14 @@ export default class SceneRenderer {
 
     static drawDecals() {
         UberMaterialAttributeGroup.clear()
-        const uniforms = UberShader.uberUniforms
-        const context = GPUService.context
+        const uniforms = UberShaderService.uberUniforms
+        const context = GPU.context
         const toRender = ProjectionEngine.Engine.getByComponent(Components.DECAL)
         const size = toRender.length
         if (size === 0)
             return
         context.uniform1i(uniforms.isDecalPass, 1)
-        StaticMeshes.cube.bindAllResources()
+        StaticMeshRepository.cube.bindAllResources()
         for (let i = 0; i < size; i++) {
             const entity = toRender[i]
             if (!entity.active || entity.isCulled)
@@ -148,20 +147,20 @@ export default class SceneRenderer {
             context.uniformMatrix4fv(uniforms.materialAttributes, false, UberMaterialAttributeGroup.data)
             context.uniformMatrix4fv(uniforms.modelMatrix, false, entity.matrix)
 
-            StaticMeshes.cube.draw()
+            StaticMeshRepository.cube.draw()
         }
     }
 
     static drawTransparency() {
         UberMaterialAttributeGroup.clear()
-        const uniforms = UberShader.uberUniforms
-        const context = GPUService.context
-        const toRender = MaterialResourceMapper.materialsArray
+        const uniforms = UberShaderService.uberUniforms
+        const context = GPU.context
+        const toRender = MaterialRepository.materialsArray
         const size = toRender.length
         if (size === 0)
             return
         context.uniform1i(uniforms.isDecalPass, 0)
-        SceneRenderer.#bindTexture(context, uniforms.previousFrame, 3, StaticFBO.postProcessing1Sampler, false)
+        SceneRenderer.#bindTexture(context, uniforms.previousFrame, 3, FramebufferRepository.postProcessing1Sampler, false)
         for (let matIndex = 0; matIndex < size; matIndex++) {
             const materialGroup = toRender[matIndex]
             if (materialGroup.material.renderingMode !== MATERIAL_RENDERING_TYPES.TRANSPARENCY)
@@ -247,8 +246,8 @@ export default class SceneRenderer {
 
     static drawOpaque() {
         UberMaterialAttributeGroup.clear()
-        uniforms = UberShader.uberUniforms
-        context = GPUService.context
+        uniforms = UberShaderService.uberUniforms
+        context = GPU.context
 
         context.uniform1i(uniforms.isDecalPass, 0)
 

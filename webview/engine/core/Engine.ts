@@ -1,14 +1,14 @@
-import CameraRepository from "./repositories/CameraRepository"
+import Camera from "./core/Camera"
 import ENVIRONMENT from "./static/ENVIRONMENT"
-import GPUService from "./services/GPUService"
+import GPU from "./core/GPU"
 import Entity from "./instances/Entity"
 import DynamicMap from "./lib/DynamicMap"
-import World from "./repositories/World"
+import World from "./core/World"
 import AbstractEngineSystem from "@engine-core/AbstractEngineSystem";
-import StaticUBOs from "@engine-core/repositories/StaticUBOs";
-import StaticMeshes from "@engine-core/repositories/StaticMeshes";
-import StaticShaders from "@engine-core/repositories/StaticShaders";
-import StaticFBO from "@engine-core/repositories/StaticFBO";
+import UBORepository from "@engine-core/repositories/UBORepository";
+import StaticMeshRepository from "@engine-core/repositories/StaticMeshRepository";
+import ShaderRepository from "@engine-core/repositories/ShaderRepository";
+import FramebufferRepository from "@engine-core/repositories/FramebufferRepository";
 import CubeMapAPI from "@engine-core/services/CubeMapAPI";
 import LineAPI from "@engine-core/services/LineAPI";
 import AbstractEngineService from "@engine-core/AbstractEngineService";
@@ -19,10 +19,13 @@ import RepositoryService from "@engine-core/services/serialization/RepositorySer
 import Components from "@engine-core/static/Components";
 
 export default class Engine extends Serializable {
+    _world: World
+    _camera: Camera
+    _gpu: GPU
+
     // TODO - FIND A BETTER PLACE FOR THESE VARIABLES
     elapsed = 0
     currentTimeStamp = 0
-    world: World
 
     UILayouts = new Map()
     isDev = true
@@ -30,8 +33,6 @@ export default class Engine extends Serializable {
     #singletons = new DynamicMap<AbstractEngineService>()
 
     rootEntity = new Entity()
-    #camera: CameraRepository
-    #gpu: GPUService
     #canvas: HTMLCanvasElement
     mainResolution: { w: number, h: number }
 
@@ -39,7 +40,9 @@ export default class Engine extends Serializable {
         w: number,
         h: number
     }, readAsset: Function) {
-        this.world = new World()
+        this._world = new World()
+        this._camera = new Camera()
+        this._gpu = new GPU()
 
         this.#canvas = canvas
         this.mainResolution = mainResolution
@@ -50,20 +53,18 @@ export default class Engine extends Serializable {
     }
 
     getByComponent(component: Components): Entity[] {
-        return this.world.getByComponent(component)
+        return this._world.getByComponent(component)
     }
 
     private async createSingletons() {
-        this.#gpu = (await this.addSingleton(GPUService)) as GPUService
-        this.#camera = (await this.addSingleton(CameraRepository)) as CameraRepository;
-        await this.addSingleton(StaticUBOs)
-        await this.addSingleton(StaticMeshes)
-        await this.addSingleton(StaticShaders)
-        await this.addSingleton(StaticFBO)
+        await this.addSingleton(UBORepository)
+        await this.addSingleton(StaticMeshRepository)
+        await this.addSingleton(ShaderRepository)
+        await this.addSingleton(FramebufferRepository)
         await this.addSingleton(CubeMapAPI)
         await this.addSingleton(LineAPI)
         await this.addSingleton(SystemService)
-        GPUService.generateBRDF()
+        GPU.generateBRDF()
     }
 
     async addSingleton(Singleton: typeof AbstractEngineService): Promise<AbstractEngineService> {
@@ -110,20 +111,20 @@ export default class Engine extends Serializable {
         return this.rootEntity
     }
 
-    getCamera(): CameraRepository {
-        return this.#camera
+    getGPU(): GPU {
+        return this._gpu
     }
 
-    getGPU(): GPUService {
-        return this.#gpu
+    getWorld() {
+        return this._world
     }
 
-    getWorld(){
-        return this.world
+    getCamera() {
+        return this._camera
     }
 
     getContext(): WebGL2RenderingContext {
-        return GPUService.context
+        return GPU.context
     }
 
     getEntities(): DynamicMap<Entity> {
@@ -146,7 +147,7 @@ export default class Engine extends Serializable {
         this.isDev = data === ENVIRONMENT.DEV
         this.environment = data
         if (this.isDev)
-            this.#camera.updateAspectRatio()
+            this._camera.updateAspectRatio()
     }
 
 }

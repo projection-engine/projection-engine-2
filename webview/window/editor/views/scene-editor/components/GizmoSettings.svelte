@@ -9,7 +9,7 @@
     import Dropdown from "@lib/components/dropdown/Dropdown.svelte"
     import LocalizationEN from "@enums/LocalizationEN"
     import EmptyIcon from "@lib/components/icon/EmptyIcon.svelte"
-    import {onDestroy, onMount} from "svelte"
+    import {onDestroy} from "svelte"
     import SceneEditorUtil from "../../../util/SceneEditorUtil"
     import ProjectionEngine from "@lib/ProjectionEngine";
     import {InjectVar} from "@lib/Injection";

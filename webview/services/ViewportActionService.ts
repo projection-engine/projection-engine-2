@@ -1,8 +1,6 @@
-import QueryAPI from "@engine-core/services/QueryAPI"
+import EntityQueryService from "@engine-core/services/EntityQueryService"
 import {vec3, vec4} from "gl-matrix"
-import CameraRepository from "@engine-core/repositories/CameraRepository"
 import CameraTracker from "@engine-tools/utils/CameraTracker"
-import Engine from "@engine-core/Engine"
 import EngineStateService from "./EngineStateService"
 import SelectionStore from "@lib/stores/SelectionStore";
 import {Injectable} from "@lib/Injection";
@@ -25,7 +23,7 @@ export default class ViewportActionService extends IInjectable{
     }
 
     focus() {
-        const entity = QueryAPI.getEntityByID(SelectionStore.getMainEntity())
+        const entity = EntityQueryService.getEntityByID(SelectionStore.getMainEntity())
         if (!entity)
             return
 
@@ -61,10 +59,10 @@ export default class ViewportActionService extends IInjectable{
         const block = []
         if (!this.toCopy)
             return
-        const targetParent = parent ? QueryAPI.getEntityByID(parent) : undefined
+        const targetParent = parent ? EntityQueryService.getEntityByID(parent) : undefined
         for (let i = 0; i < this.toCopy.length; i++) {
             const t = this.toCopy[i]
-            const found = QueryAPI.getEntityByID(t)
+            const found = EntityQueryService.getEntityByID(t)
             if (found) {
                 if (targetParent === found)
                     continue

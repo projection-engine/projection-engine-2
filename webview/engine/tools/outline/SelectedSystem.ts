@@ -1,11 +1,10 @@
-import GPUService from "@engine-core/services/GPUService"
+import GPU from "@engine-core/core/GPU"
 
-import StaticMeshes from "@engine-core/repositories/StaticMeshes"
-import StaticFBO from "@engine-core/repositories/StaticFBO"
+import StaticMeshRepository from "@engine-core/repositories/StaticMeshRepository"
+import FramebufferRepository from "@engine-core/repositories/FramebufferRepository"
 import StaticEditorShaders from "../utils/StaticEditorShaders"
 import EngineTools from "../EngineTools"
 import EngineToolsState from "../EngineToolsState"
-import GPUUtil from "../../core/utils/GPUUtil";
 
 const fallbackColor = new Float32Array([.5, .5, .5])
 const metadata = new Float32Array(9)
@@ -13,10 +12,10 @@ export default class SelectedSystem {
     static drawToBuffer() {
         const selected = EngineTools.selected
         const length = selected.length
-        const context = GPUService.context
+        const context = GPU.context
 
         if (length > 0) {
-            StaticFBO.postProcessing1.startMapping()
+            FramebufferRepository.postProcessing1.startMapping()
             StaticEditorShaders.silhouette.bind()
             const uniforms = StaticEditorShaders.silhouetteUniforms
             for (let m = 0; m < length; m++) {
@@ -44,37 +43,37 @@ export default class SelectedSystem {
                     metadata[4] = current.scaling[1]
                     metadata[5] = current.scaling[2]
                     context.uniformMatrix3fv(uniforms.metadata, false, metadata)
-                    StaticMeshes.drawQuad()
+                    StaticMeshRepository.drawQuad()
                 }
             }
-            StaticFBO.postProcessing1.stopMapping()
+            FramebufferRepository.postProcessing1.stopMapping()
         } else
-            StaticFBO.postProcessing1.clear()
+            FramebufferRepository.postProcessing1.clear()
     }
 
     static drawSilhouette() {
-        const context = GPUService.context
+        const context = GPU.context
 
         StaticEditorShaders.outline.bind()
         const outlineShaderUniforms = StaticEditorShaders.outlineUniforms
-        context.uniform2fv(outlineShaderUniforms.bufferSize, GPUService.bufferResolution)
+        context.uniform2fv(outlineShaderUniforms.bufferSize, GPU.bufferResolution)
         context.uniform1f(outlineShaderUniforms.outlineWidth, EngineToolsState.outlineWidth)
         if (EngineToolsState.showOutline) {
-            GPUUtil.bind2DTextureForDrawing(outlineShaderUniforms.silhouette, 0, StaticFBO.entityIDSampler)
+            GPU.bind2DTextureForDrawing(outlineShaderUniforms.silhouette, 0, FramebufferRepository.entityIDSampler)
 
             context.uniform1i(outlineShaderUniforms.isOutline, 1)
             context.uniform3fv(outlineShaderUniforms.outlineColor, EngineToolsState.outlineColor || fallbackColor)
             context.uniform2fv(outlineShaderUniforms.mouseCoordinates, EngineToolsState.mouseCoordinates)
-            StaticMeshes.drawQuad()
+            StaticMeshRepository.drawQuad()
         }
 
         const length = EngineTools.selected.length
         if (length > 0) {
             context.activeTexture(context.TEXTURE0)
-            context.bindTexture(context.TEXTURE_2D, StaticFBO.postProcessing1Sampler)
+            context.bindTexture(context.TEXTURE_2D, FramebufferRepository.postProcessing1Sampler)
             context.uniform1i(outlineShaderUniforms.silhouette, 0)
             context.uniform1i(outlineShaderUniforms.isOutline, 0)
-            StaticMeshes.drawQuad()
+            StaticMeshRepository.drawQuad()
         }
     }
 }

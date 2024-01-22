@@ -3,12 +3,10 @@ import AXIS from "@engine-tools/static/AXIS"
 import EntityAPI from "@engine-core/services/EntityAPI"
 import SelectionStore from "@lib/stores/SelectionStore"
 import Entity from "@engine-core/instances/Entity"
-import PickingAPI from "@engine-core/services/PickingAPI"
+import DepthPickingService from "@engine-core/services/DepthPickingService"
 
-import QueryAPI from "@engine-core/services/QueryAPI"
-import LocalizationEN from "@enums/LocalizationEN"
+import EntityQueryService from "@engine-core/services/EntityQueryService"
 import GizmoUtil from "@engine-tools/gizmo/util/GizmoUtil"
-import ProjectionEngine from "@lib/ProjectionEngine";
 import {Inject, Injectable} from "@lib/Injection";
 import IInjectable from "@lib/IInjectable";
 import EntityNamingService from "@services/EntityNamingService";
@@ -35,7 +33,7 @@ export default class EngineStateService extends IInjectable {
         const arr = EngineStateService.engine.getEntities().array
         for (let i = 0; i < arr.length; i++) {
             const entity = arr[i]
-            entity.setPickID(PickingAPI.getPickerId(i + AXIS.ZY + 1))
+            entity.setPickID(DepthPickingService.getPickerId(i + AXIS.ZY + 1))
             if (!entity.parentID && !replacedMap?.[entity.parent?.id])
                 continue
             if (entity.parent && !replacedMap?.[entity.parent?.id])
@@ -65,7 +63,7 @@ export default class EngineStateService extends IInjectable {
             if (!entity)
                 continue
             hierarchy[entity.id] = entity
-            QueryAPI.getHierarchyToObject(entity, hierarchy)
+            EntityQueryService.getHierarchyToObject(entity, hierarchy)
         }
 
         const entities = Object.values(hierarchy)

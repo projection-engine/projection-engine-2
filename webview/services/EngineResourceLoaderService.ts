@@ -2,10 +2,10 @@ import FileSystemUtil from "@lib/FileSystemUtil"
 import EditorFSUtil from "../window/editor/util/EditorFSUtil"
 
 import COMPONENTS from "@engine-core/static/Components"
-import PickingAPI from "@engine-core/services/PickingAPI"
-import QueryAPI from "@engine-core/services/QueryAPI"
+import DepthPickingService from "@engine-core/services/DepthPickingService"
+import EntityQueryService from "@engine-core/services/EntityQueryService"
 import EntityFactoryService from "./EntityFactoryService"
-import GPUService from "@engine-core/services/GPUService"
+import GPU from "@engine-core/core/GPU"
 import GPUAPI from "@engine-core/services/GPUAPI"
 
 import FileSystemAPI from "@engine-core/services/FileSystemAPI"
@@ -16,8 +16,7 @@ import EntityAPI from "@engine-core/services/EntityAPI"
 import FileTypes from "@enums/FileTypes"
 import LocalizationEN from "@enums/LocalizationEN"
 import Entity from "@engine-core/instances/Entity"
-import StaticFBO from "@engine-core/repositories/StaticFBO";
-import ProjectionEngine from "@lib/ProjectionEngine";
+import FramebufferRepository from "@engine-core/repositories/FramebufferRepository";
 import {Inject} from "@lib/Injection";
 import ToasterService from "@services/ToasterService";
 
@@ -51,7 +50,7 @@ export default class EngineResourceLoaderService {
 		if (!objLoaded)
 			return
 		let materialID
-		if (GPUService.meshes.get(objLoaded.id))
+		if (GPU.meshes.get(objLoaded.id))
 			return
 		try {
 			GPUAPI.allocateMesh(id, objLoaded)
@@ -135,7 +134,7 @@ export default class EngineResourceLoaderService {
 			}
 
 			case FileTypes.MATERIAL: {
-				const entity = QueryAPI.getEntityByPickerID(PickingAPI.readEntityID(mouseX, mouseY, 1, StaticFBO.visibility.FBO))
+				const entity = EntityQueryService.getEntityByPickerID(DepthPickingService.readEntityID(mouseX, mouseY, 1, FramebufferRepository.visibility.FBO))
 				if (!entity || !entity.meshComponent) return
 				const result = await FileSystemAPI.loadMaterial(data)
 				if (result) {

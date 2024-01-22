@@ -1,11 +1,11 @@
 import AXIS from "../../static/AXIS"
-import StaticMeshes from "@engine-core/repositories/StaticMeshes"
+import StaticMeshRepository from "@engine-core/repositories/StaticMeshRepository"
 import GizmoState from "../util/GizmoState"
 import GizmoUtil from "../util/GizmoUtil"
 import IGizmo from "../IGizmo"
 import Mesh from "../../../core/instances/Mesh"
 import Entity from "../../../core/instances/Entity"
-import PickingAPI from "@engine-core/services/PickingAPI"
+import DepthPickingService from "@engine-core/services/DepthPickingService"
 
 export default class ScreenSpaceGizmo implements IGizmo {
 	mesh: Mesh
@@ -15,11 +15,11 @@ export default class ScreenSpaceGizmo implements IGizmo {
 
 
 	drawGizmo() {
-		GizmoUtil.drawGizmo(StaticMeshes.sphere, GizmoState.mainEntity.__cacheCenterMatrix, AXIS.SCREEN_SPACE)
+		GizmoUtil.drawGizmo(StaticMeshRepository.sphere, GizmoState.mainEntity.__cacheCenterMatrix, AXIS.SCREEN_SPACE)
 	}
 
 	drawToDepth(data: MutableObject) {
-		GizmoUtil.drawToDepth(data, StaticMeshes.sphere, GizmoState.mainEntity.__cacheCenterMatrix, PickingAPI.getPickerId(1))
+		GizmoUtil.drawToDepth(data, StaticMeshRepository.sphere, GizmoState.mainEntity.__cacheCenterMatrix, DepthPickingService.getPickerId(1))
 	}
 
 	onMouseMove(){}

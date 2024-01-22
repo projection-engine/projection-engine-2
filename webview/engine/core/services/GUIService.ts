@@ -1,8 +1,7 @@
 import InputEventsAPI from "./InputEventsAPI"
-import QueryAPI from "./QueryAPI"
+import EntityQueryService from "./EntityQueryService"
 import FileSystemAPI from "./FileSystemAPI"
 import UIComponent from "../instances/components/UIComponent"
-import World from "../repositories/World"
 import Entity from "../instances/Entity"
 import ProjectionEngine from "@lib/ProjectionEngine";
 import Components from "@engine-core/static/Components";
@@ -133,7 +132,7 @@ export default class GUIService {
         for (let i = 0; i < entities.length; i++) {
             const entity = entities[i]
             const UI = entity.uiComponent
-            if (!entity.active || !UI || QueryAPI.getEntityByQueryID(entity.queryKey) !== entity)
+            if (!entity.active || !UI || EntityQueryService.getEntityByQueryID(entity.queryKey) !== entity)
                 continue
             UI.__element = undefined
         }
@@ -145,7 +144,7 @@ export default class GUIService {
 
         const UI = entity?.uiComponent
 
-        if (!entity.active || !UI || QueryAPI.getEntityByQueryID(entity.queryKey) !== entity || !UI.__element)
+        if (!entity.active || !UI || EntityQueryService.getEntityByQueryID(entity.queryKey) !== entity || !UI.__element)
             return
         const el = UI.__element
         if (!el)

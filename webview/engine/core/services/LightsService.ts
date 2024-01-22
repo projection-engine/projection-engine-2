@@ -4,9 +4,8 @@ import {glMatrix, mat4, vec3} from "gl-matrix"
 import DirectionalShadowsSystem from "../runtime/DirectionalShadowsSystem"
 import PointShadowsSystem from "../runtime/PointShadowsSystem"
 import type Entity from "../instances/Entity"
-import UberShader from "../repositories/UberShader"
-import StaticUBOs from "../repositories/StaticUBOs"
-import World from "../repositories/World"
+import UberShaderService from "./UberShaderService"
+import UBORepository from "../repositories/UBORepository"
 import Components from "@engine-core/static/Components";
 import ProjectionEngine from "@lib/ProjectionEngine";
 
@@ -27,8 +26,8 @@ export default class LightsService {
 	static lightsQuantity = 0
 
 	static initialize() {
-		LightsService.primaryBuffer = <Float32Array>ArrayBufferAPI.allocateVector(UberShader.MAX_LIGHTS * 16, 0, false, false, false)
-		LightsService.secondaryBuffer = <Float32Array>ArrayBufferAPI.allocateVector(UberShader.MAX_LIGHTS * 16, 0, false, false, false)
+		LightsService.primaryBuffer = <Float32Array>ArrayBufferAPI.allocateVector(UberShaderService.MAX_LIGHTS * 16, 0, false, false, false)
+		LightsService.secondaryBuffer = <Float32Array>ArrayBufferAPI.allocateVector(UberShaderService.MAX_LIGHTS * 16, 0, false, false, false)
 	}
 
 	static packageLights(keepOld?: boolean, force?: boolean) {
@@ -56,7 +55,7 @@ export default class LightsService {
 		const toLoopSize = lights.length
 		for (let i = 0; i < toLoopSize; i++) {
 			const current = lights[i]
-			if (offset + 16 > UberShader.MAX_LIGHTS * 16)
+			if (offset + 16 > UberShaderService.MAX_LIGHTS * 16)
 				break
 			if (!current.active || !current.changesApplied && !current.needsLightUpdate && keepOld)
 				continue
@@ -69,7 +68,7 @@ export default class LightsService {
 		const atmospheres = ProjectionEngine.Engine.getByComponent(Components.ATMOSPHERE)
 		for (let i = 0; i < atmospheres.length; i++) {
 			const current = atmospheres[i]
-			if (offset + 16 > UberShader.MAX_LIGHTS * 16)
+			if (offset + 16 > UberShaderService.MAX_LIGHTS * 16)
 				break
 			if (!current.active || !current.changesApplied && !current.needsLightUpdate && keepOld)
 				continue
@@ -81,15 +80,15 @@ export default class LightsService {
 
 		LightsService.lightsQuantity = size
 		if (LightsService.lightsQuantity > 0 || !keepOld) {
-			StaticUBOs.lightsUBO.bind()
-			StaticUBOs.lightsUBO.updateData("lightPrimaryBuffer", LightsService.primaryBuffer)
-			StaticUBOs.lightsUBO.updateData("lightSecondaryBuffer", LightsService.secondaryBuffer)
-			StaticUBOs.lightsUBO.unbind()
+			UBORepository.lightsUBO.bind()
+			UBORepository.lightsUBO.updateData("lightPrimaryBuffer", LightsService.primaryBuffer)
+			UBORepository.lightsUBO.updateData("lightSecondaryBuffer", LightsService.secondaryBuffer)
+			UBORepository.lightsUBO.unbind()
 
-			StaticUBOs.uberUBO.bind()
-			quantity[0] = Math.min(LightsService.lightsQuantity, UberShader.MAX_LIGHTS)
-			StaticUBOs.uberUBO.updateData("lightQuantity", quantity)
-			StaticUBOs.uberUBO.unbind()
+			UBORepository.uberUBO.bind()
+			quantity[0] = Math.min(LightsService.lightsQuantity, UberShaderService.MAX_LIGHTS)
+			UBORepository.uberUBO.updateData("lightQuantity", quantity)
+			UBORepository.uberUBO.unbind()
 		}
 	}
 

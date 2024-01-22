@@ -1,16 +1,11 @@
 import DynamicMap from "../lib/DynamicMap"
 import type Entity from "../instances/Entity"
-import ENVIRONMENT from "../static/ENVIRONMENT"
-import PhysicsAPI from "../services/PhysicsAPI"
 import GUIService from "../services/GUIService"
-import ProjectionEngine from "@lib/ProjectionEngine";
-import Serializable from "@engine-core/services/serialization/Serializable";
 import RepositoryService from "@engine-core/services/serialization/RepositoryService";
-import COMPONENTS from "@engine-core/static/Components";
-import Component from "@engine-core/instances/components/Component";
 import Components from "@engine-core/static/Components";
+import AbstractEngineCoreService from "@engine-core/core/AbstractEngineCoreService";
 
-export default class World extends Serializable {
+export default class World extends AbstractEngineCoreService {
     queryMap = new DynamicMap<Entity>()
     entities = new DynamicMap<Entity>()
     byComponent = new DynamicMap<DynamicMap<Entity>>()

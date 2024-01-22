@@ -1,6 +1,6 @@
-import GPUService from "../services/GPUService"
+import GPU from "../core/GPU"
 import GPUAPI from "../services/GPUAPI"
-import MeshResourceMapper from "../repositories/MeshResourceMapper"
+import MeshRepository from "../repositories/MeshRepository"
 
 const THRESHOLD = 120000
 const INTERVAL = 120000
@@ -18,10 +18,10 @@ export default class ResourceManager {
 	}
 
 	static execute() {
-		const meshes = GPUService.meshes.array
+		const meshes = GPU.meshes.array
 		for (let i = 0; i < meshes.length; i++) {
 			const current = meshes[i]
-			const inUse = MeshResourceMapper.inUse.get(current.id)
+			const inUse = MeshRepository.inUse.get(current.id)
 			if (!inUse)
 				GPUAPI.destroyMesh(current)
 		}

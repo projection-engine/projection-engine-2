@@ -1,7 +1,7 @@
 import {mat4} from "gl-matrix"
-import StaticShaders from "../repositories/StaticShaders"
-import StaticFBO from "../repositories/StaticFBO"
-import StaticMeshes from "../repositories/StaticMeshes"
+import ShaderRepository from "../repositories/ShaderRepository"
+import FramebufferRepository from "../repositories/FramebufferRepository"
+import StaticMeshRepository from "../repositories/StaticMeshRepository"
 import MATERIAL_RENDERING_TYPES from "../static/MATERIAL_RENDERING_TYPES"
 import MetricsController from "../services/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
@@ -19,14 +19,14 @@ export default class DepthPrePassSystem extends AbstractEngineSystem {
     static needsUpdate = true
 
     execute(gl: WebGL2RenderingContext) {
-        StaticShaders.visibility.bind()
-        StaticFBO.visibility.startMapping()
+        ShaderRepository.visibility.bind()
+        FramebufferRepository.visibility.startMapping()
         this.#bindUniforms(gl)
         entityMetadata[5] = 0
         loopMeshes((entity, mesh) => this.#drawMesh(gl, entity, mesh))
 
         this.#drawSprites(gl)
-        StaticFBO.visibility.stopMapping()
+        FramebufferRepository.visibility.stopMapping()
         MetricsController.currentState = METRICS_FLAGS.VISIBILITY
     }
 
@@ -63,7 +63,7 @@ export default class DepthPrePassSystem extends AbstractEngineSystem {
             gl.uniformMatrix4fv(uniforms.modelMatrix, false, entity.matrix)
             gl.uniformMatrix4fv(uniforms.previousModelMatrix, false, entity.previousModelMatrix)
 
-            StaticMeshes.drawQuad()
+            StaticMeshRepository.drawQuad()
         }
         gl.enable(gl.CULL_FACE)
     }
@@ -87,7 +87,7 @@ export default class DepthPrePassSystem extends AbstractEngineSystem {
     }
 
     #bindUniforms(gl: WebGL2RenderingContext) {
-        uniforms = StaticShaders.visibilityUniforms
+        uniforms = ShaderRepository.visibilityUniforms
         VP = ProjectionEngine.Engine.getCamera().cameraMotionBlur ? ProjectionEngine.Engine.getCamera().previousViewProjectionMatrix : ProjectionEngine.Engine.getCamera().viewProjectionMatrix
         gl.uniformMatrix4fv(uniforms.viewProjection, false, ProjectionEngine.Engine.getCamera().viewProjectionMatrix)
         gl.uniformMatrix4fv(uniforms.previousViewProjection, false, VP)

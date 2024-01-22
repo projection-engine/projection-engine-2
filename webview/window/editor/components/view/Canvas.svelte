@@ -1,6 +1,6 @@
 <script lang="ts">
     import {onMount} from "svelte"
-    import  {InjectVar} from "@lib/Injection";
+    import {InjectVar} from "@lib/Injection";
     import CanvasContextService from "@services/CanvasContextService";
     import RENDER_TARGET from "../../static/RENDER_TARGET";
 

@@ -1,7 +1,7 @@
 import Entity from "../instances/Entity"
 import ProjectionEngine from "@lib/ProjectionEngine";
 
-export default class QueryAPI {
+export default class EntityQueryService {
     static getEntityByQueryID(id: string): Entity | undefined {
         return ProjectionEngine.Engine.getQueryMap().get(id)
     }
@@ -61,7 +61,7 @@ export default class QueryAPI {
     static getHierarchyToObject(root: Entity, obj: MutableObject) {
         const children = root.children.array
         for (let i = 0; i < children.length; i++) {
-            QueryAPI.getHierarchyToObject(children[i], obj)
+            EntityQueryService.getHierarchyToObject(children[i], obj)
             obj[children[i].id] = children[i]
         }
     }
@@ -70,7 +70,7 @@ export default class QueryAPI {
         const hierarchy = array ?? []
         const children = root.children.array
         for (let i = 0; i < children.length; i++) {
-            QueryAPI.getHierarchy(children[i], hierarchy)
+            EntityQueryService.getHierarchy(children[i], hierarchy)
             hierarchy.push(children[i])
         }
         return hierarchy
@@ -81,7 +81,7 @@ export default class QueryAPI {
         callback(entity)
         for (let i = 0; i < children.length; i++) {
             const current = children[i]
-            QueryAPI.loopHierarchy(current, callback)
+            EntityQueryService.loopHierarchy(current, callback)
         }
     }
 

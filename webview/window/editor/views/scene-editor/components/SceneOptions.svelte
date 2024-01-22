@@ -8,7 +8,7 @@
     import Range from "@lib/components/range/Range.svelte"
     import Checkbox from "@lib/components/checkbox/Checkbox.svelte"
     import Dropdown from "@lib/components/dropdown/Dropdown.svelte"
-    import {onDestroy, onMount} from "svelte"
+    import {onDestroy} from "svelte"
     import ProjectionEngine from "@lib/ProjectionEngine";
     import SettingsStore from "@lib/stores/SettingsStore";
     import {InjectVar} from "@lib/Injection";

@@ -1,9 +1,8 @@
 import EntityAPI from "../services/EntityAPI"
 import getComponentInstance from "../utils/get-component-instance"
-import serializeStructure from "../utils/serialize-structure"
 import Component from "./components/Component"
 import ComponentResources from "./components/ComponentResources"
-import QueryAPI from "../services/QueryAPI"
+import EntityQueryService from "../services/EntityQueryService"
 import DynamicMap from "../lib/DynamicMap"
 import RepositoryService from "@engine-core/services/serialization/RepositoryService";
 
@@ -136,7 +135,7 @@ export default class Entity extends ComponentResources {
     }
 
     addParent(parent: Entity) {
-    	if (!parent || parent === this || parent === this.#parent || QueryAPI.isChildOf(this, parent.id) || QueryAPI.isChildOf(parent, this.id)) {
+    	if (!parent || parent === this || parent === this.#parent || EntityQueryService.isChildOf(this, parent.id) || EntityQueryService.isChildOf(parent, this.id)) {
     		return
     	}
     	if (this.#parent)

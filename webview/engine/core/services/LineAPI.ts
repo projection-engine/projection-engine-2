@@ -1,6 +1,6 @@
 import VertexBuffer from "../instances/VertexBuffer"
 import Mesh from "../instances/Mesh"
-import GPUService from "./GPUService"
+import GPU from "../core/GPU"
 import AbstractEngineService from "@engine-core/AbstractEngineService";
 
 
@@ -20,36 +20,36 @@ export default class LineAPI extends AbstractEngineService{
         if (LineAPI.#initialized) return
         LineAPI.#initialized = true
 
-        LineAPI.vaoX = GPUService.context.createVertexArray()
-        GPUService.context.bindVertexArray(LineAPI.vaoX)
+        LineAPI.vaoX = GPU.context.createVertexArray()
+        GPU.context.bindVertexArray(LineAPI.vaoX)
         LineAPI.vboX = new VertexBuffer(
             0,
             new Float32Array(X),
-            GPUService.context.ARRAY_BUFFER,
+            GPU.context.ARRAY_BUFFER,
             3,
-            GPUService.context.FLOAT
+            GPU.context.FLOAT
         )
-        GPUService.context.bindVertexArray(null)
+        GPU.context.bindVertexArray(null)
 
-        LineAPI.vaoY = GPUService.context.createVertexArray()
-        GPUService.context.bindVertexArray(LineAPI.vaoY)
+        LineAPI.vaoY = GPU.context.createVertexArray()
+        GPU.context.bindVertexArray(LineAPI.vaoY)
         LineAPI.vboY = new VertexBuffer(
             0,
             new Float32Array(Y),
-            GPUService.context.ARRAY_BUFFER,
+            GPU.context.ARRAY_BUFFER,
             3,
-            GPUService.context.FLOAT
+            GPU.context.FLOAT
         )
-        GPUService.context.bindVertexArray(null)
+        GPU.context.bindVertexArray(null)
 
-        LineAPI.vaoZ = GPUService.context.createVertexArray()
-        GPUService.context.bindVertexArray(LineAPI.vaoZ)
+        LineAPI.vaoZ = GPU.context.createVertexArray()
+        GPU.context.bindVertexArray(LineAPI.vaoZ)
         LineAPI.vboZ = new VertexBuffer(
             0,
             new Float32Array(Z),
-            GPUService.context.ARRAY_BUFFER,
+            GPU.context.ARRAY_BUFFER,
             3,
-            GPUService.context.FLOAT
+            GPU.context.FLOAT
         )
 
     }
@@ -60,11 +60,11 @@ export default class LineAPI extends AbstractEngineService{
 
         Mesh.finishIfUsed()
 
-        GPUService.context.bindVertexArray(vao)
+        GPU.context.bindVertexArray(vao)
         vbo.enable()
-        GPUService.context.drawArrays(GPUService.context.LINES, 0, 2)
+        GPU.context.drawArrays(GPU.context.LINES, 0, 2)
 
-        GPUService.context.bindVertexArray(null)
+        GPU.context.bindVertexArray(null)
         vbo.disable()
     }
 
@@ -75,12 +75,12 @@ export default class LineAPI extends AbstractEngineService{
 
         Mesh.finishIfUsed()
 
-        GPUService.context.bindVertexArray(vao)
+        GPU.context.bindVertexArray(vao)
         vbo.enable()
-        GPUService.context.drawArrays(GPUService.context.LINES, 0, 2)
+        GPU.context.drawArrays(GPU.context.LINES, 0, 2)
 
 
-        GPUService.context.bindVertexArray(null)
+        GPU.context.bindVertexArray(null)
         vbo.disable()
     }
 
@@ -91,11 +91,11 @@ export default class LineAPI extends AbstractEngineService{
 
         Mesh.finishIfUsed()
 
-        GPUService.context.bindVertexArray(vao)
+        GPU.context.bindVertexArray(vao)
         vbo.enable()
-        GPUService.context.drawArrays(GPUService.context.LINES, 0, 2)
+        GPU.context.drawArrays(GPU.context.LINES, 0, 2)
 
-        GPUService.context.bindVertexArray(null)
+        GPU.context.bindVertexArray(null)
         vbo.disable()
     }
 

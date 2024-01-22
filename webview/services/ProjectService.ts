@@ -1,14 +1,6 @@
-import FileSystemUtil from "@lib/FileSystemUtil"
 import Engine from "@engine-core/Engine"
-import EditorFSUtil from "../window/editor/util/EditorFSUtil"
 import SelectionStore from "@lib/stores/SelectionStore"
-import serializeStructure from "@engine-core/utils/serialize-structure"
-import QueryAPI from "@engine-core/services/QueryAPI"
-import PickingAPI from "@engine-core/services/PickingAPI"
-import AXIS from "@engine-tools/static/AXIS"
 import LocalizationEN from "@enums/LocalizationEN"
-import FileTypes from "@enums/FileTypes"
-import EditorUtil from "../window/editor/util/EditorUtil"
 import {Inject, Injectable} from "@lib/Injection";
 import ToasterService from "@services/ToasterService";
 import EntityHierarchyService from "@services/EntityHierarchyService";

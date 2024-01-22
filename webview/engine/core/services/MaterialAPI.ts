@@ -1,4 +1,4 @@
-import GPUService from "./GPUService"
+import GPU from "../core/GPU"
 import DATA_TYPES from "../static/DATA_TYPES"
 import GPUAPI from "./GPUAPI"
 
@@ -48,7 +48,7 @@ export default class MaterialAPI {
 				if (texturesInUse[textureID] || !FileSystemAPI.isReady)
 					continue
 				try {
-					const exists = GPUService.textures.get(textureID)
+					const exists = GPU.textures.get(textureID)
 					if (exists) {
 						texturesInUse[textureID] = {texture: exists, key: currentUniform.key}
 						uniformValues[currentUniform.key] = exists

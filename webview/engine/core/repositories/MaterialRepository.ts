@@ -1,23 +1,23 @@
 import Material from "../instances/Material"
 import Entity from "../instances/Entity"
-import GPUService from "../services/GPUService"
+import GPU from "../core/GPU"
 import ResourceMapper from "../lib/ResourceMapper"
 
 
 type Resource = { material: Material, entities: Entity[], entitiesMap: Map<string, Entity> }[]
-export default class MaterialResourceMapper {
+export default class MaterialRepository {
 	static #mapper = new ResourceMapper("material")
 
 	static get materialsArray(): Resource {
-		return <Resource>MaterialResourceMapper.#mapper.dataMap
+		return <Resource>MaterialRepository.#mapper.dataMap
 	}
 
 	static removeBlock(entities: Entity[]) {
-		MaterialResourceMapper.#mapper.removeBlock(entities)
+		MaterialRepository.#mapper.removeBlock(entities)
 	}
 
 	static unlinkEntityMaterial(entityID: string) {
-		MaterialResourceMapper.#mapper.unlink(entityID)
+		MaterialRepository.#mapper.unlink(entityID)
 	}
 
 	static deleteMaterial(meshID: string) {
@@ -28,18 +28,18 @@ export default class MaterialResourceMapper {
 	}
 
 	static linkEntityMaterial(entity: Entity, materialID: string) {
-		let index = MaterialResourceMapper.materialsArray.findIndex(m => m.material.id === materialID)
-		if (index < 0 && !GPUService.materials.has(materialID))
+		let index = MaterialRepository.materialsArray.findIndex(m => m.material.id === materialID)
+		if (index < 0 && !GPU.materials.has(materialID))
 			return
 		if (index < 0) {
-			MaterialResourceMapper.materialsArray.push({
-				material: GPUService.materials.get(materialID),
+			MaterialRepository.materialsArray.push({
+				material: GPU.materials.get(materialID),
 				entitiesMap: new Map(),
 				entities: []
 			})
-			index = MaterialResourceMapper.materialsArray.length - 1
+			index = MaterialRepository.materialsArray.length - 1
 		}
-		const instance = MaterialResourceMapper.materialsArray[index]
+		const instance = MaterialRepository.materialsArray[index]
 		if (instance.entitiesMap.has(entity.id))
 			return
 		instance.entities.push(entity)

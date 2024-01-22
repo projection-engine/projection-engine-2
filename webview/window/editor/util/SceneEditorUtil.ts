@@ -1,8 +1,8 @@
 import SHADING_MODELS from "@engine-core/static/ShadingModel"
 import LocalizationEN from "@enums/LocalizationEN"
 import ConversionAPI from "@engine-core/services/ConversionAPI"
-import GPUService from "@engine-core/services/GPUService"
-import PickingAPI from "@engine-core/services/PickingAPI"
+import GPU from "@engine-core/core/GPU"
+import DepthPickingService from "@engine-core/services/DepthPickingService"
 import DepthPrePassSystem from "@engine-core/runtime/DepthPrePassSystem"
 import EngineTools from "../../../engine/tools/EngineTools"
 import {glMatrix, quat} from "gl-matrix"
@@ -11,7 +11,6 @@ import EngineResourceLoaderService from "@services/EngineResourceLoaderService"
 import getViewportContext from "../templates/get-viewport-context"
 import RENDER_TARGET from "../static/RENDER_TARGET"
 import SelectionStore from "@lib/stores/SelectionStore";
-import CameraSerialization from "@engine-core/static/CameraSerialization";
 import ProjectionEngine from "@lib/ProjectionEngine";
 import {Inject, Injectable} from "@lib/Injection";
 import IInjectable from "@lib/IInjectable";
@@ -86,11 +85,11 @@ export default class SceneEditorUtil extends IInjectable {
         const worker = SceneEditorUtil.worker()
         if (startCoords && endCoords) {
             EngineTools.drawIconsToBuffer()
-            const nStart = ConversionAPI.toQuadCoordinates(startCoords.x, startCoords.y, GPUService.internalResolution.w, GPUService.internalResolution.h)
-            const nEnd = ConversionAPI.toQuadCoordinates(endCoords.x, endCoords.y, GPUService.internalResolution.w, GPUService.internalResolution.h)
+            const nStart = ConversionAPI.toQuadCoordinates(startCoords.x, startCoords.y, GPU.internalResolution.w, GPU.internalResolution.h)
+            const nEnd = ConversionAPI.toQuadCoordinates(endCoords.x, endCoords.y, GPU.internalResolution.w, GPU.internalResolution.h)
             try {
 
-                const data = PickingAPI.readBlock(nStart, nEnd)
+                const data = DepthPickingService.readBlock(nStart, nEnd)
                 worker.postMessage({
                     entities: ProjectionEngine.Engine.getEntities().array.map(e => ({id: e.id, pick: e.pickIndex})),
                     data
@@ -143,29 +142,11 @@ export default class SceneEditorUtil extends IInjectable {
         })
     }
 
-    static restoreCameraState(cameraMetadata: CameraSerialization | undefined) {
-        try {
-            if (!cameraMetadata) {
-                const pitch = quat.fromEuler(quat.create(), -45, 0, 0)
-                const yaw = quat.fromEuler(quat.create(), 0, 45, 0)
-                // ProjectionEngine.Engine.getCamera().update([5, 10, 5], quat.multiply(quat.create(), yaw, pitch))
-                CameraTracker.xRotation = glMatrix.toRadian(45)
-                CameraTracker.yRotation = -glMatrix.toRadian(45)
-            } else {
-                // ProjectionEngine.Engine.getCamera().restoreState(cameraMetadata)
-                CameraTracker.xRotation = cameraMetadata.prevX
-                CameraTracker.yRotation = cameraMetadata.prevY
-            }
-        } catch (err) {
-            console.error(err)
-        }
-    }
-
     static onSceneEditorMount(draggable) {
         ProjectionEngine.ContextMenuService.mount(getViewportContext(), RENDER_TARGET)
         CameraTracker.startTracking()
         draggable.onMount({
-            targetElement: GPUService.canvas,
+            targetElement: GPU.canvas,
             onDrop: (data, event) => EngineResourceLoaderService.load(data, false, event.clientX, event.clientY).catch(console.error),
             onDragOver: () => `
                 <span data-svelteicon="-" style="font-size: 70px">add</span>

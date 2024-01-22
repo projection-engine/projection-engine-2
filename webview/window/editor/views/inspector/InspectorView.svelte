@@ -1,7 +1,7 @@
 <script lang="ts">
 
     import {onDestroy, onMount} from "svelte"
-    import QueryAPI from "@engine-core/services/QueryAPI"
+    import EntityQueryService from "@engine-core/services/EntityQueryService"
     import EntityInspector from "./components/EntityAttributes.svelte"
 
     import Icon from "@lib/components/icon/Icon.svelte"
@@ -20,7 +20,7 @@
     let tabs = []
     let isOnDynamicTab = false
     const unsubSelection = InjectVar(SelectionStore).subscribe(data => {
-        const temp = QueryAPI.getEntityByID(data.array[0] || data.lockedEntity)
+        const temp = EntityQueryService.getEntityByID(data.array[0] || data.lockedEntity)
         if (temp === selectedEntity)
             return
         selectedEntity = temp

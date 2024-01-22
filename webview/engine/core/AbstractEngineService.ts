@@ -1,9 +1,6 @@
 import Engine from "@engine-core/Engine";
 import AbstractEngineResource from "@engine-core/AbstractEngineResource";
 
-/**
- * This class is managed by the Engine instance
- */
 export default class AbstractEngineService {
     protected engine: Engine
 
@@ -17,9 +14,4 @@ export default class AbstractEngineService {
 
     async initialize() {
     }
-
-    getEngine(): Engine {
-        return this.engine
-    }
-
 }

@@ -1,27 +1,16 @@
 import COMPONENTS from "../static/Components"
 import GUIService from "./GUIService"
-import PhysicsAPI from "./PhysicsAPI"
+import PhysicsWorld from "../core/PhysicsWorld"
 import Entity from "../instances/Entity"
-import ENTITY_TYPED_ATTRIBUTES from "../static/ENTITY_TYPED_ATTRIBUTES"
 import LightsService from "./LightsService"
 import DepthPrePassSystem from "../runtime/DepthPrePassSystem"
-import World from "../repositories/World"
-import MeshResourceMapper from "../repositories/MeshResourceMapper"
-import MaterialResourceMapper from "../repositories/MaterialResourceMapper"
-import QueryAPI from "./QueryAPI"
+import MeshRepository from "../repositories/MeshRepository"
+import MaterialRepository from "../repositories/MaterialRepository"
+import EntityQueryService from "./EntityQueryService"
 import ProjectionEngine from "@lib/ProjectionEngine";
 import AbstractEngineSystem from "@engine-core/AbstractEngineSystem";
 
 const COMPONENT_TRIGGER_UPDATE = [COMPONENTS.LIGHT, COMPONENTS.MESH]
-const excludedKeys = [
-    ...ENTITY_TYPED_ATTRIBUTES,
-    "components",
-    "parent",
-    "matrix",
-    "_props",
-    "isCollection",
-    "id"
-]
 export default class EntityAPI extends AbstractEngineSystem{
     static getNewEntityInstance(id?: string, isCollection?: boolean): Entity {
         return new Entity(id, isCollection)
@@ -80,7 +69,7 @@ export default class EntityAPI extends AbstractEngineSystem{
         entity.active = newValue
         let needsLightUpdate = entity.meshComponent !== undefined || entity.lightComponent !== undefined
         let needsVisibilityUpdate = entity.meshComponent !== undefined
-        const hierarchy = QueryAPI.getHierarchy(entity)
+        const hierarchy = EntityQueryService.getHierarchy(entity)
         hierarchy.forEach(child => {
             child.active = newValue
             needsVisibilityUpdate = needsVisibilityUpdate || child.meshComponent !== undefined
@@ -118,12 +107,12 @@ export default class EntityAPI extends AbstractEngineSystem{
             if (entity !== ProjectionEngine.Engine.getRootEntity())
                 hierarchy[entity.id] = entity
             if (searchHierarchy)
-                QueryAPI.getHierarchyToObject(entity, hierarchy)
+                EntityQueryService.getHierarchyToObject(entity, hierarchy)
         }
         const entities = Object.values(hierarchy)
         ProjectionEngine.Engine.getEntities().removeBlock(entities, entity => entity.id)
-        MeshResourceMapper.removeBlock(entities)
-        MaterialResourceMapper.removeBlock(entities)
+        MeshRepository.removeBlock(entities)
+        MaterialRepository.removeBlock(entities)
         ProjectionEngine.Engine.getWorld().removeBlock(entities)
 
         let didLightsChange
@@ -141,7 +130,7 @@ export default class EntityAPI extends AbstractEngineSystem{
                         scr.onDestruction()
                 }
             ProjectionEngine.Engine.getQueryMap().delete(entity.queryKey)
-            PhysicsAPI.removeRigidBody(entity)
+            PhysicsWorld.removeRigidBody(entity)
             GUIService.deleteUIEntity(entity)
             if (entity.lightComponent !== undefined || entity.meshComponent !== undefined)
                 didLightsChange = true

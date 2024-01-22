@@ -1,5 +1,5 @@
 import Framebuffer from "../../core/instances/Framebuffer";
-import GPUService from "@engine-core/services/GPUService";
+import GPU from "@engine-core/core/GPU";
 
 export default class StaticEditorFBO {
 	static gizmo?: Framebuffer
@@ -9,7 +9,7 @@ export default class StaticEditorFBO {
 		if (StaticEditorFBO.#initialized)
 			return
 		StaticEditorFBO.#initialized = true
-		const context = GPUService.context
+		const context = GPU.context
 		StaticEditorFBO.gizmo = (new Framebuffer())
 			.texture({
 				label: "GIZMO_ID",

@@ -1,10 +1,9 @@
-import GPUService from "../services/GPUService"
-import StaticMeshes from "../repositories/StaticMeshes"
-import StaticFBO from "../repositories/StaticFBO"
-import StaticShaders from "../repositories/StaticShaders"
+import GPU from "../core/GPU"
+import StaticMeshRepository from "../repositories/StaticMeshRepository"
+import FramebufferRepository from "../repositories/FramebufferRepository"
+import ShaderRepository from "../repositories/ShaderRepository"
 import MetricsController from "../services/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
-import GPUUtil from "../utils/GPUUtil";
 import AbstractEngineSystem from "@engine-core/AbstractEngineSystem";
 
 
@@ -17,21 +16,21 @@ export default class MotionBlurSystem extends AbstractEngineSystem{
 
 		if (!MotionBlurSystem.enabled)
 			return
-		StaticFBO.postProcessing1.startMapping()
-		StaticShaders.mb.bind()
-		const uniforms = StaticShaders.mbUniforms
+		FramebufferRepository.postProcessing1.startMapping()
+		ShaderRepository.mb.bind()
+		const uniforms = ShaderRepository.mbUniforms
 
-		GPUUtil.bind2DTextureForDrawing(uniforms.currentFrame, 0, StaticFBO.postProcessing2Sampler)
+		GPU.bind2DTextureForDrawing(uniforms.currentFrame, 0, FramebufferRepository.postProcessing2Sampler)
 
-		GPUUtil.bind2DTextureForDrawing(uniforms.gVelocity, 1, StaticFBO.sceneDepthVelocity)
+	 GPU.bind2DTextureForDrawing(uniforms.gVelocity, 1, FramebufferRepository.sceneDepthVelocity)
 
-		GPUService.context.uniform2fv(uniforms.bufferResolution, GPUService.bufferResolution)
+		GPU.context.uniform2fv(uniforms.bufferResolution, GPU.bufferResolution)
 
-		GPUService.context.uniform1f(uniforms.velocityScale, MotionBlurSystem.velocityScale)
-		GPUService.context.uniform1i(uniforms.maxSamples, MotionBlurSystem.maxSamples)
+		GPU.context.uniform1f(uniforms.velocityScale, MotionBlurSystem.velocityScale)
+		GPU.context.uniform1i(uniforms.maxSamples, MotionBlurSystem.maxSamples)
 
-		StaticMeshes.drawQuad()
-		StaticFBO.postProcessing1.stopMapping()
+		StaticMeshRepository.drawQuad()
+		FramebufferRepository.postProcessing1.stopMapping()
 		MetricsController.currentState = METRICS_FLAGS.MOTION_BLUR
 	}
 }

@@ -7,7 +7,7 @@
     import Metrics from "../../views/metrics/MetricsView.svelte"
     import Console from "../../views/console/ConsoleView.svelte"
     import {ViewContextPath, ViewPlacement, ViewType} from "./ViewDefinitions";
-    import {onMount, setContext} from "svelte";
+    import {setContext} from "svelte";
     import SettingsStore from "@lib/stores/SettingsStore";
     import {InjectVar} from "@lib/Injection";
     import FileSystemView from "../../views/fs/FileSystemView.svelte";

@@ -1,4 +1,3 @@
-import Engine from "@engine-core/Engine"
 import Entity from "@engine-core/instances/Entity"
 import HierarchyToRenderElement from "../window/editor/views/hierarchy/template/ToRenderElement"
 import SelectionStore from "@lib/stores/SelectionStore";

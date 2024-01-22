@@ -1,13 +1,9 @@
 import COMPONENTS from "@engine-core/static/Components"
 import {vec3, vec4} from "gl-matrix"
-
-
-import CameraRepository from "@engine-core/repositories/CameraRepository"
 import EntityAPI from "@engine-core/services/EntityAPI"
 import MeshComponent from "@engine-core/instances/components/MeshComponent"
 import LightComponent from "@engine-core/instances/components/LightComponent"
 import EngineStateService from "./EngineStateService"
-import Engine from "@engine-core/Engine"
 import LocalizationEN from "@enums/LocalizationEN"
 import ProjectionEngine from "@lib/ProjectionEngine";
 

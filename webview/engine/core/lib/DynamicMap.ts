@@ -71,6 +71,7 @@ export default class DynamicMap<T> extends Serializable {
     has(key: string) {
         return Object.hasOwn(this.map, key)
     }
+
 }
 
 RepositoryService.serializable(DynamicMap)

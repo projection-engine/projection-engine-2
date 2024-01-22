@@ -1,13 +1,12 @@
-import GPUService from "@engine-core/services/GPUService"
+import GPU from "@engine-core/core/GPU"
 import COLLISION_TYPES from "../../core/static/COLLISION_TYPES"
 import {mat4, vec3} from "gl-matrix"
-import StaticMeshes from "@engine-core/repositories/StaticMeshes"
+import StaticMeshRepository from "@engine-core/repositories/StaticMeshRepository"
 import StaticEditorShaders from "../utils/StaticEditorShaders"
-import StaticFBO from "@engine-core/repositories/StaticFBO"
+import FramebufferRepository from "@engine-core/repositories/FramebufferRepository"
 import StaticEditorMeshes from "../utils/StaticEditorMeshes"
 import CameraIconRenderer from "../icons/CameraIconRenderer"
 import EngineToolsState from "../EngineToolsState"
-import GPUUtil from "../../core/utils/GPUUtil";
 import ProjectionEngine from "@lib/ProjectionEngine";
 import Components from "@engine-core/static/Components";
 
@@ -20,10 +19,10 @@ export default class WireframeRenderer {
 		const entities = ProjectionEngine.Engine.getEntities().array
 		const size = entities.length
 		const uniforms = StaticEditorShaders.wireframeUniforms
-		const context = GPUService.context
+		const context = GPU.context
 
 		StaticEditorShaders.wireframe.bind()
-		GPUUtil.bind2DTextureForDrawing(uniforms.depth, 0,StaticFBO.sceneDepthVelocity)
+		GPU.bind2DTextureForDrawing(uniforms.depth, 0,FramebufferRepository.sceneDepthVelocity)
 
 		const cameras = ProjectionEngine.Engine.getByComponent(Components.CAMERA)
 		const camerasSize = cameras.length
@@ -63,7 +62,7 @@ export default class WireframeRenderer {
 				context.uniformMatrix4fv(uniforms.transformMatrix, false, entity.__collisionTransformationMatrix)
 				switch (collision.collisionType) {
 				case COLLISION_TYPES.SPHERE:
-					StaticMeshes.sphere.draw()
+					StaticMeshRepository.sphere.draw()
 					break
 				case COLLISION_TYPES.BOX:
 					StaticEditorMeshes.clipSpaceCamera.drawLines()

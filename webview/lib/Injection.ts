@@ -1,6 +1,5 @@
 import IInjectable from "@lib/IInjectable";
 import RepositoryService from "@engine-core/services/serialization/RepositoryService";
-import Serializable from "@engine-core/services/serialization/Serializable";
 
 function Inject(Clazz: any) {
     return (target: any, propertyKey: string) => {

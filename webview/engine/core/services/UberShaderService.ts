@@ -1,4 +1,4 @@
-import GPUService from "../services/GPUService"
+import GPU from "../core/GPU"
 import DEBUG_FRAG from "../shaders/uber-shader/UBER-MATERIAL-DEBUG.frag"
 import BASIS_FRAG from "../shaders/uber-shader/UBER-MATERIAL-BASIS.frag"
 import VERTEX_SHADER from "../shaders/uber-shader/UBER-MATERIAL.vert"
@@ -6,7 +6,7 @@ import Shader from "../instances/Shader"
 import ProjectionEngine from "@lib/ProjectionEngine";
 import ENVIRONMENT from "@engine-core/static/ENVIRONMENT";
 
-export default class UberShader {
+export default class UberShaderService {
 
     static get MAX_LIGHTS() {
         return 310
@@ -14,14 +14,14 @@ export default class UberShader {
 
     static #uberSignature = {}
     static get uberSignature() {
-        return UberShader.#uberSignature
+        return UberShaderService.#uberSignature
     }
 
     static uber?: Shader
     static uberUniforms?: { [key: string]: WebGLUniformLocation }
 
     static compile(forceCleanShader?: boolean) {
-        UberShader.uber = undefined
+        UberShaderService.uber = undefined
         const methodsToLoad = [
             `
             if(isDecalPass){ 
@@ -48,7 +48,7 @@ export default class UberShader {
             `
         ], uniformsToLoad = []
         if (!forceCleanShader)
-            GPUService.materials.forEach(mat => {
+            GPU.materials.forEach(mat => {
                 const declaration = [`case ${mat.bindID}: {`, mat.functionDeclaration, "break;", "}", ""]
                 methodsToLoad.push(declaration.join("\n"))
                 uniformsToLoad.push(mat.uniformsDeclaration)
@@ -67,17 +67,17 @@ export default class UberShader {
         const shader = new Shader(VERTEX_SHADER, fragment)
         if (shader.messages.hasError) {
 
-            if (!UberShader.uber && !forceCleanShader)
-                UberShader.compile(true)
+            if (!UberShaderService.uber && !forceCleanShader)
+                UberShaderService.compile(true)
             console.error("Invalid shader", shader.messages)
 
             return
         }
-        if (UberShader.uber)
-            GPUService.context.deleteProgram(UberShader.uber.program)
+        if (UberShaderService.uber)
+            GPU.context.deleteProgram(UberShaderService.uber.program)
 
-        UberShader.uber = shader
-        UberShader.uberUniforms = shader.uniformMap
+        UberShaderService.uber = shader
+        UberShaderService.uberUniforms = shader.uniformMap
 
     }
 }

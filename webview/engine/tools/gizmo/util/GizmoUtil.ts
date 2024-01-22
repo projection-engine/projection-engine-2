@@ -1,16 +1,15 @@
 import {mat4, quat, vec3} from "gl-matrix"
 import GizmoSystem from "../GizmoSystem"
 import Entity from "../../../core/instances/Entity"
-import PickingAPI from "@engine-core/services/PickingAPI"
+import DepthPickingService from "@engine-core/services/DepthPickingService"
 import EntityAPI from "@engine-core/services/EntityAPI"
 import StaticEditorShaders from "../../utils/StaticEditorShaders"
-import GPUService from "@engine-core/services/GPUService"
+import GPU from "@engine-core/core/GPU"
 import GizmoState from "./GizmoState"
 import Axis from "../../static/AXIS"
 import ConversionAPI from "@engine-core/services/ConversionAPI"
 import Mesh from "../../../core/instances/Mesh";
 import StaticEditorFBO from "../../utils/StaticEditorFBO";
-import GPUUtil from "../../../core/utils/GPUUtil";
 import EngineToolsState from "../../EngineToolsState";
 import ProjectionEngine from "@lib/ProjectionEngine";
 
@@ -57,7 +56,7 @@ export default class GizmoUtil {
     static getGizmoEntity(index: number, rotation: vec3, scaling: vec3) {
         const TO_DEG = 57.29
         const entity = EntityAPI.getNewEntityInstance()
-        const pickID = PickingAPI.getPickerId(index)
+        const pickID = DepthPickingService.getPickerId(index)
 
         entity.pickID[0] = pickID[0]
         entity.pickID[1] = pickID[1]
@@ -73,14 +72,14 @@ export default class GizmoUtil {
     static drawGizmo(mesh: Mesh, transformMatrix: mat4, axis: Axis) {
         StaticEditorShaders.gizmo.bind()
         const uniforms = StaticEditorShaders.gizmoUniforms
-        GPUUtil.bind2DTextureForDrawing(uniforms.gizmoIDS, 0, StaticEditorFBO.gizmo.colors[0])
-        GPUService.context.uniform2fv(uniforms.mouseCoordinates, EngineToolsState.mouseCoordinates)
+        GPU.bind2DTextureForDrawing(uniforms.gizmoIDS, 0, StaticEditorFBO.gizmo.colors[0])
+        GPU.context.uniform2fv(uniforms.mouseCoordinates, EngineToolsState.mouseCoordinates)
 
-        GPUService.context.uniformMatrix4fv(uniforms.transformMatrix, false, transformMatrix)
-        GPUService.context.uniform3fv(uniforms.translation, GizmoState.mainEntity.__pivotOffset)
-        GPUService.context.uniform1i(uniforms.axis, axis)
-        GPUService.context.uniform1i(uniforms.selectedAxis, GizmoState.clickedAxis)
-        GPUService.context.uniform1i(uniforms.cameraIsOrthographic, ProjectionEngine.Engine.getCamera().isOrthographic() ? 1 : 0)
+        GPU.context.uniformMatrix4fv(uniforms.transformMatrix, false, transformMatrix)
+        GPU.context.uniform3fv(uniforms.translation, GizmoState.mainEntity.__pivotOffset)
+        GPU.context.uniform1i(uniforms.axis, axis)
+        GPU.context.uniform1i(uniforms.selectedAxis, GizmoState.clickedAxis)
+        GPU.context.uniform1i(uniforms.cameraIsOrthographic, ProjectionEngine.Engine.getCamera().isOrthographic() ? 1 : 0)
         mesh.simplifiedDraw()
     }
 

@@ -6,8 +6,6 @@ enum DataTypes {
     STRING = "4",
     ANY = "13",
     KEY = "16",
-
-
     FLOAT =  "float",
     INT =  "int",
 

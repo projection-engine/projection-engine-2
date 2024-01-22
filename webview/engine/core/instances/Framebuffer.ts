@@ -1,4 +1,4 @@
-import GPUService from "../services/GPUService"
+import GPU from "../core/GPU"
 import Texture from "./Texture"
 
 interface FBOTexture {
@@ -28,21 +28,21 @@ export default class Framebuffer {
 	readonly colorsMetadata: FBOTexture[] = []
 	resolution = new Float32Array(2)
 
-	constructor(width = GPUService.internalResolution.w, height = GPUService.internalResolution.h) {
+	constructor(width = GPU.internalResolution.w, height = GPU.internalResolution.h) {
 
 		this.width = width
 		this.height = height
 		this.resolution[0] = width
 		this.resolution[1] = height
-		this.FBO = GPUService.context.createFramebuffer()
+		this.FBO = GPU.context.createFramebuffer()
 
 		this.fallback = {
 			w: this.width,
 			h: this.height,
 			attachment: 0,
-			precision: GPUService.context.RGBA16F,
-			format: GPUService.context.RGBA,
-			type: GPUService.context.FLOAT,
+			precision: GPU.context.RGBA16F,
+			format: GPU.context.RGBA,
+			type: GPU.context.FLOAT,
 			linear: false,
 			repeat: false
 		}
@@ -50,21 +50,21 @@ export default class Framebuffer {
 
 
 	startMapping(noClearing?: boolean) {
-		if (GPUService.activeFramebuffer === this)
+		if (GPU.activeFramebuffer === this)
 			return
 		this.use()
-		GPUService.context.viewport(0, 0, this.width, this.height)
+		GPU.context.viewport(0, 0, this.width, this.height)
 		if (!noClearing)
-			GPUService.context.clear(GPUService.context.COLOR_BUFFER_BIT | GPUService.context.DEPTH_BUFFER_BIT)
+			GPU.context.clear(GPU.context.COLOR_BUFFER_BIT | GPU.context.DEPTH_BUFFER_BIT)
 	}
 
 
 	stopMapping() {
-		if (GPUService.activeFramebuffer !== this)
+		if (GPU.activeFramebuffer !== this)
 			return
 
-		const context = GPUService.context
-		GPUService.activeFramebuffer = undefined
+		const context = GPU.context
+		GPU.activeFramebuffer = undefined
 		context.bindFramebuffer(context.FRAMEBUFFER, null)
 	}
 
@@ -73,22 +73,22 @@ export default class Framebuffer {
 		this.depthSampler = Texture.createTexture(
 			this.width,
 			this.height,
-			GPUService.context.DEPTH_COMPONENT24,
+			GPU.context.DEPTH_COMPONENT24,
 			0,
-			GPUService.context.DEPTH_COMPONENT,
-			GPUService.context.UNSIGNED_INT,
+			GPU.context.DEPTH_COMPONENT,
+			GPU.context.UNSIGNED_INT,
 			null,
-			GPUService.context.NEAREST,
-			GPUService.context.NEAREST,
-			GPUService.context.CLAMP_TO_EDGE,
-			GPUService.context.CLAMP_TO_EDGE,
+			GPU.context.NEAREST,
+			GPU.context.NEAREST,
+			GPU.context.CLAMP_TO_EDGE,
+			GPU.context.CLAMP_TO_EDGE,
 			true
 		)
 
-		GPUService.context.framebufferTexture2D(
-			GPUService.context.FRAMEBUFFER,
-			GPUService.context.DEPTH_ATTACHMENT,
-			GPUService.context.TEXTURE_2D,
+		GPU.context.framebufferTexture2D(
+			GPU.context.FRAMEBUFFER,
+			GPU.context.DEPTH_ATTACHMENT,
+			GPU.context.TEXTURE_2D,
 			this.depthSampler,
 			0
 		)
@@ -97,10 +97,10 @@ export default class Framebuffer {
 
 	depthTest(): Framebuffer {
 		this.use()
-		this.RBO = GPUService.context.createRenderbuffer()
-		GPUService.context.bindRenderbuffer(GPUService.context.RENDERBUFFER, this.RBO)
-		GPUService.context.renderbufferStorage(GPUService.context.RENDERBUFFER, GPUService.context.DEPTH_COMPONENT24, this.width, this.height)
-		GPUService.context.framebufferRenderbuffer(GPUService.context.FRAMEBUFFER, GPUService.context.DEPTH_ATTACHMENT, GPUService.context.RENDERBUFFER, this.RBO)
+		this.RBO = GPU.context.createRenderbuffer()
+		GPU.context.bindRenderbuffer(GPU.context.RENDERBUFFER, this.RBO)
+		GPU.context.renderbufferStorage(GPU.context.RENDERBUFFER, GPU.context.DEPTH_COMPONENT24, this.width, this.height)
+		GPU.context.framebufferRenderbuffer(GPU.context.FRAMEBUFFER, GPU.context.DEPTH_ATTACHMENT, GPU.context.RENDERBUFFER, this.RBO)
 
 		return this
 	}
@@ -118,15 +118,15 @@ export default class Framebuffer {
 
 		this.colorsMetadata.push({...this.fallback, ...obj})
 		this.use()
-		const texture = GPUService.context.createTexture()
-		GPUService.context.bindTexture(GPUService.context.TEXTURE_2D, texture)
-		GPUService.context.texParameteri(GPUService.context.TEXTURE_2D, GPUService.context.TEXTURE_MAG_FILTER, linear ? GPUService.context.LINEAR : GPUService.context.NEAREST)
-		GPUService.context.texParameteri(GPUService.context.TEXTURE_2D, GPUService.context.TEXTURE_MIN_FILTER, linear ? GPUService.context.LINEAR : GPUService.context.NEAREST)
-		GPUService.context.texParameteri(GPUService.context.TEXTURE_2D, GPUService.context.TEXTURE_WRAP_S, repeat ? GPUService.context.REPEAT : GPUService.context.CLAMP_TO_EDGE)
-		GPUService.context.texParameteri(GPUService.context.TEXTURE_2D, GPUService.context.TEXTURE_WRAP_T, repeat ? GPUService.context.REPEAT : GPUService.context.CLAMP_TO_EDGE)
+		const texture = GPU.context.createTexture()
+		GPU.context.bindTexture(GPU.context.TEXTURE_2D, texture)
+		GPU.context.texParameteri(GPU.context.TEXTURE_2D, GPU.context.TEXTURE_MAG_FILTER, linear ? GPU.context.LINEAR : GPU.context.NEAREST)
+		GPU.context.texParameteri(GPU.context.TEXTURE_2D, GPU.context.TEXTURE_MIN_FILTER, linear ? GPU.context.LINEAR : GPU.context.NEAREST)
+		GPU.context.texParameteri(GPU.context.TEXTURE_2D, GPU.context.TEXTURE_WRAP_S, repeat ? GPU.context.REPEAT : GPU.context.CLAMP_TO_EDGE)
+		GPU.context.texParameteri(GPU.context.TEXTURE_2D, GPU.context.TEXTURE_WRAP_T, repeat ? GPU.context.REPEAT : GPU.context.CLAMP_TO_EDGE)
 
-		GPUService.context.texImage2D(
-			GPUService.context.TEXTURE_2D,
+		GPU.context.texImage2D(
+			GPU.context.TEXTURE_2D,
 			0,
 			precision,
 			w,
@@ -135,31 +135,31 @@ export default class Framebuffer {
 			format,
 			type,
 			null)
-		GPUService.context.framebufferTexture2D(GPUService.context.FRAMEBUFFER, GPUService.context.COLOR_ATTACHMENT0 + attachment, GPUService.context.TEXTURE_2D, texture, 0)
+		GPU.context.framebufferTexture2D(GPU.context.FRAMEBUFFER, GPU.context.COLOR_ATTACHMENT0 + attachment, GPU.context.TEXTURE_2D, texture, 0)
 
 		this.colors.push(texture)
-		this.attachments[attachment] = GPUService.context.COLOR_ATTACHMENT0 + attachment
-		GPUService.context.drawBuffers(this.attachments)
+		this.attachments[attachment] = GPU.context.COLOR_ATTACHMENT0 + attachment
+		GPU.context.drawBuffers(this.attachments)
 
 		return this
 	}
 
 	use() {
-		if (GPUService.activeFramebuffer === this)
+		if (GPU.activeFramebuffer === this)
 			return
-		GPUService.context.bindFramebuffer(GPUService.context.FRAMEBUFFER, this.FBO)
-		GPUService.activeFramebuffer = this
+		GPU.context.bindFramebuffer(GPU.context.FRAMEBUFFER, this.FBO)
+		GPU.activeFramebuffer = this
 	}
 
 	clear() {
 		this.use()
-		GPUService.context.clear(GPUService.context.COLOR_BUFFER_BIT | GPUService.context.DEPTH_BUFFER_BIT)
-		GPUService.context.bindFramebuffer(GPUService.context.FRAMEBUFFER, null)
+		GPU.context.clear(GPU.context.COLOR_BUFFER_BIT | GPU.context.DEPTH_BUFFER_BIT)
+		GPU.context.bindFramebuffer(GPU.context.FRAMEBUFFER, null)
 	}
 
 	stop() {
-		GPUService.activeFramebuffer = undefined
-		GPUService.context.bindFramebuffer(GPUService.context.FRAMEBUFFER, null)
+		GPU.activeFramebuffer = undefined
+		GPU.context.bindFramebuffer(GPU.context.FRAMEBUFFER, null)
 	}
 
 	static toImage(fbo, w = 300, h = 300): string {
@@ -167,9 +167,9 @@ export default class Framebuffer {
 		canvas.width = w
 		canvas.height = h
 		const context = canvas.getContext("2d")
-		GPUService.context.bindFramebuffer(GPUService.context.FRAMEBUFFER, fbo)
+		GPU.context.bindFramebuffer(GPU.context.FRAMEBUFFER, fbo)
 		const data = new Float32Array(w * h * 4)
-		GPUService.context.readPixels(0, 0, w, h, GPUService.context.RGBA, GPUService.context.FLOAT, data)
+		GPU.context.readPixels(0, 0, w, h, GPU.context.RGBA, GPU.context.FLOAT, data)
 		for (let i = 0; i < data.length; i += 4) {
 			data[i] *= 255
 			data[i + 1] *= 255
@@ -180,7 +180,7 @@ export default class Framebuffer {
 		const imageData = context.createImageData(w, h)
 		imageData.data.set(data)
 		context.putImageData(imageData, 0, 0)
-		GPUService.context.bindFramebuffer(GPUService.context.FRAMEBUFFER, null)
+		GPU.context.bindFramebuffer(GPU.context.FRAMEBUFFER, null)
 		return canvas.toDataURL()
 	}
 }

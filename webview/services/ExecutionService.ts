@@ -2,8 +2,7 @@ import ENVIRONMENT from "@engine-core/static/ENVIRONMENT"
 import CameraTracker from "@engine-tools/utils/CameraTracker"
 import GUIService from "@engine-core/services/GUIService"
 import Engine from "@engine-core/Engine"
-import ScriptsAPI from "@engine-core/services/ScriptsAPI"
-import World from "@engine-core/repositories/World"
+import Scripting from "@engine-core/core/Scripting"
 import LocalizationEN from "@enums/LocalizationEN"
 import {Inject, Injectable, LazyInject} from "@lib/Injection";
 import ProjectService from "@services/ProjectService";
@@ -53,7 +52,7 @@ export default class ExecutionService extends IInjectable{
         ExecutionService.engine.setEnvironment(ENVIRONMENT.DEV)
 
         GUIService.destroyUI()
-        await ScriptsAPI.updateAllScripts()
+        await Scripting.updateAllScripts()
 
         ExecutionService.engine.getCamera().trackingEntity = undefined
         CameraTracker.startTracking()

@@ -1,10 +1,10 @@
-import MeshResourceMapper from "../repositories/MeshResourceMapper"
+import MeshRepository from "../repositories/MeshRepository"
 import Entity from "@engine-core/instances/Entity";
 import Mesh from "@engine-core/instances/Mesh";
 
 export default function loopMeshes(callback:GenericVoidFunctionWith2P<Entity, Mesh>){
 
-	const toRender = MeshResourceMapper.meshesArray
+	const toRender = MeshRepository.meshesArray
 	const size = toRender.length
 	if (size === 0)
 		return

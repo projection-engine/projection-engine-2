@@ -2,7 +2,7 @@ import {mat4, vec3} from "gl-matrix"
 import CUBE_MAP_VIEWS from "../static/CUBE_MAP_VIEWS"
 import ShadowProbe from "../instances/ShadowProbe"
 import LightComponent from "../instances/components/LightComponent"
-import StaticShaders from "../repositories/StaticShaders"
+import ShaderRepository from "../repositories/ShaderRepository"
 import MATERIAL_RENDERING_TYPES from "../static/MATERIAL_RENDERING_TYPES"
 import MetricsController from "../services/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
@@ -67,7 +67,7 @@ export default class PointShadowsSystem extends AbstractEngineSystem {
         const distanceFromLight = vec3.length(cacheVec3)
         if (distanceFromLight > currentEntity.lightComponent.cutoff)
             return
-        StaticShaders.omniDirectShadows.bindForUse({
+        ShaderRepository.omniDirectShadows.bindForUse({
             farPlane: currentEntity.lightComponent.zFar,
             viewMatrix: cacheViewMatrix,
             transformMatrix: entity.matrix,

@@ -1,6 +1,6 @@
 import {glMatrix, quat, vec3} from "gl-matrix"
 import AXIS from "../../static/AXIS"
-import GPUService from "@engine-core/services/GPUService"
+import GPU from "@engine-core/core/GPU"
 import EngineTools from "../../EngineTools"
 import StaticEditorMeshes from "../../utils/StaticEditorMeshes"
 import StaticEditorShaders from "../../utils/StaticEditorShaders"
@@ -10,7 +10,6 @@ import Movable from "../../../core/instances/components/Movable"
 import GizmoState from "../util/GizmoState"
 import GizmoSystem from "../GizmoSystem"
 import AbstractXYZGizmo from "./AbstractXYZGizmo";
-import GPUUtil from "../../../core/utils/GPUUtil";
 import StaticEditorFBO from "../../utils/StaticEditorFBO";
 import EngineToolsState from "../../EngineToolsState";
 import ProjectionEngine from "@lib/ProjectionEngine";
@@ -60,14 +59,14 @@ export default class RotationGizmo extends AbstractXYZGizmo {
         if (GizmoState.clickedAxis === axis || GizmoState.clickedAxis === AXIS.NONE) {
             StaticEditorShaders.rotation.bind()
             const uniforms = StaticEditorShaders.rotationUniforms
-            const context = GPUService.context
+            const context = GPU.context
 
             context.uniformMatrix4fv(uniforms.transformMatrix, false, transformMatrix)
             context.uniform3fv(uniforms.translation, GizmoState.mainEntity.__pivotOffset)
-            context.uniform1i(uniforms.cameraIsOrthographic, ProjectionEngine.Engine.getCamera().notificationBuffers[2])
+            context.uniform1i(uniforms.cameraIsOrthographic, ProjectionEngine.Engine.getCamera().isOrthographic() ? 1 : 0)
 
-            GPUUtil.bind2DTextureForDrawing(uniforms.gizmoIDS, 0, StaticEditorFBO.gizmo.colors[0])
-            GPUService.context.uniform2fv(uniforms.mouseCoordinates, EngineToolsState.mouseCoordinates)
+            GPU.bind2DTextureForDrawing(uniforms.gizmoIDS, 0, StaticEditorFBO.gizmo.colors[0])
+            GPU.context.uniform2fv(uniforms.mouseCoordinates, EngineToolsState.mouseCoordinates)
 
             uniformCache[0] = axis
             uniformCache[1] = GizmoState.clickedAxis

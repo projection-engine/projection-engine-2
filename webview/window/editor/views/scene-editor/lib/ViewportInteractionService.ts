@@ -1,5 +1,5 @@
 import Engine from "@engine-core/Engine"
-import GPUService from "@engine-core/services/GPUService"
+import GPU from "@engine-core/core/GPU"
 import ViewportUtil from "../../../util/ViewportUtil"
 import GizmoState from "../../../../../engine/tools/gizmo/util/GizmoState"
 import GizmoMouseUtil from "../../../../../engine/tools/gizmo/util/GizmoMouseUtil"
@@ -13,13 +13,13 @@ export default class ViewportInteractionService {
     static #LEFT_BUTTON = 0
 
     static initialize() {
-        GPUService.canvas.addEventListener("mousedown", this.#onMouseDown.bind(this))
+        GPU.canvas.addEventListener("mousedown", this.#onMouseDown.bind(this))
         document.addEventListener("mouseup", this.#onMouseUp.bind(this))
         document.addEventListener("mousemove", EngineTools.onMouseMove)
     }
 
     static onDestroy() {
-        GPUService.canvas.removeEventListener("mousedown", this.#onMouseDown.bind(this))
+        GPU.canvas.removeEventListener("mousedown", this.#onMouseDown.bind(this))
         document.removeEventListener("mouseup", this.#onMouseUp.bind(this))
         document.removeEventListener("mousemove", EngineTools.onMouseMove)
     }

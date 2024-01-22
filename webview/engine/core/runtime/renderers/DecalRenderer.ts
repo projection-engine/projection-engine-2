@@ -1,11 +1,11 @@
-import GPUService from "../../services/GPUService"
+import GPU from "../../core/GPU"
 import MetricsController from "../../services/MetricsController"
 import METRICS_FLAGS from "../../static/METRICS_FLAGS"
 import SceneRenderer from "./SceneRenderer"
 
 export default class DecalRenderer{
 	static execute() {
-		const context = GPUService.context
+		const context = GPU.context
 
 		context.disable(context.DEPTH_TEST)
 		context.disable(context.CULL_FACE)
