@@ -1,7 +1,7 @@
 import Component from "./Component"
 import LIGHT_PROPS from "../../static/component-props/LIGHT_PROPS"
 import LIGHT_TYPES from "../../static/LIGHT_TYPES"
-import LightsService from "../../services/LightsService"
+import WorldLights from "../../core/WorldLights"
 import {mat4} from "gl-matrix"
 import EntityAPI from "../../services/EntityAPI"
 import COMPONENTS from "../../static/Components"
@@ -31,7 +31,7 @@ export default class LightComponent extends Component {
 		const isDifferent = data !== this._type
 		this._type = data
 		if (isDifferent && EntityAPI.isRegistered(this.entity))
-			LightsService.packageLights(false, true)
+			WorldLights.packageLights(false, true)
 	}
 
 	hasSSS = false

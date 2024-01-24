@@ -11,6 +11,7 @@
     import SettingsStore from "@lib/stores/SettingsStore";
     import {InjectVar} from "@lib/Injection";
     import FileSystemView from "../../views/fs/FileSystemView.svelte";
+    import WorldOutlinerView from "../../views/world/WorldOutlineView.svelte";
 
     export let styles: string = ""
     export let index: number
@@ -25,7 +26,7 @@
             case ViewType.SHADER_EDITOR:
                 return ShaderEditor
             case ViewType.HIERARCHY:
-                return Hierarchy
+                return WorldOutlinerView
             case ViewType.INSPECTOR:
                 return Inspector
             case ViewType.FILES:

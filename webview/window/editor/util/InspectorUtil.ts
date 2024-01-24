@@ -4,7 +4,7 @@ import EngineResourceLoaderService from "@services/EngineResourceLoaderService"
 import FileSystemAPI from "@engine-core/services/FileSystemAPI"
 import SelectionStore from "@lib/stores/SelectionStore"
 import LightComponent from "@engine-core/instances/components/LightComponent"
-import LightsService from "@engine-core/services/LightsService"
+import WorldLights from "@engine-core/core/WorldLights"
 import CameraComponent from "@engine-core/instances/components/CameraComponent"
 import EditorUtil from "./EditorUtil"
 import type Entity from "@engine-core/instances/Entity";
@@ -76,7 +76,7 @@ export default class InspectorUtil extends IInjectable {
     static updateEntityComponent(entity: Entity, key: string, value: any, component: typeof Component) {
         if (component instanceof LightComponent) {
             entity.needsLightUpdate = true
-            LightsService.packageLights(true)
+            WorldLights.packageLights(true)
         }
         if (component instanceof CameraComponent) {
             entity.__cameraNeedsUpdate = true

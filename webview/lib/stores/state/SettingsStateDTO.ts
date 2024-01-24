@@ -8,10 +8,11 @@ import ViewTabDTO from "../../../window/editor/components/view/ViewTabDTO";
 import LocalizationEN from "@enums/LocalizationEN";
 import {ViewType} from "../../../window/editor/components/view/ViewDefinitions";
 import RepositoryService from "@engine-core/services/serialization/RepositoryService";
+import {v4} from 'uuid';
 
 export default class SettingsStateDTO extends IStateDTO {
     filesInUse: string[] = []
-
+    projectID  = v4()
     spawnOnOrigin = false
     maxDistanceIcon = 50
     cameraGizmoSize = 25

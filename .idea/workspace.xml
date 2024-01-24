@@ -20,27 +20,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-52] Engine refactoring&#10;- Fixing camera">
+      <change afterPath="$PROJECT_DIR$/webview/engine/core/core/WorldLights.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/AbstractEngineService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/AbstractEngineService.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/engine/core/Engine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/Engine.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/core/Camera.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/core/Camera.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/core/GPU.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/core/GPU.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/core/Scripting.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/core/Scripting.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/core/World.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/core/World.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/engine-d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/engine-d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/Entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/Entity.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/lib/DynamicMap.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/DynamicMap.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/runtime/ScriptingSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/ScriptingSystem.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/runtime/TransformationPass.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/TransformationPass.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/AtmosphereComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/AtmosphereComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/LightComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/LightComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/runtime/StartupSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/StartupSystem.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/engine/core/services/EntityAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/services/EntityAPI.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/services/EntityQueryService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/services/EntityQueryService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/services/GUIService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/services/GUIService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/services/SystemService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/services/SystemService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/services/ExecutionService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/ExecutionService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/EditorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/EditorUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/services/LightsService.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/stores/state/SettingsStateDTO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/state/SettingsStateDTO.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/View.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/View.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/util/InspectorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/InspectorUtil.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/AddComponent.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/AddComponent.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/EntityInformation.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/EntityInformation.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,6 +50,9 @@
         <option value="Files" />
         <option value="FileInput" />
         <option value="Option" />
+        <option value="WorldOutlinerView" />
+        <option value="WorldEntity" />
+        <option value="WorldOptions" />
         <option value="TypeScript File" />
       </list>
     </option>
@@ -66,7 +60,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="60-serializable-integration-with-stores" />
+        <entry key="$PROJECT_DIR$" value="52-engine-refactoring-repositories-and-services" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -145,7 +139,7 @@
     &quot;Shell Script.copy-files.executor&quot;: &quot;Run&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;52-engine-refactoring-repositories-and-services&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;63-ui-refactoring-hierarchy&quot;,
     &quot;js.last.introduce.type&quot;: &quot;CONST&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/russi/WebstormProjects/projection-engine-2/test/core&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -356,6 +350,8 @@
       <workItem from="1705858855353" duration="9588000" />
       <workItem from="1705962296510" duration="4326000" />
       <workItem from="1706054398272" duration="2639000" />
+      <workItem from="1706134463386" duration="801000" />
+      <workItem from="1706135278039" duration="3169000" />
     </task>
     <task id="LOCAL-00010" summary="[STD-3] Project window&#10;- Removing old ui&#10;- Creating libs for integration with c++ backend&#10;- Starting project window">
       <option name="closed" value="true" />
