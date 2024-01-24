@@ -21,7 +21,7 @@ export default class TransformationPass extends AbstractEngineSystem {
     static cache = 0
 
     execute() {
-        const entities = this.engine.getWorld().entities.array
+        const entities = this.engine.getWorld()._entities.array
         const size = entities.length
         const hasToUpdate = TransformationPass.cache === 4
         for (let i = 0; i < size; i++) {

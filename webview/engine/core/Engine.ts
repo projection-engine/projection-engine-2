@@ -17,24 +17,36 @@ import SystemService from "@engine-core/services/SystemService";
 import Serializable from "@engine-core/services/serialization/Serializable";
 import RepositoryService from "@engine-core/services/serialization/RepositoryService";
 import Components from "@engine-core/static/Components";
+import Scripting from "@engine-core/core/Scripting";
+import PhysicsWorld from "@engine-core/core/PhysicsWorld";
 
 export default class Engine extends Serializable {
+    _physicsWorld: PhysicsWorld
     _world: World
     _camera: Camera
+    _scripting: Scripting;
     _gpu: GPU
 
     // TODO - FIND A BETTER PLACE FOR THESE VARIABLES
     elapsed = 0
-    currentTimeStamp = 0
 
+    currentTimeStamp = 0
     UILayouts = new Map()
     isDev = true
     environment: number = ENVIRONMENT.DEV
-    #singletons = new DynamicMap<AbstractEngineService>()
 
-    rootEntity = new Entity()
+    #singletons = new DynamicMap<AbstractEngineService>()
     #canvas: HTMLCanvasElement
     mainResolution: { w: number, h: number }
+
+    constructor() {
+        super();
+
+        this._world = new World(this)
+        this._scripting = new Scripting(this)
+        this._camera = new Camera(this)
+        this._gpu = new GPU(this)
+    }
 
     async initialize(canvas: HTMLCanvasElement, mainResolution: {
         w: number,
@@ -42,19 +54,13 @@ export default class Engine extends Serializable {
     }, readAsset: Function) {
         this.#canvas = canvas
         this.mainResolution = mainResolution
-
-        this._world = new World(this)
-        this._camera = new Camera(this)
-        this._gpu = new GPU(this)
-
+        this._gpu.initialize()
         await this.createSingletons()
-
-        this.getWorld().addEntity(this.rootEntity)
         this.start()
     }
 
     getByComponent(component: Components): Entity[] {
-        return this._world.getByComponent(component)
+        return this._world.getEntitiesByComponent(component)
     }
 
     private async createSingletons() {
@@ -83,8 +89,8 @@ export default class Engine extends Serializable {
         return await (this.getSingleton(SystemService) as SystemService).addSystem(System)
     }
 
-    async startSimulation() {
-        await (this.getSingleton(SystemService) as SystemService).startSimulation()
+    startSimulation() {
+        (this.getSingleton(SystemService) as SystemService).startSimulation()
     }
 
     stop() {
@@ -109,7 +115,7 @@ export default class Engine extends Serializable {
     }
 
     getRootEntity(): Entity {
-        return this.rootEntity
+        return this._world.getRootEntity()
     }
 
     getGPU(): GPU {
@@ -118,6 +124,9 @@ export default class Engine extends Serializable {
 
     getWorld() {
         return this._world
+    }
+    getPhysicsWorld() {
+        return this._physicsWorld
     }
 
     getCamera() {
@@ -129,11 +138,7 @@ export default class Engine extends Serializable {
     }
 
     getEntities(): DynamicMap<Entity> {
-        return this.getWorld().entities
-    }
-
-    getQueryMap(): DynamicMap<Entity> {
-        return this.getWorld().queryMap
+        return this.getWorld()._entities
     }
 
     get<T>(Clazz: new () => T): T {
@@ -151,5 +156,8 @@ export default class Engine extends Serializable {
             this._camera.updateAspectRatio()
     }
 
+    getScripting(): Scripting {
+        return this._scripting;
+    }
 }
 RepositoryService.injectable(Engine)

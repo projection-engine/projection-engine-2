@@ -36,13 +36,6 @@ export default class EditorUtil extends IInjectable {
     @Inject(SettingsStore)
     static settingsStore: SettingsStore
 
-    static async componentConstructor(entity, scriptID, autoUpdate = true) {
-        await Scripting.linkScript(entity, scriptID)
-        if (autoUpdate)
-            EditorUtil.selectionStore.updateStore({array: SelectionStore.getEntitiesSelected()})
-        EditorUtil.toasterService.success(LocalizationEN.ADDED_COMPONENT)
-    }
-
     static focusOnCamera(cameraTarget) {
         const focused = EditorUtil.settingsStore.getData().focusedCamera
         const isCamera = cameraTarget instanceof Entity

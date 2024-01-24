@@ -1,5 +1,5 @@
 import DynamicMap from "../lib/DynamicMap"
-import type Entity from "../instances/Entity"
+import Entity from "../instances/Entity"
 import GUIService from "../services/GUIService"
 import RepositoryService from "@engine-core/services/serialization/RepositoryService";
 import Components from "@engine-core/static/Components";
@@ -7,20 +7,33 @@ import AbstractEngineCoreService from "@engine-core/core/AbstractEngineCoreServi
 import Engine from "@engine-core/Engine";
 
 export default class World extends AbstractEngineCoreService {
-    queryMap = new DynamicMap<Entity>()
-    entities = new DynamicMap<Entity>()
-    byComponent = new DynamicMap<DynamicMap<Entity>>()
+    _entities = new DynamicMap<Entity>()
+    _byComponent = new DynamicMap<DynamicMap<Entity>>()
+    _rootEntity = new Entity()
 
     constructor(engine?: Engine) {
         super(engine);
         Object.values(Components).forEach(v => {
-            this.byComponent.set(v, new DynamicMap<Entity>())
+            this._byComponent.set(v, new DynamicMap<Entity>())
         })
+        this._entities.set(this._rootEntity.getId(), this._rootEntity)
+    }
+
+    getEntities() {
+        return this._entities
+    }
+
+    getByComponent() {
+        return this._byComponent
+    }
+
+    getRootEntity() {
+        return this._rootEntity
     }
 
     clear() {
         Object.values(Components).forEach(v => {
-            this.byComponent.set(v, new DynamicMap<Entity>())
+            this._byComponent.set(v, new DynamicMap<Entity>())
         })
     }
 
@@ -28,7 +41,7 @@ export default class World extends AbstractEngineCoreService {
         for (let i = 0; i < entities.length; i++) {
             const entity = entities[i]
             entity.components.keys().forEach(key => {
-                this.byComponent.get(key).set(entity.id, entity)
+                this._byComponent.get(key).set(entity.id, entity)
                 if (key === Components.MESH) {
                     entity.meshComponent.updateComponentReferences()
                 } else if (key === Components.UI) {
@@ -38,8 +51,8 @@ export default class World extends AbstractEngineCoreService {
         }
     }
 
-    getByComponent(component: Components): Entity[] {
-        return this.byComponent.get(component).array
+    getEntitiesByComponent(component: Components): Entity[] {
+        return this._byComponent.get(component).array
     }
 
     addEntity(entity: Entity) {
@@ -49,7 +62,7 @@ export default class World extends AbstractEngineCoreService {
     removeBlock(entities: Entity[]) {
         for (const entity of entities) {
             for (const key of entity.components.keys()) {
-                this.byComponent.get(key).delete(entity.id)
+                this._byComponent.get(key).delete(entity.id)
             }
         }
     }

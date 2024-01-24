@@ -85,7 +85,6 @@ export default class EntityAPI extends AbstractEngineSystem{
         if (!EntityAPI.isRegistered(entity))
             return
 
-        ProjectionEngine.Engine.getQueryMap().set(entity.queryKey, entity)
         ProjectionEngine.Engine.getWorld().addEntity(entity)
         if (COMPONENT_TRIGGER_UPDATE.indexOf(<COMPONENTS | undefined>previouslyRemoved) || !!COMPONENT_TRIGGER_UPDATE.find(v => entity.components.get(v) != null))
             LightsService.packageLights(false, true)
@@ -129,7 +128,6 @@ export default class EntityAPI extends AbstractEngineSystem{
                     if (scr && scr.onDestruction)
                         scr.onDestruction()
                 }
-            ProjectionEngine.Engine.getQueryMap().delete(entity.queryKey)
             PhysicsWorld.removeRigidBody(entity)
             GUIService.deleteUIEntity(entity)
             if (entity.lightComponent !== undefined || entity.meshComponent !== undefined)

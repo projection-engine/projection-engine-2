@@ -39,30 +39,30 @@ export default class Camera extends AbstractEngineCoreService {
     aspectRatio: number = 1
     zNear: number = .1
     zFar: number = 100
-    fov: number = Math.PI/2
+    fov: number = Math.PI / 2
     orthographicProjectionSize: number
 
     cameraMotionBlur = false
-    _bloom = false
-    _filmGrain = false
-    _vignetteEnabled = false
-    _chromaticAberration = false
-    _distortion = false
+    bloom = false
+    filmGrain = false
+    vignetteEnabled = false
+    chromaticAberration = false
+    distortion = false
     DOF = false
     size = 50
-    _focusDistanceDOF = 10
-    _apertureDOF = 1.2
-    _focalLengthDOF = 5
-    _samplesDOF = 100
-    _filmGrainStrength = 1.
-    _vignetteStrength = .25
+    focusDistanceDOF = 10
+    apertureDOF = 1.2
+    focalLengthDOF = 5
+    samplesDOF = 100
+    filmGrainStrength = 1.
+    vignetteStrength = .25
     bloomThreshold = .75
     bloomQuality = 8
     bloomOffset = 0
-    _gamma = 2.2
-    _exposure = 1.
-    _chromaticAberrationStrength = 1
-    _distortionStrength = 1
+    gamma = 2.2
+    exposure = 1.
+    chromaticAberrationStrength = 1
+    distortionStrength = 1
 
     updateAspectRatio() {
         const bBox = GPU.canvas.getBoundingClientRect()
@@ -141,6 +141,7 @@ export default class Camera extends AbstractEngineCoreService {
         else
             this.updateAspectRatio()
         this.updateProjection()
+        this.updateUBOs()
     }
 
 
@@ -167,144 +168,25 @@ export default class Camera extends AbstractEngineCoreService {
         R[3] = data[3] || 0
     }
 
-    get vignetteStrength() {
-        return this._vignetteStrength
+    updateUBOs() {
+        this.#updateLensUBO("vignetteStrength", this.vignetteStrength)
+        this.#updateLensUBO("vignetteEnabled", this.vignetteEnabled)
+        this.#updateLensUBO("filmGrainEnabled", this.filmGrain)
+        this.#updateLensUBO("filmGrainStrength", this.filmGrainStrength)
+        this.#updateLensUBO("focusDistanceDOF", this.focusDistanceDOF)
+        this.#updateLensUBO("apertureDOF", this.apertureDOF)
+        this.#updateLensUBO("focalLengthDOF", this.focalLengthDOF)
+        this.#updateLensUBO("samplesDOF", this.samplesDOF)
+        this.#updateLensUBO("gamma", this.gamma)
+        this.#updateLensUBO("exposure", this.exposure)
+        this.#updateLensUBO("distortionEnabled", this.distortion)
+        this.#updateLensUBO("chromaticAberrationEnabled", this.chromaticAberration)
+        this.#updateLensUBO("bloomEnabled", this.bloom)
+        this.#updateLensUBO("chromaticAberrationIntensity", this.chromaticAberrationStrength)
+        this.#updateLensUBO("distortionIntensity", this.distortionStrength)
     }
 
-    set vignetteStrength(data) {
-        this._vignetteStrength = data
-        this.updateLensUBO("vignetteStrength", data)
-    }
-
-    get vignetteEnabled() {
-        return this._vignetteEnabled
-    }
-
-    set vignetteEnabled(data) {
-        this._vignetteEnabled = data
-        this.updateLensUBO("vignetteEnabled", data)
-    }
-
-    get filmGrain() {
-        return this._filmGrain
-    }
-
-    get filmGrainStrength() {
-        return this._filmGrainStrength
-    }
-
-    set filmGrain(data) {
-        this._filmGrain = data
-        this.updateLensUBO("filmGrainEnabled", data)
-    }
-
-    set filmGrainStrength(data) {
-        this._filmGrainStrength = data
-        this.updateLensUBO("filmGrainStrength", data)
-
-    }
-
-    get gamma() {
-        return this._gamma
-    }
-
-    get exposure() {
-        return this._exposure
-    }
-
-    get focusDistanceDOF() {
-        return this._focusDistanceDOF
-    }
-
-    set focusDistanceDOF(data) {
-        this._focusDistanceDOF = data
-        this.updateLensUBO("focusDistanceDOF", data)
-    }
-
-    get apertureDOF() {
-        return this._apertureDOF
-    }
-
-    set apertureDOF(data) {
-        this._apertureDOF = data
-        this.updateLensUBO("apertureDOF", data)
-    }
-
-    get focalLengthDOF() {
-        return this._focalLengthDOF
-    }
-
-    set focalLengthDOF(data) {
-        this._focalLengthDOF = data
-        this.updateLensUBO("focalLengthDOF", data)
-
-    }
-
-    get samplesDOF() {
-        return this._samplesDOF
-    }
-
-    set samplesDOF(data) {
-        this._samplesDOF = data
-        this.updateLensUBO("samplesDOF", data)
-    }
-
-    set gamma(data) {
-        this._gamma = data
-        this.updateLensUBO("gamma", data)
-    }
-
-    set exposure(data) {
-        this._exposure = data
-        this.updateLensUBO("exposure", data)
-    }
-
-    get distortion() {
-        return this._distortion
-    }
-
-    set distortion(v) {
-        this._distortion = v
-        this.updateLensUBO("distortionEnabled", v)
-    }
-
-    get chromaticAberration() {
-        return this._chromaticAberration
-    }
-
-    set chromaticAberration(v) {
-        this._chromaticAberration = v
-        this.updateLensUBO("chromaticAberrationEnabled", v)
-    }
-
-    get bloom() {
-        return this._bloom
-    }
-
-    set bloom(v) {
-        this._bloom = v
-        this.updateLensUBO("bloomEnabled", v)
-    }
-
-    get chromaticAberrationStrength() {
-        return this._chromaticAberrationStrength
-    }
-
-    set chromaticAberrationStrength(v) {
-        this._chromaticAberrationStrength = v
-        this.updateLensUBO("chromaticAberrationIntensity", v)
-    }
-
-    get distortionStrength() {
-        return this._distortionStrength
-    }
-
-    set distortionStrength(v) {
-        this._distortionStrength = v
-        this.updateLensUBO("distortionIntensity", v)
-    }
-
-    updateLensUBO(name: string, data: number | boolean) {
+    #updateLensUBO(name: string, data: number | boolean) {
         if (typeof data === "boolean") {
             const U_INT = new Uint8Array(1)
             U_INT[0] = data ? 1 : 0

@@ -57,21 +57,6 @@
         >
             <small slot="label">{LocalizationEN.NAME}</small>
         </Input>
-
-        <Input
-                width="100%"
-                hasBorder={true}
-                onChange={v => {
-                    Engine.getQueryMap().delete(entity.queryKey)
-                    Engine.getQueryMap().set(v, entity)
-                    entity.queryKey = v
-                }}
-                height="23px"
-                inputValue={entity.queryKey}
-                placeholder={LocalizationEN.QUERY_KEY}
-        >
-            <small slot="label">{LocalizationEN.QUERY_KEY}</small>
-        </Input>
         {#if entity.parent}
             <Selector
                     type="parent"

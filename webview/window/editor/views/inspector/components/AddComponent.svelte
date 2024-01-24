@@ -55,17 +55,7 @@
                 <Icon styles="font-size: 1rem">{component.data[2]}</Icon>
                 <small data-svelteoverflow="-">{component.data[1]}</small>
             </button>
-        {:else}
-            <button
-                    data-sveltebuttondefault="-"
-                    data-svelteinline="-"
-                    on:click={(e) => {
-                        EditorUtil.componentConstructor(entity, component.data.registryID).catch(console.error)
-                        e.target.closeDropdown()
-                    }}>
-                <Icon styles="font-size: 1rem">add</Icon>
-                {component.data.name}
-            </button>
+
         {/if}
     {/each}
 </Dropdown>

@@ -84,7 +84,7 @@ export default class GUIService {
 
         mapToObject(el, UI)
 
-        el.id = entity.queryKey
+        el.id = entity.id
         el.innerHTML = ProjectionEngine.Engine.UILayouts.get(UI.uiLayoutID) || ""
 
         const children = el.children
@@ -132,26 +132,26 @@ export default class GUIService {
         for (let i = 0; i < entities.length; i++) {
             const entity = entities[i]
             const UI = entity.uiComponent
-            if (!entity.active || !UI || EntityQueryService.getEntityByQueryID(entity.queryKey) !== entity)
+            if (!entity.active || !UI || EntityQueryService.getEntityByID(entity.id) !== entity)
                 continue
             UI.__element = undefined
         }
     }
 
-    static updateUIEntity(entity) {
+    static updateUIEntity(entity: Entity) {
         if (!GUIService.document?.parentElement)
             return
 
         const UI = entity?.uiComponent
 
-        if (!entity.active || !UI || EntityQueryService.getEntityByQueryID(entity.queryKey) !== entity || !UI.__element)
+        if (!entity.active || !UI || EntityQueryService.getEntityByID(entity.id) !== entity || !UI.__element)
             return
         const el = UI.__element
         if (!el)
             return
         el.removeAttribute("style")
         mapToObject(el, UI)
-        el.id = entity.queryKey
+        el.id = entity.id
         const html = ProjectionEngine.Engine.UILayouts.get(UI.uiLayoutID)
         el.innerHTML = html ? html : ""
     }

@@ -28,8 +28,7 @@ export default class GPU extends AbstractEngineCoreService {
     static skylightProbe: LightProbe
     static bufferResolution = new Float32Array([0, 0])
 
-    constructor(engine?: Engine) {
-        super(engine)
+    initialize(){
         this.initializeWebGLContext(this.engine.getMainResolution(), this.engine.getCanvas());
         GPU.skylightProbe = new LightProbe(128)
         this.addResizeObserver()

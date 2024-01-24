@@ -21,7 +21,6 @@ export default class Entity extends ComponentResources {
     }
 
     #colorIdentifier = [255, 255, 255]
-    queryKey = this.#id.slice(0, this.#id.length / 2)
     name = ""
     active = true
     scripts = []

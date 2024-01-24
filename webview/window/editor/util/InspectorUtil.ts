@@ -107,9 +107,6 @@ export default class InspectorUtil extends IInjectable {
                 return
 
             switch (type) {
-                case "SCRIPT":
-                    await EditorUtil.componentConstructor(entity, id, true)
-                    break
                 case "MESH":
                     if (!entity.meshComponent) {
                         entity.addComponent(COMPONENTS.MESH)

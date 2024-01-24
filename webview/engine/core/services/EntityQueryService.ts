@@ -2,10 +2,6 @@ import Entity from "../instances/Entity"
 import ProjectionEngine from "@lib/ProjectionEngine";
 
 export default class EntityQueryService {
-    static getEntityByQueryID(id: string): Entity | undefined {
-        return ProjectionEngine.Engine.getQueryMap().get(id)
-    }
-
     static getEntityByID(id: string): Entity | undefined {
         return ProjectionEngine.Engine.getEntities().get(id)
     }

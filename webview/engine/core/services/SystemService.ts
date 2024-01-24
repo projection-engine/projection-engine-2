@@ -89,7 +89,7 @@ export default class SystemService extends AbstractEngineService {
         this.#frameID = requestAnimationFrame(v => this.#loop(v))
     }
 
-    async startSimulation() {
+     startSimulation() {
         this.engine.setEnvironment(ENVIRONMENT.EXECUTION)
         GUIService.buildUI(GPU.canvas.parentElement)
         const entities = this.engine.getEntities().array
@@ -97,6 +97,6 @@ export default class SystemService extends AbstractEngineService {
             const current = entities[i]
             PhysicsWorld.registerRigidBody(current)
         }
-        await Scripting.updateAllScripts()
+        this.scripting.initializeScripts()
     }
 }

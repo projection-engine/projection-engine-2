@@ -1,3 +1,14 @@
+import EntityQueryService from "@engine-core/services/EntityQueryService";
+import Camera from "@engine-core/core/Camera";
+import ConsoleAPI from "@engine-core/services/ConsoleAPI";
+import InputEventsAPI from "@engine-core/services/InputEventsAPI";
+import GUIService from "@engine-core/services/GUIService";
+import PhysicsWorld from "@engine-core/core/PhysicsWorld";
+import GPUAPI from "@engine-core/services/GPUAPI";
+import GPU from "@engine-core/core/GPU";
+import Components from "@engine-core/static/Components";
+import World from "@engine-core/core/World";
+
 enum CameraProjectionType {
     PERSPECTIVE,
     ORTHOGRAPHIC
@@ -6,6 +17,22 @@ enum CameraProjectionType {
 interface SerializationPackage {
     root: string,
     dependencies: Record<string, SerializableClass>
+}
+
+
+interface CustomEngineScript{
+    onCreate(): void
+    execute(): void
+    GPU: GPU
+    GPUAPI: GPUAPI
+    PhysicsWorld: PhysicsWorld
+    GUIService: GUIService
+    World: World
+    InputEventsAPI: InputEventsAPI
+    ConsoleAPI: ConsoleAPI
+    Components: typeof Components
+    Camera: Camera
+    EntityQueryService: EntityQueryService
 }
 
 interface SerializableClass {
@@ -55,5 +82,6 @@ export {
     SerializableAcceptedTypes,
     SerializationPackage,
     EmbeddedMeshes,
-    GLSLTypes
+    GLSLTypes,
+    CustomEngineScript
 }

@@ -19,14 +19,28 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-52] Engine refactoring&#10;- Refactoring files&#10;- Creating core systems&#10;- Removing unused files">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-52] Engine refactoring&#10;- Fixing camera">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/engine/core/AbstractEngineService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/AbstractEngineService.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/engine/core/Engine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/Engine.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/engine/core/core/Camera.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/core/Camera.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/engine/core/core/GPU.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/core/GPU.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/core/Scripting.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/core/Scripting.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/engine/core/core/World.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/core/World.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/runtime/CameraSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/CameraSystem.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/engine-d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/engine-d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/Entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/Entity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/lib/DynamicMap.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/DynamicMap.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/runtime/ScriptingSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/ScriptingSystem.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/runtime/TransformationPass.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/TransformationPass.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/services/EntityAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/services/EntityAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/services/EntityQueryService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/services/EntityQueryService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/services/GUIService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/services/GUIService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/services/SystemService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/services/SystemService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/services/ExecutionService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/ExecutionService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/EditorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/EditorUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/InspectorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/InspectorUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/AddComponent.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/AddComponent.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/EntityInformation.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/EntityInformation.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -340,15 +354,8 @@
       <workItem from="1705788686737" duration="1103000" />
       <workItem from="1705835439400" duration="13150000" />
       <workItem from="1705858855353" duration="9588000" />
-      <workItem from="1705962296510" duration="3911000" />
-    </task>
-    <task id="LOCAL-00009" summary="[STD-3] Virtual file system&#10;- Refactoring webview files&#10;- Refactoring directory names">
-      <option name="closed" value="true" />
-      <created>1703348417811</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1703348417811</updated>
+      <workItem from="1705962296510" duration="4326000" />
+      <workItem from="1706054398272" duration="2639000" />
     </task>
     <task id="LOCAL-00010" summary="[STD-3] Project window&#10;- Removing old ui&#10;- Creating libs for integration with c++ backend&#10;- Starting project window">
       <option name="closed" value="true" />
@@ -734,7 +741,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705964939189</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="[STD-52] Engine refactoring&#10;- Fixing camera">
+      <option name="closed" value="true" />
+      <created>1705966267952</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1705966267952</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -758,7 +773,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-37] Dependency injection&#10;- Making all injectables injections" />
     <MESSAGE value="[STD-26] Tabs&#10;- Starting tabs rework&#10;- Moving systems and creating path alias" />
     <MESSAGE value="[STD-26] Tabs&#10;- Adding types and enums&#10;- Removing unused code&#10;- Reworking views to be simpler&#10;- Removing TabsStore" />
     <MESSAGE value="[STD-34] Stores&#10;- Creating DTOs&#10;- Creating new subscribe method&#10;- Removing old objects" />
@@ -783,7 +797,8 @@
     <MESSAGE value="[STD-52] Engine refactoring&#10;- Removing getters from Engine" />
     <MESSAGE value="[STD-52] Engine refactoring&#10;- Making components serializable&#10;- Making Entity serializable&#10;- Refactoring entity registry to World class" />
     <MESSAGE value="[STD-52] Engine refactoring&#10;- Refactoring files&#10;- Creating core systems&#10;- Removing unused files" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-52] Engine refactoring&#10;- Refactoring files&#10;- Creating core systems&#10;- Removing unused files" />
+    <MESSAGE value="[STD-52] Engine refactoring&#10;- Fixing camera" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-52] Engine refactoring&#10;- Fixing camera" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -810,7 +825,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/webview/services/ExecutionService.ts</url>
-          <line>26</line>
+          <line>28</line>
           <option name="timeStamp" value="54" />
         </line-breakpoint>
       </breakpoints>

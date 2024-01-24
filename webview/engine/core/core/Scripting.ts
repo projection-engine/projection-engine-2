@@ -12,78 +12,68 @@ import FileSystemAPI from "../services/FileSystemAPI"
 import EntityAPI from "../services/EntityAPI"
 import ProjectionEngine from "@lib/ProjectionEngine";
 import AbstractEngineCoreService from "@engine-core/core/AbstractEngineCoreService";
+import DynamicMap from "@engine-core/lib/DynamicMap";
+import Entity from "@engine-core/instances/Entity";
+import {CustomEngineScript} from "@engine-core/engine-d";
+import Components from "../static/Components";
 
+/**
+ * Custom systems defined by the user
+ */
 export default class Scripting extends AbstractEngineCoreService {
-    static scriptInstances = new Map()
-    static mountedScripts = []
-    static mountedScriptsMap = new Map()
+    _rawScripts = new DynamicMap<string>()
+    #instances = new DynamicMap<CustomEngineScript>()
 
-    static async updateAllScripts() {
-        Scripting.mountedScripts = []
-        Scripting.mountedScriptsMap.clear()
-        const scriptsToUpdate = Array.from(Scripting.scriptInstances.keys())
-        for (let i = 0; i < scriptsToUpdate.length; i++) {
-            const current = scriptsToUpdate[i]
-            const data = await FileSystemAPI.readAsset(current)
-            Scripting.scriptInstances.set(current, data)
-        }
-        for (let i = 0; i < ProjectionEngine.Engine.getEntities().array.length; i++) {
-            const current = ProjectionEngine.Engine.getEntities().array[i]
-            for (let j = 0; j < current.scripts.length; j++)
-                Scripting.#updateEntityScript(current.scripts[j].id, current, j)
+    initializeScripts() {
+        this._rawScripts.keys().forEach((scriptID) => this.#initializeScript(scriptID))
+    }
+
+    setScript(scriptID: string, content: string) {
+        this._rawScripts.set(scriptID, content)
+        if (this.#instances.has(scriptID)) {
+            this.#instances.delete(scriptID)
+            this.#initializeScript(scriptID)
         }
     }
 
-    static async linkScript(entity, scriptID) {
-        const scriptFound = Scripting.scriptInstances.get(scriptID)
-        const found = entity.scripts.findIndex(s => s.id === scriptID)
-        if (!scriptFound) {
-            const data = await FileSystemAPI.readAsset(scriptID)
-            if (data != null)
-                Scripting.scriptInstances.set(scriptID, data)
-            else if (found > -1) {
-                entity.scripts.splice(found, 1)
-                return
-            }
-        }
-        Scripting.#updateEntityScript(scriptID, entity, found)
-    }
-
-
-    static #updateEntityScript(scriptID, entity, index) {
-        const scriptData = Scripting.scriptInstances.get(scriptID)
-        if (!scriptData)
-            return
+    #initializeScript(scriptID: string): boolean {
+        const scriptData = this._rawScripts[scriptID]
+        if (!scriptData || this.#instances.has(scriptID))
+            return false
         try {
-            const generator = new Function("GPU, GPUAPI, PhysicsWorld, GUIService, EntityAPI, InputEventsAPI, ConsoleAPI, Component, COMPONENTS, Camera, EntityQueryService, entity, FileSystemAPI", scriptData)
+            const generator = new Function("", scriptData)
             try {
-                const script = generator(GPU, GPUAPI, PhysicsWorld, GUIService, EntityAPI, InputEventsAPI, ConsoleAPI, Component, COMPONENTS, Camera, EntityQueryService, entity, FileSystemAPI)
-                if (index > -1) {
-                    const ref = entity.scripts[index]
-                    Object.entries(ref).forEach(([key, value]) => {
-                        if (typeof value !== "function" && key !== "_props" && key !== "_name")
-                            script[key] = value
-                    })
-                    entity.scripts[index] = script
-                } else
-                    entity.scripts.push(script)
-                script.id = scriptID
+                const script = generator() as CustomEngineScript
+                if (typeof script === "object" && typeof script.onCreate === "function" && typeof script.execute === "function") {
 
-                if (!ProjectionEngine.Engine.isDev && script.onCreation)
-                    script.onCreation()
-                const oldIndex = Scripting.mountedScriptsMap.get(scriptID + entity.id)
-                if (oldIndex !== undefined)
-                    Scripting.mountedScripts[oldIndex] = script
-                else {
-                    Scripting.mountedScripts.push(script)
-                    Scripting.mountedScriptsMap.set(scriptID + entity.id, Scripting.mountedScripts.length - 1)
+                    script.GPU = this.engine.getGPU()
+                    script.GPUAPI = GPUAPI
+                    script.PhysicsWorld = this.engine.getPhysicsWorld()
+                    script.GUIService = GUIService
+                    script.World = this.engine.getWorld()
+                    script.InputEventsAPI = InputEventsAPI
+                    script.ConsoleAPI = ConsoleAPI
+                    script.Components = Components
+                    script.Camera = this.engine.getCamera()
+                    script.EntityQueryService = EntityQueryService
+
+                    script.onCreate()
+
+                    this.#instances.set(scriptID, script)
+                    return true
+                } else {
+                    console.error("Script is missing onCreate and execute methods")
                 }
-                return true
             } catch (runtimeError) {
                 console.error(runtimeError)
             }
         } catch (syntaxError) {
             console.error(syntaxError)
         }
+        return false
+    }
+
+    getScripts(): CustomEngineScript[] {
+        return this.#instances.array
     }
 }
