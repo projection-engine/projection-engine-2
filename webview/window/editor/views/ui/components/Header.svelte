@@ -1,5 +1,5 @@
 <script lang="ts">
-    import COMPONENTS from "@engine-core/static/COMPONENTS"
+    import COMPONENTS from "@engine-core/static/Components"
     import GUIService from "@engine-core/services/GUIService"
     import ViewHeader from "../../../components/view/ViewHeader.svelte"
     import Icon from "@lib/components/icon/Icon.svelte"
@@ -18,9 +18,9 @@
     export let toggleAutoUpdate:GenericVoidFunction
 
     function selectAll() {
-    	const m = [], size = ProjectionEngine.Engine.entities.array.length
+    	const m = [], size = ProjectionEngine.Engine.getEntities().array.length
     	for (let i = 0; i < size; i++) {
-    		const e = ProjectionEngine.ProjectionEngine.Engine.entities.array[i]
+    		const e = ProjectionEngine.ProjectionEngine.Engine.getEntities().array[i]
     		if (e.uiComponent)
     			m.push(e.id)
     	}

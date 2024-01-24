@@ -1,4 +1,4 @@
-import QueryAPI from "@engine-core/services/QueryAPI"
+import EntityQueryService from "@engine-core/services/EntityQueryService"
 import Entity from "@engine-core/instances/Entity"
 import {Injectable} from "@lib/Injection";
 import ProjectionEngine from "@lib/ProjectionEngine";
@@ -24,7 +24,7 @@ export default class EntityNamingService extends IInjectable{
         const found = this.#byName.get(newName)
         let validName = true
         if (found !== entity.id)
-            validName = !QueryAPI.getEntityByID(found)
+            validName = !EntityQueryService.getEntityByID(found)
         if (validName) {
             ProjectionEngine.EntityUpdateService.updateEntity(entity, newName, "name")
             this.#byName.set(newName, entity.id)

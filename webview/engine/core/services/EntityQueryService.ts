@@ -1,19 +1,15 @@
 import Entity from "../instances/Entity"
 import ProjectionEngine from "@lib/ProjectionEngine";
 
-export default class QueryAPI {
-    static getEntityByQueryID(id: string): Entity | undefined {
-        return ProjectionEngine.Engine.queryMap.get(id)
-    }
-
+export default class EntityQueryService {
     static getEntityByID(id: string): Entity | undefined {
-        return ProjectionEngine.Engine.entities.get(id)
+        return ProjectionEngine.Engine.getEntities().get(id)
     }
 
     static getEntitiesWithNativeComponent(componentKey: string): Entity[] {
         const newArr = []
-        for (let i = 0; i < ProjectionEngine.Engine.entities.array.length; i++) {
-            const entity = ProjectionEngine.Engine.entities.array[i]
+        for (let i = 0; i < ProjectionEngine.Engine.getEntities().array.length; i++) {
+            const entity = ProjectionEngine.Engine.getEntities().array[i]
             if (entity.components.get(componentKey) != null)
                 newArr.push(entity)
         }
@@ -61,7 +57,7 @@ export default class QueryAPI {
     static getHierarchyToObject(root: Entity, obj: MutableObject) {
         const children = root.children.array
         for (let i = 0; i < children.length; i++) {
-            QueryAPI.getHierarchyToObject(children[i], obj)
+            EntityQueryService.getHierarchyToObject(children[i], obj)
             obj[children[i].id] = children[i]
         }
     }
@@ -70,7 +66,7 @@ export default class QueryAPI {
         const hierarchy = array ?? []
         const children = root.children.array
         for (let i = 0; i < children.length; i++) {
-            QueryAPI.getHierarchy(children[i], hierarchy)
+            EntityQueryService.getHierarchy(children[i], hierarchy)
             hierarchy.push(children[i])
         }
         return hierarchy
@@ -81,14 +77,14 @@ export default class QueryAPI {
         callback(entity)
         for (let i = 0; i < children.length; i++) {
             const current = children[i]
-            QueryAPI.loopHierarchy(current, callback)
+            EntityQueryService.loopHierarchy(current, callback)
         }
     }
 
     static getEntityByPickerID(id: number): Entity | undefined {
         if (id === 0)
             return
-        const entities = ProjectionEngine.Engine.entities.array
+        const entities = ProjectionEngine.Engine.getEntities().array
         const size = entities.length
         for (let i = 0; i < size; i++) {
             const current = entities[i]

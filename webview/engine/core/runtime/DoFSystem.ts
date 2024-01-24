@@ -1,11 +1,11 @@
-import StaticMeshes from "../repositories/StaticMeshes"
-import StaticFBO from "../repositories/StaticFBO"
-import StaticShaders from "../repositories/StaticShaders"
+import StaticMeshRepository from "../repositories/StaticMeshRepository"
+import FramebufferRepository from "../repositories/FramebufferRepository"
+import ShaderRepository from "../repositories/ShaderRepository"
 import MetricsController from "../services/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
-import GPUUtil from "../utils/GPUUtil";
 import ProjectionEngine from "@lib/ProjectionEngine";
 import AbstractEngineSystem from "@engine-core/AbstractEngineSystem";
+import GPU from "@engine-core/core/GPU";
 
 
 export default class DoFSystem extends AbstractEngineSystem{
@@ -14,13 +14,13 @@ export default class DoFSystem extends AbstractEngineSystem{
 		if (!ProjectionEngine.Engine.getCamera().DOF)
 			return
 
-		StaticShaders.bokeh.bind()
-		StaticFBO.postProcessing2.startMapping()
+		ShaderRepository.bokeh.bind()
+		FramebufferRepository.postProcessing2.startMapping()
 
-		GPUUtil.bind2DTextureForDrawing(StaticShaders.bokehUniforms.sceneColor, 0,StaticFBO.postProcessing1Sampler)
-		GPUUtil.bind2DTextureForDrawing(StaticShaders.bokehUniforms.sceneDepth, 1,StaticFBO.sceneDepthVelocity)
-		StaticMeshes.drawQuad()
-		StaticFBO.postProcessing2.stopMapping()
+		 GPU.bind2DTextureForDrawing(ShaderRepository.bokehUniforms.sceneColor, 0,FramebufferRepository.postProcessing1Sampler)
+		 GPU.bind2DTextureForDrawing(ShaderRepository.bokehUniforms.sceneDepth, 1,FramebufferRepository.sceneDepthVelocity)
+		StaticMeshRepository.drawQuad()
+		FramebufferRepository.postProcessing2.stopMapping()
 		MetricsController.currentState = METRICS_FLAGS.BOKEH
 	}
 }

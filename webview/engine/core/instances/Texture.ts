@@ -1,7 +1,7 @@
 import TEXTURE_WRAPPING from "../static/texture/TEXTURE_WRAPPING"
 import TEXTURE_FILTERING from "../static/texture/TEXTURE_FILTERING"
 import TEXTURE_FORMATS from "../static/texture/TEXTURE_FORMATS"
-import GPUService from "../services/GPUService"
+import GPU from "../core/GPU"
 import TextureParams from "../static/TextureParams"
 import imageToBitmap from "@engine-core/utils/image-to-bitmap";
 
@@ -58,22 +58,22 @@ export default class Texture {
             height,
             type = "UNSIGNED_BYTE"
         } = this.attributes
-        this.texture = GPUService.context.createTexture()
-        GPUService.context.bindTexture(GPUService.context.TEXTURE_2D, this.texture)
-        GPUService.context.texImage2D(GPUService.context.TEXTURE_2D, 0, GPUService.context[internalFormat], width, height, 0, GPUService.context[format], GPUService.context[type], this.#image)
-        GPUService.context.texParameteri(GPUService.context.TEXTURE_2D, GPUService.context.TEXTURE_MIN_FILTER, GPUService.context[minFilter])
-        GPUService.context.texParameteri(GPUService.context.TEXTURE_2D, GPUService.context.TEXTURE_MAG_FILTER, GPUService.context[magFilter])
-        GPUService.context.texParameteri(GPUService.context.TEXTURE_2D, GPUService.context.TEXTURE_WRAP_S, GPUService.context[wrapS])
-        GPUService.context.texParameteri(GPUService.context.TEXTURE_2D, GPUService.context.TEXTURE_WRAP_T, GPUService.context[wrapT])
+        this.texture = GPU.context.createTexture()
+        GPU.context.bindTexture(GPU.context.TEXTURE_2D, this.texture)
+        GPU.context.texImage2D(GPU.context.TEXTURE_2D, 0, GPU.context[internalFormat], width, height, 0, GPU.context[format], GPU.context[type], this.#image)
+        GPU.context.texParameteri(GPU.context.TEXTURE_2D, GPU.context.TEXTURE_MIN_FILTER, GPU.context[minFilter])
+        GPU.context.texParameteri(GPU.context.TEXTURE_2D, GPU.context.TEXTURE_MAG_FILTER, GPU.context[magFilter])
+        GPU.context.texParameteri(GPU.context.TEXTURE_2D, GPU.context.TEXTURE_WRAP_S, GPU.context[wrapS])
+        GPU.context.texParameteri(GPU.context.TEXTURE_2D, GPU.context.TEXTURE_WRAP_T, GPU.context[wrapT])
         if (minFilter === TEXTURE_FILTERING.MIN.LINEAR_MIPMAP_LINEAR) {
-            const anisotropicEXT = GPUService.context.getExtension("EXT_texture_filter_anisotropic")
+            const anisotropicEXT = GPU.context.getExtension("EXT_texture_filter_anisotropic")
             const anisotropicAmountMin = 8
-            const anisotropicAmount = Math.min(anisotropicAmountMin, GPUService.context.getParameter(anisotropicEXT.MAX_TEXTURE_MAX_ANISOTROPY_EXT))
-            GPUService.context.texParameterf(GPUService.context.TEXTURE_2D, anisotropicEXT.TEXTURE_MAX_ANISOTROPY_EXT, anisotropicAmount)
-            GPUService.context.generateMipmap(GPUService.context.TEXTURE_2D)
+            const anisotropicAmount = Math.min(anisotropicAmountMin, GPU.context.getParameter(anisotropicEXT.MAX_TEXTURE_MAX_ANISOTROPY_EXT))
+            GPU.context.texParameterf(GPU.context.TEXTURE_2D, anisotropicEXT.TEXTURE_MAX_ANISOTROPY_EXT, anisotropicAmount)
+            GPU.context.generateMipmap(GPU.context.TEXTURE_2D)
         }
         this.attributes = null
-        GPUService.context.bindTexture(GPUService.context.TEXTURE_2D, null)
+        GPU.context.bindTexture(GPU.context.TEXTURE_2D, null)
         if (this.#image instanceof ImageBitmap)
             this.#image.close()
         this.#image = null
@@ -82,7 +82,7 @@ export default class Texture {
 
     update(attributes: TextureParams) {
         if (this.loaded)
-            GPUService.context.deleteTexture(this.texture)
+            GPU.context.deleteTexture(this.texture)
         this.initialize(attributes).catch(console.error)
 
     }
@@ -102,20 +102,20 @@ export default class Texture {
         yFlip: boolean,
         autoUnbind = true
     ): WebGLTexture {
-        const texture = GPUService.context.createTexture()
+        const texture = GPU.context.createTexture()
 
-        GPUService.context.bindTexture(GPUService.context.TEXTURE_2D, texture)
-        GPUService.context.texImage2D(GPUService.context.TEXTURE_2D, 0, internalFormat, width, height, border, format, type, data)
-        GPUService.context.texParameteri(GPUService.context.TEXTURE_2D, GPUService.context.TEXTURE_MAG_FILTER, magFilter)
-        GPUService.context.texParameteri(GPUService.context.TEXTURE_2D, GPUService.context.TEXTURE_MIN_FILTER, minFilter)
+        GPU.context.bindTexture(GPU.context.TEXTURE_2D, texture)
+        GPU.context.texImage2D(GPU.context.TEXTURE_2D, 0, internalFormat, width, height, border, format, type, data)
+        GPU.context.texParameteri(GPU.context.TEXTURE_2D, GPU.context.TEXTURE_MAG_FILTER, magFilter)
+        GPU.context.texParameteri(GPU.context.TEXTURE_2D, GPU.context.TEXTURE_MIN_FILTER, minFilter)
 
         if (wrapS !== undefined)
-            GPUService.context.texParameteri(GPUService.context.TEXTURE_2D, GPUService.context.TEXTURE_WRAP_S, wrapS)
+            GPU.context.texParameteri(GPU.context.TEXTURE_2D, GPU.context.TEXTURE_WRAP_S, wrapS)
         if (wrapT !== undefined)
-            GPUService.context.texParameteri(GPUService.context.TEXTURE_2D, GPUService.context.TEXTURE_WRAP_T, wrapT)
-        if (yFlip === true) GPUService.context.pixelStorei(GPUService.context.UNPACK_FLIP_Y_WEBGL, false)
+            GPU.context.texParameteri(GPU.context.TEXTURE_2D, GPU.context.TEXTURE_WRAP_T, wrapT)
+        if (yFlip === true) GPU.context.pixelStorei(GPU.context.UNPACK_FLIP_Y_WEBGL, false)
         if (autoUnbind)
-            GPUService.context.bindTexture(GPUService.context.TEXTURE_2D, null)
+            GPU.context.bindTexture(GPU.context.TEXTURE_2D, null)
 
         return texture
     }

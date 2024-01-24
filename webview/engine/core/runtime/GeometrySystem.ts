@@ -1,5 +1,5 @@
-import StaticFBO from "../repositories/StaticFBO"
-import UberShader from "../repositories/UberShader"
+import FramebufferRepository from "../repositories/FramebufferRepository"
+import UberShaderService from "../services/UberShaderService"
 import SceneRenderer from "./renderers/SceneRenderer"
 import SpriteRenderer from "./renderers/SpriteRenderer"
 import DecalRenderer from "./renderers/DecalRenderer"
@@ -11,12 +11,12 @@ import AbstractEngineSystem from "@engine-core/AbstractEngineSystem";
 
 export default class GeometrySystem extends AbstractEngineSystem {
     execute(gl: WebGL2RenderingContext) {
-        if (!UberShader.uber)
+        if (!UberShaderService.uber)
             return
         gl.flush()
 
         Mesh.finishIfUsed()
-        StaticFBO.postProcessing2.startMapping()
+        FramebufferRepository.postProcessing2.startMapping()
 
         AtmosphereRenderer.execute()
         SceneRenderer.bindGlobalResources()
@@ -24,7 +24,7 @@ export default class GeometrySystem extends AbstractEngineSystem {
         DecalRenderer.execute()
         SpriteRenderer.execute()
 
-        StaticFBO.postProcessing2.stopMapping()
+        FramebufferRepository.postProcessing2.stopMapping()
 
         MeshRenderer.execute(true)
         gl.flush()

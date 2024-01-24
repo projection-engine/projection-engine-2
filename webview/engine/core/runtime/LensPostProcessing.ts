@@ -1,25 +1,25 @@
-import StaticMeshes from "../repositories/StaticMeshes"
-import StaticFBO from "../repositories/StaticFBO"
-import StaticShaders from "../repositories/StaticShaders"
+import StaticMeshRepository from "../repositories/StaticMeshRepository"
+import FramebufferRepository from "../repositories/FramebufferRepository"
+import ShaderRepository from "../repositories/ShaderRepository"
 import MetricsController from "../services/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
-import GPUUtil from "../utils/GPUUtil";
 import AbstractEngineSystem from "@engine-core/AbstractEngineSystem";
+import GPU from "@engine-core/core/GPU";
 
 
-export default class LensPostProcessing extends AbstractEngineSystem{
+export default class LensPostProcessing extends AbstractEngineSystem {
 
-	 execute(gl: WebGL2RenderingContext) {
+    execute(gl: WebGL2RenderingContext) {
 
-		StaticFBO.lens.startMapping()
-		StaticShaders.lens.bind()
-		GPUUtil.bind2DTextureForDrawing(StaticShaders.lensUniforms.bloomColor, 0, StaticFBO.postProcessing2Sampler)
+        FramebufferRepository.lens.startMapping()
+        ShaderRepository.lens.bind()
+        GPU.bind2DTextureForDrawing(ShaderRepository.lensUniforms.bloomColor, 0, FramebufferRepository.postProcessing2Sampler)
 
-		GPUUtil.bind2DTextureForDrawing(StaticShaders.lensUniforms.sceneColor, 1, StaticFBO.postProcessing1Sampler)
+        GPU.bind2DTextureForDrawing(ShaderRepository.lensUniforms.sceneColor, 1, FramebufferRepository.postProcessing1Sampler)
 
-		StaticMeshes.drawQuad()
-		StaticFBO.lens.stopMapping()
-		MetricsController.currentState = METRICS_FLAGS.LENS
-	}
+        StaticMeshRepository.drawQuad()
+        FramebufferRepository.lens.stopMapping()
+        MetricsController.currentState = METRICS_FLAGS.LENS
+    }
 
 }

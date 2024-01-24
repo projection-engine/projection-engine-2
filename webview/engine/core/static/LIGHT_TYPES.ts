@@ -5,5 +5,4 @@ export default {
 	SPHERE: 3,
 	DISK: 4,
 	PLANE: 5,
-
 }

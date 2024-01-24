@@ -1,13 +1,9 @@
-import COMPONENTS from "@engine-core/static/COMPONENTS"
+import COMPONENTS from "@engine-core/static/Components"
 import {vec3, vec4} from "gl-matrix"
-
-
-import CameraRepository from "@engine-core/repositories/CameraRepository"
 import EntityAPI from "@engine-core/services/EntityAPI"
 import MeshComponent from "@engine-core/instances/components/MeshComponent"
 import LightComponent from "@engine-core/instances/components/LightComponent"
 import EngineStateService from "./EngineStateService"
-import Engine from "@engine-core/Engine"
 import LocalizationEN from "@enums/LocalizationEN"
 import ProjectionEngine from "@lib/ProjectionEngine";
 
@@ -99,7 +95,7 @@ export default class EntityFactoryService {
     }
 
     static toggleEntityVisibility(entityID: string, noSubmit?: boolean) {
-        EntityAPI.toggleVisibility(ProjectionEngine.Engine.entities.get(entityID))
+        EntityAPI.toggleVisibility(ProjectionEngine.Engine.getEntities().get(entityID))
         if (!noSubmit)
             ProjectionEngine.EntityHierarchyService.updateHierarchy()
     }

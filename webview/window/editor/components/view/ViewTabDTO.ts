@@ -1,5 +1,6 @@
-import {ViewOrientation, ViewPlacement, ViewType} from "./ViewDefinitions";
+import {ViewPlacement, ViewType} from "./ViewDefinitions";
 import Serializable from "@engine-core/services/serialization/Serializable";
+import RepositoryService from "@engine-core/services/serialization/RepositoryService";
 
 export default class ViewTabDTO extends Serializable{
     _name: string = "View Tab"
@@ -108,3 +109,4 @@ export default class ViewTabDTO extends Serializable{
         }
     }
 }
+RepositoryService.serializable(ViewTabDTO)

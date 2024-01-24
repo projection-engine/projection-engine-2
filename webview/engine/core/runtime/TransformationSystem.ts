@@ -5,7 +5,7 @@ export default class TransformationSystem extends AbstractEngineSystem {
 
     // TODO - JUST ACCESS THESE PROPERTIES DIRECTLY
     // static #getEntityInfo(entity: Entity): WorkerEntity {
-    //     const parent = QueryAPI.getClosestEntityParent(entity)
+    //     const parent = EntityQueryService.getClosestEntityParent(entity)
     //     const newEntity = <WorkerEntity>{
     //         id: entity.id,
     //         changedBuffer: entity.__changedBuffer,

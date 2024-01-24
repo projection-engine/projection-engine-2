@@ -4,7 +4,8 @@ import LIGHT_TYPES from "../../static/LIGHT_TYPES"
 import LightsService from "../../services/LightsService"
 import {mat4} from "gl-matrix"
 import EntityAPI from "../../services/EntityAPI"
-import COMPONENTS from "../../static/COMPONENTS"
+import COMPONENTS from "../../static/Components"
+import RepositoryService from "@engine-core/services/serialization/RepositoryService";
 
 
 export default class LightComponent extends Component {
@@ -92,3 +93,5 @@ export default class LightComponent extends Component {
 
 
 }
+
+RepositoryService.serializable(LightComponent)

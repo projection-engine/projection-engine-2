@@ -1,67 +1,66 @@
-import GPUService from "../services/GPUService"
-import StaticMeshes from "../repositories/StaticMeshes"
-import StaticFBO from "../repositories/StaticFBO"
-import StaticShaders from "../repositories/StaticShaders"
-import StaticUBOs from "../repositories/StaticUBOs"
+import GPU from "../core/GPU"
+import StaticMeshRepository from "../repositories/StaticMeshRepository"
+import FramebufferRepository from "../repositories/FramebufferRepository"
+import ShaderRepository from "../repositories/ShaderRepository"
+import UBORepository from "../repositories/UBORepository"
 import MetricsController from "../services/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import EngineState from "../EngineState"
-import GPUUtil from "../utils/GPUUtil";
 import AbstractEngineSystem from "@engine-core/AbstractEngineSystem";
 
 
-export default class SSAO extends AbstractEngineSystem{
-	static noiseScale = new Float32Array(2)
+export default class SSAO extends AbstractEngineSystem {
+    static noiseScale = new Float32Array(2)
 
-	 async initialize() {
-		const RESOLUTION = 4
-		SSAO.noiseScale[0] = GPUService.internalResolution.w / RESOLUTION
-		SSAO.noiseScale[1] = GPUService.internalResolution.h / RESOLUTION
+    async initialize() {
+        const RESOLUTION = 4
+        SSAO.noiseScale[0] = GPU.internalResolution.w / RESOLUTION
+        SSAO.noiseScale[1] = GPU.internalResolution.h / RESOLUTION
 
-		StaticUBOs.ssaoUBO.bind()
-		StaticUBOs.ssaoUBO.updateData("settings", new Float32Array([.5, .7, -.1, 1000]))
-		StaticUBOs.ssaoUBO.updateData("noiseScale", SSAO.noiseScale)
-		StaticUBOs.ssaoUBO.unbind()
+        UBORepository.ssaoUBO.bind()
+        UBORepository.ssaoUBO.updateData("settings", new Float32Array([.5, .7, -.1, 1000]))
+        UBORepository.ssaoUBO.updateData("noiseScale", SSAO.noiseScale)
+        UBORepository.ssaoUBO.unbind()
 
-		await StaticFBO.generateSSAONoise()
-	}
+        await FramebufferRepository.generateSSAONoise()
+    }
 
-	static #draw() {
-		StaticFBO.ssao.startMapping()
-		StaticShaders.ssao.bind()
+    #draw(gl: WebGL2RenderingContext) {
+        FramebufferRepository.ssao.startMapping()
+        ShaderRepository.ssao.bind()
 
 
-		GPUUtil.bind2DTextureForDrawing(StaticShaders.ssaoUniforms.sceneDepth, 0, StaticFBO.sceneDepthVelocity)
+        GPU.bind2DTextureForDrawing(ShaderRepository.ssaoUniforms.sceneDepth, 0, FramebufferRepository.sceneDepthVelocity)
 
-		GPUUtil.bind2DTextureForDrawing(StaticShaders.ssaoUniforms.noiseSampler, 1, StaticFBO.noiseSampler)
+        GPU.bind2DTextureForDrawing(ShaderRepository.ssaoUniforms.noiseSampler, 1, FramebufferRepository.noiseSampler)
 
-		GPUService.context.uniform1i(StaticShaders.ssaoUniforms.maxSamples, EngineState.ssaoMaxSamples)
+        gl.uniform1i(ShaderRepository.ssaoUniforms.maxSamples, EngineState.ssaoMaxSamples)
 
-		StaticMeshes.drawQuad()
-		StaticFBO.ssao.stopMapping()
-	}
+        StaticMeshRepository.drawQuad()
+        FramebufferRepository.ssao.stopMapping()
+    }
 
-	static #blur() {
-		StaticShaders.boxBlur.bind()
-		StaticFBO.ssaoBlurred.startMapping()
+    #blur(gl: WebGL2RenderingContext) {
+        ShaderRepository.boxBlur.bind()
+        FramebufferRepository.ssaoBlurred.startMapping()
 
-		GPUUtil.bind2DTextureForDrawing(StaticShaders.boxBlurUniforms.sampler, 0, StaticFBO.ssaoSampler)
+        GPU.bind2DTextureForDrawing(ShaderRepository.boxBlurUniforms.sampler, 0, FramebufferRepository.ssaoSampler)
 
-		GPUService.context.uniform1i(StaticShaders.boxBlurUniforms.samples, EngineState.ssaoBlurSamples)
+        gl.uniform1i(ShaderRepository.boxBlurUniforms.samples, EngineState.ssaoBlurSamples)
 
-		StaticMeshes.drawQuad()
-		StaticFBO.ssaoBlurred.stopMapping()
-	}
+        StaticMeshRepository.drawQuad()
+        FramebufferRepository.ssaoBlurred.stopMapping()
+    }
 
-	static execute() {
-		if (!EngineState.ssaoEnabled)
-			return
+    execute(gl: WebGL2RenderingContext) {
+        if (!EngineState.ssaoEnabled)
+            return
 
-		SSAO.#draw()
-		SSAO.#blur()
+        this.#draw(gl)
+        this.#blur(gl)
 
-		MetricsController.currentState = METRICS_FLAGS.SSAO
-	}
+        MetricsController.currentState = METRICS_FLAGS.SSAO
+    }
 
 }
 

@@ -33,7 +33,7 @@
         const entitiesSelected = SelectionStore.getEntitiesSelected()
         for (let i = 0; i < entitiesSelected.length; i++) {
             const e = entitiesSelected[i]
-            const c = ProjectionEngine.Engine.entities.get(e)
+            const c = ProjectionEngine.Engine.getEntities().get(e)
             if (c) {
                 cache.push(c)
                 c.__originalTranslation = undefined
@@ -43,7 +43,7 @@
             }
         }
         if (cache.length === 0) {
-            const fallback = ProjectionEngine.Engine.entities.get(SelectionStore.getMainEntity())
+            const fallback = ProjectionEngine.Engine.getEntities().get(SelectionStore.getMainEntity())
             if (fallback)
                 fallback.__originalQuat = undefined
             fallback && cache.push(fallback)

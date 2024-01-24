@@ -1,4 +1,4 @@
-import GPUService from "./GPUService"
+import GPU from "../core/GPU"
 
 function getTarget(key) {
 	const events = InputEventsAPI.EVENTS
@@ -37,7 +37,7 @@ export default class InputEventsAPI {
 	}
 
 	static get targetElement() {
-		return GPUService.canvas.parentElement
+		return GPU.canvas.parentElement
 	}
 
 	static get isCursorLocked() {

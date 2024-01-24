@@ -1,17 +1,17 @@
 import ENVIRONMENT from "../static/ENVIRONMENT"
-import {glMatrix, quat, vec3, vec4} from "gl-matrix"
+import {glMatrix, quat, vec3} from "gl-matrix"
 import ConversionAPI from "../services/ConversionAPI"
 import MotionBlurSystem from "../runtime/MotionBlurSystem"
-import GPUService from "../services/GPUService"
+import GPU from "./GPU"
 import Entity from "../instances/Entity"
 import CameraComponent from "../instances/components/CameraComponent"
 import {CameraProjectionType} from "@engine-core/engine-d";
-import AbstractEngineService from "@engine-core/AbstractEngineService";
 import ArrayBufferAPI from "@engine-core/services/ArrayBufferAPI";
-import StaticUBOs from "@engine-core/repositories/StaticUBOs";
+import UBORepository from "@engine-core/repositories/UBORepository";
+import AbstractEngineCoreService from "@engine-core/core/AbstractEngineCoreService";
 
-export default class CameraRepository extends AbstractEngineService {
-    #dynamicAspectRatio = false
+export default class Camera extends AbstractEngineCoreService {
+    _dynamicAspectRatio = false
     trackingEntity: Entity
     hasChangedProjection: boolean;
     hasChangedView: boolean;
@@ -34,40 +34,40 @@ export default class CameraRepository extends AbstractEngineService {
     invSkyboxProjectionMatrix = ArrayBufferAPI.allocateMatrix(4, true)
     viewUBOBuffer = ArrayBufferAPI.allocateVector(52)
     projectionUBOBuffer = ArrayBufferAPI.allocateVector(35)
-    projectionBuffer = ArrayBufferAPI.allocateVector(5)
     translationBuffer = <vec3>ArrayBufferAPI.allocateVector(3)
     rotationBuffer = <quat>ArrayBufferAPI.allocateVector(4, 0, true)
+    aspectRatio: number = 1
+    zNear: number = .1
+    zFar: number = 100
+    fov: number = Math.PI / 2
+    orthographicProjectionSize: number
 
     cameraMotionBlur = false
-    #bloom = false
-    #filmGrain = false
-    #vignetteEnabled = false
-    #chromaticAberration = false
-    #distortion = false
+    bloom = false
+    filmGrain = false
+    vignetteEnabled = false
+    chromaticAberration = false
+    distortion = false
     DOF = false
     size = 50
-    #focusDistanceDOF = 10
-    #apertureDOF = 1.2
-    #focalLengthDOF = 5
-    #samplesDOF = 100
-    #filmGrainStrength = 1.
-    #vignetteStrength = .25
+    focusDistanceDOF = 10
+    apertureDOF = 1.2
+    focalLengthDOF = 5
+    samplesDOF = 100
+    filmGrainStrength = 1.
+    vignetteStrength = .25
     bloomThreshold = .75
     bloomQuality = 8
     bloomOffset = 0
-    #gamma = 2.2
-    #exposure = 1.
-    #chromaticAberrationStrength = 1
-    #distortionStrength = 1
-
-    async initialize(): Promise<void> {
-        this.projectionBuffer[4] = 10
-    }
+    gamma = 2.2
+    exposure = 1.
+    chromaticAberrationStrength = 1
+    distortionStrength = 1
 
     updateAspectRatio() {
-        const bBox = GPUService.canvas.getBoundingClientRect()
+        const bBox = GPU.canvas.getBoundingClientRect()
         ConversionAPI.canvasBBox = bBox
-        if (this.engine.environment === ENVIRONMENT.DEV || this.#dynamicAspectRatio) {
+        if (this.engine.getEnvironment() === ENVIRONMENT.DEV || this._dynamicAspectRatio) {
             this.aspectRatio = bBox.width / bBox.height
             this.updateProjection()
         }
@@ -115,7 +115,7 @@ export default class CameraRepository extends AbstractEngineService {
         this.zFar = cameraObj.zFar
         this.zNear = cameraObj.zNear
         this.fov = cameraObj.fov < Math.PI * 2 ? cameraObj.fov : glMatrix.toRadian(cameraObj.fov)
-        this.#dynamicAspectRatio = cameraObj.dynamicAspectRatio
+        this._dynamicAspectRatio = cameraObj.dynamicAspectRatio
         this.setIsOrthographic(cameraObj.ortho)
         this.cameraMotionBlur = cameraObj.cameraMotionBlur
         this.vignetteEnabled = cameraObj.vignette
@@ -141,6 +141,7 @@ export default class CameraRepository extends AbstractEngineService {
         else
             this.updateAspectRatio()
         this.updateProjection()
+        this.updateUBOs()
     }
 
 
@@ -167,199 +168,37 @@ export default class CameraRepository extends AbstractEngineService {
         R[3] = data[3] || 0
     }
 
-
-    get zFar() {
-        return this.projectionBuffer[0]
+    updateUBOs() {
+        this.#updateLensUBO("vignetteStrength", this.vignetteStrength)
+        this.#updateLensUBO("vignetteEnabled", this.vignetteEnabled)
+        this.#updateLensUBO("filmGrainEnabled", this.filmGrain)
+        this.#updateLensUBO("filmGrainStrength", this.filmGrainStrength)
+        this.#updateLensUBO("focusDistanceDOF", this.focusDistanceDOF)
+        this.#updateLensUBO("apertureDOF", this.apertureDOF)
+        this.#updateLensUBO("focalLengthDOF", this.focalLengthDOF)
+        this.#updateLensUBO("samplesDOF", this.samplesDOF)
+        this.#updateLensUBO("gamma", this.gamma)
+        this.#updateLensUBO("exposure", this.exposure)
+        this.#updateLensUBO("distortionEnabled", this.distortion)
+        this.#updateLensUBO("chromaticAberrationEnabled", this.chromaticAberration)
+        this.#updateLensUBO("bloomEnabled", this.bloom)
+        this.#updateLensUBO("chromaticAberrationIntensity", this.chromaticAberrationStrength)
+        this.#updateLensUBO("distortionIntensity", this.distortionStrength)
     }
 
-    get zNear() {
-        return this.projectionBuffer[1]
-    }
-
-    get fov() {
-        return this.projectionBuffer[2]
-    }
-
-    get aspectRatio() {
-        return this.projectionBuffer[3]
-    }
-
-    get orthographicProjectionSize() {
-        return this.projectionBuffer[4]
-    }
-
-    set zFar(data) {
-        this.projectionBuffer[0] = data
-    }
-
-    set zNear(data) {
-        this.projectionBuffer[1] = data
-    }
-
-    set fov(data) {
-        this.projectionBuffer[2] = data
-    }
-
-    set aspectRatio(data) {
-        this.projectionBuffer[3] = data
-    }
-
-    set orthographicProjectionSize(data) {
-        this.projectionBuffer[4] = data
-    }
-
-
-
-    get vignetteStrength() {
-        return this.#vignetteStrength
-    }
-
-    set vignetteStrength(data) {
-        this.#vignetteStrength = data
-        this.updateLensUBO("vignetteStrength", data)
-    }
-
-    get vignetteEnabled() {
-        return this.#vignetteEnabled
-    }
-
-    set vignetteEnabled(data) {
-        this.#vignetteEnabled = data
-        this.updateLensUBO("vignetteEnabled", data)
-    }
-
-    get filmGrain() {
-        return this.#filmGrain
-    }
-
-    get filmGrainStrength() {
-        return this.#filmGrainStrength
-    }
-
-    set filmGrain(data) {
-        this.#filmGrain = data
-        this.updateLensUBO("filmGrainEnabled", data)
-    }
-
-    set filmGrainStrength(data) {
-        this.#filmGrainStrength = data
-        this.updateLensUBO("filmGrainStrength", data)
-
-    }
-
-    get gamma() {
-        return this.#gamma
-    }
-
-    get exposure() {
-        return this.#exposure
-    }
-
-    get focusDistanceDOF() {
-        return this.#focusDistanceDOF
-    }
-
-    set focusDistanceDOF(data) {
-        this.#focusDistanceDOF = data
-        this.updateLensUBO("focusDistanceDOF", data)
-    }
-
-    get apertureDOF() {
-        return this.#apertureDOF
-    }
-
-    set apertureDOF(data) {
-        this.#apertureDOF = data
-        this.updateLensUBO("apertureDOF", data)
-    }
-
-    get focalLengthDOF() {
-        return this.#focalLengthDOF
-    }
-
-    set focalLengthDOF(data) {
-        this.#focalLengthDOF = data
-        this.updateLensUBO("focalLengthDOF", data)
-
-    }
-
-    get samplesDOF() {
-        return this.#samplesDOF
-    }
-
-    set samplesDOF(data) {
-        this.#samplesDOF = data
-        this.updateLensUBO("samplesDOF", data)
-    }
-
-    set gamma(data) {
-        this.#gamma = data
-        this.updateLensUBO("gamma", data)
-    }
-
-    set exposure(data) {
-        this.#exposure = data
-        this.updateLensUBO("exposure", data)
-    }
-
-    get distortion() {
-        return this.#distortion
-    }
-
-    set distortion(v) {
-        this.#distortion = v
-        this.updateLensUBO("distortionEnabled", v)
-    }
-
-    get chromaticAberration() {
-        return this.#chromaticAberration
-    }
-
-    set chromaticAberration(v) {
-        this.#chromaticAberration = v
-        this.updateLensUBO("chromaticAberrationEnabled", v)
-    }
-
-    get bloom() {
-        return this.#bloom
-    }
-
-    set bloom(v) {
-        this.#bloom = v
-        this.updateLensUBO("bloomEnabled", v)
-    }
-
-    get chromaticAberrationStrength() {
-        return this.#chromaticAberrationStrength
-    }
-
-    set chromaticAberrationStrength(v) {
-        this.#chromaticAberrationStrength = v
-        this.updateLensUBO("chromaticAberrationIntensity", v)
-    }
-
-    get distortionStrength() {
-        return this.#distortionStrength
-    }
-
-    set distortionStrength(v) {
-        this.#distortionStrength = v
-        this.updateLensUBO("distortionIntensity", v)
-    }
-
-    updateLensUBO(name: string, data: number | boolean){
-        if(typeof data === "boolean"){
+    #updateLensUBO(name: string, data: number | boolean) {
+        if (typeof data === "boolean") {
             const U_INT = new Uint8Array(1)
             U_INT[0] = data ? 1 : 0
-            StaticUBOs.lensPostProcessingUBO.bind()
-            StaticUBOs.lensPostProcessingUBO.updateData(name, U_INT)
-            StaticUBOs.lensPostProcessingUBO.unbind()
-        }else{
+            UBORepository.lensPostProcessingUBO.bind()
+            UBORepository.lensPostProcessingUBO.updateData(name, U_INT)
+            UBORepository.lensPostProcessingUBO.unbind()
+        } else {
             const FLOAT = new Float32Array(1)
             FLOAT[0] = data
-            StaticUBOs.lensPostProcessingUBO.bind()
-            StaticUBOs.lensPostProcessingUBO.updateData(name, FLOAT)
-            StaticUBOs.lensPostProcessingUBO.unbind()
+            UBORepository.lensPostProcessingUBO.bind()
+            UBORepository.lensPostProcessingUBO.updateData(name, FLOAT)
+            UBORepository.lensPostProcessingUBO.unbind()
         }
     }
 }

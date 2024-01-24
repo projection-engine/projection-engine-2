@@ -1,15 +1,14 @@
-import GPUService from "@engine-core/services/GPUService"
+import GPU from "@engine-core/core/GPU"
 import LIGHT_TYPES from "../../core/static/LIGHT_TYPES"
 import LineRenderer from "./LineRenderer"
-import StaticMeshes from "@engine-core/repositories/StaticMeshes"
+import StaticMeshRepository from "@engine-core/repositories/StaticMeshRepository"
 import StaticEditorShaders from "../utils/StaticEditorShaders"
 import {mat4} from "gl-matrix"
 import MATERIAL_RENDERING_TYPES from "../../core/static/MATERIAL_RENDERING_TYPES"
 import Entity from "../../core/instances/Entity"
-import StaticFBO from "@engine-core/repositories/StaticFBO"
+import FramebufferRepository from "@engine-core/repositories/FramebufferRepository"
 import EngineToolsState from "../EngineToolsState"
 import GizmoUtil from "../gizmo/util/GizmoUtil"
-import GPUUtil from "../../core/utils/GPUUtil";
 import ProjectionEngine from "@lib/ProjectionEngine";
 
 
@@ -19,7 +18,7 @@ export default class IconsSystem {
 
 	static loop(cb, uniforms?: MutableObject) {
 		const tracking = ProjectionEngine.Engine.getCamera().trackingEntity
-		const entities = ProjectionEngine.Engine.entities.array
+		const entities = ProjectionEngine.Engine.getEntities().array
 		const size = entities.length
 
 		for (let i = 0; i < size; i++) {
@@ -50,7 +49,7 @@ export default class IconsSystem {
 		U
 	) {
 		const uniforms = U || StaticEditorShaders.iconUniforms
-		const context = GPUService.context
+		const context = GPU.context
 		const lightComponent = entity.lightComponent
 		const lightType = lightComponent?.type
 		let doNotFaceCamera = 0,
@@ -118,7 +117,7 @@ export default class IconsSystem {
 
 		context.uniformMatrix4fv(uniforms.settings, false, iconAttributes)
 		context.uniformMatrix4fv(uniforms.transformationMatrix, false, entity.__cacheIconMatrix)
-		StaticMeshes.drawQuad()
+		StaticMeshRepository.drawQuad()
 	}
 
 	static #drawVisualizations(entity: Entity) {
@@ -155,14 +154,14 @@ export default class IconsSystem {
 	static execute() {
 		if (!IconsSystem.iconsTexture)
 			return
-		const context = GPUService.context
+		const context = GPU.context
 		const uniforms = StaticEditorShaders.iconUniforms
 
 		StaticEditorShaders.icon.bind()
 
-		GPUUtil.bind2DTextureForDrawing(uniforms.iconSampler, 0, IconsSystem.iconsTexture)
+		GPU.bind2DTextureForDrawing(uniforms.iconSampler, 0, IconsSystem.iconsTexture)
 
-		GPUUtil.bind2DTextureForDrawing(uniforms.sceneDepth, 1, StaticFBO.sceneDepthVelocity)
+		GPU.bind2DTextureForDrawing(uniforms.sceneDepth, 1, FramebufferRepository.sceneDepthVelocity)
 
 		context.uniformMatrix4fv(uniforms.projectionM, false, ProjectionEngine.Engine.getCamera().projectionMatrix)
 		context.uniformMatrix4fv(uniforms.viewM, false, ProjectionEngine.Engine.getCamera().viewMatrix)

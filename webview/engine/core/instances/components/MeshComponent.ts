@@ -2,13 +2,14 @@ import Component from "./Component"
 
 import MESH_PROPS from "../../static/component-props/MESH_PROPS"
 import MaterialAPI from "../../services/MaterialAPI"
-import GPUService from "../../services/GPUService"
+import GPU from "../../core/GPU"
 import FileSystemAPI from "../../services/FileSystemAPI"
-import MeshResourceMapper from "../../repositories/MeshResourceMapper"
-import MaterialResourceMapper from "../../repositories/MaterialResourceMapper"
+import MeshRepository from "../../repositories/MeshRepository"
+import MaterialRepository from "../../repositories/MaterialRepository"
 import MaterialUniform from "../../static/MaterialUniform"
 import EntityAPI from "../../services/EntityAPI"
-import COMPONENTS from "../../static/COMPONENTS"
+import COMPONENTS from "../../static/Components"
+import RepositoryService from "@engine-core/services/serialization/RepositoryService";
 
 export default class MeshComponent extends Component {
 	static get componentKey(): string {
@@ -47,21 +48,21 @@ export default class MeshComponent extends Component {
 
 	#bindMesh(meshID: string) {
 		if (!EntityAPI.isRegistered(this.entity) || !meshID) return
-		const found = GPUService.meshes.get(meshID)
+		const found = GPU.meshes.get(meshID)
 		if (!found)
 			FileSystemAPI.loadMesh(meshID).then(_ => {
-				const found = GPUService.meshes.get(meshID)
+				const found = GPU.meshes.get(meshID)
 				if (!found) {
 					console.error("Mesh not found")
 					return
 				}
 				this.entity.meshRef = found
-				MeshResourceMapper.linkEntityMesh(this.entity, meshID)
+				MeshRepository.linkEntityMesh(this.entity, meshID)
 
 			})
 		else {
 			this.entity.meshRef = found
-			MeshResourceMapper.linkEntityMesh(this.entity, meshID)
+			MeshRepository.linkEntityMesh(this.entity, meshID)
 		}
 	}
 
@@ -74,7 +75,7 @@ export default class MeshComponent extends Component {
 		if (meshID)
 			this.#bindMesh(meshID)
 		else {
-			MeshResourceMapper.unlinkEntityMesh(this.entity.id)
+			MeshRepository.unlinkEntityMesh(this.entity.id)
 			this.entity.meshRef = undefined
 		}
 	}
@@ -85,10 +86,10 @@ export default class MeshComponent extends Component {
 
 	#bindMaterial(materialID: string) {
 		if (!EntityAPI.isRegistered(this.entity) || !materialID) return
-		const found = GPUService.materials.get(materialID)
+		const found = GPU.materials.get(materialID)
 		if (!found)
 			FileSystemAPI.loadMaterial(materialID).then(_ => {
-				const found = GPUService.materials.get(materialID)
+				const found = GPU.materials.get(materialID)
 				if (!found) {
 					console.error("Material not found")
 					return
@@ -97,7 +98,7 @@ export default class MeshComponent extends Component {
 				this.#materialUniforms = this.entity.materialRef.uniforms
 				this._mappedUniforms = {}
 				MaterialAPI.mapUniforms(this.#materialUniforms, this.#texturesInUse, this._mappedUniforms).catch(console.error)
-				MaterialResourceMapper.linkEntityMaterial(this.entity, materialID)
+				MaterialRepository.linkEntityMaterial(this.entity, materialID)
 
 			})
 		else {
@@ -105,7 +106,7 @@ export default class MeshComponent extends Component {
 			this.#materialUniforms = this.entity.materialRef.uniforms
 			this._mappedUniforms = {}
 			MaterialAPI.mapUniforms(this.#materialUniforms, this.#texturesInUse, this._mappedUniforms).catch(console.error)
-			MaterialResourceMapper.linkEntityMaterial(this.entity, materialID)
+			MaterialRepository.linkEntityMaterial(this.entity, materialID)
 		}
 	}
 
@@ -117,7 +118,7 @@ export default class MeshComponent extends Component {
 		if (materialID)
 			this.#bindMaterial(materialID)
 		else {
-			MaterialResourceMapper.unlinkEntityMaterial(this.entity.id)
+			MaterialRepository.unlinkEntityMaterial(this.entity.id)
 			this.entity.materialRef = undefined
 		}
 	}
@@ -143,3 +144,5 @@ export default class MeshComponent extends Component {
 	}
 
 }
+
+RepositoryService.serializable(MeshComponent)

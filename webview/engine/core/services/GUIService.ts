@@ -1,10 +1,10 @@
 import InputEventsAPI from "./InputEventsAPI"
-import QueryAPI from "./QueryAPI"
+import EntityQueryService from "./EntityQueryService"
 import FileSystemAPI from "./FileSystemAPI"
 import UIComponent from "../instances/components/UIComponent"
-import ResourceEntityMapper from "../repositories/ResourceEntityMapper"
 import Entity from "../instances/Entity"
 import ProjectionEngine from "@lib/ProjectionEngine";
+import Components from "@engine-core/static/Components";
 
 const STYLES = {
     position: "absolute",
@@ -40,7 +40,7 @@ export default class GUIService {
         const uiElements = Array.from(ProjectionEngine.Engine.UILayouts.keys())
         for (let i = 0; i < uiElements.length; i++) {
             const found = uiElements[i]
-            const entities = ProjectionEngine.Engine.entities.array.filter(e => {
+            const entities = ProjectionEngine.Engine.getEntities().array.filter(e => {
                 const component = e.uiComponent
                 return component?.uiLayoutID === found
             })
@@ -84,7 +84,7 @@ export default class GUIService {
 
         mapToObject(el, UI)
 
-        el.id = entity.queryKey
+        el.id = entity.id
         el.innerHTML = ProjectionEngine.Engine.UILayouts.get(UI.uiLayoutID) || ""
 
         const children = el.children
@@ -108,7 +108,7 @@ export default class GUIService {
         target.appendChild(GUIService.document)
 
         const elementsToBind = []
-        const entities = ResourceEntityMapper.ui.array
+        const entities = ProjectionEngine.Engine.getByComponent(Components.UI)
         for (let i = 0; i < entities.length; i++)
             elementsToBind.push(GUIService.createUIEntity(entities[i]))
         for (let i = 0; i < elementsToBind.length; i++) {
@@ -128,30 +128,30 @@ export default class GUIService {
             return
 
         GUIService.document.parentElement.removeChild(GUIService.document)
-        const entities = ProjectionEngine.Engine.entities.array
+        const entities = ProjectionEngine.Engine.getEntities().array
         for (let i = 0; i < entities.length; i++) {
             const entity = entities[i]
             const UI = entity.uiComponent
-            if (!entity.active || !UI || QueryAPI.getEntityByQueryID(entity.queryKey) !== entity)
+            if (!entity.active || !UI || EntityQueryService.getEntityByID(entity.id) !== entity)
                 continue
             UI.__element = undefined
         }
     }
 
-    static updateUIEntity(entity) {
+    static updateUIEntity(entity: Entity) {
         if (!GUIService.document?.parentElement)
             return
 
         const UI = entity?.uiComponent
 
-        if (!entity.active || !UI || QueryAPI.getEntityByQueryID(entity.queryKey) !== entity || !UI.__element)
+        if (!entity.active || !UI || EntityQueryService.getEntityByID(entity.id) !== entity || !UI.__element)
             return
         const el = UI.__element
         if (!el)
             return
         el.removeAttribute("style")
         mapToObject(el, UI)
-        el.id = entity.queryKey
+        el.id = entity.id
         const html = ProjectionEngine.Engine.UILayouts.get(UI.uiLayoutID)
         el.innerHTML = html ? html : ""
     }

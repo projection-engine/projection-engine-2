@@ -5,7 +5,7 @@
     import Icon from "@lib/components/icon/Icon.svelte";
     import ToolTip from "@lib/components/tooltip/ToolTip.svelte";
     import Entity from "@engine-core/instances/Entity";
-    import QueryAPI from "@engine-core/services/QueryAPI";
+    import EntityQueryService from "@engine-core/services/EntityQueryService";
     import LocalizationEN from "@enums/LocalizationEN";
 
     export let testSearch: GenericVoidFunctionWithP<MutableObject>
@@ -24,7 +24,7 @@
         } else {
 
             delete open[entity.id]
-            QueryAPI.loopHierarchy(entity, (child) => {
+            EntityQueryService.loopHierarchy(entity, (child) => {
                 delete open[child.id]
             })
             updateOpen()

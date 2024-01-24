@@ -1,10 +1,10 @@
 import EntityAPI from "../services/EntityAPI"
 import getComponentInstance from "../utils/get-component-instance"
-import serializeStructure from "../utils/serialize-structure"
 import Component from "./components/Component"
 import ComponentResources from "./components/ComponentResources"
-import QueryAPI from "../services/QueryAPI"
+import EntityQueryService from "../services/EntityQueryService"
 import DynamicMap from "../lib/DynamicMap"
+import RepositoryService from "@engine-core/services/serialization/RepositoryService";
 
 
 export default class Entity extends ComponentResources {
@@ -21,7 +21,6 @@ export default class Entity extends ComponentResources {
     }
 
     #colorIdentifier = [255, 255, 255]
-    queryKey = this.#id.slice(0, this.#id.length / 2)
     name = ""
     active = true
     scripts = []
@@ -29,7 +28,7 @@ export default class Entity extends ComponentResources {
     parentID?: string
     #pickID = new Float32Array(3)
     #pickIndex = -1
-    #children = new DynamicMap<string, Entity>()
+    #children = new DynamicMap<Entity>()
 
     get colorIdentifier() {
     	return this.#colorIdentifier
@@ -106,8 +105,10 @@ export default class Entity extends ComponentResources {
     }
 
     clone() {
-    	const str = serializeStructure(this.serializable())
-    	return EntityAPI.parseEntityObject(JSON.parse(str), true)
+    	// const str = serializeStructure(this.serializable())
+    	// return EntityAPI.parseEntityObject(JSON.parse(str), true)
+		// TODO - REIMPLEMENT
+		return null
     }
 
 
@@ -133,7 +134,7 @@ export default class Entity extends ComponentResources {
     }
 
     addParent(parent: Entity) {
-    	if (!parent || parent === this || parent === this.#parent || QueryAPI.isChildOf(this, parent.id) || QueryAPI.isChildOf(parent, this.id)) {
+    	if (!parent || parent === this || parent === this.#parent || EntityQueryService.isChildOf(this, parent.id) || EntityQueryService.isChildOf(parent, this.id)) {
     		return
     	}
     	if (this.#parent)
@@ -153,3 +154,5 @@ export default class Entity extends ComponentResources {
     	return this.#children
     }
 }
+
+RepositoryService.serializable(Entity)

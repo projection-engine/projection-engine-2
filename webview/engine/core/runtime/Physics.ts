@@ -1,4 +1,4 @@
-import PhysicsAPI from "../services/PhysicsAPI"
+import PhysicsWorld from "../core/PhysicsWorld"
 import MetricsController from "../services/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import EngineState from "../EngineState"
@@ -18,21 +18,21 @@ export default class Physics {
 	}
 
 	static #execute() {
-		if (ProjectionEngine.Engine.isDev || !PhysicsAPI.ammo)
+		if (ProjectionEngine.Engine.isDev || !PhysicsWorld.ammo)
 			return
 
-		const rigidBodies = PhysicsAPI.rigidBodies
+		const rigidBodies = PhysicsWorld.rigidBodies
 		const length = rigidBodies.length
-		const tempTransformation = PhysicsAPI.tempTransformation
+		const tempTransformation = PhysicsWorld.tempTransformation
 
-		PhysicsAPI.world.stepSimulation(EngineState.physicsSimulationStep, EngineState.physicsSubSteps)
+		PhysicsWorld.world.stepSimulation(EngineState.physicsSimulationStep, EngineState.physicsSubSteps)
 
 		for (let i = 0; i < length; i++) {
 			const current = rigidBodies[i]
 			const component = current.rigidBodyComponent
 			if (!component?.motionState) {
 				if (!component)
-					PhysicsAPI.removeRigidBody(current)
+					PhysicsWorld.removeRigidBody(current)
 				continue
 			}
 			component.motionState.getWorldTransform(tempTransformation)

@@ -1,5 +1,5 @@
 import LocalizationEN from "@enums/LocalizationEN"
-import COMPONENTS from "@engine-core/static/COMPONENTS"
+import COMPONENTS from "@engine-core/static/Components"
 import EngineResourceLoaderService from "@services/EngineResourceLoaderService"
 import FileSystemAPI from "@engine-core/services/FileSystemAPI"
 import SelectionStore from "@lib/stores/SelectionStore"
@@ -107,9 +107,6 @@ export default class InspectorUtil extends IInjectable {
                 return
 
             switch (type) {
-                case "SCRIPT":
-                    await EditorUtil.componentConstructor(entity, id, true)
-                    break
                 case "MESH":
                     if (!entity.meshComponent) {
                         entity.addComponent(COMPONENTS.MESH)

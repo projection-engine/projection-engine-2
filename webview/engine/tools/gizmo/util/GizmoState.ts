@@ -7,7 +7,6 @@ import EngineTools from "../../EngineTools"
 import IGizmo from "../IGizmo"
 import Gizmos from "@enums/Gizmos"
 import {vec3} from "gl-matrix"
-import ProjectionEngine from "@lib/ProjectionEngine";
 
 export default class GizmoState {
     static #mainEntity?: Entity
@@ -33,9 +32,6 @@ export default class GizmoState {
     }
 
     static set gizmoType(data: Gizmos) {
-        if (!ProjectionEngine.Engine.isReady) {
-            return
-        }
         GizmoState.#gizmoType = data
         GizmoState.#targetGizmos.length = 0
         switch (data) {

@@ -26,7 +26,7 @@
 
     onMount(() => {
         ProjectionEngine.EntityHierarchyService.registerListener(COMPONENT_ID, () => {
-            cameras = ProjectionEngine.Engine.entities.array.filter(entity => entity.cameraComponent != null)
+            cameras = ProjectionEngine.Engine.getEntities().array.filter(entity => entity.cameraComponent != null)
         })
     })
 

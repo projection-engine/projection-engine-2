@@ -19,20 +19,28 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-56] Improving serialization architecture&#10;- Added support for circular dependencies&#10;- Improved tests for serialization">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-52] Engine refactoring&#10;- Fixing camera">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/services/serialization/Serializable.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/services/serialization/Serializable.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/FSService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/FSService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/components/dropdown/OptionDropdown.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/components/dropdown/OptionDropdown.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/components/frame/MenuBar.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/components/frame/MenuBar.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/stores/AbstractStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/AbstractStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/stores/SelectionStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/SelectionStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/stores/state/CBStateDTO.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/stores/state/IStateDTO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/state/IStateDTO.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/services/ProjectService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/ProjectService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/ViewTabDTO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/ViewTabDTO.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/editor-window.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/editor-window.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/SceneOptions.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/SceneOptions.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/AbstractEngineService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/AbstractEngineService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/Engine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/Engine.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/core/Camera.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/core/Camera.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/core/GPU.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/core/GPU.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/core/Scripting.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/core/Scripting.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/core/World.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/core/World.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/engine-d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/engine-d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/Entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/Entity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/lib/DynamicMap.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/lib/DynamicMap.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/runtime/ScriptingSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/ScriptingSystem.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/runtime/TransformationPass.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/TransformationPass.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/services/EntityAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/services/EntityAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/services/EntityQueryService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/services/EntityQueryService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/services/GUIService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/services/GUIService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/services/SystemService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/services/SystemService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/services/ExecutionService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/ExecutionService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/EditorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/EditorUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/InspectorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/InspectorUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/AddComponent.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/AddComponent.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/EntityInformation.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/EntityInformation.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +66,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="56-repositories-and-serialization" />
+        <entry key="$PROJECT_DIR$" value="60-serializable-integration-with-stores" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -137,7 +145,7 @@
     &quot;Shell Script.copy-files.executor&quot;: &quot;Run&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;60-serializable-integration-with-stores&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;52-engine-refactoring-repositories-and-services&quot;,
     &quot;js.last.introduce.type&quot;: &quot;CONST&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/russi/WebstormProjects/projection-engine-2/test/core&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -151,7 +159,7 @@
     &quot;npm.sdev.executor&quot;: &quot;Run&quot;,
     &quot;npm.test.executor&quot;: &quot;Run&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.C/C++&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\russi\\WebstormProjects\\projection-engine-2\\webview\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -161,11 +169,11 @@
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\test\core" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\engine\core\services\serialization" />
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\engine\core\core" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\engine\core\services" />
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\engine\core\services\serialization" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\engine\core\lib" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\engine\core\repositories" />
-      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\engine\core\runtime" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -345,55 +353,9 @@
       <workItem from="1705769927210" duration="10479000" />
       <workItem from="1705788686737" duration="1103000" />
       <workItem from="1705835439400" duration="13150000" />
-      <workItem from="1705858855353" duration="4314000" />
-    </task>
-    <task id="LOCAL-00004" summary="[STD-1] Webview2 integration&#10;- Removing electron stuff">
-      <option name="closed" value="true" />
-      <created>1702827617412</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1702827617412</updated>
-    </task>
-    <task id="LOCAL-00005" summary="[STD-1] Webview2 integration&#10;- Removing unused files">
-      <option name="closed" value="true" />
-      <created>1702827782890</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1702827782890</updated>
-    </task>
-    <task id="LOCAL-00006" summary="[STD-1] Webview2 integration&#10;- Removing unused componments from ui&#10;- Removing shared array buffer dependency">
-      <option name="closed" value="true" />
-      <created>1702840812476</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1702840812476</updated>
-    </task>
-    <task id="LOCAL-00007" summary="[STD-7] Implementing issue&#10;- Refactoring IWindow and EditorWindow&#10;- Adding integration with WebViewWindow to IWindow">
-      <option name="closed" value="true" />
-      <created>1703338298057</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1703338298057</updated>
-    </task>
-    <task id="LOCAL-00008" summary="[STD-8] Webview build&#10;- Added build directory to be the same as C++&#10;- Improvements to adding listeners&#10;- Fixed async initialization of listeners&#10;- Added reload option to window">
-      <option name="closed" value="true" />
-      <created>1703342234652</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1703342234652</updated>
-    </task>
-    <task id="LOCAL-00009" summary="[STD-3] Virtual file system&#10;- Refactoring webview files&#10;- Refactoring directory names">
-      <option name="closed" value="true" />
-      <created>1703348417811</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1703348417811</updated>
+      <workItem from="1705858855353" duration="9588000" />
+      <workItem from="1705962296510" duration="4326000" />
+      <workItem from="1706054398272" duration="2639000" />
     </task>
     <task id="LOCAL-00010" summary="[STD-3] Project window&#10;- Removing old ui&#10;- Creating libs for integration with c++ backend&#10;- Starting project window">
       <option name="closed" value="true" />
@@ -739,7 +701,55 @@
       <option name="project" value="LOCAL" />
       <updated>1705850986735</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="[STD-60] Project service&#10;- Creating save option&#10;- Save as option&#10;- Open option&#10;- Making stores serializable">
+      <option name="closed" value="true" />
+      <created>1705863388347</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1705863388348</updated>
+    </task>
+    <task id="LOCAL-00054" summary="[STD-52] Engine refactoring&#10;- Moving serializable registration to classes declaration">
+      <option name="closed" value="true" />
+      <created>1705866880814</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1705866880814</updated>
+    </task>
+    <task id="LOCAL-00055" summary="[STD-52] Engine refactoring&#10;- Removing getters from Engine">
+      <option name="closed" value="true" />
+      <created>1705867540962</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1705867540962</updated>
+    </task>
+    <task id="LOCAL-00056" summary="[STD-52] Engine refactoring&#10;- Making components serializable&#10;- Making Entity serializable&#10;- Refactoring entity registry to World class">
+      <option name="closed" value="true" />
+      <created>1705871049134</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1705871049134</updated>
+    </task>
+    <task id="LOCAL-00057" summary="[STD-52] Engine refactoring&#10;- Refactoring files&#10;- Creating core systems&#10;- Removing unused files">
+      <option name="closed" value="true" />
+      <created>1705964939189</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1705964939189</updated>
+    </task>
+    <task id="LOCAL-00058" summary="[STD-52] Engine refactoring&#10;- Fixing camera">
+      <option name="closed" value="true" />
+      <created>1705966267952</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1705966267952</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -763,12 +773,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-35] Removing static members from Engine" />
-    <MESSAGE value="[STD-37] Dependency injection&#10;- Adding path aliases &#10;- Fixing singleton ref errors" />
-    <MESSAGE value="[STD-37] Dependency injection&#10;- Removing unused files&#10;- Adding backbone for new dependency injection architecture" />
-    <MESSAGE value="[STD-37] Dependency injection&#10;- Making stores injectable&#10;- Creating inject method for variables" />
-    <MESSAGE value="[STD-37] Dependency injection&#10;- Making services injectable" />
-    <MESSAGE value="[STD-37] Dependency injection&#10;- Making all injectables injections" />
     <MESSAGE value="[STD-26] Tabs&#10;- Starting tabs rework&#10;- Moving systems and creating path alias" />
     <MESSAGE value="[STD-26] Tabs&#10;- Adding types and enums&#10;- Removing unused code&#10;- Reworking views to be simpler&#10;- Removing TabsStore" />
     <MESSAGE value="[STD-34] Stores&#10;- Creating DTOs&#10;- Creating new subscribe method&#10;- Removing old objects" />
@@ -788,7 +792,13 @@
     <MESSAGE value="[STD-53] Camera refactoring&#10;- Finishing camera refactoring&#10;- Refactoring engine files" />
     <MESSAGE value="[STD-56] Creating serialization architecture" />
     <MESSAGE value="[STD-56] Improving serialization architecture&#10;- Added support for circular dependencies&#10;- Improved tests for serialization" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-56] Improving serialization architecture&#10;- Added support for circular dependencies&#10;- Improved tests for serialization" />
+    <MESSAGE value="[STD-60] Project service&#10;- Creating save option&#10;- Save as option&#10;- Open option&#10;- Making stores serializable" />
+    <MESSAGE value="[STD-52] Engine refactoring&#10;- Moving serializable registration to classes declaration" />
+    <MESSAGE value="[STD-52] Engine refactoring&#10;- Removing getters from Engine" />
+    <MESSAGE value="[STD-52] Engine refactoring&#10;- Making components serializable&#10;- Making Entity serializable&#10;- Refactoring entity registry to World class" />
+    <MESSAGE value="[STD-52] Engine refactoring&#10;- Refactoring files&#10;- Creating core systems&#10;- Removing unused files" />
+    <MESSAGE value="[STD-52] Engine refactoring&#10;- Fixing camera" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-52] Engine refactoring&#10;- Fixing camera" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -815,7 +825,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/webview/services/ExecutionService.ts</url>
-          <line>27</line>
+          <line>28</line>
           <option name="timeStamp" value="54" />
         </line-breakpoint>
       </breakpoints>

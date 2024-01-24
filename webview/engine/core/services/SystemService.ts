@@ -20,9 +20,9 @@ import Physics from "@engine-core/runtime/Physics";
 import ProjectionEngine from "@lib/ProjectionEngine";
 import ENVIRONMENT from "@engine-core/static/ENVIRONMENT";
 import GUIService from "@engine-core/services/GUIService";
-import GPUService from "@engine-core/services/GPUService";
-import PhysicsSystem from "@engine-core/services/PhysicsAPI";
-import ScriptsAPI from "@engine-core/services/ScriptsAPI";
+import GPU from "@engine-core/core/GPU";
+import PhysicsWorld from "@engine-core/core/PhysicsWorld";
+import Scripting from "@engine-core/core/Scripting";
 
 export default class SystemService extends AbstractEngineService {
     #rootSystem: AbstractEngineSystem
@@ -89,14 +89,14 @@ export default class SystemService extends AbstractEngineService {
         this.#frameID = requestAnimationFrame(v => this.#loop(v))
     }
 
-    async startSimulation() {
-        this.engine.environment = ENVIRONMENT.EXECUTION
-        GUIService.buildUI(GPUService.canvas.parentElement)
-        const entities = this.engine.entities.array
+     startSimulation() {
+        this.engine.setEnvironment(ENVIRONMENT.EXECUTION)
+        GUIService.buildUI(GPU.canvas.parentElement)
+        const entities = this.engine.getEntities().array
         for (let i = 0; i < entities.length; i++) {
             const current = entities[i]
-            PhysicsSystem.registerRigidBody(current)
+            PhysicsWorld.registerRigidBody(current)
         }
-        await ScriptsAPI.updateAllScripts()
+        this.scripting.initializeScripts()
     }
 }

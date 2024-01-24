@@ -59,7 +59,6 @@ export default class HierarchyUtil {
     static getEngineIcon(nodeRef): { icon: string, label: string }[] {
         const icons = []
         if (nodeRef) {
-
             if (nodeRef.atmosphereComponent)
                 icons.push({
                     icon: "wb_twilight",
@@ -181,7 +180,7 @@ export default class HierarchyUtil {
             targetElement: ref,
             onDrop: (entityDragged, event) => {
                 const node = event.composedPath().find(n => n?.getAttribute?.("data-sveltenode") != null)?.getAttribute?.("data-sveltenode")
-                HierarchyUtil.handleDrop(event, entityDragged, node ? ProjectionEngine.Engine.entities.get(node) : undefined)
+                HierarchyUtil.handleDrop(event, entityDragged, node ? ProjectionEngine.Engine.getEntities().get(node) : undefined)
             },
             onDragOver: (_, ev) => {
                 if (ev.ctrlKey)

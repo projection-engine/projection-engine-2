@@ -1,5 +1,4 @@
 import MessageInterface from "../static/MessageInterface"
-import serializeStructure from "@engine-core/utils/serialize-structure";
 
 export enum Types {
     ERROR = "ERROR",
@@ -84,7 +83,6 @@ export default class ConsoleAPI {
 				parts.push(...str.split("\n").map((message, i) => ({
 					type,
 					message: message + " " + messages[i].toString(),
-					object: serializeStructure(messages[i]),
 					blockID,
 					src,
 					notFirstOnBlock: i > 0

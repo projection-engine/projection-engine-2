@@ -1,9 +1,9 @@
 <script lang="ts">
     import {onDestroy, onMount} from "svelte"
     import GUIService from "@engine-core/services/GUIService"
-    import QueryAPI from "@engine-core/services/QueryAPI"
+    import EntityQueryService from "@engine-core/services/EntityQueryService"
     import Header from "./components/Header.svelte"
-    import GPUService from "@engine-core/services/GPUService"
+    import GPU from "@engine-core/core/GPU"
     import LocalizationEN from "@enums/LocalizationEN"
     import SelectionStore from "@lib/stores/SelectionStore";
     import type Entity from "@engine-core/instances/Entity";
@@ -25,7 +25,7 @@
             return
 
         const bBox = e.target.getBoundingClientRect()
-        const entity = QueryAPI.getEntityByID(e.target.getAttribute("data-entityid"))
+        const entity = EntityQueryService.getEntityByID(e.target.getAttribute("data-entityid"))
 
         tooltipRef.style.width = bBox.width + "px"
         tooltipRef.style.height = bBox.height + "px"
@@ -67,7 +67,7 @@
         resizeObserver.observe(ref)
         GUIService.showUI()
 
-        GUIService.document.style.height = (GPUService.canvas.getBoundingClientRect().height - 28) + "px"
+        GUIService.document.style.height = (GPU.canvas.getBoundingClientRect().height - 28) + "px"
         GUIService.document.style.top = "28px"
         ProjectionEngine.EntityHierarchyService.registerListener(COMPONENT_ID, update)
         update()

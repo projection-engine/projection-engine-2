@@ -12,7 +12,7 @@
     import GizmoSettings from "./components/GizmoSettings.svelte"
     import SHADING_MODELS from "@engine-core/static/ShadingModel"
     import Icon from "@lib/components/icon/Icon.svelte"
-    import GPUService from "@engine-core/services/GPUService"
+    import GPU from "@engine-core/core/GPU"
     import LocalizationEN from "@enums/LocalizationEN"
     import SceneEditorUtil from "../../util/SceneEditorUtil"
     import ProjectionEngine from "@lib/ProjectionEngine";
@@ -32,7 +32,7 @@
         isSelectBoxDisabled = data.gizmo !== GIZMOS.NONE
         shadingModel = data.shadingModel
         executingAnimation = data.executingAnimation
-        focusedCamera = data.focusedCamera ? ProjectionEngine.Engine.entities.get(data.focusedCamera) : null
+        focusedCamera = data.focusedCamera ? ProjectionEngine.Engine.getEntities().get(data.focusedCamera) : null
     }, ["gizmo", "shadingModel", "focusedCamera", "executingAnimation"])
 
     onMount(() => {
@@ -56,7 +56,7 @@
         <SceneOptions {isOnGizmo}/>
     </ViewHeader>
     <SelectBox
-            targetElement={GPUService.canvas}
+            targetElement={GPU.canvas}
             targetElementID={RENDER_TARGET}
             disabled={isSelectBoxDisabled}
             setSelected={SceneEditorUtil.getUnderSelectionBox}

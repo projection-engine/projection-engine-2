@@ -1,20 +1,20 @@
-import GPUService from "../../services/GPUService"
-import ResourceEntityMapper from "../../repositories/ResourceEntityMapper"
-import StaticShaders from "../../repositories/StaticShaders"
-import StaticMeshes from "../../repositories/StaticMeshes"
+import GPU from "../../core/GPU"
+import ShaderRepository from "../../repositories/ShaderRepository"
+import StaticMeshRepository from "../../repositories/StaticMeshRepository"
 import MetricsController from "../../services/MetricsController"
 import METRICS_FLAGS from "../../static/METRICS_FLAGS"
 import AtmosphereComponent from "../../instances/components/AtmosphereComponent"
 import {mat4} from "gl-matrix"
 import ProjectionEngine from "@lib/ProjectionEngine";
+import Components from "@engine-core/static/Components";
 
 const resources = mat4.create().fill(0)
 export default class AtmosphereRenderer {
 	static execute() {
-		const shader = StaticShaders.atmosphere
-		const uniforms = StaticShaders.atmosphereUniforms
-		const context = GPUService.context
-		const entities = ResourceEntityMapper.atmosphere.array
+		const shader = ShaderRepository.atmosphere
+		const uniforms = ShaderRepository.atmosphereUniforms
+		const context = GPU.context
+		const entities = ProjectionEngine.Engine.getByComponent(Components.ATMOSPHERE)
 		const size = entities.length
 		if (size === 0)
 			return
@@ -32,7 +32,7 @@ export default class AtmosphereRenderer {
 			context.uniform1i(uniforms.type, component.renderingType)
 			context.uniformMatrix4fv(uniforms.information, false, resources)
 
-			StaticMeshes.drawQuad()
+			StaticMeshRepository.drawQuad()
 		}
 		context.enable(context.DEPTH_TEST)
 

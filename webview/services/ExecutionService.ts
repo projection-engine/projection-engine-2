@@ -2,19 +2,20 @@ import ENVIRONMENT from "@engine-core/static/ENVIRONMENT"
 import CameraTracker from "@engine-tools/utils/CameraTracker"
 import GUIService from "@engine-core/services/GUIService"
 import Engine from "@engine-core/Engine"
-import ScriptsAPI from "@engine-core/services/ScriptsAPI"
-import ResourceEntityMapper from "@engine-core/repositories/ResourceEntityMapper"
+import Scripting from "@engine-core/core/Scripting"
 import LocalizationEN from "@enums/LocalizationEN"
 import {Inject, Injectable, LazyInject} from "@lib/Injection";
 import ProjectService from "@services/ProjectService";
 import ToasterService from "@services/ToasterService";
 import IInjectable from "@lib/IInjectable";
 import SettingsStore from "@lib/stores/SettingsStore";
+import {SerializationPackage} from "@engine-core/engine-d";
 
 @Injectable
 export default class ExecutionService extends IInjectable{
     #isPlaying = false
-    cameraSerialization
+    #worldCache: SerializationPackage
+    #cameraCache: SerializationPackage
 
     @Inject(SettingsStore)
     static settingsStore: SettingsStore
@@ -27,12 +28,16 @@ export default class ExecutionService extends IInjectable{
 
     @Inject(ToasterService)
     static toasterService: ToasterService
+
     
     async startPlayState() {
         if (this.#isPlaying) {
             return
         }
         ExecutionService.toasterService.warn(LocalizationEN.SAVING_STATE)
+
+        this.#worldCache = ExecutionService.engine.getWorld().serialize();
+        this.#cameraCache = ExecutionService.engine.getCamera().serialize();
 
         this.#isPlaying = true
         CameraTracker.stopTracking()
@@ -41,24 +46,22 @@ export default class ExecutionService extends IInjectable{
     }
 
     async stopPlayState() {
-        if (!this.#isPlaying)
+        if (!this.#isPlaying) {
             return
-        ResourceEntityMapper.clear()
+        }
 
-        ExecutionService.engine.entities.clear()
-        ExecutionService.engine.queryMap.clear()
+        ExecutionService.engine.setEnvironment(ENVIRONMENT.DEV)
 
-        ExecutionService.toasterService.log(LocalizationEN.RESTORING_STATE)
         this.#isPlaying = false
-        ExecutionService.engine.environment = ENVIRONMENT.DEV
+        ExecutionService.toasterService.log(LocalizationEN.RESTORING_STATE)
+        ExecutionService.engine.getCamera().parse(this.#cameraCache);
+
+        ExecutionService.engine.getWorld().parse(this.#worldCache);
 
         GUIService.destroyUI()
-        await ScriptsAPI.updateAllScripts()
-
-        ExecutionService.engine.getCamera().trackingEntity = undefined
         CameraTracker.startTracking()
+
         ExecutionService.settingsStore.updateStore({executingAnimation: false})
-        // ExecutionService.engine.getCamera().restoreState(this.cameraSerialization)
     }
 
 }

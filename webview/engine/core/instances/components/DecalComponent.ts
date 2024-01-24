@@ -1,12 +1,13 @@
 import Component from "./Component"
 import DECAL_PROPS from "../../static/component-props/DECAL_PROPS"
 import Texture from "../Texture"
-import GPUService from "../../services/GPUService"
+import GPU from "../../core/GPU"
 import FileSystemAPI from "../../services/FileSystemAPI"
 import TextureParams from "../../static/TextureParams"
 import GPUAPI from "../../services/GPUAPI"
 import MATERIAL_RENDERING_TYPES from "../../static/MATERIAL_RENDERING_TYPES"
-import COMPONENTS from "../../static/COMPONENTS"
+import COMPONENTS from "../../static/Components"
+import RepositoryService from "@engine-core/services/serialization/RepositoryService";
 
 export default class DecalComponent extends Component {
 	static get componentKey(): string {
@@ -73,35 +74,35 @@ export default class DecalComponent extends Component {
 	}
 
 	set albedoID(value: string) {
-		this.#albedo = GPUService.textures.get(value)
+		this.#albedo = GPU.textures.get(value)
 		if (value && !this.albedo)
 			DecalComponent.#fetchIfNotFound(value).then(res => this.#albedo = res)
 		this._albedoID = value
 	}
 
 	set roughnessID(value: string) {
-		this.#roughness = GPUService.textures.get(value)
+		this.#roughness = GPU.textures.get(value)
 		if (value && !this.roughness)
 			DecalComponent.#fetchIfNotFound(value).then(res => this.#roughness = res)
 		this._roughnessID = value
 	}
 
 	set metallicID(value: string) {
-		this.#metallic = GPUService.textures.get(value)
+		this.#metallic = GPU.textures.get(value)
 		if (value && !this.metallic)
 			DecalComponent.#fetchIfNotFound(value).then(res => this.#metallic = res)
 		this._metallicID = value
 	}
 
 	set normalID(value: string) {
-		this.#normal = GPUService.textures.get(value)
+		this.#normal = GPU.textures.get(value)
 		if (value && !this.normal)
 			DecalComponent.#fetchIfNotFound(value).then(res => this.#normal = res)
 		this._normalID = value
 	}
 
 	set occlusionID(value: string) {
-		this.#occlusion = GPUService.textures.get(value)
+		this.#occlusion = GPU.textures.get(value)
 		if (value && !this.occlusion)
 			DecalComponent.#fetchIfNotFound(value).then(res => this.#occlusion = res)
 		this._occlusionID = value
@@ -129,3 +130,4 @@ export default class DecalComponent extends Component {
 
 	_props = DECAL_PROPS
 }
+RepositoryService.serializable(DecalComponent)

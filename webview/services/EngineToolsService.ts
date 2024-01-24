@@ -1,12 +1,11 @@
 import Engine from "@engine-core/Engine"
 import CameraTracker from "@engine-tools/utils/CameraTracker"
 import EngineTools from "@engine-tools/EngineTools"
-import CameraRepository from "@engine-core/repositories/CameraRepository"
 import ENVIRONMENT from "@engine-core/static/ENVIRONMENT"
 import EngineResources from "@engine-core/services/EngineResources"
 import SelectionStore from "@lib/stores/SelectionStore"
 import GUIService from "@engine-core/services/GUIService"
-import GPUService from "@engine-core/services/GPUService"
+import GPU from "@engine-core/core/GPU"
 import EngineToolsState from "@engine-tools/EngineToolsState"
 import EngineState from "@engine-core/EngineState"
 import GizmoState from "@engine-tools/gizmo/util/GizmoState"
@@ -39,7 +38,7 @@ export default class EngineToolsService {
         const settings = EngineToolsService.settingsStore.getData()
         if (engine.executingAnimation)
             GUIService.showUI()
-        if (EngineToolsService.engine.environment === ENVIRONMENT.DEV && !engine.focusedCamera) {
+        if (EngineToolsService.engine.getEnvironment() === ENVIRONMENT.DEV && !engine.focusedCamera) {
             EngineToolsService.engine.getCamera().trackingEntity = undefined
             if (settings.camera !== undefined) {
                 CameraTracker.screenSpaceMovementSpeed = settings.camera.screenSpaceMovementSpeed || 1
@@ -80,10 +79,10 @@ export default class EngineToolsService {
         EngineToolsService.#updateEngineToolsState()
         EngineToolsService.engine.getCamera().setIsOrthographic(settings.camera.ortho)
 
-        GPUService.canvas.width = settings.resolutionX
-        GPUService.canvas.height = settings.resolutionY
+        GPU.canvas.width = settings.resolutionX
+        GPU.canvas.height = settings.resolutionY
 
-        EngineTools.isRunning = EngineToolsService.engine.environment === ENVIRONMENT.DEV
+        EngineTools.isRunning = EngineToolsService.engine.getEnvironment() === ENVIRONMENT.DEV
         EngineToolsService.#updateEngineState()
 
         EngineToolsService.#updateCameraTracker()

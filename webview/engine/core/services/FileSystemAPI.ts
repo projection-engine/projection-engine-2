@@ -1,4 +1,4 @@
-import GPUService from "./GPUService"
+import GPU from "../core/GPU"
 import GPUAPI from "./GPUAPI"
 import MaterialInformation from "../static/MaterialInformation"
 
@@ -23,7 +23,7 @@ export default class FileSystemAPI {
 	}
 
 	static async loadTexture(registryID: string) {
-		if (GPUService.textures.get(registryID) != null)
+		if (GPU.textures.get(registryID) != null)
 			return
 		try {
 			const textureData = await FileSystemAPI.readAsset(registryID)
@@ -41,7 +41,7 @@ export default class FileSystemAPI {
 	}
 
 	static async loadMesh(ID: string): Promise<boolean> {
-		if (!ID || GPUService.meshes.get(ID) != null) {
+		if (!ID || GPU.meshes.get(ID) != null) {
 			FileSystemAPI.#doCallback(FileSystemAPI.#fetchingMeshes, ID)
 			return
 		}
@@ -53,7 +53,7 @@ export default class FileSystemAPI {
 			FileSystemAPI.#fetchingMeshes[ID] = []
 
 			try {
-				if (!GPUService.meshes.get(ID)) {
+				if (!GPU.meshes.get(ID)) {
 					const data = await FileSystemAPI.readAsset(ID)
 					if (!data) {
 						FileSystemAPI.#doCallback(FileSystemAPI.#fetchingMeshes, ID)
@@ -78,7 +78,7 @@ export default class FileSystemAPI {
 	}
 
 	static async loadMaterial(ID: string) {
-		if (!ID || GPUService.materials.get(ID) != null) {
+		if (!ID || GPU.materials.get(ID) != null) {
 			FileSystemAPI.#doCallback(FileSystemAPI.#fetchingMaterials, ID)
 			return
 		}
@@ -90,7 +90,7 @@ export default class FileSystemAPI {
 		else {
 			FileSystemAPI.#fetchingMaterials[ID] = []
 			try {
-				if (!GPUService.materials.get(ID)) {
+				if (!GPU.materials.get(ID)) {
 					const data = await FileSystemAPI.readAsset(ID)
 					if (!data) {
 						FileSystemAPI.#doCallback(FileSystemAPI.#fetchingMaterials, ID)

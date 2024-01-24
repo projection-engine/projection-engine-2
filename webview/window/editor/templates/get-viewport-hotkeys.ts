@@ -1,5 +1,5 @@
 import GIZMOS from "@enums/Gizmos"
-import QueryAPI from "@engine-core/services/QueryAPI"
+import EntityQueryService from "@engine-core/services/EntityQueryService"
 import GizmoTransformationType from "@enums/GizmoTransformationType"
 import EntityFactoryService from "@services/EntityFactoryService"
 import CAMERA_ROTATIONS from "../../../engine/tools/static/CAMERA_ROTATIONS"
@@ -21,7 +21,7 @@ export default function getViewportHotkeys(): { [key: string]: ContextMenuOption
                 const t = SelectionStore.getMainEntity()
                 if (!t)
                     return
-                const entity = QueryAPI.getEntityByID(t)
+                const entity = EntityQueryService.getEntityByID(t)
                 if (entity)
                     EngineStateService.add(entity.clone())
             },
@@ -73,7 +73,7 @@ export default function getViewportHotkeys(): { [key: string]: ContextMenuOption
                 const t = SelectionStore.getMainEntity()
                 if (!t)
                     return
-                const toSelect = [t, ...EditorUtil.selectEntityHierarchy(QueryAPI.getEntityByID(t))]
+                const toSelect = [t, ...EditorUtil.selectEntityHierarchy(EntityQueryService.getEntityByID(t))]
                 SelectionStore.setEntitiesSelected([...SelectionStore.getEntitiesSelected(), ...toSelect])
             },
 
@@ -93,7 +93,7 @@ export default function getViewportHotkeys(): { [key: string]: ContextMenuOption
             callback: () => {
                 const selected = SelectionStore.getEntitiesSelected()
                 for (let i = 0; i < selected.length; i++) {
-                    const entity = QueryAPI.getEntityByID(selected[i])
+                    const entity = EntityQueryService.getEntityByID(selected[i])
                     entity._translation[0] = 0
                     entity._translation[1] = 0
                     entity._translation[2] = 0

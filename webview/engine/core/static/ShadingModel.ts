@@ -8,7 +8,6 @@ enum ShadingModel {
     METALLIC = 7,
     ROUGHNESS = 8,
     G_AO = 9,
-    AMBIENT = 10,
     POSITION = 11,
     UV = 12,
     RANDOM = 13,

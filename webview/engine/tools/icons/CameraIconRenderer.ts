@@ -1,6 +1,6 @@
 import StaticEditorMeshes from "../utils/StaticEditorMeshes"
 import StaticEditorShaders from "../utils/StaticEditorShaders"
-import GPUService from "@engine-core/services/GPUService"
+import GPU from "@engine-core/core/GPU"
 import {mat4} from "gl-matrix"
 import Entity from "../../core/instances/Entity"
 import EngineToolsState from "../EngineToolsState"
@@ -31,7 +31,7 @@ export default class CameraIconRenderer {
 		if (entity.distanceFromCamera > EngineToolsState.maxDistanceIcon)
 			return
 		CameraIconRenderer.#createFrustumMatrix(entity)
-		const context = GPUService.context
+		const context = GPU.context
 		const uniforms = StaticEditorShaders.wireframeUniforms
 
 		context.uniform1i(uniforms.isSelected, entity.__isSelected ? 1 : 0)

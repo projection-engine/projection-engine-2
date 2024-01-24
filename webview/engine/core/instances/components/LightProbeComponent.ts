@@ -1,6 +1,7 @@
 import Component from "./Component"
 import LIGHT_PROBE_PROPS from "../../static/component-props/LIGHT_PROBE_PROPS"
-import COMPONENTS from "../../static/COMPONENTS"
+import COMPONENTS from "../../static/Components"
+import RepositoryService from "@engine-core/services/serialization/RepositoryService";
 
 export default class LightProbeComponent extends Component {
 	static get componentKey(): string {
@@ -13,3 +14,5 @@ export default class LightProbeComponent extends Component {
 	mipmaps = 6
 	maxDistance = 50
 }
+
+RepositoryService.serializable(LightProbeComponent)

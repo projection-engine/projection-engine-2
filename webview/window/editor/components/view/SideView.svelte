@@ -1,6 +1,6 @@
 <script lang="ts">
     import ResizableBar from "@lib/components/resizable/ResizableBar.svelte"
-    import {onDestroy, onMount} from "svelte"
+    import {onDestroy} from "svelte"
     import View from "./View.svelte";
     import {ViewOrientation, ViewPlacement, ViewPlacementMetadata, ViewResizePosition} from "./ViewDefinitions";
     import {InjectVar} from "@lib/Injection";

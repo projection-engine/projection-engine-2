@@ -1,12 +1,12 @@
-import ScriptsAPI from "@engine-core/services/ScriptsAPI"
+import Scripting from "@engine-core/core/Scripting"
 import SelectionStore from "@lib/stores/SelectionStore"
 import LocalizationEN from "@enums/LocalizationEN"
 import Entity from "@engine-core/instances/Entity"
 import Engine from "@engine-core/Engine"
 import CameraTracker from "../../../engine/tools/utils/CameraTracker"
-import COMPONENTS from "@engine-core/static/COMPONENTS"
+import COMPONENTS from "@engine-core/static/Components"
 import IPCRoutes from "@enums/IPCRoutes"
-import QueryAPI from "@engine-core/services/QueryAPI"
+import EntityQueryService from "@engine-core/services/EntityQueryService"
 import GIZMOS from "@enums/Gizmos"
 import GizmoState from "../../../engine/tools/gizmo/util/GizmoState";
 import GizmoUtil from "../../../engine/tools/gizmo/util/GizmoUtil";
@@ -36,18 +36,11 @@ export default class EditorUtil extends IInjectable {
     @Inject(SettingsStore)
     static settingsStore: SettingsStore
 
-    static async componentConstructor(entity, scriptID, autoUpdate = true) {
-        await ScriptsAPI.linkScript(entity, scriptID)
-        if (autoUpdate)
-            EditorUtil.selectionStore.updateStore({array: SelectionStore.getEntitiesSelected()})
-        EditorUtil.toasterService.success(LocalizationEN.ADDED_COMPONENT)
-    }
-
     static focusOnCamera(cameraTarget) {
         const focused = EditorUtil.settingsStore.getData().focusedCamera
         const isCamera = cameraTarget instanceof Entity
         if (!focused || isCamera && cameraTarget.id !== focused) {
-            const current = isCamera ? cameraTarget : EditorUtil.engine.entities.get(SelectionStore.getMainEntity())
+            const current = isCamera ? cameraTarget : EditorUtil.engine.getEntities().get(SelectionStore.getMainEntity())
             if (current && current.cameraComponent) {
                 // EditorUtil.executionService.cameraSerialization = EditorUtil.engine.getCamera().serializeState()
                 CameraTracker.stopTracking()
@@ -134,7 +127,7 @@ export default class EditorUtil extends IInjectable {
     static snap(grid?: number) {
         const selected = SelectionStore.getEntitiesSelected()
         for (let i = 0; i < selected.length; i++) {
-            const entity = QueryAPI.getEntityByID(selected[i])
+            const entity = EntityQueryService.getEntityByID(selected[i])
             const currentGizmo = EditorUtil.settingsStore.getData().gizmo
 
             switch (currentGizmo) {

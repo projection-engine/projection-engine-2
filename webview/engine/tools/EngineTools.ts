@@ -7,13 +7,12 @@ import WireframeRenderer from "./outline/WireframeRenderer"
 import ENVIRONMENT from "../core/static/ENVIRONMENT"
 import LineRenderer from "./icons/LineRenderer"
 import Entity from "../core/instances/Entity"
-import GPUService from "@engine-core/services/GPUService"
+import GPU from "@engine-core/core/GPU"
 import StaticEditorMeshes from "./utils/StaticEditorMeshes"
 import StaticEditorShaders from "./utils/StaticEditorShaders"
-import StaticFBO from "@engine-core/repositories/StaticFBO"
+import FramebufferRepository from "@engine-core/repositories/FramebufferRepository"
 import GizmoState from "./gizmo/util/GizmoState"
 import StaticEditorFBO from "./utils/StaticEditorFBO";
-import GPUUtil from "../core/utils/GPUUtil";
 import ConversionAPI from "@engine-core/services/ConversionAPI";
 import EngineToolsState from "./EngineToolsState";
 import ProjectionEngine from "@lib/ProjectionEngine";
@@ -36,7 +35,7 @@ export default class EngineTools extends AbstractEngineSystem {
     async initialize() {
         StaticEditorShaders.initialize()
         await StaticEditorMeshes.initialize()
-        ProjectionEngine.Engine.environment = ENVIRONMENT.DEV
+        ProjectionEngine.Engine.setEnvironment(ENVIRONMENT.DEV)  
         LineRenderer.initialize()
         StaticEditorFBO.initialize()
 
@@ -62,7 +61,7 @@ export default class EngineTools extends AbstractEngineSystem {
         selected.length = 0
         for (let i = 0; i < data.length; i++) {
             const d = data[i]
-            const entity = ProjectionEngine.Engine.entities.get(d)
+            const entity = ProjectionEngine.Engine.getEntities().get(d)
             if (entity !== undefined) {
                 selected.push(entity)
                 entity.__isSelected = true
@@ -73,17 +72,17 @@ export default class EngineTools extends AbstractEngineSystem {
     }
 
     static drawIconsToBuffer() {
-        GPUService.context.disable(GPUService.context.DEPTH_TEST)
-        StaticFBO.visibility.use()
+        GPU.context.disable(GPU.context.DEPTH_TEST)
+        FramebufferRepository.visibility.use()
         StaticEditorShaders.iconToDepth.bind()
-        GPUUtil.bind2DTextureForDrawing(StaticEditorShaders.iconToDepthUniforms.image, 0, IconsSystem.iconsTexture)
+        GPU.bind2DTextureForDrawing(StaticEditorShaders.iconToDepthUniforms.image, 0, IconsSystem.iconsTexture)
         IconsSystem.loop(IconsSystem.drawIcon, StaticEditorShaders.iconToDepthUniforms)
-        StaticFBO.visibility.stopMapping()
-        GPUService.context.enable(GPUService.context.DEPTH_TEST)
+        FramebufferRepository.visibility.stopMapping()
+        GPU.context.enable(GPU.context.DEPTH_TEST)
     }
 
     execute(gl: WebGL2RenderingContext) {
-        const coords = ConversionAPI.toQuadCoordinates(EngineToolsState.unconvertedMouseCoordinates[0], EngineToolsState.unconvertedMouseCoordinates[1], GPUService.internalResolution.w, GPUService.internalResolution.h)
+        const coords = ConversionAPI.toQuadCoordinates(EngineToolsState.unconvertedMouseCoordinates[0], EngineToolsState.unconvertedMouseCoordinates[1], GPU.internalResolution.w, GPU.internalResolution.h)
         EngineToolsState.mouseCoordinates[0] = coords.x
         EngineToolsState.mouseCoordinates[1] = coords.y
         CameraTracker.updateFrame()
@@ -101,7 +100,7 @@ export default class EngineTools extends AbstractEngineSystem {
     }
 
     static #setContextState() {
-        const context = GPUService.context
+        const context = GPU.context
         context.clear(context.DEPTH_BUFFER_BIT)
         context.disable(context.CULL_FACE)
         context.disable(context.DEPTH_TEST)

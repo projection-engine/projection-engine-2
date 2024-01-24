@@ -1,4 +1,4 @@
-import GPUService from "@engine-core/services/GPUService"
+import GPU from "@engine-core/core/GPU"
 import GizmoUtil from "./util/GizmoUtil"
 import GizmoState from "./util/GizmoState"
 import GizmoLineSystem from "./GizmoLineSystem"
@@ -8,7 +8,7 @@ import DynamicMap from "../../core/lib/DynamicMap"
 export default class GizmoSystem {
 	static onStart?: Function
 	static onStop?: Function
-	static #listeners = new DynamicMap<string, Function>()
+	static #listeners = new DynamicMap<Function>()
 
 	static addListener(id: string, callback: Function) {
 		GizmoSystem.#listeners.set(id, callback)
@@ -28,7 +28,7 @@ export default class GizmoSystem {
 	}
 
 	static execute() {
-		const context = GPUService.context
+		const context = GPU.context
 		context.enable(context.DEPTH_TEST)
 		context.clear(context.DEPTH_BUFFER_BIT)
 		const m = GizmoState.mainEntity

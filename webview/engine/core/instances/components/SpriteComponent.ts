@@ -1,6 +1,7 @@
 import SPRITE_PROPS from "../../static/component-props/SPRITE_PROPS"
 import Component from "./Component"
-import COMPONENTS from "../../static/COMPONENTS"
+import COMPONENTS from "../../static/Components"
+import RepositoryService from "@engine-core/services/serialization/RepositoryService";
 
 export default class SpriteComponent extends Component {
 	static get componentKey(): string {
@@ -30,3 +31,5 @@ export default class SpriteComponent extends Component {
 		this.attributes[1] = d ? 1 : 0
 	}
 }
+
+RepositoryService.serializable(SpriteComponent)

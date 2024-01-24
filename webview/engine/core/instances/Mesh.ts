@@ -1,6 +1,6 @@
 import VertexBuffer from "./VertexBuffer"
 
-import GPUService from "../services/GPUService"
+import GPU from "../core/GPU"
 import GPUAPI from "../services/GPUAPI"
 import ProjectionEngine from "@lib/ProjectionEngine";
 
@@ -50,50 +50,50 @@ export default class Mesh {
 		this.trianglesQuantity = l / 3
 		this.verticesQuantity = l
 
-		this.VAO = GPUService.context.createVertexArray()
-		GPUService.context.bindVertexArray(this.VAO)
+		this.VAO = GPU.context.createVertexArray()
+		GPU.context.bindVertexArray(this.VAO)
 
-		this.indexVBO = GPUAPI.createBuffer(GPUService.context.ELEMENT_ARRAY_BUFFER, new Uint32Array(indices))
-		this.vertexVBO = new VertexBuffer(0, new Float32Array(vertices), GPUService.context.ARRAY_BUFFER, 3, GPUService.context.FLOAT, false, undefined, 0)
+		this.indexVBO = GPUAPI.createBuffer(GPU.context.ELEMENT_ARRAY_BUFFER, new Uint32Array(indices))
+		this.vertexVBO = new VertexBuffer(0, new Float32Array(vertices), GPU.context.ARRAY_BUFFER, 3, GPU.context.FLOAT, false, undefined, 0)
 
 		if (uvs && uvs.length > 0)
-			this.uvVBO = new VertexBuffer(1, new Float32Array(uvs), GPUService.context.ARRAY_BUFFER, 2, GPUService.context.FLOAT, false, undefined, 0)
+			this.uvVBO = new VertexBuffer(1, new Float32Array(uvs), GPU.context.ARRAY_BUFFER, 2, GPU.context.FLOAT, false, undefined, 0)
 
 		if (normals && normals.length > 0)
-			this.normalVBO = new VertexBuffer(2, new Float32Array(normals), GPUService.context.ARRAY_BUFFER, 3, GPUService.context.FLOAT, false, undefined, 0)
+			this.normalVBO = new VertexBuffer(2, new Float32Array(normals), GPU.context.ARRAY_BUFFER, 3, GPU.context.FLOAT, false, undefined, 0)
 
-		GPUService.context.bindVertexArray(null)
-		GPUService.context.bindBuffer(GPUService.context.ELEMENT_ARRAY_BUFFER, null)
+		GPU.context.bindVertexArray(null)
+		GPU.context.bindBuffer(GPU.context.ELEMENT_ARRAY_BUFFER, null)
 
 	}
 
 	static finishIfUsed() {
-		const lastUsed = GPUService.activeMesh
+		const lastUsed = GPU.activeMesh
 		if (lastUsed != null)
 			lastUsed.finish()
 	}
 
 	bindEssentialResources() {
-		const last = GPUService.activeMesh
+		const last = GPU.activeMesh
 		if (last === this)
 			return
 		// else if (last != null)
 		//     last.finish()
 
-		GPUService.activeMesh = this
-		GPUService.context.bindVertexArray(this.VAO)
-		GPUService.context.bindBuffer(GPUService.context.ELEMENT_ARRAY_BUFFER, this.indexVBO)
+		GPU.activeMesh = this
+		GPU.context.bindVertexArray(this.VAO)
+		GPU.context.bindBuffer(GPU.context.ELEMENT_ARRAY_BUFFER, this.indexVBO)
 		this.vertexVBO.enable()
 
 	}
 
 	bindAllResources() {
-		const last = GPUService.activeMesh
+		const last = GPU.activeMesh
 		if (last === this)
 			return
-		GPUService.activeMesh = this
-		GPUService.context.bindVertexArray(this.VAO)
-		GPUService.context.bindBuffer(GPUService.context.ELEMENT_ARRAY_BUFFER, this.indexVBO)
+		GPU.activeMesh = this
+		GPU.context.bindVertexArray(this.VAO)
+		GPU.context.bindBuffer(GPU.context.ELEMENT_ARRAY_BUFFER, this.indexVBO)
 		this.vertexVBO.enable()
 		if (this.normalVBO)
 			this.normalVBO.enable()
@@ -102,7 +102,7 @@ export default class Mesh {
 	}
 
 	finish() {
-		GPUService.context.bindBuffer(GPUService.context.ELEMENT_ARRAY_BUFFER, null)
+		GPU.context.bindBuffer(GPU.context.ELEMENT_ARRAY_BUFFER, null)
 		this.vertexVBO.disable()
 
 		if (this.uvVBO)
@@ -110,14 +110,14 @@ export default class Mesh {
 		if (this.normalVBO)
 			this.normalVBO.disable()
 
-		GPUService.context.bindVertexArray(null)
-		GPUService.activeMesh = undefined
+		GPU.context.bindVertexArray(null)
+		GPU.activeMesh = undefined
 	}
 
 	simplifiedDraw() {
 
 		this.bindEssentialResources()
-		GPUService.context.drawElements(GPUService.context.TRIANGLES, this.verticesQuantity, GPUService.context.UNSIGNED_INT, 0)
+		GPU.context.drawElements(GPU.context.TRIANGLES, this.verticesQuantity, GPU.context.UNSIGNED_INT, 0)
 		this.updateLastUsed();
 	}
 
@@ -127,42 +127,42 @@ export default class Mesh {
 
 	draw() {
 		this.bindAllResources()
-		GPUService.context.drawElements(GPUService.context.TRIANGLES, this.verticesQuantity, GPUService.context.UNSIGNED_INT, 0)
+		GPU.context.drawElements(GPU.context.TRIANGLES, this.verticesQuantity, GPU.context.UNSIGNED_INT, 0)
 		this.updateLastUsed();
 
 	}
 
 	drawInstanced(quantity) {
 		this.bindAllResources()
-		GPUService.context.drawElementsInstanced(GPUService.context.TRIANGLES, this.verticesQuantity, GPUService.context.UNSIGNED_INT, 0, quantity)
+		GPU.context.drawElementsInstanced(GPU.context.TRIANGLES, this.verticesQuantity, GPU.context.UNSIGNED_INT, 0, quantity)
 		this.updateLastUsed();
 
 	}
 
 	drawLineLoop() {
 		this.bindEssentialResources()
-		GPUService.context.drawElements(GPUService.context.LINE_LOOP, this.verticesQuantity, GPUService.context.UNSIGNED_INT, 0)
+		GPU.context.drawElements(GPU.context.LINE_LOOP, this.verticesQuantity, GPU.context.UNSIGNED_INT, 0)
 		this.updateLastUsed();
 
 	}
 
 	drawTriangleStrip() {
 		this.bindEssentialResources()
-		GPUService.context.drawElements(GPUService.context.TRIANGLE_STRIP, this.verticesQuantity, GPUService.context.UNSIGNED_INT, 0)
+		GPU.context.drawElements(GPU.context.TRIANGLE_STRIP, this.verticesQuantity, GPU.context.UNSIGNED_INT, 0)
 		this.updateLastUsed();
 
 	}
 
 	drawTriangleFan() {
 		this.bindEssentialResources()
-		GPUService.context.drawElements(GPUService.context.TRIANGLE_FAN, this.verticesQuantity, GPUService.context.UNSIGNED_INT, 0)
+		GPU.context.drawElements(GPU.context.TRIANGLE_FAN, this.verticesQuantity, GPU.context.UNSIGNED_INT, 0)
 		this.updateLastUsed();
 
 	}
 
 	drawLines() {
 		this.bindEssentialResources()
-		GPUService.context.drawElements(GPUService.context.LINES, this.verticesQuantity, GPUService.context.UNSIGNED_INT, 0)
+		GPU.context.drawElements(GPU.context.LINES, this.verticesQuantity, GPU.context.UNSIGNED_INT, 0)
 		this.updateLastUsed();
 	}
 

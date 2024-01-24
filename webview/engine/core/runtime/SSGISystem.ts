@@ -1,12 +1,11 @@
-import GPUService from "../services/GPUService"
-import StaticMeshes from "../repositories/StaticMeshes"
-import StaticFBO from "../repositories/StaticFBO"
-import StaticShaders from "../repositories/StaticShaders"
+import GPU from "../core/GPU"
+import StaticMeshRepository from "../repositories/StaticMeshRepository"
+import FramebufferRepository from "../repositories/FramebufferRepository"
+import ShaderRepository from "../repositories/ShaderRepository"
 import Framebuffer from "../instances/Framebuffer"
 import MetricsController from "../services/MetricsController"
 import METRICS_FLAGS from "../static/METRICS_FLAGS"
 import EngineState from "../EngineState"
-import GPUUtil from "../utils/GPUUtil";
 import AbstractSystem from "@engine-core/AbstractEngineSystem";
 import GPUAPI from "@engine-core/services/GPUAPI";
 
@@ -15,52 +14,52 @@ export default class SSGISystem extends AbstractSystem{
     static uniformSettings = new Float32Array(3)
 
     execute(gl: WebGL2RenderingContext) {
-        GPUAPI.copyTexture(StaticFBO.postProcessing1, StaticFBO.postProcessing2, GPUService.context.COLOR_BUFFER_BIT)
+        GPUAPI.copyTexture(FramebufferRepository.postProcessing1, FramebufferRepository.postProcessing2, GPU.context.COLOR_BUFFER_BIT)
 
 
         if (!EngineState.ssgiEnabled) {
             if (!cleared) {
-                StaticFBO.ssgi.clear()
+                FramebufferRepository.ssgi.clear()
                 cleared = true
             }
             return
         }
         cleared = false
-        const uniforms = StaticShaders.ssgiUniforms
-        StaticFBO.ssgi.startMapping()
-        StaticShaders.ssgi.bind()
+        const uniforms = ShaderRepository.ssgiUniforms
+        FramebufferRepository.ssgi.startMapping()
+        ShaderRepository.ssgi.bind()
 
 
-        GPUUtil.bind2DTextureForDrawing(uniforms.sceneDepth, 0, StaticFBO.sceneDepthVelocity)
+        GPU.bind2DTextureForDrawing(uniforms.sceneDepth, 0, FramebufferRepository.sceneDepthVelocity)
 
-        GPUUtil.bind2DTextureForDrawing(uniforms.previousFrame, 1, StaticFBO.postProcessing2Sampler)
+        GPU.bind2DTextureForDrawing(uniforms.previousFrame, 1, FramebufferRepository.postProcessing2Sampler)
 
         gl.uniform3fv(uniforms.rayMarchSettings, SSGISystem.uniformSettings)
 
-        StaticMeshes.drawQuad()
-        this.#applyBlur(gl, StaticFBO.ssgiFallback, StaticFBO.ssgiSampler, true)
-        this.#applyBlur(gl, StaticFBO.ssgi, StaticFBO.ssgiFallbackSampler, false)
+        StaticMeshRepository.drawQuad()
+        this.#applyBlur(gl, FramebufferRepository.ssgiFallback, FramebufferRepository.ssgiSampler, true)
+        this.#applyBlur(gl, FramebufferRepository.ssgi, FramebufferRepository.ssgiFallbackSampler, false)
 
         MetricsController.currentState = METRICS_FLAGS.SSGI
     }
 
      #applyBlur(gl: WebGL2RenderingContext, FBO: Framebuffer, color: WebGLTexture, first: boolean) {
-        const uniforms = StaticShaders.bilateralBlurUniforms
+        const uniforms = ShaderRepository.bilateralBlurUniforms
 
         if (first) {
-            StaticShaders.bilateralBlur.bind()
+            ShaderRepository.bilateralBlur.bind()
 
             gl.uniform1f(uniforms.blurRadius, EngineState.ssgiBlurRadius)
             gl.uniform1i(uniforms.samples, EngineState.ssgiBlurSamples)
-            gl.uniform2fv(uniforms.bufferResolution, StaticFBO.ssgiFallback.resolution)
+            gl.uniform2fv(uniforms.bufferResolution, FramebufferRepository.ssgiFallback.resolution)
 
-            GPUUtil.bind2DTextureForDrawing(uniforms.entityIDSampler, 0, StaticFBO.entityIDSampler)
+            GPU.bind2DTextureForDrawing(uniforms.entityIDSampler, 0, FramebufferRepository.entityIDSampler)
         } else
             gl.uniform1i(uniforms.samples, EngineState.ssgiBlurSamples / 2)
         FBO.startMapping()
-        GPUUtil.bind2DTextureForDrawing(uniforms.sceneColor, 1, color)
+         GPU.bind2DTextureForDrawing(uniforms.sceneColor, 1, color)
 
-        StaticMeshes.drawQuad()
+        StaticMeshRepository.drawQuad()
         FBO.stopMapping()
     }
 }

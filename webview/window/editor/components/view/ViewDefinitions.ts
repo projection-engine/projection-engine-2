@@ -1,4 +1,3 @@
-import ViewTabDTO from "./ViewTabDTO";
 import LocalizationEN from "@enums/LocalizationEN";
 
 enum ViewType {

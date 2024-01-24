@@ -1,6 +1,7 @@
 import Component from "./Component"
 import CULLING_COMPONENT_PROPS from "../../static/component-props/CULLING_COMPONENT_PROPS"
-import COMPONENTS from "../../static/COMPONENTS"
+import COMPONENTS from "../../static/Components"
+import RepositoryService from "@engine-core/services/serialization/RepositoryService";
 
 export default class CullingComponent extends Component{
 	static get componentKey(): string {
@@ -46,3 +47,5 @@ export default class CullingComponent extends Component{
 	}
 	occlusionCulling:boolean
 }
+
+RepositoryService.serializable(CullingComponent)

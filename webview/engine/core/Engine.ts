@@ -1,68 +1,77 @@
-import CameraRepository from "./repositories/CameraRepository"
+import Camera from "./core/Camera"
 import ENVIRONMENT from "./static/ENVIRONMENT"
-import GPUService from "./services/GPUService"
+import GPU from "./core/GPU"
 import Entity from "./instances/Entity"
 import DynamicMap from "./lib/DynamicMap"
-import ResourceEntityMapper from "./repositories/ResourceEntityMapper"
-import {Injectable} from "@lib/Injection";
-import IInjectable from "@lib/IInjectable";
+import World from "./core/World"
 import AbstractEngineSystem from "@engine-core/AbstractEngineSystem";
-import StaticUBOs from "@engine-core/repositories/StaticUBOs";
-import StaticMeshes from "@engine-core/repositories/StaticMeshes";
-import StaticShaders from "@engine-core/repositories/StaticShaders";
-import StaticFBO from "@engine-core/repositories/StaticFBO";
+import UBORepository from "@engine-core/repositories/UBORepository";
+import StaticMeshRepository from "@engine-core/repositories/StaticMeshRepository";
+import ShaderRepository from "@engine-core/repositories/ShaderRepository";
+import FramebufferRepository from "@engine-core/repositories/FramebufferRepository";
 import CubeMapAPI from "@engine-core/services/CubeMapAPI";
 import LineAPI from "@engine-core/services/LineAPI";
 import AbstractEngineService from "@engine-core/AbstractEngineService";
 import AbstractEngineResource from "@engine-core/AbstractEngineResource";
 import SystemService from "@engine-core/services/SystemService";
+import Serializable from "@engine-core/services/serialization/Serializable";
+import RepositoryService from "@engine-core/services/serialization/RepositoryService";
+import Components from "@engine-core/static/Components";
+import Scripting from "@engine-core/core/Scripting";
+import PhysicsWorld from "@engine-core/core/PhysicsWorld";
 
-@Injectable
-export default class Engine extends IInjectable {
+export default class Engine extends Serializable {
+    _physicsWorld: PhysicsWorld
+    _world: World
+    _camera: Camera
+    _scripting: Scripting;
+    _gpu: GPU
+
     // TODO - FIND A BETTER PLACE FOR THESE VARIABLES
     elapsed = 0
-    currentTimeStamp = 0
 
-    #development = false
+    currentTimeStamp = 0
     UILayouts = new Map()
     isDev = true
-    #environment: number = ENVIRONMENT.DEV
-    #isReady = false
-    #singletons = new DynamicMap<string, AbstractEngineService>()
+    environment: number = ENVIRONMENT.DEV
 
-    #rootEntity = new Entity()
-    #camera: CameraRepository
-    #gpu: GPUService
+    #singletons = new DynamicMap<AbstractEngineService>()
     #canvas: HTMLCanvasElement
-    #mainResolution: { w: number, h: number }
+    mainResolution: { w: number, h: number }
 
+    constructor() {
+        super();
+
+        this._world = new World(this)
+        this._scripting = new Scripting(this)
+        this._camera = new Camera(this)
+        this._gpu = new GPU(this)
+    }
 
     async initialize(canvas: HTMLCanvasElement, mainResolution: {
         w: number,
         h: number
-    }, readAsset: Function, devAmbient: boolean) {
-        this.#development = devAmbient
-
+    }, readAsset: Function) {
         this.#canvas = canvas
-        this.#mainResolution = mainResolution
+        this.mainResolution = mainResolution
+        this._gpu.initialize()
         await this.createSingletons()
-
-        ResourceEntityMapper.addEntity(this.#rootEntity)
-        this.#isReady = true
         this.start()
     }
 
+    getByComponent(component: Components): Entity[] {
+        return this._world.getEntitiesByComponent(component)
+    }
+
     private async createSingletons() {
-        this.#gpu = (await this.addSingleton(GPUService)) as GPUService
-        this.#camera = (await this.addSingleton(CameraRepository)) as CameraRepository;
-        await this.addSingleton(StaticUBOs)
-        await this.addSingleton(StaticMeshes)
-        await this.addSingleton(StaticShaders)
-        await this.addSingleton(StaticFBO)
+        await this.addSingleton(UBORepository)
+        await this.addSingleton(StaticMeshRepository)
+        await this.addSingleton(ShaderRepository)
+        await this.addSingleton(FramebufferRepository)
         await this.addSingleton(CubeMapAPI)
         await this.addSingleton(LineAPI)
         await this.addSingleton(SystemService)
-        GPUService.generateBRDF()
+        GPU.generateBRDF()
     }
 
     async addSingleton(Singleton: typeof AbstractEngineService): Promise<AbstractEngineService> {
@@ -72,7 +81,7 @@ export default class Engine extends IInjectable {
         return instance
     }
 
-    getSingleton(Singleton: typeof AbstractEngineService): AbstractEngineService{
+    getSingleton(Singleton: typeof AbstractEngineService): AbstractEngineService {
         return this.#singletons.get(Singleton.name)
     }
 
@@ -80,8 +89,8 @@ export default class Engine extends IInjectable {
         return await (this.getSingleton(SystemService) as SystemService).addSystem(System)
     }
 
-    async startSimulation() {
-        await (this.getSingleton(SystemService) as SystemService).startSimulation()
+    startSimulation() {
+        (this.getSingleton(SystemService) as SystemService).startSimulation()
     }
 
     stop() {
@@ -102,50 +111,53 @@ export default class Engine extends IInjectable {
     }
 
     getMainResolution(): { w: number; h: number } {
-        return this.#mainResolution;
+        return this.mainResolution;
     }
 
     getRootEntity(): Entity {
-        return this.#rootEntity
+        return this._world.getRootEntity()
     }
 
-    getCamera(): CameraRepository {
-        return this.#camera
+    getGPU(): GPU {
+        return this._gpu
     }
 
-    getGPU(): GPUService {
-        return this.#gpu
+    getWorld() {
+        return this._world
+    }
+    getPhysicsWorld() {
+        return this._physicsWorld
+    }
+
+    getCamera() {
+        return this._camera
     }
 
     getContext(): WebGL2RenderingContext {
-        return GPUService.context
+        return GPU.context
     }
 
-    get entities(): DynamicMap<string, Entity> {
-        return ResourceEntityMapper.entities
+    getEntities(): DynamicMap<Entity> {
+        return this.getWorld()._entities
     }
 
-    get queryMap(): Map<string, Entity> {
-        return ResourceEntityMapper.queryMap
+    get<T>(Clazz: new () => T): T {
+        return this.#singletons.get(Clazz.name) as T
     }
 
-    get isReady() {
-        return this.#isReady
+    getEnvironment(): number {
+        return this.environment
     }
 
-    get developmentMode() {
-        return this.#development
-    }
-
-    get environment(): number {
-        return this.#environment
-    }
-
-    set environment(data: number) {
+    setEnvironment(data: number) {
         this.isDev = data === ENVIRONMENT.DEV
-        this.#environment = data
+        this.environment = data
         if (this.isDev)
-            this.#camera.updateAspectRatio()
+            this._camera.updateAspectRatio()
     }
 
+    getScripting(): Scripting {
+        return this._scripting;
+    }
 }
+RepositoryService.injectable(Engine)

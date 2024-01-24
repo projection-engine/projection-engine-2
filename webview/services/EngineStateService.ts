@@ -3,12 +3,10 @@ import AXIS from "@engine-tools/static/AXIS"
 import EntityAPI from "@engine-core/services/EntityAPI"
 import SelectionStore from "@lib/stores/SelectionStore"
 import Entity from "@engine-core/instances/Entity"
-import PickingAPI from "@engine-core/services/PickingAPI"
+import DepthPickingService from "@engine-core/services/DepthPickingService"
 
-import QueryAPI from "@engine-core/services/QueryAPI"
-import LocalizationEN from "@enums/LocalizationEN"
+import EntityQueryService from "@engine-core/services/EntityQueryService"
 import GizmoUtil from "@engine-tools/gizmo/util/GizmoUtil"
-import ProjectionEngine from "@lib/ProjectionEngine";
 import {Inject, Injectable} from "@lib/Injection";
 import IInjectable from "@lib/IInjectable";
 import EntityNamingService from "@services/EntityNamingService";
@@ -32,15 +30,15 @@ export default class EngineStateService extends IInjectable {
     static engine: Engine
 
     static updateStructure(replacedMap?: { [key: string]: boolean }) {
-        const arr = EngineStateService.engine.entities.array
+        const arr = EngineStateService.engine.getEntities().array
         for (let i = 0; i < arr.length; i++) {
             const entity = arr[i]
-            entity.setPickID(PickingAPI.getPickerId(i + AXIS.ZY + 1))
+            entity.setPickID(DepthPickingService.getPickerId(i + AXIS.ZY + 1))
             if (!entity.parentID && !replacedMap?.[entity.parent?.id])
                 continue
             if (entity.parent && !replacedMap?.[entity.parent?.id])
                 entity.parentID = entity.parent.id
-            const parent = EngineStateService.engine.entities.get(entity.parentID)
+            const parent = EngineStateService.engine.getEntities().get(entity.parentID)
             if (parent) {
                 entity.parentID = undefined
                 entity.addParent(parent)
@@ -48,19 +46,6 @@ export default class EngineStateService extends IInjectable {
         }
 
         EngineStateService.entityHierarchyService.updateHierarchy()
-    }
-
-    static replaceBlock(toRemove: string[], toAdd: Entity[]) {
-
-        const replacedMap = {}
-        EngineStateService.removeBlock(toRemove)
-        for (let i = 0; i < toAdd.length; i++) {
-            const entity = toAdd[i]
-            EntityAPI.addEntity(entity)
-            replacedMap[entity.id] = true
-            EngineStateService.entityNamingService.renameEntity(entity.name, entity)
-        }
-        EngineStateService.updateStructure(replacedMap)
     }
 
     static appendBlock(block: Entity[]) {
@@ -74,11 +59,11 @@ export default class EngineStateService extends IInjectable {
     static removeBlock(payload: string[]) {
         const hierarchy: { [key: string]: Entity } = {}
         for (let i = 0; i < payload.length; i++) {
-            const entity = EngineStateService.engine.entities.get(payload[i])
+            const entity = EngineStateService.engine.getEntities().get(payload[i])
             if (!entity)
                 continue
             hierarchy[entity.id] = entity
-            QueryAPI.getHierarchyToObject(entity, hierarchy)
+            EntityQueryService.getHierarchyToObject(entity, hierarchy)
         }
 
         const entities = Object.values(hierarchy)
@@ -87,7 +72,7 @@ export default class EngineStateService extends IInjectable {
         EngineStateService.selectionStore.updateStore({
             array: []
         })
-        SelectionStore.setLockedEntity(EngineStateService.engine.entities.array[0]?.id)
+        SelectionStore.setLockedEntity(EngineStateService.engine.getEntities().array[0]?.id)
         EngineStateService.updateStructure()
     }
 
@@ -103,11 +88,11 @@ export default class EngineStateService extends IInjectable {
     }
 
     static linkMultiple(payload: string[]) {
-        const values = EngineStateService.engine.entities.array
+        const values = EngineStateService.engine.getEntities().array
         for (let i = 0; i < values.length; i++) {
             const s = values[i]
             if (payload.indexOf(s.id) > 0) {
-                const found = EngineStateService.engine.entities.get(payload[0])
+                const found = EngineStateService.engine.getEntities().get(payload[0])
                 s.addParent(found)
             }
         }

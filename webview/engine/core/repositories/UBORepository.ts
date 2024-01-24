@@ -1,6 +1,6 @@
 import UBO from "../instances/UBO"
-import UberShader from "./UberShader"
-import GPUService from "../services/GPUService"
+import UberShaderService from "../services/UberShaderService"
+import GPU from "../core/GPU"
 import AbstractEngineService from "@engine-core/AbstractEngineService";
 
 export enum StaticUBONames {
@@ -13,7 +13,7 @@ export enum StaticUBONames {
     CAMERA_PROJECTION = "CameraProjectionInfo"
 }
 
-export default class StaticUBOs extends AbstractEngineService {
+export default class UBORepository extends AbstractEngineService {
     static cameraViewUBO?: UBO
     static frameCompositionUBO?: UBO
     static lensPostProcessingUBO?: UBO
@@ -23,7 +23,7 @@ export default class StaticUBOs extends AbstractEngineService {
     static cameraProjectionUBO?: UBO
 
     async initialize() {
-        StaticUBOs.cameraViewUBO = this.createResource(UBO).initialize(
+        UBORepository.cameraViewUBO = this.createResource(UBO).initialize(
             StaticUBONames.CAMERA_VIEW,
             [
                 {name: "viewProjection", type: "mat4"},
@@ -31,7 +31,7 @@ export default class StaticUBOs extends AbstractEngineService {
                 {name: "invViewMatrix", type: "mat4"},
                 {name: "placement", type: "vec4"},
             ])
-        StaticUBOs.frameCompositionUBO = this.createResource(UBO).initialize(
+        UBORepository.frameCompositionUBO = this.createResource(UBO).initialize(
             StaticUBONames.FRAME_COMPOSITION,
             [
                 {type: "vec2", name: "inverseFilterTextureSize"},
@@ -46,7 +46,7 @@ export default class StaticUBOs extends AbstractEngineService {
 
             ]
         )
-        StaticUBOs.lensPostProcessingUBO = this.createResource(UBO).initialize(
+        UBORepository.lensPostProcessingUBO = this.createResource(UBO).initialize(
             StaticUBONames.LENS_PP,
             [
                 {type: "float", name: "textureSizeXDOF"},
@@ -69,7 +69,7 @@ export default class StaticUBOs extends AbstractEngineService {
                 {type: "float", name: "exposure"}
             ]
         )
-        StaticUBOs.ssaoUBO = this.createResource(UBO).initialize(
+        UBORepository.ssaoUBO = this.createResource(UBO).initialize(
             StaticUBONames.SSAO,
             [
                 {name: "settings", type: "vec4"},
@@ -77,7 +77,7 @@ export default class StaticUBOs extends AbstractEngineService {
                 {name: "noiseScale", type: "vec2"}
             ]
         )
-        StaticUBOs.uberUBO = this.createResource(UBO).initialize(
+        UBORepository.uberUBO = this.createResource(UBO).initialize(
             StaticUBONames.UBER,
             [
                 {name: "shadowMapsQuantity", type: "float"},
@@ -98,14 +98,14 @@ export default class StaticUBOs extends AbstractEngineService {
                 {type: "bool", name: "hasAmbientOcclusion"}
             ]
         )
-        StaticUBOs.lightsUBO = this.createResource(UBO).initialize(
+        UBORepository.lightsUBO = this.createResource(UBO).initialize(
             StaticUBONames.LIGHTS,
             [
-                {name: "lightPrimaryBuffer", type: "mat4", dataLength: UberShader.MAX_LIGHTS},
-                {name: "lightSecondaryBuffer", type: "mat4", dataLength: UberShader.MAX_LIGHTS},
+                {name: "lightPrimaryBuffer", type: "mat4", dataLength: UberShaderService.MAX_LIGHTS},
+                {name: "lightSecondaryBuffer", type: "mat4", dataLength: UberShaderService.MAX_LIGHTS},
             ]
         )
-        StaticUBOs.cameraProjectionUBO = this.createResource(UBO).initialize(
+        UBORepository.cameraProjectionUBO = this.createResource(UBO).initialize(
             StaticUBONames.CAMERA_PROJECTION,
             [
                 {name: "projectionMatrix", type: "mat4"},
@@ -117,14 +117,14 @@ export default class StaticUBOs extends AbstractEngineService {
         )
 
         const F32 = new Float32Array([2.2])
-        StaticUBOs.lensPostProcessingUBO.bind()
-        StaticUBOs.lensPostProcessingUBO.updateData("gamma", F32)
+        UBORepository.lensPostProcessingUBO.bind()
+        UBORepository.lensPostProcessingUBO.updateData("gamma", F32)
         F32[0] = 1
-        StaticUBOs.lensPostProcessingUBO.updateData("exposure", F32)
-        F32[0] = GPUService.internalResolution.w
-        StaticUBOs.lensPostProcessingUBO.updateData("textureSizeXDOF", F32)
-        F32[0] = GPUService.internalResolution.h
-        StaticUBOs.lensPostProcessingUBO.updateData("textureSizeYDOF", F32)
-        StaticUBOs.lensPostProcessingUBO.unbind()
+        UBORepository.lensPostProcessingUBO.updateData("exposure", F32)
+        F32[0] = GPU.internalResolution.w
+        UBORepository.lensPostProcessingUBO.updateData("textureSizeXDOF", F32)
+        F32[0] = GPU.internalResolution.h
+        UBORepository.lensPostProcessingUBO.updateData("textureSizeYDOF", F32)
+        UBORepository.lensPostProcessingUBO.unbind()
     }
 }
