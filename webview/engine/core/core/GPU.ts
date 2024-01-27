@@ -11,6 +11,8 @@ import DynamicMap from "../lib/DynamicMap"
 import ConversionAPI from "@engine-core/services/ConversionAPI";
 import AbstractEngineCoreService from "@engine-core/core/AbstractEngineCoreService";
 import Engine from "@engine-core/Engine";
+import RepositoryService from "@engine-core/services/serialization/RepositoryService";
+import Camera from "@engine-core/core/Camera";
 
 export default class GPU extends AbstractEngineCoreService {
     static context?: WebGL2RenderingContext
@@ -98,3 +100,5 @@ export default class GPU extends AbstractEngineCoreService {
         context.uniform1i(uniform, activeIndex)
     }
 }
+
+RepositoryService.serializable(GPU)

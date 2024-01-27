@@ -8,10 +8,11 @@ import ViewTabDTO from "../../../window/editor/components/view/ViewTabDTO";
 import LocalizationEN from "@enums/LocalizationEN";
 import {ViewType} from "../../../window/editor/components/view/ViewDefinitions";
 import RepositoryService from "@engine-core/services/serialization/RepositoryService";
+import {v4} from 'uuid';
 
 export default class SettingsStateDTO extends IStateDTO {
     filesInUse: string[] = []
-
+    projectID  = v4()
     spawnOnOrigin = false
     maxDistanceIcon = 50
     cameraGizmoSize = 25
@@ -70,6 +71,7 @@ export default class SettingsStateDTO extends IStateDTO {
         CAMERA_LEFT: [KEYS.Digit3],
         CAMERA_RIGHT: [KEYS.Digit4],
         CAMERA_FRONT: [KEYS.Digit5],
+        CAMERA_BACK: [KEYS.Digit6],
         FOCUS_ON_CAMERA: [KEYS.Digit0]
     }
     contentBrowserHotkeys = {

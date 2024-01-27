@@ -16,6 +16,7 @@ import DynamicMap from "@engine-core/lib/DynamicMap";
 import Entity from "@engine-core/instances/Entity";
 import {CustomEngineScript} from "@engine-core/engine-d";
 import Components from "../static/Components";
+import RepositoryService from "@engine-core/services/serialization/RepositoryService";
 
 /**
  * Custom systems defined by the user
@@ -77,3 +78,6 @@ export default class Scripting extends AbstractEngineCoreService {
         return this.#instances.array
     }
 }
+
+RepositoryService.serializable(Scripting)
+

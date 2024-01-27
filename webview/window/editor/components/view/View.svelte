@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Hierarchy from "../../views/hierarchy/HierarchyView.svelte"
+    import Hierarchy from "../../views/hierarchy/WorldOutlineView.svelte"
     import Inspector from "../../views/inspector/InspectorView.svelte"
     import ShaderEditor from "../../views/shader-editor/ShaderEditorView.svelte"
     import UIEditor from "../../views/ui/UIEditorView.svelte"
@@ -11,6 +11,8 @@
     import SettingsStore from "@lib/stores/SettingsStore";
     import {InjectVar} from "@lib/Injection";
     import FileSystemView from "../../views/fs/FileSystemView.svelte";
+    import WorldOutlinerView from "../../views/world/WorldOutlineView.svelte";
+    import HierarchyView from "../../views/hierarchy/WorldOutlineView.svelte";
 
     export let styles: string = ""
     export let index: number
@@ -25,7 +27,7 @@
             case ViewType.SHADER_EDITOR:
                 return ShaderEditor
             case ViewType.HIERARCHY:
-                return Hierarchy
+                return HierarchyView
             case ViewType.INSPECTOR:
                 return Inspector
             case ViewType.FILES:

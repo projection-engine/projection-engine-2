@@ -11,12 +11,17 @@
     import ProjectionEngine from "@lib/ProjectionEngine";
     import {InjectVar} from "@lib/Injection";
     import SettingsStore from "@lib/stores/SettingsStore";
+    import Components from "@engine-core/static/Components";
+    import WorldOutlineStore from "@lib/stores/WorldOutlineStore";
 
-    const COMPONENT_ID = crypto.randomUUID()
     let cameras = []
     let focusedCamera
     let screenSpaceMovement = false
     let camera = {}
+
+    const unsubscribeWorld = InjectVar(WorldOutlineStore).subscribe(() => {
+        cameras = ProjectionEngine.Engine.getByComponent(Components.CAMERA)
+    })
 
     const unsubSettings = InjectVar(SettingsStore).subscribe(data => {
         CameraTracker.screenSpaceMovement = screenSpaceMovement = data.screenSpaceMovement
@@ -24,15 +29,10 @@
         focusedCamera = data.focusedCamera
     }, ["screenSpaceMovement", "camera", "focusedCamera"])
 
-    onMount(() => {
-        ProjectionEngine.EntityHierarchyService.registerListener(COMPONENT_ID, () => {
-            cameras = ProjectionEngine.Engine.getEntities().array.filter(entity => entity.cameraComponent != null)
-        })
-    })
 
     onDestroy(() => {
         unsubSettings()
-        ProjectionEngine.EntityHierarchyService.removeListener(COMPONENT_ID)
+        unsubscribeWorld()
     })
 
     const toggleProjection = () => {

@@ -4,7 +4,7 @@ import EngineResourceLoaderService from "@services/EngineResourceLoaderService"
 import FileSystemAPI from "@engine-core/services/FileSystemAPI"
 import SelectionStore from "@lib/stores/SelectionStore"
 import LightComponent from "@engine-core/instances/components/LightComponent"
-import LightsService from "@engine-core/services/LightsService"
+import WorldLights from "@engine-core/core/WorldLights"
 import CameraComponent from "@engine-core/instances/components/CameraComponent"
 import EditorUtil from "./EditorUtil"
 import type Entity from "@engine-core/instances/Entity";
@@ -12,7 +12,7 @@ import type Component from "@engine-core/instances/components/Component";
 import Engine from "@engine-core/Engine";
 import IInjectable from "@lib/IInjectable";
 import {Inject, Injectable} from "@lib/Injection";
-import EntityHierarchyService from "@services/EntityHierarchyService";
+import WorldOutlineStore from "@lib/stores/WorldOutlineStore";
 import ToasterService from "@services/ToasterService";
 import SettingsStore from "@lib/stores/SettingsStore";
 
@@ -30,8 +30,8 @@ export default class InspectorUtil extends IInjectable {
     @Inject(Engine)
     static engine: Engine
 
-    @Inject(EntityHierarchyService)
-    static entityHierarchyService: EntityHierarchyService
+    @Inject(WorldOutlineStore)
+    static entityHierarchyService: WorldOutlineStore
 
     @Inject(ToasterService)
     static toasterService: ToasterService
@@ -76,7 +76,7 @@ export default class InspectorUtil extends IInjectable {
     static updateEntityComponent(entity: Entity, key: string, value: any, component: typeof Component) {
         if (component instanceof LightComponent) {
             entity.needsLightUpdate = true
-            LightsService.packageLights(true)
+            WorldLights.packageLights(true)
         }
         if (component instanceof CameraComponent) {
             entity.__cameraNeedsUpdate = true

@@ -19,6 +19,7 @@ import RepositoryService from "@engine-core/services/serialization/RepositorySer
 import Components from "@engine-core/static/Components";
 import Scripting from "@engine-core/core/Scripting";
 import PhysicsWorld from "@engine-core/core/PhysicsWorld";
+import WorldLights from "@engine-core/core/WorldLights";
 
 export default class Engine extends Serializable {
     _physicsWorld: PhysicsWorld
@@ -26,6 +27,7 @@ export default class Engine extends Serializable {
     _camera: Camera
     _scripting: Scripting;
     _gpu: GPU
+    _worldLights: WorldLights
 
     // TODO - FIND A BETTER PLACE FOR THESE VARIABLES
     elapsed = 0
@@ -44,6 +46,7 @@ export default class Engine extends Serializable {
 
         this._world = new World(this)
         this._scripting = new Scripting(this)
+        this._worldLights = new WorldLights(this)
         this._camera = new Camera(this)
         this._gpu = new GPU(this)
     }
@@ -125,6 +128,11 @@ export default class Engine extends Serializable {
     getWorld() {
         return this._world
     }
+
+    getWorldLights() {
+        return this._worldLights
+    }
+
     getPhysicsWorld() {
         return this._physicsWorld
     }

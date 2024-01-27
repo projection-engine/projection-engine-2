@@ -2,7 +2,7 @@ import COMPONENTS from "../static/Components"
 import GUIService from "./GUIService"
 import PhysicsWorld from "../core/PhysicsWorld"
 import Entity from "../instances/Entity"
-import LightsService from "./LightsService"
+import WorldLights from "../core/WorldLights"
 import DepthPrePassSystem from "../runtime/DepthPrePassSystem"
 import MeshRepository from "../repositories/MeshRepository"
 import MaterialRepository from "../repositories/MaterialRepository"
@@ -77,7 +77,7 @@ export default class EntityAPI extends AbstractEngineSystem{
         })
 
         if (needsLightUpdate)
-            LightsService.packageLights(false, true)
+            WorldLights.packageLights(false, true)
         DepthPrePassSystem.needsUpdate = needsVisibilityUpdate
     }
 
@@ -87,7 +87,7 @@ export default class EntityAPI extends AbstractEngineSystem{
 
         ProjectionEngine.Engine.getWorld().addEntity(entity)
         if (COMPONENT_TRIGGER_UPDATE.indexOf(<COMPONENTS | undefined>previouslyRemoved) || !!COMPONENT_TRIGGER_UPDATE.find(v => entity.components.get(v) != null))
-            LightsService.packageLights(false, true)
+            WorldLights.packageLights(false, true)
         DepthPrePassSystem.needsUpdate = true
     }
 
@@ -135,7 +135,7 @@ export default class EntityAPI extends AbstractEngineSystem{
         }
 
         if (didLightsChange)
-            LightsService.packageLights(false, true)
+            WorldLights.packageLights(false, true)
     }
 
 

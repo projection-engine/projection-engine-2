@@ -1,10 +1,11 @@
 import IStateDTO from "@lib/stores/state/IStateDTO";
 import IInjectable from "@lib/IInjectable";
 
+type Callback<T> = (data: T, changes?: string[]) => void
 export default class AbstractStore<T extends IStateDTO> extends IInjectable {
     readonly _data: T
-    #globalSubs = new Map<string, GenericVoidFunctionWithP<T>>()
-    #subsByField = new Map<string, Map<string, GenericVoidFunctionWithP<T>>>()
+    #globalSubs = new Map<string, Callback<T>>()
+    #subsByField = new Map<string, Map<string, Callback<T>>>()
 
     constructor(data: T) {
         super()
@@ -12,11 +13,13 @@ export default class AbstractStore<T extends IStateDTO> extends IInjectable {
     }
 
     updateStore(data: MutableObject = {}) {
-        const callbacks: GenericVoidFunctionWithP<T>[] = []
+        const callbacks: Callback<T>[] = []
+        const changed: string[] = []
         for (const key of this._data.getKeys()) {
             if (!Object.hasOwn(data, key)) {
                 continue;
             }
+            changed.push(key)
             const dataValue = data[key];
             if (this.#subsByField.has(key)) {
                 this.#subsByField
@@ -26,7 +29,7 @@ export default class AbstractStore<T extends IStateDTO> extends IInjectable {
             this._data[key] = dataValue
         }
         this.#globalSubs.forEach(callback => callbacks.push(callback))
-        callbacks.forEach(c => c(this._data))
+        callbacks.forEach(c => c(this._data, changed))
     }
 
     /**
@@ -35,8 +38,8 @@ export default class AbstractStore<T extends IStateDTO> extends IInjectable {
      * @param dependencies
      * @return unsubscribe callback
      */
-    subscribe(callback: GenericVoidFunctionWithP<T>, dependencies: string[] = []): GenericVoidFunction {
-        callback(this._data)
+    subscribe(callback: Callback<T>, dependencies: string[] = []): GenericVoidFunction {
+        callback(this._data, [])
         const id = crypto.randomUUID()
         if (dependencies.length === 0) {
             this.#globalSubs.set(id, callback)

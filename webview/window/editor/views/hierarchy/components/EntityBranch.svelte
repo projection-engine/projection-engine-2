@@ -17,16 +17,15 @@
 
     let isOnEdit = false
     let ref: HTMLElement
+    let containerRef: HTMLElement
 
-
-    $: icons = HierarchyUtil.getEngineIcon(entity)
     const draggable = dragDrop(true)
     $: draggable.disabled = isOnEdit
 
 
     const ID = crypto.randomUUID()
     let entityName = entity.name
-    let entityID
+    let entityID: string
     let components = []
     let children = 0
     $: {
@@ -44,55 +43,54 @@
             entityID = entity.id
         }
     }
-    $: {
-        if (!isOnEdit && entityName !== entity.name) {
-            ProjectionEngine.EntityNamingService.renameEntity(entity.name, entity)
-            entityName = entity.name
-        }
-    }
+
     onMount(() => {
+        containerRef.addEventListener("click", e => HierarchyUtil.updateSelection(entity.id, e.ctrlKey))
+        ref.addEventListener("dblclick", () => isOnEdit = true)
         draggable.onMount({
             targetElement: ref,
             onDragStart: () => entity,
-            dragImage: _ => `<div style="display: flex; gap: 4px"><span style="font-size: .9rem;" data-svelteicon="-">view_in_ar</span> ${SelectionStore.getEntitiesSelected().length > 1 ? SelectionStore.getEntitiesSelected().length + " Entities" : entity.name}</div>`,
+            dragImage: () => `<div style="display: flex; gap: 4px"><span style="font-size: .9rem;" data-svelteicon="-">view_in_ar</span> ${SelectionStore.getEntitiesSelected().length > 1 ? SelectionStore.getEntitiesSelected().length + " Entities" : entity.name}</div>`,
         })
     })
+
     onDestroy(() => {
         draggable.onDestroy()
         ProjectionEngine.EntityUpdateService.removeListener(entityID, ID)
     })
 
+    function handleRename(value: string) {
+        entityName = entity.name = value
+        ProjectionEngine.EntityNamingService.renameEntity(entity.name, entity)
+        isOnEdit = false
+    }
+
     $: isLocked = lockedEntity === entity.id
 </script>
 
-<div class="info hierarchy-branch" data-sveltenode={entity.id} on:click={e => HierarchyUtil.updateSelection(entity.id, e.ctrlKey)}>
+<div class="info hierarchy-branch" data-sveltenode={entity.id} bind:this={containerRef}>
     <button
-
             data-sveltelocked={isLocked ? "-" : ""}
             class="button-icon hierarchy-branch"
             style={`--button-color: ${entity.isCollection ? "rgb(" + entity.colorIdentifier + ")" : !isLocked ? "var(--folder-color-darker)" : "var(--folder-color)" }`}
             on:click={() => SelectionStore.setLockedEntity(entity.id)}
     >
-        {#if entity.isCollection}
-            <Icon styles="font-size: 1rem">inventory_2</Icon>
-        {:else}
-            <Icon styles="font-size: 1rem">view_in_ar</Icon>
-        {/if}
+        <Icon styles="font-size: 1rem">
+            {#if entity.isCollection}
+                inventory_2
+            {:else}
+                view_in_ar
+            {/if}
+        </Icon>
     </button>
 
-    <div bind:this={ref} on:dblclick={() => isOnEdit = true}>
+    <div bind:this={ref}>
         {entityName}
         <ToolTip content={entityName}/>
     </div>
 
     {#if isOnEdit}
-        <ModalInput
-                initialValue={entityName}
-                handleClose={value => {
-                    entity.name = value
-                    isOnEdit = false
-                }}
-        />
+        <ModalInput initialValue={entityName} handleClose={handleRename}/>
     {/if}
 
     {#if !isOpen && !isOnSearch}
