@@ -1,6 +1,5 @@
 <script lang="ts">
-    import TreeBranchContent from "./EntityTreeBranchContent.svelte";
-
+    import EntityBranch from "./EntityBranch.svelte";
     import EntityFactoryService from "@services/EntityFactoryService";
     import Icon from "@lib/components/icon/Icon.svelte";
     import ToolTip from "@lib/components/tooltip/ToolTip.svelte";
@@ -8,25 +7,22 @@
     import EntityQueryService from "@engine-core/services/EntityQueryService";
     import LocalizationEN from "@enums/LocalizationEN";
 
-    export let testSearch: GenericVoidFunctionWithP<MutableObject>
+    export let testSearch: GenericNonVoidFunctionWithP<MutableObject, boolean>
     export let depth: number
     export let isOnSearch: boolean
     export let entity: Entity
     export let open: { [key: string]: boolean }
     export let updateOpen: GenericVoidFunction
-    export let selectedList:string[]
+    export let selectedList: string[]
     export let lockedEntity: string
 
-    const onExpand = () => {
+    function onExpand() {
         if (!open[entity.id]) {
             open[entity.id] = true
             updateOpen()
         } else {
-
             delete open[entity.id]
-            EntityQueryService.loopHierarchy(entity, (child) => {
-                delete open[child.id]
-            })
+            EntityQueryService.loopHierarchy(entity, c => delete open[c.id])
             updateOpen()
         }
     }
@@ -36,19 +32,23 @@
     $: childQuantity = Math.max(entity.children.array.length, entity.allComponents.length)
     $: hasChildren = childQuantity > 0
     $: isMatchToSearch = isOnSearch && testSearch(entity)
+
+    function toggleVisibility() {
+        EntityFactoryService.toggleEntityVisibility(entity.id)
+    }
 </script>
 
 <div
         data-svelteselected={isNodeSelected || isMatchToSearch? "-" : ""}
         data-sveltenode={entity.id}
-
         class="wrapper hierarchy-branch"
         style={(isMatchToSearch && !isNodeSelected ? "--pj-accent-color-light: var(--pj-accent-color-tertiary);" : "")+ "padding-left:" +  (depth * 18 + "px;") + (entity.active ? "" : "opacity: .5") }
 >
 
     {#if hasChildren}
         {#each {length: depth} as _, i}
-            <div data-sveltevertdivider="-" style={`border-left-style: ${i === 0 ? "solid" : "dashed"}; left: ${i * 18}px`} class="divider"></div>
+            <div data-sveltevertdivider="-"
+                 style={`border-left-style: ${i === 0 ? "solid" : "dashed"}; left: ${i * 18}px`} class="divider"></div>
         {/each}
         <button
                 data-sveltebuttondefault="-"
@@ -62,11 +62,11 @@
     {:else}
         <div class="button-small hierarchy-branch"></div>
     {/if}
-    <TreeBranchContent {isOpen} {entity} {lockedEntity} {isOnSearch}/>
+    <EntityBranch {isOpen} {entity} {lockedEntity} {isOnSearch}/>
     <button
             data-sveltebuttondefault="-"
             class="button-visibility"
-            on:click={() => EntityFactoryService.toggleEntityVisibility(entity.id)}
+            on:click={toggleVisibility}
     >
         <ToolTip content={LocalizationEN.DEACTIVATE}/>
         <Icon styles="font-size: .8rem">

@@ -44,7 +44,6 @@ export default class Entity extends ComponentResources {
     	super()
     	this.#id = (id ?? this.#id) as `${string}-${string}-${string}-${string}-${string}`
     	this.#isCollection = isCollection ?? false
-
     }
 
     get allComponents() {

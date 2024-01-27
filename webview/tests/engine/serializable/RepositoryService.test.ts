@@ -65,7 +65,6 @@ test('Should restore circular dependency', () => {
 
     RepositoryService.restore(dump)
 
-    console.log(JSON.parse(dump))
     expect(repository.otherRepository).toBe(other)
     expect(repository.otherRepository).not.toBeNull()
     expect(repository.otherRepository?.circular).toBe(repository)

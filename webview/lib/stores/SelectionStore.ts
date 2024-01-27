@@ -1,6 +1,7 @@
 import AbstractStore from "./AbstractStore"
 import {Injectable, InjectVar} from "@lib/Injection";
 import SelectionStateDTO from "@lib/stores/state/SelectionStateDTO";
+import RepositoryService from "@engine-core/services/serialization/RepositoryService";
 
 @Injectable
 export default class SelectionStore extends AbstractStore<SelectionStateDTO>{
@@ -30,3 +31,5 @@ export default class SelectionStore extends AbstractStore<SelectionStateDTO>{
 		InjectVar(SelectionStore).updateStore({lockedEntity: data})
 	}
 }
+
+RepositoryService.serializable(SelectionStore)

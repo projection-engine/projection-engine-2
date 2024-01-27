@@ -72,7 +72,7 @@ export default class EntityQueryService {
         return hierarchy
     }
 
-    static loopHierarchy(entity: Entity, callback: Function) {
+    static loopHierarchy(entity: Entity, callback: GenericVoidFunctionWithP<Entity>) {
         const children = entity.children.array
         callback(entity)
         for (let i = 0; i < children.length; i++) {

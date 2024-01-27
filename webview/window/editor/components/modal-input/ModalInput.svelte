@@ -1,31 +1,33 @@
-<script>
+<script lang="ts">
     import Modal from "@lib/components/modal/Modal.svelte"
     import KEYS from "../../static/KEYS"
 
-    export let handleClose
-    export let alignBottom
-    export let initialValue
+    export let handleClose: GenericVoidFunctionWithP<string>
+    export let alignBottom = false
+    export let initialValue: string = undefined
 
-    let ref
-    const value = {value: initialValue}
+    let ref: HTMLElement
+    let inputRef: HTMLInputElement
 
     function getStyle() {
-    	const bBox = ref.parentElement.getBoundingClientRect()
-    	return `width: ${bBox.width}px; display: block; padding: 0; background: none; border: none; height: 23px; width: 10vw; top: ${alignBottom ? bBox.top + bBox.height - 15 :bBox.top }px; left: ${bBox.left + bBox.width/2}px; transform: translate(-50%, 0%); box-shadow: var(--pj-boxshadow)`
+        const bBox = ref.parentElement.getBoundingClientRect()
+        return `width: ${bBox.width}px; display: block; padding: 0; background: none; border: none; height: 23px; width: 10vw; top: ${alignBottom ? bBox.top + bBox.height - 15 : bBox.top}px; left: ${bBox.left + bBox.width / 2}px; transform: translate(-50%, 0%); box-shadow: var(--pj-boxshadow)`
+    }
+
+    function onKeyDown(e: KeyboardEvent & { currentTarget: (EventTarget & HTMLInputElement) }) {
+        if (e.code === KEYS.Enter)
+            handleClose(e.currentTarget.value)
     }
 </script>
 
 <span style="display: none" bind:this={ref}></span>
 <Modal
         styles={ref ? getStyle() : ""}
-        handleClose={_ => handleClose(value.value)}>
+        handleClose={() => handleClose(inputRef.value)}>
     <input
-            value={value.value}
-            on:change={e => value.value = e.target.value}
-            on:keydown={e => {
-                if(e.code === KEYS.Enter)
-                    handleClose(e.target.value)
-            }}
+            bind:this={inputRef}
+            value={initialValue}
+            on:keydown={onKeyDown}
     />
 </Modal>
 

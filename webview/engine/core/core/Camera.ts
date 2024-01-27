@@ -9,6 +9,7 @@ import {CameraProjectionType} from "@engine-core/engine-d";
 import ArrayBufferAPI from "@engine-core/services/ArrayBufferAPI";
 import UBORepository from "@engine-core/repositories/UBORepository";
 import AbstractEngineCoreService from "@engine-core/core/AbstractEngineCoreService";
+import RepositoryService from "@engine-core/services/serialization/RepositoryService";
 
 export default class Camera extends AbstractEngineCoreService {
     _dynamicAspectRatio = false
@@ -203,3 +204,4 @@ export default class Camera extends AbstractEngineCoreService {
     }
 }
 
+RepositoryService.serializable(Camera)

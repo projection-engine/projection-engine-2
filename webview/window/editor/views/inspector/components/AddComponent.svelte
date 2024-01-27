@@ -1,33 +1,11 @@
 <script lang="ts">
-    import {onDestroy, onMount} from "svelte"
-
     import Icon from "@lib/components/icon/Icon.svelte"
     import Dropdown from "@lib/components/dropdown/Dropdown.svelte"
     import LocalizationEN from "@enums/LocalizationEN"
-    import EditorUtil from "../../../util/EditorUtil"
     import NATIVE_COMPONENTS from "../static/NATIVE_COMPONENTS";
     import Entity from "@engine-core/instances/Entity";
-    import ProjectionEngine from "@lib/ProjectionEngine";
 
-    const COMPONENT_ID = crypto.randomUUID()
     export let entity: Entity
-
-    let components = []
-    let scripts = []
-    // TODO - REWRITE
-    // onMount(() => ProjectionEngine.ContentBrowserStore.addListener(COMPONENT_ID, data => scripts = data.components, ["components"]))
-    // onDestroy(() => ProjectionEngine.ContentBrowserStore.removeListener(COMPONENT_ID))
-
-    $:components = [
-        ...scripts.map(s => ({type: "script", data: s})),
-        ...NATIVE_COMPONENTS
-            .filter(native => !entity.components.has(native[0]))
-            .map(n => ({
-                type: "native",
-                data: n
-            }))
-    ]
-
 </script>
 
 
@@ -43,17 +21,17 @@
         <Icon styles="font-size: 1rem">add</Icon>
         {LocalizationEN.ADD_COMPONENT}
     </button>
-    {#each components as component}
-        {#if component.type === "native"}
+    {#each NATIVE_COMPONENTS as component}
+        {#if !entity.components.has(component[0])}
             <button
                     data-sveltebuttondefault="-"
                     data-svelteinline="-"
                     on:click={(e) =>{
-                        entity.addComponent(component.data[0])
+                        entity.addComponent(component[0])
                     }}
             >
-                <Icon styles="font-size: 1rem">{component.data[2]}</Icon>
-                <small data-svelteoverflow="-">{component.data[1]}</small>
+                <Icon styles="font-size: 1rem">{component[2]}</Icon>
+                <small data-svelteoverflow="-">{component[1]}</small>
             </button>
 
         {/if}

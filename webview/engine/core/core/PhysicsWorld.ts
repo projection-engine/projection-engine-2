@@ -2,6 +2,8 @@ import Ammo from "../lib/Ammo.js"
 import COLLISION_TYPES from "../static/COLLISION_TYPES"
 import Entity from "../instances/Entity"
 import AbstractEngineCoreService from "@engine-core/core/AbstractEngineCoreService";
+import RepositoryService from "@engine-core/services/serialization/RepositoryService";
+import Camera from "@engine-core/core/Camera";
 
 const COLLISION = "COLLISION",
 	DISPATCHER = "DISPATCHER",
@@ -163,3 +165,5 @@ export default class PhysicsWorld extends AbstractEngineCoreService{
 		// PhysicsWorld.initializeCollider(entity)
 	}
 }
+
+RepositoryService.serializable(PhysicsWorld)

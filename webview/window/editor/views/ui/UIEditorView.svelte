@@ -8,8 +8,8 @@
     import SelectionStore from "@lib/stores/SelectionStore";
     import type Entity from "@engine-core/instances/Entity";
     import ProjectionEngine from "@lib/ProjectionEngine";
-
-    const COMPONENT_ID = crypto.randomUUID()
+    import {InjectVar} from "@lib/Injection";
+    import WorldOutlineStore from "@lib/stores/WorldOutlineStore";
 
     let ref: HTMLElement
     let tooltipRef: HTMLElement
@@ -17,7 +17,16 @@
     let isAutoUpdateEnabled = true
     let selectedEntity: Entity
 
+    function update() {
+        const targets = document.querySelectorAll("[data-enginewrapper='-']")
+        for (let i = 0; i < targets.length; i++) {
+            const t = targets[i]
+            t.removeEventListener("click", clickHandler)
+            t.addEventListener("click", clickHandler)
+        }
+    }
 
+    const unsubscribe = InjectVar(WorldOutlineStore).subscribe(update)
     const resizeObserver = new ResizeObserver(() => GUIService.document.style.height = ref.offsetHeight + "px")
 
     function clickHandler(e) {
@@ -43,14 +52,6 @@
 
     $: if (!isOnSelection && tooltipRef) tooltipRef.style.zIndex = "-1"
 
-    function update() {
-        const targets = document.querySelectorAll("[data-enginewrapper='-']")
-        for (let i = 0; i < targets.length; i++) {
-            const t = targets[i]
-            t.removeEventListener("click", clickHandler)
-            t.addEventListener("click", clickHandler)
-        }
-    }
 
     let updateInterval
     $: {
@@ -69,14 +70,13 @@
 
         GUIService.document.style.height = (GPU.canvas.getBoundingClientRect().height - 28) + "px"
         GUIService.document.style.top = "28px"
-        ProjectionEngine.EntityHierarchyService.registerListener(COMPONENT_ID, update)
         update()
     })
 
     onDestroy(() => {
         clearInterval(updateInterval)
+        unsubscribe()
         resizeObserver.disconnect()
-        ProjectionEngine.EntityHierarchyService.removeListener(COMPONENT_ID)
         GUIService.hideUI()
         GUIService.document.style.height = "100%"
         GUIService.document.style.top = "0"
@@ -91,7 +91,7 @@
         toggleAutoUpdate={() => isAutoUpdateEnabled = !isAutoUpdateEnabled}
 />
 <div class="wrapper ui" bind:this={ref}>
-    <div class="tooltip" id={COMPONENT_ID} bind:this={tooltipRef}></div>
+    <div class="tooltip" bind:this={tooltipRef}></div>
 </div>
 
 <style>

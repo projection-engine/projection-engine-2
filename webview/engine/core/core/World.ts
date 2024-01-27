@@ -16,6 +16,7 @@ export default class World extends AbstractEngineCoreService {
         Object.values(Components).forEach(v => {
             this._byComponent.set(v, new DynamicMap<Entity>())
         })
+        this._rootEntity.name = "World"
         this._entities.set(this._rootEntity.getId(), this._rootEntity)
     }
 

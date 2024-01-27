@@ -1,14 +1,19 @@
-<!--suppress ALL -->
 <script lang="ts">
     import Icon from "@lib/components/icon/Icon.svelte";
     import Component from "@engine-core/instances/components/Component";
     import HierarchyUtil from "../../../util/HierarchyUtil";
     import EditorUtil from "../../../util/EditorUtil";
-
+    import {onMount} from "svelte";
+    import SelectionStoreUtil from "@lib/stores/SelectionStore";
 
     export let depth: number
     export let component: Component
 
+    let ref: HTMLElement
+
+    onMount(() => {
+        ref.addEventListener("click", e => HierarchyUtil.updateSelection(entity.id, e.ctrlKey))
+    })
     $: icon = EditorUtil.getComponentIcon(component.componentKey)
     $: label = EditorUtil.getComponentLabel(component.componentKey)
     $: entity = component.entity
@@ -21,8 +26,7 @@
         data-svelteentity={entity.id}
         style={"padding-left:" +  (depth * 18 + "px;") + (component.entity.active ? "" : "opacity: .5") }
 >
-    <div class="info hierarchy-branch" data-sveltenode={entity.id}
-         on:click={e => HierarchyUtil.updateSelection(entity.id, e.ctrlKey)}>
+    <div class="info hierarchy-branch" data-sveltenode={entity.id} bind:this={ref}>
         {#each {length: depth} as _, i}
             <div data-sveltevertdivider="-"
                  style={`border-left-style: ${i === 0 ? "solid" : "dashed"}; left: ${i * 18}px`} class="divider"></div>
