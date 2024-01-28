@@ -44,12 +44,13 @@
                 options={option.options}
                 label={option.label}
                 buttonStyles="border: none !important; height: 25px !important;"
-                autoClose={true}/>
+            />
     {/each}
 </div>
 
 <style>
     .container {
+        background: var(--pj-background-secondary);
         display: flex;
         gap: 4px;
         justify-content: flex-start;
