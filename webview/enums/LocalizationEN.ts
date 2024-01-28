@@ -780,5 +780,6 @@ export default {
     INSPECTOR: "Inspector",
     CONSOLE: "Console",
     IMAGE: "Texture",
-    TERRAIN: "terrain"
+    TERRAIN: "terrain",
+    SHADERS_REBUILT: "Shaders rebuilt"
 }

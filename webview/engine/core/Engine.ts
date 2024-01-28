@@ -180,5 +180,9 @@ export default class Engine extends Serializable {
     getScripting(): Scripting {
         return this._scripting;
     }
+
+    async buildShaders(){
+        await this.get(ShaderRepository).buildShaders()
+    }
 }
 RepositoryService.injectable(Engine)

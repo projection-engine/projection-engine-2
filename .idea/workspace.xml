@@ -19,114 +19,11 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-73] Bringing files from old PR">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-16] Engine refactoring: Shaders&#10;- Moving shaders to CPP side&#10;- Creating new service for shader processing&#10;- Creating new interface for engine: ResourceLoader&#10;- Improving WindowRepository to only initialize when needed&#10;- Fixing tests&#10;- Creating new tests for StringUtils&#10;- Implementing new shader initialization architecture">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/FileSystemService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/FileSystemService.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/FileSystemService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/FileSystemService.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/WindowRepository.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/WindowRepository.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/WindowRepository.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/WindowRepository.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/FS.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/FS.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/StringUtils.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/StringUtils.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/core/FileSystemTest.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/core/FileSystemTest.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/main_test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/main_test.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/engine/core/Engine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/Engine.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/core/GPU.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/core/GPU.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/core/PhysicsWorld.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/core/PhysicsWorld.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/core/Scripting.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/core/Scripting.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/engine-d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/engine-d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/Shader.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/Shader.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/repositories/ShaderRepository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/repositories/ShaderRepository.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/runtime/CameraSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/CameraSystem.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/runtime/ScriptingSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/ScriptingSystem.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/runtime/TransformationPass.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/TransformationPass.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/services/GPUAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/services/GPUAPI.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/services/SystemService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/services/SystemService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/services/UberShaderService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/services/UberShaderService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/forward-rendering/ATMOSPHERE.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/ATMOSPHERE.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/forward-rendering/CUBEMAP.vert" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/CUBEMAP.vert" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/forward-rendering/DIRECTIONAL_SHADOWS.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/DIRECTIONAL_SHADOWS.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/forward-rendering/OMNIDIRECTIONAL_SHADOWS.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/OMNIDIRECTIONAL_SHADOWS.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/forward-rendering/SHADOWS.vert" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/SHADOWS.vert" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/forward-rendering/SPRITE.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/SPRITE.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/forward-rendering/SPRITE.vert" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/SPRITE.vert" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/forward-rendering/V_BUFFER.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/V_BUFFER.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/forward-rendering/V_BUFFER.vert" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/V_BUFFER.vert" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/functions/ACES.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/ACES.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/functions/PERLIN_NOISE.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/PERLIN_NOISE.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/functions/POST_PROCESSING_UNIFORMS.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/POST_PROCESSING_UNIFORMS.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/functions/RAY_MARCHER.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/RAY_MARCHER.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/functions/SATURATE.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/SATURATE.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/functions/SCENE_DEPTH_UTILS.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/SCENE_DEPTH_UTILS.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/functions/STRONG_BLUR.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/STRONG_BLUR.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/BILATERAL_BLUR.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/BILATERAL_BLUR.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/BILINEAR_DOWNSCALE.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/BILINEAR_DOWNSCALE.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/BOKEH.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/BOKEH.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/BOX-BLUR.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/BOX-BLUR.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/BRDF_GEN.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/BRDF_GEN.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/BRIGHTNESS_FILTER.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/BRIGHTNESS_FILTER.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/FRAME_COMPOSITION.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/FRAME_COMPOSITION.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/GAUSSIAN.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/GAUSSIAN.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/IRRADIANCE_MAP.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/IRRADIANCE_MAP.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/LENS_POST_PROCESSING.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/LENS_POST_PROCESSING.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/MOTION_BLUR.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/MOTION_BLUR.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/PREFILTERED_MAP.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/PREFILTERED_MAP.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/QUAD.vert" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/QUAD.vert" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/SSAO.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/SSAO.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/SSGI.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/SSGI.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/TO_SCREEN.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/TO_SCREEN.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/post-processing/UPSAMPLE_TENT.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/UPSAMPLE_TENT.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/uber-shader/ATTRIBUTES.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/ATTRIBUTES.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/uber-shader/PB_LIGHT_COMPUTATION.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/PB_LIGHT_COMPUTATION.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/uber-shader/UBER-MATERIAL-BASIS.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/UBER-MATERIAL-BASIS.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/uber-shader/UBER-MATERIAL-DEBUG.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/UBER-MATERIAL-DEBUG.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/uber-shader/UBER-MATERIAL.vert" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/UBER-MATERIAL.vert" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/uber-shader/lights/BRDF_FUNCTIONS.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/BRDF_FUNCTIONS.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/uber-shader/lights/COMPUTE_AREALIGHT.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/COMPUTE_AREALIGHT.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/uber-shader/lights/COMPUTE_DIRECTIONAL_LIGHTS.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/COMPUTE_DIRECTIONAL_LIGHTS.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/uber-shader/lights/COMPUTE_POINT_LIGHTS.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/COMPUTE_POINT_LIGHTS.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/uber-shader/lights/COMPUTE_SPOTLIGHT.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/COMPUTE_SPOTLIGHT.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/shaders/uber-shader/lights/SSS.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/SSS.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/utils/apply-shader-methods.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/EngineTools.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/EngineTools.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/gizmo/shader/GIZMO.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/GIZMO.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/gizmo/shader/GIZMO.vert" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/GIZMO.vert" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/gizmo/shader/GIZMO_TO_DEPTH.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/GIZMO_TO_DEPTH.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/gizmo/shader/GIZMO_TO_DEPTH.vert" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/GIZMO_TO_DEPTH.vert" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/gizmo/shader/ROTATION_GIZMO.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/ROTATION_GIZMO.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/gizmo/shader/ROTATION_GIZMO.vert" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/ROTATION_GIZMO.vert" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/gizmo/transformation/RotationGizmo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/gizmo/transformation/RotationGizmo.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/gizmo/util/GizmoUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/gizmo/util/GizmoUtil.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/icons/CameraIconRenderer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/icons/CameraIconRenderer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/icons/GridSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/icons/GridSystem.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/icons/IconsSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/icons/IconsSystem.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/icons/LineRenderer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/icons/LineRenderer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/outline/SelectedSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/outline/SelectedSystem.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/outline/WireframeRenderer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/outline/WireframeRenderer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/static/shaders/GRID.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/GRID.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/static/shaders/GRID.vert" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/GRID.vert" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/static/shaders/ICONS_SPRITE.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/ICONS_SPRITE.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/static/shaders/ICONS_SPRITE.vert" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/ICONS_SPRITE.vert" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/static/shaders/ICONS_SPRITE_TO_DEPTH.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/ICONS_SPRITE_TO_DEPTH.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/static/shaders/ICONS_SPRITE_TO_DEPTH.vert" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/ICONS_SPRITE_TO_DEPTH.vert" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/static/shaders/LINE.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/LINE.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/static/shaders/LINE.vert" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/LINE.vert" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/static/shaders/MESH_MAP.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/MESH_MAP.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/static/shaders/MESH_MAP.vert" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/MESH_MAP.vert" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/static/shaders/SILHOUETTE.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/SILHOUETTE.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/static/shaders/SILHOUETTE.vert" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/SILHOUETTE.vert" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/static/shaders/WIREFRAME.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/WIREFRAME.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/static/shaders/WIREFRAME.vert" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/shaders/WIREFRAME.vert" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/tools/utils/StaticEditorShaders.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/webview/WebViewService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/webview/WebViewService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/services/CanvasContextService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/CanvasContextService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/enums/LocalizationEN.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/enums/LocalizationEN.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/components/frame/MenuBar.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/components/frame/MenuBar.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -449,15 +346,7 @@
       <workItem from="1706135278039" duration="3243000" />
       <workItem from="1706221011521" duration="2292000" />
       <workItem from="1706353242258" duration="5905000" />
-      <workItem from="1706443195876" duration="7290000" />
-    </task>
-    <task id="LOCAL-00011" summary="[STD-3] Project window&#10;- Improving event system structure">
-      <option name="closed" value="true" />
-      <created>1703421270891</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1703421270891</updated>
+      <workItem from="1706443195876" duration="7717000" />
     </task>
     <task id="LOCAL-00012" summary="[STD-13] WindowSystem&#10;- Created windowSystem&#10;- Improved Runner class&#10;- Created Projects window">
       <option name="closed" value="true" />
@@ -843,7 +732,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706138529710</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="[STD-16] Engine refactoring: Shaders&#10;- Moving shaders to CPP side&#10;- Creating new service for shader processing&#10;- Creating new interface for engine: ResourceLoader&#10;- Improving WindowRepository to only initialize when needed&#10;- Fixing tests&#10;- Creating new tests for StringUtils&#10;- Implementing new shader initialization architecture">
+      <option name="closed" value="true" />
+      <created>1706450746010</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1706450746010</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -867,7 +764,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-26] Tabs&#10;- Adding types and enums&#10;- Removing unused code&#10;- Reworking views to be simpler&#10;- Removing TabsStore" />
     <MESSAGE value="[STD-34] Stores&#10;- Creating DTOs&#10;- Creating new subscribe method&#10;- Removing old objects" />
     <MESSAGE value="[STD-34] Stores&#10;- Fixing subscribe and unsubscribe&#10;- Creating test for store" />
     <MESSAGE value="[STD-34] Stores&#10;- Completing change to subscribe&#10;- Creating test for Injection &#10;- Improving store update method" />
@@ -892,7 +788,8 @@
     <MESSAGE value="[STD-52] Engine refactoring&#10;- Refactoring files&#10;- Creating core systems&#10;- Removing unused files" />
     <MESSAGE value="[STD-52] Engine refactoring&#10;- Fixing camera" />
     <MESSAGE value="[STD-63] Starting new hierarchy&#10;- Creating WorldOutlineView&#10;- Creating service for view&#10;- Fixing LightsService" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-63] Starting new hierarchy&#10;- Creating WorldOutlineView&#10;- Creating service for view&#10;- Fixing LightsService" />
+    <MESSAGE value="[STD-16] Engine refactoring: Shaders&#10;- Moving shaders to CPP side&#10;- Creating new service for shader processing&#10;- Creating new interface for engine: ResourceLoader&#10;- Improving WindowRepository to only initialize when needed&#10;- Fixing tests&#10;- Creating new tests for StringUtils&#10;- Implementing new shader initialization architecture" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-16] Engine refactoring: Shaders&#10;- Moving shaders to CPP side&#10;- Creating new service for shader processing&#10;- Creating new interface for engine: ResourceLoader&#10;- Improving WindowRepository to only initialize when needed&#10;- Fixing tests&#10;- Creating new tests for StringUtils&#10;- Implementing new shader initialization architecture" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
