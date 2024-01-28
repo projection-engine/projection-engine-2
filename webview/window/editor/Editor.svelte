@@ -56,7 +56,7 @@
 
 <style>
     .wrapper {
-        background: var(--pj-background-secondary);
+
         width: 100vw;
         height: 100vh;
         overflow: hidden;

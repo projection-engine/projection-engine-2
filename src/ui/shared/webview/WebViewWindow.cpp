@@ -24,6 +24,11 @@ namespace PEngine {
         webviewController->get_CoreWebView2(
                 &webview);
 
+        wil::com_ptr<ICoreWebView2Controller2> controller2 = webviewController.try_query<ICoreWebView2Controller2>();
+        if (controller2) {
+            COREWEBVIEW2_COLOR transparentColor = {0, 255, 255, 255};
+            controller2->put_DefaultBackgroundColor(transparentColor);
+        }
         wil::com_ptr<ICoreWebView2Settings> settings;
         webview->get_Settings(
                 &settings);
@@ -133,7 +138,7 @@ namespace PEngine {
     }
 
     void WebViewWindow::resize() {
-        if(webviewController != nullptr) {
+        if (webviewController != nullptr) {
             RECT bounds;
             GetClientRect(getNativeWindow(), &bounds);
             webviewController->put_Bounds(bounds);

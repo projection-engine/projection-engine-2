@@ -19,11 +19,13 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-16] Engine refactoring: Shaders&#10;- Moving shaders to CPP side&#10;- Creating new service for shader processing&#10;- Creating new interface for engine: ResourceLoader&#10;- Improving WindowRepository to only initialize when needed&#10;- Fixing tests&#10;- Creating new tests for StringUtils&#10;- Implementing new shader initialization architecture">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-16] Engine refactoring: Shaders&#10;- adding rebuild button">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/Engine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/Engine.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/enums/LocalizationEN.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/enums/LocalizationEN.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/editor/basic/Runner.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/basic/Runner.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/lib/components/frame/MenuBar.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/components/frame/MenuBar.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/static/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/global.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/Editor.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/Editor.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +55,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="52-engine-refactoring-repositories-and-services" />
+        <entry key="$PROJECT_DIR$" value="16-engine-refactoring-shaders" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -133,7 +135,7 @@
     "Shell Script.copy-files.executor": "Run",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "16-engine-refactoring-shaders",
+    "git-widget-placeholder": "5-event-based-engine-communication",
     "js.last.introduce.type": "CONST",
     "last_opened_file_path": "C:/Users/russi/WebstormProjects/projection-engine-2/test/core",
     "node.js.detected.package.eslint": "true",
@@ -346,15 +348,7 @@
       <workItem from="1706135278039" duration="3243000" />
       <workItem from="1706221011521" duration="2292000" />
       <workItem from="1706353242258" duration="5905000" />
-      <workItem from="1706443195876" duration="7717000" />
-    </task>
-    <task id="LOCAL-00012" summary="[STD-13] WindowSystem&#10;- Created windowSystem&#10;- Improved Runner class&#10;- Created Projects window">
-      <option name="closed" value="true" />
-      <created>1703542451825</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1703542451825</updated>
+      <workItem from="1706443195876" duration="11062000" />
     </task>
     <task id="LOCAL-00013" summary="[STD-6] Project window&#10;- Improving event system&#10;- Adding basic functions for project window">
       <option name="closed" value="true" />
@@ -740,7 +734,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706450746010</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="[STD-16] Engine refactoring: Shaders&#10;- adding rebuild button">
+      <option name="closed" value="true" />
+      <created>1706450967942</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1706450967942</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -764,7 +766,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-34] Stores&#10;- Creating DTOs&#10;- Creating new subscribe method&#10;- Removing old objects" />
     <MESSAGE value="[STD-34] Stores&#10;- Fixing subscribe and unsubscribe&#10;- Creating test for store" />
     <MESSAGE value="[STD-34] Stores&#10;- Completing change to subscribe&#10;- Creating test for Injection &#10;- Improving store update method" />
     <MESSAGE value="[STD-34] Stores&#10;- Merging Visuals and Engine stores into Settings store" />
@@ -789,14 +790,15 @@
     <MESSAGE value="[STD-52] Engine refactoring&#10;- Fixing camera" />
     <MESSAGE value="[STD-63] Starting new hierarchy&#10;- Creating WorldOutlineView&#10;- Creating service for view&#10;- Fixing LightsService" />
     <MESSAGE value="[STD-16] Engine refactoring: Shaders&#10;- Moving shaders to CPP side&#10;- Creating new service for shader processing&#10;- Creating new interface for engine: ResourceLoader&#10;- Improving WindowRepository to only initialize when needed&#10;- Fixing tests&#10;- Creating new tests for StringUtils&#10;- Implementing new shader initialization architecture" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-16] Engine refactoring: Shaders&#10;- Moving shaders to CPP side&#10;- Creating new service for shader processing&#10;- Creating new interface for engine: ResourceLoader&#10;- Improving WindowRepository to only initialize when needed&#10;- Fixing tests&#10;- Creating new tests for StringUtils&#10;- Implementing new shader initialization architecture" />
+    <MESSAGE value="[STD-16] Engine refactoring: Shaders&#10;- adding rebuild button" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-16] Engine refactoring: Shaders&#10;- adding rebuild button" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp</url>
-          <line>55</line>
+          <line>60</line>
           <option name="timeStamp" value="35" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
@@ -808,6 +810,11 @@
           <url>file://$PROJECT_DIR$/src/services/ShaderService.cpp</url>
           <line>11</line>
           <option name="timeStamp" value="58" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp</url>
+          <line>28</line>
+          <option name="timeStamp" value="60" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/webview/lib/FSService.ts</url>

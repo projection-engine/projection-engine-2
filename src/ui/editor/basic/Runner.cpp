@@ -8,7 +8,7 @@
 
 namespace PEngine {
     void Runner::render() {
-//        ImGui::ShowDemoWindow();
+        ImGui::ShowDemoWindow();
     }
 
     void Runner::updateViewports() {
