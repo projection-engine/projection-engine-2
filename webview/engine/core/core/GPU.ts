@@ -1,5 +1,5 @@
-import QUAD_VERT from "../shaders/post-processing/QUAD.vert"
-import BRDF_FRAG from "../shaders/post-processing/BRDF_GEN.frag"
+import QUAD_VERT from "../../shaders/QUAD.vert"
+import BRDF_FRAG from "../../shaders/BRDF_GEN.frag"
 import Shader from "../instances/Shader"
 import Framebuffer from "../instances/Framebuffer"
 import Material from "../instances/Material"
@@ -10,9 +10,7 @@ import StaticMeshRepository from "../repositories/StaticMeshRepository"
 import DynamicMap from "../lib/DynamicMap"
 import ConversionAPI from "@engine-core/services/ConversionAPI";
 import AbstractEngineCoreService from "@engine-core/core/AbstractEngineCoreService";
-import Engine from "@engine-core/Engine";
 import RepositoryService from "@engine-core/services/serialization/RepositoryService";
-import Camera from "@engine-core/core/Camera";
 
 export default class GPU extends AbstractEngineCoreService {
     static context?: WebGL2RenderingContext
@@ -30,7 +28,7 @@ export default class GPU extends AbstractEngineCoreService {
     static skylightProbe: LightProbe
     static bufferResolution = new Float32Array([0, 0])
 
-    initialize(){
+    initialize() {
         this.initializeWebGLContext(this.engine.getMainResolution(), this.engine.getCanvas());
         GPU.skylightProbe = new LightProbe(128)
         this.addResizeObserver()
@@ -52,12 +50,12 @@ export default class GPU extends AbstractEngineCoreService {
         OBS.observe(GPU.canvas)
     }
 
-    static generateBRDF() {
+    async generateBRDF() {
         const FBO = new Framebuffer(512, 512).texture({
             precision: GPU.context.RG32F,
             format: GPU.context.RG
         })
-        const brdfShader = new Shader(QUAD_VERT, BRDF_FRAG)
+        const brdfShader = await this.getShaderInstance("QUAD.vert", "BRDF_GEN.frag")
 
         FBO.startMapping()
         brdfShader.bind()
@@ -93,11 +91,20 @@ export default class GPU extends AbstractEngineCoreService {
         GPU.context.frontFace(GPU.context.CCW)
     }
 
-    static bind2DTextureForDrawing(uniform:WebGLUniformLocation, activeIndex:number, sampler:WebGLTexture){
+    static bind2DTextureForDrawing(uniform: WebGLUniformLocation, activeIndex: number, sampler: WebGLTexture) {
         const context = GPU.context
         context.activeTexture(context.TEXTURE0 + activeIndex)
         context.bindTexture(context.TEXTURE_2D, sampler)
         context.uniform1i(uniform, activeIndex)
+    }
+
+    async getShaderInstance(vertexName: string, fragName: string): Promise<Shader> {
+        const result = await this.engine.getResourceLoader().requestShader(vertexName, fragName);
+        const shader = new Shader(result.vertex, result.fragment);
+        if(shader.messages.hasError) {
+            console.trace(result, vertexName, fragName)
+        }
+        return shader
     }
 }
 

@@ -67,7 +67,8 @@ export default class GPUAPI {
 
 		GPU.materials.set(id, material)
 
-		UberShaderService.compile()
+		// TODO
+		// UberShaderService.compile()
 		DepthPrePassSystem.needsUpdate = true
 		return material
 	}

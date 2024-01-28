@@ -1,35 +1,35 @@
 #include <catch2/catch_test_macros.hpp>
 
 #include "../Tester.h"
-#include "FS.h"
+#include "../../src/services/FileSystemService.h"
 
 namespace PEngine::FileSystemTest {
 
     void createDirectory() {
-        std::string path = FS::GetCurrentPath() + "/example";
-        FS::CreateDir(path);
-        REQUIRE(FS::Exists(path) == true);
+        std::string path = FileSystemService::GetCurrentPath() + "/example";
+        FileSystemService::CreateDir(path);
+        REQUIRE(FileSystemService::Exists(path) == true);
     }
 
     void createFile() {
-        std::string path = FS::GetCurrentPath() + "/example/example.txt";
-        FS::WriteFile(path, "example");
-        REQUIRE(FS::Exists(path) == true);
+        std::string path = FileSystemService::GetCurrentPath() + "/example/example.txt";
+        FileSystemService::WriteFile(path, "example");
+        REQUIRE(FileSystemService::Exists(path) == true);
     }
 
     void readFile() {
-        std::string path = FS::GetCurrentPath() + "/example/example.txt";
-        std::string content = FS::ReadFile(path);
+        std::string path = FileSystemService::GetCurrentPath() + "/example/example.txt";
+        std::string content = FileSystemService::ReadFile(path);
         REQUIRE(!content.empty());
         REQUIRE(content == "example");
     }
 
     void deleteFile() {
-        std::string dirPath = FS::GetCurrentPath() + "/example";
+        std::string dirPath = FileSystemService::GetCurrentPath() + "/example";
         std::string path = dirPath + "/example.txt";
-        FS::DeleteFileOrDir(dirPath);
-        REQUIRE(FS::Exists(dirPath) == false);
-        REQUIRE(FS::Exists(path) == false);
+        FileSystemService::DeleteFileOrDir(dirPath);
+        REQUIRE(FileSystemService::Exists(dirPath) == false);
+        REQUIRE(FileSystemService::Exists(path) == false);
     }
 
     Tester *createTester() {

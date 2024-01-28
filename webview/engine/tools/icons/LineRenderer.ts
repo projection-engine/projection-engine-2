@@ -1,7 +1,7 @@
 import LineAPI from "@engine-core/services/LineAPI"
 import GPU from "@engine-core/core/GPU"
 import FramebufferRepository from "@engine-core/repositories/FramebufferRepository"
-import StaticEditorShaders from "../utils/StaticEditorShaders"
+import ShaderRepository from "@engine-core/repositories/ShaderRepository";
 
 const X = new Float32Array([1, 0, 0]), Y = new Float32Array([0, 1, 0]), Z = new Float32Array([0, 0, 1])
 
@@ -19,7 +19,7 @@ export default class LineRenderer {
 	}
 
 	static initialize() {
-		lineUniforms = StaticEditorShaders.lineUniforms
+		lineUniforms = ShaderRepository.lineUniforms
 	}
 
 	static finish() {
@@ -29,7 +29,7 @@ export default class LineRenderer {
 	static #bind() {
 
 		if (finished) {
-			StaticEditorShaders.line.bind()
+			ShaderRepository.line.bind()
 
 			GPU.context.uniform1i(lineUniforms.darker, darker)
 			GPU.context.uniform1f(lineUniforms.size, size)

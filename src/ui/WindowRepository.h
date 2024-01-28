@@ -37,7 +37,7 @@ namespace PEngine {
     public:
         static WindowRepository &Get();
 
-        explicit WindowRepository();
+        void initialize();
 
         template<class W>
         void createWindow(const std::string &id) {

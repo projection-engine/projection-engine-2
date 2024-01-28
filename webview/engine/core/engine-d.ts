@@ -20,9 +20,11 @@ interface SerializationPackage {
 }
 
 
-interface CustomEngineScript{
+interface CustomEngineScript {
     onCreate(): void
+
     execute(): void
+
     GPU: GPU
     GPUAPI: GPUAPI
     PhysicsWorld: PhysicsWorld
@@ -75,7 +77,16 @@ enum GLSLTypes {
     bool = "uniform1i"
 }
 
+type ShaderUniforms = Record<string, WebGLUniformLocation>
+
+interface ResourceLoader {
+    requestShader(vertexName: string, fragName: string): Promise<{ vertex: string, fragment: string }>
+    prepareShader(shader: string): Promise<string>
+}
+
 export {
+    ResourceLoader,
+    ShaderUniforms,
     CameraProjectionType,
     SerializableArray,
     SerializableClass,

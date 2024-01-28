@@ -1,9 +1,7 @@
-#include <iostream>
 #include "Editor.h"
 #include "../shared/webview/WebViewWindow.h"
 #include "../shared/webview/WebViewPayload.h"
 #include "basic/Runner.h"
-#include "../../util/FS.h"
 #include "../WindowRepository.h"
 
 #define RELOAD "RELOAD"
@@ -13,6 +11,7 @@
 namespace PEngine {
     std::string Editor::projectPath;
 
+
     IRunner *Editor::initialize() {
         if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
             CONSOLE_ERROR("Failed to initialize GLAD")
@@ -21,7 +20,8 @@ namespace PEngine {
         WindowRepository::Get().getWebView()->addMessageListener(RELOAD, onMessage);
         WindowRepository::Get().getWebView()->addMessageListener(GET_PROJECT_PATH, onMessage);
         WindowRepository::Get().getWebView()->addMessageListener(SET_PROJECT_PATH, onMessage);
-        FS::BindEvents(WindowRepository::Get().getWebView());
+        fileSystemService.BindEvents(WindowRepository::Get().getWebView());
+        shaderService.BindEvents(WindowRepository::Get().getWebView());
         return new Runner();
     }
 

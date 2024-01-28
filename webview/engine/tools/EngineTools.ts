@@ -9,7 +9,6 @@ import LineRenderer from "./icons/LineRenderer"
 import Entity from "../core/instances/Entity"
 import GPU from "@engine-core/core/GPU"
 import StaticEditorMeshes from "./utils/StaticEditorMeshes"
-import StaticEditorShaders from "./utils/StaticEditorShaders"
 import FramebufferRepository from "@engine-core/repositories/FramebufferRepository"
 import GizmoState from "./gizmo/util/GizmoState"
 import StaticEditorFBO from "./utils/StaticEditorFBO";
@@ -22,6 +21,7 @@ import TranslationGizmo from "@engine-tools/gizmo/transformation/TranslationGizm
 import DualAxisGizmo from "@engine-tools/gizmo/transformation/DualAxisGizmo";
 import ScreenSpaceGizmo from "@engine-tools/gizmo/transformation/ScreenSpaceGizmo";
 import AbstractEngineSystem from "@engine-core/AbstractEngineSystem";
+import ShaderRepository from "@engine-core/repositories/ShaderRepository";
 
 export default class EngineTools extends AbstractEngineSystem {
     static selected: Entity[] = []
@@ -33,7 +33,6 @@ export default class EngineTools extends AbstractEngineSystem {
     static isRunning = true
 
     async initialize() {
-        StaticEditorShaders.initialize()
         await StaticEditorMeshes.initialize()
         ProjectionEngine.Engine.setEnvironment(ENVIRONMENT.DEV)  
         LineRenderer.initialize()
@@ -74,9 +73,9 @@ export default class EngineTools extends AbstractEngineSystem {
     static drawIconsToBuffer() {
         GPU.context.disable(GPU.context.DEPTH_TEST)
         FramebufferRepository.visibility.use()
-        StaticEditorShaders.iconToDepth.bind()
-        GPU.bind2DTextureForDrawing(StaticEditorShaders.iconToDepthUniforms.image, 0, IconsSystem.iconsTexture)
-        IconsSystem.loop(IconsSystem.drawIcon, StaticEditorShaders.iconToDepthUniforms)
+        ShaderRepository.iconToDepth.bind()
+        GPU.bind2DTextureForDrawing(ShaderRepository.iconToDepthUniforms.image, 0, IconsSystem.iconsTexture)
+        IconsSystem.loop(IconsSystem.drawIcon, ShaderRepository.iconToDepthUniforms)
         FramebufferRepository.visibility.stopMapping()
         GPU.context.enable(GPU.context.DEPTH_TEST)
     }

@@ -1,9 +1,9 @@
 import StaticEditorMeshes from "../utils/StaticEditorMeshes"
-import StaticEditorShaders from "../utils/StaticEditorShaders"
 import GPU from "@engine-core/core/GPU"
 import {mat4} from "gl-matrix"
 import Entity from "../../core/instances/Entity"
 import EngineToolsState from "../EngineToolsState"
+import ShaderRepository from "@engine-core/repositories/ShaderRepository";
 
 
 const invView = mat4.create()
@@ -32,7 +32,7 @@ export default class CameraIconRenderer {
 			return
 		CameraIconRenderer.#createFrustumMatrix(entity)
 		const context = GPU.context
-		const uniforms = StaticEditorShaders.wireframeUniforms
+		const uniforms = ShaderRepository.wireframeUniforms
 
 		context.uniform1i(uniforms.isSelected, entity.__isSelected ? 1 : 0)
 		context.uniformMatrix4fv(uniforms.transformMatrix, false, entity.__cameraIconMatrix)

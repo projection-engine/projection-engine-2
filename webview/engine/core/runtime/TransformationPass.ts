@@ -1,5 +1,4 @@
 import {mat4, quat, vec3} from "gl-matrix"
-import DynamicMap from "../lib/DynamicMap"
 import Movable from "../instances/components/Movable"
 import AbstractEngineSystem from "@engine-core/AbstractEngineSystem";
 import Entity from "@engine-core/instances/Entity";

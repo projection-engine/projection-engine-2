@@ -26,32 +26,35 @@ set(COMMON_LIBRARIES
         nlohmann_json::nlohmann_json
 )
 
-set(MAIN_PATHS
+set(FILE_PATHS
+        src/util/JSON.h
+
         src/ui/shared/AbstractWindow.cpp
         src/ui/shared/AbstractWindow.h
         src/ui/editor/Editor.cpp
         src/ui/editor/Editor.h
         src/ui/editor/basic/Runner.cpp
         src/ui/editor/basic/Runner.h
-        src/ui/shared/webview/WebViewPayload.cpp
-        src/ui/shared/webview/WebViewPayload.h
+
         src/ui/WindowRepository.cpp
         src/ui/WindowRepository.h
+
+        src/ui/shared/webview/WebViewPayload.cpp
+        src/ui/shared/webview/WebViewPayload.h
+
         src/ui/shared/webview/WebViewWindow.cpp
         src/ui/shared/webview/WebViewWindow.h
-)
-set(FILE_PATHS
-        src/util/JSON.h
 
-        src/services/FileSystemService.cpp
-        src/services/FileSystemService.h
+        src/services/ShaderService.cpp
+        src/services/ShaderService.h
+
+        src/services/AbstractService.h
 
         src/engine/resource/dto/FBOTextureDTO.h
-        src/engine/resource/static/direct_shadows.vs
-        src/engine/resource/static/direct_shadows.fs
 
         src/engine/resource/core/RUBO.cpp
         src/engine/resource/core/RUBO.h
+
         src/engine/resource/dto/UBODataDTO.h
         src/engine/resource/UBOType.h
         src/util/Definitions.h
@@ -91,8 +94,8 @@ set(FILE_PATHS
         src/engine/resource/ResourcesSystem.h
         src/engine/world/IEntity.cpp
         src/engine/world/IEntity.h
-        src/util/FS.h
-        src/util/FS.cpp
+        src/services/FileSystemService.h
+        src/services/FileSystemService.cpp
         src/util/event/TypedEventPayload.h
         src/util/structures/List.h
         src/util/structures/Map.cpp

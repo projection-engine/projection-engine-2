@@ -10,9 +10,7 @@
 #include "GLFW/glfw3native.h"
 #include "WebViewPayload.h"
 #include "../../../util/JSON.h"
-#include <unordered_map>
 #include "../WindowRepository.h"
-#include "../../../util/FS.h"
 #include "WebView2EnvironmentOptions.h"
 
 namespace PEngine {

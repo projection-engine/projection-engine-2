@@ -1,8 +1,8 @@
 import GPU from "@engine-core/core/GPU"
 import FramebufferRepository from "@engine-core/repositories/FramebufferRepository"
 import StaticMeshRepository from "@engine-core/repositories/StaticMeshRepository"
-import StaticEditorShaders from "../utils/StaticEditorShaders"
 import EngineToolsState from "../EngineToolsState"
+import ShaderRepository from "@engine-core/repositories/ShaderRepository";
 
 export default class GridSystem {
 	static #buffer = new Float32Array([.3, 20, 50, 1])
@@ -12,8 +12,8 @@ export default class GridSystem {
 		if(!EngineToolsState.showGrid)
 			return
 
-		StaticEditorShaders.grid.bind()
-		const uniforms = StaticEditorShaders.gridUniforms
+		ShaderRepository.grid.bind()
+		const uniforms = ShaderRepository.gridUniforms
 		const buffer = GridSystem.#buffer
 		buffer[0] = EngineToolsState.gridColor
 		buffer[1] = EngineToolsState.gridScale
