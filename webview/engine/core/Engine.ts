@@ -20,6 +20,9 @@ import Components from "@engine-core/static/Components";
 import Scripting from "@engine-core/core/Scripting";
 import PhysicsWorld from "@engine-core/core/PhysicsWorld";
 import WorldLights from "@engine-core/core/WorldLights";
+import {ResourceLoader} from "@engine-core/engine-d";
+import Shader from "@engine-core/instances/Shader";
+import UberShaderService from "@engine-core/services/UberShaderService";
 
 export default class Engine extends Serializable {
     _physicsWorld: PhysicsWorld
@@ -27,6 +30,7 @@ export default class Engine extends Serializable {
     _camera: Camera
     _scripting: Scripting;
     _gpu: GPU
+    _resourceLoader: ResourceLoader
     _worldLights: WorldLights
 
     // TODO - FIND A BETTER PLACE FOR THESE VARIABLES
@@ -51,10 +55,14 @@ export default class Engine extends Serializable {
         this._gpu = new GPU(this)
     }
 
-    async initialize(canvas: HTMLCanvasElement, mainResolution: {
-        w: number,
-        h: number
-    }, readAsset: Function) {
+    async initialize(
+        canvas: HTMLCanvasElement,
+        mainResolution: {
+            w: number,
+            h: number
+        },
+        resourceLoader: ResourceLoader) {
+        this._resourceLoader = resourceLoader
         this.#canvas = canvas
         this.mainResolution = mainResolution
         this._gpu.initialize()
@@ -67,6 +75,7 @@ export default class Engine extends Serializable {
     }
 
     private async createSingletons() {
+        await this.addSingleton(UberShaderService)
         await this.addSingleton(UBORepository)
         await this.addSingleton(StaticMeshRepository)
         await this.addSingleton(ShaderRepository)
@@ -74,7 +83,7 @@ export default class Engine extends Serializable {
         await this.addSingleton(CubeMapAPI)
         await this.addSingleton(LineAPI)
         await this.addSingleton(SystemService)
-        GPU.generateBRDF()
+        await this._gpu.generateBRDF()
     }
 
     async addSingleton(Singleton: typeof AbstractEngineService): Promise<AbstractEngineService> {
@@ -125,6 +134,10 @@ export default class Engine extends Serializable {
         return this._gpu
     }
 
+    getResourceLoader(): ResourceLoader {
+        return this._resourceLoader
+    }
+
     getWorld() {
         return this._world
     }
@@ -149,7 +162,7 @@ export default class Engine extends Serializable {
         return this.getWorld()._entities
     }
 
-    get<T>(Clazz: new () => T): T {
+    get<T>(Clazz: new (engine: Engine) => T): T {
         return this.#singletons.get(Clazz.name) as T
     }
 
@@ -166,6 +179,10 @@ export default class Engine extends Serializable {
 
     getScripting(): Scripting {
         return this._scripting;
+    }
+
+    async buildShaders(){
+        await this.get(ShaderRepository).buildShaders()
     }
 }
 RepositoryService.injectable(Engine)

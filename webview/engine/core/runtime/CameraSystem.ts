@@ -2,7 +2,6 @@ import AbstractEngineSystem from "@engine-core/AbstractEngineSystem";
 import UBORepository from "@engine-core/repositories/UBORepository";
 import GPU from "@engine-core/core/GPU";
 import {mat4, quat, vec3} from "gl-matrix";
-import Camera from "@engine-core/core/Camera";
 
 export default class CameraSystem extends AbstractEngineSystem {
 

@@ -3,7 +3,6 @@ import AXIS from "../../static/AXIS"
 import GPU from "@engine-core/core/GPU"
 import EngineTools from "../../EngineTools"
 import StaticEditorMeshes from "../../utils/StaticEditorMeshes"
-import StaticEditorShaders from "../../utils/StaticEditorShaders"
 import GizmoUtil from "../util/GizmoUtil"
 import GizmoTransformationType from "@enums/GizmoTransformationType"
 import Movable from "../../../core/instances/components/Movable"
@@ -13,6 +12,7 @@ import AbstractXYZGizmo from "./AbstractXYZGizmo";
 import StaticEditorFBO from "../../utils/StaticEditorFBO";
 import EngineToolsState from "../../EngineToolsState";
 import ProjectionEngine from "@lib/ProjectionEngine";
+import ShaderRepository from "@engine-core/repositories/ShaderRepository";
 
 const toDeg = 180 / Math.PI
 const uniformCache = new Float32Array(4)
@@ -57,8 +57,8 @@ export default class RotationGizmo extends AbstractXYZGizmo {
 
     #draw(transformMatrix, axis) {
         if (GizmoState.clickedAxis === axis || GizmoState.clickedAxis === AXIS.NONE) {
-            StaticEditorShaders.rotation.bind()
-            const uniforms = StaticEditorShaders.rotationUniforms
+            ShaderRepository.rotation.bind()
+            const uniforms = ShaderRepository.rotationUniforms
             const context = GPU.context
 
             context.uniformMatrix4fv(uniforms.transformMatrix, false, transformMatrix)

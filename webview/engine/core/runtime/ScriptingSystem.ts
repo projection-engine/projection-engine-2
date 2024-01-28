@@ -1,8 +1,5 @@
 import AbstractEngineSystem from "@engine-core/AbstractEngineSystem";
 import ProjectionEngine from "@lib/ProjectionEngine";
-import Scripting from "@engine-core/core/Scripting";
-import MetricsController from "@engine-core/services/MetricsController";
-import METRICS_FLAGS from "@engine-core/static/METRICS_FLAGS";
 
 export default class ScriptingSystem extends AbstractEngineSystem {
     execute(gl: WebGL2RenderingContext) {

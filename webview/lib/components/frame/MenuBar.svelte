@@ -4,9 +4,14 @@
     import {InjectVar} from "@lib/Injection";
     import ProjectService from "@services/ProjectService";
     import {DropdownOption} from "@lib/components/dropdown/DropdownDefinitions";
+    import Engine from "@engine-core/Engine";
+    import ToasterService from "@services/ToasterService";
+    import LocalizationEN from "@enums/LocalizationEN";
 
     const webView = InjectVar(WebViewService)
     const projectService = InjectVar(ProjectService)
+    const toasterService = InjectVar(ToasterService)
+    const engine = InjectVar(Engine)
 
     const OPTIONS: {label: string, disabled?: boolean, options: DropdownOption[]}[] = [
         {
@@ -21,7 +26,10 @@
         {label: "Edit", disabled: true, options: []},
         {
             label: "Window",
-            options: [{label: "Reload", onClick: () => webView.beam("RELOAD")}]
+            options: [
+                {label: "Recompile shaders", onClick: () => engine.buildShaders().then(() => toasterService.success(LocalizationEN.SHADERS_REBUILT))},
+                {label: "Reload", onClick: () => webView.beam("RELOAD")}
+            ]
         },
         {label: "Help", disabled: true, options: []},
     ]

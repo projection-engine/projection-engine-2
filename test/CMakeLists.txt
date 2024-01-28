@@ -27,6 +27,8 @@ set(SOURCES
         core/FileSystemTest.h
         core/JSONTest.cpp
         core/JSONTest.h
+        core/StringUtilTest.cpp
+        core/StringUtilTest.h
 )
 
 include_directories(../src/ui/editor)

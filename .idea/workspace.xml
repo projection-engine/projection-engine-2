@@ -19,42 +19,11 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-63] Starting new hierarchy&#10;- Creating WorldOutlineView&#10;- Creating service for view&#10;- Fixing LightsService">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-16] Engine refactoring: Shaders&#10;- Moving shaders to CPP side&#10;- Creating new service for shader processing&#10;- Creating new interface for engine: ResourceLoader&#10;- Improving WindowRepository to only initialize when needed&#10;- Fixing tests&#10;- Creating new tests for StringUtils&#10;- Implementing new shader initialization architecture">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/core/Camera.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/core/Camera.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/core/GPU.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/core/GPU.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/core/PhysicsWorld.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/core/PhysicsWorld.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/core/Scripting.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/core/Scripting.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/core/World.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/core/World.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/Entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/Entity.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/services/EntityQueryService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/services/EntityQueryService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/ProjectionEngine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/ProjectionEngine.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/stores/AbstractStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/AbstractStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/stores/SelectionStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/SelectionStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/stores/SettingsStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/SettingsStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/stores/state/SettingsStateDTO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/state/SettingsStateDTO.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/services/EngineStateService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/EngineStateService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/services/EntityHierarchyService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/WorldOutlineStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/services/ProjectService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/ProjectService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/services/WorldOutlineService.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/tests/engine/serializable/RepositoryService.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/tests/engine/serializable/RepositoryService.test.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/modal-input/ModalInput.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/modal-input/ModalInput.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/View.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/View.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/static/VIEWPORT_TABS.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/HierarchyUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/HierarchyUtil.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/InspectorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/InspectorUtil.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/HierarchyView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/WorldOutlineView.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/ComponentTreeBranch.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/ComponentBranch.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/EntityTreeBranch.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/EntityBranchWrapper.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/EntityTreeBranchContent.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/EntityBranch.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/Header.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/WorldOutlineHeader.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/Tree.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/AddComponent.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/AddComponent.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/CameraSettings.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/CameraSettings.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/ui/UIEditorView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/ui/UIEditorView.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/world/WorldEntity.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/world/WorldOptions.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/world/WorldOutlineView.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/Engine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/Engine.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/enums/LocalizationEN.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/enums/LocalizationEN.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/components/frame/MenuBar.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/components/frame/MenuBar.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +46,7 @@
         <option value="WorldEntity" />
         <option value="WorldOptions" />
         <option value="TypeScript File" />
+        <option value="shader-template" />
       </list>
     </option>
   </component>
@@ -125,72 +95,78 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;C/C++ File.main.cpp.executor&quot;: &quot;Run&quot;,
-    &quot;CMake Application.Projection.executor&quot;: &quot;Run&quot;,
-    &quot;CMake Application.projection.executor&quot;: &quot;Debug&quot;,
-    &quot;CMake Debug.projection.executor&quot;: &quot;Debug&quot;,
-    &quot;CMake Debug.projectioncmake.executor&quot;: &quot;Debug&quot;,
-    &quot;Catch.File-system test.executor&quot;: &quot;Debug&quot;,
-    &quot;Catch.JSON test.executor&quot;: &quot;Run&quot;,
-    &quot;Catch.Run all.executor&quot;: &quot;Run&quot;,
-    &quot;Catch.main_test.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should be lazily obtained.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should be the same instance (1).executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should be the same instance.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should dump cycle.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should dump data.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should not inject not @Injectable.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should parse nested.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should parse serializable.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should parse.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should prepare ID.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should restore circular dependency.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should restore data.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should serialize nested.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should serialize.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should stringify Serializable.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should stringify.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should trigger global subscriber.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should trigger subscriber with same value.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Should unsubscribe.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;Shell Script.copy-files.executor&quot;: &quot;Run&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;63-ui-refactoring-hierarchy&quot;,
-    &quot;js.last.introduce.type&quot;: &quot;CONST&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/russi/WebstormProjects/projection-engine-2/test/core&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs.jest.jest_package&quot;: &quot;C:/Users/russi/WebstormProjects/projection-engine-2/webview/node_modules/jest&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.bdev.executor&quot;: &quot;Run&quot;,
-    &quot;npm.dev-build.executor&quot;: &quot;Run&quot;,
-    &quot;npm.sdev.executor&quot;: &quot;Run&quot;,
-    &quot;npm.test.executor&quot;: &quot;Run&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\russi\\WebstormProjects\\projection-engine-2\\webview\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "C/C++ File.main.cpp.executor": "Run",
+    "CMake Application.Projection.executor": "Run",
+    "CMake Application.projection.executor": "Debug",
+    "CMake Debug.projection.executor": "Debug",
+    "CMake Debug.projectioncmake.executor": "Debug",
+    "Catch.File-system test.executor": "Debug",
+    "Catch.JSON test.executor": "Run",
+    "Catch.Run all.executor": "Run",
+    "Catch.String util test.executor": "Debug",
+    "Catch.main_test.executor": "Run",
+    "Jest.Should be lazily obtained.executor": "Run",
+    "Jest.Should be the same instance (1).executor": "Run",
+    "Jest.Should be the same instance.executor": "Run",
+    "Jest.Should dump cycle.executor": "Run",
+    "Jest.Should dump data.executor": "Run",
+    "Jest.Should not inject not @Injectable.executor": "Run",
+    "Jest.Should parse nested.executor": "Run",
+    "Jest.Should parse serializable.executor": "Run",
+    "Jest.Should parse.executor": "Run",
+    "Jest.Should prepare ID.executor": "Run",
+    "Jest.Should restore circular dependency.executor": "Run",
+    "Jest.Should restore data.executor": "Run",
+    "Jest.Should serialize nested.executor": "Run",
+    "Jest.Should serialize.executor": "Run",
+    "Jest.Should stringify Serializable.executor": "Run",
+    "Jest.Should stringify.executor": "Run",
+    "Jest.Should trigger global subscriber.executor": "Run",
+    "Jest.Should trigger subscriber with same value.executor": "Run",
+    "Jest.Should unsubscribe.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "Shell Script.copy-files.executor": "Run",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "16-engine-refactoring-shaders",
+    "js.last.introduce.type": "CONST",
+    "last_opened_file_path": "C:/Users/russi/WebstormProjects/projection-engine-2/test/core",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs.jest.jest_package": "C:/Users/russi/WebstormProjects/projection-engine-2/webview/node_modules/jest",
+    "nodejs_package_manager_path": "npm",
+    "npm.bdev.executor": "Run",
+    "npm.dev-build.executor": "Run",
+    "npm.sdev.executor": "Run",
+    "npm.test.executor": "Run",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "C:\\Users\\russi\\WebstormProjects\\projection-engine-2\\webview\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "Glsl"
+    ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\test\core" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\engine\shaders" />
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\engine" />
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\services" />
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\engine\shaders" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\lib\stores" />
-      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\engine\core\core" />
-      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\engine\core\services" />
-      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\engine\core\services\serialization" />
-      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\engine\core\lib" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -206,30 +182,23 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="npm.test">
-    <configuration name="Should dump cycle" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <jest-package value="$PROJECT_DIR$/webview/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$/webview" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/webview/tests/engine/serializable/Serializable.test.ts" />
-      <test-names>
-        <test-name value="Should dump cycle" />
-      </test-names>
-      <method v="2" />
+  <component name="RunManager" selected="CMake Debug.projectioncmake">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
     </configuration>
-    <configuration name="Should dump data" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <jest-package value="$PROJECT_DIR$/webview/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$/webview" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/webview/tests/engine/serializable/RepositoryService.test.ts" />
-      <test-names>
-        <test-name value="Should dump data" />
-      </test-names>
-      <method v="2" />
+    <configuration name="Run all" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="build" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_CLASS="[RUN_ALL]" TEST_METHOD="Run all" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="String util test" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="build" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_CLASS="[stringutil-test]" TEST_METHOD="String util test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
     </configuration>
     <configuration name="Should restore circular dependency" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
@@ -292,11 +261,11 @@
     </configuration>
     <list>
       <item itemvalue="Catch.main_test" />
+      <item itemvalue="Catch.String util test" />
+      <item itemvalue="Catch.Run all" />
       <item itemvalue="CMake Application.Projection" />
       <item itemvalue="CMake Debug.projectioncmake" />
-      <item itemvalue="Jest.Should dump cycle" />
       <item itemvalue="Jest.Should restore circular dependency" />
-      <item itemvalue="Jest.Should dump data" />
       <item itemvalue="Jest.Should restore data" />
       <item itemvalue="npm.dev-build" />
       <item itemvalue="npm.bdev" />
@@ -305,11 +274,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Catch.String util test" />
+        <item itemvalue="Catch.Run all" />
         <item itemvalue="npm.test" />
         <item itemvalue="Jest.Should restore data" />
         <item itemvalue="Jest.Should restore circular dependency" />
-        <item itemvalue="Jest.Should dump data" />
-        <item itemvalue="Jest.Should dump cycle" />
       </list>
     </recent_temporary>
   </component>
@@ -377,14 +346,7 @@
       <workItem from="1706135278039" duration="3243000" />
       <workItem from="1706221011521" duration="2292000" />
       <workItem from="1706353242258" duration="5905000" />
-    </task>
-    <task id="LOCAL-00011" summary="[STD-3] Project window&#10;- Improving event system structure">
-      <option name="closed" value="true" />
-      <created>1703421270891</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1703421270891</updated>
+      <workItem from="1706443195876" duration="7717000" />
     </task>
     <task id="LOCAL-00012" summary="[STD-13] WindowSystem&#10;- Created windowSystem&#10;- Improved Runner class&#10;- Created Projects window">
       <option name="closed" value="true" />
@@ -770,7 +732,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706138529710</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="[STD-16] Engine refactoring: Shaders&#10;- Moving shaders to CPP side&#10;- Creating new service for shader processing&#10;- Creating new interface for engine: ResourceLoader&#10;- Improving WindowRepository to only initialize when needed&#10;- Fixing tests&#10;- Creating new tests for StringUtils&#10;- Implementing new shader initialization architecture">
+      <option name="closed" value="true" />
+      <created>1706450746010</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1706450746010</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -794,7 +764,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-26] Tabs&#10;- Adding types and enums&#10;- Removing unused code&#10;- Reworking views to be simpler&#10;- Removing TabsStore" />
     <MESSAGE value="[STD-34] Stores&#10;- Creating DTOs&#10;- Creating new subscribe method&#10;- Removing old objects" />
     <MESSAGE value="[STD-34] Stores&#10;- Fixing subscribe and unsubscribe&#10;- Creating test for store" />
     <MESSAGE value="[STD-34] Stores&#10;- Completing change to subscribe&#10;- Creating test for Injection &#10;- Improving store update method" />
@@ -819,25 +788,26 @@
     <MESSAGE value="[STD-52] Engine refactoring&#10;- Refactoring files&#10;- Creating core systems&#10;- Removing unused files" />
     <MESSAGE value="[STD-52] Engine refactoring&#10;- Fixing camera" />
     <MESSAGE value="[STD-63] Starting new hierarchy&#10;- Creating WorldOutlineView&#10;- Creating service for view&#10;- Fixing LightsService" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-63] Starting new hierarchy&#10;- Creating WorldOutlineView&#10;- Creating service for view&#10;- Fixing LightsService" />
+    <MESSAGE value="[STD-16] Engine refactoring: Shaders&#10;- Moving shaders to CPP side&#10;- Creating new service for shader processing&#10;- Creating new interface for engine: ResourceLoader&#10;- Improving WindowRepository to only initialize when needed&#10;- Fixing tests&#10;- Creating new tests for StringUtils&#10;- Implementing new shader initialization architecture" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-16] Engine refactoring: Shaders&#10;- Moving shaders to CPP side&#10;- Creating new service for shader processing&#10;- Creating new interface for engine: ResourceLoader&#10;- Improving WindowRepository to only initialize when needed&#10;- Fixing tests&#10;- Creating new tests for StringUtils&#10;- Implementing new shader initialization architecture" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp</url>
-          <line>57</line>
+          <line>55</line>
           <option name="timeStamp" value="35" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/ui/shared/webview/WebViewPayload.cpp</url>
-          <line>6</line>
-          <option name="timeStamp" value="41" />
+          <url>file://$PROJECT_DIR$/test/core/StringUtilTest.cpp</url>
+          <line>11</line>
+          <option name="timeStamp" value="56" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/util/FS.cpp</url>
-          <line>94</line>
-          <option name="timeStamp" value="53" />
+          <url>file://$PROJECT_DIR$/src/services/ShaderService.cpp</url>
+          <line>11</line>
+          <option name="timeStamp" value="58" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/webview/lib/FSService.ts</url>

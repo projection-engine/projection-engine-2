@@ -11,6 +11,21 @@ namespace PEngine::StringUtils {
         }
         str.replace(start_pos, from.length(), to);
     }
+
+    static std::vector<std::string> Matches(const std::string &input, const std::string &searchString) {
+        std::vector<std::string> includes;
+        size_t pos = 0;
+        while ((pos = input.find(searchString, pos)) != std::string::npos) {
+            size_t endPos = input.find_first_of('\n', pos);
+            if (endPos == std::string::npos)
+                endPos = input.size();
+            std::string include = input.substr(pos, endPos - pos);
+            includes.push_back(include);
+            pos = endPos;
+        }
+
+        return includes;
+    }
 }
 
 #endif

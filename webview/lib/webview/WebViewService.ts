@@ -1,13 +1,14 @@
 import WebViewPayload from "./WebViewPayload";
-import IInjectable from "@lib/IInjectable";
 import {Injectable} from "@lib/Injection";
+import IInjectable from "@lib/IInjectable";
+import {CommunicationService} from "@lib/webview/CommunicationService";
 
 @Injectable
-export default class WebViewService extends IInjectable {
+export default class WebViewService extends IInjectable implements CommunicationService {
     private listeners: Map<string, GenericVoidFunctionWithP<WebViewPayload>> = new Map()
     private initialized = false
 
-    private addGlobalListener() {
+    addGlobalListener() {
         if (!this.initialized) {
             // @ts-ignore
             window.chrome.webview.addEventListener('message', event => {

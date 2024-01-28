@@ -2,6 +2,8 @@
 #define PROJECTION_EDITOR_H
 
 #include "../shared/AbstractWindow.h"
+#include "../../services/FileSystemService.h"
+#include "../../services/ShaderService.h"
 
 namespace PEngine {
     class WebViewWindow;
@@ -12,6 +14,8 @@ namespace PEngine {
     private:
         static void onMessage(WebViewPayload &payload);
         static std::string projectPath;
+        FileSystemService fileSystemService;
+        ShaderService shaderService;
     public:
 
         explicit Editor() : AbstractWindow("Project Editor") {}

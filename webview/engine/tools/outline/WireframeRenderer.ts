@@ -2,13 +2,13 @@ import GPU from "@engine-core/core/GPU"
 import COLLISION_TYPES from "../../core/static/COLLISION_TYPES"
 import {mat4, vec3} from "gl-matrix"
 import StaticMeshRepository from "@engine-core/repositories/StaticMeshRepository"
-import StaticEditorShaders from "../utils/StaticEditorShaders"
 import FramebufferRepository from "@engine-core/repositories/FramebufferRepository"
 import StaticEditorMeshes from "../utils/StaticEditorMeshes"
 import CameraIconRenderer from "../icons/CameraIconRenderer"
 import EngineToolsState from "../EngineToolsState"
 import ProjectionEngine from "@lib/ProjectionEngine";
 import Components from "@engine-core/static/Components";
+import ShaderRepository from "@engine-core/repositories/ShaderRepository";
 
 const EMPTY_MATRIX = mat4.create()
 const translationCache = vec3.create()
@@ -18,10 +18,10 @@ export default class WireframeRenderer {
 			return
 		const entities = ProjectionEngine.Engine.getEntities().array
 		const size = entities.length
-		const uniforms = StaticEditorShaders.wireframeUniforms
+		const uniforms = ShaderRepository.wireframeUniforms
 		const context = GPU.context
 
-		StaticEditorShaders.wireframe.bind()
+		ShaderRepository.wireframe.bind()
 		GPU.bind2DTextureForDrawing(uniforms.depth, 0,FramebufferRepository.sceneDepthVelocity)
 
 		const cameras = ProjectionEngine.Engine.getByComponent(Components.CAMERA)

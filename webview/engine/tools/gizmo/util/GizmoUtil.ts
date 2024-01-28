@@ -3,7 +3,6 @@ import GizmoSystem from "../GizmoSystem"
 import Entity from "../../../core/instances/Entity"
 import DepthPickingService from "@engine-core/services/DepthPickingService"
 import EntityAPI from "@engine-core/services/EntityAPI"
-import StaticEditorShaders from "../../utils/StaticEditorShaders"
 import GPU from "@engine-core/core/GPU"
 import GizmoState from "./GizmoState"
 import Axis from "../../static/AXIS"
@@ -12,6 +11,7 @@ import Mesh from "../../../core/instances/Mesh";
 import StaticEditorFBO from "../../utils/StaticEditorFBO";
 import EngineToolsState from "../../EngineToolsState";
 import ProjectionEngine from "@lib/ProjectionEngine";
+import ShaderRepository from "@engine-core/repositories/ShaderRepository";
 
 
 export default class GizmoUtil {
@@ -70,8 +70,8 @@ export default class GizmoUtil {
     }
 
     static drawGizmo(mesh: Mesh, transformMatrix: mat4, axis: Axis) {
-        StaticEditorShaders.gizmo.bind()
-        const uniforms = StaticEditorShaders.gizmoUniforms
+        ShaderRepository.gizmo.bind()
+        const uniforms = ShaderRepository.gizmoUniforms
         GPU.bind2DTextureForDrawing(uniforms.gizmoIDS, 0, StaticEditorFBO.gizmo.colors[0])
         GPU.context.uniform2fv(uniforms.mouseCoordinates, EngineToolsState.mouseCoordinates)
 
@@ -100,7 +100,7 @@ export default class GizmoUtil {
         if(mesh != null) {
             data.transformMatrix = transformation
             data.uID = pickId
-            StaticEditorShaders.toDepthBuffer.bindForUse(data)
+            ShaderRepository.toDepthBuffer.bindForUse(data)
             mesh.draw()
         }
     }

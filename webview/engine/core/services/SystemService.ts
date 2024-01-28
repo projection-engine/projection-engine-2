@@ -22,7 +22,6 @@ import ENVIRONMENT from "@engine-core/static/ENVIRONMENT";
 import GUIService from "@engine-core/services/GUIService";
 import GPU from "@engine-core/core/GPU";
 import PhysicsWorld from "@engine-core/core/PhysicsWorld";
-import Scripting from "@engine-core/core/Scripting";
 
 export default class SystemService extends AbstractEngineService {
     #rootSystem: AbstractEngineSystem

@@ -2,9 +2,9 @@ import GPU from "@engine-core/core/GPU"
 
 import StaticMeshRepository from "@engine-core/repositories/StaticMeshRepository"
 import FramebufferRepository from "@engine-core/repositories/FramebufferRepository"
-import StaticEditorShaders from "../utils/StaticEditorShaders"
 import EngineTools from "../EngineTools"
 import EngineToolsState from "../EngineToolsState"
+import ShaderRepository from "@engine-core/repositories/ShaderRepository";
 
 const fallbackColor = new Float32Array([.5, .5, .5])
 const metadata = new Float32Array(9)
@@ -16,8 +16,8 @@ export default class SelectedSystem {
 
         if (length > 0) {
             FramebufferRepository.postProcessing1.startMapping()
-            StaticEditorShaders.silhouette.bind()
-            const uniforms = StaticEditorShaders.silhouetteUniforms
+            ShaderRepository.silhouette.bind()
+            const uniforms = ShaderRepository.silhouetteUniforms
             for (let m = 0; m < length; m++) {
                 const current = selected[m]
                 if (!current || !current.active)
@@ -54,8 +54,8 @@ export default class SelectedSystem {
     static drawSilhouette() {
         const context = GPU.context
 
-        StaticEditorShaders.outline.bind()
-        const outlineShaderUniforms = StaticEditorShaders.outlineUniforms
+        ShaderRepository.outline.bind()
+        const outlineShaderUniforms = ShaderRepository.outlineUniforms
         context.uniform2fv(outlineShaderUniforms.bufferSize, GPU.bufferResolution)
         context.uniform1f(outlineShaderUniforms.outlineWidth, EngineToolsState.outlineWidth)
         if (EngineToolsState.showOutline) {

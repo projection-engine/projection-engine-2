@@ -1,26 +1,16 @@
 import GPU from "../core/GPU"
-import DEBUG_FRAG from "../shaders/uber-shader/UBER-MATERIAL-DEBUG.frag"
-import BASIS_FRAG from "../shaders/uber-shader/UBER-MATERIAL-BASIS.frag"
-import VERTEX_SHADER from "../shaders/uber-shader/UBER-MATERIAL.vert"
 import Shader from "../instances/Shader"
 import ProjectionEngine from "@lib/ProjectionEngine";
 import ENVIRONMENT from "@engine-core/static/ENVIRONMENT";
+import AbstractEngineService from "@engine-core/AbstractEngineService";
 
-export default class UberShaderService {
-
-    static get MAX_LIGHTS() {
-        return 310
-    }
-
-    static #uberSignature = {}
-    static get uberSignature() {
-        return UberShaderService.#uberSignature
-    }
-
+export default class UberShaderService extends AbstractEngineService {
+    static MAX_LIGHTS = 310
+    static uberSignature = {}
     static uber?: Shader
     static uberUniforms?: { [key: string]: WebGLUniformLocation }
 
-    static compile(forceCleanShader?: boolean) {
+    async compile(forceCleanShader?: boolean) {
         UberShaderService.uber = undefined
         const methodsToLoad = [
             `
@@ -60,15 +50,21 @@ export default class UberShaderService {
             }
         `)
 
-        let fragment = ProjectionEngine.Engine.getEnvironment() === ENVIRONMENT.DEV ? DEBUG_FRAG : BASIS_FRAG
+        let fragment: string
+        if(ProjectionEngine.Engine.getEnvironment() === ENVIRONMENT.DEV){
+            fragment = await this.engine.getResourceLoader().prepareShader("UBER-MATERIAL-DEBUG.frag")
+        }else{
+            fragment = await this.engine.getResourceLoader().prepareShader("UBER-MATERIAL-BASIS.frag")
+        }
         fragment = fragment.replace("//--UNIFORMS--", uniformsToLoad.join("\n"))
         fragment = fragment.replace("//--MATERIAL_SELECTION--", methodsToLoad.join("\n"))
 
-        const shader = new Shader(VERTEX_SHADER, fragment)
+        const vertexShader = await this.engine.getResourceLoader().prepareShader("UBER-MATERIAL.vert");
+        const shader = new Shader(vertexShader, fragment)
         if (shader.messages.hasError) {
 
             if (!UberShaderService.uber && !forceCleanShader)
-                UberShaderService.compile(true)
+                this.compile(true)
             console.error("Invalid shader", shader.messages)
 
             return

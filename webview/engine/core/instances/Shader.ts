@@ -1,5 +1,4 @@
 import GPU from "../core/GPU"
-import applyShaderMethods from "../utils/apply-shader-methods"
 import UBORepository, {StaticUBONames} from "../repositories/UBORepository"
 import {GLSLTypes} from "@engine-core/engine-d";
 
@@ -36,12 +35,12 @@ export default class Shader {
     }
     txt
 
-    constructor(vertex, fragment) {
+    constructor(vertex: string, fragment: string) {
         const alert = []
         this.program = GPU.context.createProgram()
 
-        const vertexBuilt = "#version 300 es\n" + applyShaderMethods(vertex)
-        const fragmentBuilt = "#version 300 es\n" + applyShaderMethods(fragment)
+        const vertexBuilt = "#version 300 es\n" + vertex
+        const fragmentBuilt = "#version 300 es\n" + fragment
 
         this.txt = fragmentBuilt
         const vertexShader = this.#compileShader(vertexBuilt, GPU.context.VERTEX_SHADER, m => alert.push(m))

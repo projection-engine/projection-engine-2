@@ -1,21 +1,12 @@
-import GPU from "./GPU"
 import GPUAPI from "../services/GPUAPI"
-import PhysicsWorld from "./PhysicsWorld"
 import GUIService from "../services/GUIService"
 import InputEventsAPI from "../services/InputEventsAPI"
 import ConsoleAPI from "../services/ConsoleAPI"
-import Component from "../instances/components/Component"
-import COMPONENTS from "../static/Components"
-import Camera from "./Camera"
+import Components from "../static/Components"
 import EntityQueryService from "../services/EntityQueryService"
-import FileSystemAPI from "../services/FileSystemAPI"
-import EntityAPI from "../services/EntityAPI"
-import ProjectionEngine from "@lib/ProjectionEngine";
 import AbstractEngineCoreService from "@engine-core/core/AbstractEngineCoreService";
 import DynamicMap from "@engine-core/lib/DynamicMap";
-import Entity from "@engine-core/instances/Entity";
 import {CustomEngineScript} from "@engine-core/engine-d";
-import Components from "../static/Components";
 import RepositoryService from "@engine-core/services/serialization/RepositoryService";
 
 /**

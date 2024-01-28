@@ -2,7 +2,6 @@ import GPU from "@engine-core/core/GPU"
 import LIGHT_TYPES from "../../core/static/LIGHT_TYPES"
 import LineRenderer from "./LineRenderer"
 import StaticMeshRepository from "@engine-core/repositories/StaticMeshRepository"
-import StaticEditorShaders from "../utils/StaticEditorShaders"
 import {mat4} from "gl-matrix"
 import MATERIAL_RENDERING_TYPES from "../../core/static/MATERIAL_RENDERING_TYPES"
 import Entity from "../../core/instances/Entity"
@@ -10,6 +9,7 @@ import FramebufferRepository from "@engine-core/repositories/FramebufferReposito
 import EngineToolsState from "../EngineToolsState"
 import GizmoUtil from "../gizmo/util/GizmoUtil"
 import ProjectionEngine from "@lib/ProjectionEngine";
+import ShaderRepository from "@engine-core/repositories/ShaderRepository";
 
 
 const iconAttributes = mat4.create()
@@ -48,7 +48,7 @@ export default class IconsSystem {
 		entity: Entity,
 		U
 	) {
-		const uniforms = U || StaticEditorShaders.iconUniforms
+		const uniforms = U || ShaderRepository.iconUniforms
 		const context = GPU.context
 		const lightComponent = entity.lightComponent
 		const lightType = lightComponent?.type
@@ -155,9 +155,9 @@ export default class IconsSystem {
 		if (!IconsSystem.iconsTexture)
 			return
 		const context = GPU.context
-		const uniforms = StaticEditorShaders.iconUniforms
+		const uniforms = ShaderRepository.iconUniforms
 
-		StaticEditorShaders.icon.bind()
+		ShaderRepository.icon.bind()
 
 		GPU.bind2DTextureForDrawing(uniforms.iconSampler, 0, IconsSystem.iconsTexture)
 

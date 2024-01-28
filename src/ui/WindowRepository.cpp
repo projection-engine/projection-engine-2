@@ -44,7 +44,7 @@ namespace PEngine {
         fprintf(stderr, "GLFW Error %d: %s\n", error, description);
     }
 
-    WindowRepository::WindowRepository() {
+    void WindowRepository::initialize() {
 
         CONSOLE_LOG("Creating window")
         glfwSetErrorCallback(onError);
