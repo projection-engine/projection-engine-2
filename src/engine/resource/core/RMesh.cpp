@@ -2,7 +2,7 @@
 
 #include <utility>
 #include "RMesh.h"
-#include "../ResourcesSystem.h"
+#include "../../services/ResourceService.h"
 
 namespace PEngine {
     RMesh *RMesh::activeMesh = nullptr;
@@ -18,7 +18,7 @@ namespace PEngine {
         glGenVertexArrays(1, &vao);
         glBindVertexArray(vao);
 
-        ResourcesSystem::createBuffer(&indexBuffer, GL_ELEMENT_ARRAY_BUFFER, indices, GL_STATIC_DRAW);
+        ResourceService::createBuffer(&indexBuffer, GL_ELEMENT_ARRAY_BUFFER, indices, GL_STATIC_DRAW);
         vertexVBO.init(0, vertices, GL_ARRAY_BUFFER, 3, GL_FLOAT, false, GL_STATIC_DRAW, 0);
 
         if (uvs != nullptr) {

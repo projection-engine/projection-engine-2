@@ -1,10 +1,10 @@
-#include <glad/glad.h>
-#include "ResourcesSystem.h"
-#include "../../util/structures/Map.cpp"
-#include "core/RMesh.h"
+#include "glad/glad.h"
+#include "ResourceService.h"
+#include "structures/Map.cpp"
+#include "../resource/core/RMesh.h"
 
 namespace PEngine {
-    void ResourcesSystem::registerResource(IResource *resource, StaticResource id) {
+    void ResourceService::registerResource(IResource *resource, StaticResource id) {
         CONSOLE_WARN("Creating {0}", std::to_string(id))
         if (staticResources.has(id)) {
             CONSOLE_ERROR("Static util already exists {0}", std::to_string(id))
@@ -13,15 +13,15 @@ namespace PEngine {
         staticResources.set(id, resource);
     }
 
-    bool ResourcesSystem::hasResource(const std::string &id) {
+    bool ResourceService::hasResource(const std::string &id) {
         return dynamicResources.has(id);
     }
 
-    bool ResourcesSystem::hasResource(StaticResource id) {
+    bool ResourceService::hasResource(StaticResource id) {
         return staticResources.has(id);
     }
 
-    void ResourcesSystem::registerResource(IResource *resource, const char *id) {
+    void ResourceService::registerResource(IResource *resource, const char *id) {
         CONSOLE_WARN("Creating {0}", id)
         if (dynamicResources.has(id)) {
             CONSOLE_ERROR("Dynamic util already exists {0}", id)
@@ -30,7 +30,7 @@ namespace PEngine {
         dynamicResources.set(id, resource);
     }
 
-    void ResourcesSystem::deleteResource(const std::string &id) {
+    void ResourceService::deleteResource(const std::string &id) {
         CONSOLE_WARN("Deleting {0}", id)
         if (!dynamicResources.has(id)) {
             CONSOLE_ERROR("Dynamic util doesn't exists {0}", id)
@@ -41,7 +41,7 @@ namespace PEngine {
         dynamicResources.deleteKey(id);
     }
 
-    void ResourcesSystem::deleteResource(StaticResource id) {
+    void ResourceService::deleteResource(StaticResource id) {
         CONSOLE_WARN("Deleting {0}", std::to_string(id))
         if (!staticResources.has(id)) {
             CONSOLE_ERROR("Static util doesn't exists {0}", std::to_string(id))
@@ -52,7 +52,7 @@ namespace PEngine {
         staticResources.deleteKey(id);
     }
 
-    void ResourcesSystem::createTexture(
+    void ResourceService::createTexture(
             unsigned int *target,
             unsigned int width,
             unsigned int height,
@@ -76,7 +76,7 @@ namespace PEngine {
         glBindTexture(GL_TEXTURE_2D, 0);
     }
 
-    void ResourcesSystem::createBuffer(
+    void ResourceService::createBuffer(
             unsigned int *target,
             unsigned int type,
             std::vector<float> &data,

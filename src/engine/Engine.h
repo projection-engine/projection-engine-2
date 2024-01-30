@@ -1,37 +1,49 @@
 #ifndef PROJECTION_ENGINE_H
 #define PROJECTION_ENGINE_H
 
-#include "world/WorldSystem.h"
-#include "resource/ResourcesSystem.h"
-#include "runtime/RuntimeSystem.h"
+#include "services/WorldService.h"
+#include "services/CameraService.h"
+#include "services/WorldPhysicsService.h"
+#include "services/ResourceService.h"
+#include "services/SystemService.h"
+#include "services/WorldLightsService.h"
 
 namespace PEngine {
-    class IIOController;
+    class AbstractIOService;
 
-    class IFSController;
+    class AbstractFSService;
 
     class Engine {
     private:
-        WorldSystem world;
-        ResourcesSystem resources;
-        RuntimeSystem systems;
-        IIOController *io = nullptr;
-        IFSController *fs = nullptr;
+        WorldService world;
+        WorldLightsService worldLights;
+        ResourceService resources;
+        CameraService camera;
+        WorldPhysicsService worldPhysics;
+        SystemService systems;
+
+        AbstractIOService *io;
+        AbstractFSService *fs;
     public:
+        explicit Engine(AbstractIOService *ioController, AbstractFSService *fsController);
 
-        explicit Engine(IIOController *ioController, IFSController *fsController);
+        WorldService *getWorldService();
 
-        explicit Engine() = default;
+        ResourceService *getResourceService();
 
-        WorldSystem &getWorld();
+        SystemService *getSystemService();
 
-        ResourcesSystem &getResources();
-
-        IIOController *getIo();
-
-        IFSController *getFs();
+        WorldLightsService *getWorldLightsService();
 
         void run();
+
+        AbstractIOService *getIo() const;
+
+        AbstractFSService *getFs() const;
+
+        WorldPhysicsService *getWorldPhysicsService();
+
+        CameraService *getCameraService();
     };
 }
 

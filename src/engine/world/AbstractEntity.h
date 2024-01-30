@@ -1,18 +1,18 @@
-#ifndef PROJECTION_IENTITY_H
-#define PROJECTION_IENTITY_H
+#ifndef PROJECTION_ABSTRACTENTITY_H
+#define PROJECTION_ABSTRACTENTITY_H
 
 #include <string>
 #include "entt/entity/entity.hpp"
 #include "../../util/UUID.h"
 
 namespace PEngine {
-    class IEntity {
+    class AbstractEntity {
     private:
         std::string name;
         std::string uuid;
         entt::entity entity;
     public:
-        explicit IEntity(entt::entity entity, std::string uuid);
+        explicit AbstractEntity(entt::entity entity, std::string uuid);
 
         const std::string &getName() const;
 

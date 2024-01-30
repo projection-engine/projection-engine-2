@@ -29,6 +29,9 @@ set(COMMON_LIBRARIES
 set(FILE_PATHS
         src/util/JSON.h
 
+        src/engine/services/AbstractCoreService.h
+        src/engine/services/AbstractCoreService.cpp
+
         src/ui/shared/AbstractWindow.cpp
         src/ui/shared/AbstractWindow.h
         src/ui/editor/Editor.cpp
@@ -59,9 +62,9 @@ set(FILE_PATHS
         src/engine/resource/UBOType.h
         src/util/Definitions.h
 
-        src/engine/external/IIOController.h
-        src/engine/external/IFSController.h
-        src/engine/external/IIOController.cpp
+        src/engine/external/AbstractIOService.h
+        src/engine/external/AbstractFSService.h
+        src/engine/external/AbstractIOService.cpp
 
         src/engine/resource/core/IResource.h
         src/engine/resource/StaticResource.h
@@ -77,23 +80,22 @@ set(FILE_PATHS
         src/engine/resource/core/RTexture.h
         src/engine/resource/ResourceType.h
         src/engine/resource/core/IResource.cpp
-        src/engine/runtime/systems/ISystem.cpp
-        src/engine/runtime/systems/ISystem.h
-        src/engine/runtime/systems/InputSystem.cpp
-        src/engine/runtime/systems/InputSystem.h
+        src/engine/runtime/AbstractSystem.cpp
+        src/engine/runtime/AbstractSystem.h
+        src/engine/runtime/CameraTrackerSystem.cpp
+        src/engine/runtime/CameraTrackerSystem.h
 
-        src/engine/world/components/IComponent.cpp
-        src/engine/world/Component.h
-        src/engine/world/components/CTransform.cpp
-        src/engine/world/components/CTransform.h
+        src/engine/world/components/AbstractComponent.cpp
+        src/engine/world/components/MovementComponent.cpp
+        src/engine/world/components/MovementComponent.h
 
         src/util/event/IEventTarget.h
-        src/engine/runtime/RuntimeSystem.cpp
-        src/engine/runtime/RuntimeSystem.h
-        src/engine/resource/ResourcesSystem.cpp
-        src/engine/resource/ResourcesSystem.h
-        src/engine/world/IEntity.cpp
-        src/engine/world/IEntity.h
+        src/engine/services/SystemService.cpp
+        src/engine/services/SystemService.h
+        src/engine/services/ResourceService.cpp
+        src/engine/services/ResourceService.h
+        src/engine/world/AbstractEntity.cpp
+        src/engine/world/AbstractEntity.h
         src/services/FileSystemService.h
         src/services/FileSystemService.cpp
         src/util/event/TypedEventPayload.h
@@ -111,9 +113,9 @@ set(FILE_PATHS
         src/util/debug/ILoggable.h
         src/util/debug/Timer.cpp
         src/util/debug/Timer.h
-        src/engine/world/WorldSystem.cpp
-        src/engine/world/WorldSystem.h
-        src/engine/world/components/IComponent.h
+        src/engine/services/WorldService.cpp
+        src/engine/services/WorldService.h
+        src/engine/world/components/AbstractComponent.h
         src/engine/Engine.cpp
         src/engine/Engine.h
         src/util/UUID.h

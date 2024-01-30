@@ -9,7 +9,7 @@ namespace PEngine {
         return type;
     }
 
-    void IResource::setResourceSystem(ResourcesSystem *system) {
+    void IResource::setResourceSystem(ResourceService *system) {
         if (this->resourcesSystem != nullptr) {
             return;
         }

@@ -1,14 +1,15 @@
-#ifndef PROJECTION_RESOURCESSYSTEM_H
-#define PROJECTION_RESOURCESSYSTEM_H
+#ifndef PROJECTION_RESOURCESERVICE_H
+#define PROJECTION_RESOURCESERVICE_H
 
-#include "StaticResource.h"
-#include "core/IResource.h"
-#include "../../util/structures/Map.h"
-#include "../../util/debug/ILoggable.h"
+#include "../resource/StaticResource.h"
+#include "../resource/core/IResource.h"
+#include "structures/Map.h"
+#include "debug/ILoggable.h"
+#include "AbstractCoreService.h"
 
 namespace PEngine {
 
-    class ResourcesSystem : public ILoggable {
+    class ResourceService : public AbstractCoreService {
     private:
         Map<StaticResource, IResource *> staticResources;
         Map<std::string, IResource *> dynamicResources;

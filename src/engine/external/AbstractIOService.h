@@ -1,12 +1,12 @@
-#ifndef PROJECTION_IIOCONTROLLER_H
-#define PROJECTION_IIOCONTROLLER_H
+#ifndef PROJECTION_ABSTRACTIOSERVICE_H
+#define PROJECTION_ABSTRACTIOSERVICE_H
 
 namespace PEngine {
     template<typename K, typename V>
     class Map;
 
 
-    class IIOController {
+    class AbstractIOService {
     public:
         virtual bool isMousePosValid();
 

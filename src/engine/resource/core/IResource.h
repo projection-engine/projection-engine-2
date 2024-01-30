@@ -6,12 +6,12 @@
 #include "../../../util/debug/ILoggable.h"
 
 namespace PEngine {
-    class ResourcesSystem;
+    class ResourceService;
 
     class IResource : public ILoggable {
     protected:
         ResourceType type;
-        ResourcesSystem *resourcesSystem = nullptr;
+        ResourceService *resourcesSystem = nullptr;
     public:
         explicit IResource(ResourceType type);
 
@@ -19,7 +19,7 @@ namespace PEngine {
 
         ResourceType getType() const;
 
-        void setResourceSystem(ResourcesSystem *resourcesSystem);
+        void setResourceSystem(ResourceService *resourcesSystem);
     };
 
 }

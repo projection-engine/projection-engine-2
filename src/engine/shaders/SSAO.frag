@@ -1,11 +1,9 @@
 precision highp float;
-#define KERNELS 64
-
 #include "./CAMERA_VIEW_INFO.glsl"
 
 uniform Settings{
     vec4 settings;
-    vec4 samples[KERNELS];
+    vec4 samples[64];
     vec2 noiseScale;
 };
 in vec2 texCoords;

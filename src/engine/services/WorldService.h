@@ -1,56 +1,57 @@
 #pragma once
-#ifndef PROJECTION_WORLDSYSTEM_H
-#define PROJECTION_WORLDSYSTEM_H
+#ifndef PROJECTION_WORLDSERVICE_H
+#define PROJECTION_WORLDSERVICE_H
 
 #include "entt/entt.hpp"
-#include "../../util/debug/ILoggable.h"
-#include "../../util/structures/Map.h"
-#include "components/IComponent.h"
+#include "debug/ILoggable.h"
+#include "structures/Map.h"
+#include "../world/components/AbstractComponent.h"
+#include "AbstractCoreService.h"
 
 namespace PEngine {
 
-    class IEntity;
+    class AbstractEntity;
 
-    class WorldSystem : public ILoggable {
+    class WorldService : public AbstractCoreService {
     private:
         entt::registry worldReg;
-        Map<std::string, IEntity *> entities;
+        Map<std::string, AbstractEntity *> entities;
 
-        IEntity *addEntityInternal(const std::string& uuid, const char *name);
+        AbstractEntity *addEntityInternal(const std::string& uuid, const char *name);
 
-        static entt::entity getEntityFromWrapper(IEntity *entity);
+        static entt::entity getEntityFromWrapper(AbstractEntity *entity);
 
     public:
 
-        IEntity *addEntity();
+        AbstractEntity *addEntity();
 
         void removeEntity(const std::string &uuid);
 
         template<class T>
-        IComponent &addComponent(IEntity *ent) {
+        AbstractComponent &addComponent(AbstractEntity *ent) {
             CONSOLE_LOG("Adding component to entity")
             entt::entity entity = getEntityFromWrapper(ent);
             worldReg.emplace<T>(entity);
-            IComponent &comp = worldReg.get<T>(entity);
+            AbstractComponent &comp = worldReg.get<T>(entity);
             comp.setEntity(ent);
             return comp;
         }
 
         template<class T>
-        void removeComponent(IEntity *ent) {
+        void removeComponent(AbstractEntity *ent) {
             CONSOLE_LOG("Removing component from entity")
             entt::entity entity = getEntityFromWrapper(ent);
             worldReg.erase<T>(entity);
         }
 
         template<class T>
-        IComponent *getComponent(IEntity *ent) {
+        AbstractComponent *getComponent(AbstractEntity *ent) {
             entt::entity entity = getEntityFromWrapper(ent);
             return worldReg.try_get<T>(entity);
         }
 
         template<class T>
-        bool hasComponent(IEntity *ent) {
+        bool hasComponent(AbstractEntity *ent) {
             entt::entity entity = getEntityFromWrapper(ent);
             return worldReg.all_of<T>(entity);
         }
@@ -59,7 +60,7 @@ namespace PEngine {
 
         entt::registry &getRegistry();
 
-        IEntity *addEntity(std::string name);
+        AbstractEntity *addEntity(std::string name);
     };
 }
 

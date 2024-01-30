@@ -1,12 +1,12 @@
 #ifndef PROJECTION_IOCONTROLLER_H
 #define PROJECTION_IOCONTROLLER_H
 
-#include "../../../engine/external/IIOController.h"
+#include "../../../engine/external/AbstractIOService.h"
 #include "imgui.h"
 
 namespace PEngine {
 
-    class IOController : public IIOController {
+    class IOController : public AbstractIOService {
     private:
         ImGuiIO &io;
         const int MAX_SIZE_MOUSE = IM_ARRAYSIZE(io.MouseDown);

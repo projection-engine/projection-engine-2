@@ -1,6 +1,6 @@
 #include "RFBO.h"
 #include <glad/glad.h>
-#include "../ResourcesSystem.h"
+#include "../../services/ResourceService.h"
 
 namespace PEngine {
     RFBO::~RFBO() {
@@ -12,7 +12,7 @@ namespace PEngine {
     }
 
     RFBO *RFBO::depthTexture() {
-        ResourcesSystem::createTexture(
+        ResourceService::createTexture(
                 &depthSampler,
                 width,
                 height,

@@ -1,12 +1,12 @@
-#ifndef PROJECTION_CTRANSFORM_H
-#define PROJECTION_CTRANSFORM_H
+#ifndef PROJECTION_MOVEMENTCOMPONENT_H
+#define PROJECTION_MOVEMENTCOMPONENT_H
 
 #include "glm/glm.hpp"
-#include "IComponent.h"
+#include "AbstractComponent.h"
 
 namespace PEngine {
 
-    class CTransform : public IComponent {
+    class MovementComponent : public AbstractComponent {
     private:
         glm::mat4 matrix;
         glm::vec3 translation;

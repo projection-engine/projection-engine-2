@@ -1,6 +1,6 @@
 #include <glad/glad.h>
 #include "VertexBufferObject.h"
-#include "../ResourcesSystem.h"
+#include "../../services/ResourceService.h"
 
 namespace PEngine {
     VertexBufferObject::~VertexBufferObject() {
@@ -18,7 +18,7 @@ namespace PEngine {
             int stride
     ) {
 
-        ResourcesSystem::createBuffer(&vbo, type, data, renderingType);
+        ResourceService::createBuffer(&vbo, type, data, renderingType);
         glVertexAttribPointer(
                 index,
                 size,

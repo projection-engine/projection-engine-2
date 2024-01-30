@@ -1,34 +1,52 @@
 #include "Engine.h"
-#include "world/WorldSystem.h"
-#include "runtime/systems/InputSystem.h"
-#include "external/IIOController.h"
-#include "external/IFSController.h"
 
 namespace PEngine {
-    Engine::Engine(IIOController *ioController, IFSController *fsController) {
-        io = ioController;
-        fs = fsController;
-        systems.setEngine(this);
-        systems.createSystem<InputSystem>();
+    WorldService *Engine::getWorldService() {
+        return &world;
     }
 
-    WorldSystem &Engine::getWorld() {
-        return world;
+    ResourceService *Engine::getResourceService() {
+        return &resources;
     }
 
-    ResourcesSystem &Engine::getResources() {
-        return resources;
+    SystemService *Engine::getSystemService() {
+        return &systems;
     }
+
+    WorldLightsService *Engine::getWorldLightsService() {
+        return &worldLights;
+    }
+
+    CameraService *Engine::getCameraService() {
+        return &camera;
+    }
+
+    WorldPhysicsService *Engine::getWorldPhysicsService() {
+        return &worldPhysics;
+    }
+
 
     void Engine::run() {
         systems.run();
     }
 
-    IIOController *Engine::getIo() {
+    Engine::Engine(AbstractIOService *ioService, AbstractFSService *fsService) {
+        io = ioService;
+        fs = fsService;
+
+        systems.setEngine(this);
+        world.setEngine(this);
+        resources.setEngine(this);
+        worldLights.setEngine(this);
+
+        systems.initialize();
+    }
+
+    AbstractIOService *Engine::getIo() const {
         return io;
     }
 
-    IFSController *Engine::getFs() {
+    AbstractFSService *Engine::getFs() const {
         return fs;
     }
 }
