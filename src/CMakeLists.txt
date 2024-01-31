@@ -7,13 +7,7 @@ foreach (SHADERS ${SHADERS})
 endforeach ()
 
 string(REPLACE "src/" "" SRC_PATHS "${FILE_PATHS}")
-add_executable(projection main.cpp ${SRC_PATHS}
-        engine/services/WorldLightsService.cpp
-        engine/services/WorldLightsService.h
-        engine/services/CameraService.cpp
-        engine/services/CameraService.h
-        engine/services/WorldPhysicsService.cpp
-        engine/services/WorldPhysicsService.h)
+add_executable(projection main.cpp ${SRC_PATHS})
 
 target_link_libraries(projection PRIVATE ${COMMON_LIBRARIES})
 

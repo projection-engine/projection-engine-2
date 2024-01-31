@@ -9,6 +9,7 @@ import LocalizationEN from "@enums/LocalizationEN";
 import {ViewType} from "../../../window/editor/components/view/ViewDefinitions";
 import RepositoryService from "@engine-core/services/serialization/RepositoryService";
 import {v4} from 'uuid';
+import {CameraConfig} from "@engine-core/engine-d";
 
 export default class SettingsStateDTO extends IStateDTO {
     filesInUse: string[] = []
@@ -98,7 +99,7 @@ export default class SettingsStateDTO extends IStateDTO {
         PASTE: [KEYS.ControlLeft, KEYS.KeyV],
         FOCUS: [KEYS.Home]
     }
-    camera = {
+    camera: CameraConfig & MutableObject = {
         fov: 90,
         dynamicAspectRatio: true,
         aspectRatio: 1,

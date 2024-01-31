@@ -27,10 +27,20 @@ set(COMMON_LIBRARIES
 )
 
 set(FILE_PATHS
-        src/util/JSON.h
-
+        src/engine/services/WorldLightsService.cpp
+        src/engine/services/WorldLightsService.h
+        src/engine/services/CameraService.cpp
+        src/engine/services/CameraService.h
+        src/engine/services/WorldPhysicsService.cpp
+        src/engine/services/WorldPhysicsService.h
+        src/engine/enum/CameraProjectionType.h
+        src/engine/definitions.h
+        src/engine/runtime/CameraSystem.cpp
+        src/engine/runtime/CameraSystem.h
         src/engine/services/AbstractCoreService.h
         src/engine/services/AbstractCoreService.cpp
+
+        src/util/JSON.h
 
         src/ui/shared/AbstractWindow.cpp
         src/ui/shared/AbstractWindow.h

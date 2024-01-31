@@ -5,7 +5,7 @@ import MotionBlurSystem from "../runtime/MotionBlurSystem"
 import GPU from "./GPU"
 import Entity from "../instances/Entity"
 import CameraComponent from "../instances/components/CameraComponent"
-import {CameraProjectionType} from "@engine-core/engine-d";
+import {CameraConfig, CameraProjectionType} from "@engine-core/engine-d";
 import ArrayBufferAPI from "@engine-core/services/ArrayBufferAPI";
 import UBORepository from "@engine-core/repositories/UBORepository";
 import AbstractEngineCoreService from "@engine-core/core/AbstractEngineCoreService";
@@ -13,7 +13,6 @@ import RepositoryService from "@engine-core/services/serialization/RepositorySer
 
 export default class Camera extends AbstractEngineCoreService {
     _dynamicAspectRatio = false
-    trackingEntity: Entity
     hasChangedProjection: boolean;
     hasChangedView: boolean;
     translationSmoothing: number;
@@ -92,22 +91,9 @@ export default class Camera extends AbstractEngineCoreService {
         this.viewNeedsUpdate = true
     }
 
-    updateViewTarget(data: Entity | Object) {
-        if (!data)
-            this.trackingEntity = undefined
-
-        let cameraObj
-        if (data instanceof Entity) {
-            this.trackingEntity = data
-            cameraObj = data.cameraComponent
-        } else
-            cameraObj = data
-
-        if (!data)
+    updateViewTarget(cameraObj: CameraConfig) {
+        if (!cameraObj)
             return
-
-        cameraObj = {...(new CameraComponent()), ...cameraObj}
-
         MotionBlurSystem.enabled = cameraObj.motionBlurEnabled === true || cameraObj.cameraMotionBlur === true
 
         MotionBlurSystem.velocityScale = cameraObj.mbVelocityScale
@@ -143,30 +129,6 @@ export default class Camera extends AbstractEngineCoreService {
             this.updateAspectRatio()
         this.updateProjection()
         this.updateUBOs()
-    }
-
-
-    addTranslation(data: number[] | Float32Array) {
-        const T = this.translationBuffer
-        T[0] = T[0] + data[0] || 0
-        T[1] = T[1] + data[1] || 0
-        T[2] = T[2] + data[2] || 0
-    }
-
-    updateTranslation(data: number[] | Float32Array) {
-        const T = this.translationBuffer
-        T[0] = data[0] || 0
-        T[1] = data[1] || 0
-        T[2] = data[2] || 0
-    }
-
-    updateRotation(data: number[] | Float32Array) {
-        const R = this.rotationBuffer
-
-        R[0] = data[0] || 0
-        R[1] = data[1] || 0
-        R[2] = data[2] || 0
-        R[3] = data[3] || 0
     }
 
     updateUBOs() {

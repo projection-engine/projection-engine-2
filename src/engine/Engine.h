@@ -21,7 +21,6 @@ namespace PEngine {
         CameraService camera;
         WorldPhysicsService worldPhysics;
         SystemService systems;
-
         AbstractIOService *io;
         AbstractFSService *fs;
     public:

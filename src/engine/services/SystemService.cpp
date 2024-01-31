@@ -1,11 +1,14 @@
 #include "SystemService.h"
 #include "../Engine.h"
 #include "../runtime/AbstractSystem.h"
+#include "../runtime/CameraSystem.h"
+#include "../runtime/CameraTrackerSystem.h"
 
 namespace PEngine {
 
     void SystemService::initialize() {
-        // TODO - INITIALIZE SYSTEMS
+        createSystem<CameraTrackerSystem>();
+        createSystem<CameraSystem>();
     }
 
     void SystemService::run() {
