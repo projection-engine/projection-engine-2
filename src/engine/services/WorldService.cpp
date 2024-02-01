@@ -1,5 +1,5 @@
 #include "WorldService.h"
-#include "structures/Map.cpp"
+#include "../../util/structures/Map.cpp"
 
 namespace PEngine {
     void WorldService::removeEntity(const std::string &uuid) {

@@ -21,8 +21,8 @@ namespace PEngine {
         CameraService camera;
         WorldPhysicsService worldPhysics;
         SystemService systems;
-        AbstractIOService *io;
-        AbstractFSService *fs;
+        AbstractIOService *io = nullptr;
+        AbstractFSService *fs = nullptr;
     public:
         explicit Engine(AbstractIOService *ioController, AbstractFSService *fsController);
 

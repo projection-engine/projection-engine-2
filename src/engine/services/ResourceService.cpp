@@ -1,6 +1,6 @@
 #include "glad/glad.h"
 #include "ResourceService.h"
-#include "structures/Map.cpp"
+#include "../../util/structures/Map.cpp"
 #include "../resource/core/RMesh.h"
 
 namespace PEngine {

@@ -3,8 +3,8 @@
 
 #include "../resource/StaticResource.h"
 #include "../resource/core/IResource.h"
-#include "structures/Map.h"
-#include "debug/ILoggable.h"
+#include "../../util/structures/Map.h"
+#include "../../util/debug/ILoggable.h"
 #include "AbstractCoreService.h"
 
 namespace PEngine {

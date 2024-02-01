@@ -3,10 +3,11 @@
 #define PROJECTION_WORLDSERVICE_H
 
 #include "entt/entt.hpp"
-#include "debug/ILoggable.h"
-#include "structures/Map.h"
+#include "../../util/debug/ILoggable.h"
+#include "../../util/structures/Map.h"
 #include "../world/components/AbstractComponent.h"
 #include "AbstractCoreService.h"
+#include "../world/ComponentFactory.h"
 
 namespace PEngine {
 
@@ -14,26 +15,26 @@ namespace PEngine {
 
     class WorldService : public AbstractCoreService {
     private:
+        ComponentFactory componentFactory;
         entt::registry worldReg;
         Map<std::string, AbstractEntity *> entities;
 
-        AbstractEntity *addEntityInternal(const std::string& uuid, const char *name);
+        AbstractEntity *addEntityInternal(const std::string &uuid, const char *name);
 
         static entt::entity getEntityFromWrapper(AbstractEntity *entity);
 
     public:
-
         AbstractEntity *addEntity();
 
         void removeEntity(const std::string &uuid);
 
         template<class T>
-        AbstractComponent &addComponent(AbstractEntity *ent) {
+        AbstractComponent &addComponent(ComponentsEnum name, AbstractEntity *ent) {
             CONSOLE_LOG("Adding component to entity")
             entt::entity entity = getEntityFromWrapper(ent);
             worldReg.emplace<T>(entity);
             AbstractComponent &comp = worldReg.get<T>(entity);
-            comp.setEntity(ent);
+            comp.entity = ent;
             return comp;
         }
 

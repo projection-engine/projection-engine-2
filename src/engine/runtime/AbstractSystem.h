@@ -1,7 +1,8 @@
 #ifndef PROJECTION_ABSTRACTSYSTEM_H
 #define PROJECTION_ABSTRACTSYSTEM_H
 
-#include "debug/ILoggable.h"
+
+#include "../../util/debug/ILoggable.h"
 
 namespace PEngine {
     class ResourceService;
@@ -22,16 +23,16 @@ namespace PEngine {
 
     class AbstractSystem : public ILoggable {
     private:
-        AbstractSystem *nextSystem;
+        AbstractSystem *nextSystem = nullptr;
     protected:
-        WorldPhysicsService *worldPhysics;
-        CameraService *camera;
-        WorldLightsService *worldLights;
-        ResourceService *resources;
-        WorldService *world;
-        Engine *engine;
-        AbstractIOService *io;
-        AbstractFSService *fs;
+        WorldPhysicsService *worldPhysics = nullptr;
+        CameraService *camera = nullptr;
+        WorldLightsService *worldLights = nullptr;
+        ResourceService *resources = nullptr;
+        WorldService *world = nullptr;
+        Engine *engine = nullptr;
+        AbstractIOService *io = nullptr;
+        AbstractFSService *fs = nullptr;
         bool enabled = true;
     public:
 

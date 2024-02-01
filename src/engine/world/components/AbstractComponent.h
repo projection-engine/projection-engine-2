@@ -5,13 +5,8 @@
 #include "../AbstractEntity.h"
 
 namespace PEngine {
-    class AbstractComponent {
-    protected:
+    struct AbstractComponent {
         AbstractEntity *entity = nullptr;
-    public:
-        AbstractEntity *getEntity();
-
-        void setEntity(AbstractEntity *entity);
     };
 }
 #endif
