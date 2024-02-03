@@ -8,11 +8,14 @@
 namespace PEngine {
     Mesh *Mesh::activeMesh = nullptr;
 
-    void Mesh::init(std::vector<float> &vertices, std::vector<float> &indices, std::vector<float> *normals,
-                    std::vector<float> *uvs, std::vector<float> maxBBox,
-                    std::vector<float> minBBox) {
-        this->maxBoundingBox = std::move(maxBBox);
-        this->minBoundingBox = std::move(minBBox);
+    Mesh *Mesh::init(std::vector<float> &vertices,
+                     std::vector<float> &indices,
+                     std::vector<float> *normals,
+                     std::vector<float> *uvs,
+                     std::vector<float> *maxBBox,
+                     std::vector<float> *minBBox) {
+        this->maxBoundingBox = maxBBox;
+        this->minBoundingBox = minBBox;
         this->trianglesQuantity = indices.size() / 3;
         this->verticesQuantity = indices.size();
 

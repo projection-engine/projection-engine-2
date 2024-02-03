@@ -19,8 +19,6 @@ namespace PEngine {
 
     class WindowRepository : public ILoggable {
     private:
-        static void windowResizeCallback(GLFWwindow *window, int width, int height);
-
         static WindowRepository singleton;
         GLFWwindow *window = nullptr;
         WebViewWindow *webView = nullptr;
@@ -30,11 +28,14 @@ namespace PEngine {
 
         void createWindowInternal(const std::string &id, AbstractWindow *window);
 
-        static void getDesktopResolution(int &horizontal, int &vertical);
+        static void windowResizeCallback(GLFWwindow *window, int width, int height);
 
         static void onError(int error, const char *description);
 
     public:
+
+        static void getDesktopResolution(int &horizontal, int &vertical);
+
         static WindowRepository &Get();
 
         void initialize();

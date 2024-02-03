@@ -23,8 +23,10 @@ namespace PEngine {
         SystemService systems;
         AbstractIOService *io = nullptr;
         AbstractFSService *fs = nullptr;
+        int width;
+        int height;
     public:
-        explicit Engine(AbstractIOService *ioController, AbstractFSService *fsController);
+        explicit Engine(int w, int h, AbstractIOService *ioController, AbstractFSService *fsController);
 
         WorldService *getWorldService();
 
@@ -43,6 +45,10 @@ namespace PEngine {
         WorldPhysicsService *getWorldPhysicsService();
 
         CameraService *getCameraService();
+
+        int getViewportWidth() const;
+
+        int getViewportHeight() const;
     };
 }
 

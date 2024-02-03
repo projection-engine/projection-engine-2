@@ -51,7 +51,13 @@ namespace PEngine{
         UBO_LIGHTS,
         UBO_CAMERA_PROJECTION,
 
-        TEXTURE_NOISE
+        TEXTURE_NOISE,
+
+        MESH_SPHERE,
+        MESH_CUBE,
+        MESH_CYLINDER,
+        MESH_PLANE,
+        MESH_QUAD
     };
 }
 #endif

@@ -4,7 +4,12 @@
 #include "resource/core/Mesh.h"
 #include "resource/core/Shader.h"
 #include "../enum/StaticShader.h"
-#include "resource/StaticResourceFactory.h"
+#include "resource/StaticMeshFactory.h"
+#include "resource/StaticFBOFactory.h"
+#include "resource/StaticTextureFactory.h"
+#include "resource/StaticShaderFactory.h"
+#include "resource/StaticUBOFactory.h"
+#include "../Engine.h"
 
 namespace PEngine {
     bool ResourceService::hasResource(const std::string &id) {
@@ -36,8 +41,10 @@ namespace PEngine {
     }
 
     ResourceService::ResourceService() {
-        StaticResourceFactory::InitializeShaders(staticResources);
-        StaticResourceFactory::InitializeFBOs(staticResources);
-        StaticResourceFactory::InitializeMeshes(staticResources);
+        GenerateStaticUBOs(staticResources);
+        GenerateStaticShaders(staticResources);
+        GenerateStaticFBOs(engine->getViewportWidth(), engine->getViewportHeight(), staticResources);
+        GenerateNoiseTexture(staticResources);
+        GenerateStaticMeshes(engine->getFs(), staticResources);
     }
 }
