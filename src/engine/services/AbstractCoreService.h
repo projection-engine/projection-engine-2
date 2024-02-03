@@ -6,11 +6,13 @@
 namespace PEngine {
     class Engine;
 
-    class AbstractCoreService : public ILoggable{
+    class AbstractCoreService : public ILoggable {
     protected:
         Engine *engine;
     public:
         void setEngine(Engine *eg);
+
+        Engine *getEngine();
     };
 }
 

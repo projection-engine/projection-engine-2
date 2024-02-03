@@ -1,8 +1,8 @@
 #ifndef PROJECTION_RESOURCESERVICE_H
 #define PROJECTION_RESOURCESERVICE_H
 
-#include "../resource/StaticResource.h"
-#include "../resource/core/IResource.h"
+#include "../enum/StaticResource.h"
+#include "resource/core/AbstractResource.h"
 #include "../../util/structures/Map.h"
 #include "../../util/debug/ILoggable.h"
 #include "AbstractCoreService.h"
@@ -11,39 +11,17 @@ namespace PEngine {
 
     class ResourceService : public AbstractCoreService {
     private:
-        Map<StaticResource, IResource *> staticResources;
-        Map<std::string, IResource *> dynamicResources;
+        Map<StaticResource, AbstractResource *> staticResources;
+        Map<std::string, AbstractResource *> dynamicResources;
 
-        void registerResource(IResource *resource, StaticResource id);
+        void registerResource(AbstractResource *resource, StaticResource id);
 
-        void registerResource(IResource *resource, const char *id);
+        void registerResource(AbstractResource *resource, const char *id);
 
     public:
 
-        static void createTexture(
-                unsigned int *target,
-                unsigned int width,
-                unsigned int height,
-                unsigned int internalFormat,
-                unsigned int border,
-                unsigned int format,
-                unsigned int type,
-                unsigned int minFilter,
-                unsigned int magFilter,
-                unsigned int wrapS,
-                unsigned int wrapT,
-                unsigned char *data
-        );
-
-        static void createBuffer(
-                unsigned int *target,
-                unsigned int type,
-                std::vector<float> &data,
-                unsigned int renderingType
-        );
-
         template<class T>
-        IResource *createResource(StaticResource id) {
+        AbstractResource *createResource(StaticResource id) {
             T *newResource = new T;
             newResource->setResourceSystem(this);
             registerResource(newResource, id);
@@ -51,7 +29,7 @@ namespace PEngine {
         }
 
         template<class T>
-        IResource *createResource(const char *id) {
+        AbstractResource *createResource(const char *id) {
             T *newResource = new T;
             newResource->setResourceSystem(this);
             registerResource(newResource, id);
@@ -71,8 +49,6 @@ namespace PEngine {
         bool hasResource(const std::string &id);
 
         bool hasResource(StaticResource id);
-
-        void deleteResource(StaticResource id);
 
         void deleteResource(const std::string &id);
     };

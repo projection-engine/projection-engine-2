@@ -5,63 +5,41 @@
 #include "entt/entt.hpp"
 #include "../../util/debug/ILoggable.h"
 #include "../../util/structures/Map.h"
-#include "../world/components/AbstractComponent.h"
 #include "AbstractCoreService.h"
-#include "../world/ComponentFactory.h"
+#include "../enum/ComponentType.h"
+#include "world/ComponentFactory.h"
 
 namespace PEngine {
 
-    class AbstractEntity;
+    class Entity;
+
+    class AbstractComponent;
 
     class WorldService : public AbstractCoreService {
     private:
         ComponentFactory componentFactory;
         entt::registry worldReg;
-        Map<std::string, AbstractEntity *> entities;
-
-        AbstractEntity *addEntityInternal(const std::string &uuid, const char *name);
-
-        static entt::entity getEntityFromWrapper(AbstractEntity *entity);
+        Map<std::uint32_t, Entity *> entities;
 
     public:
-        AbstractEntity *addEntity();
 
-        void removeEntity(const std::string &uuid);
+        explicit WorldService();
 
-        template<class T>
-        AbstractComponent &addComponent(ComponentsEnum name, AbstractEntity *ent) {
-            CONSOLE_LOG("Adding component to entity")
-            entt::entity entity = getEntityFromWrapper(ent);
-            worldReg.emplace<T>(entity);
-            AbstractComponent &comp = worldReg.get<T>(entity);
-            comp.entity = ent;
-            return comp;
-        }
+        Entity *addEntity();
 
-        template<class T>
-        void removeComponent(AbstractEntity *ent) {
-            CONSOLE_LOG("Removing component from entity")
-            entt::entity entity = getEntityFromWrapper(ent);
-            worldReg.erase<T>(entity);
-        }
+        void removeEntity(std::uint32_t id);
 
-        template<class T>
-        AbstractComponent *getComponent(AbstractEntity *ent) {
-            entt::entity entity = getEntityFromWrapper(ent);
-            return worldReg.try_get<T>(entity);
-        }
+        void addComponent(ComponentType name, Entity *ent);
 
-        template<class T>
-        bool hasComponent(AbstractEntity *ent) {
-            entt::entity entity = getEntityFromWrapper(ent);
-            return worldReg.all_of<T>(entity);
-        }
+        void removeComponent(ComponentType name, Entity *ent);
 
-        bool hasEntity(const std::string &uuid);
+        AbstractComponent &getComponent(ComponentType name, Entity *ent);
+
+        bool hasComponent(ComponentType name, Entity *ent);
+
+        bool hasEntity(std::uint32_t id);
 
         entt::registry &getRegistry();
-
-        AbstractEntity *addEntity(std::string name);
     };
 }
 

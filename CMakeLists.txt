@@ -27,6 +27,15 @@ set(COMMON_LIBRARIES
 )
 
 set(FILE_PATHS
+        src/engine/util/GPUUtil.cpp
+        src/engine/util/GPUUtil.h
+        src/engine/util/ShaderUtil.cpp
+        src/engine/util/ShaderUtil.h
+        src/ui/editor/FS.cpp
+        src/ui/editor/FS.h
+        src/engine/services/world/ComponentFactory.cpp
+        src/engine/services/world/ComponentFactory.h
+        src/engine/enum/ComponentType.h
         src/engine/services/WorldLightsService.cpp
         src/engine/services/WorldLightsService.h
         src/engine/services/CameraService.cpp
@@ -63,49 +72,49 @@ set(FILE_PATHS
 
         src/services/AbstractService.h
 
-        src/engine/resource/dto/FBOTextureDTO.h
+        src/engine/services/resource/dto/FBOTextureDTO.h
 
-        src/engine/resource/core/RUBO.cpp
-        src/engine/resource/core/RUBO.h
+        src/engine/services/resource/core/UBO.cpp
+        src/engine/services/resource/core/UBO.h
 
-        src/engine/resource/dto/UBODataDTO.h
-        src/engine/resource/UBOType.h
+        src/engine/services/resource/dto/UBODataDTO.h
+        src/engine/enum/UBOType.h
         src/util/Definitions.h
 
-        src/engine/external/AbstractIOService.h
-        src/engine/external/AbstractFSService.h
-        src/engine/external/AbstractIOService.cpp
+        src/engine/services/AbstractIOService.h
+        src/engine/services/AbstractFSService.h
+        src/engine/services/AbstractIOService.cpp
 
-        src/engine/resource/core/IResource.h
-        src/engine/resource/StaticResource.h
-        src/engine/resource/core/RFBO.cpp
-        src/engine/resource/core/RFBO.h
-        src/engine/resource/core/RMesh.cpp
-        src/engine/resource/core/RMesh.h
-        src/engine/resource/core/RShader.cpp
-        src/engine/resource/core/RShader.h
-        src/engine/resource/core/VertexBufferObject.cpp
-        src/engine/resource/core/VertexBufferObject.h
-        src/engine/resource/core/RTexture.cpp
-        src/engine/resource/core/RTexture.h
-        src/engine/resource/ResourceType.h
-        src/engine/resource/core/IResource.cpp
+        src/engine/services/resource/core/AbstractResource.h
+        src/engine/enum/StaticResource.h
+        src/engine/services/resource/core/FBO.cpp
+        src/engine/services/resource/core/FBO.h
+        src/engine/services/resource/core/Mesh.cpp
+        src/engine/services/resource/core/Mesh.h
+        src/engine/services/resource/core/Shader.cpp
+        src/engine/services/resource/core/Shader.h
+        src/engine/services/resource/core/VBO.cpp
+        src/engine/services/resource/core/VBO.h
+        src/engine/services/resource/core/Texture.cpp
+        src/engine/services/resource/core/Texture.h
+        src/engine/enum/ResourceType.h
+        src/engine/services/resource/core/AbstractResource.cpp
         src/engine/runtime/AbstractSystem.cpp
         src/engine/runtime/AbstractSystem.h
         src/engine/runtime/CameraTrackerSystem.cpp
         src/engine/runtime/CameraTrackerSystem.h
 
-        src/engine/world/components/AbstractComponent.cpp
-        src/engine/world/components/MovementComponent.cpp
-        src/engine/world/components/MovementComponent.h
+        src/engine/services/world/AbstractComponent.cpp
+        src/engine/services/world/components/MovementComponent.cpp
+        src/engine/services/world/components/MovementComponent.h
 
         src/util/event/IEventTarget.h
         src/engine/services/SystemService.cpp
         src/engine/services/SystemService.h
         src/engine/services/ResourceService.cpp
         src/engine/services/ResourceService.h
-        src/engine/world/AbstractEntity.cpp
-        src/engine/world/AbstractEntity.h
+        src/engine/services/world/Entity.cpp
+        src/engine/services/world/Entity.h
         src/services/FileSystemService.h
         src/services/FileSystemService.cpp
         src/util/event/TypedEventPayload.h
@@ -125,7 +134,7 @@ set(FILE_PATHS
         src/util/debug/Timer.h
         src/engine/services/WorldService.cpp
         src/engine/services/WorldService.h
-        src/engine/world/components/AbstractComponent.h
+        src/engine/services/world/AbstractComponent.h
         src/engine/Engine.cpp
         src/engine/Engine.h
         src/util/UUID.h

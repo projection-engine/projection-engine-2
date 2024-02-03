@@ -10,15 +10,15 @@ namespace PEngine::EngineTest {
 
 
     void shouldAddEntity() {
-        AbstractEntity *entity = engine.getWorld().addEntity();
-        AbstractEntity *entityWithName = engine.getWorld().addEntity("Name");
+        Entity *entity = engine.getWorld().addEntity();
+        Entity *entityWithName = engine.getWorld().addEntity("Name");
         REQUIRE(engine.getWorld().hasEntity(entity->getUUID()) == true);
         REQUIRE(engine.getWorld().hasEntity(entityWithName->getUUID()) == true);
         REQUIRE(entityWithName->getName() == "Name");
     }
 
     void shouldRemoveEntity() {
-        AbstractEntity *entity = engine.getWorld().addEntity();
+        Entity *entity = engine.getWorld().addEntity();
         std::string uuid = entity->getUUID();
         engine.getWorld().removeEntity(uuid);
         REQUIRE(engine.getWorld().hasEntity(uuid) == false);
@@ -26,7 +26,7 @@ namespace PEngine::EngineTest {
 
 
     void shouldAddComponent() {
-        AbstractEntity *entity = engine.getWorld().addEntity();
+        Entity *entity = engine.getWorld().addEntity();
         engine.getWorld().addComponent<MovementComponent>(entity);
         AbstractComponent *component = engine.getWorld().getComponent<MovementComponent>(entity);
 
@@ -34,7 +34,7 @@ namespace PEngine::EngineTest {
     }
 
     void shouldRemoveComponent() {
-        AbstractEntity *entity = engine.getWorld().addEntity();
+        Entity *entity = engine.getWorld().addEntity();
         engine.getWorld().addComponent<MovementComponent>(entity);
         engine.getWorld().removeComponent<MovementComponent>(entity);
 
@@ -50,7 +50,7 @@ namespace PEngine::EngineTest {
     }
 
     void shouldHaveComponent() {
-        AbstractEntity *entity = engine.getWorld().addEntity();
+        Entity *entity = engine.getWorld().addEntity();
         engine.getWorld().addComponent<MovementComponent>(entity);
 
         bool found = false;
