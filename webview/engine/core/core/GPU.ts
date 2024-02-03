@@ -11,6 +11,9 @@ import DynamicMap from "../lib/DynamicMap"
 import ConversionAPI from "@engine-core/services/ConversionAPI";
 import AbstractEngineCoreService from "@engine-core/core/AbstractEngineCoreService";
 import RepositoryService from "@engine-core/services/serialization/RepositoryService";
+import generateSsaoNoise from "@engine-core/utils/generate-ssao-noise";
+import UBORepository from "@engine-core/repositories/UBORepository";
+import FramebufferRepository from "@engine-core/repositories/FramebufferRepository";
 
 export default class GPU extends AbstractEngineCoreService {
     static context?: WebGL2RenderingContext
@@ -101,10 +104,28 @@ export default class GPU extends AbstractEngineCoreService {
     async getShaderInstance(vertexName: string, fragName: string): Promise<Shader> {
         const result = await this.engine.getResourceLoader().requestShader(vertexName, fragName);
         const shader = new Shader(result.vertex, result.fragment);
-        if(shader.messages.hasError) {
+        if (shader.messages.hasError) {
             console.trace(result, vertexName, fragName)
         }
         return shader
+    }
+
+    static generateSSAONoise(resolution: number) {
+        const context = GPU.context
+        const {kernels, noise} = generateSsaoNoise(resolution, resolution)
+
+        UBORepository.ssaoUBO.bind()
+        UBORepository.ssaoUBO.updateData("samples", kernels)
+        UBORepository.ssaoUBO.unbind()
+        FramebufferRepository.noiseSampler = context.createTexture()
+
+        context.bindTexture(context.TEXTURE_2D, FramebufferRepository.noiseSampler)
+        context.texParameteri(context.TEXTURE_2D, context.TEXTURE_MAG_FILTER, context.NEAREST)
+        context.texParameteri(context.TEXTURE_2D, context.TEXTURE_MIN_FILTER, context.NEAREST)
+        context.texParameteri(context.TEXTURE_2D, context.TEXTURE_WRAP_S, context.REPEAT)
+        context.texParameteri(context.TEXTURE_2D, context.TEXTURE_WRAP_T, context.REPEAT)
+        context.texStorage2D(context.TEXTURE_2D, 1, context.RG16F, resolution, resolution)
+        context.texSubImage2D(context.TEXTURE_2D, 0, 0, 0, resolution, resolution, context.RG, context.FLOAT, noise)
     }
 }
 

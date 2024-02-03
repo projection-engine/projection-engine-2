@@ -19,64 +19,30 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-78] C++ render loop&#10;- Components">
-      <change afterPath="$PROJECT_DIR$/src/engine/services/resource/core/Texture.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/engine/services/resource/core/Texture.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/engine/services/world/ComponentFactory.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/engine/services/world/ComponentFactory.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/engine/services/world/Entity.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/engine/services/world/Entity.h" afterDir="false" />
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-78] C++ engine structure&#10;- Refactoring resources &#10;- Implementing request shader in Shader class&#10;- Implementing FS&#10;- Refactoring ComponentFactory&#10;- Creating util classes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/definitions.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/definitions.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/external/AbstractFSService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/AbstractFSService.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/external/AbstractIOService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/AbstractIOService.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/external/AbstractIOService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/AbstractIOService.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/resource/ResourceType.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/enum/ResourceType.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/resource/StaticResource.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/enum/StaticResource.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/resource/UBOType.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/enum/UBOType.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/resource/core/IResource.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/AbstractResource.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/resource/core/IResource.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/AbstractResource.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/resource/core/RFBO.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/FBO.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/resource/core/RFBO.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/FBO.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/resource/core/RMesh.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/Mesh.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/resource/core/RMesh.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/Mesh.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/resource/core/RShader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/Shader.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/resource/core/RShader.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/Shader.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/resource/core/RTexture.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/resource/core/RTexture.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/resource/core/RUBO.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/UBO.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/resource/core/RUBO.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/UBO.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/resource/core/VertexBufferObject.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/VBO.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/resource/core/VertexBufferObject.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/VBO.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/resource/dto/FBOTextureDTO.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/dto/FBOTextureDTO.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/resource/dto/UBODataDTO.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/dto/UBODataDTO.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/resource/static/direct_shadows.fs" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/static/direct_shadows.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/resource/static/direct_shadows.vs" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/static/direct_shadows.vs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/runtime/CameraTrackerSystem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/runtime/CameraTrackerSystem.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/AbstractCoreService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/AbstractCoreService.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/AbstractCoreService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/AbstractCoreService.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/enum/StaticResource.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/enum/StaticResource.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/engine/services/ResourceService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/ResourceService.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/engine/services/ResourceService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/ResourceService.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/WorldService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/WorldService.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/WorldService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/WorldService.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/world/AbstractEntity.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/world/AbstractEntity.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/world/ComponentFactory.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/world/ComponentFactory.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/world/ComponentsEnum.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/enum/ComponentType.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/world/components/AbstractComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/AbstractComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/world/components/AbstractComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/AbstractComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/world/components/MovementComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/MovementComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/world/components/MovementComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/MovementComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/ShaderService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/ShaderService.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/ShaderService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/ShaderService.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/WindowRepository.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/WindowRepository.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/editor/basic/FSController.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/basic/FSController.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/editor/basic/IOController.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/basic/IOController.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/Definitions.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Definitions.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/engine/EngineTest.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/engine/EngineTest.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/resource/core/FBO.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/FrameBuffer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/resource/core/FBO.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/FrameBuffer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/resource/core/Shader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/Shader.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/resource/core/Shader.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/Shader.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/resource/core/Texture.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/Texture.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/resource/dto/FBOTextureDTO.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/dto/FBOTextureDTO.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/util/GPUUtil.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/util/GPUUtil.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/util/GPUUtil.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/util/GPUUtil.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/runners/imgui_demo.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/runners/imgui_demo.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/core/GPU.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/core/GPU.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/repositories/FramebufferRepository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/repositories/FramebufferRepository.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/runtime/AOSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/AOSystem.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/tools/EngineTools.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/EngineTools.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/tools/gizmo/transformation/RotationGizmo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/gizmo/transformation/RotationGizmo.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/tools/gizmo/util/GizmoMouseUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/gizmo/util/GizmoMouseUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/tools/gizmo/util/GizmoUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/tools/gizmo/util/GizmoUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/tools/utils/StaticEditorFBO.ts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +72,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="75-add-transparency-support-for-the-webview2-context" />
+        <entry key="$PROJECT_DIR$" value="78-c-render-loop" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -186,7 +152,7 @@
     "Shell Script.copy-files.executor": "Run",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "78-c-render-loop",
+    "git-widget-placeholder": "80-c-engine-static-resources-initialization",
     "js.last.introduce.type": "CONST",
     "last_opened_file_path": "C:/Users/russi/WebstormProjects/projection-engine-2/test/core",
     "node.js.detected.package.eslint": "true",
@@ -408,15 +374,7 @@
       <workItem from="1706656810092" duration="466000" />
       <workItem from="1706738820617" duration="3580000" />
       <workItem from="1706826394990" duration="3419000" />
-      <workItem from="1706956994527" duration="6302000" />
-    </task>
-    <task id="LOCAL-00017" summary="[STD-6] Project window&#10;- Completing createProject&#10;- Fixing bugs JSON and FS&#10;- Refactoring FileSystemUtil&#10;- Removing imgui stuff from IWindow">
-      <option name="closed" value="true" />
-      <created>1704124383074</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1704124383074</updated>
+      <workItem from="1706956994527" duration="16658000" />
     </task>
     <task id="LOCAL-00018" summary="[STD-6] Project window&#10;- Fixing build issues">
       <option name="closed" value="true" />
@@ -802,7 +760,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706829739270</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="[STD-78] C++ engine structure&#10;- Refactoring resources &#10;- Implementing request shader in Shader class&#10;- Implementing FS&#10;- Refactoring ComponentFactory&#10;- Creating util classes">
+      <option name="closed" value="true" />
+      <created>1706963741838</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1706963741839</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -826,7 +792,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-21]  New project architecture&#10;- Creating new file system structure&#10;- Creating new events&#10;- Creating new file browser" />
     <MESSAGE value="[STD-21]  New project architecture&#10;- Finishing new file browser" />
     <MESSAGE value="[STD-3]  Starting refactoring&#10;- Fixing texture initialization" />
     <MESSAGE value="[STD-33]  Starting refactoring&#10;- Initiating systems refactoring" />
@@ -851,7 +816,8 @@
     <MESSAGE value="[STD-78] C++ render loop&#10;- Creating new core services&#10;- Refactoring files" />
     <MESSAGE value="[STD-78] C++ render loop&#10;- Creating camera class&#10;- Creating camera system" />
     <MESSAGE value="[STD-78] C++ render loop&#10;- Components" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-78] C++ render loop&#10;- Components" />
+    <MESSAGE value="[STD-78] C++ engine structure&#10;- Refactoring resources &#10;- Implementing request shader in Shader class&#10;- Implementing FS&#10;- Refactoring ComponentFactory&#10;- Creating util classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-78] C++ engine structure&#10;- Refactoring resources &#10;- Implementing request shader in Shader class&#10;- Implementing FS&#10;- Refactoring ComponentFactory&#10;- Creating util classes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

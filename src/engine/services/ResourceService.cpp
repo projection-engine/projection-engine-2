@@ -2,42 +2,42 @@
 #include "ResourceService.h"
 #include "../../util/structures/Map.cpp"
 #include "resource/core/Mesh.h"
+#include "resource/core/Shader.h"
+#include "../enum/StaticShader.h"
+#include "resource/StaticResourceFactory.h"
 
 namespace PEngine {
-    void ResourceService::registerResource(AbstractResource *resource, StaticResource id) {
-        CONSOLE_WARN("Creating {0}", std::to_string(id))
-        if (staticResources.has(id)) {
-            CONSOLE_ERROR("Static util already exists {0}", std::to_string(id))
-            return;
-        }
-        staticResources.set(id, resource);
-    }
-
     bool ResourceService::hasResource(const std::string &id) {
-        return dynamicResources.has(id);
+        return dynamicResources.count(id);
     }
 
     bool ResourceService::hasResource(StaticResource id) {
-        return staticResources.has(id);
+        return staticResources.count(id);
     }
 
     void ResourceService::registerResource(AbstractResource *resource, const char *id) {
         CONSOLE_WARN("Creating {0}", id)
-        if (dynamicResources.has(id)) {
+        if (dynamicResources.count(id)) {
             CONSOLE_ERROR("Dynamic util already exists {0}", id)
             return;
         }
-        dynamicResources.set(id, resource);
+        dynamicResources[id] = resource;
     }
 
     void ResourceService::deleteResource(const std::string &id) {
         CONSOLE_WARN("Deleting {0}", id)
-        if (!dynamicResources.has(id)) {
+        if (!dynamicResources.count(id)) {
             CONSOLE_ERROR("Dynamic util doesn't exists {0}", id)
             return;
         }
-        AbstractResource *pResource = dynamicResources.get(id);
+        AbstractResource *pResource = dynamicResources[id];
         delete pResource;
-        dynamicResources.deleteKey(id);
+        dynamicResources.erase(id);
+    }
+
+    ResourceService::ResourceService() {
+        StaticResourceFactory::InitializeShaders(staticResources);
+        StaticResourceFactory::InitializeFBOs(staticResources);
+        StaticResourceFactory::InitializeMeshes(staticResources);
     }
 }

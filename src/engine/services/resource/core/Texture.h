@@ -1,13 +1,18 @@
 #ifndef PROJECTION_TEXTURE_H
 #define PROJECTION_TEXTURE_H
 
+#include "glad/glad.h"
 #include "AbstractResource.h"
 
-namespace PEngine{
+namespace PEngine {
 
     class Texture : public AbstractResource {
     public:
-        explicit Texture() : AbstractResource(ResourceType::TEXTURE){}
+        GLuint texture{};
+
+        explicit Texture() : AbstractResource(ResourceType::TEXTURE) {
+            glGenTextures(1, &texture);
+        }
     };
 }
 

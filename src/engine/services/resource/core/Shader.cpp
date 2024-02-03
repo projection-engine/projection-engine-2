@@ -7,7 +7,7 @@
 namespace PEngine {
     Shader *Shader::activeShader = nullptr;
 
-    void Shader::init(std::string vertex, std::string fragment, bool isPartialShader) {
+    AbstractResource *Shader::init(std::string vertex, std::string fragment, bool isPartialShader) {
         program = glCreateProgram();
         vertex = GLSL_VERSION + ("\n" + ShaderUtil::RequestShader(fs, vertex, isPartialShader));
         fragment = GLSL_VERSION + ("\n" + ShaderUtil::RequestShader(fs, fragment, isPartialShader));
@@ -18,6 +18,8 @@ namespace PEngine {
         glAttachShader(program, fragmentShader);
         glLinkProgram(program);
         glFlush();
+
+        return this;
     }
 
     GLuint Shader::compileShader(std::string &code, int type) {

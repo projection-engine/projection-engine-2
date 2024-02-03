@@ -7,7 +7,13 @@ foreach (SHADERS ${SHADERS})
 endforeach ()
 
 string(REPLACE "src/" "" SRC_PATHS "${FILE_PATHS}")
-add_executable(projection main.cpp ${SRC_PATHS})
+add_executable(projection main.cpp ${SRC_PATHS}
+        engine/enum/StaticShader.h
+        engine/enum/StaticShader.cpp
+        engine/services/resource/StaticResourceFactory.cpp
+        engine/services/resource/StaticResourceFactory.h
+        engine/util/NoiseTextureDTO.h
+)
 
 target_link_libraries(projection PRIVATE ${COMMON_LIBRARIES})
 

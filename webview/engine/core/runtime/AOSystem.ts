@@ -22,7 +22,7 @@ export default class SSAO extends AbstractEngineSystem {
         UBORepository.ssaoUBO.updateData("noiseScale", SSAO.noiseScale)
         UBORepository.ssaoUBO.unbind()
 
-        await FramebufferRepository.generateSSAONoise()
+        GPU.generateSSAONoise(RESOLUTION)
     }
 
     #draw(gl: WebGL2RenderingContext) {

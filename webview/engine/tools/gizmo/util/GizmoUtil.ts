@@ -8,10 +8,10 @@ import GizmoState from "./GizmoState"
 import Axis from "../../static/AXIS"
 import ConversionAPI from "@engine-core/services/ConversionAPI"
 import Mesh from "../../../core/instances/Mesh";
-import StaticEditorFBO from "../../utils/StaticEditorFBO";
 import EngineToolsState from "../../EngineToolsState";
 import ProjectionEngine from "@lib/ProjectionEngine";
 import ShaderRepository from "@engine-core/repositories/ShaderRepository";
+import FramebufferRepository from "@engine-core/repositories/FramebufferRepository";
 
 
 export default class GizmoUtil {
@@ -72,7 +72,7 @@ export default class GizmoUtil {
     static drawGizmo(mesh: Mesh, transformMatrix: mat4, axis: Axis) {
         ShaderRepository.gizmo.bind()
         const uniforms = ShaderRepository.gizmoUniforms
-        GPU.bind2DTextureForDrawing(uniforms.gizmoIDS, 0, StaticEditorFBO.gizmo.colors[0])
+        GPU.bind2DTextureForDrawing(uniforms.gizmoIDS, 0, FramebufferRepository.gizmo.colors[0])
         GPU.context.uniform2fv(uniforms.mouseCoordinates, EngineToolsState.mouseCoordinates)
 
         GPU.context.uniformMatrix4fv(uniforms.transformMatrix, false, transformMatrix)
@@ -89,11 +89,11 @@ export default class GizmoUtil {
             translation: GizmoState.mainEntity.__pivotOffset,
             cameraIsOrthographic: ProjectionEngine.Engine.getCamera().isOrthographic()
         }
-        StaticEditorFBO.gizmo.startMapping()
+        FramebufferRepository.gizmo.startMapping()
         for (let i = 0; i < GizmoState.targetGizmos.length; i++) {
             GizmoState.targetGizmos[i].drawToDepth(data)
         }
-        StaticEditorFBO.gizmo.stopMapping()
+        FramebufferRepository.gizmo.stopMapping()
     }
 
     static drawToDepth(data, mesh, transformation, pickId) {

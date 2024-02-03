@@ -1,6 +1,8 @@
 #ifndef PROJECTION_GPUUTIL_H
 #define PROJECTION_GPUUTIL_H
 
+#include "NoiseTextureDTO.h"
+
 namespace PEngine {
 
     class GPUUtil {
@@ -22,6 +24,8 @@ namespace PEngine {
                            unsigned int wrapS,
                            unsigned int wrapT,
                            unsigned char *data);
+
+        static NoiseTextureDTO GenerateNoise(int kernel, int size);
     };
 
 }

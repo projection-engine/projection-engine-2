@@ -5,7 +5,7 @@ import GizmoState from "./GizmoState"
 import GizmoSystem from "../GizmoSystem"
 import GizmoUtil from "./GizmoUtil"
 import {vec3} from "gl-matrix"
-import StaticEditorFBO from "../../utils/StaticEditorFBO";
+import FramebufferRepository from "@engine-core/repositories/FramebufferRepository";
 
 export default class GizmoMouseUtil {
 
@@ -27,7 +27,7 @@ export default class GizmoMouseUtil {
         if (!GizmoState.mainEntity)
             return
         GizmoUtil.updateGizmosTransformation(true)
-        const axis = DepthPickingService.readEntityID(event.clientX, event.clientY, 0, StaticEditorFBO.gizmo.FBO)
+        const axis = DepthPickingService.readEntityID(event.clientX, event.clientY, 0, FramebufferRepository.gizmo.FBO)
         if (axis === 0)
             return
         vec3.copy(GizmoState.initialEntityPosition, GizmoState.mainEntity.__pivotOffset)

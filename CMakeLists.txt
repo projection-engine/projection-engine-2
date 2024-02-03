@@ -87,8 +87,8 @@ set(FILE_PATHS
 
         src/engine/services/resource/core/AbstractResource.h
         src/engine/enum/StaticResource.h
-        src/engine/services/resource/core/FBO.cpp
-        src/engine/services/resource/core/FBO.h
+        src/engine/services/resource/core/FrameBuffer.cpp
+        src/engine/services/resource/core/FrameBuffer.h
         src/engine/services/resource/core/Mesh.cpp
         src/engine/services/resource/core/Mesh.h
         src/engine/services/resource/core/Shader.cpp

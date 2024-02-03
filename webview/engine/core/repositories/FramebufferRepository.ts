@@ -33,65 +33,58 @@ export default class FramebufferRepository extends AbstractEngineService {
     static ssaoBlurred?: Framebuffer
     static ssaoBlurredSampler?: WebGLTexture
 
-
     static downscaleBloom: Framebuffer[] = []
     static upscaleBloom: Framebuffer[] = []
+
+    static gizmo?: Framebuffer
 
     static shadows?: Framebuffer
     static shadowsSampler?: WebGLTexture
 
     static noiseSampler?: WebGLTexture
-    static #initialized = false
 
     async initialize() {
-        if (FramebufferRepository.#initialized)
-            return
-        FramebufferRepository.#initialized = true
         const context = GPU.context
         const halfResW = GPU.internalResolution.w / 2
         const halfResH = GPU.internalResolution.h / 2
-
-        FramebufferRepository.visibility = (new Framebuffer())
-            .texture({
-                attachment: 0,
-                precision: context.RGBA32F,
-                format: context.RGBA,
-                label: "DEPTH"
-            })
-            .texture({
-                attachment: 1,
-                label: "ENTITY_ID",
-                precision: context.RGBA,
-                format: context.RGBA,
-                type: context.UNSIGNED_BYTE
-            })
-            .depthTest()
-
-
-        FramebufferRepository.postProcessing1 = new Framebuffer().texture()
-        FramebufferRepository.postProcessing2 = new Framebuffer().texture().depthTest()
-
         const linearTexture = {
             linear: true,
             precision: context.RGBA,
             format: context.RGBA,
             type: context.UNSIGNED_BYTE
-        }
-
-        FramebufferRepository.ssgi = new Framebuffer(halfResW, halfResH).texture(linearTexture)
-        FramebufferRepository.ssgiFallback = new Framebuffer(halfResW, halfResH).texture(linearTexture)
-
-        const SSAO_SETTINGS = {
+        },
+        gizmo = {
+            precision: context.RGBA,
+            format: context.RGBA,
+            type: context.UNSIGNED_BYTE
+        },
+        visibilityA = {
+            attachment: 0,
+            precision: context.RGBA32F,
+            format: context.RGBA,
+        },
+        visibilityB = {
+            attachment: 1,
+            precision: context.RGBA,
+            format: context.RGBA,
+            type: context.UNSIGNED_BYTE
+        },
+        ssao = {
             linear: true,
             precision: context.R8,
             format: context.RED,
             type: context.UNSIGNED_BYTE
         }
-        FramebufferRepository.ssao = new Framebuffer(halfResW, halfResH).texture(SSAO_SETTINGS)
-        FramebufferRepository.ssaoBlurred = new Framebuffer(halfResW, halfResH).texture(SSAO_SETTINGS)
+
+        FramebufferRepository.gizmo = (new Framebuffer()).texture(gizmo).depthTest()
+        FramebufferRepository.visibility = (new Framebuffer()).texture(visibilityA).texture(visibilityB).depthTest()
+        FramebufferRepository.postProcessing1 = new Framebuffer().texture()
+        FramebufferRepository.postProcessing2 = new Framebuffer().texture().depthTest()
         FramebufferRepository.lens = new Framebuffer().texture()
-
-
+        FramebufferRepository.ssgi = new Framebuffer(halfResW, halfResH).texture(linearTexture)
+        FramebufferRepository.ssgiFallback = new Framebuffer(halfResW, halfResH).texture(linearTexture)
+        FramebufferRepository.ssao = new Framebuffer(halfResW, halfResH).texture(ssao)
+        FramebufferRepository.ssaoBlurred = new Framebuffer(halfResW, halfResH).texture(ssao)
         const Q = 7
         let w = GPU.internalResolution.w, h = GPU.internalResolution.h
         for (let i = 0; i < Q; i++) {
@@ -126,22 +119,5 @@ export default class FramebufferRepository extends AbstractEngineService {
         FramebufferRepository.shadowsSampler = FramebufferRepository.shadows.depthSampler
     }
 
-    static async generateSSAONoise() {
-        const context = GPU.context
-        const {kernels, noise} = generateSsaoNoise(RESOLUTION, RESOLUTION)
 
-        UBORepository.ssaoUBO.bind()
-        UBORepository.ssaoUBO.updateData("samples", kernels)
-        UBORepository.ssaoUBO.unbind()
-        FramebufferRepository.noiseSampler = context.createTexture()
-
-        context.bindTexture(context.TEXTURE_2D, FramebufferRepository.noiseSampler)
-        context.texParameteri(context.TEXTURE_2D, context.TEXTURE_MAG_FILTER, context.NEAREST)
-        context.texParameteri(context.TEXTURE_2D, context.TEXTURE_MIN_FILTER, context.NEAREST)
-        context.texParameteri(context.TEXTURE_2D, context.TEXTURE_WRAP_S, context.REPEAT)
-        context.texParameteri(context.TEXTURE_2D, context.TEXTURE_WRAP_T, context.REPEAT)
-        context.texStorage2D(context.TEXTURE_2D, 1, context.RG16F, RESOLUTION, RESOLUTION)
-        context.texSubImage2D(context.TEXTURE_2D, 0, 0, 0, RESOLUTION, RESOLUTION, context.RG, context.FLOAT, noise)
-
-    }
 }

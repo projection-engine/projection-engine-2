@@ -9,10 +9,10 @@ import Movable from "../../../core/instances/components/Movable"
 import GizmoState from "../util/GizmoState"
 import GizmoSystem from "../GizmoSystem"
 import AbstractXYZGizmo from "./AbstractXYZGizmo";
-import StaticEditorFBO from "../../utils/StaticEditorFBO";
 import EngineToolsState from "../../EngineToolsState";
 import ProjectionEngine from "@lib/ProjectionEngine";
 import ShaderRepository from "@engine-core/repositories/ShaderRepository";
+import FramebufferRepository from "@engine-core/repositories/FramebufferRepository";
 
 const toDeg = 180 / Math.PI
 const uniformCache = new Float32Array(4)
@@ -65,7 +65,7 @@ export default class RotationGizmo extends AbstractXYZGizmo {
             context.uniform3fv(uniforms.translation, GizmoState.mainEntity.__pivotOffset)
             context.uniform1i(uniforms.cameraIsOrthographic, ProjectionEngine.Engine.getCamera().isOrthographic() ? 1 : 0)
 
-            GPU.bind2DTextureForDrawing(uniforms.gizmoIDS, 0, StaticEditorFBO.gizmo.colors[0])
+            GPU.bind2DTextureForDrawing(uniforms.gizmoIDS, 0, FramebufferRepository.gizmo.colors[0])
             GPU.context.uniform2fv(uniforms.mouseCoordinates, EngineToolsState.mouseCoordinates)
 
             uniformCache[0] = axis
