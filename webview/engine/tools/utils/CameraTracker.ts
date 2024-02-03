@@ -112,7 +112,10 @@ export default class CameraTracker {
 			const yaw = quat.fromEuler(cacheYaw, 0, CameraTracker.xRotation * toDeg, 0)
 			quat.copy(cacheRotation, pitch)
 			quat.multiply(cacheRotation, yaw, cacheRotation)
-			ProjectionEngine.Engine.getCamera().updateRotation(cacheRotation)
+			ProjectionEngine.Engine.getCamera().rotationBuffer[0] = cacheRotation[0];
+			ProjectionEngine.Engine.getCamera().rotationBuffer[1] = cacheRotation[1];
+			ProjectionEngine.Engine.getCamera().rotationBuffer[2] = cacheRotation[2];
+			ProjectionEngine.Engine.getCamera().rotationBuffer[3] = cacheRotation[3];
 			changed = true
 		}
 
@@ -124,7 +127,10 @@ export default class CameraTracker {
 		CameraTracker.forceUpdate = false
 		vec4.transformQuat(toApplyTranslation, toApplyTranslation, ProjectionEngine.Engine.getCamera().rotationBuffer)
 
-		ProjectionEngine.Engine.getCamera().addTranslation(toApplyTranslation)
+		const T = ProjectionEngine.Engine.getCamera().translationBuffer
+		T[0] = T[0] + toApplyTranslation[0] || 0
+		T[1] = T[1] + toApplyTranslation[1] || 0
+		T[2] = T[2] + toApplyTranslation[2] || 0
 		ProjectionEngine.Engine.getCamera().updateView()
 	}
 

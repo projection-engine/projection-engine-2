@@ -10,8 +10,6 @@ namespace PEngine {
 
     public:
 
-        static std::string RequestShader(const std::string &shaderFileName);
-
         void BindEvents(PEngine::WebViewWindow *pWindow) override;
     };
 

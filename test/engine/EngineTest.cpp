@@ -1,24 +1,24 @@
 #include <catch2/catch_test_macros.hpp>
 #include "entt/entt.hpp"
-#include "../../src/engine/world/WorldSystem.h"
+#include "../../src/engine/services/WorldService.h"
 #include "../../src/engine/Engine.h"
 #include "../Tester.h"
-#include "../../src/engine/world/components/CTransform.h"
+#include "../../src/engine/world/components/MovementComponent.h"
 
 namespace PEngine::EngineTest {
     static Engine engine(nullptr, nullptr);
 
 
     void shouldAddEntity() {
-        IEntity *entity = engine.getWorld().addEntity();
-        IEntity *entityWithName = engine.getWorld().addEntity("Name");
+        Entity *entity = engine.getWorld().addEntity();
+        Entity *entityWithName = engine.getWorld().addEntity("Name");
         REQUIRE(engine.getWorld().hasEntity(entity->getUUID()) == true);
         REQUIRE(engine.getWorld().hasEntity(entityWithName->getUUID()) == true);
         REQUIRE(entityWithName->getName() == "Name");
     }
 
     void shouldRemoveEntity() {
-        IEntity *entity = engine.getWorld().addEntity();
+        Entity *entity = engine.getWorld().addEntity();
         std::string uuid = entity->getUUID();
         engine.getWorld().removeEntity(uuid);
         REQUIRE(engine.getWorld().hasEntity(uuid) == false);
@@ -26,41 +26,41 @@ namespace PEngine::EngineTest {
 
 
     void shouldAddComponent() {
-        IEntity *entity = engine.getWorld().addEntity();
-        engine.getWorld().addComponent<CTransform>(entity);
-        IComponent *component = engine.getWorld().getComponent<CTransform>(entity);
+        Entity *entity = engine.getWorld().addEntity();
+        engine.getWorld().addComponent<MovementComponent>(entity);
+        AbstractComponent *component = engine.getWorld().getComponent<MovementComponent>(entity);
 
         REQUIRE(component != nullptr);
     }
 
     void shouldRemoveComponent() {
-        IEntity *entity = engine.getWorld().addEntity();
-        engine.getWorld().addComponent<CTransform>(entity);
-        engine.getWorld().removeComponent<CTransform>(entity);
+        Entity *entity = engine.getWorld().addEntity();
+        engine.getWorld().addComponent<MovementComponent>(entity);
+        engine.getWorld().removeComponent<MovementComponent>(entity);
 
         bool found = false;
-        auto v = engine.getWorld().getRegistry().view<CTransform>();
+        auto v = engine.getWorld().getRegistry().view<MovementComponent>();
         for (auto ent: v) {
             if (ent == entity->getEntity()) {
                 found = true;
             }
         }
-        REQUIRE(engine.getWorld().hasComponent<CTransform>(entity) == false);
+        REQUIRE(engine.getWorld().hasComponent<MovementComponent>(entity) == false);
         REQUIRE(found == false);
     }
 
     void shouldHaveComponent() {
-        IEntity *entity = engine.getWorld().addEntity();
-        engine.getWorld().addComponent<CTransform>(entity);
+        Entity *entity = engine.getWorld().addEntity();
+        engine.getWorld().addComponent<MovementComponent>(entity);
 
         bool found = false;
-        auto v = engine.getWorld().getRegistry().view<CTransform>();
+        auto v = engine.getWorld().getRegistry().view<MovementComponent>();
         for (auto ent: v) {
             if (ent == entity->getEntity()) {
                 found = true;
             }
         }
-        REQUIRE(engine.getWorld().hasComponent<CTransform>(entity) == true);
+        REQUIRE(engine.getWorld().hasComponent<MovementComponent>(entity) == true);
         REQUIRE(found == true);
     }
 

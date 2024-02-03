@@ -1,11 +1,11 @@
 #ifndef PROJECTION_FSCONTROLLER_H
 #define PROJECTION_FSCONTROLLER_H
 
-#include "../../../engine/external/IFSController.h"
+#include "../../../engine/services/AbstractFSService.h"
 
 namespace PEngine {
 
-    class FSController : public IFSController{
+    class FSController : public AbstractFSService{
 
     };
 

@@ -3,16 +3,7 @@ import UBORepository, {StaticUBONames} from "../repositories/UBORepository"
 import {GLSLTypes} from "@engine-core/engine-d";
 
 const regex = /uniform(\s+)(highp|mediump|lowp)?(\s*)((\w|_)+)((\s|\w|_)*);/gm
-const structRegex = (type) => {
-    return new RegExp(`(struct\\s+${type}\\s*\\s*{.+?(?<=}))`, "gs")
-}
-const defineRegex = (global) => {
-    return new RegExp("#define(\\s+)((\\w|_)+)(\\s+)(.+)", global ? "gmi" : "mi")
-}
 const regexMatch = /uniform(\s+)(highp|mediump|lowp)?(\s*)((\w|_)+)((\s|\w|_)*);$/m
-const regexArray = (global) => {
-    return new RegExp("uniform(\\s+)(highp|mediump|lowp)?(\\s*)((\\w|_)+)((\\s|\\w|_)*)\\[(\\w+)\\](\\s*);$", global ? "gm" : "m")
-}
 
 interface Uniform {
     type: string,
@@ -124,7 +115,6 @@ export default class Shader {
                     return []
                 const type = match[4]
                 const name: string = match[6].replace(" ", "").trim()
-
                 if (GLSLTypes[type] != null) {
                     this.uniforms.push({
                         type,
@@ -133,71 +123,7 @@ export default class Shader {
                     })
                     return
                 }
-
-                const struct: string[] | number = code.match(structRegex(type))
-                const reg = /^(\s*)(\w+)(\s*)((\w|_)+)/m
-                if (struct === null)
-                    return []
-                const partial: string[] = struct[0].split("\n").filter(e => Object.keys(GLSLTypes).some(v => e.includes(v)))
-                this.uniforms.push(
-                    ...partial.map((s): Uniform | undefined => {
-                        const current = s.match(reg)
-                        if (current) {
-                            return {
-                                type: current[2],
-                                name: current[4],
-                                parent: name,
-                                uLocation: GPU.context.getUniformLocation(this.program, name + "." + current[4])
-                            }
-                        }
-                    })
-                )
             })
-        const arrayUniforms = code.match(regexArray(true))
-        const definitions = code.match(defineRegex(true))
-        if (arrayUniforms)
-            arrayUniforms.forEach(u => {
-                const match = u.match(regexArray(false))
-
-                if (!match)
-                    return
-                const type = match[4]
-                const name = match[6].replace(" ", "")
-                const define = definitions.find(d => d.includes(match[8]))?.match(defineRegex(false))
-
-                if (!define) return
-                const arraySize = parseInt(define[5])
-                if (GLSLTypes[type] !== undefined) {
-                    this.uniforms.push({
-                        type,
-                        name,
-                        arraySize,
-                        uLocations: (new Array(arraySize).fill(null)).map((_, i) => GPU.context.getUniformLocation(this.program, name + `[${i}]`))
-                    })
-                    return
-                }
-                const struct = code.match(structRegex(type))
-                const reg = /^(\s*)(\w+)(\s*)((\w|_)+)/m
-
-                if (!struct)
-                    return
-                const partial = struct[0].split("\n").filter(e => Object.keys(GLSLTypes).some(v => e.includes(v)))
-                this.uniforms.push(
-                    ...partial.map((s): Uniform | undefined => {
-                        const current: string[] | null = s.match(reg)
-                        if (current === null)
-                            return
-                        return {
-                            type: current[2],
-                            name: current[4],
-                            parent: name,
-                            arraySize,
-                            uLocations: (new Array(arraySize).fill(null)).map((_, i) => GPU.context.getUniformLocation(this.program, name + `[${i}]` + "." + current[4]))
-                        }
-                    })
-                )
-            })
-
     }
 
     bind() {

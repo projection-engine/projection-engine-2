@@ -5,12 +5,6 @@ import {mat4, quat, vec3} from "gl-matrix";
 
 export default class CameraSystem extends AbstractEngineSystem {
 
-    async initialize() {
-        vec3.copy(this.camera.currentTranslation, this.camera.translationBuffer)
-        quat.copy(this.camera.currentRotation, this.camera.rotationBuffer)
-        mat4.multiply(this.camera.viewProjectionMatrix, this.camera.projectionMatrix, this.camera.viewMatrix)
-    }
-
     execute(gl: WebGL2RenderingContext) {
         const c = this.camera;
         c.hasChangedView = false

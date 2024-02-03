@@ -84,7 +84,38 @@ interface ResourceLoader {
     prepareShader(shader: string): Promise<string>
 }
 
+interface CameraConfig{
+    motionBlurEnabled: boolean,
+    cameraMotionBlur: boolean,
+    mbVelocityScale: number,
+    mbSamples: number,
+    zFar: number,
+    zNear: number,
+    fov: number,
+    ortho: boolean,
+    vignette: boolean,
+    vignetteStrength: number,
+    distortion: boolean,
+    distortionStrength: number,
+    chromaticAberration: boolean,
+    chromaticAberrationStrength: number,
+    filmGrain: boolean,
+    filmGrainStrength: number,
+    bloom: boolean,
+    bloomThreshold: number,
+    gamma: number,
+    exposure: number,
+    apertureDOF: number,
+    focalLengthDOF: number,
+    focusDistanceDOF: number,
+    samplesDOF: number,
+    enabledDOF: boolean,
+    dynamicAspectRatio: boolean,
+    aspectRatio: number,
+}
+
 export {
+    CameraConfig,
     ResourceLoader,
     ShaderUniforms,
     CameraProjectionType,

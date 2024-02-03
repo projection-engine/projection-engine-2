@@ -3,6 +3,7 @@
 #include "shared/webview/WebViewWindow.h"
 #include "shared/runners/IRunner.h"
 #include "GLFW/glfw3native.h"
+#include "../engine/definitions.h"
 
 namespace PEngine {
     WindowRepository WindowRepository::singleton;

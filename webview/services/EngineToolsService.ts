@@ -39,7 +39,6 @@ export default class EngineToolsService {
         if (engine.executingAnimation)
             GUIService.showUI()
         if (EngineToolsService.engine.getEnvironment() === ENVIRONMENT.DEV && !engine.focusedCamera) {
-            EngineToolsService.engine.getCamera().trackingEntity = undefined
             if (settings.camera !== undefined) {
                 CameraTracker.screenSpaceMovementSpeed = settings.camera.screenSpaceMovementSpeed || 1
                 CameraTracker.movementSpeed = settings.camera.movementSpeed * .1

@@ -19,13 +19,64 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-16] Engine refactoring: Shaders&#10;- adding rebuild button">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-78] C++ render loop&#10;- Components">
+      <change afterPath="$PROJECT_DIR$/src/engine/services/resource/core/Texture.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/engine/services/resource/core/Texture.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/engine/services/world/ComponentFactory.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/engine/services/world/ComponentFactory.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/engine/services/world/Entity.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/engine/services/world/Entity.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/editor/basic/Runner.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/basic/Runner.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/components/frame/MenuBar.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/components/frame/MenuBar.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/static/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/global.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/Editor.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/Editor.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/definitions.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/definitions.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/external/AbstractFSService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/AbstractFSService.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/external/AbstractIOService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/AbstractIOService.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/external/AbstractIOService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/AbstractIOService.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/resource/ResourceType.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/enum/ResourceType.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/resource/StaticResource.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/enum/StaticResource.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/resource/UBOType.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/enum/UBOType.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/resource/core/IResource.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/AbstractResource.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/resource/core/IResource.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/AbstractResource.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/resource/core/RFBO.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/FBO.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/resource/core/RFBO.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/FBO.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/resource/core/RMesh.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/Mesh.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/resource/core/RMesh.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/Mesh.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/resource/core/RShader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/Shader.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/resource/core/RShader.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/Shader.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/resource/core/RTexture.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/resource/core/RTexture.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/resource/core/RUBO.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/UBO.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/resource/core/RUBO.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/UBO.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/resource/core/VertexBufferObject.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/VBO.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/resource/core/VertexBufferObject.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/VBO.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/resource/dto/FBOTextureDTO.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/dto/FBOTextureDTO.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/resource/dto/UBODataDTO.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/dto/UBODataDTO.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/resource/static/direct_shadows.fs" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/static/direct_shadows.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/resource/static/direct_shadows.vs" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/static/direct_shadows.vs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/runtime/CameraTrackerSystem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/runtime/CameraTrackerSystem.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/AbstractCoreService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/AbstractCoreService.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/AbstractCoreService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/AbstractCoreService.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/ResourceService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/ResourceService.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/ResourceService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/ResourceService.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/WorldService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/WorldService.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/WorldService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/WorldService.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/world/AbstractEntity.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/world/AbstractEntity.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/world/ComponentFactory.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/world/ComponentFactory.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/world/ComponentsEnum.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/enum/ComponentType.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/world/components/AbstractComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/AbstractComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/world/components/AbstractComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/AbstractComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/world/components/MovementComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/MovementComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/world/components/MovementComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/MovementComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/ShaderService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/ShaderService.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/ShaderService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/ShaderService.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/WindowRepository.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/WindowRepository.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/editor/basic/FSController.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/basic/FSController.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/editor/basic/IOController.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/basic/IOController.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/Definitions.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Definitions.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/engine/EngineTest.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/engine/EngineTest.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +106,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="16-engine-refactoring-shaders" />
+        <entry key="$PROJECT_DIR$" value="75-add-transparency-support-for-the-webview2-context" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -135,7 +186,7 @@
     "Shell Script.copy-files.executor": "Run",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "5-event-based-engine-communication",
+    "git-widget-placeholder": "78-c-render-loop",
     "js.last.introduce.type": "CONST",
     "last_opened_file_path": "C:/Users/russi/WebstormProjects/projection-engine-2/test/core",
     "node.js.detected.package.eslint": "true",
@@ -149,7 +200,8 @@
     "npm.sdev.executor": "Run",
     "npm.test.executor": "Run",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "structure.view.defaults.are.configured": "true",
     "ts.external.directory.path": "C:\\Users\\russi\\WebstormProjects\\projection-engine-2\\webview\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   },
@@ -164,11 +216,11 @@
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\test\core" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\engine\services\world" />
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\engine\enum" />
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\engine\services" />
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\engine\runtime" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\engine\shaders" />
-      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\engine" />
-      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\services" />
-      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\engine\shaders" />
-      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\lib\stores" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -185,11 +237,6 @@
     </option>
   </component>
   <component name="RunManager" selected="CMake Debug.projectioncmake">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Run all" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="build" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_CLASS="[RUN_ALL]" TEST_METHOD="Run all" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -200,6 +247,11 @@
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="Should restore circular dependency" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
@@ -348,39 +400,15 @@
       <workItem from="1706135278039" duration="3243000" />
       <workItem from="1706221011521" duration="2292000" />
       <workItem from="1706353242258" duration="5905000" />
-      <workItem from="1706443195876" duration="11062000" />
-    </task>
-    <task id="LOCAL-00013" summary="[STD-6] Project window&#10;- Improving event system&#10;- Adding basic functions for project window">
-      <option name="closed" value="true" />
-      <created>1703948510001</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1703948510001</updated>
-    </task>
-    <task id="LOCAL-00014" summary="[STD-6] Project window&#10;- Creating &quot;create project&quot; callback">
-      <option name="closed" value="true" />
-      <created>1703971371539</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1703971371539</updated>
-    </task>
-    <task id="LOCAL-00015" summary="[STD-6] Project window&#10;- creating system for projects &#10;- Completing tests for file system&#10;- Continuing create project">
-      <option name="closed" value="true" />
-      <created>1704032352371</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1704032352371</updated>
-    </task>
-    <task id="LOCAL-00016" summary="[STD-6] Project window&#10;- JSON util&#10;- JSON util tests">
-      <option name="closed" value="true" />
-      <created>1704117632681</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1704117632681</updated>
+      <workItem from="1706443195876" duration="11629000" />
+      <workItem from="1706464151773" duration="1650000" />
+      <workItem from="1706466585489" duration="596000" />
+      <workItem from="1706567007629" duration="433000" />
+      <workItem from="1706652619624" duration="3774000" />
+      <workItem from="1706656810092" duration="466000" />
+      <workItem from="1706738820617" duration="3580000" />
+      <workItem from="1706826394990" duration="3419000" />
+      <workItem from="1706956994527" duration="6302000" />
     </task>
     <task id="LOCAL-00017" summary="[STD-6] Project window&#10;- Completing createProject&#10;- Fixing bugs JSON and FS&#10;- Refactoring FileSystemUtil&#10;- Removing imgui stuff from IWindow">
       <option name="closed" value="true" />
@@ -742,7 +770,39 @@
       <option name="project" value="LOCAL" />
       <updated>1706450967942</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="[STD-75] Adding transparency support for webview2 context">
+      <option name="closed" value="true" />
+      <created>1706458974057</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1706458974057</updated>
+    </task>
+    <task id="LOCAL-00063" summary="[STD-78] C++ render loop&#10;- Creating new core services&#10;- Refactoring files">
+      <option name="closed" value="true" />
+      <created>1706657234121</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1706657234122</updated>
+    </task>
+    <task id="LOCAL-00064" summary="[STD-78] C++ render loop&#10;- Creating camera class&#10;- Creating camera system">
+      <option name="closed" value="true" />
+      <created>1706742398961</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1706742398962</updated>
+    </task>
+    <task id="LOCAL-00065" summary="[STD-78] C++ render loop&#10;- Components">
+      <option name="closed" value="true" />
+      <created>1706829739270</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1706829739270</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -766,10 +826,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-34] Stores&#10;- Fixing subscribe and unsubscribe&#10;- Creating test for store" />
-    <MESSAGE value="[STD-34] Stores&#10;- Completing change to subscribe&#10;- Creating test for Injection &#10;- Improving store update method" />
-    <MESSAGE value="[STD-34] Stores&#10;- Merging Visuals and Engine stores into Settings store" />
-    <MESSAGE value="[STD-21]  New project architecture&#10;- Removing old level stuff&#10;- Refactoring services&#10;- Adding new events for project path" />
     <MESSAGE value="[STD-21]  New project architecture&#10;- Creating new file system structure&#10;- Creating new events&#10;- Creating new file browser" />
     <MESSAGE value="[STD-21]  New project architecture&#10;- Finishing new file browser" />
     <MESSAGE value="[STD-3]  Starting refactoring&#10;- Fixing texture initialization" />
@@ -791,7 +847,11 @@
     <MESSAGE value="[STD-63] Starting new hierarchy&#10;- Creating WorldOutlineView&#10;- Creating service for view&#10;- Fixing LightsService" />
     <MESSAGE value="[STD-16] Engine refactoring: Shaders&#10;- Moving shaders to CPP side&#10;- Creating new service for shader processing&#10;- Creating new interface for engine: ResourceLoader&#10;- Improving WindowRepository to only initialize when needed&#10;- Fixing tests&#10;- Creating new tests for StringUtils&#10;- Implementing new shader initialization architecture" />
     <MESSAGE value="[STD-16] Engine refactoring: Shaders&#10;- adding rebuild button" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-16] Engine refactoring: Shaders&#10;- adding rebuild button" />
+    <MESSAGE value="[STD-75] Adding transparency support for webview2 context" />
+    <MESSAGE value="[STD-78] C++ render loop&#10;- Creating new core services&#10;- Refactoring files" />
+    <MESSAGE value="[STD-78] C++ render loop&#10;- Creating camera class&#10;- Creating camera system" />
+    <MESSAGE value="[STD-78] C++ render loop&#10;- Components" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-78] C++ render loop&#10;- Components" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -805,11 +865,6 @@
           <url>file://$PROJECT_DIR$/test/core/StringUtilTest.cpp</url>
           <line>11</line>
           <option name="timeStamp" value="56" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/services/ShaderService.cpp</url>
-          <line>11</line>
-          <option name="timeStamp" value="58" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp</url>
