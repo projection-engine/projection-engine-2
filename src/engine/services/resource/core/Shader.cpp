@@ -45,4 +45,8 @@ namespace PEngine {
             Shader::activeShader = this;
         }
     }
+
+    GLuint &Shader::getProgram() {
+        return program;
+    }
 }

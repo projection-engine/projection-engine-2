@@ -43,6 +43,14 @@ namespace PEngine{
         FBO_UPSCALE_1,
         FBO_UPSCALE_2,
 
+        UBO_CAMERA_VIEW,
+        UBO_FRAME_COMPOSITION,
+        UBO_LENS_PP,
+        UBO_SSAO,
+        UBO_UBER,
+        UBO_LIGHTS,
+        UBO_CAMERA_PROJECTION,
+
         TEXTURE_NOISE
     };
 }

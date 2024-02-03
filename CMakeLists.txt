@@ -74,8 +74,8 @@ set(FILE_PATHS
 
         src/engine/services/resource/dto/FBOTextureDTO.h
 
-        src/engine/services/resource/core/UBO.cpp
-        src/engine/services/resource/core/UBO.h
+        src/engine/services/resource/core/UniformBuffer.cpp
+        src/engine/services/resource/core/UniformBuffer.h
 
         src/engine/services/resource/dto/UBODataDTO.h
         src/engine/enum/UBOType.h

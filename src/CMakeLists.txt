@@ -13,6 +13,8 @@ add_executable(projection main.cpp ${SRC_PATHS}
         engine/services/resource/StaticResourceFactory.cpp
         engine/services/resource/StaticResourceFactory.h
         engine/util/NoiseTextureDTO.h
+        engine/enum/StaticUBO.cpp
+        engine/enum/StaticUBO.h
 )
 
 target_link_libraries(projection PRIVATE ${COMMON_LIBRARIES})

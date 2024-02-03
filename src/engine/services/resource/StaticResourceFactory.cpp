@@ -1,11 +1,13 @@
 #include "StaticResourceFactory.h"
 #include "core/Shader.h"
 #include "core/Mesh.h"
-#include "core/UBO.h"
+#include "core/UniformBuffer.h"
 #include "../../enum/StaticShader.h"
 #include "core/FrameBuffer.h"
 #include "core/Texture.h"
 #include "../../util/GPUUtil.h"
+#include "../../definitions.h"
+#include "../../enum/StaticUBO.h"
 
 namespace PEngine {
     void
@@ -89,7 +91,7 @@ namespace PEngine {
         rMap[StaticResource::FBO_SSAO] = (new FrameBuffer(halfResW, halfResH))->texture(ssao);
         rMap[StaticResource::FBO_SSAO_BLURRED] = (new FrameBuffer(halfResW, halfResH))->texture(ssao);
 
- 
+
         int w = width;
         int h = height;
         GenerateBlurBuffer(w, h, 0.5, rMap, linearTexture, StaticResource::FBO_DOWNSCALE_1);
@@ -102,15 +104,15 @@ namespace PEngine {
 
         GenerateBlurBuffer(w, h, 4, rMap, linearTexture, StaticResource::FBO_UPSCALE_1);
         GenerateBlurBuffer(w, h, 4, rMap, linearTexture, StaticResource::FBO_UPSCALE_2);
-        
+
         GenerateDirectionalShadowsFBO(width, height, rMap);
-        
+
     }
 
     void StaticResourceFactory::GenerateNoiseTexture(std::unordered_map<StaticResource, AbstractResource *> &rMap) {
         const int RESOLUTION = 4;
 
-        const NoiseTextureDTO &dto = GPUUtil::GenerateNoise(64, RESOLUTION);
+        const NoiseTextureDTO &dto = GPUUtil::GenerateNoise(SSAO_KERNELS, RESOLUTION);
 
 //        UBORepository.ssaoUBO.bind()
 //        UBORepository.ssaoUBO.updateData("samples", kernels)
@@ -126,7 +128,7 @@ namespace PEngine {
         glTexStorage2D(GL_TEXTURE_2D, 1, GL_RG16F, RESOLUTION, RESOLUTION);
         glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, RESOLUTION, RESOLUTION, GL_RG, GL_FLOAT, &dto.noiseTextureData[0]);
     }
-    
+
     void StaticResourceFactory::GenerateBlurBuffer(
             int &w,
             int &h,
@@ -142,8 +144,81 @@ namespace PEngine {
     void StaticResourceFactory::InitializeMeshes(std::unordered_map<StaticResource, AbstractResource *> &rMap) {
 
     }
-    void StaticResourceFactory::InitializeUBOs(std::unordered_map<StaticResource, AbstractResource *> &rMap) {
 
+    void StaticResourceFactory::InitializeUBOs(std::unordered_map<StaticResource, AbstractResource *> &rMap) {
+        std::vector<UBODataDTO> lights = {
+                UBODataDTO{"lightPrimaryBuffer", UBOType::MAT4, MAX_LIGHTS},
+                UBODataDTO{"lightSecondaryBuffer", UBOType::MAT4, MAX_LIGHTS},
+        };
+        std::vector<UBODataDTO> cameraProjection = {
+                UBODataDTO{"projectionMatrix", UBOType::MAT4},
+                UBODataDTO{"invProjectionMatrix", UBOType::MAT4},
+                UBODataDTO{"bufferResolution", UBOType::VEC2},
+                UBODataDTO{"logDepthFC", UBOType::FLOAT},
+                UBODataDTO{"logC", UBOType::FLOAT},
+        };
+        std::vector<UBODataDTO> uber = {
+                UBODataDTO{"shadowMapsQuantity", UBOType::FLOAT},
+                UBODataDTO{"shadowMapResolution", UBOType::FLOAT},
+                UBODataDTO{"lightQuantity", UBOType::INT},
+                UBODataDTO{"SSRFalloff", UBOType::FLOAT},
+                UBODataDTO{"stepSizeSSR", UBOType::FLOAT},
+                UBODataDTO{"maxSSSDistance", UBOType::FLOAT},
+                UBODataDTO{"SSSDepthThickness", UBOType::FLOAT},
+                UBODataDTO{"SSSEdgeAttenuation", UBOType::FLOAT},
+                UBODataDTO{"skylightSamples", UBOType::FLOAT},
+                UBODataDTO{"SSSDepthDelta", UBOType::FLOAT},
+                UBODataDTO{"SSAOFalloff", UBOType::FLOAT},
+                UBODataDTO{"maxStepsSSR", UBOType::INT},
+                UBODataDTO{"maxStepsSSS", UBOType::INT},
+                UBODataDTO{"hasSkylight", UBOType::BOOL},
+                UBODataDTO{"hasAmbientOcclusion", UBOType::BOOL}
+        };
+        std::vector<UBODataDTO> ssao = {
+                UBODataDTO{"settings", UBOType::VEC4},
+                UBODataDTO{"samples", UBOType::VEC4, SSAO_KERNELS},
+                UBODataDTO{"noiseScale", UBOType::VEC2}
+        };
+        std::vector<UBODataDTO> lens = {
+                UBODataDTO{"textureSizeXDOF", UBOType::FLOAT},
+                UBODataDTO{"textureSizeYDOF", UBOType::FLOAT},
+                UBODataDTO{"distortionIntensity", UBOType::FLOAT},
+                UBODataDTO{"chromaticAberrationIntensity", UBOType::FLOAT},
+                UBODataDTO{"distortionEnabled", UBOType::BOOL,},
+                UBODataDTO{"chromaticAberrationEnabled", UBOType::BOOL},
+                UBODataDTO{"bloomEnabled", UBOType::BOOL},
+                UBODataDTO{"focusDistanceDOF", UBOType::FLOAT},
+                UBODataDTO{"apertureDOF", UBOType::FLOAT},
+                UBODataDTO{"focalLengthDOF", UBOType::FLOAT},
+                UBODataDTO{"samplesDOF", UBOType::FLOAT},
+                UBODataDTO{"vignetteEnabled", UBOType::BOOL},
+                UBODataDTO{"vignetteStrength", UBOType::FLOAT},
+                UBODataDTO{"gamma", UBOType::FLOAT},
+                UBODataDTO{"exposure", UBOType::FLOAT}
+        };
+        std::vector<UBODataDTO> cameraView = {
+                UBODataDTO{"viewProjection", UBOType::MAT4},
+                UBODataDTO{"viewMatrix", UBOType::MAT4},
+                UBODataDTO{"invViewMatrix", UBOType::MAT4},
+                UBODataDTO{"placement", UBOType::VEC4},
+        };
+        std::vector<UBODataDTO> frameComposition = {
+                UBODataDTO{"inverseFilterTextureSize", UBOType::VEC2},
+                UBODataDTO{"useFXAA", UBOType::BOOL},
+                UBODataDTO{"filmGrainEnabled", UBOType::BOOL},
+                UBODataDTO{"FXAASpanMax", UBOType::FLOAT},
+                UBODataDTO{"FXAAReduceMin", UBOType::FLOAT},
+                UBODataDTO{"FXAAReduceMul", UBOType::FLOAT},
+                UBODataDTO{"filmGrainStrength", UBOType::FLOAT},
+        };
+
+        rMap[StaticResource::UBO_CAMERA_VIEW] = (new UniformBuffer)->init(StaticUBO::CAMERA_VIEW, cameraView);
+        rMap[StaticResource::UBO_FRAME_COMPOSITION] = (new UniformBuffer)->init(StaticUBO::FRAME_COMPOSITION, frameComposition);
+        rMap[StaticResource::UBO_LENS_PP] = (new UniformBuffer)->init(StaticUBO::LENS_PP, lens);
+        rMap[StaticResource::UBO_SSAO] = (new UniformBuffer)->init(StaticUBO::SSAO, ssao);
+        rMap[StaticResource::UBO_UBER] = (new UniformBuffer)->init(StaticUBO::UBER, uber);
+        rMap[StaticResource::UBO_LIGHTS] = (new UniformBuffer)->init(StaticUBO::LIGHTS, lights);
+        rMap[StaticResource::UBO_CAMERA_PROJECTION] = (new UniformBuffer)->init(StaticUBO::CAMERA_PROJECTION, cameraProjection);
     }
 
     void StaticResourceFactory::GenerateDirectionalShadowsFBO(

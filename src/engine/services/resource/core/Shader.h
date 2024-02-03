@@ -16,9 +16,13 @@ namespace PEngine {
 
     public:
 
+        std::unordered_map<std::string, GLuint> uniforms;
+
         explicit Shader() : AbstractResource(ResourceType::SHADER) {}
 
         AbstractResource *init(std::string vertex, std::string fragment, bool isPartialShader);
+
+        GLuint &getProgram();
 
         void bind();
     };

@@ -1,16 +1,17 @@
 #include "glad/glad.h"
-#include "UBO.h"
+#include "UniformBuffer.h"
+#include "Shader.h"
 
 namespace PEngine {
-    int UBO::blockPointIncrement = 0;
+    int UniformBuffer::blockPointIncrement = 0;
 
-    int UBO::calculate(UBODataDTO data[]) {
+    int UniformBuffer::calculate(std::vector<UBODataDTO> &data) {
         int chunk = 16;
         int tSize;
         int offset = 0;
         int sizeTotal;
         int sizeOffset;
-        size_t quantity = sizeof(data) / sizeof(UBODataDTO);
+        size_t quantity = data.size() / sizeof(UBODataDTO);
         for (int i = 0; i < quantity; i++) {
             if (data[i].dataLength == 0) {
 
@@ -64,45 +65,45 @@ namespace PEngine {
 
             data[i].offset = offset;
             data[i].chunkSize = sizeOffset;
-//            data[i].dataSize = sizeOffset;
 
             offset += sizeOffset;
         }
         return offset;
     }
 
-    void UBO::updateBuffer(std::vector<float> data) {
+    void UniformBuffer::updateBuffer(std::vector<float> data) {
         glBufferSubData(GL_UNIFORM_BUFFER, 0, data.size() * sizeof(float), &data[0]);
     }
 
-    void UBO::updateData(const std::string &name, std::vector<float> data) {
+    void UniformBuffer::updateData(const std::string &name, std::vector<float> data) {
         glBufferSubData(GL_UNIFORM_BUFFER, items[name], data.size() * sizeof(float), &data[0]);
     }
 
-    void UBO::bind() {
+    void UniformBuffer::bind() {
         glBindBuffer(GL_UNIFORM_BUFFER, buffer);
     }
 
-    void UBO::unbind() {
+    void UniformBuffer::unbind() {
         glBindBuffer(GL_UNIFORM_BUFFER, 0);
     }
 
-    void UBO::bindWithShader() {
-//            GPUState.context.useProgram(shaderProgram)
-//            const index = GPUState.context.getUniformBlockIndex(shaderProgram, this.blockName)
-//            GPUState.context.uniformBlockBinding(shaderProgram, index, this.blockPoint)
-//            GPUState.context.bindBuffer(GPUState.context.UNIFORM_BUFFER, null)
+    void UniformBuffer::bindWithShader(Shader *shader) {
+        shader->bind();
+        GLuint index = glGetUniformBlockIndex(shader->getProgram(), blockName);
+        glUniformBlockBinding(shader->getProgram(), index, blockPoint);
+        glBindBuffer(GL_UNIFORM_BUFFER, 0);
     }
 
-    void UBO::init(const char *blockName, UBODataDTO *data) {
+    class UniformBuffer *UniformBuffer::init(const char *bN, std::vector<UBODataDTO> &data) {
+        this->blockName = bN;
+
         int bufferSize = calculate(data);
-        size_t quantity = sizeof(data) / sizeof(UBODataDTO);
+        size_t quantity = data.size() / sizeof(UBODataDTO);
 
         for (int i = 0; i < quantity; i++) {
             items[data[i].name] = data[i].offset;
         }
 
-        this->blockName = blockName;
         blockPoint = blockPointIncrement;
         blockPointIncrement += 1;
 
@@ -111,5 +112,7 @@ namespace PEngine {
         glBufferData(GL_UNIFORM_BUFFER, bufferSize * sizeof(float), &data[0], GL_DYNAMIC_DRAW);
         glBindBuffer(GL_UNIFORM_BUFFER, 0);
         glBindBufferBase(GL_UNIFORM_BUFFER, blockPoint, buffer);
+
+        return this;
     }
 }
