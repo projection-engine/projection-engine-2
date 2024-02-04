@@ -31,8 +31,6 @@ set(FILE_PATHS
         src/engine/util/GPUUtil.h
         src/engine/util/ShaderUtil.cpp
         src/engine/util/ShaderUtil.h
-        src/ui/editor/FS.cpp
-        src/ui/editor/FS.h
         src/engine/services/world/ComponentFactory.cpp
         src/engine/services/world/ComponentFactory.h
         src/engine/enum/ComponentType.h
@@ -74,8 +72,8 @@ set(FILE_PATHS
 
         src/engine/services/resource/dto/FBOTextureDTO.h
 
-        src/engine/services/resource/core/UBO.cpp
-        src/engine/services/resource/core/UBO.h
+        src/engine/services/resource/core/UniformBuffer.cpp
+        src/engine/services/resource/core/UniformBuffer.h
 
         src/engine/services/resource/dto/UBODataDTO.h
         src/engine/enum/UBOType.h
@@ -87,8 +85,8 @@ set(FILE_PATHS
 
         src/engine/services/resource/core/AbstractResource.h
         src/engine/enum/StaticResource.h
-        src/engine/services/resource/core/FBO.cpp
-        src/engine/services/resource/core/FBO.h
+        src/engine/services/resource/core/FrameBuffer.cpp
+        src/engine/services/resource/core/FrameBuffer.h
         src/engine/services/resource/core/Mesh.cpp
         src/engine/services/resource/core/Mesh.h
         src/engine/services/resource/core/Shader.cpp

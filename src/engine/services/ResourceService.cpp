@@ -1,43 +1,55 @@
-#include "glad/glad.h"
 #include "ResourceService.h"
 #include "../../util/structures/Map.cpp"
-#include "resource/core/Mesh.h"
+#include "resource/core/Shader.h"
+#include "../enum/StaticShader.h"
+#include "resource/StaticMeshFactory.h"
+#include "resource/StaticFBOFactory.h"
+#include "resource/StaticTextureFactory.h"
+#include "resource/StaticShaderFactory.h"
+#include "resource/StaticUBOFactory.h"
+#include "../Engine.h"
 
 namespace PEngine {
-    void ResourceService::registerResource(AbstractResource *resource, StaticResource id) {
-        CONSOLE_WARN("Creating {0}", std::to_string(id))
-        if (staticResources.has(id)) {
-            CONSOLE_ERROR("Static util already exists {0}", std::to_string(id))
-            return;
-        }
-        staticResources.set(id, resource);
-    }
-
     bool ResourceService::hasResource(const std::string &id) {
-        return dynamicResources.has(id);
+        return dynamicResources.count(id);
     }
 
     bool ResourceService::hasResource(StaticResource id) {
-        return staticResources.has(id);
+        return staticResources.count(id);
     }
 
     void ResourceService::registerResource(AbstractResource *resource, const char *id) {
         CONSOLE_WARN("Creating {0}", id)
-        if (dynamicResources.has(id)) {
+        if (hasResource(id)) {
             CONSOLE_ERROR("Dynamic util already exists {0}", id)
             return;
         }
-        dynamicResources.set(id, resource);
+        dynamicResources[id] = resource;
     }
 
     void ResourceService::deleteResource(const std::string &id) {
         CONSOLE_WARN("Deleting {0}", id)
-        if (!dynamicResources.has(id)) {
+        if (!hasResource(id)) {
             CONSOLE_ERROR("Dynamic util doesn't exists {0}", id)
             return;
         }
-        AbstractResource *pResource = dynamicResources.get(id);
+        AbstractResource *pResource = dynamicResources[id];
         delete pResource;
-        dynamicResources.deleteKey(id);
+        dynamicResources.erase(id);
+    }
+
+    void ResourceService::deleteResource(StaticResource id) {
+        if (hasResource(id)) {
+            delete staticResources[id];
+            staticResources.erase(id);
+        }
+    }
+
+    void ResourceService::initialize() {
+        GenerateStaticUBOs(this);
+        GenerateStaticShaders(this);
+        GenerateStaticFBOs(this, engine->getViewportWidth(), engine->getViewportHeight());
+        GenerateNoiseTexture(this);
+        GenerateStaticMeshes(this, engine->getFs());
     }
 }

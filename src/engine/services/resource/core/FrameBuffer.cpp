@@ -1,18 +1,18 @@
-#include "FBO.h"
+#include "FrameBuffer.h"
 #include "glad/glad.h"
 #include "../../ResourceService.h"
 #include "../../../util/GPUUtil.h"
 
 namespace PEngine {
-    FBO::~FBO() {
+    FrameBuffer::~FrameBuffer() {
         // TODO - DESTROY FRAMEBUFFER, TEXTURES AND RBO
     }
 
-    void FBO::stopMapping() {
+    void FrameBuffer::stopMapping() {
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 
-    class FBO *FBO::depthTexture() {
+    FrameBuffer *FrameBuffer::depthTexture() {
         GPUUtil::createTexture(
                 &depthSampler,
                 width,
@@ -39,7 +39,7 @@ namespace PEngine {
         return this;
     }
 
-    class FBO *FBO::depthTest() {
+    FrameBuffer *FrameBuffer::depthTest() {
         glGenRenderbuffers(1, &rbo);
         glBindRenderbuffer(GL_RENDERBUFFER, rbo);
         glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, width, height);
@@ -47,59 +47,64 @@ namespace PEngine {
         return this;
     }
 
-    class FBO *FBO::texture(FBOTextureDTO *obj) {
+    FrameBuffer *FrameBuffer::texture(FBOTextureDTO &obj) {
         unsigned int newTexture;
 
-        colorsMetadata.push_back(obj);
         glBindFramebuffer(GL_FRAMEBUFFER, fbo);
         glGenTextures(1, &newTexture);
         glBindTexture(GL_TEXTURE_2D, newTexture);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
-                        obj->linear ? GL_LINEAR : GL_NEAREST);
+                        obj.linear ? GL_LINEAR : GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
-                        obj->linear ? GL_LINEAR : GL_NEAREST);
+                        obj.linear ? GL_LINEAR : GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S,
-                        obj->repeat ? GL_REPEAT : GL_CLAMP_TO_EDGE);
+                        obj.repeat ? GL_REPEAT : GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T,
-                        obj->repeat ? GL_REPEAT : GL_CLAMP_TO_EDGE);
+                        obj.repeat ? GL_REPEAT : GL_CLAMP_TO_EDGE);
+        int widthT = obj.w;
+        int heightT = obj.h;
+        if (widthT < 0) widthT = width;
+        if (heightT < 0) heightT = height;
 
         glTexImage2D(
                 GL_TEXTURE_2D,
                 0,
-                obj->precision,
-                obj->w,
-                obj->h,
+                obj.precision,
+                widthT,
+                heightT,
                 0,
-                obj->format,
-                type,
+                obj.format,
+                obj.type,
                 nullptr);
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + obj->attachment, GL_TEXTURE_2D, newTexture, 0);
-
+        GLuint attachment = GL_COLOR_ATTACHMENT0 + obj.attachment;
+        glFramebufferTexture2D(GL_FRAMEBUFFER, attachment, GL_TEXTURE_2D, newTexture, 0);
         colors.push_back(newTexture);
-        attachments[obj->attachment] = GL_COLOR_ATTACHMENT0 + obj->attachment;
-
-        for (unsigned int &attachment: attachments) {
-            glDrawBuffers(1, &attachment);
-        }
+        glDrawBuffers(1, &attachment);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
         return this;
     }
 
-    void FBO::use() {
+    void FrameBuffer::use() {
         glBindFramebuffer(GL_FRAMEBUFFER, fbo);
     }
 
-    void FBO::clear() {
+    void FrameBuffer::clear() {
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     }
 
-    void FBO::startMapping(bool noClearing) {
+    void FrameBuffer::startMapping(bool noClearing) {
         use();
         glViewport(0, 0, width, height);
         if (!noClearing)
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    }
+
+    FrameBuffer *FrameBuffer::setResolution(int w, int h) {
+        FrameBuffer::width = w;
+        FrameBuffer::height = h;
+        return this;
     }
 }
 

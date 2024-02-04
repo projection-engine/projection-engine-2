@@ -11,8 +11,8 @@ namespace PEngine {
     private:
         size_t verticesQuantity;
         size_t trianglesQuantity;
-        std::vector<float> maxBoundingBox;
-        std::vector<float> minBoundingBox;
+        std::vector<float> *maxBoundingBox = nullptr;
+        std::vector<float> *minBoundingBox = nullptr;
         GLuint vao;
         GLuint indexBuffer;
         VBO vertexVBO;
@@ -25,9 +25,12 @@ namespace PEngine {
 
         ~Mesh() override;
 
-        void init(std::vector<float> &vertices, std::vector<float> &indices, std::vector<float> *normals,
-                  std::vector<float> *uvs, std::vector<float> maxBBox,
-                  std::vector<float> minBBox);
+        Mesh *init(std::vector<float> &vertices,
+                   std::vector<float> &indices,
+                   std::vector<float> *normals,
+                   std::vector<float> *uvs,
+                   std::vector<float> *maxBBox,
+                   std::vector<float> *minBBox);
 
         void bindAllResources();
 
@@ -39,13 +42,13 @@ namespace PEngine {
 
         size_t getTrianglesQuantity() const;
 
-        const std::vector<float> &getMaxBoundingBox() const;
+        std::vector<float> *getMaxBoundingBox();
 
-        const std::vector<float> &getMinBoundingBox() const;
+        std::vector<float> *getMinBoundingBox();
 
-        unsigned int getVao() const;
+        GLuint getVao() const;
 
-        unsigned int getIndexBuffer() const;
+        GLuint getIndexBuffer() const;
 
         const VBO &getVertexVbo() const;
 

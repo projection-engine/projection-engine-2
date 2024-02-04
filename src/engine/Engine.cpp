@@ -30,15 +30,19 @@ namespace PEngine {
         systems.run();
     }
 
-    Engine::Engine(AbstractIOService *ioService, AbstractFSService *fsService) {
-        io = ioService;
-        fs = fsService;
+    Engine::Engine(int w, int h, AbstractIOService *ioController, AbstractFSService *fsController) {
+        width = w;
+        height = h;
+
+        io = ioController;
+        fs = fsController;
 
         systems.setEngine(this);
         world.setEngine(this);
         resources.setEngine(this);
         worldLights.setEngine(this);
 
+        resources.initialize();
         systems.initialize();
     }
 
@@ -48,5 +52,13 @@ namespace PEngine {
 
     AbstractFSService *Engine::getFs() const {
         return fs;
+    }
+
+    int Engine::getViewportWidth() const {
+        return width;
+    }
+
+    int Engine::getViewportHeight() const {
+        return height;
     }
 }

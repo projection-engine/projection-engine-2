@@ -11,7 +11,6 @@ import GPU from "@engine-core/core/GPU"
 import StaticEditorMeshes from "./utils/StaticEditorMeshes"
 import FramebufferRepository from "@engine-core/repositories/FramebufferRepository"
 import GizmoState from "./gizmo/util/GizmoState"
-import StaticEditorFBO from "./utils/StaticEditorFBO";
 import ConversionAPI from "@engine-core/services/ConversionAPI";
 import EngineToolsState from "./EngineToolsState";
 import ProjectionEngine from "@lib/ProjectionEngine";
@@ -36,7 +35,6 @@ export default class EngineTools extends AbstractEngineSystem {
         await StaticEditorMeshes.initialize()
         ProjectionEngine.Engine.setEnvironment(ENVIRONMENT.DEV)  
         LineRenderer.initialize()
-        StaticEditorFBO.initialize()
 
         EngineTools.RotationGizmo = new RotationGizmo();
         EngineTools.ScalingGizmo = new ScalingGizmo();

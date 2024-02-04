@@ -4,8 +4,12 @@
 #include "../../util/StringUtils.h"
 
 namespace PEngine {
-    std::string ShaderUtil::RequestShader(AbstractFSService *fs, const std::string& name, bool isPartialShader) {
-        std::string baseShader = isPartialShader ? name : fs->readFile(name);
+    std::string ShaderUtil::RequestShader(AbstractFSService *fs, const std::string &name, bool isPartialShader) {
+        std::string baseShader = name;
+        if (!isPartialShader) {
+            baseShader = fs->readFile(name);
+        }
+
         const std::vector<std::string> &includes = StringUtils::Matches(baseShader, "#include");
         for (const std::string &include: includes) {
             std::string includeCopy = include;

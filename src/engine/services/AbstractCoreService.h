@@ -8,7 +8,7 @@ namespace PEngine {
 
     class AbstractCoreService : public ILoggable {
     protected:
-        Engine *engine;
+        Engine *engine = nullptr;
     public:
         void setEngine(Engine *eg);
 

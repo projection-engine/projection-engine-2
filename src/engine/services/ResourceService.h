@@ -11,17 +11,18 @@ namespace PEngine {
 
     class ResourceService : public AbstractCoreService {
     private:
-        Map<StaticResource, AbstractResource *> staticResources;
-        Map<std::string, AbstractResource *> dynamicResources;
+        std::unordered_map<StaticResource, AbstractResource *> staticResources;
+        std::unordered_map<std::string, AbstractResource *> dynamicResources;
 
-        void registerResource(AbstractResource *resource, StaticResource id);
+        void registerResource(AbstractResource *resource, StaticResource id) {
+            staticResources[id] = resource;
+        }
 
         void registerResource(AbstractResource *resource, const char *id);
 
     public:
-
         template<class T>
-        AbstractResource *createResource(StaticResource id) {
+        T *createResource(StaticResource id) {
             T *newResource = new T;
             newResource->setResourceSystem(this);
             registerResource(newResource, id);
@@ -29,7 +30,7 @@ namespace PEngine {
         }
 
         template<class T>
-        AbstractResource *createResource(const char *id) {
+        T *createResource(const char *id) {
             T *newResource = new T;
             newResource->setResourceSystem(this);
             registerResource(newResource, id);
@@ -38,12 +39,12 @@ namespace PEngine {
 
         template<class T>
         T *getResource(const std::string &id) {
-            return (T *) dynamicResources.get(id);
+            return (T *) dynamicResources[id];
         }
 
         template<class T>
         T *getResource(StaticResource id) {
-            return (T *) staticResources.get(id);
+            return (T *) staticResources[id];
         }
 
         bool hasResource(const std::string &id);
@@ -51,6 +52,10 @@ namespace PEngine {
         bool hasResource(StaticResource id);
 
         void deleteResource(const std::string &id);
+
+        void deleteResource(StaticResource id);
+
+        void initialize();
     };
 
 }

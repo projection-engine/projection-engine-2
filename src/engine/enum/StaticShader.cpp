@@ -1,0 +1,49 @@
+#include "StaticShader.h"
+
+namespace PEngine{
+    std::string StaticShader::SPRITE_FRAG = "./SPRITE.frag";
+    std::string StaticShader::SPRITE_VERTEX = "./SPRITE.vert";
+    std::string StaticShader::QUAD_VERTEX = "./QUAD.vert";
+    std::string StaticShader::LENS_POST_PROCESSING_FRAG = "./LENS_POST_PROCESSING.frag";
+    std::string StaticShader::SSAO = "./SSAO.frag";
+    std::string StaticShader::BOX_BLUR_FRAG = "./BOX-BLUR.frag";
+    std::string StaticShader::FXAA_FRAG = "./FRAME_COMPOSITION.frag";
+    std::string StaticShader::BRIGHTNESS_FILTER_FRAG = "./BRIGHTNESS_FILTER.frag";
+    std::string StaticShader::SSGI = "./SSGI.frag";
+    std::string StaticShader::CUBEMAP = "./CUBEMAP.vert";
+    std::string StaticShader::PREFILTERED_MAP = "./PREFILTERED_MAP.frag";
+    std::string StaticShader::IRRADIANCE_MAP = "./IRRADIANCE_MAP.frag";
+    std::string StaticShader::MOTION_BLUR_FRAG = "./MOTION_BLUR.frag";
+    std::string StaticShader::GAUSSIAN_FRAG = "./GAUSSIAN.frag";
+    std::string StaticShader::UPSAMPLING_TEND_FRAG = "./UPSAMPLE_TENT.glsl";
+    std::string StaticShader::BOKEH_FRAG = "./BOKEH.frag";
+    std::string StaticShader::BILATERAL_BLUR = "./BILATERAL_BLUR.glsl";
+    std::string StaticShader::BILINEAR_DOWNSCALE = "./BILINEAR_DOWNSCALE.glsl";
+    std::string StaticShader::TO_SCREEN = "./TO_SCREEN.frag";
+    std::string StaticShader::V_BUFFER_VERT = "./V_BUFFER.vert";
+    std::string StaticShader::V_BUFFER_FRAG = "./V_BUFFER.frag";
+    std::string StaticShader::OMNIDIRECTIONAL_SHADOWS = "./OMNIDIRECTIONAL_SHADOWS.frag";
+    std::string StaticShader::SHADOWS_VERTEX = "./SHADOWS.vert";
+    std::string StaticShader::DIRECTIONAL_SHADOWS = "./DIRECTIONAL_SHADOWS.frag";
+    std::string StaticShader::ATMOSPHERE_FRAG = "./ATMOSPHERE.frag";
+    std::string StaticShader::ICONS_SPRITE_VERT = "./ICONS_SPRITE.vert";
+    std::string StaticShader::ICONS_SPRITE_TO_DEPTH_VERT = "./ICONS_SPRITE_TO_DEPTH.vert";
+    std::string StaticShader::ICONS_SPRITE_FRAG = "./ICONS_SPRITE.frag";
+    std::string StaticShader::ICONS_SPRITE_TO_DEPTH_FRAG = "./ICONS_SPRITE_TO_DEPTH.frag";
+    std::string StaticShader::LINE_VERT = "./LINE.vert";
+    std::string StaticShader::LINE_FRAG = "./LINE.frag";
+    std::string StaticShader::GIZMO_TO_DEPTH_VERT = "./GIZMO_TO_DEPTH.vert";
+    std::string StaticShader::GIZMO_TO_DEPTH_FRAG = "./GIZMO_TO_DEPTH.frag";
+    std::string StaticShader::GIZMO_VERT = "./GIZMO.vert";
+    std::string StaticShader::GIZMO_FRAG = "./GIZMO.frag";
+    std::string StaticShader::WIREFRAME_VERT = "./WIREFRAME.vert";
+    std::string StaticShader::WIREFRAME_FRAG = "./WIREFRAME.frag";
+    std::string StaticShader::ROTATION_GIZMO_VERT = "./ROTATION_GIZMO.vert";
+    std::string StaticShader::ROTATION_GIZMO_FRAG = "./ROTATION_GIZMO.frag";
+    std::string StaticShader::GRID_VERT = "./GRID.vert";
+    std::string StaticShader::GRID_FRAG = "./GRID.frag";
+    std::string StaticShader::SILHOUETTE_VERT = "./SILHOUETTE.vert";
+    std::string StaticShader::SILHOUETTE_FRAG = "./SILHOUETTE.frag";
+    std::string StaticShader::MESH_MAP_VERT = "./MESH_MAP.vert";
+    std::string StaticShader::MESH_MAP_FRAG = "./MESH_MAP.frag";
+}

@@ -36,7 +36,9 @@ namespace PEngine {
     }
 
     void Runner::initiate() {
-        engine = new Engine(new IOController, new FSController);
+        int w, h;
+        WindowRepository::getDesktopResolution(w, h);
+        engine = new Engine(w, h, new IOController, new FSController);
     }
 
     void Runner::destroyContext() {
