@@ -19,10 +19,7 @@ export default class LightComponent extends Component {
 
 	_props = LIGHT_PROPS
 
-	// -------------- GLOBAL --------------
-	_color = [255, 255, 255]
-	fixedColor = [1, 1, 1]
-	_type = LIGHT_TYPES.DIRECTIONAL
+
 	get type() {
 		return this._type
 	}
@@ -34,6 +31,10 @@ export default class LightComponent extends Component {
 			WorldLights.packageLights(false, true)
 	}
 
+
+	_color = [255, 255, 255]
+	fixedColor = [1, 1, 1]
+	_type = LIGHT_TYPES.DIRECTIONAL
 	hasSSS = false
 	shadowBias = .0001
 	shadowSamples = 3
@@ -41,26 +42,19 @@ export default class LightComponent extends Component {
 	zFar = 10000
 	cutoff = 50
 	shadowAttenuationMinDistance = 50
-
-	// -------------- NOT DIRECTIONAL --------------
 	attenuation = [0, 0]
 	smoothing = .5
-
-	// -------------- SPOTLIGHT --------------
 	radius = 45
-
-	// -------------- DIRECTIONAL --------------
 	size = 35
 	atlasFace = [0, 0]
 	__lightView = mat4.create()
 	__lightProjection = mat4.create()
-	// -------------- AREA --------------
 	areaRadius = 1
 	planeAreaWidth = 1
 	planeAreaHeight = 1
-
-	// -------------- GLOBAL --------------
 	_intensity = 1
+	_shadowMap = true
+
 	get intensity() {
 		return this._intensity
 	}
@@ -80,7 +74,6 @@ export default class LightComponent extends Component {
 		this.fixedColor = [this._color[0] * this.intensity / 255, this._color[1] * this.intensity / 255, this._color[2] * this.intensity / 255]
 	}
 
-	_shadowMap = true
 	get shadowMap() {
 		return this._shadowMap
 	}

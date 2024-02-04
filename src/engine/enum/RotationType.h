@@ -1,0 +1,14 @@
+#ifndef PROJECTION_ROTATIONTYPE_H
+#define PROJECTION_ROTATIONTYPE_H
+namespace PEngine {
+    enum RotationType {
+        ROTATION_QUATERNION,
+        ROTATION_EULER_XYZ,
+        ROTATION_EULER_XZY,
+        ROTATION_EULER_YXZ,
+        ROTATION_EULER_YZX,
+        ROTATION_EULER_ZXY,
+        ROTATION_EULER_ZYX,
+    };
+}
+#endif

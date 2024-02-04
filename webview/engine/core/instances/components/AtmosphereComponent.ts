@@ -24,7 +24,7 @@ export default class AtmosphereComponent extends Component {
 	}
 
 	_elapsedTime = 0
-	#sunDirection = <vec3>[0, 1, 1]
+	_sunDirection = <vec3>[0, 1, 1]
 	maxSamples = 10
 	mieHeight = 1000
 	rayleighHeight = 8000
@@ -37,12 +37,12 @@ export default class AtmosphereComponent extends Component {
 	threshold = 0
 
 	get sunDirection() {
-		return this.#sunDirection
+		return this._sunDirection
 	}
 
 	set elapsedTime(data) {
 		this._elapsedTime = data
-		vec3.normalize(this.#sunDirection, [Math.sin(this._elapsedTime), Math.cos(this._elapsedTime), 1.0])
+		vec3.normalize(this._sunDirection, [Math.sin(this._elapsedTime), Math.cos(this._elapsedTime), 1.0])
 		if (this.entity?.active) {
 			this.entity.needsLightUpdate = true
 			WorldLights.packageLights(true, true)
@@ -53,6 +53,15 @@ export default class AtmosphereComponent extends Component {
 		return this._elapsedTime
 	}
 
+	static 	setElapsedTime(data: number, component: AtmosphereComponent) {
+		component._elapsedTime = data
+		vec3.normalize(component._sunDirection, [Math.sin(component._elapsedTime), Math.cos(component._elapsedTime), 1.0])
+		if (component.entity?.active) {
+			component.entity.needsLightUpdate = true
+			WorldLights.packageLights(true, true)
+		}
+	}
+
 
 	// 0  [0][0]  1  [0][1] 2  [0][2] 3  [0][3]
 	// 4  [1][0]  5  [1][1] 6  [1][2] 7  [1][3]
@@ -60,9 +69,9 @@ export default class AtmosphereComponent extends Component {
 	// 12 [3][0]  13 [3][1] 14 [3][2] 15 [3][3]
 
 	static bindResources(matrix: mat4, component: AtmosphereComponent) {
-		matrix[0] = component.#sunDirection[0]
-		matrix[1] = component.#sunDirection[1]
-		matrix[2] = component.#sunDirection[2]
+		matrix[0] = component._sunDirection[0]
+		matrix[1] = component._sunDirection[1]
+		matrix[2] = component._sunDirection[2]
 		matrix[3] = component.betaRayleigh[0] * 263157
 		matrix[4] = component.betaRayleigh[1] * 74074
 		matrix[5] = component.betaRayleigh[2] * 30211

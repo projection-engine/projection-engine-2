@@ -19,20 +19,18 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-80] C++ engine static resources&#10;-Fixing  shader compilation&#10;- Changing opengl version to 330 core">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-81] C++ engine: camera system">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/Engine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/Engine.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/Engine.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/Engine.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/runtime/CameraSystem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/runtime/CameraSystem.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/runtime/CameraSystem.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/runtime/CameraSystem.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/CameraService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/CameraService.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/resource/core/UniformBuffer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/UniformBuffer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/resource/core/UniformBuffer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/UniformBuffer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/MovementComponent.cpp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/MovementComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/MovementComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/runtime/CameraSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/CameraSystem.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/core/WorldLights.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/core/WorldLights.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/AtmosphereComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/AtmosphereComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/CullingComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/CullingComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/LightComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/LightComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/MeshComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/MeshComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/Movable.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/Movable.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/RigidBodyComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/RigidBodyComponent.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,15 +52,15 @@
         <option value="WorldOutlinerView" />
         <option value="WorldEntity" />
         <option value="WorldOptions" />
-        <option value="TypeScript File" />
         <option value="shader-template" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="80-c-engine-static-resources-initialization" />
+        <entry key="$PROJECT_DIR$" value="81-c-engine-systems" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -142,9 +140,9 @@
     "Shell Script.copy-files.executor": "Run",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "81-c-engine-systems",
+    "git-widget-placeholder": "84-c-engine-components",
     "js.last.introduce.type": "CONST",
-    "last_opened_file_path": "C:/Users/russi/WebstormProjects/projection-engine-2/test/core",
+    "last_opened_file_path": "C:/Users/russi/WebstormProjects/projection-engine-2/src/engine/services/world/components",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -169,6 +167,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\engine\services\world\components" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\test\core" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -193,11 +192,6 @@
     </option>
   </component>
   <component name="RunManager" selected="CMake Debug.projectioncmake">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Run all" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="build" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_CLASS="[RUN_ALL]" TEST_METHOD="Run all" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -208,6 +202,11 @@
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="Should restore circular dependency" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
@@ -368,23 +367,8 @@
       <workItem from="1706984753768" duration="3000" />
       <workItem from="1706994302513" duration="4292000" />
       <workItem from="1707039304628" duration="2800000" />
-      <workItem from="1707042191619" duration="8374000" />
-    </task>
-    <task id="LOCAL-00025" summary="[STD-27] Abstract singleton&#10;- Removing AbstractSingleton &#10;- Moving static classes to singleton instances  on the Engine class">
-      <option name="closed" value="true" />
-      <created>1704561908724</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1704561908724</updated>
-    </task>
-    <task id="LOCAL-00026" summary="[STD-35] Removing static members from Engine">
-      <option name="closed" value="true" />
-      <created>1704566913253</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1704566913253</updated>
+      <workItem from="1707042191619" duration="9803000" />
+      <workItem from="1707070919185" duration="4136000" />
     </task>
     <task id="LOCAL-00027" summary="[STD-37] Dependency injection&#10;- Adding path aliases &#10;- Fixing singleton ref errors">
       <option name="closed" value="true" />
@@ -762,7 +746,23 @@
       <option name="project" value="LOCAL" />
       <updated>1707045625200</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="[STD-81] C++ engine: camera system">
+      <option name="closed" value="true" />
+      <created>1707052240530</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1707052240530</updated>
+    </task>
+    <task id="LOCAL-00075" summary="[STD-81] C++ engine: camera system">
+      <option name="closed" value="true" />
+      <created>1707052247285</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1707052247285</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -786,7 +786,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-53] Camera refactoring&#10;- Removing camera notification decoder" />
     <MESSAGE value="[STD-53] Camera refactoring&#10;- Finishing camera refactoring&#10;- Refactoring engine files" />
     <MESSAGE value="[STD-56] Creating serialization architecture" />
     <MESSAGE value="[STD-56] Improving serialization architecture&#10;- Added support for circular dependencies&#10;- Improved tests for serialization" />
@@ -811,7 +810,8 @@
     <MESSAGE value="[STD-80] C++ engine static resources&#10;- Primitive util" />
     <MESSAGE value="[STD-80] C++ engine static resources&#10;- Fixing FBO&#10;- Adding editor tools shaders&#10;- Fixing static shader initialization" />
     <MESSAGE value="[STD-80] C++ engine static resources&#10;-Fixing  shader compilation&#10;- Changing opengl version to 330 core" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-80] C++ engine static resources&#10;-Fixing  shader compilation&#10;- Changing opengl version to 330 core" />
+    <MESSAGE value="[STD-81] C++ engine: camera system" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-81] C++ engine: camera system" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

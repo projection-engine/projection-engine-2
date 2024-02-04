@@ -15,6 +15,7 @@ export default class CullingComponent extends Component{
 	_screenDoorEffectDistanceMultiplier = .5
 	_distance = 100
 	_distanceCulling = false
+	occlusionCulling = false
 
 	get screenDoorEffectDistanceMultiplier(){
 		return this._screenDoorEffectDistanceMultiplier
@@ -45,7 +46,6 @@ export default class CullingComponent extends Component{
 	get screenDoorEnabled(){
 		return this.entity.__cullingMetadata[5] === 1
 	}
-	occlusionCulling:boolean
 }
 
 RepositoryService.serializable(CullingComponent)
