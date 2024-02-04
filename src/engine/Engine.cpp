@@ -27,6 +27,10 @@ namespace PEngine {
 
 
     void Engine::run() {
+        auto end = std::chrono::high_resolution_clock::now();
+        long long endC = std::chrono::time_point_cast<std::chrono::microseconds>(end).time_since_epoch().count();
+        elapsed = endC - elapsed;
+
         systems.run();
     }
 

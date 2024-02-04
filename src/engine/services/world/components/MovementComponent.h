@@ -12,7 +12,6 @@ namespace PEngine {
         glm::vec3 translation;
         glm::vec3 scale;
         glm::vec4 rotation;
-
     };
 
 }

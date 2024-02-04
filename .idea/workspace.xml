@@ -19,12 +19,20 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-80] C++ engine static resources&#10;- Fixing FBO&#10;- Adding editor tools shaders&#10;- Fixing static shader initialization">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-80] C++ engine static resources&#10;-Fixing  shader compilation&#10;- Changing opengl version to 330 core">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/resource/core/Shader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/Shader.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/resource/core/Shader.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/Shader.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/resource/static/direct_shadows.fs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/resource/static/direct_shadows.vs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/Engine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/Engine.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/Engine.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/Engine.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/runtime/CameraSystem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/runtime/CameraSystem.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/runtime/CameraSystem.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/runtime/CameraSystem.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/CameraService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/CameraService.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/resource/core/UniformBuffer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/UniformBuffer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/resource/core/UniformBuffer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/resource/core/UniformBuffer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/MovementComponent.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/MovementComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/MovementComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/runtime/CameraSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/runtime/CameraSystem.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +62,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="78-c-render-loop" />
+        <entry key="$PROJECT_DIR$" value="80-c-engine-static-resources-initialization" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -134,7 +142,7 @@
     "Shell Script.copy-files.executor": "Run",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "80-c-engine-static-resources-initialization",
+    "git-widget-placeholder": "81-c-engine-systems",
     "js.last.introduce.type": "CONST",
     "last_opened_file_path": "C:/Users/russi/WebstormProjects/projection-engine-2/test/core",
     "node.js.detected.package.eslint": "true",
@@ -360,15 +368,7 @@
       <workItem from="1706984753768" duration="3000" />
       <workItem from="1706994302513" duration="4292000" />
       <workItem from="1707039304628" duration="2800000" />
-      <workItem from="1707042191619" duration="3331000" />
-    </task>
-    <task id="LOCAL-00024" summary="[STD-27] Abstract singleton&#10;- Changing all stores to be accessed via the ProjectionEngine singleton">
-      <option name="closed" value="true" />
-      <created>1704550718453</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1704550718453</updated>
+      <workItem from="1707042191619" duration="8374000" />
     </task>
     <task id="LOCAL-00025" summary="[STD-27] Abstract singleton&#10;- Removing AbstractSingleton &#10;- Moving static classes to singleton instances  on the Engine class">
       <option name="closed" value="true" />
@@ -754,7 +754,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707044829901</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="[STD-80] C++ engine static resources&#10;-Fixing  shader compilation&#10;- Changing opengl version to 330 core">
+      <option name="closed" value="true" />
+      <created>1707045625200</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1707045625200</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -778,7 +786,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-33] Engine refactoring: systems&#10;- Removing console.log&#10;- changing singletons map to reference class name instead of class type" />
     <MESSAGE value="[STD-53] Camera refactoring&#10;- Removing camera notification decoder" />
     <MESSAGE value="[STD-53] Camera refactoring&#10;- Finishing camera refactoring&#10;- Refactoring engine files" />
     <MESSAGE value="[STD-56] Creating serialization architecture" />
@@ -803,7 +810,8 @@
     <MESSAGE value="[STD-80] C++ engine static resources&#10;- Using service for registration of resources" />
     <MESSAGE value="[STD-80] C++ engine static resources&#10;- Primitive util" />
     <MESSAGE value="[STD-80] C++ engine static resources&#10;- Fixing FBO&#10;- Adding editor tools shaders&#10;- Fixing static shader initialization" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-80] C++ engine static resources&#10;- Fixing FBO&#10;- Adding editor tools shaders&#10;- Fixing static shader initialization" />
+    <MESSAGE value="[STD-80] C++ engine static resources&#10;-Fixing  shader compilation&#10;- Changing opengl version to 330 core" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-80] C++ engine static resources&#10;-Fixing  shader compilation&#10;- Changing opengl version to 330 core" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -822,6 +830,11 @@
           <url>file://$PROJECT_DIR$/src/engine/services/AbstractFSService.h</url>
           <line>11</line>
           <option name="timeStamp" value="64" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/engine/runtime/CameraSystem.cpp</url>
+          <line>101</line>
+          <option name="timeStamp" value="67" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/webview/lib/FSService.ts</url>

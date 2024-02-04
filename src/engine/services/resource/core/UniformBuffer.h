@@ -1,6 +1,7 @@
 #ifndef PROJECTION_UNIFORMBUFFER_H
 #define PROJECTION_UNIFORMBUFFER_H
 
+#include "glad/glad.h"
 #include "AbstractResource.h"
 #include "../dto/UBODataDTO.h"
 #include <vector>
@@ -17,6 +18,9 @@ namespace PEngine {
         int blockPoint = -1;
         const char *blockName = nullptr;
         static int blockPointIncrement;
+
+        static int calculate(std::vector<UBODataDTO> &data);
+
     public:
         explicit UniformBuffer() : AbstractResource(ResourceType::UBO) {}
 
@@ -28,12 +32,11 @@ namespace PEngine {
 
         void unbind();
 
-        void updateData(const std::string &name, std::vector<float> data);
+        void updateData(const std::string &name, std::vector<float> &data);
 
-        void updateBuffer(std::vector<float> data);
+        static void updateBuffer(std::vector<float> &data);
 
-    private:
-        static int calculate(std::vector<UBODataDTO> &data);
+        static void updateBuffer(float data[]);
 
     };
 
