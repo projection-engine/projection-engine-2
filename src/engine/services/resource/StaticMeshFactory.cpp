@@ -3,6 +3,8 @@
 #include "../AbstractFSService.h"
 #include "nlohmann/json.hpp"
 #include "core/Mesh.h"
+#include "../../util/PrimitiveUtil.h"
+#include "../ResourceService.h"
 
 namespace PEngine {
     std::vector<float> FillVector(nlohmann::json &object) {
@@ -13,54 +15,46 @@ namespace PEngine {
         return vec;
     }
 
-    void GenerateStaticMeshes(AbstractFSService *fs, std::unordered_map<StaticResource, AbstractResource *> &rMap) {
+    void CreateMesh(nlohmann::json &object, Mesh *instance) {
+        std::vector<float> vertices = FillVector(object["vertices"]);
+        std::vector<float> indices = FillVector(object["indices"]);
+        std::vector<float> normals = FillVector(object["normals"]);
+        std::vector<float> uvs = FillVector(object["uvs"]);
+        const std::vector<float> &minMax = PrimitiveUtil::ComputeBoundingBox(vertices);
+        return instance->init(
+                vertices,
+                indices,
+                &normals,
+                &uvs,
+                nullptr,
+                nullptr
+        );
+    }
+
+    void GenerateStaticMeshes(ResourceService *service, AbstractFSService *fs) {
         std::string jsonData = fs->readFile("STATIC_MESHES.json");
         nlohmann::json json = nlohmann::json::parse(jsonData);
 
+
+        CreateMesh(json["SPHERE"], service->createResource<Mesh>(StaticResource::MESH_SPHERE));
+        CreateMesh(json["CUBE"], service->createResource<Mesh>(StaticResource::MESH_CUBE));
+        CreateMesh(json["CYLINDER"], service->createResource<Mesh>(StaticResource::MESH_CYLINDER));
+        CreateMesh(json["PLANE"], service->createResource<Mesh>(StaticResource::MESH_PLANE));
+
         nlohmann::json QUAD = json["QUAD"];
-        nlohmann::json SPHERE = json["SPHERE"];
-        nlohmann::json CUBE = json["CUBE"];
-        nlohmann::json CYLINDER = json["CYLINDER"];
-        nlohmann::json PLANE = json["PLANE"];
-//        nlohmann::json CUBE_LINEAR;
-        rMap[StaticResource::MESH_SPHERE] = (new Mesh())->init(
-                FillVector(SPHERE["vertices"]),
-                FillVector(SPHERE["indices"]),
-                FillVector(SPHERE["normals"]),
-                FillVector(SPHERE["uvs"]),
-                nullptr,
-                nullptr
-        );
-        rMap[StaticResource::MESH_CUBE] = (new Mesh())->init(
-                FillVector(CUBE["vertices"]),
-                FillVector(CUBE["indices"]),
-                FillVector(CUBE["normals"]),
-                FillVector(CUBE["uvs"]),
-                nullptr,
-                nullptr
-        );
-        rMap[StaticResource::MESH_CYLINDER] = (new Mesh())->init(
-                FillVector(CYLINDER["vertices"]),
-                FillVector(CYLINDER["indices"]),
-                FillVector(CYLINDER["normals"]),
-                FillVector(CYLINDER["uvs"]),
-                nullptr,
-                nullptr
-        );
-        rMap[StaticResource::MESH_PLANE] = (new Mesh())->init(
-                FillVector(PLANE["vertices"]),
-                FillVector(PLANE["indices"]),
-                FillVector(PLANE["normals"]),
-                FillVector(PLANE["uvs"]),
-                nullptr,
-                nullptr
-        );
-        rMap[StaticResource::MESH_QUAD] = (new Mesh())->init(
-                FillVector(QUAD["vertices"]),
-                FillVector(QUAD["indices"]),
-                nullptr,
-                nullptr
-        );
+        std::vector<float> vertices = FillVector(QUAD["vertices"]);
+        std::vector<float> indices = FillVector(QUAD["indices"]);
+        service->createResource<Mesh>(StaticResource::MESH_QUAD)
+                ->init(
+                        vertices,
+                        indices,
+                        nullptr,
+                        nullptr,
+                        nullptr,
+                        nullptr
+                );
+
+        //        nlohmann::json CUBE_LINEAR;
 //        rMap[StaticResource::MESH_cubeBuffer] = new VertexBuffer(0, new Float32Array(CUBE_LINEAR), GPU.context.ARRAY_BUFFER, 3, GPU.context.FLOAT, false, undefined, 0)
     }
 }

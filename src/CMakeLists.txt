@@ -23,6 +23,8 @@ add_executable(projection main.cpp ${SRC_PATHS}
         engine/services/resource/StaticUBOFactory.h
         engine/services/resource/StaticTextureFactory.cpp
         engine/services/resource/StaticTextureFactory.h
+        engine/util/PrimitiveUtil.cpp
+        engine/util/PrimitiveUtil.h
 )
 
 target_link_libraries(projection PRIVATE ${COMMON_LIBRARIES})

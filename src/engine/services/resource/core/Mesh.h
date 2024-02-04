@@ -42,13 +42,13 @@ namespace PEngine {
 
         size_t getTrianglesQuantity() const;
 
-        const std::vector<float> &getMaxBoundingBox() const;
+        std::vector<float> *getMaxBoundingBox();
 
-        const std::vector<float> &getMinBoundingBox() const;
+        std::vector<float> *getMinBoundingBox();
 
-        unsigned int getVao() const;
+        GLuint getVao() const;
 
-        unsigned int getIndexBuffer() const;
+        GLuint getIndexBuffer() const;
 
         const VBO &getVertexVbo() const;
 

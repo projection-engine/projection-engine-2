@@ -25,7 +25,7 @@ namespace PEngine {
         explicit ResourceService();
 
         template<class T>
-        AbstractResource *createResource(StaticResource id) {
+        T *createResource(StaticResource id) {
             T *newResource = new T;
             newResource->setResourceSystem(this);
             registerResource(newResource, id);
@@ -33,7 +33,7 @@ namespace PEngine {
         }
 
         template<class T>
-        AbstractResource *createResource(const char *id) {
+        T *createResource(const char *id) {
             T *newResource = new T;
             newResource->setResourceSystem(this);
             registerResource(newResource, id);
@@ -55,6 +55,8 @@ namespace PEngine {
         bool hasResource(StaticResource id);
 
         void deleteResource(const std::string &id);
+
+        void deleteResource(StaticResource id);
     };
 
 }

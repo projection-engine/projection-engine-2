@@ -12,15 +12,13 @@ namespace PEngine {
     private:
         int width = 640;
         int height = 480;
-        GLuint fbo;
+        GLuint fbo = 0;
         GLuint rbo = 0;
         GLuint depthSampler = 0;
         std::vector<GLuint> colors;
         std::vector<unsigned int> attachments;
     public:
-        explicit FrameBuffer(int w, int h) : AbstractResource(ResourceType::FBO) {
-            width = w;
-            height = h;
+        explicit FrameBuffer() : AbstractResource(ResourceType::FBO) {
             glGenFramebuffers(1, &fbo);
         }
 
@@ -39,6 +37,8 @@ namespace PEngine {
         void use();
 
         void clear();
+
+        FrameBuffer *setResolution(int w, int h);
     };
 
 }

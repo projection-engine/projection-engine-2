@@ -8,7 +8,9 @@
 namespace PEngine {
     class AbstractResource;
 
-    void GenerateStaticUBOs(std::unordered_map<StaticResource, AbstractResource *> &rMap);
+    class ResourceService;
+
+    void GenerateStaticUBOs(ResourceService *service);
 }
 
 #endif

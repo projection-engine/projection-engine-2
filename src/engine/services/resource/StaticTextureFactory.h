@@ -9,7 +9,9 @@ namespace PEngine {
 
     class AbstractResource;
 
-    void GenerateNoiseTexture(std::unordered_map<StaticResource, AbstractResource *> &rMap);
+    class ResourceService;
+
+    void GenerateNoiseTexture(ResourceService *service);
 
 }
 

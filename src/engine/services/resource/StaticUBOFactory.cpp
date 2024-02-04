@@ -5,9 +5,10 @@
 #include "../../definitions.h"
 #include "core/UniformBuffer.h"
 #include "../../enum/StaticUBO.h"
+#include "../ResourceService.h"
 
-namespace PEngine{
-    void GenerateStaticUBOs(std::unordered_map<StaticResource, AbstractResource *> &rMap) {
+namespace PEngine {
+    void GenerateStaticUBOs(ResourceService *service) {
         std::vector<UBODataDTO> lights = {
                 UBODataDTO{"lightPrimaryBuffer", UBOType::MAT4, MAX_LIGHTS},
                 UBODataDTO{"lightSecondaryBuffer", UBOType::MAT4, MAX_LIGHTS},
@@ -74,12 +75,20 @@ namespace PEngine{
                 UBODataDTO{"filmGrainStrength", UBOType::FLOAT},
         };
 
-        rMap[StaticResource::UBO_CAMERA_VIEW] = (new UniformBuffer)->init(StaticUBO::CAMERA_VIEW, cameraView);
-        rMap[StaticResource::UBO_FRAME_COMPOSITION] = (new UniformBuffer)->init(StaticUBO::FRAME_COMPOSITION, frameComposition);
-        rMap[StaticResource::UBO_LENS_PP] = (new UniformBuffer)->init(StaticUBO::LENS_PP, lens);
-        rMap[StaticResource::UBO_SSAO] = (new UniformBuffer)->init(StaticUBO::SSAO, ssao);
-        rMap[StaticResource::UBO_UBER] = (new UniformBuffer)->init(StaticUBO::UBER, uber);
-        rMap[StaticResource::UBO_LIGHTS] = (new UniformBuffer)->init(StaticUBO::LIGHTS, lights);
-        rMap[StaticResource::UBO_CAMERA_PROJECTION] = (new UniformBuffer)->init(StaticUBO::CAMERA_PROJECTION, cameraProjection);
+
+        (service->createResource<UniformBuffer>(StaticResource::UBO_CAMERA_VIEW))
+                ->init(StaticUBO::CAMERA_VIEW, cameraView);
+        (service->createResource<UniformBuffer>(StaticResource::UBO_FRAME_COMPOSITION))
+                ->init(StaticUBO::FRAME_COMPOSITION, frameComposition);
+        (service->createResource<UniformBuffer>(StaticResource::UBO_LENS_PP))
+                ->init(StaticUBO::LENS_PP, lens);
+        (service->createResource<UniformBuffer>(StaticResource::UBO_SSAO))
+                ->init(StaticUBO::SSAO, ssao);
+        (service->createResource<UniformBuffer>(StaticResource::UBO_UBER))
+                ->init(StaticUBO::UBER, uber);
+        (service->createResource<UniformBuffer>(StaticResource::UBO_LIGHTS))
+                ->init(StaticUBO::LIGHTS, lights);
+        (service->createResource<UniformBuffer>(StaticResource::UBO_CAMERA_PROJECTION))
+                ->init(StaticUBO::CAMERA_PROJECTION, cameraProjection);
     }
 }

@@ -7,7 +7,9 @@
 namespace PEngine {
     class AbstractResource;
 
-    void GenerateStaticShaders(std::unordered_map<StaticResource, AbstractResource *> &rMap);
+    class ResourceService;
+
+    void GenerateStaticShaders(ResourceService *service);
 }
 
 #endif

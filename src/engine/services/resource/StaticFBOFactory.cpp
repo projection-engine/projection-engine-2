@@ -2,34 +2,34 @@
 #include "StaticFBOFactory.h"
 #include "dto/FBOTextureDTO.h"
 #include "core/FrameBuffer.h"
+#include "../ResourceService.h"
 
 namespace PEngine {
 
-    void GenerateDirectionalShadowsFBO(
-            int width,
-            int height,
-            std::unordered_map<StaticResource, AbstractResource *> &rMap) {
-        if (rMap.count(StaticResource::FBO_DIRECTIONAL_SHADOWS)) {
-            delete rMap[StaticResource::FBO_DIRECTIONAL_SHADOWS];
-            rMap.erase(StaticResource::FBO_DIRECTIONAL_SHADOWS);
+    void GenerateDirectionalShadowsFBO(ResourceService *service, int width, int height) {
+        if (service->hasResource(StaticResource::FBO_DIRECTIONAL_SHADOWS)) {
+            service->deleteResource(StaticResource::FBO_DIRECTIONAL_SHADOWS);
         }
-        rMap[StaticResource::FBO_DIRECTIONAL_SHADOWS] = (new FrameBuffer(width, height))->depthTexture();
+        service->createResource<FrameBuffer>(StaticResource::FBO_DIRECTIONAL_SHADOWS)
+                ->setResolution(width, height)
+                ->depthTexture();
     }
 
     void GenerateBlurBuffer(
+            ResourceService *service,
             int &w,
             int &h,
             float multiplier,
-            std::unordered_map<StaticResource, AbstractResource *> &rMap,
             FBOTextureDTO &linearTexture,
             StaticResource name) {
         w *= multiplier;
         h *= multiplier;
-        rMap[name] = (new FrameBuffer(w, h))->texture(linearTexture);
+        service->createResource<FrameBuffer>(name)
+                ->setResolution(w, h)
+                ->texture(linearTexture);
     }
 
-    void GenerateStaticFBOs(int width, int height,
-                   std::unordered_map<StaticResource, AbstractResource *> &rMap) {
+    void GenerateStaticFBOs(ResourceService *service, int width, int height) {
         int halfResW = width / 2;
         int halfResH = height / 2;
 
@@ -63,33 +63,52 @@ namespace PEngine {
         ssao.format = GL_RED;
         ssao.type = GL_UNSIGNED_BYTE;
 
-        rMap[StaticResource::FBO_GIZMO] = (new FrameBuffer(width, height))->texture(gizmo)->depthTest();
-        rMap[StaticResource::FBO_VISIBILITY] = (new FrameBuffer(width, height))->texture(visibilityA)->texture(
-                visibilityB)->depthTest();
-        rMap[StaticResource::FBO_POST_PROCESSING_1] = (new FrameBuffer(width, height))->texture(defaultSettings);
-        rMap[StaticResource::FBO_POST_PROCESSING_2] = (new FrameBuffer(width, height))->texture(
-                defaultSettings)->depthTest();
-        rMap[StaticResource::FBO_LENS] = (new FrameBuffer(width, height))->texture(defaultSettings);
-        rMap[StaticResource::FBO_SSGI] = (new FrameBuffer(halfResW, halfResH))->texture(linearTexture);
-        rMap[StaticResource::FBO_SSGI_FALLBACK] = (new FrameBuffer(halfResW, halfResH))->texture(linearTexture);
-        rMap[StaticResource::FBO_SSAO] = (new FrameBuffer(halfResW, halfResH))->texture(ssao);
-        rMap[StaticResource::FBO_SSAO_BLURRED] = (new FrameBuffer(halfResW, halfResH))->texture(ssao);
+        service->createResource<FrameBuffer>(StaticResource::FBO_GIZMO)
+                ->setResolution(width, height)
+                ->texture(gizmo)
+                ->depthTest();
+        service->createResource<FrameBuffer>(StaticResource::FBO_VISIBILITY)
+                ->setResolution(width, height)
+                ->texture(visibilityA)
+                ->texture(visibilityB)
+                ->depthTest();
+        service->createResource<FrameBuffer>(StaticResource::FBO_POST_PROCESSING_1)
+                ->setResolution(width, height)
+                ->texture(defaultSettings);
+        service->createResource<FrameBuffer>(StaticResource::FBO_POST_PROCESSING_2)
+                ->setResolution(width, height)
+                ->texture(defaultSettings)
+                ->depthTest();
+        service->createResource<FrameBuffer>(StaticResource::FBO_LENS)
+                ->setResolution(width, height)
+                ->texture(defaultSettings);
+        service->createResource<FrameBuffer>(StaticResource::FBO_SSGI)
+                ->setResolution(halfResW, halfResH)
+                ->texture(linearTexture);
+        service->createResource<FrameBuffer>(StaticResource::FBO_SSGI_FALLBACK)
+                ->setResolution(halfResW, halfResH)
+                ->texture(linearTexture);
+        service->createResource<FrameBuffer>(StaticResource::FBO_SSAO)
+                ->setResolution(halfResW, halfResH)
+                ->texture(ssao);
+        service->createResource<FrameBuffer>(StaticResource::FBO_SSAO_BLURRED)
+                ->setResolution(halfResW, halfResH)
+                ->texture(ssao);
 
 
         int w = width;
         int h = height;
-        GenerateBlurBuffer(w, h, 0.5, rMap, linearTexture, StaticResource::FBO_DOWNSCALE_1);
-        GenerateBlurBuffer(w, h, 0.5, rMap, linearTexture, StaticResource::FBO_DOWNSCALE_2);
-        GenerateBlurBuffer(w, h, 0.5, rMap, linearTexture, StaticResource::FBO_DOWNSCALE_3);
-        GenerateBlurBuffer(w, h, 0.5, rMap, linearTexture, StaticResource::FBO_DOWNSCALE_4);
-        GenerateBlurBuffer(w, h, 0.5, rMap, linearTexture, StaticResource::FBO_DOWNSCALE_5);
-        GenerateBlurBuffer(w, h, 0.5, rMap, linearTexture, StaticResource::FBO_DOWNSCALE_6);
-        GenerateBlurBuffer(w, h, 0.5, rMap, linearTexture, StaticResource::FBO_DOWNSCALE_7);
+        GenerateBlurBuffer(service, w, h, 0.5, linearTexture, StaticResource::FBO_DOWNSCALE_1);
+        GenerateBlurBuffer(service, w, h, 0.5, linearTexture, StaticResource::FBO_DOWNSCALE_2);
+        GenerateBlurBuffer(service, w, h, 0.5, linearTexture, StaticResource::FBO_DOWNSCALE_3);
+        GenerateBlurBuffer(service, w, h, 0.5, linearTexture, StaticResource::FBO_DOWNSCALE_4);
+        GenerateBlurBuffer(service, w, h, 0.5, linearTexture, StaticResource::FBO_DOWNSCALE_5);
+        GenerateBlurBuffer(service, w, h, 0.5, linearTexture, StaticResource::FBO_DOWNSCALE_6);
+        GenerateBlurBuffer(service, w, h, 0.5, linearTexture, StaticResource::FBO_DOWNSCALE_7);
+        GenerateBlurBuffer(service, w, h, 4, linearTexture, StaticResource::FBO_UPSCALE_1);
+        GenerateBlurBuffer(service, w, h, 4, linearTexture, StaticResource::FBO_UPSCALE_2);
 
-        GenerateBlurBuffer(w, h, 4, rMap, linearTexture, StaticResource::FBO_UPSCALE_1);
-        GenerateBlurBuffer(w, h, 4, rMap, linearTexture, StaticResource::FBO_UPSCALE_2);
-
-        GenerateDirectionalShadowsFBO(width, height, rMap);
+        GenerateDirectionalShadowsFBO(service, width, height);
 
     }
 

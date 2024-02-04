@@ -11,7 +11,9 @@ namespace PEngine {
 
     class AbstractResource;
 
-    void GenerateStaticMeshes(AbstractFSService *fs, std::unordered_map<StaticResource, AbstractResource *> &rMap);
+    class ResourceService;
+
+    void GenerateStaticMeshes(ResourceService *service, AbstractFSService *fs);
 }
 
 #endif

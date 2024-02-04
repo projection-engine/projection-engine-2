@@ -8,12 +8,11 @@
 namespace PEngine {
     class AbstractResource;
 
-    void GenerateDirectionalShadowsFBO(
-            int width,
-            int height,
-            std::unordered_map<StaticResource, AbstractResource *> &rMap);
+    class ResourceService;
 
-    void GenerateStaticFBOs(int width, int height, std::unordered_map<StaticResource, AbstractResource *> &rMap);
+    void GenerateDirectionalShadowsFBO(ResourceService *service, int width, int height);
+
+    void GenerateStaticFBOs(ResourceService *service, int width, int height);
 
 }
 

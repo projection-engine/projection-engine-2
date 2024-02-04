@@ -35,6 +35,7 @@ namespace PEngine {
 
         glBindVertexArray(0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+        return this;
     }
 
     void Mesh::bindAllResources() {
@@ -80,19 +81,19 @@ namespace PEngine {
         return trianglesQuantity;
     }
 
-    const std::vector<float> &Mesh::getMaxBoundingBox() const {
+    std::vector<float> *Mesh::getMaxBoundingBox() {
         return maxBoundingBox;
     }
 
-    const std::vector<float> &Mesh::getMinBoundingBox() const {
+    std::vector<float> *Mesh::getMinBoundingBox() {
         return minBoundingBox;
     }
 
-    unsigned int Mesh::getVao() const {
+    GLuint Mesh::getVao() const {
         return vao;
     }
 
-    unsigned int Mesh::getIndexBuffer() const {
+    GLuint Mesh::getIndexBuffer() const {
         return indexBuffer;
     }
 

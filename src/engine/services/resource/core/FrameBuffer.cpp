@@ -104,5 +104,11 @@ namespace PEngine {
         if (!noClearing)
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
+
+    FrameBuffer *FrameBuffer::setResolution(int w, int h) {
+        FrameBuffer::width = w;
+        FrameBuffer::height = h;
+        return this;
+    }
 }
 

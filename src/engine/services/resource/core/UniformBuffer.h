@@ -13,14 +13,14 @@ namespace PEngine {
     class UniformBuffer : public AbstractResource {
     private:
         std::unordered_map<std::string, long> items;
-        unsigned int buffer;
-        int blockPoint;
-        const char *blockName;
+        GLuint buffer = 0;
+        int blockPoint = -1;
+        const char *blockName = nullptr;
         static int blockPointIncrement;
     public:
-        explicit UniformBuffer() : AbstractResource(ResourceType::UniformBuffer) {}
+        explicit UniformBuffer() : AbstractResource(ResourceType::UBO) {}
 
-        UniformBuffer* init(const char *blockName, std::vector<UBODataDTO> &data);
+        UniformBuffer *init(const char *blockName, std::vector<UBODataDTO> &data);
 
         void bindWithShader(Shader *shader);
 
