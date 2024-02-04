@@ -7,10 +7,10 @@ namespace PEngine {
     struct FBOTextureDTO {
         int w = -1;
         int h = -1;
-        int attachment = 0;
-        int precision = GL_RGBA16F;
-        int format = GL_RGBA;
-        int type = GL_FLOAT;
+        GLuint attachment = 0;
+        GLint precision = GL_RGBA16F;
+        GLint format = GL_RGBA;
+        GLint type = GL_FLOAT;
         bool linear = false;
         bool repeat = false;
 

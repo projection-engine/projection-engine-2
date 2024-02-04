@@ -46,5 +46,26 @@ namespace PEngine {
                 ->init(StaticShader::QUAD_VERTEX, StaticShader::UPSAMPLING_TEND_FRAG, false);
         service->createResource<Shader>(StaticResource::SHADER_ATMOSPHERE)
                 ->init(StaticShader::QUAD_VERTEX, StaticShader::ATMOSPHERE_FRAG, false);
+
+        service->createResource<Shader>(StaticResource::SHADER_ICON)
+                ->init(StaticShader::ICONS_SPRITE_VERT, StaticShader::ICONS_SPRITE_FRAG, false);
+        service->createResource<Shader>(StaticResource::SHADER_ICON_DEPTH)
+                ->init(StaticShader::ICONS_SPRITE_TO_DEPTH_VERT, StaticShader::ICONS_SPRITE_TO_DEPTH_FRAG, false);
+        service->createResource<Shader>(StaticResource::SHADER_LINE)
+                ->init(StaticShader::LINE_VERT, StaticShader::LINE_FRAG, false);
+        service->createResource<Shader>(StaticResource::SHADER_TO_DEPTH)
+                ->init(StaticShader::GIZMO_TO_DEPTH_VERT, StaticShader::GIZMO_TO_DEPTH_FRAG, false);
+        service->createResource<Shader>(StaticResource::SHADER_GIZMO)
+                ->init(StaticShader::GIZMO_VERT, StaticShader::GIZMO_FRAG, false);
+        service->createResource<Shader>(StaticResource::SHADER_WIREFRAME)
+                ->init(StaticShader::WIREFRAME_VERT, StaticShader::WIREFRAME_FRAG, false);
+        service->createResource<Shader>(StaticResource::SHADER_ROTATION_GIZMO)
+                ->init(StaticShader::ROTATION_GIZMO_VERT, StaticShader::ROTATION_GIZMO_FRAG, false);
+        service->createResource<Shader>(StaticResource::SHADER_GRID)
+                ->init(StaticShader::GRID_VERT, StaticShader::GRID_FRAG, false);
+        service->createResource<Shader>(StaticResource::SHADER_OUTLINE)
+                ->init(StaticShader::SILHOUETTE_VERT, StaticShader::SILHOUETTE_FRAG, false);
+        service->createResource<Shader>(StaticResource::SHADER_SILHOUETTE)
+                ->init(StaticShader::MESH_MAP_VERT, StaticShader::MESH_MAP_FRAG, false);
     }
 }

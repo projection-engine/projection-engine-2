@@ -31,8 +31,6 @@ set(FILE_PATHS
         src/engine/util/GPUUtil.h
         src/engine/util/ShaderUtil.cpp
         src/engine/util/ShaderUtil.h
-        src/ui/editor/FS.cpp
-        src/ui/editor/FS.h
         src/engine/services/world/ComponentFactory.cpp
         src/engine/services/world/ComponentFactory.h
         src/engine/enum/ComponentType.h

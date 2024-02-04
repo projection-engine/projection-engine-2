@@ -42,6 +42,7 @@ namespace PEngine {
         resources.setEngine(this);
         worldLights.setEngine(this);
 
+        resources.initialize();
         systems.initialize();
     }
 

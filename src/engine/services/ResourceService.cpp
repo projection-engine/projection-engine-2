@@ -38,18 +38,18 @@ namespace PEngine {
         dynamicResources.erase(id);
     }
 
-    ResourceService::ResourceService() {
-        GenerateStaticUBOs(this);
-        GenerateStaticShaders(this);
-        GenerateStaticFBOs(this, engine->getViewportWidth(), engine->getViewportHeight());
-        GenerateNoiseTexture(this);
-        GenerateStaticMeshes(this, engine->getFs());
-    }
-
     void ResourceService::deleteResource(StaticResource id) {
         if (hasResource(id)) {
             delete staticResources[id];
             staticResources.erase(id);
         }
+    }
+
+    void ResourceService::initialize() {
+        GenerateStaticUBOs(this);
+        GenerateStaticShaders(this);
+        GenerateStaticFBOs(this, engine->getViewportWidth(), engine->getViewportHeight());
+        GenerateNoiseTexture(this);
+        GenerateStaticMeshes(this, engine->getFs());
     }
 }

@@ -74,16 +74,12 @@ namespace PEngine {
                 heightT,
                 0,
                 obj.format,
-                type,
+                obj.type,
                 nullptr);
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + obj.attachment, GL_TEXTURE_2D, newTexture, 0);
-
+        GLuint attachment = GL_COLOR_ATTACHMENT0 + obj.attachment;
+        glFramebufferTexture2D(GL_FRAMEBUFFER, attachment, GL_TEXTURE_2D, newTexture, 0);
         colors.push_back(newTexture);
-        attachments[obj.attachment] = GL_COLOR_ATTACHMENT0 + obj.attachment;
-
-        for (unsigned int &attachment: attachments) {
-            glDrawBuffers(1, &attachment);
-        }
+        glDrawBuffers(1, &attachment);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
         return this;
     }

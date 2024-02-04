@@ -6,7 +6,8 @@
 namespace PEngine {
 
     class FSController : public AbstractFSService{
-
+    public:
+        std::string readFile(const std::string &path) override;
     };
 
 }

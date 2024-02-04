@@ -20,8 +20,8 @@ namespace PEngine {
         std::vector<float> indices = FillVector(object["indices"]);
         std::vector<float> normals = FillVector(object["normals"]);
         std::vector<float> uvs = FillVector(object["uvs"]);
-        const std::vector<float> &minMax = PrimitiveUtil::ComputeBoundingBox(vertices);
-        return instance->init(
+        std::vector<float> minMax = PrimitiveUtil::ComputeBoundingBox(vertices);
+        instance->init(
                 vertices,
                 indices,
                 &normals,

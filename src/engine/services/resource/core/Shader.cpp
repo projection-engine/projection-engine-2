@@ -31,7 +31,7 @@ namespace PEngine {
         GLint isCompiled;
         glGetShaderiv(shader, GL_COMPILE_STATUS, &isCompiled);
         if (isCompiled != GL_TRUE) {
-            GLsizei log_length = 0;
+            GLsizei log_length;
             GLchar message[1024];
             glGetShaderInfoLog(shader, 1024, &log_length, message);
             CONSOLE_ERROR("ERROR COMPILING SHADER: {0}", *message)

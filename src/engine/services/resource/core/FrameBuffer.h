@@ -16,7 +16,6 @@ namespace PEngine {
         GLuint rbo = 0;
         GLuint depthSampler = 0;
         std::vector<GLuint> colors;
-        std::vector<unsigned int> attachments;
     public:
         explicit FrameBuffer() : AbstractResource(ResourceType::FBO) {
             glGenFramebuffers(1, &fbo);
