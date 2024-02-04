@@ -49,6 +49,8 @@ namespace PEngine {
         int getViewportWidth() const;
 
         int getViewportHeight() const;
+
+        long long int elapsed = 0;
     };
 }
 

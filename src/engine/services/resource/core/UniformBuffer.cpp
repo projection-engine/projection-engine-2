@@ -71,11 +71,15 @@ namespace PEngine {
         return offset;
     }
 
-    void UniformBuffer::updateBuffer(std::vector<float> data) {
+    void UniformBuffer::updateBuffer(std::vector<float> &data) {
         glBufferSubData(GL_UNIFORM_BUFFER, 0, data.size() * sizeof(float), &data[0]);
     }
 
-    void UniformBuffer::updateData(const std::string &name, std::vector<float> data) {
+    void UniformBuffer::updateBuffer(float data[]) {
+        glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(data), data);
+    }
+
+    void UniformBuffer::updateData(const std::string &name, std::vector<float> &data) {
         glBufferSubData(GL_UNIFORM_BUFFER, items[name], data.size() * sizeof(float), &data[0]);
     }
 

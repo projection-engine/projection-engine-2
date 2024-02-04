@@ -27,6 +27,27 @@ set(COMMON_LIBRARIES
 )
 
 set(FILE_PATHS
+
+        src/engine/enum/StaticShader.h
+        src/engine/enum/StaticShader.cpp
+        src/engine/services/resource/StaticMeshFactory.cpp
+        src/engine/services/resource/StaticMeshFactory.h
+        src/engine/util/NoiseTextureDTO.h
+        src/engine/enum/StaticUBO.cpp
+        src/engine/enum/StaticUBO.h
+        src/engine/services/resource/StaticFBOFactory.cpp
+        src/engine/services/resource/StaticFBOFactory.h
+        src/engine/services/resource/StaticShaderFactory.cpp
+        src/engine/services/resource/StaticShaderFactory.h
+        src/engine/services/resource/StaticUBOFactory.cpp
+        src/engine/services/resource/StaticUBOFactory.h
+        src/engine/services/resource/StaticTextureFactory.cpp
+        src/engine/services/resource/StaticTextureFactory.h
+        src/engine/util/PrimitiveUtil.cpp
+        src/engine/util/PrimitiveUtil.h
+        src/engine/util/MathUtil.cpp
+        src/engine/util/MathUtil.h
+
         src/engine/util/GPUUtil.cpp
         src/engine/util/GPUUtil.h
         src/engine/util/ShaderUtil.cpp
@@ -103,7 +124,6 @@ set(FILE_PATHS
         src/engine/runtime/CameraTrackerSystem.h
 
         src/engine/services/world/AbstractComponent.cpp
-        src/engine/services/world/components/MovementComponent.cpp
         src/engine/services/world/components/MovementComponent.h
 
         src/util/event/IEventTarget.h

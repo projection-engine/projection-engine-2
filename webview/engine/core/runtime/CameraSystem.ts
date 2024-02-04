@@ -80,10 +80,9 @@ export default class CameraSystem extends AbstractEngineSystem {
         const c = this.camera;
         mat4.fromRotationTranslation(c.invViewMatrix, c.currentRotation, c.currentTranslation)
         mat4.invert(c.viewMatrix, c.invViewMatrix)
-        const m = c.invViewMatrix
-        c.position[0] = m[12]
-        c.position[1] = m[13]
-        c.position[2] = m[14]
+        c.position[0] = c.invViewMatrix[12]
+        c.position[1] = c.invViewMatrix[13]
+        c.position[2] = c.invViewMatrix[14]
 
         mat4.multiply(c.viewProjectionMatrix, c.projectionMatrix, c.viewMatrix)
         this.copyToUBOMatrix()

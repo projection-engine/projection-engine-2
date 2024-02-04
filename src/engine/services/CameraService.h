@@ -11,24 +11,22 @@
 
 namespace PEngine {
 
-    class CameraService : public AbstractCoreService {
-    public:
+    struct CameraService : public AbstractCoreService {
         CameraProjectionType projectionType = CameraProjectionType::PERSPECTIVE;
         glm::vec3 currentTranslation;
         glm::vec4 currentRotation;
         glm::vec3 position;
-        glm::tmat4x4<float> viewMatrix;
-        glm::tmat4x4<float> projectionMatrix;
-        glm::tmat4x4<float> invViewMatrix;
-        glm::tmat4x4<float> invProjectionMatrix;
-        glm::tmat4x4<float> viewProjectionMatrix;
-        glm::tmat4x4<float> previousViewProjectionMatrix;
-        glm::tmat4x4<float> staticViewMatrix;
-        glm::tmat4x4<float> skyboxProjectionMatrix;
-        glm::tmat4x4<float> invSkyboxProjectionMatrix;
+        glm::mat4 viewMatrix;
+        glm::mat4 projectionMatrix;
+        glm::mat4 invViewMatrix;
+        glm::mat4 invProjectionMatrix;
+        glm::mat4 viewProjectionMatrix;
+        glm::mat4 previousViewProjectionMatrix;
+        glm::mat4 staticViewMatrix;
+        glm::mat4 skyboxProjectionMatrix;
+        glm::mat4 invSkyboxProjectionMatrix;
         glm::vec3 translationBuffer;
         glm::vec4 rotationBuffer;
-
 
         bool dynamicAspectRatio = false;
         bool hasChangedProjection = false;
