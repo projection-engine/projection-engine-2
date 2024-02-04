@@ -11,8 +11,8 @@ namespace PEngine {
         program = glCreateProgram();
         vertex = GLSL_VERSION + ("\n" + ShaderUtil::RequestShader(fs, vertex, isPartialShader));
         fragment = GLSL_VERSION + ("\n" + ShaderUtil::RequestShader(fs, fragment, isPartialShader));
-        vertexShader = compileShader(vertex, GL_VERTEX_SHADER);
-        fragmentShader = compileShader(fragment, GL_FRAGMENT_SHADER);
+        vertexShader = compileShader(vertex.c_str(), true);
+        fragmentShader = compileShader(fragment.c_str(), false);
 
         glAttachShader(program, vertexShader);
         glAttachShader(program, fragmentShader);
@@ -22,21 +22,31 @@ namespace PEngine {
         return this;
     }
 
-    GLuint Shader::compileShader(std::string &code, int type) {
-        GLuint shader = glCreateShader(type);
-        const char *codeConst = code.c_str();
-        glShaderSource(shader, 1, &codeConst, nullptr);
+    GLuint Shader::compileShader(const char *code, bool isVertex) {
+        GLuint shader = glCreateShader(isVertex ? GL_VERTEX_SHADER : GL_FRAGMENT_SHADER);
+        glShaderSource(shader, 1, &code, nullptr);
         glCompileShader(shader);
 
-        GLint isCompiled;
-        glGetShaderiv(shader, GL_COMPILE_STATUS, &isCompiled);
-        if (isCompiled != GL_TRUE) {
-            GLsizei log_length;
-            GLchar message[1024];
-            glGetShaderInfoLog(shader, 1024, &log_length, message);
-            CONSOLE_ERROR("ERROR COMPILING SHADER: {0}", *message)
-        }
+        checkCompileErrors(shader, isVertex ? "VERTEX" : "FRAGMENT");
         return shader;
+    }
+
+    void Shader::checkCompileErrors(GLuint shader, std::string type) {
+        GLint success;
+        GLchar infoLog[1024];
+        if (type != "PROGRAM") {
+            glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+            if (!success) {
+                glGetShaderInfoLog(shader, 1024, nullptr, infoLog);
+                CONSOLE_ERROR("ERROR COMPILING SHADER: {0} \n {1}", type, infoLog)
+            }
+        } else {
+            glGetProgramiv(shader, GL_LINK_STATUS, &success);
+            if (!success) {
+                glGetProgramInfoLog(shader, 1024, nullptr, infoLog);
+                CONSOLE_ERROR("ERROR COMPILING SHADER: {0} \n {1}", type, infoLog)
+            }
+        }
     }
 
     void Shader::bind() {
