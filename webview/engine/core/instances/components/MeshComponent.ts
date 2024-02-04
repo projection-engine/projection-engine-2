@@ -23,10 +23,11 @@ export default class MeshComponent extends Component {
 	castsShadows = true
 	_meshID?: string
 	_materialID?: string
-
 	#texturesInUse = {}
 	_mappedUniforms = {}
 	#materialUniforms: MaterialUniform[] = []
+	contributeToProbes = true
+	overrideMaterialUniforms = false
 
 	updateMaterialUniformValue(key: string, value: any) {
 		this._mappedUniforms[key] = value
@@ -35,9 +36,6 @@ export default class MeshComponent extends Component {
 	get mappedUniforms() {
 		return this._mappedUniforms
 	}
-
-	contributeToProbes = true
-	overrideMaterialUniforms = false
 
 	updateComponentReferences() {
 		if (this._meshID)
@@ -129,10 +127,6 @@ export default class MeshComponent extends Component {
 
 	get hasMesh(): boolean {
 		return this._meshID !== undefined
-	}
-
-	get texturesInUse() {
-		return this.#texturesInUse
 	}
 
 	get hasMaterial(): boolean {

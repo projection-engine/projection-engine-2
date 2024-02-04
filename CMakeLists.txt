@@ -28,6 +28,22 @@ set(COMMON_LIBRARIES
 
 set(FILE_PATHS
 
+        src/engine/services/world/components/MeshComponent.h
+        src/engine/services/world/components/LightComponent.h
+        src/engine/services/world/components/AtmosphereComponent.h
+        src/engine/services/world/components/CameraComponent.h
+        src/engine/services/world/components/CullingComponent.h
+        src/engine/services/world/components/DecalComponent.h
+        src/engine/services/world/components/LightProbeComponent.h
+        src/engine/services/world/components/ColliderComponent.h
+        src/engine/services/world/components/RigidBodyComponent.h
+        src/engine/services/world/components/SpriteComponent.h
+        src/engine/enum/AtmosphereRenderingType.h
+        src/engine/enum/ColliderType.h
+        src/engine/enum/MaterialRenderingType.h
+        src/engine/enum/LightType.h
+        src/engine/enum/RotationType.h
+
         src/engine/enum/StaticShader.h
         src/engine/enum/StaticShader.cpp
         src/engine/services/resource/StaticMeshFactory.cpp

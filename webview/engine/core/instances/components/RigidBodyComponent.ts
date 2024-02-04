@@ -16,13 +16,13 @@ export default class RigidBodyComponent extends Component {
 	mass = 1
 	drag = 0
 	inertia: [number, number, number] = [0, 0, 0]
+	initialized =false
 
 	#motionState?: btDefaultMotionState
 	#body?: btRigidBody
 	#transform?: btTransform
 	#inertia?: btVector3
 
-	initialized =false
 
 	get body(): btRigidBody | undefined {
 		return this.#body

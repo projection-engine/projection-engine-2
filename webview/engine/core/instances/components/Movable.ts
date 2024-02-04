@@ -36,14 +36,12 @@ export default class Movable extends Serializable {
 		return 6
 	}
 
-	#hasWorkerBound = false
 	_rotationQuaternion = <Float32Array>ArrayBufferAPI.allocateVector(4, 0, true, true, false)
 	_rotationQuaternionFinal = <Float32Array>ArrayBufferAPI.allocateVector(4, 0, true, true, false)
 	_translation = <Float32Array>ArrayBufferAPI.allocateVector(3, 0, false, true, false)
 	_scaling = <Float32Array>ArrayBufferAPI.allocateVector(3, 1, false, true, false)
 	_rotationEuler = <Float32Array>ArrayBufferAPI.allocateVector(3, Movable.ROTATION_QUATERNION, false, true, false)
 	_rotationType = <Float32Array>ArrayBufferAPI.allocateVector(1, 0, false, true, false)
-
 	pivotPoint = <Float32Array>ArrayBufferAPI.allocateVector(3, 0, false, true, false)
 	matrix = <Float32Array>ArrayBufferAPI.allocateMatrix(4, true)
 	baseTransformationMatrix = <Float32Array>ArrayBufferAPI.allocateMatrix(4, true)
@@ -54,14 +52,6 @@ export default class Movable extends Serializable {
 	lockedTranslation = false
 	lockedScaling = false
 	absoluteTranslation = <Float32Array>ArrayBufferAPI.allocateVector(3, 0, false, true, false)
-
-	get hasWorkerBound() {
-		return this.#hasWorkerBound
-	}
-
-	set hasWorkerBound(data) {
-		this.#hasWorkerBound = data
-	}
 
 	get isCulled() {
 		return this.__cullingMetadata[3] === 1

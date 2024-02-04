@@ -29,14 +29,11 @@ export default class WorldLights extends AbstractEngineCoreService {
 
 
     static packageLights(keepOld?: boolean, force?: boolean) {
-        const self = WorldLights.get()
-
         if (force) {
             WorldLights.#package(keepOld)
             return
         }
-        clearTimeout(self.lightTimeout)
-        self.lightTimeout = setTimeout(() => WorldLights.#package(keepOld), 50)
+        WorldLights.#package(keepOld)
     }
 
     static get(): WorldLights {
