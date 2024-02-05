@@ -5,23 +5,33 @@
 
 namespace PEngine {
     void WorldService::removeEntity(std::uint32_t id) {
-        if (!entities.has(id))
+        if (!entities.count(id))
             return;
         CONSOLE_LOG("Removing entity")
-        Entity *entity = entities.get(id);
-        worldReg.destroy(entity->getEntity());
-        entities.deleteKey(id);
-        delete entity;
+        Entity &entity = entities.at(id);
+        worldReg.destroy(entity.getEntity());
+        entities.erase(id);
     }
 
     Entity *WorldService::addEntity() {
-        auto *pEntity = new Entity(worldReg.create());
-        entities.set(static_cast<unsigned int>(pEntity->getEntity()), pEntity);
-        return pEntity;
+        entt::entity ent = worldReg.create();
+        auto entId = static_cast<unsigned int>(ent);
+        entities.emplace(entId, Entity());
+        Entity &entity = entities.at(entId);
+        entity.initialize(ent);
+
+        auto parentId = static_cast<unsigned int>(root.getEntity());
+        childParent[entId] = parentId;
+        if (!parentChildren.count(parentId)) {
+            parentChildren[parentId] = {};
+        }
+        parentChildren[parentId].push_back(entId);
+
+        return &entity;
     }
 
     bool WorldService::hasEntity(std::uint32_t uuid) {
-        return entities.has(uuid);
+        return entities.count(uuid);
     }
 
     entt::registry &WorldService::getRegistry() {
@@ -34,6 +44,7 @@ namespace PEngine {
 
     WorldService::WorldService() {
         componentFactory.setService(this);
+        root.initialize(worldReg.create());
     }
 
     AbstractComponent &WorldService::getComponent(ComponentType name, Entity *ent) {
@@ -41,12 +52,7 @@ namespace PEngine {
     }
 
     bool WorldService::hasComponent(ComponentType name, Entity *ent) {
-        try {
-            getComponent(name, ent);
-            return true;
-        } catch (std::invalid_argument &ex) {
-            return false;
-        }
+        return componentFactory.hasComponent(name, ent);
     }
 
     void WorldService::removeComponent(ComponentType name, Entity *ent) {

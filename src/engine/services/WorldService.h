@@ -3,23 +3,23 @@
 #define PROJECTION_WORLDSERVICE_H
 
 #include "entt/entt.hpp"
-#include "../../util/debug/ILoggable.h"
-#include "../../util/structures/Map.h"
 #include "AbstractCoreService.h"
 #include "../enum/ComponentType.h"
 #include "world/ComponentFactory.h"
+#include "world/Entity.h"
+#include <unordered_map>
 
 namespace PEngine {
-
-    class Entity;
-
     class AbstractComponent;
 
     class WorldService : public AbstractCoreService {
     private:
         ComponentFactory componentFactory;
         entt::registry worldReg;
-        Map<std::uint32_t, Entity *> entities;
+        Entity root;
+        std::unordered_map<std::uint32_t, Entity> entities;
+        std::unordered_map<std::uint32_t, std::uint32_t> childParent;
+        std::unordered_map<std::uint32_t, std::vector<std::uint32_t>> parentChildren;
 
     public:
 

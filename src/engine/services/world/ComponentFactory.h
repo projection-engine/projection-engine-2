@@ -22,6 +22,8 @@ namespace PEngine {
         AbstractComponent &getComponent(ComponentType name, Entity *ent);
 
         void removeComponent(ComponentType name, Entity *ent);
+
+        bool hasComponent(ComponentType name, Entity *ent);
     };
 
 }

@@ -43,4 +43,13 @@ namespace PEngine {
             }
         }
     }
+
+    bool ComponentFactory::hasComponent(ComponentType name, Entity *ent) {
+        try {
+            getComponent(name, ent);
+            return true;
+        } catch (std::invalid_argument &ex) {
+            return false;
+        }
+    }
 }
