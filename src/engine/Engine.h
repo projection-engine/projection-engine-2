@@ -25,8 +25,9 @@ namespace PEngine {
         SystemService systems;
         AbstractIOService *io = nullptr;
         AbstractFSService *fs = nullptr;
+        bool initialized = false;
     public:
-        explicit Engine(int w, int h, AbstractIOService *ioController, AbstractFSService *fsController);
+        void initialize(int w, int h, AbstractIOService *ioController, AbstractFSService *fsController);
 
         WorldService *getWorldService();
 

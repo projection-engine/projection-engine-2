@@ -34,7 +34,12 @@ namespace PEngine {
         systems.run();
     }
 
-    Engine::Engine(int w, int h, AbstractIOService *ioController, AbstractFSService *fsController) {
+    void Engine::initialize(int w, int h, AbstractIOService *ioController, AbstractFSService *fsController) {
+        if (initialized) {
+            return;
+        }
+
+        initialized = true;
         state.viewportWidth = w;
         state.viewportHeight = h;
 

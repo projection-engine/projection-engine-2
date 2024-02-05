@@ -8,8 +8,8 @@ endforeach ()
 
 string(REPLACE "src/" "" SRC_PATHS "${FILE_PATHS}")
 add_executable(projection main.cpp ${SRC_PATHS}
-        engine/services/RuntimeState.cpp
-        engine/services/RuntimeState.h)
+        engine/services/world/WorldRegistry.cpp
+        engine/services/world/WorldRegistry.h)
 
 target_link_libraries(projection PRIVATE ${COMMON_LIBRARIES})
 

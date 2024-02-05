@@ -2,10 +2,11 @@
 #include "AbstractComponent.h"
 #include "components/MovementComponent.h"
 #include "../WorldService.h"
+#include "../world/WorldRegistry.h"
 
 namespace PEngine {
     void ComponentFactory::addComponent(ComponentType name, Entity *ent) {
-        entt::registry &reg = service->getRegistry();
+        entt::registry &reg = service->getRegistry()->getWorldReg();
         entt::entity entity = ent->getEntity();
         switch (name) {
             case MOVEMENT: {
@@ -18,7 +19,7 @@ namespace PEngine {
     }
 
     AbstractComponent &ComponentFactory::getComponent(ComponentType name, Entity *ent) {
-        entt::registry &reg = service->getRegistry();
+        entt::registry &reg = service->getRegistry()->getWorldReg();
         entt::entity entity = ent->getEntity();
 
         switch (name) {
@@ -34,7 +35,7 @@ namespace PEngine {
     }
 
     void ComponentFactory::removeComponent(ComponentType name, Entity *ent) {
-        entt::registry &reg = service->getRegistry();
+        entt::registry &reg = service->getRegistry()->getWorldReg();
         entt::entity entity = ent->getEntity();
         switch (name) {
             case MOVEMENT: {

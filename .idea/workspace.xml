@@ -19,16 +19,18 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-84] C++ engine: components">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-86] C++ engine ui: hierarchy&#10;- Adding engine state&#10;- Removing pointers from World&#10;- Adding new fields to Entity">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/RuntimeState.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/RuntimeState.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/Engine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/Engine.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/Engine.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/Engine.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/engine/services/WorldService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/WorldService.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/engine/services/WorldService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/WorldService.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/ComponentFactory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/ComponentFactory.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/ComponentFactory.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/ComponentFactory.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/Entity.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/Entity.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/Entity.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/Entity.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/editor/basic/Runner.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/basic/Runner.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/editor/basic/Runner.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/basic/Runner.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,7 +154,7 @@
     "npm.sdev.executor": "Run",
     "npm.test.executor": "Run",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.keymap",
+    "settings.editor.selected.configurable": "CMakeSettings",
     "structure.view.defaults.are.configured": "true",
     "ts.external.directory.path": "C:\\Users\\russi\\WebstormProjects\\projection-engine-2\\webview\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
@@ -190,6 +192,11 @@
     </option>
   </component>
   <component name="RunManager" selected="CMake Debug.projectioncmake">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Run all" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="build" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_CLASS="[RUN_ALL]" TEST_METHOD="Run all" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -362,15 +369,7 @@
       <workItem from="1707039304628" duration="2800000" />
       <workItem from="1707042191619" duration="9803000" />
       <workItem from="1707070919185" duration="4466000" />
-      <workItem from="1707170120892" duration="1713000" />
-    </task>
-    <task id="LOCAL-00028" summary="[STD-37] Dependency injection&#10;- Removing unused files&#10;- Adding backbone for new dependency injection architecture">
-      <option name="closed" value="true" />
-      <created>1704577002578</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1704577002578</updated>
+      <workItem from="1707170120892" duration="6722000" />
     </task>
     <task id="LOCAL-00029" summary="[STD-37] Dependency injection&#10;- Making stores injectable&#10;- Creating inject method for variables">
       <option name="closed" value="true" />
@@ -756,7 +755,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707076477925</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="[STD-86] C++ engine ui: hierarchy&#10;- Adding engine state&#10;- Removing pointers from World&#10;- Adding new fields to Entity">
+      <option name="closed" value="true" />
+      <created>1707172485864</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1707172485865</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -780,7 +787,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-56] Creating serialization architecture" />
     <MESSAGE value="[STD-56] Improving serialization architecture&#10;- Added support for circular dependencies&#10;- Improved tests for serialization" />
     <MESSAGE value="[STD-60] Project service&#10;- Creating save option&#10;- Save as option&#10;- Open option&#10;- Making stores serializable" />
     <MESSAGE value="[STD-52] Engine refactoring&#10;- Moving serializable registration to classes declaration" />
@@ -805,7 +811,8 @@
     <MESSAGE value="[STD-80] C++ engine static resources&#10;-Fixing  shader compilation&#10;- Changing opengl version to 330 core" />
     <MESSAGE value="[STD-81] C++ engine: camera system" />
     <MESSAGE value="[STD-84] C++ engine: components" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-84] C++ engine: components" />
+    <MESSAGE value="[STD-86] C++ engine ui: hierarchy&#10;- Adding engine state&#10;- Removing pointers from World&#10;- Adding new fields to Entity" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-86] C++ engine ui: hierarchy&#10;- Adding engine state&#10;- Removing pointers from World&#10;- Adding new fields to Entity" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -1,41 +1,26 @@
 #include "WorldService.h"
 #include "../../util/structures/Map.cpp"
+#include "entt/entt.hpp"
 #include "world/Entity.h"
 #include "world/AbstractComponent.h"
+#include "world/WorldRegistry.h"
 
 namespace PEngine {
     void WorldService::removeEntity(std::uint32_t id) {
-        if (!entities.count(id))
-            return;
-        CONSOLE_LOG("Removing entity")
-        Entity &entity = entities.at(id);
-        worldReg.destroy(entity.getEntity());
-        entities.erase(id);
+         worldRegistry->removeEntity(id);
     }
 
     Entity *WorldService::addEntity() {
-        entt::entity ent = worldReg.create();
-        auto entId = static_cast<unsigned int>(ent);
-        entities.emplace(entId, Entity());
-        Entity &entity = entities.at(entId);
-        entity.initialize(ent);
-
-        auto parentId = static_cast<unsigned int>(root.getEntity());
-        childParent[entId] = parentId;
-        if (!parentChildren.count(parentId)) {
-            parentChildren[parentId] = {};
-        }
-        parentChildren[parentId].push_back(entId);
-
-        return &entity;
+        return worldRegistry->addEntity();
     }
 
-    bool WorldService::hasEntity(std::uint32_t uuid) {
-        return entities.count(uuid);
+    bool WorldService::hasEntity(std::uint32_t id) {
+        return worldRegistry->hasEntity(id);
+
     }
 
-    entt::registry &WorldService::getRegistry() {
-        return worldReg;
+    WorldRegistry *WorldService::getRegistry() {
+        return worldRegistry;
     }
 
     void WorldService::addComponent(ComponentType name, Entity *ent) {
@@ -43,8 +28,8 @@ namespace PEngine {
     }
 
     WorldService::WorldService() {
+        worldRegistry = new WorldRegistry;
         componentFactory.setService(this);
-        root.initialize(worldReg.create());
     }
 
     AbstractComponent &WorldService::getComponent(ComponentType name, Entity *ent) {
