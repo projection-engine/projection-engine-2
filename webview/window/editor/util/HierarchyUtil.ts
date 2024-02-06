@@ -1,4 +1,3 @@
-import HierarchyToRenderElement from "../views/hierarchy/template/ToRenderElement"
 import LocalizationEN from "@enums/LocalizationEN"
 import Entity from "@engine-core/instances/Entity"
 import EngineStateService from "@services/EngineStateService"
@@ -7,6 +6,7 @@ import HotKeysController from "@lib/HotKeysController";
 import getViewportHotkeys from "../templates/get-viewport-hotkeys";
 import SelectionStore from "@lib/stores/SelectionStore";
 import ProjectionEngine from "@lib/ProjectionEngine";
+import {HierarchyToRenderElement} from "../views/hierarchy/hierarchy-definitions";
 
 export default class HierarchyUtil {
     static buildTree(openTree: Record<string, boolean>, search: string, filteredComponent: string): HierarchyToRenderElement[] {

@@ -11,7 +11,7 @@
     import ProjectionEngine from "@lib/ProjectionEngine";
 
     export let entity: Entity
-    export let lockedEntity: string
+    export let lockedEntity: number
     export let isOpen: boolean
     export let isOnSearch: boolean
 

@@ -19,18 +19,25 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-86] C++ engine ui: hierarchy&#10;- Adding engine state&#10;- Removing pointers from World&#10;- Adding new fields to Entity">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-86] C++ engine ui: hierarchy&#10;- Creating hierarchy service&#10;- Changing editor window&#10;- Making world as facade class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/Engine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/Engine.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/Engine.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/Engine.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/WorldService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/WorldService.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/WorldService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/WorldService.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/editor/basic/Runner.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/basic/Runner.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/editor/basic/Runner.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/basic/Runner.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/ProjectionEngine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/ProjectionEngine.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/stores/WorldOutlineStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/HierarchyStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/stores/state/WorldOutlineDTO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/stores/state/HierarchyDTO.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/webview/CommunicationService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/webview/CommunicationService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/webview/WebViewService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/webview/WebViewService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/services/EngineStateService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/EngineStateService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/services/ProjectService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/ProjectService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/View.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/View.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/HierarchyUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/HierarchyUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/InspectorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/InspectorUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/WorldOutlineView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/HierarchyView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/EntityBranch.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/EntityBranch.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/EntityBranchWrapper.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/EntityBranchWrapper.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/WorldOutlineHeader.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/HierarchyHeader.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/template/ToRenderElement.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/CameraSettings.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/CameraSettings.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/ui/UIEditorView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/ui/UIEditorView.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,69 +109,69 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "C/C++ File.main.cpp.executor": "Run",
-    "CMake Application.Projection.executor": "Run",
-    "CMake Application.projection.executor": "Debug",
-    "CMake Debug.projection.executor": "Debug",
-    "CMake Debug.projectioncmake.executor": "Debug",
-    "Catch.File-system test.executor": "Debug",
-    "Catch.JSON test.executor": "Run",
-    "Catch.Run all.executor": "Run",
-    "Catch.String util test.executor": "Debug",
-    "Catch.main_test.executor": "Run",
-    "Jest.Should be lazily obtained.executor": "Run",
-    "Jest.Should be the same instance (1).executor": "Run",
-    "Jest.Should be the same instance.executor": "Run",
-    "Jest.Should dump cycle.executor": "Run",
-    "Jest.Should dump data.executor": "Run",
-    "Jest.Should not inject not @Injectable.executor": "Run",
-    "Jest.Should parse nested.executor": "Run",
-    "Jest.Should parse serializable.executor": "Run",
-    "Jest.Should parse.executor": "Run",
-    "Jest.Should prepare ID.executor": "Run",
-    "Jest.Should restore circular dependency.executor": "Run",
-    "Jest.Should restore data.executor": "Run",
-    "Jest.Should serialize nested.executor": "Run",
-    "Jest.Should serialize.executor": "Run",
-    "Jest.Should stringify Serializable.executor": "Run",
-    "Jest.Should stringify.executor": "Run",
-    "Jest.Should trigger global subscriber.executor": "Run",
-    "Jest.Should trigger subscriber with same value.executor": "Run",
-    "Jest.Should unsubscribe.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "Shell Script.copy-files.executor": "Run",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "86-c-engine-ui-hierarchy",
-    "js.last.introduce.type": "CONST",
-    "last_opened_file_path": "C:/Users/russi/WebstormProjects/projection-engine-2/src/engine/services/world/components",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs.jest.jest_package": "C:/Users/russi/WebstormProjects/projection-engine-2/webview/node_modules/jest",
-    "nodejs_package_manager_path": "npm",
-    "npm.bdev.executor": "Run",
-    "npm.dev-build.executor": "Run",
-    "npm.sdev.executor": "Run",
-    "npm.test.executor": "Run",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "CMakeSettings",
-    "structure.view.defaults.are.configured": "true",
-    "ts.external.directory.path": "C:\\Users\\russi\\WebstormProjects\\projection-engine-2\\webview\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;C/C++ File.main.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;CMake Application.Projection.executor&quot;: &quot;Run&quot;,
+    &quot;CMake Application.projection.executor&quot;: &quot;Debug&quot;,
+    &quot;CMake Debug.projection.executor&quot;: &quot;Debug&quot;,
+    &quot;CMake Debug.projectioncmake.executor&quot;: &quot;Debug&quot;,
+    &quot;Catch.File-system test.executor&quot;: &quot;Debug&quot;,
+    &quot;Catch.JSON test.executor&quot;: &quot;Run&quot;,
+    &quot;Catch.Run all.executor&quot;: &quot;Run&quot;,
+    &quot;Catch.String util test.executor&quot;: &quot;Debug&quot;,
+    &quot;Catch.main_test.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should be lazily obtained.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should be the same instance (1).executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should be the same instance.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should dump cycle.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should dump data.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should not inject not @Injectable.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should parse nested.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should parse serializable.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should parse.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should prepare ID.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should restore circular dependency.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should restore data.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should serialize nested.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should serialize.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should stringify Serializable.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should stringify.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should trigger global subscriber.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should trigger subscriber with same value.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should unsubscribe.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;Shell Script.copy-files.executor&quot;: &quot;Run&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;86-c-engine-ui-hierarchy&quot;,
+    &quot;js.last.introduce.type&quot;: &quot;CONST&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/russi/WebstormProjects/projection-engine-2/src/engine/services/world/components&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs.jest.jest_package&quot;: &quot;C:/Users/russi/WebstormProjects/projection-engine-2/webview/node_modules/jest&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.bdev.executor&quot;: &quot;Run&quot;,
+    &quot;npm.dev-build.executor&quot;: &quot;Run&quot;,
+    &quot;npm.sdev.executor&quot;: &quot;Run&quot;,
+    &quot;npm.test.executor&quot;: &quot;Run&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;CMakeSettings&quot;,
+    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\russi\\WebstormProjects\\projection-engine-2\\webview\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "Glsl"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;Glsl&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\engine\services\world\components" />
@@ -192,11 +199,6 @@
     </option>
   </component>
   <component name="RunManager" selected="CMake Debug.projectioncmake">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Run all" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="build" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_CLASS="[RUN_ALL]" TEST_METHOD="Run all" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -207,6 +209,11 @@
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="Should restore circular dependency" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
@@ -369,15 +376,8 @@
       <workItem from="1707039304628" duration="2800000" />
       <workItem from="1707042191619" duration="9803000" />
       <workItem from="1707070919185" duration="4466000" />
-      <workItem from="1707170120892" duration="6722000" />
-    </task>
-    <task id="LOCAL-00029" summary="[STD-37] Dependency injection&#10;- Making stores injectable&#10;- Creating inject method for variables">
-      <option name="closed" value="true" />
-      <created>1704578024745</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1704578024745</updated>
+      <workItem from="1707170120892" duration="7054000" />
+      <workItem from="1707259872759" duration="2442000" />
     </task>
     <task id="LOCAL-00030" summary="[STD-37] Dependency injection&#10;- Making services injectable">
       <option name="closed" value="true" />
@@ -763,7 +763,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707172485865</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="[STD-86] C++ engine ui: hierarchy&#10;- Creating hierarchy service&#10;- Changing editor window&#10;- Making world as facade class">
+      <option name="closed" value="true" />
+      <created>1707177358165</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1707177358165</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -787,7 +795,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-56] Improving serialization architecture&#10;- Added support for circular dependencies&#10;- Improved tests for serialization" />
     <MESSAGE value="[STD-60] Project service&#10;- Creating save option&#10;- Save as option&#10;- Open option&#10;- Making stores serializable" />
     <MESSAGE value="[STD-52] Engine refactoring&#10;- Moving serializable registration to classes declaration" />
     <MESSAGE value="[STD-52] Engine refactoring&#10;- Removing getters from Engine" />
@@ -812,7 +819,8 @@
     <MESSAGE value="[STD-81] C++ engine: camera system" />
     <MESSAGE value="[STD-84] C++ engine: components" />
     <MESSAGE value="[STD-86] C++ engine ui: hierarchy&#10;- Adding engine state&#10;- Removing pointers from World&#10;- Adding new fields to Entity" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-86] C++ engine ui: hierarchy&#10;- Adding engine state&#10;- Removing pointers from World&#10;- Adding new fields to Entity" />
+    <MESSAGE value="[STD-86] C++ engine ui: hierarchy&#10;- Creating hierarchy service&#10;- Changing editor window&#10;- Making world as facade class" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-86] C++ engine ui: hierarchy&#10;- Creating hierarchy service&#10;- Changing editor window&#10;- Making world as facade class" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -3,16 +3,15 @@
     import {onDestroy, onMount} from "svelte"
     import HotKeysController from "@lib/HotKeysController"
     import dragDrop from "@lib/components/drag-drop/drag-drop"
-    import Header from "./components/WorldOutlineHeader.svelte"
+    import Header from "./components/HierarchyHeader.svelte"
     import HierarchyUtil from "../../util/HierarchyUtil"
-    import HierarchyToRenderElement from "./template/ToRenderElement";
     import {InjectVar} from "@lib/Injection";
-    import SelectionStore from "@lib/stores/SelectionStore";
     import LocalizationEN from "@enums/LocalizationEN";
     import ComponentBranch from "./components/ComponentBranch.svelte";
     import EntityTreeBranch from "./components/EntityBranchWrapper.svelte";
     import Icon from "@lib/components/icon/Icon.svelte";
-    import WorldOutlineStore from "@lib/stores/WorldOutlineStore";
+    import {HierarchyEvents, HierarchyToRenderElement} from "./hierarchy-definitions";
+    import WebViewService from "@lib/webview/WebViewService";
 
 
     let ref: HTMLElement
@@ -20,31 +19,29 @@
     let filteredComponent = undefined
     let openTree = {}
     let toRender: HierarchyToRenderElement[] = []
-    let selectedList: string[] = []
-    let lockedEntity: string
+    let selectedList: number[] = []
+    let lockedEntity: number
 
-    const ID = crypto.randomUUID()
     const draggable = dragDrop()
-    const store = InjectVar(WorldOutlineStore)
+    const webViewService = InjectVar(WebViewService)
 
-    const unsubscribe = store.subscribe((data, changed) => {
-        if(changed.includes("openPath")){
-            openTree = {...data.openPath}
-        }
-        fetchHierarchy()
+    const unsubSelection = webViewService.listen(
+        HierarchyEvents.GET_SELECTED_ENTITIES,
+        payload => selectedList = JSON.parse(payload.getPayload())
+    )
+
+    const unsubHierarchy = webViewService.listen(HierarchyEvents.GET_HIERARCHY, payload => {
+            // TODO
+        // toRender = HierarchyUtil.buildTree(openTree, search, filteredComponent)
     })
 
-    const unsubSelection = InjectVar(SelectionStore).subscribe(data => {
-        selectedList = data.array
-        lockedEntity = data.lockedEntity
-    }, ["array", "lockedEntity"])
-
-    function fetchHierarchy() {
-        toRender = HierarchyUtil.buildTree(openTree, search, filteredComponent)
-    }
+    const unsubLockedEntity = webViewService.listen(
+        HierarchyEvents.GET_LOCKED_ENTITY,
+        payload => lockedEntity = JSON.parse(payload.getPayload()).id
+    )
 
     onMount(() => {
-        store.updateHierarchy()
+        webViewService.beam(HierarchyEvents.GET_HIERARCHY)
         HierarchyUtil.initializeView(draggable, ref)
     })
 
@@ -52,24 +49,25 @@
         HotKeysController.unbindAction(ref)
         draggable.onDestroy()
         unsubSelection()
-        unsubscribe()
+        unsubLockedEntity()
+        unsubHierarchy()
     })
 
     $: isOnSearch = search || filteredComponent;
 
     function setSearch(v: string) {
         search = v;
-        fetchHierarchy()
+        webViewService.beam(HierarchyEvents.GET_HIERARCHY)
     }
 
     function setFilteredComponent(v: string) {
         filteredComponent = v;
-        fetchHierarchy()
+        webViewService.beam(HierarchyEvents.GET_HIERARCHY)
     }
 </script>
 
 <Header {setFilteredComponent} {setSearch} {filteredComponent} {search}/>
-<div class="wrapper" id={ID} bind:this={ref}>
+<div class="wrapper"  bind:this={ref}>
     <div class="content" style={toRender.length === 0 ? "background: var(--pj-background-quaternary)" : undefined}>
         {#if toRender.length > 0}
             <VirtualList items={toRender} itemHeight={23} let:item>
@@ -85,7 +83,7 @@
                             {selectedList}
                             {lockedEntity}
                             open={openTree}
-                            updateOpen={() => fetchHierarchy()}
+                            updateOpen={() => webViewService.beam(HierarchyEvents.GET_HIERARCHY)}
                     />
                 {/if}
             </VirtualList>

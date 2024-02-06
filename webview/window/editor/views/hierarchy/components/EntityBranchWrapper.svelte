@@ -11,10 +11,10 @@
     export let depth: number
     export let isOnSearch: boolean
     export let entity: Entity
-    export let open: { [key: string]: boolean }
+    export let open: Record<number, boolean>
     export let updateOpen: GenericVoidFunction
-    export let selectedList: string[]
-    export let lockedEntity: string
+    export let selectedList: number[]
+    export let lockedEntity: number
 
     function onExpand() {
         if (!open[entity.id]) {
@@ -22,7 +22,7 @@
             updateOpen()
         } else {
             delete open[entity.id]
-            EntityQueryService.loopHierarchy(entity, c => delete open[c.id])
+            // EntityQueryService.loopHierarchy(entity, c => delete open[c.id])
             updateOpen()
         }
     }

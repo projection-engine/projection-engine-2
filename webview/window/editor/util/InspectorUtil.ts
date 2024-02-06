@@ -12,7 +12,7 @@ import type Component from "@engine-core/instances/components/Component";
 import Engine from "@engine-core/Engine";
 import IInjectable from "@lib/IInjectable";
 import {Inject, Injectable} from "@lib/Injection";
-import WorldOutlineStore from "@lib/stores/WorldOutlineStore";
+import HierarchyStore from "@lib/stores/HierarchyStore";
 import ToasterService from "@services/ToasterService";
 import SettingsStore from "@lib/stores/SettingsStore";
 
@@ -30,8 +30,8 @@ export default class InspectorUtil extends IInjectable {
     @Inject(Engine)
     static engine: Engine
 
-    @Inject(WorldOutlineStore)
-    static entityHierarchyService: WorldOutlineStore
+    @Inject(HierarchyStore)
+    static entityHierarchyService: HierarchyStore
 
     @Inject(ToasterService)
     static toasterService: ToasterService
