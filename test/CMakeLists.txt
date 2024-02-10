@@ -3,8 +3,8 @@ string(REPLACE "src/" "../src/" FILES_LOCAL "${FILE_PATHS}")
 set(SOURCES
         ${FILES_LOCAL}
 
-        engine/EngineTest.cpp
-        engine/EngineTest.h
+        engine/WorldServiceTest.cpp
+        engine/WorldServiceTest.h
         Tester.cpp
         Tester.h
         core/ListTest.cpp
@@ -25,8 +25,6 @@ set(SOURCES
         ui/store/SampleData.h
         core/FileSystemTest.cpp
         core/FileSystemTest.h
-        core/JSONTest.cpp
-        core/JSONTest.h
         core/StringUtilTest.cpp
         core/StringUtilTest.h
 )

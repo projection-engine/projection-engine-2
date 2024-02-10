@@ -46,11 +46,6 @@ namespace PEngine {
         io = ioController;
         fs = fsController;
 
-        systems.setEngine(this);
-        world.setEngine(this);
-        resources.setEngine(this);
-        worldLights.setEngine(this);
-
         resources.initialize();
         systems.initialize();
     }
@@ -73,5 +68,12 @@ namespace PEngine {
 
     RuntimeState &Engine::getState() {
         return state;
+    }
+
+    Engine::Engine() {
+        systems.setEngine(this);
+        world.setEngine(this);
+        resources.setEngine(this);
+        worldLights.setEngine(this);
     }
 }

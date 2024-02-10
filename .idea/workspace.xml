@@ -19,20 +19,49 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-86] C++ engine ui: hierarchy&#10;- EngineService">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-86] C++ engine ui: hierarchy&#10;- Fixing bugs&#10;- Implementing core methods">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/WorldRegistry.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/WorldRegistry.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/HierarchyService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/HierarchyService.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/HierarchyService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/HierarchyService.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/enums/LocalizationEN.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/enums/LocalizationEN.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/services/EngineEvents.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/EngineEvents.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/services/EngineService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/EngineService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/HierarchyUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/HierarchyUtil.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/HierarchyView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/HierarchyView.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/ComponentNode.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/ComponentNode.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/EntityNode.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/EntityNode.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/HierarchyHeader.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/HierarchyHeader.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/HierarchyNode.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/HierarchyNode.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/Engine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/Engine.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/Engine.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/Engine.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/world/ComponentFactory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/ComponentFactory.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/HierarchyService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/EngineService.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/HierarchyService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/EngineService.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/JSON.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/core/JSONTest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/core/JSONTest.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/engine/EngineTest.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/engine/WorldServiceTest.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/engine/EngineTest.h" beforeDir="false" afterPath="$PROJECT_DIR$/test/engine/WorldServiceTest.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/main_test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/main_test.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendors/Roboto/LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-Black.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-BlackItalic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-Bold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-BoldItalic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-Italic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-Light.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-LightItalic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-Medium.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-MediumItalic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-Regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-Thin.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-ThinItalic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendors/material-icons/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIcons-Regular.codepoints" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIcons-Regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIconsOutlined-Regular.codepoints" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIconsOutlined-Regular.otf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIconsRound-Regular.codepoints" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIconsRound-Regular.otf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIconsSharp-Regular.codepoints" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIconsSharp-Regular.otf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIconsTwoTone-Regular.codepoints" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIconsTwoTone-Regular.otf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendors/material-icons/README.md" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +92,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="84-c-engine-components" />
+        <entry key="$PROJECT_DIR$" value="86-engine-hierarchy" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -108,10 +137,11 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "C/C++ File.main.cpp.executor": "Run",
-    "CMake Application.Projection.executor": "Debug",
+    "CMake Application.Projection.executor": "Run",
     "CMake Application.projection.executor": "Debug",
     "CMake Debug.projection.executor": "Debug",
     "CMake Debug.projectioncmake.executor": "Debug",
+    "Catch.Engine test.executor": "Debug",
     "Catch.File-system test.executor": "Debug",
     "Catch.JSON test.executor": "Run",
     "Catch.Run all.executor": "Run",
@@ -144,7 +174,7 @@
     "Shell Script.copy-files.executor": "Run",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "86-c-engine-ui-hierarchy",
+    "git-widget-placeholder": "68-engine-world-tests",
     "js.last.introduce.type": "CONST",
     "last_opened_file_path": "C:/Users/russi/WebstormProjects/projection-engine-2/src/engine/services/world/components",
     "node.js.detected.package.eslint": "true",
@@ -196,18 +226,17 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="CMake Application.Projection">
-    <configuration name="Should be lazily obtained" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <jest-package value="$PROJECT_DIR$/webview/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$/webview" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/webview/tests/injection/Injection.test.ts" />
-      <test-names>
-        <test-name value="Should be lazily obtained" />
-      </test-names>
-      <method v="2" />
+  <component name="RunManager" selected="Catch.Engine test">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Engine test" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="build" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_CLASS="[engine-test]" TEST_METHOD="Engine test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
     </configuration>
     <configuration name="Should be the same instance" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
@@ -282,9 +311,9 @@
     </configuration>
     <list>
       <item itemvalue="Catch.main_test" />
+      <item itemvalue="Catch.Engine test" />
       <item itemvalue="CMake Application.Projection" />
       <item itemvalue="CMake Debug.projectioncmake" />
-      <item itemvalue="Jest.Should be lazily obtained" />
       <item itemvalue="Jest.Should be the same instance" />
       <item itemvalue="Jest.Should inject into non-static property" />
       <item itemvalue="Jest.Should not inject not @Injectable" />
@@ -295,11 +324,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Catch.Engine test" />
         <item itemvalue="npm.build" />
         <item itemvalue="Jest.Should inject into non-static property" />
         <item itemvalue="Jest.Should not inject not @Injectable" />
         <item itemvalue="Jest.Should be the same instance" />
-        <item itemvalue="Jest.Should be lazily obtained" />
       </list>
     </recent_temporary>
   </component>
@@ -383,15 +412,8 @@
       <workItem from="1707070919185" duration="4466000" />
       <workItem from="1707170120892" duration="7054000" />
       <workItem from="1707259872759" duration="2605000" />
-      <workItem from="1707565609411" duration="15186000" />
-    </task>
-    <task id="LOCAL-00033" summary="[STD-26] Tabs&#10;- Adding types and enums&#10;- Removing unused code&#10;- Reworking views to be simpler&#10;- Removing TabsStore">
-      <option name="closed" value="true" />
-      <created>1704656135335</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1704656135335</updated>
+      <workItem from="1707565609411" duration="16181000" />
+      <workItem from="1707600497348" duration="2229000" />
     </task>
     <task id="LOCAL-00034" summary="[STD-26] Tabs&#10;- Adding types and enums&#10;- Removing unused code&#10;- Reworking views to be simpler&#10;- Removing TabsStore">
       <option name="closed" value="true" />
@@ -777,7 +799,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707582295033</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="[STD-86] C++ engine ui: hierarchy&#10;- Fixing bugs&#10;- Implementing core methods">
+      <option name="closed" value="true" />
+      <created>1707589758765</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1707589758765</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -801,7 +831,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-52] Engine refactoring&#10;- Making components serializable&#10;- Making Entity serializable&#10;- Refactoring entity registry to World class" />
     <MESSAGE value="[STD-52] Engine refactoring&#10;- Refactoring files&#10;- Creating core systems&#10;- Removing unused files" />
     <MESSAGE value="[STD-52] Engine refactoring&#10;- Fixing camera" />
     <MESSAGE value="[STD-63] Starting new hierarchy&#10;- Creating WorldOutlineView&#10;- Creating service for view&#10;- Fixing LightsService" />
@@ -826,14 +855,15 @@
     <MESSAGE value="[STD-86] C++ engine ui: hierarchy&#10;- Initializing integration of hierarchy with C++ engine&#10;- Adding listen method to WebViewService.ts&#10;- Renaming WorldOutline" />
     <MESSAGE value="[STD-86] C++ engine ui: hierarchy&#10;- Continuing hierarchy changes" />
     <MESSAGE value="[STD-86] C++ engine ui: hierarchy&#10;- EngineService" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-86] C++ engine ui: hierarchy&#10;- EngineService" />
+    <MESSAGE value="[STD-86] C++ engine ui: hierarchy&#10;- Fixing bugs&#10;- Implementing core methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-86] C++ engine ui: hierarchy&#10;- Fixing bugs&#10;- Implementing core methods" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp</url>
-          <line>60</line>
+          <line>58</line>
           <option name="timeStamp" value="35" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
@@ -847,14 +877,14 @@
           <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/services/HierarchyService.cpp</url>
-          <line>61</line>
-          <option name="timeStamp" value="80" />
+          <url>file://$PROJECT_DIR$/test/engine/WorldServiceTest.cpp</url>
+          <line>66</line>
+          <option name="timeStamp" value="83" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/services/HierarchyService.cpp</url>
-          <line>59</line>
-          <option name="timeStamp" value="81" />
+          <url>file://$PROJECT_DIR$/test/engine/WorldServiceTest.cpp</url>
+          <line>48</line>
+          <option name="timeStamp" value="84" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/webview/lib/FSService.ts</url>
@@ -868,8 +898,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/webview/window/editor/services/EngineService.ts</url>
-          <line>52</line>
-          <properties lambdaOrdinal="-1" />
+          <line>51</line>
           <option name="timeStamp" value="79" />
         </line-breakpoint>
       </breakpoints>

@@ -1,6 +1,5 @@
 #include "WebViewWindow.h"
 #include <filesystem>
-#include <iostream>
 #include "../AbstractWindow.h"
 
 #define GLFW_EXPOSE_NATIVE_WGL
@@ -9,7 +8,6 @@
 #include <nlohmann/json.hpp>
 #include "GLFW/glfw3native.h"
 #include "WebViewPayload.h"
-#include "../../../util/JSON.h"
 #include "../WindowRepository.h"
 #include "WebView2EnvironmentOptions.h"
 
@@ -77,10 +75,12 @@ namespace PEngine {
 
         WebViewPayload payload;
         try {
-            JSON payloadJson = JSON::parse(msg);
-            payload.id = payloadJson.get<std::string>("id", "");
+            nlohmann::json payloadJson = nlohmann::json::parse(msg);
+            payload.id = payloadJson.at("id").get<std::string>();
             CONSOLE_LOG("WebView message received with ID: {0}", payload.id)
-            payload.payload = payloadJson.get<std::string>("payload", "");
+            if (payloadJson.find("payload") != payloadJson.end()) {
+                payload.payload = payloadJson.at("payload").get<std::string>();
+            }
             payload.webview = this;
         } catch (nlohmann::json::parse_error &ex) {
             CONSOLE_ERROR("Error parsing payload")
@@ -92,10 +92,10 @@ namespace PEngine {
     }
 
     void WebViewWindow::postMessage(const std::string &message, const std::string &id) {
-        JSON jsonObj;
-        jsonObj.set("payload", message.c_str());
-        jsonObj.set("id", id.c_str());
-        std::string messagePayload = jsonObj.stringify();
+        nlohmann::json jsonObj;
+        jsonObj["payload"] = message.c_str();
+        jsonObj["id"] = id.c_str();
+        std::string messagePayload = jsonObj.dump();
         CONSOLE_WARN("Posting message to {0}", id)
         webview->PostWebMessageAsString(std::wstring(messagePayload.begin(), messagePayload.end()).c_str());
     }
