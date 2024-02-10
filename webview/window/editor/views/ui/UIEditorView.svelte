@@ -9,7 +9,7 @@
     import type Entity from "@engine-core/instances/Entity";
     import ProjectionEngine from "@lib/ProjectionEngine";
     import {InjectVar} from "@lib/Injection";
-    import HierarchyStore from "@lib/stores/HierarchyStore";
+    import WorldOutlineStore from "@lib/stores/WorldOutlineStore";
 
     let ref: HTMLElement
     let tooltipRef: HTMLElement
@@ -26,7 +26,7 @@
         }
     }
 
-    const unsubscribe = InjectVar(HierarchyStore).subscribe(update)
+    const unsubscribe = InjectVar(WorldOutlineStore).subscribe(update)
     const resizeObserver = new ResizeObserver(() => GUIService.document.style.height = ref.offsetHeight + "px")
 
     function clickHandler(e) {

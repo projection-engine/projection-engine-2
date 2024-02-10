@@ -7,7 +7,7 @@ import EntityUpdateService from "@services/EntityUpdateService";
 import ProjectService from "@services/ProjectService";
 import SettingsStore from "./stores/SettingsStore";
 import Engine from "@engine-core/Engine";
-import HierarchyStore from "@lib/stores/HierarchyStore";
+import WorldOutlineStore from "@lib/stores/WorldOutlineStore";
 import ContextMenuService from "@services/ContextMenuService";
 import {Inject} from "@lib/Injection";
 
@@ -25,8 +25,8 @@ export default class ProjectionEngine extends IInjectable {
     @Inject(DragDropService)
     static DragDropService: DragDropService
 
-    @Inject(HierarchyStore)
-    static EntityHierarchyService: HierarchyStore
+    @Inject(WorldOutlineStore)
+    static EntityHierarchyService: WorldOutlineStore
 
     @Inject(EntityNamingService)
     static EntityNamingService: EntityNamingService

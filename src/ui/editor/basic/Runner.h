@@ -15,7 +15,7 @@ namespace PEngine {
 
     class Runner : public IRunner {
     private:
-        Engine &engine;
+        Engine *engine = nullptr;
 
         void initiate();
 
@@ -34,9 +34,11 @@ namespace PEngine {
 
     public:
 
-        explicit Runner(Engine &engine) : engine(engine) {
+        explicit Runner() {
             initiate();
         }
+
+        void destroyContext() override;
     };
 
 }
