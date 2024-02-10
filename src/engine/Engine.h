@@ -7,7 +7,6 @@
 #include "services/ResourceService.h"
 #include "services/SystemService.h"
 #include "services/WorldLightsService.h"
-#include "services/RuntimeState.h"
 
 namespace PEngine {
     class AbstractIOService;
@@ -16,7 +15,6 @@ namespace PEngine {
 
     class Engine {
     private:
-        RuntimeState state;
         WorldService world;
         WorldLightsService worldLights;
         ResourceService resources;
@@ -25,9 +23,10 @@ namespace PEngine {
         SystemService systems;
         AbstractIOService *io = nullptr;
         AbstractFSService *fs = nullptr;
-        bool initialized = false;
+        int width;
+        int height;
     public:
-        void initialize(int w, int h, AbstractIOService *ioController, AbstractFSService *fsController);
+        explicit Engine(int w, int h, AbstractIOService *ioController, AbstractFSService *fsController);
 
         WorldService *getWorldService();
 
@@ -39,11 +38,9 @@ namespace PEngine {
 
         void run();
 
-        RuntimeState &getState();
+        AbstractIOService *getIo() const;
 
-        AbstractIOService *getIo();
-
-        AbstractFSService *getFs();
+        AbstractFSService *getFs() const;
 
         WorldPhysicsService *getWorldPhysicsService();
 
@@ -53,6 +50,7 @@ namespace PEngine {
 
         int getViewportHeight() const;
 
+        long long int elapsed = 0;
     };
 }
 

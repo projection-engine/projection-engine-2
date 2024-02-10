@@ -14,7 +14,7 @@ namespace PEngine {
         camera->hasChangedProjection = false;
 
         if (camera->viewNeedsUpdate) {
-            updateMatrices(engine->getState().elapsed);
+            updateMatrices(engine->elapsed);
         }
 
         if (camera->projectionNeedsUpdate || camera->projectionType == ORTHOGRAPHIC && camera->viewNeedsUpdate) {

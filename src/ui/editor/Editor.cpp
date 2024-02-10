@@ -11,6 +11,7 @@
 namespace PEngine {
     std::string Editor::projectPath;
 
+
     IRunner *Editor::initialize() {
         if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
             CONSOLE_ERROR("Failed to initialize GLAD")
@@ -21,8 +22,7 @@ namespace PEngine {
         WindowRepository::Get().getWebView()->addMessageListener(SET_PROJECT_PATH, onMessage);
         fileSystemService.BindEvents(WindowRepository::Get().getWebView());
         shaderService.BindEvents(WindowRepository::Get().getWebView());
-        hierarchyService.BindEvents(WindowRepository::Get().getWebView());
-        return new Runner(engine);
+        return new Runner();
     }
 
     void Editor::onMessage(WebViewPayload &payload) {
@@ -37,9 +37,5 @@ namespace PEngine {
 
     const char *Editor::getWebViewHTML() {
         return "editor-window.html";
-    }
-
-    Engine &Editor::getEngine() {
-        return engine;
     }
 }

@@ -2,23 +2,23 @@ import Entity from "@engine-core/instances/Entity"
 import SelectionStore from "@lib/stores/SelectionStore";
 import {Injectable, LazyInject} from "@lib/Injection";
 import AbstractStore from "@lib/stores/AbstractStore";
-import HierarchyDTO from "@lib/stores/state/HierarchyDTO";
+import WorldOutlineDTO from "@lib/stores/state/WorldOutlineDTO";
 import Engine from "@engine-core/Engine";
 
 
 @Injectable
-export default class HierarchyStore extends AbstractStore<HierarchyDTO> {
+export default class WorldOutlineStore extends AbstractStore<WorldOutlineDTO> {
 
     @LazyInject(Engine)
     static engine: Engine
 
     constructor() {
-        super(new HierarchyDTO());
+        super(new WorldOutlineDTO());
     }
 
     updateHierarchy() {
         const data = []
-        const root = HierarchyStore.engine.getRootEntity()
+        const root = WorldOutlineStore.engine.getRootEntity()
 
         const callback = (node: Entity, depth: number) => {
             if (!node)
@@ -41,7 +41,7 @@ export default class HierarchyStore extends AbstractStore<HierarchyDTO> {
     }
 
     openTree() {
-        const node = HierarchyStore.engine.getEntities().get(SelectionStore.getMainEntity())
+        const node = WorldOutlineStore.engine.getEntities().get(SelectionStore.getMainEntity())
         if (!node) return
         const open = {}
         let target = node
@@ -51,7 +51,7 @@ export default class HierarchyStore extends AbstractStore<HierarchyDTO> {
             open[target.id] = true
             target = target.parent
         }
-        open[HierarchyStore.engine.getRootEntity().id] = true
+        open[WorldOutlineStore.engine.getRootEntity().id] = true
         this.updateStore({openPath: open})
     }
 }

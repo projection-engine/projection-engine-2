@@ -1,26 +1,31 @@
 #include "WorldService.h"
 #include "../../util/structures/Map.cpp"
-#include "entt/entt.hpp"
 #include "world/Entity.h"
 #include "world/AbstractComponent.h"
-#include "world/WorldRegistry.h"
 
 namespace PEngine {
     void WorldService::removeEntity(std::uint32_t id) {
-         worldRegistry->removeEntity(id);
+        if (!entities.has(id))
+            return;
+        CONSOLE_LOG("Removing entity")
+        Entity *entity = entities.get(id);
+        worldReg.destroy(entity->getEntity());
+        entities.deleteKey(id);
+        delete entity;
     }
 
     Entity *WorldService::addEntity() {
-        return worldRegistry->addEntity();
+        auto *pEntity = new Entity(worldReg.create());
+        entities.set(static_cast<unsigned int>(pEntity->getEntity()), pEntity);
+        return pEntity;
     }
 
-    bool WorldService::hasEntity(std::uint32_t id) {
-        return worldRegistry->hasEntity(id);
-
+    bool WorldService::hasEntity(std::uint32_t uuid) {
+        return entities.has(uuid);
     }
 
-    WorldRegistry *WorldService::getRegistry() {
-        return worldRegistry;
+    entt::registry &WorldService::getRegistry() {
+        return worldReg;
     }
 
     void WorldService::addComponent(ComponentType name, Entity *ent) {
@@ -28,7 +33,6 @@ namespace PEngine {
     }
 
     WorldService::WorldService() {
-        worldRegistry = new WorldRegistry;
         componentFactory.setService(this);
     }
 
@@ -37,27 +41,16 @@ namespace PEngine {
     }
 
     bool WorldService::hasComponent(ComponentType name, Entity *ent) {
-        return componentFactory.hasComponent(name, ent);
+        try {
+            getComponent(name, ent);
+            return true;
+        } catch (std::invalid_argument &ex) {
+            return false;
+        }
     }
 
     void WorldService::removeComponent(ComponentType name, Entity *ent) {
         componentFactory.removeComponent(name, ent);
-    }
-
-    Entity *WorldService::getEntity(std::uint32_t id) {
-        return worldRegistry->getEntity(id);
-    }
-
-    std::unordered_map<std::uint32_t, std::vector<std::uint32_t>> &WorldService::getParentChildren() {
-        return worldRegistry->getParentChildren();
-    }
-
-    Entity &WorldService::getRoot() {
-        return worldRegistry->getRoot();
-    }
-
-    std::vector<ComponentType> WorldService::getComponentList(Entity *ent) {
-        return componentFactory.getComponentList(ent);
     }
 
 }
