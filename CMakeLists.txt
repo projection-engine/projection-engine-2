@@ -27,9 +27,12 @@ set(COMMON_LIBRARIES
 )
 
 set(FILE_PATHS
+       src/engine/services/world/WorldRegistry.cpp
+       src/engine/services/world/WorldRegistry.h
+
         src/engine/services/RuntimeState.h
-        src/services/HierarchyService.cpp
-        src/services/HierarchyService.h
+        src/services/EngineService.cpp
+        src/services/EngineService.h
         
         src/engine/services/world/components/MeshComponent.h
         src/engine/services/world/components/LightComponent.h
@@ -86,8 +89,6 @@ set(FILE_PATHS
         src/engine/runtime/CameraSystem.h
         src/engine/services/AbstractCoreService.h
         src/engine/services/AbstractCoreService.cpp
-
-        src/util/JSON.h
 
         src/ui/shared/AbstractWindow.cpp
         src/ui/shared/AbstractWindow.h

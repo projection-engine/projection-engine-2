@@ -55,13 +55,9 @@ namespace PEngine {
         }
     }
 
-    bool ComponentFactory::hasComponent(ComponentType name, Entity *ent) {
-        try {
-            getComponent(name, ent);
-            return true;
-        } catch (std::invalid_argument &ex) {
-            return false;
-        }
+        bool ComponentFactory::hasComponent(ComponentType name, Entity *ent) {
+        std::vector<ComponentType> vec = entityComponents[ent->getEntityId()];
+        return std::find(vec.begin(), vec.end(), name) != vec.end();
     }
 
     std::vector<ComponentType> ComponentFactory::getComponentList(Entity *ent) {

@@ -1,5 +1,5 @@
 #include "catch2/catch_all.hpp"
-#include "engine/EngineTest.h"
+#include "engine/WorldServiceTest.h"
 #include "Tester.h"
 #include "core/LoggerTest.h"
 #include "core/ListTest.h"
@@ -7,7 +7,6 @@
 #include "ui/event/EventControllerTest.h"
 #include "ui/store/IStoreTest.h"
 #include "core/FileSystemTest.h"
-#include "core/JSONTest.h"
 #include "core/StringUtilTest.h"
 
 void run(int ind, bool all) {
@@ -43,11 +42,6 @@ void run(int ind, bool all) {
     }
 
     if (ind == 7 || all) {
-        Tester *tester = PEngine::JSONTest::createTester();
-        tester->run();
-    }
-
-    if (ind == 8 || all) {
         Tester *tester = PEngine::StringUtilTest::createTester();
         tester->run();
     }
@@ -81,12 +75,8 @@ TEST_CASE("File-system test", "[fs-test]") {
     run(6, false);
 }
 
-TEST_CASE("JSON test", "[json-test]") {
-    run(7, false);
-}
-
 TEST_CASE("String util test", "[stringutil-test]") {
-    run(8, false);
+    run(7, false);
 }
 
 TEST_CASE("Run all", "[RUN_ALL]") {

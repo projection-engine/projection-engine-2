@@ -1,4 +1,4 @@
-#include "HierarchyService.h"
+#include "EngineService.h"
 #include "../ui/shared/webview/WebViewPayload.h"
 #include "../ui/shared/webview/WebViewWindow.h"
 #include "../ui/editor/Editor.h"
@@ -18,7 +18,7 @@
 #define MAKE_PARENT "MAKE_PARENT"
 
 namespace PEngine {
-    void HierarchyService::BindEvents(PEngine::WebViewWindow *pWindow) {
+    void EngineService::BindEvents(PEngine::WebViewWindow *pWindow) {
         pWindow->addMessageListener(CREATE_ENTITY, HandleEvent);
         pWindow->addMessageListener(DELETE_ENTITY, HandleEvent);
         pWindow->addMessageListener(GET_HIERARCHY, HandleEvent);
@@ -31,7 +31,7 @@ namespace PEngine {
         pWindow->addMessageListener(TOGGLE_ACTIVE, HandleEvent);
     }
 
-    void HierarchyService::HandleEvent(WebViewPayload &payload) {
+    void EngineService::HandleEvent(WebViewPayload &payload) {
         Editor *window = (Editor *) WindowRepository::Get().getWindowById(EDITOR_WINDOW);
         Engine &engine = window->getEngine();
         WorldService *world = engine.getWorldService();
@@ -54,7 +54,6 @@ namespace PEngine {
         } else if (payload.id == SELECT_ENTITIES) {
             std::vector<std::uint32_t> &vec = engine.getState().selected;
             vec.clear();
-
             nlohmann::json parsed = nlohmann::json::parse(payload.payload);
             for (std::uint32_t element: parsed) {
                 vec.push_back(element);
@@ -76,19 +75,19 @@ namespace PEngine {
         }
     }
 
-    void HierarchyService::PostSelectedEntities(const WebViewPayload &payload, Engine &engine) {
+    void EngineService::PostSelectedEntities(const WebViewPayload &payload, Engine &engine) {
         nlohmann::json result = engine.getState().selected;
         payload.webview->postMessage(result.dump(), GET_SELECTED_ENTITIES);
     }
 
-    void HierarchyService::PostLockedEntity(const WebViewPayload &payload, Engine &engine) {
+    void EngineService::PostLockedEntity(const WebViewPayload &payload, Engine &engine) {
         nlohmann::json j;
         j["id"] = engine.getState().lockedEntity;
         payload.webview->postMessage(j.dump(), GET_LOCKED_ENTITY);
         payload.resolve(j.dump());
     }
 
-    void HierarchyService::PostHierarchy(WebViewPayload &payload, Engine &engine) {
+    void EngineService::PostHierarchy(WebViewPayload &payload, Engine &engine) {
         WorldService *world = engine.getWorldService();
         std::unordered_map<uint32_t, std::vector<uint32_t>> hierarchy = world->getParentChildren();
         nlohmann::json json;
@@ -96,10 +95,10 @@ namespace PEngine {
         payload.webview->postMessage(json.dump(), GET_HIERARCHY);
     }
 
-    void HierarchyService::GetHierarchy(nlohmann::json &json,
-                                        WorldService *world,
-                                        std::unordered_map<std::uint32_t, std::vector<std::uint32_t>> &hierarchy,
-                                        Entity *entity) {
+    void EngineService::GetHierarchy(nlohmann::json &json,
+                                     WorldService *world,
+                                     std::unordered_map<std::uint32_t, std::vector<std::uint32_t>> &hierarchy,
+                                     Entity *entity) {
         std::vector<nlohmann::json> children;
         json["name"] = entity->name;
         json["entityID"] = entity->getEntityId();

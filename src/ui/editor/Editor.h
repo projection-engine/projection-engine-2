@@ -5,7 +5,7 @@
 #include "../../services/FileSystemService.h"
 #include "../../services/ShaderService.h"
 #include "../../engine/Engine.h"
-#include "../../services/HierarchyService.h"
+#include "../../services/EngineService.h"
 
 namespace PEngine {
     class WebViewWindow;
@@ -17,7 +17,7 @@ namespace PEngine {
         static void onMessage(WebViewPayload &payload);
         static std::string projectPath;
         FileSystemService fileSystemService;
-        HierarchyService hierarchyService;
+        EngineService hierarchyService;
         ShaderService shaderService;
         Engine engine;
     public:

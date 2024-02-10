@@ -1,5 +1,5 @@
-#ifndef PROJECTION_HIERARCHYSERVICE_H
-#define PROJECTION_HIERARCHYSERVICE_H
+#ifndef PROJECTION_ENGINESERVICE_H
+#define PROJECTION_ENGINESERVICE_H
 
 #include "AbstractService.h"
 #include "nlohmann/json.hpp"
@@ -10,7 +10,7 @@ namespace PEngine {
 
     class Entity;
 
-    class HierarchyService : public AbstractService {
+    class EngineService : public AbstractService {
         static void HandleEvent(WebViewPayload &payload);
 
     public:
