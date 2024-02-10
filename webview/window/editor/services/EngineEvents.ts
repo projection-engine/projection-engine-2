@@ -7,6 +7,8 @@ enum EngineEvents {
     LOCK_ENTITY = "LOCK_ENTITY",
     GET_LOCKED_ENTITY = "GET_LOCKED_ENTITY",
     TOGGLE_ACTIVE = "TOGGLE_ACTIVE",
+    RENAME_ENTITY = "RENAME_ENTITY",
+    MAKE_PARENT = "MAKE_PARENT"
 }
 
 export default EngineEvents

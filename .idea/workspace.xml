@@ -19,23 +19,20 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-86] C++ engine ui: hierarchy&#10;- Initializing integration of hierarchy with C++ engine&#10;- Adding listen method to WebViewService.ts&#10;- Renaming WorldOutline">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-86] C++ engine ui: hierarchy&#10;- EngineService">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/WorldService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/WorldService.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/WorldService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/WorldService.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/ComponentFactory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/ComponentFactory.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/ComponentFactory.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/ComponentFactory.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/Entity.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/Entity.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/Entity.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/Entity.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/engine/services/world/WorldRegistry.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/WorldRegistry.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/WorldRegistry.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/WorldRegistry.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/HierarchyService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/HierarchyService.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/HierarchyService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/HierarchyService.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/enums/LocalizationEN.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/enums/LocalizationEN.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/services/EngineEvents.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/EngineEvents.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/services/EngineService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/EngineService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/HierarchyUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/HierarchyUtil.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/HierarchyView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/HierarchyView.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/ComponentBranch.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/ComponentNode.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/EntityBranch.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/EntityNode.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/EntityBranchWrapper.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/HierarchyNode.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/hierarchy-definitions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/hierarchy-definitions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/ComponentNode.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/ComponentNode.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/EntityNode.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/EntityNode.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/HierarchyHeader.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/HierarchyHeader.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/HierarchyNode.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/HierarchyNode.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +108,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "C/C++ File.main.cpp.executor": "Run",
-    "CMake Application.Projection.executor": "Run",
+    "CMake Application.Projection.executor": "Debug",
     "CMake Application.projection.executor": "Debug",
     "CMake Debug.projection.executor": "Debug",
     "CMake Debug.projectioncmake.executor": "Debug",
@@ -386,23 +383,7 @@
       <workItem from="1707070919185" duration="4466000" />
       <workItem from="1707170120892" duration="7054000" />
       <workItem from="1707259872759" duration="2605000" />
-      <workItem from="1707565609411" duration="8801000" />
-    </task>
-    <task id="LOCAL-00031" summary="[STD-37] Dependency injection&#10;- Making all injectables injections">
-      <option name="closed" value="true" />
-      <created>1704630162546</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1704630162546</updated>
-    </task>
-    <task id="LOCAL-00032" summary="[STD-26] Tabs&#10;- Starting tabs rework&#10;- Moving systems and creating path alias">
-      <option name="closed" value="true" />
-      <created>1704638465778</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1704638465778</updated>
+      <workItem from="1707565609411" duration="15186000" />
     </task>
     <task id="LOCAL-00033" summary="[STD-26] Tabs&#10;- Adding types and enums&#10;- Removing unused code&#10;- Reworking views to be simpler&#10;- Removing TabsStore">
       <option name="closed" value="true" />
@@ -780,7 +761,23 @@
       <option name="project" value="LOCAL" />
       <updated>1707262338931</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="[STD-86] C++ engine ui: hierarchy&#10;- Continuing hierarchy changes">
+      <option name="closed" value="true" />
+      <created>1707582282139</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1707582282139</updated>
+    </task>
+    <task id="LOCAL-00081" summary="[STD-86] C++ engine ui: hierarchy&#10;- EngineService">
+      <option name="closed" value="true" />
+      <created>1707582295033</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1707582295033</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -804,8 +801,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-52] Engine refactoring&#10;- Moving serializable registration to classes declaration" />
-    <MESSAGE value="[STD-52] Engine refactoring&#10;- Removing getters from Engine" />
     <MESSAGE value="[STD-52] Engine refactoring&#10;- Making components serializable&#10;- Making Entity serializable&#10;- Refactoring entity registry to World class" />
     <MESSAGE value="[STD-52] Engine refactoring&#10;- Refactoring files&#10;- Creating core systems&#10;- Removing unused files" />
     <MESSAGE value="[STD-52] Engine refactoring&#10;- Fixing camera" />
@@ -829,7 +824,9 @@
     <MESSAGE value="[STD-86] C++ engine ui: hierarchy&#10;- Adding engine state&#10;- Removing pointers from World&#10;- Adding new fields to Entity" />
     <MESSAGE value="[STD-86] C++ engine ui: hierarchy&#10;- Creating hierarchy service&#10;- Changing editor window&#10;- Making world as facade class" />
     <MESSAGE value="[STD-86] C++ engine ui: hierarchy&#10;- Initializing integration of hierarchy with C++ engine&#10;- Adding listen method to WebViewService.ts&#10;- Renaming WorldOutline" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-86] C++ engine ui: hierarchy&#10;- Initializing integration of hierarchy with C++ engine&#10;- Adding listen method to WebViewService.ts&#10;- Renaming WorldOutline" />
+    <MESSAGE value="[STD-86] C++ engine ui: hierarchy&#10;- Continuing hierarchy changes" />
+    <MESSAGE value="[STD-86] C++ engine ui: hierarchy&#10;- EngineService" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-86] C++ engine ui: hierarchy&#10;- EngineService" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -850,9 +847,14 @@
           <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/engine/runtime/CameraSystem.cpp</url>
-          <line>101</line>
-          <option name="timeStamp" value="67" />
+          <url>file://$PROJECT_DIR$/src/services/HierarchyService.cpp</url>
+          <line>61</line>
+          <option name="timeStamp" value="80" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/services/HierarchyService.cpp</url>
+          <line>59</line>
+          <option name="timeStamp" value="81" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/webview/lib/FSService.ts</url>
@@ -863,6 +865,12 @@
           <url>file://$PROJECT_DIR$/webview/services/ExecutionService.ts</url>
           <line>28</line>
           <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/webview/window/editor/services/EngineService.ts</url>
+          <line>52</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="79" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

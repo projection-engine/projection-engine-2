@@ -22,6 +22,10 @@ namespace PEngine {
                                  Entity *entity);
 
         static void PostHierarchy(WebViewPayload &payload, PEngine::Engine &engine);
+
+        static void PostSelectedEntities(const WebViewPayload &payload, Engine &engine);
+
+        static void PostLockedEntity(const WebViewPayload &payload, Engine &engine);
     };
 
 }

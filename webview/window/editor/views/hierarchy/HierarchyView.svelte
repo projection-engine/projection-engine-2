@@ -1,25 +1,22 @@
 <script lang="ts">
-    import VirtualList from "@sveltejs/svelte-virtual-list"
     import {onDestroy, onMount} from "svelte"
     import HotKeysController from "@lib/HotKeysController"
     import dragDrop from "@lib/components/drag-drop/drag-drop"
-    import Header from "./components/HierarchyHeader.svelte"
+    import HierarchyHeader from "./components/HierarchyHeader.svelte"
     import HierarchyUtil from "../../util/HierarchyUtil"
     import {InjectVar} from "@lib/Injection";
     import LocalizationEN from "@enums/LocalizationEN";
-    import ComponentBranch from "./components/ComponentNode.svelte";
-    import EntityTreeBranch from "./components/HierarchyNode.svelte";
+    import HierarchyNode from "./components/HierarchyNode.svelte";
     import Icon from "@lib/components/icon/Icon.svelte";
-    import {EntityDTO, HierarchyToRenderElement} from "./hierarchy-definitions";
+    import {EntityDTO} from "./hierarchy-definitions";
     import WebViewService from "@lib/webview/WebViewService";
     import EngineService from "../../services/EngineService";
     import EngineEvents from "../../services/EngineEvents";
-    import HierarchyNode from "./components/HierarchyNode.svelte";
 
 
     let ref: HTMLElement
     let search = ""
-    let filteredComponent = undefined
+    let filteredComponent: number = undefined
     let openTree = {}
     let rootEntity: EntityDTO = null
     let selectedList: number[] = []
@@ -33,7 +30,6 @@
 
     onMount(() => {
         webViewService.beam(EngineEvents.GET_HIERARCHY)
-        HierarchyUtil.initializeView(draggable, ref)
     })
 
     onDestroy(() => {
@@ -44,23 +40,33 @@
         unsubHierarchy()
     })
 
-    $: isOnSearch = search || filteredComponent;
+    $: isOnSearch = search.length > 0 || filteredComponent !== undefined;
 
     function setSearch(v: string) {
         search = v;
     }
 
-    function setFilteredComponent(v: string) {
+    function setFilteredComponent(v: number) {
         filteredComponent = v;
     }
 </script>
 
-<Header {setFilteredComponent} {setSearch} {filteredComponent} {search}/>
+<HierarchyHeader
+        lockedEntity={lockedEntity}
+        open={openTree}
+        root={rootEntity}
+        updateOpen={() => openTree = openTree}
+        selected={selectedList}
+        {setFilteredComponent}
+        {setSearch}
+        {filteredComponent}
+        {search}
+/>
 <div class="wrapper" bind:this={ref}>
     <div class="content" style={rootEntity == null ? "background: var(--pj-background-quaternary)" : undefined}>
         {#if rootEntity != null}
             <HierarchyNode
-                    testSearch={node => HierarchyUtil.testSearch(filteredComponent, search, node)}
+                    testSearch={node => HierarchyUtil.testSearch(search, filteredComponent, node)}
                     isOnSearch={isOnSearch}
                     entity={rootEntity}
                     depth={0}

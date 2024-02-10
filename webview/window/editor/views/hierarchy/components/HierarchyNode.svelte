@@ -7,7 +7,7 @@
     import EngineService from "../../../services/EngineService";
     import ComponentNode from "./ComponentNode.svelte";
 
-    export let testSearch: GenericNonVoidFunctionWithP<MutableObject, boolean>
+    export let testSearch: GenericNonVoidFunctionWithP<EntityDTO, boolean>
     export let depth: number
     export let isOnSearch: boolean
     export let entity: EntityDTO

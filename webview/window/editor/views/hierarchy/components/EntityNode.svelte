@@ -1,14 +1,9 @@
 <script lang="ts">
-    import dragDrop from "@lib/components/drag-drop/drag-drop";
-    import {onDestroy, onMount} from "svelte";
+    import {onMount} from "svelte";
     import ToolTip from "@lib/components/tooltip/ToolTip.svelte";
     import Icon from "@lib/components/icon/Icon.svelte";
-    import Entity from "@engine-core/instances/Entity";
     import ModalInput from "../../../components/modal-input/ModalInput.svelte";
     import LocalizationEN from "@enums/LocalizationEN";
-    import HierarchyUtil from "../../../util/HierarchyUtil";
-    import SelectionStore from "@lib/stores/SelectionStore";
-    import ProjectionEngine from "@lib/ProjectionEngine";
     import {EntityDTO} from "../hierarchy-definitions";
     import EngineService from "../../../services/EngineService";
     import EditorUtil from "../../../util/EditorUtil";
@@ -22,26 +17,16 @@
     let ref: HTMLElement
     let containerRef: HTMLElement
 
-    const draggable = dragDrop(true)
-    $: draggable.disabled = isOnEdit
-
-    let entityName = entity.name
-    $: entityName = entity.name
 
     onMount(() => {
         containerRef.addEventListener("click", e => EngineService.updateSelection(entity.entityID, e.ctrlKey))
         ref.addEventListener("dblclick", () => isOnEdit = true)
-        draggable.onMount({
-            targetElement: ref,
-            onDragStart: () => entity,
-            dragImage: () => `<div style="display: flex; gap: 4px"><span style="font-size: .9rem;" data-svelteicon="-">view_in_ar</span> ${SelectionStore.getEntitiesSelected().length > 1 ? SelectionStore.getEntitiesSelected().length + " Entities" : entity.name}</div>`,
-        })
     })
 
-    onDestroy(() => draggable.onDestroy())
-
     function handleRename(value: string) {
-        entityName = entity.name = value
+        entity.name = value
+
+        EngineService.renameEntity(entity.entityID, entity.name);
         isOnEdit = false
     }
 
@@ -61,12 +46,12 @@
     </button>
 
     <div bind:this={ref}>
-        {entityName}
-        <ToolTip content={entityName}/>
+        {entity.name}
+        <ToolTip content={entity.name}/>
     </div>
 
     {#if isOnEdit}
-        <ModalInput initialValue={entityName} handleClose={handleRename}/>
+        <ModalInput initialValue={entity.name} handleClose={handleRename}/>
     {/if}
 
     {#if !isOpen && !isOnSearch}

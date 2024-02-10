@@ -1,11 +1,7 @@
 <script lang="ts">
     import Icon from "@lib/components/icon/Icon.svelte";
-    import Component from "@engine-core/instances/components/Component";
-    import HierarchyUtil from "../../../util/HierarchyUtil";
     import EditorUtil from "../../../util/EditorUtil";
     import {onMount} from "svelte";
-    import SelectionStoreUtil from "@lib/stores/SelectionStore";
-    import {ComponentDTO} from "../hierarchy-definitions";
     import EngineService from "../../../services/EngineService";
 
     export let depth: number

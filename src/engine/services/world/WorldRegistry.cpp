@@ -28,12 +28,12 @@ namespace PEngine {
         Entity &entity = entities.at(entId);
         entity.initialize(ent);
 
-        auto parentId = static_cast<unsigned int>(root.getEntity());
-        childParent[entId] = parentId;
-        if (!parentChildren.count(parentId)) {
-            parentChildren[parentId] = {};
+        std::uint32_t rootId = root.getEntityId();
+        childParent[entId] = rootId;
+        if (!parentChildren.count(rootId)) {
+            parentChildren[rootId] = {};
         }
-        parentChildren[parentId].push_back(entId);
+        parentChildren[rootId].push_back(entId);
 
         return &entity;
     }

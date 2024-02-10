@@ -11,7 +11,7 @@ export default class EngineService extends IInjectable {
 
     static timeout: NodeJS.Timeout
 
-    static selectionCache: number[]
+    static selectionCache: number[] = []
 
     static listenToSelectionChanges(cb: GenericVoidFunctionWithP<number[]>): VoidFunction {
         return EngineService.webViewService.listen(
@@ -43,14 +43,29 @@ export default class EngineService extends IInjectable {
     }
 
     static updateSelection(entityID: number, ctrlKey: boolean) {
-        if(!ctrlKey){
+        if (!ctrlKey) {
             EngineService.selectionCache.length = 0
-        }else{
-            EngineService.selectionCache.push(entityID)
         }
+        EngineService.selectionCache.push(entityID)
+        clearTimeout(EngineService.timeout)
         EngineService.timeout = setTimeout(() => {
             EngineService.webViewService.beam(EngineEvents.SELECT_ENTITIES, JSON.stringify(EngineService.selectionCache))
         }, 100)
-        clearTimeout(EngineService.timeout)
+    }
+
+    static renameEntity(entityID: number, entityName: string) {
+        EngineService.webViewService.beam(EngineEvents.RENAME_ENTITY, JSON.stringify({name: entityName, id: entityID}))
+    }
+
+    static addEntity() {
+        EngineService.webViewService.beam(EngineEvents.CREATE_ENTITY)
+    }
+
+    static deleteEntity(id: number) {
+        EngineService.webViewService.beam(EngineEvents.DELETE_ENTITY, JSON.stringify({id}))
+    }
+
+    static makeParent(parentId: number, id: number) {
+        EngineService.webViewService.beam(EngineEvents.MAKE_PARENT, JSON.stringify({parentId, id}))
     }
 }
