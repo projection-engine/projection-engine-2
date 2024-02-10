@@ -27,7 +27,10 @@ set(COMMON_LIBRARIES
 )
 
 set(FILE_PATHS
-
+        src/engine/services/RuntimeState.h
+        src/services/HierarchyService.cpp
+        src/services/HierarchyService.h
+        
         src/engine/services/world/components/MeshComponent.h
         src/engine/services/world/components/LightComponent.h
         src/engine/services/world/components/AtmosphereComponent.h

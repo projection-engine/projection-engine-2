@@ -10,7 +10,7 @@ import GizmoUtil from "@engine-tools/gizmo/util/GizmoUtil"
 import {Inject, Injectable} from "@lib/Injection";
 import IInjectable from "@lib/IInjectable";
 import EntityNamingService from "@services/EntityNamingService";
-import WorldOutlineStore from "@lib/stores/WorldOutlineStore";
+import HierarchyStore from "@lib/stores/HierarchyStore";
 
 
 // TODO - REMOVE STATIC MEMBERS
@@ -23,8 +23,8 @@ export default class EngineStateService extends IInjectable {
     @Inject(EntityNamingService)
     static entityNamingService: EntityNamingService
 
-    @Inject(WorldOutlineStore)
-    static entityHierarchyService: WorldOutlineStore
+    @Inject(HierarchyStore)
+    static entityHierarchyService: HierarchyStore
 
     @Inject(Engine)
     static engine: Engine
