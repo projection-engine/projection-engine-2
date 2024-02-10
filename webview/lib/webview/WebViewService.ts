@@ -5,7 +5,8 @@ import {CommunicationService} from "@lib/webview/CommunicationService";
 
 @Injectable
 export default class WebViewService extends IInjectable implements CommunicationService {
-    private listeners: Map<string, GenericVoidFunctionWithP<WebViewPayload>> = new Map()
+    private listeners: Map<string, GenericVoidFunctionWithP<WebViewPayload>[]> = new Map()
+    private fixedListeners: Map<string, GenericVoidFunctionWithP<WebViewPayload>[]> = new Map()
     private initialized = false
 
     addGlobalListener() {
@@ -18,8 +19,12 @@ export default class WebViewService extends IInjectable implements Communication
                     }
                     const response = WebViewPayload.of(event.data);
                     if (this.listeners.has(response.getId())) {
-                        this.listeners.get(response.getId())(response)
+                        this.listeners.get(response.getId()).forEach(c => c(response))
                         this.listeners.delete(response.getId())
+                    }
+
+                    if (this.fixedListeners.has(response.getId())) {
+                        this.fixedListeners.get(response.getId()).forEach(c => c(response))
                     }
                 } catch (ex) {
                     console.error(ex)
@@ -29,34 +34,30 @@ export default class WebViewService extends IInjectable implements Communication
         }
     }
 
-    /**
-     * Sends message to backend but doesn't wait for a response
-     * @param message
-     * @param id
-     */
     beam(id: string, message?: string) {
         // @ts-ignore
         window.chrome.webview.postMessage(JSON.stringify(new WebViewPayload(id, message)))
     }
 
-    /**
-     * Same as "wire" method but a callback is required
-     * @param message
-     * @param id
-     * @param callback
-     */
     hardWire(id: string, callback: GenericVoidFunctionWithP<WebViewPayload>, message?: string) {
         this.addGlobalListener()
-        this.listeners.set(id, callback)
+
+        if (!this.listeners.has(id)) {
+            this.listeners.set(id, [])
+        }
+        this.listeners.get(id).push(callback);
         // @ts-ignore
         window.chrome.webview.postMessage(JSON.stringify(new WebViewPayload(id, message)))
     }
 
-    /**
-     * Sends message and waits for a response with the same ID
-     * @param message
-     * @param id
-     */
+    listen(id: string, callback: GenericVoidFunctionWithP<WebViewPayload>): VoidFunction {
+        if (!this.fixedListeners.has(id)) {
+            this.fixedListeners.set(id, [])
+        }
+        this.fixedListeners.get(id).push(callback);
+        return () => this.fixedListeners.set(id, this.fixedListeners.get(id).filter(c => c != callback));
+    }
+
     async wire(id: string, message?: string): Promise<WebViewPayload> {
         return new Promise(resolve => this.hardWire(id, resolve, message))
     }

@@ -1,32 +1,32 @@
 <script lang="ts">
     import Icon from "@lib/components/icon/Icon.svelte";
-    import Component from "@engine-core/instances/components/Component";
-    import HierarchyUtil from "../../../util/HierarchyUtil";
     import EditorUtil from "../../../util/EditorUtil";
     import {onMount} from "svelte";
-    import SelectionStoreUtil from "@lib/stores/SelectionStore";
+    import EngineService from "../../../services/EngineService";
 
     export let depth: number
-    export let component: Component
+    export let isEntityActive: boolean
+    export let componentType: number
+    export let entityID: number
 
     let ref: HTMLElement
 
     onMount(() => {
-        ref.addEventListener("click", e => HierarchyUtil.updateSelection(entity.id, e.ctrlKey))
+        ref.addEventListener("click", e => EngineService.updateSelection(entityID, e.ctrlKey))
     })
-    $: icon = EditorUtil.getComponentIcon(component.componentKey)
-    $: label = EditorUtil.getComponentLabel(component.componentKey)
-    $: entity = component.entity
+
+    $: icon = EditorUtil.getComponentIcon(componentType)
+    $: label = EditorUtil.getComponentLabel(componentType)
 </script>
 
 
 <div
         class="wrapper hierarchy-branch"
         class:element={true}
-        data-svelteentity={entity.id}
-        style={"padding-left:" +  (depth * 18 + "px;") + (component.entity.active ? "" : "opacity: .5") }
+        data-svelteentity={entityID}
+        style={"padding-left:" +  (depth * 18 + "px;") + (isEntityActive ? "" : "opacity: .5") }
 >
-    <div class="info hierarchy-branch" data-sveltenode={entity.id} bind:this={ref}>
+    <div class="info hierarchy-branch" data-sveltenode={entityID} bind:this={ref}>
         {#each {length: depth} as _, i}
             <div data-sveltevertdivider="-"
                  style={`border-left-style: ${i === 0 ? "solid" : "dashed"}; left: ${i * 18}px`} class="divider"></div>
@@ -34,7 +34,7 @@
         <div class="button-small hierarchy-branch"></div>
         <button
                 class="button-icon hierarchy-branch"
-                on:click={() => SelectionStoreUtil.setLockedEntity(entity.id)}
+                on:click={() => EngineService.setLockedEntity(entityID)}
         >
             <Icon styles="font-size: 1rem; color: var(--pj-accent-color-tertiary)">{icon}</Icon>
         </button>

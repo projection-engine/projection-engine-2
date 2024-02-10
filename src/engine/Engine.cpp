@@ -29,14 +29,19 @@ namespace PEngine {
     void Engine::run() {
         auto end = std::chrono::high_resolution_clock::now();
         long long endC = std::chrono::time_point_cast<std::chrono::microseconds>(end).time_since_epoch().count();
-        elapsed = endC - elapsed;
+        state.elapsed = endC - state.elapsed;
 
         systems.run();
     }
 
-    Engine::Engine(int w, int h, AbstractIOService *ioController, AbstractFSService *fsController) {
-        width = w;
-        height = h;
+    void Engine::initialize(int w, int h, AbstractIOService *ioController, AbstractFSService *fsController) {
+        if (initialized) {
+            return;
+        }
+
+        initialized = true;
+        state.viewportWidth = w;
+        state.viewportHeight = h;
 
         io = ioController;
         fs = fsController;
@@ -50,19 +55,23 @@ namespace PEngine {
         systems.initialize();
     }
 
-    AbstractIOService *Engine::getIo() const {
+    AbstractIOService *Engine::getIo() {
         return io;
     }
 
-    AbstractFSService *Engine::getFs() const {
+    AbstractFSService *Engine::getFs() {
         return fs;
     }
 
     int Engine::getViewportWidth() const {
-        return width;
+        return state.viewportWidth;
     }
 
     int Engine::getViewportHeight() const {
-        return height;
+        return state.viewportHeight;
+    }
+
+    RuntimeState &Engine::getState() {
+        return state;
     }
 }

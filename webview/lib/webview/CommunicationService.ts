@@ -24,4 +24,6 @@ export interface CommunicationService {
      * @param id
      */
     wire(id: string, message?: string): Promise<WebViewPayload>;
+
+    listen(id: string, callback: GenericVoidFunctionWithP<WebViewPayload>): VoidFunction;
 }

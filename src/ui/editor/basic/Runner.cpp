@@ -23,7 +23,7 @@ namespace PEngine {
     }
 
     void Runner::drawNewFrame() {
-        engine->run();
+        engine.run();
         ImGui::Render();
         glfwGetFramebufferSize(WindowRepository::Get().getWindow(), &windowWidth, &windowHeight);
         glViewport(0, 0, windowWidth, windowHeight);
@@ -38,10 +38,6 @@ namespace PEngine {
     void Runner::initiate() {
         int w, h;
         WindowRepository::getDesktopResolution(w, h);
-        engine = new Engine(w, h, new IOController, new FSController);
-    }
-
-    void Runner::destroyContext() {
-        delete engine;
+        engine.initialize(w, h, new IOController, new FSController);
     }
 }

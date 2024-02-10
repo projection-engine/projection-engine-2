@@ -3,7 +3,7 @@ import SelectionStore from "@lib/stores/SelectionStore"
 import LocalizationEN from "@enums/LocalizationEN"
 import {Inject, Injectable} from "@lib/Injection";
 import ToasterService from "@services/ToasterService";
-import WorldOutlineStore from "@lib/stores/WorldOutlineStore";
+import HierarchyStore from "@lib/stores/HierarchyStore";
 import SettingsStore from "@lib/stores/SettingsStore";
 import EntityNamingService from "@services/EntityNamingService";
 import IInjectable from "@lib/IInjectable";
@@ -29,8 +29,8 @@ export default class ProjectService extends IInjectable {
     @Inject(ToasterService)
     static toasterService: ToasterService
 
-    @Inject(WorldOutlineStore)
-    static entityHierarchyService: WorldOutlineStore
+    @Inject(HierarchyStore)
+    static entityHierarchyService: HierarchyStore
 
     @Inject(SettingsStore)
     static settingsStore: SettingsStore

@@ -2,30 +2,29 @@
 #ifndef PROJECTION_WORLDSERVICE_H
 #define PROJECTION_WORLDSERVICE_H
 
-#include "entt/entt.hpp"
-#include "../../util/debug/ILoggable.h"
-#include "../../util/structures/Map.h"
 #include "AbstractCoreService.h"
 #include "../enum/ComponentType.h"
 #include "world/ComponentFactory.h"
+#include <unordered_map>
+
 
 namespace PEngine {
-
-    class Entity;
-
     class AbstractComponent;
+
+    class WorldRegistry;
 
     class WorldService : public AbstractCoreService {
     private:
         ComponentFactory componentFactory;
-        entt::registry worldReg;
-        Map<std::uint32_t, Entity *> entities;
+        WorldRegistry *worldRegistry = nullptr;
 
     public:
 
         explicit WorldService();
 
         Entity *addEntity();
+
+        Entity *getEntity(std::uint32_t id);
 
         void removeEntity(std::uint32_t id);
 
@@ -39,7 +38,13 @@ namespace PEngine {
 
         bool hasEntity(std::uint32_t id);
 
-        entt::registry &getRegistry();
+        WorldRegistry *getRegistry();
+
+        std::unordered_map<std::uint32_t, std::vector<std::uint32_t>> &getParentChildren();
+
+        Entity &getRoot();
+
+        std::vector<ComponentType> getComponentList(Entity *ent);
     };
 }
 

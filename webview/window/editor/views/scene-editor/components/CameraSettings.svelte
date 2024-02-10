@@ -12,14 +12,14 @@
     import {InjectVar} from "@lib/Injection";
     import SettingsStore from "@lib/stores/SettingsStore";
     import Components from "@engine-core/static/Components";
-    import WorldOutlineStore from "@lib/stores/WorldOutlineStore";
+    import HierarchyStore from "@lib/stores/HierarchyStore";
 
     let cameras = []
     let focusedCamera
     let screenSpaceMovement = false
     let camera = {}
 
-    const unsubscribeWorld = InjectVar(WorldOutlineStore).subscribe(() => {
+    const unsubscribeWorld = InjectVar(HierarchyStore).subscribe(() => {
         cameras = ProjectionEngine.Engine.getByComponent(Components.CAMERA)
     })
 
