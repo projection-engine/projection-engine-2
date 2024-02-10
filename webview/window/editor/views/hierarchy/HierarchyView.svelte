@@ -7,41 +7,32 @@
     import HierarchyUtil from "../../util/HierarchyUtil"
     import {InjectVar} from "@lib/Injection";
     import LocalizationEN from "@enums/LocalizationEN";
-    import ComponentBranch from "./components/ComponentBranch.svelte";
-    import EntityTreeBranch from "./components/EntityBranchWrapper.svelte";
+    import ComponentBranch from "./components/ComponentNode.svelte";
+    import EntityTreeBranch from "./components/HierarchyNode.svelte";
     import Icon from "@lib/components/icon/Icon.svelte";
-    import {HierarchyEvents, HierarchyToRenderElement} from "./hierarchy-definitions";
+    import {EntityDTO, HierarchyToRenderElement} from "./hierarchy-definitions";
     import WebViewService from "@lib/webview/WebViewService";
+    import EngineService from "../../services/EngineService";
+    import EngineEvents from "../../services/EngineEvents";
+    import HierarchyNode from "./components/HierarchyNode.svelte";
 
 
     let ref: HTMLElement
     let search = ""
     let filteredComponent = undefined
     let openTree = {}
-    let toRender: HierarchyToRenderElement[] = []
+    let rootEntity: EntityDTO = null
     let selectedList: number[] = []
     let lockedEntity: number
 
-    const draggable = dragDrop()
     const webViewService = InjectVar(WebViewService)
-
-    const unsubSelection = webViewService.listen(
-        HierarchyEvents.GET_SELECTED_ENTITIES,
-        payload => selectedList = JSON.parse(payload.getPayload())
-    )
-
-    const unsubHierarchy = webViewService.listen(HierarchyEvents.GET_HIERARCHY, payload => {
-            // TODO
-        // toRender = HierarchyUtil.buildTree(openTree, search, filteredComponent)
-    })
-
-    const unsubLockedEntity = webViewService.listen(
-        HierarchyEvents.GET_LOCKED_ENTITY,
-        payload => lockedEntity = JSON.parse(payload.getPayload()).id
-    )
+    const draggable = dragDrop()
+    const unsubSelection = EngineService.listenToSelectionChanges(payload => selectedList = payload)
+    const unsubHierarchy = EngineService.listenToHierarchyChanges(payload => rootEntity = payload)
+    const unsubLockedEntity = EngineService.listenToLockedEntityChanges(payload => lockedEntity = payload)
 
     onMount(() => {
-        webViewService.beam(HierarchyEvents.GET_HIERARCHY)
+        webViewService.beam(EngineEvents.GET_HIERARCHY)
         HierarchyUtil.initializeView(draggable, ref)
     })
 
@@ -57,36 +48,27 @@
 
     function setSearch(v: string) {
         search = v;
-        webViewService.beam(HierarchyEvents.GET_HIERARCHY)
     }
 
     function setFilteredComponent(v: string) {
         filteredComponent = v;
-        webViewService.beam(HierarchyEvents.GET_HIERARCHY)
     }
 </script>
 
 <Header {setFilteredComponent} {setSearch} {filteredComponent} {search}/>
-<div class="wrapper"  bind:this={ref}>
-    <div class="content" style={toRender.length === 0 ? "background: var(--pj-background-quaternary)" : undefined}>
-        {#if toRender.length > 0}
-            <VirtualList items={toRender} itemHeight={23} let:item>
-                {#if item.component}
-                    <ComponentBranch
-                            component={item.component} depth={item.depth}/>
-                {:else}
-                    <EntityTreeBranch
-                            testSearch={node => HierarchyUtil.testSearch(filteredComponent, search, node)}
-                            {isOnSearch}
-                            entity={item.node}
-                            depth={item.depth}
-                            {selectedList}
-                            {lockedEntity}
-                            open={openTree}
-                            updateOpen={() => webViewService.beam(HierarchyEvents.GET_HIERARCHY)}
-                    />
-                {/if}
-            </VirtualList>
+<div class="wrapper" bind:this={ref}>
+    <div class="content" style={rootEntity == null ? "background: var(--pj-background-quaternary)" : undefined}>
+        {#if rootEntity != null}
+            <HierarchyNode
+                    testSearch={node => HierarchyUtil.testSearch(filteredComponent, search, node)}
+                    isOnSearch={isOnSearch}
+                    entity={rootEntity}
+                    depth={0}
+                    selectedList={selectedList}
+                    lockedEntity={lockedEntity}
+                    open={openTree}
+                    updateOpen={() => openTree = openTree}
+            />
         {:else}
             <div data-svelteempty="-">
                 <Icon styles="font-size: 75px">account_tree</Icon>

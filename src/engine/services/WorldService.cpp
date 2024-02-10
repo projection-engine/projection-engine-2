@@ -44,4 +44,20 @@ namespace PEngine {
         componentFactory.removeComponent(name, ent);
     }
 
+    Entity *WorldService::getEntity(std::uint32_t id) {
+        return worldRegistry->getEntity(id);
+    }
+
+    std::unordered_map<std::uint32_t, std::vector<std::uint32_t>> &WorldService::getParentChildren() {
+        return worldRegistry->getParentChildren();
+    }
+
+    Entity &WorldService::getRoot() {
+        return worldRegistry->getRoot();
+    }
+
+    std::vector<ComponentType> WorldService::getComponentList(Entity *ent) {
+        return componentFactory.getComponentList(ent);
+    }
+
 }

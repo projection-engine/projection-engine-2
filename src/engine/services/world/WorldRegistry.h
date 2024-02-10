@@ -25,7 +25,11 @@ namespace PEngine {
 
         Entity *addEntity();
 
-        bool hasEntity(uint32_t uuid);
+        bool hasEntity(uint32_t id);
+
+        Entity *getEntity(uint32_t id);
+
+        std::unordered_map<std::uint32_t, std::vector<std::uint32_t>> &getParentChildren();
     };
 
 }

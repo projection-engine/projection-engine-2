@@ -9,8 +9,11 @@
     import HierarchyUtil from "../../../util/HierarchyUtil";
     import SelectionStore from "@lib/stores/SelectionStore";
     import ProjectionEngine from "@lib/ProjectionEngine";
+    import {EntityDTO} from "../hierarchy-definitions";
+    import EngineService from "../../../services/EngineService";
+    import EditorUtil from "../../../util/EditorUtil";
 
-    export let entity: Entity
+    export let entity: EntityDTO
     export let lockedEntity: number
     export let isOpen: boolean
     export let isOnSearch: boolean
@@ -22,30 +25,11 @@
     const draggable = dragDrop(true)
     $: draggable.disabled = isOnEdit
 
-
-    const ID = crypto.randomUUID()
     let entityName = entity.name
-    let entityID: string
-    let components = []
-    let children = 0
-    $: {
-        if (entityID !== entity.id) {
-            if (entityID)
-                ProjectionEngine.EntityUpdateService.removeListener(entityID, ID)
-            ProjectionEngine.EntityUpdateService.addListener(entity.id, ID, () => {
-                entityName = entity.name
-                components = HierarchyUtil.mapComponents(entity)
-                children = entity.children.array.length
-            })
-            children = entity.children.array.length
-            components = HierarchyUtil.mapComponents(entity)
-            entityName = entity.name
-            entityID = entity.id
-        }
-    }
+    $: entityName = entity.name
 
     onMount(() => {
-        containerRef.addEventListener("click", e => HierarchyUtil.updateSelection(entity.id, e.ctrlKey))
+        containerRef.addEventListener("click", e => EngineService.updateSelection(entity.entityID, e.ctrlKey))
         ref.addEventListener("dblclick", () => isOnEdit = true)
         draggable.onMount({
             targetElement: ref,
@@ -54,33 +38,25 @@
         })
     })
 
-    onDestroy(() => {
-        draggable.onDestroy()
-        ProjectionEngine.EntityUpdateService.removeListener(entityID, ID)
-    })
+    onDestroy(() => draggable.onDestroy())
 
     function handleRename(value: string) {
         entityName = entity.name = value
-        ProjectionEngine.EntityNamingService.renameEntity(entity.name, entity)
         isOnEdit = false
     }
 
-    $: isLocked = lockedEntity === entity.id
+    $: isLocked = lockedEntity === entity.entityID
 </script>
 
-<div class="info hierarchy-branch" data-sveltenode={entity.id} bind:this={containerRef}>
+<div class="info hierarchy-branch" data-sveltenode={entity.entityID} bind:this={containerRef}>
     <button
             data-sveltelocked={isLocked ? "-" : ""}
             class="button-icon hierarchy-branch"
-            style={`--button-color: ${entity.isCollection ? "rgb(" + entity.colorIdentifier + ")" : !isLocked ? "var(--folder-color-darker)" : "var(--folder-color)" }`}
-            on:click={() => SelectionStore.setLockedEntity(entity.id)}
+            style={`--button-color: ${!isLocked ? "var(--folder-color-darker)" : "var(--folder-color)" }`}
+            on:click={() => EngineService.setLockedEntity(entity.entityID)}
     >
         <Icon styles="font-size: 1rem">
-            {#if entity.isCollection}
-                inventory_2
-            {:else}
                 view_in_ar
-            {/if}
         </Icon>
     </button>
 
@@ -94,17 +70,17 @@
     {/if}
 
     {#if !isOpen && !isOnSearch}
-        {#each components as component}
+        {#each entity.components as component}
             <div class="component">
-                <Icon styles="font-size: .9rem">{component.icon}</Icon>
-                <ToolTip content={component.label}/>
+                <Icon styles="font-size: .9rem">{EditorUtil.getComponentIcon(component)}</Icon>
+                <ToolTip content={EditorUtil.getComponentLabel(component)}/>
             </div>
         {/each}
-        {#if children > 0}
+        {#if entity.children.length > 0}
             <div class="component" style="color: var(--folder-color)">
                 <Icon styles="font-size: .9rem">category</Icon>
                 <ToolTip content={LocalizationEN.CHILDREN}/>
-                <small class="children-quantity">{children}</small>
+                <small class="children-quantity">{entity.children.length}</small>
             </div>
         {/if}
     {/if}

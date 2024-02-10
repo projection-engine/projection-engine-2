@@ -38,7 +38,18 @@ namespace PEngine {
         return &entity;
     }
 
-    bool WorldRegistry::hasEntity(std::uint32_t uuid) {
-        return entities.count(uuid);
+    bool WorldRegistry::hasEntity(std::uint32_t id) {
+        return entities.count(id);
+    }
+
+    Entity *WorldRegistry::getEntity(uint32_t id) {
+        if(hasEntity(id)) {
+            return &entities[id];
+        }
+        return nullptr;
+    }
+
+    std::unordered_map<std::uint32_t, std::vector<std::uint32_t>> &WorldRegistry::getParentChildren() {
+        return parentChildren;
     }
 }

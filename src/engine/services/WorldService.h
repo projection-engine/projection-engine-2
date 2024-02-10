@@ -24,6 +24,8 @@ namespace PEngine {
 
         Entity *addEntity();
 
+        Entity *getEntity(std::uint32_t id);
+
         void removeEntity(std::uint32_t id);
 
         void addComponent(ComponentType name, Entity *ent);
@@ -37,6 +39,12 @@ namespace PEngine {
         bool hasEntity(std::uint32_t id);
 
         WorldRegistry *getRegistry();
+
+        std::unordered_map<std::uint32_t, std::vector<std::uint32_t>> &getParentChildren();
+
+        Entity &getRoot();
+
+        std::vector<ComponentType> getComponentList(Entity *ent);
     };
 }
 

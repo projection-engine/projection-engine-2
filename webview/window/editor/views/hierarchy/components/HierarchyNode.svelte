@@ -1,48 +1,55 @@
 <script lang="ts">
-    import EntityBranch from "./EntityBranch.svelte";
-    import EntityFactoryService from "@services/EntityFactoryService";
+    import EntityNode from "./EntityNode.svelte";
     import Icon from "@lib/components/icon/Icon.svelte";
     import ToolTip from "@lib/components/tooltip/ToolTip.svelte";
-    import Entity from "@engine-core/instances/Entity";
-    import EntityQueryService from "@engine-core/services/EntityQueryService";
     import LocalizationEN from "@enums/LocalizationEN";
+    import {EntityDTO} from "../hierarchy-definitions";
+    import EngineService from "../../../services/EngineService";
+    import ComponentNode from "./ComponentNode.svelte";
 
     export let testSearch: GenericNonVoidFunctionWithP<MutableObject, boolean>
     export let depth: number
     export let isOnSearch: boolean
-    export let entity: Entity
+    export let entity: EntityDTO
     export let open: Record<number, boolean>
     export let updateOpen: GenericVoidFunction
     export let selectedList: number[]
     export let lockedEntity: number
 
     function onExpand() {
-        if (!open[entity.id]) {
-            open[entity.id] = true
+        if (!open[entity.entityID]) {
+            open[entity.entityID] = true
             updateOpen()
         } else {
-            delete open[entity.id]
-            // EntityQueryService.loopHierarchy(entity, c => delete open[c.id])
+            delete open[entity.entityID]
+            closeHierarchy(entity)
             updateOpen()
         }
     }
 
-    $: isOpen = open[entity.id]
-    $: isNodeSelected = selectedList.includes(entity.id)
-    $: childQuantity = Math.max(entity.children.array.length, entity.allComponents.length)
+    function closeHierarchy(entity: EntityDTO) {
+        entity.children.forEach(c => {
+            delete open[c.entityID]
+            closeHierarchy(c)
+        })
+    }
+
+    $: isOpen = open[entity.entityID]
+    $: isNodeSelected = selectedList.includes(entity.entityID)
+    $: childQuantity = Math.max(entity.children.length, entity.components.length)
     $: hasChildren = childQuantity > 0
     $: isMatchToSearch = isOnSearch && testSearch(entity)
 
     function toggleVisibility() {
-        EntityFactoryService.toggleEntityVisibility(entity.id)
+        EngineService.toggleEntityVisibility(entity.entityID)
     }
 </script>
 
 <div
         data-svelteselected={isNodeSelected || isMatchToSearch? "-" : ""}
-        data-sveltenode={entity.id}
+        data-sveltenode={entity.entityID}
         class="wrapper hierarchy-branch"
-        style={(isMatchToSearch && !isNodeSelected ? "--pj-accent-color-light: var(--pj-accent-color-tertiary);" : "")+ "padding-left:" +  (depth * 18 + "px;") + (entity.active ? "" : "opacity: .5") }
+        style={(isMatchToSearch && !isNodeSelected ? "--pj-accent-color-light: var(--pj-accent-color-tertiary);" : "")+ "padding-left:" +  (depth * 18 + "px;") + (entity.isActive ? "" : "opacity: .5") }
 >
 
     {#if hasChildren}
@@ -62,7 +69,7 @@
     {:else}
         <div class="button-small hierarchy-branch"></div>
     {/if}
-    <EntityBranch {isOpen} {entity} {lockedEntity} {isOnSearch}/>
+    <EntityNode {isOpen} {entity} {lockedEntity} {isOnSearch}/>
     <button
             data-sveltebuttondefault="-"
             class="button-visibility"
@@ -70,7 +77,7 @@
     >
         <ToolTip content={LocalizationEN.DEACTIVATE}/>
         <Icon styles="font-size: .8rem">
-            {#if entity.active}
+            {#if entity.isActive}
                 visibility
             {:else}
                 visibility_off
@@ -78,6 +85,28 @@
         </Icon>
     </button>
 </div>
+{#if isOpen}
+    {#each entity.components as component}
+        <ComponentNode
+                entityID={entity.entityID}
+                isEntityActive={entity.isActive}
+                componentType={component}
+                depth={depth + 1}
+        />
+    {/each}
+    {#each entity.children as child}
+        <svelte:self
+                {testSearch}
+                {isOnSearch}
+                entity={child}
+                depth={depth + 1}
+                {selectedList}
+                {lockedEntity}
+                {open}
+                {updateOpen}
+        />
+    {/each}
+{/if}
 
 <style>
     .button-visibility {

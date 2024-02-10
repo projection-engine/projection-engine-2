@@ -8,6 +8,10 @@ namespace PEngine {
     void ComponentFactory::addComponent(ComponentType name, Entity *ent) {
         entt::registry &reg = service->getRegistry()->getWorldReg();
         entt::entity entity = ent->getEntity();
+        if (!entityComponents.count(ent->getEntityId())) {
+            entityComponents[ent->getEntityId()] = {};
+        }
+        entityComponents[ent->getEntityId()].push_back(name);
         switch (name) {
             case MOVEMENT: {
                 reg.emplace<MovementComponent>(entity);
@@ -37,6 +41,12 @@ namespace PEngine {
     void ComponentFactory::removeComponent(ComponentType name, Entity *ent) {
         entt::registry &reg = service->getRegistry()->getWorldReg();
         entt::entity entity = ent->getEntity();
+
+        if (entityComponents.count(ent->getEntityId())) {
+            std::vector<ComponentType> &list = entityComponents[ent->getEntityId()];
+            list.erase(std::remove(list.begin(), list.end(), name), list.end());
+        }
+
         switch (name) {
             case MOVEMENT: {
                 reg.erase<MovementComponent>(entity);
@@ -52,5 +62,12 @@ namespace PEngine {
         } catch (std::invalid_argument &ex) {
             return false;
         }
+    }
+
+    std::vector<ComponentType> ComponentFactory::getComponentList(Entity *ent) {
+        if (entityComponents.count(ent->getEntityId())) {
+            return entityComponents[ent->getEntityId()];
+        }
+        return {};
     }
 }

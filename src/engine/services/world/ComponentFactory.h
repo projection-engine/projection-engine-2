@@ -14,10 +14,13 @@ namespace PEngine {
 
     class ComponentFactory {
         WorldService *service = nullptr;
+        std::unordered_map<std::uint32_t, std::vector<ComponentType>> entityComponents;
     public:
         void setService(WorldService *service);
 
         void addComponent(ComponentType name, Entity *ent);
+
+        std::vector<ComponentType> getComponentList(Entity *ent);
 
         AbstractComponent &getComponent(ComponentType name, Entity *ent);
 
