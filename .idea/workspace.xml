@@ -19,62 +19,20 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-68] engine world tests&#10;- Removing unused files&#10;- Removing JSON class&#10;- Fixing tests">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-65] c++ entity and engine inspector&#10;- Removing unused files&#10;- Rewriting property definition&#10;- Creating new form declaration system&#10;- Refactoring inspector view&#10;- Adding components to component type enum">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/enum/ComponentType.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/enum/ComponentType.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/webview/.eslintrc.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/AtmosphereComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/AtmosphereComponent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/CameraComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/CameraComponent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/CullingComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/CullingComponent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/DecalComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/DecalComponent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/LightComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/LightComponent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/LightProbeComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/LightProbeComponent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/MeshComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/MeshComponent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/PhysicsColliderComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/PhysicsColliderComponent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/RigidBodyComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/RigidBodyComponent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/SpriteComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/SpriteComponent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/static/ATMOSPHERE_TYPES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/AtmosphereType.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/static/component-props/ATMOSPHERE_PROPS.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/static/component-props/CAMERA_PROPS.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/static/component-props/CULLING_COMPONENT_PROPS.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/static/component-props/DECAL_PROPS.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/static/component-props/LIGHT_PROBE_PROPS.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/static/component-props/LIGHT_PROPS.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/static/component-props/MESH_PROPS.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/static/component-props/PHYSICS_COLLIDER_PROPS.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/static/component-props/RIGID_BODY_PROPS.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/static/component-props/SPRITE_PROPS.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/static/component-props/TERRAIN_PROPS.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/services/EngineEvents.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/engine-definitions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/services/EngineService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/EngineService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/EditorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/EditorUtil.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/HierarchyUtil.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/InspectorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/InspectorUtil.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/HierarchyView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/HierarchyView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/MovementComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/MovementComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/enums/LocalizationEN.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/enums/LocalizationEN.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/components/range/Range.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/components/range/Range.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/services/engine-definitions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/engine-definitions.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/InspectorView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/InspectorView.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/AddComponent.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/AddComponent.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/CameraPreferences.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/CameraPreferences.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/ComponentRow.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/EntityAttributes.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/EntityAttributes.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/EntityInformation.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/EntityInformation.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/TransformationForm.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/TransformationForm.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/UIComponent.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/UIComponent.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/UIStyles.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/UIStyles.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/dynamic-form/Layout.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/dynamic-form/Layout.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/dynamic-form/Property.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/dynamic-form/Property.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/static/CAMERA_PREFERENCES.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/static/INSPECTOR_TABS.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/static/NATIVE_COMPONENTS.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/static/ROTATION_TYPES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/static/ROTATION_TYPES.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/preferences/Preferences.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/preferences/TABS.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/preferences/components/ShortcutField.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/ShortcutField.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/preferences/components/Shortcuts.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/Shortcuts.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/preferences/components/content/ContentField.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/preferences/components/content/ContentGroup.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/preferences/components/content/ContentWrapper.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/preferences/static/PREFERENCES.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/preferences/static/PREFERENCES_TYPES.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/Form.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/Form.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/TransformationForm.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/dynamic-form/Layout.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/dynamic-form/Property.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/AbstractFormType.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/AbstractFormType.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/MovementForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/MovementForm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/static/ROTATION_TYPES.ts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,6 +58,7 @@
         <option value="Node" />
         <option value="Form" />
         <option value="TypeScript File" />
+        <option value="FormField" />
       </list>
     </option>
   </component>
@@ -430,15 +389,7 @@
       <workItem from="1707259872759" duration="2605000" />
       <workItem from="1707565609411" duration="16181000" />
       <workItem from="1707600497348" duration="3126000" />
-      <workItem from="1707646660954" duration="11508000" />
-    </task>
-    <task id="LOCAL-00035" summary="[STD-34] Stores&#10;- Creating DTOs&#10;- Creating new subscribe method&#10;- Removing old objects">
-      <option name="closed" value="true" />
-      <created>1704668806461</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1704668806461</updated>
+      <workItem from="1707646660954" duration="15200000" />
     </task>
     <task id="LOCAL-00036" summary="[STD-34] Stores&#10;- Fixing subscribe and unsubscribe&#10;- Creating test for store">
       <option name="closed" value="true" />
@@ -824,7 +775,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707602790571</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="[STD-65] c++ entity and engine inspector&#10;- Removing unused files&#10;- Rewriting property definition&#10;- Creating new form declaration system&#10;- Refactoring inspector view&#10;- Adding components to component type enum">
+      <option name="closed" value="true" />
+      <created>1707661795767</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1707661795768</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -848,7 +807,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-52] Engine refactoring&#10;- Fixing camera" />
     <MESSAGE value="[STD-63] Starting new hierarchy&#10;- Creating WorldOutlineView&#10;- Creating service for view&#10;- Fixing LightsService" />
     <MESSAGE value="[STD-16] Engine refactoring: Shaders&#10;- Moving shaders to CPP side&#10;- Creating new service for shader processing&#10;- Creating new interface for engine: ResourceLoader&#10;- Improving WindowRepository to only initialize when needed&#10;- Fixing tests&#10;- Creating new tests for StringUtils&#10;- Implementing new shader initialization architecture" />
     <MESSAGE value="[STD-16] Engine refactoring: Shaders&#10;- adding rebuild button" />
@@ -873,7 +831,8 @@
     <MESSAGE value="[STD-86] C++ engine ui: hierarchy&#10;- EngineService" />
     <MESSAGE value="[STD-86] C++ engine ui: hierarchy&#10;- Fixing bugs&#10;- Implementing core methods" />
     <MESSAGE value="[STD-68] engine world tests&#10;- Removing unused files&#10;- Removing JSON class&#10;- Fixing tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-68] engine world tests&#10;- Removing unused files&#10;- Removing JSON class&#10;- Fixing tests" />
+    <MESSAGE value="[STD-65] c++ entity and engine inspector&#10;- Removing unused files&#10;- Rewriting property definition&#10;- Creating new form declaration system&#10;- Refactoring inspector view&#10;- Adding components to component type enum" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-65] c++ entity and engine inspector&#10;- Removing unused files&#10;- Rewriting property definition&#10;- Creating new form declaration system&#10;- Refactoring inspector view&#10;- Adding components to component type enum" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

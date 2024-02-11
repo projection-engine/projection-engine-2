@@ -20,7 +20,6 @@ namespace PEngine {
         glm::vec4 rotationQuaternion = glm::vec4(0, 0, 0, 1);
         glm::vec4 rotationQuaternionFinal = glm::vec4(0, 0, 0, 1);
         RotationType rotationType = RotationType::ROTATION_QUATERNION;
-
         bool changed = false;
         bool changesApplied = true;
         bool isUnderChange = false;

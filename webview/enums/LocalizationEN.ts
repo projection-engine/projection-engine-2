@@ -781,5 +781,9 @@ export default {
     CONSOLE: "Console",
     IMAGE: "Texture",
     TERRAIN: "terrain",
-    SHADERS_REBUILT: "Shaders rebuilt"
+    SHADERS_REBUILT: "Shaders rebuilt",
+    ROTATION_TYPE: "Rotation type",
+    LOCKED_TRANSLATION: "Locked translation",
+    LOCKED_SCALING: "Locked scaling",
+    LOCKED_ROTATION: "Locked rotation"
 }

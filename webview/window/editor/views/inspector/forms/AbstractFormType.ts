@@ -5,14 +5,14 @@ export default class AbstractFormType {
     #properties: AbstractFormType[] = [];
     label: string;
     type: PropertyType;
-    objectKey?: string;
-    settings?: MutableObject;
+    key?: string;
+    settings?: PropertySettings = {};
     disabledIf?: DisabledIf;
 
     addProperty(label: string | null, type: PropertyType, objectKey?: string, settings?: PropertySettings, disabledIf?: DisabledIf) {
         const instance = new AbstractFormType;
-        instance.settings = settings;
-        instance.objectKey = objectKey;
+        instance.settings = settings ?? {};
+        instance.key = objectKey;
         instance.type = type;
         instance.label = label;
         instance.disabledIf = disabledIf;
@@ -39,7 +39,7 @@ export default class AbstractFormType {
         }, disabledIf);
     }
 
-    array(labels: string[], key: string, increment: number, max?: number, min?: number, isAngle?: boolean, disabledIf?: DisabledIf): AbstractFormType {
+    array(labels: string[], key: string, increment?: number, max?: number, min?: number, isAngle?: boolean, disabledIf?: DisabledIf): AbstractFormType {
         return this.addProperty(null, PropertyType.ARRAY, key, {
             labels,
             max,

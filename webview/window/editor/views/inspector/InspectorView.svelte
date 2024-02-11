@@ -16,12 +16,12 @@
     import TABS from "./static/TABS";
     import Form from "./components/Form.svelte";
     import EntityMetadataForm from "./forms/EntityMetadataForm";
+    import LocalizationEN from "@enums/LocalizationEN";
 
     let selectedEntity: EntityDTO;
     let components: ComponentDTO[];
     let engineState: EngineStateDTO;
     let componentDefinitions: typeof AbstractFormType[];
-    let settings: SettingsDTO;
     let tabIndex = 0;
     let tabs = [];
 
@@ -29,9 +29,6 @@
     const unsubLockedEntity = EngineService.listenToLockedEntityChanges(updateSelection);
     const unsubEngineState = EngineService.listenToEngineState(payload => {
         engineState = payload;
-    });
-    const unsubSettings = EngineService.listenToSettings(payload => {
-        settings = payload;
     });
 
     function updateSelection(payload: number | undefined) {
@@ -55,9 +52,27 @@
     onDestroy(() => {
         unsubSelection();
         unsubLockedEntity();
-        unsubSettings();
         unsubEngineState();
     });
+
+    function postResponse() {
+        switch (tabIndex) {
+            case 0:
+            case 1:
+            case 2:
+                EngineService.postEngineStateChange(engineState)
+                engineState = engineState;
+                break;
+            case 3:
+                EngineService.postEntityChange(selectedEntity)
+                selectedEntity = selectedEntity;
+                break;
+            default:
+                EngineService.postComponentChange(components)
+                components = components;
+                break;
+        }
+    }
 
 </script>
 
@@ -73,29 +88,39 @@
                 <ToolTip content={button.label}/>
             </button>
         {/each}
-        <div data-sveltedivider="-"></div>
-        {#each tabs as button, index}
+        {#if selectedEntity}
+            <div data-sveltedivider="-"></div>
             <button data-sveltebuttondefault="-"
-                    data-sveltehighlight={tabIndex === index ? "-" : undefined}
+                    data-sveltehighlight={tabIndex === 3 ? "-" : undefined}
                     class="tab-button shared"
-                    on:click={() => tabIndex = index}
+                    on:click={() => tabIndex = 3}
             >
-                <Icon styles="font-size: .9rem">{button.icon}</Icon>
-                <ToolTip content={button.label}/>
+                <Icon styles="font-size: .9rem">settings</Icon>
+                <ToolTip content={LocalizationEN.ENTITY}/>
             </button>
-        {/each}
+            {#each tabs as button, index}
+                <button data-sveltebuttondefault="-"
+                        data-sveltehighlight={tabIndex === index ? "-" : undefined}
+                        class="tab-button shared"
+                        on:click={() => tabIndex = index}
+                >
+                    <Icon styles="font-size: .9rem">{button.icon}</Icon>
+                    <ToolTip content={button.label}/>
+                </button>
+            {/each}
+        {/if}
     </div>
     <div class="content">
         {#if tabIndex === 0}
-            <Form definition={CameraPreferencesForm}/>
+            <Form {postResponse} definition={CameraPreferencesForm} data={engineState}/>
         {:else if tabIndex === 1}
-            <Form definition={ViewportPreferencesForm}/>
+            <Form {postResponse} definition={ViewportPreferencesForm} data={engineState}/>
         {:else if tabIndex === 2}
-            <Form definition={RenderingPreferencesForm}/>
+            <Form {postResponse} definition={RenderingPreferencesForm} data={engineState}/>
         {:else if tabIndex === 3}
-            <Form definition={EntityMetadataForm}/>
+            <Form {postResponse} definition={EntityMetadataForm} data={selectedEntity}/>
         {:else if componentDefinitions[tabIndex] != null}
-            <Form definition={componentDefinitions[tabIndex]}/>
+            <Form {postResponse} definition={componentDefinitions[tabIndex]} data={components[tabIndex]}/>
         {/if}
     </div>
 </div>

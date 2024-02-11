@@ -15,7 +15,7 @@
     export let disabled = undefined
     export let incrementPercentage = .001
     export let value = 0
-    export let handleChange
+    export let handleChange = () => null
     export let isAngle
     export let integer = undefined
 
