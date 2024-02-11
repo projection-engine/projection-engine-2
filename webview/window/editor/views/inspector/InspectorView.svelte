@@ -1,27 +1,25 @@
 <script lang="ts">
 
     import {onDestroy} from "svelte";
-    import Icon from "@lib/components/icon/Icon.svelte";
-    import ToolTip from "@lib/components/tooltip/ToolTip.svelte";
-    import InspectorUtil from "../../util/InspectorUtil";
     import EngineService from "../../services/EngineService";
-    import {ComponentDTO} from "./inspector-definition";
-    import {EntityDTO} from "../hierarchy/hierarchy-definitions";
-    import {EngineStateDTO, SettingsDTO} from "../../services/engine-definitions";
+    import {TabDTO} from "./inspector-definition";
+    import {ComponentDTO, ComponentType, EngineStateDTO, EntityDTO} from "../../services/engine-definitions";
     import CameraPreferencesForm from "./forms/CameraPreferencesForm";
     import RenderingPreferencesForm from "./forms/RenderingPreferencesForm";
     import ViewportPreferencesForm from "./forms/ViewportPreferencesForm";
     import AbstractFormType from "./forms/AbstractFormType";
     import COMPONENT_DEFINITIONS from "./static/COMPONENT_DEFINITIONS";
-    import TABS from "./static/TABS";
     import Form from "./components/Form.svelte";
     import EntityMetadataForm from "./forms/EntityMetadataForm";
     import LocalizationEN from "@enums/LocalizationEN";
+    import InspectorTabs from "./InspectorTabs.svelte";
+    import EditorUtil from "../../util/EditorUtil";
 
     let selectedEntity: EntityDTO;
     let components: ComponentDTO[];
     let engineState: EngineStateDTO;
     let componentDefinitions: typeof AbstractFormType[];
+    let componentMap: ComponentType[] = [];
     let tabIndex = 0;
     let tabs = [];
 
@@ -31,14 +29,36 @@
         engineState = payload;
     });
 
+    function getEntityTabs(components: ComponentDTO[]): TabDTO[] {
+        return [
+            {
+                icon: "settings",
+                label: LocalizationEN.ENTITY_PROPERTIES
+            },
+            {divider: true},
+            ...components.map((c, i) => ({
+                icon: EditorUtil.getComponentIcon(c.componentType),
+                label: EditorUtil.getComponentLabel(c.componentType),
+                index: i
+            }))
+        ];
+    }
+
     function updateSelection(payload: number | undefined) {
         if (payload != null) {
-            selectedEntity = EngineService.getEntityByID(payload);
-            components = EngineService.getEntityComponents(payload);
+            EngineService.getEntityByID(payload).then(e => {
+                selectedEntity = e;
+            });
+             EngineService.getEntityComponents(payload).then(e => {
+                 selectedEntity = e;
+             });
             tabIndex = 3;
             componentDefinitions = components.map(c => COMPONENT_DEFINITIONS[c.componentType]);
+            componentMap = components.map(c => {
+                return c.componentType as unknown as ComponentType;
+            });
             if (selectedEntity) {
-                tabs = InspectorUtil.getEntityTabs(components);
+                tabs = getEntityTabs(components);
             } else {
                 tabs = [];
             }
@@ -60,15 +80,15 @@
             case 0:
             case 1:
             case 2:
-                EngineService.postEngineStateChange(engineState)
+                EngineService.postEngineStateChange(engineState);
                 engineState = engineState;
                 break;
             case 3:
-                EngineService.postEntityChange(selectedEntity)
+                EngineService.postEntityChange(selectedEntity);
                 selectedEntity = selectedEntity;
                 break;
             default:
-                EngineService.postComponentChange(components)
+                EngineService.postComponentChange(selectedEntity.entityID, components);
                 components = components;
                 break;
         }
@@ -77,39 +97,13 @@
 </script>
 
 <div class="wrapper">
-    <div class="tabs">
-        {#each TABS as button, index}
-            <button data-sveltebuttondefault="-"
-                    data-sveltehighlight={tabIndex === index ? "-" : undefined}
-                    class="tab-button shared"
-                    on:click={() => tabIndex = index}
-            >
-                <Icon styles="font-size: .9rem">{button.icon}</Icon>
-                <ToolTip content={button.label}/>
-            </button>
-        {/each}
-        {#if selectedEntity}
-            <div data-sveltedivider="-"></div>
-            <button data-sveltebuttondefault="-"
-                    data-sveltehighlight={tabIndex === 3 ? "-" : undefined}
-                    class="tab-button shared"
-                    on:click={() => tabIndex = 3}
-            >
-                <Icon styles="font-size: .9rem">settings</Icon>
-                <ToolTip content={LocalizationEN.ENTITY}/>
-            </button>
-            {#each tabs as button, index}
-                <button data-sveltebuttondefault="-"
-                        data-sveltehighlight={tabIndex === index ? "-" : undefined}
-                        class="tab-button shared"
-                        on:click={() => tabIndex = index}
-                >
-                    <Icon styles="font-size: .9rem">{button.icon}</Icon>
-                    <ToolTip content={button.label}/>
-                </button>
-            {/each}
-        {/if}
-    </div>
+    <InspectorTabs
+            {tabs}
+            {selectedEntity}
+            {tabIndex}
+            setTabIndex={v => tabIndex = v}
+            {componentMap}
+    />
     <div class="content">
         {#if tabIndex === 0}
             <Form {postResponse} definition={CameraPreferencesForm} data={engineState}/>
@@ -137,20 +131,6 @@
         max-height: 100%;
         overflow-y: auto;
         overflow-x: hidden;
-    }
-
-    .tabs {
-        height: 100%;
-
-        display: grid;
-        align-content: flex-start;
-        justify-content: center;
-        gap: 2px;
-
-        overflow-x: hidden;
-        min-width: 25px;
-        width: 25px;
-        overflow-y: auto;
     }
 
     .content {

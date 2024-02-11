@@ -1,19 +1,9 @@
-import Entity from "@engine-core/instances/Entity";
-import Component from "@engine-core/instances/components/Component";
-
-
-interface HierarchyToRenderElement {
-    node: Entity
-    component?: Component
-    depth: number
-}
-
-interface EntityDTO {
+interface HierarchyEntityDTO {
     name: string,
     entityID: number,
-    children: EntityDTO[]
+    children: HierarchyEntityDTO[]
     components: number[]
     isActive: boolean
 }
 
-export {HierarchyToRenderElement, EntityDTO}
+export {HierarchyEntityDTO};

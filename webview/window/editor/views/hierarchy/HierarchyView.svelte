@@ -7,7 +7,7 @@
     import LocalizationEN from "@enums/LocalizationEN";
     import HierarchyNode from "./components/HierarchyNode.svelte";
     import Icon from "@lib/components/icon/Icon.svelte";
-    import {EntityDTO} from "./hierarchy-definitions";
+    import {HierarchyEntityDTO} from "./hierarchy-definitions";
     import WebViewService from "@lib/webview/WebViewService";
     import EngineService from "../../services/EngineService";
     import {EngineEvents} from "../../services/engine-definitions";
@@ -18,7 +18,7 @@
     let search = ""
     let filteredComponent: number = undefined
     let openTree = {}
-    let rootEntity: EntityDTO = null
+    let rootEntity: HierarchyEntityDTO = null
     let selectedList: number[] = []
     let lockedEntity: number
 
@@ -50,7 +50,7 @@
         filteredComponent = v;
     }
 
-    function testSearch(search: string, filteredComponent: number, node: EntityDTO) {
+    function testSearch(search: string, filteredComponent: number, node: HierarchyEntityDTO) {
         return (!search || search && node.name.includes(search)) && (!filteredComponent || filteredComponent && node.components.includes(filteredComponent))
     }
 </script>

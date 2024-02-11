@@ -31,7 +31,11 @@ enum ComponentType {
     SPRITE,
 }
 
-enum RotationType{
+interface ComponentDTO {
+    componentType: number;
+}
+
+enum RotationType {
     ROTATION_QUATERNION,
     ROTATION_EULER_XYZ,
     ROTATION_EULER_XZY,
@@ -41,4 +45,8 @@ enum RotationType{
     ROTATION_EULER_ZYX,
 }
 
-export {EngineEvents, EngineStateDTO, SettingsDTO, ComponentType, RotationType};
+interface EntityDTO {
+    entityID: number
+}
+
+export {EngineEvents, EngineStateDTO, SettingsDTO, ComponentType, RotationType, EntityDTO, ComponentDTO};

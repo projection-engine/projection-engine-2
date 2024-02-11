@@ -10,7 +10,6 @@ import GizmoUtil from "@engine-tools/gizmo/util/GizmoUtil"
 import {Inject, Injectable} from "@lib/Injection";
 import IInjectable from "@lib/IInjectable";
 import EntityNamingService from "@services/EntityNamingService";
-import HierarchyStore from "@lib/stores/HierarchyStore";
 
 
 // TODO - REMOVE STATIC MEMBERS
@@ -22,9 +21,6 @@ export default class EngineStateService extends IInjectable {
 
     @Inject(EntityNamingService)
     static entityNamingService: EntityNamingService
-
-    @Inject(HierarchyStore)
-    static entityHierarchyService: HierarchyStore
 
     @Inject(Engine)
     static engine: Engine
@@ -44,8 +40,6 @@ export default class EngineStateService extends IInjectable {
                 entity.addParent(parent)
             }
         }
-
-        EngineStateService.entityHierarchyService.updateHierarchy()
     }
 
     static appendBlock(block: Entity[]) {

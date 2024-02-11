@@ -1,6 +1,4 @@
-interface ComponentDTO{
-    componentType: number
-}
+
 
 interface TabDTO {
     icon?: string,
@@ -23,13 +21,6 @@ enum PropertyType {
     QUAT_EULER,
 }
 
-interface Property{
-    label: string,
-    type: PropertyType,
-    objectKey?: string,
-    settings?: MutableObject
-}
-
 interface PropertySettings {
     min?: number
     isAngle?: boolean
@@ -39,4 +30,4 @@ interface PropertySettings {
     options?: {label: string, value: any}[]
 }
 
-export {ComponentDTO, TabDTO, PropertyType, Property, PropertySettings}
+export { TabDTO, PropertyType,  PropertySettings}
