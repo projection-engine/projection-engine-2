@@ -1,4 +1,4 @@
-import Movable from "@engine-core/instances/components/Movable"
+import Movable from "@engine-core/instances/components/Movable";
 import LocalizationEN from "@enums/LocalizationEN";
 
 export default [

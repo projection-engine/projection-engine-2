@@ -1,11 +1,11 @@
 <script>
-    import Property from "./Property.svelte"
+    import Property from "./Property.svelte";
 
-    import Component from "@engine-core/instances/components/Component"
-    import Accordion from "@lib/components/accordion/Accordion.svelte"
-    import PropertyHeader from "@lib/components/PropertyHeader.svelte"
-    import LocalizationEN from "@enums/LocalizationEN"
-    import InspectorUtil from "../../../../util/InspectorUtil"
+    import Component from "@engine-core/instances/components/Component";
+    import Accordion from "@lib/components/accordion/Accordion.svelte";
+    import PropertyHeader from "@lib/components/PropertyHeader.svelte";
+    import LocalizationEN from "@enums/LocalizationEN";
+    import InspectorUtil from "../../../../util/InspectorUtil";
     import EditorUtil from "../../../../util/EditorUtil";
     import COMPONENTS from "@engine-core/static/Components";
     import UIComponent from "../UIComponent.svelte";

@@ -1,8 +1,7 @@
 <script lang="ts">
-    import Icon from "@lib/components/icon/Icon.svelte"
-    import Dropdown from "@lib/components/dropdown/Dropdown.svelte"
-    import LocalizationEN from "@enums/LocalizationEN"
-    import NATIVE_COMPONENTS from "../static/NATIVE_COMPONENTS";
+    import Icon from "@lib/components/icon/Icon.svelte";
+    import Dropdown from "@lib/components/dropdown/Dropdown.svelte";
+    import LocalizationEN from "@enums/LocalizationEN";
     import Entity from "@engine-core/instances/Entity";
 
     export let entity: Entity
@@ -21,21 +20,21 @@
         <Icon styles="font-size: 1rem">add</Icon>
         {LocalizationEN.ADD_COMPONENT}
     </button>
-    {#each NATIVE_COMPONENTS as component}
-        {#if !entity.components.has(component[0])}
-            <button
-                    data-sveltebuttondefault="-"
-                    data-svelteinline="-"
-                    on:click={(e) =>{
-                        entity.addComponent(component[0])
-                    }}
-            >
-                <Icon styles="font-size: 1rem">{component[2]}</Icon>
-                <small data-svelteoverflow="-">{component[1]}</small>
-            </button>
+    <!-- {#each NATIVE_COMPONENTS as component} -->
+    <!--     {#if !entity.components.has(component[0])} -->
+    <!--         <button -->
+    <!--                 data-sveltebuttondefault="-" -->
+    <!--                 data-svelteinline="-" -->
+    <!--                 on:click={(e) =>{ -->
+    <!--                     entity.addComponent(component[0]) -->
+    <!--                 }} -->
+    <!--         > -->
+    <!--             <Icon styles="font-size: 1rem">{component[2]}</Icon> -->
+    <!--             <small data-svelteoverflow="-">{component[1]}</small> -->
+    <!--         </button> -->
 
-        {/if}
-    {/each}
+    <!--     {/if} -->
+    <!-- {/each} -->
 </Dropdown>
 
 <style>

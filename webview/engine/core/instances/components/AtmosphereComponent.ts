@@ -1,6 +1,5 @@
 import Component from "./Component"
-import ATMOSPHERE_PROPS from "../../static/component-props/ATMOSPHERE_PROPS"
-import ATMOSPHERE_TYPES from "../../static/ATMOSPHERE_TYPES"
+import ATMOSPHERE_TYPES from "../../../../window/editor/views/inspector/forms/AtmosphereType"
 import {mat4, vec3} from "gl-matrix"
 import WorldLights from "../../core/WorldLights"
 import COMPONENTS from "../../static/Components"
@@ -16,7 +15,6 @@ export default class AtmosphereComponent extends Component {
 		return AtmosphereComponent.componentKey
 	}
 
-	_props = ATMOSPHERE_PROPS
 
 	constructor() {
 		super()

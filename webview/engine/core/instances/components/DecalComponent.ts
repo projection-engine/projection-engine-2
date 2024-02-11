@@ -1,5 +1,4 @@
 import Component from "./Component"
-import DECAL_PROPS from "../../static/component-props/DECAL_PROPS"
 import Texture from "../Texture"
 import GPU from "../../core/GPU"
 import FileSystemAPI from "../../services/FileSystemAPI"
@@ -127,7 +126,5 @@ export default class DecalComponent extends Component {
 	get occlusionID(): string {
 		return this._occlusionID
 	}
-
-	_props = DECAL_PROPS
 }
 RepositoryService.serializable(DecalComponent)

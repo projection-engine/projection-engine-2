@@ -1,7 +1,7 @@
 import {Inject, Injectable} from "@lib/Injection";
 import IInjectable from "@lib/IInjectable";
 import WebViewService from "@lib/webview/WebViewService";
-import EngineEvents from "./EngineEvents";
+import {EngineEvents} from "./engine-definitions";
 import {EntityDTO} from "../views/hierarchy/hierarchy-definitions";
 
 @Injectable

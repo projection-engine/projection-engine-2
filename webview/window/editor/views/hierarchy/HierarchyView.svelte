@@ -3,7 +3,6 @@
     import HotKeysController from "@lib/HotKeysController"
     import dragDrop from "@lib/components/drag-drop/drag-drop"
     import HierarchyHeader from "./components/HierarchyHeader.svelte"
-    import HierarchyUtil from "../../util/HierarchyUtil"
     import {InjectVar} from "@lib/Injection";
     import LocalizationEN from "@enums/LocalizationEN";
     import HierarchyNode from "./components/HierarchyNode.svelte";
@@ -11,7 +10,8 @@
     import {EntityDTO} from "./hierarchy-definitions";
     import WebViewService from "@lib/webview/WebViewService";
     import EngineService from "../../services/EngineService";
-    import EngineEvents from "../../services/EngineEvents";
+    import {EngineEvents} from "../../services/engine-definitions";
+
 
 
     let ref: HTMLElement
@@ -49,6 +49,10 @@
     function setFilteredComponent(v: number) {
         filteredComponent = v;
     }
+
+    function testSearch(search: string, filteredComponent: number, node: EntityDTO) {
+        return (!search || search && node.name.includes(search)) && (!filteredComponent || filteredComponent && node.components.includes(filteredComponent))
+    }
 </script>
 
 <HierarchyHeader
@@ -66,7 +70,7 @@
     <div class="content" style={rootEntity == null ? "background: var(--pj-background-quaternary)" : undefined}>
         {#if rootEntity != null}
             <HierarchyNode
-                    testSearch={node => HierarchyUtil.testSearch(search, filteredComponent, node)}
+                    testSearch={node => testSearch(search, filteredComponent, node)}
                     isOnSearch={isOnSearch}
                     entity={rootEntity}
                     depth={0}

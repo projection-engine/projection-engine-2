@@ -19,49 +19,62 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-86] C++ engine ui: hierarchy&#10;- Fixing bugs&#10;- Implementing core methods">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-68] engine world tests&#10;- Removing unused files&#10;- Removing JSON class&#10;- Fixing tests">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/Engine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/Engine.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/Engine.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/Engine.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/ComponentFactory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/ComponentFactory.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/HierarchyService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/EngineService.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/HierarchyService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/EngineService.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/JSON.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/core/JSONTest.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/core/JSONTest.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/engine/EngineTest.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/engine/WorldServiceTest.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/engine/EngineTest.h" beforeDir="false" afterPath="$PROJECT_DIR$/test/engine/WorldServiceTest.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/main_test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/main_test.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/Roboto/LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-Black.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-BlackItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-Bold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-BoldItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-Italic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-Light.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-LightItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-Medium.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-MediumItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-Regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-Thin.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-ThinItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/material-icons/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIcons-Regular.codepoints" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIcons-Regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIconsOutlined-Regular.codepoints" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIconsOutlined-Regular.otf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIconsRound-Regular.codepoints" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIconsRound-Regular.otf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIconsSharp-Regular.codepoints" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIconsSharp-Regular.otf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIconsTwoTone-Regular.codepoints" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIconsTwoTone-Regular.otf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/material-icons/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/enum/ComponentType.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/enum/ComponentType.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/webview/.eslintrc.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/AtmosphereComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/AtmosphereComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/CameraComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/CameraComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/CullingComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/CullingComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/DecalComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/DecalComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/LightComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/LightComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/LightProbeComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/LightProbeComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/MeshComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/MeshComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/PhysicsColliderComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/PhysicsColliderComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/RigidBodyComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/RigidBodyComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/SpriteComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/SpriteComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/static/ATMOSPHERE_TYPES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/AtmosphereType.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/static/component-props/ATMOSPHERE_PROPS.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/static/component-props/CAMERA_PROPS.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/static/component-props/CULLING_COMPONENT_PROPS.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/static/component-props/DECAL_PROPS.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/static/component-props/LIGHT_PROBE_PROPS.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/static/component-props/LIGHT_PROPS.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/static/component-props/MESH_PROPS.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/static/component-props/PHYSICS_COLLIDER_PROPS.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/static/component-props/RIGID_BODY_PROPS.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/static/component-props/SPRITE_PROPS.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/static/component-props/TERRAIN_PROPS.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/services/EngineEvents.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/engine-definitions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/services/EngineService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/EngineService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/EditorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/EditorUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/HierarchyUtil.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/InspectorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/InspectorUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/HierarchyView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/HierarchyView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/InspectorView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/InspectorView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/AddComponent.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/AddComponent.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/CameraPreferences.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/CameraPreferences.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/ComponentRow.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/EntityAttributes.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/EntityAttributes.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/EntityInformation.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/EntityInformation.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/TransformationForm.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/TransformationForm.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/UIComponent.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/UIComponent.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/UIStyles.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/UIStyles.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/dynamic-form/Layout.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/dynamic-form/Layout.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/dynamic-form/Property.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/dynamic-form/Property.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/static/CAMERA_PREFERENCES.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/static/INSPECTOR_TABS.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/static/NATIVE_COMPONENTS.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/static/ROTATION_TYPES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/static/ROTATION_TYPES.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/preferences/Preferences.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/preferences/TABS.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/preferences/components/ShortcutField.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/ShortcutField.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/preferences/components/Shortcuts.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/Shortcuts.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/preferences/components/content/ContentField.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/preferences/components/content/ContentGroup.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/preferences/components/content/ContentWrapper.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/preferences/static/PREFERENCES.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/preferences/static/PREFERENCES_TYPES.ts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,15 +97,16 @@
         <option value="WorldEntity" />
         <option value="WorldOptions" />
         <option value="shader-template" />
-        <option value="TypeScript File" />
         <option value="Node" />
+        <option value="Form" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="86-engine-hierarchy" />
+        <entry key="$PROJECT_DIR$" value="68-engine-world-tests" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -141,7 +155,7 @@
     "CMake Application.projection.executor": "Debug",
     "CMake Debug.projection.executor": "Debug",
     "CMake Debug.projectioncmake.executor": "Debug",
-    "Catch.Engine test.executor": "Debug",
+    "Catch.Engine test.executor": "Run",
     "Catch.File-system test.executor": "Debug",
     "Catch.JSON test.executor": "Run",
     "Catch.Run all.executor": "Run",
@@ -174,9 +188,9 @@
     "Shell Script.copy-files.executor": "Run",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "68-engine-world-tests",
+    "git-widget-placeholder": "65-c-ui-inspector",
     "js.last.introduce.type": "CONST",
-    "last_opened_file_path": "C:/Users/russi/WebstormProjects/projection-engine-2/src/engine/services/world/components",
+    "last_opened_file_path": "C:/Users/russi/WebstormProjects/projection-engine-2/webview/window/editor/views/inspector/forms",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -202,15 +216,17 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\window\editor\views\inspector\forms" />
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\window\editor\views\inspector\component-props" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\engine\services\world\components" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\test\core" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\window\editor\views\inspector\components" />
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\window\editor\views\inspector\component-props" />
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\window\editor\views\inspector" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\engine\services\world" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\engine\enum" />
-      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\engine\services" />
-      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\engine\runtime" />
-      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\engine\shaders" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -226,16 +242,16 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Catch.Engine test">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="CMake Application.Projection">
     <configuration name="Engine test" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="build" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_CLASS="[engine-test]" TEST_METHOD="Engine test" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="Should be the same instance" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
@@ -413,15 +429,8 @@
       <workItem from="1707170120892" duration="7054000" />
       <workItem from="1707259872759" duration="2605000" />
       <workItem from="1707565609411" duration="16181000" />
-      <workItem from="1707600497348" duration="2229000" />
-    </task>
-    <task id="LOCAL-00034" summary="[STD-26] Tabs&#10;- Adding types and enums&#10;- Removing unused code&#10;- Reworking views to be simpler&#10;- Removing TabsStore">
-      <option name="closed" value="true" />
-      <created>1704656142360</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1704656142360</updated>
+      <workItem from="1707600497348" duration="3126000" />
+      <workItem from="1707646660954" duration="11508000" />
     </task>
     <task id="LOCAL-00035" summary="[STD-34] Stores&#10;- Creating DTOs&#10;- Creating new subscribe method&#10;- Removing old objects">
       <option name="closed" value="true" />
@@ -807,7 +816,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707589758765</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="[STD-68] engine world tests&#10;- Removing unused files&#10;- Removing JSON class&#10;- Fixing tests">
+      <option name="closed" value="true" />
+      <created>1707602790570</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1707602790571</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -831,7 +848,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-52] Engine refactoring&#10;- Refactoring files&#10;- Creating core systems&#10;- Removing unused files" />
     <MESSAGE value="[STD-52] Engine refactoring&#10;- Fixing camera" />
     <MESSAGE value="[STD-63] Starting new hierarchy&#10;- Creating WorldOutlineView&#10;- Creating service for view&#10;- Fixing LightsService" />
     <MESSAGE value="[STD-16] Engine refactoring: Shaders&#10;- Moving shaders to CPP side&#10;- Creating new service for shader processing&#10;- Creating new interface for engine: ResourceLoader&#10;- Improving WindowRepository to only initialize when needed&#10;- Fixing tests&#10;- Creating new tests for StringUtils&#10;- Implementing new shader initialization architecture" />
@@ -856,7 +872,8 @@
     <MESSAGE value="[STD-86] C++ engine ui: hierarchy&#10;- Continuing hierarchy changes" />
     <MESSAGE value="[STD-86] C++ engine ui: hierarchy&#10;- EngineService" />
     <MESSAGE value="[STD-86] C++ engine ui: hierarchy&#10;- Fixing bugs&#10;- Implementing core methods" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-86] C++ engine ui: hierarchy&#10;- Fixing bugs&#10;- Implementing core methods" />
+    <MESSAGE value="[STD-68] engine world tests&#10;- Removing unused files&#10;- Removing JSON class&#10;- Fixing tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-68] engine world tests&#10;- Removing unused files&#10;- Removing JSON class&#10;- Fixing tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

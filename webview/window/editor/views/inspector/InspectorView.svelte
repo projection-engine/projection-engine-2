@@ -1,78 +1,101 @@
 <script lang="ts">
 
-    import {onDestroy, onMount} from "svelte"
-    import EntityQueryService from "@engine-core/services/EntityQueryService"
-    import EntityInspector from "./components/EntityAttributes.svelte"
+    import {onDestroy} from "svelte";
+    import Icon from "@lib/components/icon/Icon.svelte";
+    import ToolTip from "@lib/components/tooltip/ToolTip.svelte";
+    import InspectorUtil from "../../util/InspectorUtil";
+    import EngineService from "../../services/EngineService";
+    import {ComponentDTO} from "./inspector-definition";
+    import {EntityDTO} from "../hierarchy/hierarchy-definitions";
+    import {EngineStateDTO, SettingsDTO} from "../../services/engine-definitions";
+    import CameraPreferencesForm from "./forms/CameraPreferencesForm";
+    import RenderingPreferencesForm from "./forms/RenderingPreferencesForm";
+    import ViewportPreferencesForm from "./forms/ViewportPreferencesForm";
+    import AbstractFormType from "./forms/AbstractFormType";
+    import COMPONENT_DEFINITIONS from "./static/COMPONENT_DEFINITIONS";
+    import TABS from "./static/TABS";
+    import Form from "./components/Form.svelte";
+    import EntityMetadataForm from "./forms/EntityMetadataForm";
 
-    import Icon from "@lib/components/icon/Icon.svelte"
-    import ToolTip from "@lib/components/tooltip/ToolTip.svelte"
-    import CameraPreferences from "./components/CameraPreferences.svelte"
-    import InspectorUtil from "../../util/InspectorUtil"
-    import INSPECTOR_TABS from "./static/INSPECTOR_TABS"
-    import ProjectionEngine from "@lib/ProjectionEngine";
-    import ContentWrapper from "../preferences/components/content/ContentWrapper.svelte";
-    import {InjectVar} from "@lib/Injection";
-    import SelectionStore from "@lib/stores/SelectionStore";
-    import Entity from "@engine-core/instances/Entity";
+    let selectedEntity: EntityDTO;
+    let components: ComponentDTO[];
+    let engineState: EngineStateDTO;
+    let componentDefinitions: typeof AbstractFormType[];
+    let settings: SettingsDTO;
+    let tabIndex = 0;
+    let tabs = [];
 
-    let selectedEntity: Entity
-    let tabIndex = 0
-    let tabs = []
-    let isOnDynamicTab = false
-    const unsubSelection = InjectVar(SelectionStore).subscribe(data => {
-        const temp = EntityQueryService.getEntityByID(data.array[0] || data.lockedEntity)
-        if (temp === selectedEntity)
-            return
-        selectedEntity = temp
-        tabIndex = INSPECTOR_TABS.length
-        if (selectedEntity) {
-            const entityTabs = InspectorUtil.getEntityTabs(selectedEntity.allComponents, selectedEntity.isCollection)
-            setTabs(entityTabs)
-        } else
-            setTabs([])
-    }, ["array", "lockedEntity"])
+    const unsubSelection = EngineService.listenToSelectionChanges(selection => updateSelection(selection[0]));
+    const unsubLockedEntity = EngineService.listenToLockedEntityChanges(updateSelection);
+    const unsubEngineState = EngineService.listenToEngineState(payload => {
+        engineState = payload;
+    });
+    const unsubSettings = EngineService.listenToSettings(payload => {
+        settings = payload;
+    });
 
-    onDestroy(unsubSelection)
-
-    function setTabs(data) {
-        const TABS = [...INSPECTOR_TABS]
-        if (!selectedEntity)
-            TABS.pop()
-        tabs = [...TABS, ...data]
+    function updateSelection(payload: number | undefined) {
+        if (payload != null) {
+            selectedEntity = EngineService.getEntityByID(payload);
+            components = EngineService.getEntityComponents(payload);
+            tabIndex = 3;
+            componentDefinitions = components.map(c => COMPONENT_DEFINITIONS[c.componentType]);
+            if (selectedEntity) {
+                tabs = InspectorUtil.getEntityTabs(components);
+            } else {
+                tabs = [];
+            }
+            return;
+        }
+        tabIndex = 0;
+        selectedEntity = undefined;
+        components = [];
     }
 
-    $: isOnDynamicTab = tabIndex > 2 && selectedEntity !== undefined
+    onDestroy(() => {
+        unsubSelection();
+        unsubLockedEntity();
+        unsubSettings();
+        unsubEngineState();
+    });
+
 </script>
 
 <div class="wrapper">
     <div class="tabs">
+        {#each TABS as button, index}
+            <button data-sveltebuttondefault="-"
+                    data-sveltehighlight={tabIndex === index ? "-" : undefined}
+                    class="tab-button shared"
+                    on:click={() => tabIndex = index}
+            >
+                <Icon styles="font-size: .9rem">{button.icon}</Icon>
+                <ToolTip content={button.label}/>
+            </button>
+        {/each}
+        <div data-sveltedivider="-"></div>
         {#each tabs as button, index}
-            {#if button.divider}
-                <div data-sveltedivider="-"></div>
-            {:else}
-                <button data-sveltebuttondefault="-"
-                        data-sveltehighlight={tabIndex === index ? "-" : undefined}
-                        class="tab-button shared"
-                        on:click={() => tabIndex = index}
-                        style={button.color ? "--pj-accent-color: " + button.color  + "; color: " + button.color : undefined}
-                >
-                    <Icon styles="font-size: .9rem">{button.icon}</Icon>
-                    <ToolTip content={button.label}/>
-                </button>
-            {/if}
+            <button data-sveltebuttondefault="-"
+                    data-sveltehighlight={tabIndex === index ? "-" : undefined}
+                    class="tab-button shared"
+                    on:click={() => tabIndex = index}
+            >
+                <Icon styles="font-size: .9rem">{button.icon}</Icon>
+                <ToolTip content={button.label}/>
+            </button>
         {/each}
     </div>
     <div class="content">
-        {#if isOnDynamicTab && selectedEntity != null}
-            <EntityInspector
-                    setTabIndex={i => tabIndex = i}
-                    entity={selectedEntity}
-                    tabIndex={tabIndex}
-            />
+        {#if tabIndex === 0}
+            <Form definition={CameraPreferencesForm}/>
+        {:else if tabIndex === 1}
+            <Form definition={ViewportPreferencesForm}/>
         {:else if tabIndex === 2}
-            <CameraPreferences/>
-        {:else}
-            <ContentWrapper data={tabs[tabIndex]}/>
+            <Form definition={RenderingPreferencesForm}/>
+        {:else if tabIndex === 3}
+            <Form definition={EntityMetadataForm}/>
+        {:else if componentDefinitions[tabIndex] != null}
+            <Form definition={componentDefinitions[tabIndex]}/>
         {/if}
     </div>
 </div>

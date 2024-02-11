@@ -1,15 +1,15 @@
 <script>
-    import Checkbox from "@lib/components/checkbox/Checkbox.svelte"
-    import Component from "@engine-core/instances/components/Component"
-    import Selector from "../../../../components/selector/Selector.svelte"
+    import Checkbox from "@lib/components/checkbox/Checkbox.svelte";
+    import Component from "@engine-core/instances/components/Component";
+    import Selector from "../../../../components/selector/Selector.svelte";
 
-    import ColorPicker from "@lib/components/color-picker/ColorPicker.svelte"
-    import Input from "@lib/components/input/Input.svelte"
-    import Dropdown from "@lib/components/dropdown/Dropdown.svelte"
-    import Icon from "@lib/components/icon/Icon.svelte"
-    import Range from "@lib/components/range/Range.svelte"
-    import FileSystemAPI from "@engine-core/services/FileSystemAPI"
-    import LocalizationEN from "@enums/LocalizationEN"
+    import ColorPicker from "@lib/components/color-picker/ColorPicker.svelte";
+    import Input from "@lib/components/input/Input.svelte";
+    import Dropdown from "@lib/components/dropdown/Dropdown.svelte";
+    import Icon from "@lib/components/icon/Icon.svelte";
+    import Range from "@lib/components/range/Range.svelte";
+    import FileSystemAPI from "@engine-core/services/FileSystemAPI";
+    import LocalizationEN from "@enums/LocalizationEN";
     import EmptyIcon from "@lib/components/icon/EmptyIcon.svelte";
 
     export let component = undefined
