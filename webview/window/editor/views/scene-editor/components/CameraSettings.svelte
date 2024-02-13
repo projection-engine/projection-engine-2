@@ -1,27 +1,17 @@
 <script>
     import CameraGizmo from "./CameraGizmo.svelte"
-    import Dropdown from "@lib/components/dropdown/Dropdown.svelte"
     import ToolTip from "@lib/components/tooltip/ToolTip.svelte"
     import Icon from "@lib/components/icon/Icon.svelte"
     import CameraTracker from "../../../../../engine/tools/utils/CameraTracker"
     import {onDestroy, onMount} from "svelte"
     import LocalizationEN from "@enums/LocalizationEN"
-    import EmptyIcon from "@lib/components/icon/EmptyIcon.svelte"
-    import EditorUtil from "../../../util/EditorUtil"
     import ProjectionEngine from "@lib/ProjectionEngine";
     import {InjectVar} from "@lib/Injection";
     import SettingsStore from "@lib/stores/SettingsStore";
-    import Components from "@engine-core/static/Components";
-    import HierarchyStore from "@lib/stores/HierarchyStore";
 
-    let cameras = []
     let focusedCamera
     let screenSpaceMovement = false
     let camera = {}
-
-    const unsubscribeWorld = InjectVar(HierarchyStore).subscribe(() => {
-        cameras = ProjectionEngine.Engine.getByComponent(Components.CAMERA)
-    })
 
     const unsubSettings = InjectVar(SettingsStore).subscribe(data => {
         CameraTracker.screenSpaceMovement = screenSpaceMovement = data.screenSpaceMovement
@@ -32,7 +22,6 @@
 
     onDestroy(() => {
         unsubSettings()
-        unsubscribeWorld()
     })
 
     const toggleProjection = () => {
@@ -41,34 +30,6 @@
 </script>
 
 <div class="wrapper">
-    <Dropdown
-            disabled={cameras.length === 0}
-            buttonStyles={"border-radius: 25px; height: 25px;" + (focusedCamera ? "background: var(--pj-accent-color);" : "background: var(--pj-background-tertiary);")}>
-        <button data-sveltebuttondefault="-"
-                disabled={cameras.length === 0}
-                slot="button"
-                style="background: transparent; box-shadow: none"
-                class="button viewport"
-                data-sveltehighlight={focusedCamera ? "-" : undefined}
-        >
-            <ToolTip content={LocalizationEN.FOCUS_ON_CAMERA}/>
-            <Icon styles="font-size: 1rem">videocam</Icon>
-        </button>
-        {#each cameras as camera}
-            <button data-sveltebuttondefault="-"
-                    style="border: none"
-                    class="button viewport"
-                    on:click={_ => EditorUtil.focusOnCamera(camera)}
-            >
-                {#if focusedCamera === camera.id}
-                    <Icon>check</Icon>
-                {:else}
-                    <EmptyIcon/>
-                {/if}
-                {camera.name}
-            </button>
-        {/each}
-    </Dropdown>
     <button data-sveltebuttondefault="-" disabled={focusedCamera} class="button viewport"
             on:click={toggleProjection}>
         <ToolTip content={LocalizationEN.SWITCH_PROJECTION}/>

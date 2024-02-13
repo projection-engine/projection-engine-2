@@ -1,4 +1,3 @@
-import SPRITE_PROPS from "../../static/component-props/SPRITE_PROPS"
 import Component from "./Component"
 import COMPONENTS from "../../static/Components"
 import RepositoryService from "@engine-core/services/serialization/RepositoryService";
@@ -10,7 +9,6 @@ export default class SpriteComponent extends Component {
 	get componentKey(): string {
 		return SpriteComponent.componentKey
 	}
-	_props = SPRITE_PROPS
 	imageID?: string
 	attributes: [number, number] = [0, 0]
 

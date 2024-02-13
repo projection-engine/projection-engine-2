@@ -112,9 +112,6 @@ export default class EditorUtil extends IInjectable {
         }
     }
 
-    static async resolveFileName(path: string, ext: string): Promise<string> {
-        return await EditorUtil.getCall(IPCRoutes.RESOLVE_NAME, {path, ext}, false)
-    }
 
     static selectEntityHierarchy(start: Entity): string[] {
         const result: string[] = []

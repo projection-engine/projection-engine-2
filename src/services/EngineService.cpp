@@ -5,30 +5,30 @@
 #include "../engine/services/world/Entity.h"
 #include "../ui/WindowRepository.h"
 #include "nlohmann/json.hpp"
-
-#define CREATE_ENTITY "CREATE_ENTITY"
-#define DELETE_ENTITY "DELETE_ENTITY"
-#define GET_HIERARCHY "GET_HIERARCHY"
-#define SELECT_ENTITIES "SELECT_ENTITIES"
-#define GET_SELECTED_ENTITIES "GET_SELECTED_ENTITIES"
-#define LOCK_ENTITY "LOCK_ENTITY"
-#define GET_LOCKED_ENTITY "GET_LOCKED_ENTITY"
-#define TOGGLE_ACTIVE "TOGGLE_ACTIVE"
-#define RENAME_ENTITY "RENAME_ENTITY"
-#define MAKE_PARENT "MAKE_PARENT"
+#include "../engine/enum/EngineEvents.h"
+#include "../engine/listeners/WorldHierarchyListener.h"
+#include "../engine/listeners/WorldChangeListener.h"
 
 namespace PEngine {
     void EngineService::BindEvents(PEngine::WebViewWindow *pWindow) {
-        pWindow->addMessageListener(CREATE_ENTITY, HandleEvent);
-        pWindow->addMessageListener(DELETE_ENTITY, HandleEvent);
-        pWindow->addMessageListener(GET_HIERARCHY, HandleEvent);
-        pWindow->addMessageListener(SELECT_ENTITIES, HandleEvent);
-        pWindow->addMessageListener(GET_SELECTED_ENTITIES, HandleEvent);
-        pWindow->addMessageListener(LOCK_ENTITY, HandleEvent);
-        pWindow->addMessageListener(GET_LOCKED_ENTITY, HandleEvent);
-        pWindow->addMessageListener(MAKE_PARENT, HandleEvent);
-        pWindow->addMessageListener(RENAME_ENTITY, HandleEvent);
-        pWindow->addMessageListener(TOGGLE_ACTIVE, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::CREATE_ENTITY, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::DELETE_ENTITY, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::GET_HIERARCHY, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::SELECT_ENTITIES, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::GET_SELECTED_ENTITIES, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::LOCK_ENTITY, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::GET_LOCKED_ENTITY, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::MAKE_PARENT, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::RENAME_ENTITY, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::TOGGLE_ACTIVE, HandleEvent);
+
+        pWindow->addMessageListener(EngineEvents::UPDATE_ENGINE_STATE, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::UPDATE_ENTITY, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::UPDATE_COMPONENT, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::GET_ENTITY_COMPONENTS, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::GET_ENTITY, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::ADD_COMPONENT, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::GET_ENGINE_STATE, HandleEvent);
     }
 
     void EngineService::HandleEvent(WebViewPayload &payload) {
@@ -36,81 +36,48 @@ namespace PEngine {
         Engine &engine = window->getEngine();
         WorldService *world = engine.getWorldService();
 
-        if (payload.id == CREATE_ENTITY) {
-            world->addEntity();
-            PostHierarchy(payload, engine);
-        } else if (payload.id == DELETE_ENTITY) {
-            nlohmann::json parsed = nlohmann::json::parse(payload.payload);
-            std::uint32_t value = parsed.at("id").get<std::uint32_t>();
-            world->removeEntity(value);
-            PostHierarchy(payload, engine);
-        } else if (payload.id == GET_HIERARCHY) {
-            PostHierarchy(payload, engine);
-        } else if (payload.id == TOGGLE_ACTIVE) {
-            nlohmann::json parsed = nlohmann::json::parse(payload.payload);
-            Entity *entity = world->getEntity(parsed.at("id").get<std::uint32_t>());
-            entity->active = !entity->active;
-            PostHierarchy(payload, engine);
-        } else if (payload.id == SELECT_ENTITIES) {
-            std::vector<std::uint32_t> &vec = engine.getState().selected;
-            vec.clear();
-            nlohmann::json parsed = nlohmann::json::parse(payload.payload);
-            for (std::uint32_t element: parsed) {
-                vec.push_back(element);
-            }
-            PostSelectedEntities(payload, engine);
-        } else if (payload.id == GET_SELECTED_ENTITIES) {
-            PostSelectedEntities(payload, engine);
-        } else if (payload.id == LOCK_ENTITY) {
-            nlohmann::json parsed = nlohmann::json::parse(payload.payload);
-            engine.getState().lockedEntity = parsed.at("id").get<std::uint32_t>();
-            PostLockedEntity(payload, engine);
-        } else if (payload.id == GET_LOCKED_ENTITY) {
-            PostLockedEntity(payload, engine);
-        } else if (payload.id == RENAME_ENTITY) {
-            nlohmann::json parsed = nlohmann::json::parse(payload.payload);
-            Entity *entity = world->getEntity(parsed.at("id").get<std::uint32_t>());
-            entity->name = parsed.at("name").get<std::string>();
-            PostHierarchy(payload, engine);
+        if (payload.id == EngineEvents::CREATE_ENTITY) {
+            WorldChangeListener::AddEntity(payload, engine, world);
+        } else if (payload.id == EngineEvents::DELETE_ENTITY) {
+            WorldChangeListener::DeleteEntity(payload, engine, world);
+        } else if (payload.id == EngineEvents::GET_HIERARCHY) {
+            WorldHierarchyListener::PostHierarchy(payload, engine);
+        } else if (payload.id == EngineEvents::TOGGLE_ACTIVE) {
+            WorldChangeListener::ToggleActive(payload, engine, world);
+        } else if (payload.id == EngineEvents::SELECT_ENTITIES) {
+            WorldHierarchyListener::SelectEntities(payload, engine);
+        } else if (payload.id == EngineEvents::GET_SELECTED_ENTITIES) {
+            WorldHierarchyListener::PostSelectedEntities(payload, engine);
+        } else if (payload.id == EngineEvents::LOCK_ENTITY) {
+            WorldHierarchyListener::LockEntity(payload, engine);
+        } else if (payload.id == EngineEvents::GET_LOCKED_ENTITY) {
+            WorldHierarchyListener::PostLockedEntity(payload, engine);
+        } else if (payload.id == EngineEvents::RENAME_ENTITY) {
+            WorldChangeListener::RenameEntity(payload, engine, world);
+        } else if (payload.id == EngineEvents::UPDATE_ENGINE_STATE) {
+            UpdateEngineState(payload, engine);
+        } else if (payload.id == EngineEvents::UPDATE_ENTITY) {
+            WorldChangeListener::UpdateEntity(payload, engine, world);
+        } else if (payload.id == EngineEvents::UPDATE_COMPONENT) {
+            WorldChangeListener::UpdateComponent(payload, engine, world);
+        } else if (payload.id == EngineEvents::GET_ENTITY_COMPONENTS) {
+            WorldChangeListener::GetEntityComponents(payload, engine, world);
+        } else if (payload.id == EngineEvents::GET_ENTITY) {
+            WorldChangeListener::GetEntity(payload, engine, world);
+        } else if (payload.id == EngineEvents::ADD_COMPONENT) {
+            WorldChangeListener::AddComponent(payload, engine, world);
+        } else if (payload.id == EngineEvents::GET_ENGINE_STATE) {
+            GetEngineState(payload, engine);
+
         }
     }
 
-    void EngineService::PostSelectedEntities(const WebViewPayload &payload, Engine &engine) {
-        nlohmann::json result = engine.getState().selected;
-        payload.webview->postMessage(result.dump(), GET_SELECTED_ENTITIES);
+    void EngineService::UpdateEngineState(WebViewPayload &payload, Engine &engine) {
+        // TODO
     }
 
-    void EngineService::PostLockedEntity(const WebViewPayload &payload, Engine &engine) {
-        nlohmann::json j;
-        j["id"] = engine.getState().lockedEntity;
-        payload.webview->postMessage(j.dump(), GET_LOCKED_ENTITY);
-        payload.resolve(j.dump());
+    void EngineService::GetEngineState(WebViewPayload &payload, Engine &engine) {
+// TODO
     }
 
-    void EngineService::PostHierarchy(WebViewPayload &payload, Engine &engine) {
-        WorldService *world = engine.getWorldService();
-        std::unordered_map<uint32_t, std::vector<uint32_t>> hierarchy = world->getParentChildren();
-        nlohmann::json json;
-        GetHierarchy(json, world, hierarchy, &world->getRoot());
-        payload.webview->postMessage(json.dump(), GET_HIERARCHY);
-    }
-
-    void EngineService::GetHierarchy(nlohmann::json &json,
-                                     WorldService *world,
-                                     std::unordered_map<std::uint32_t, std::vector<std::uint32_t>> &hierarchy,
-                                     Entity *entity) {
-        std::vector<nlohmann::json> children;
-        json["name"] = entity->name;
-        json["entityID"] = entity->getEntityId();
-        json["components"] = world->getComponentList(entity);
-        json["isActive"] = entity->active;
-        if (hierarchy.count(entity->getEntityId())) {
-            for (auto child: hierarchy[entity->getEntityId()]) {
-                nlohmann::json childJson;
-                GetHierarchy(childJson, world, hierarchy, world->getEntity(child));
-                children.push_back(childJson);
-            }
-        }
-        json["children"] = children;
-    }
-} 
+}

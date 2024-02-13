@@ -4,11 +4,11 @@
     import Icon from "@lib/components/icon/Icon.svelte";
     import ModalInput from "../../../components/modal-input/ModalInput.svelte";
     import LocalizationEN from "@enums/LocalizationEN";
-    import {EntityDTO} from "../hierarchy-definitions";
+    import {HierarchyEntityDTO} from "../hierarchy-definitions";
     import EngineService from "../../../services/EngineService";
     import EditorUtil from "../../../util/EditorUtil";
 
-    export let entity: EntityDTO
+    export let entity: HierarchyEntityDTO
     export let lockedEntity: number
     export let isOpen: boolean
     export let isOnSearch: boolean

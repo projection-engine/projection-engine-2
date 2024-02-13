@@ -1,5 +1,4 @@
 import Component from "./Component"
-import RIGID_BODY_PROPS from "../../static/component-props/RIGID_BODY_PROPS"
 import COMPONENTS from "../../static/Components"
 import RepositoryService from "@engine-core/services/serialization/RepositoryService";
 
@@ -11,7 +10,6 @@ export default class RigidBodyComponent extends Component {
 		return RigidBodyComponent.componentKey
 	}
 
-	_props = RIGID_BODY_PROPS
 
 	mass = 1
 	drag = 0

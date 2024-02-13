@@ -1,6 +1,5 @@
 import Component from "./Component"
 
-import MESH_PROPS from "../../static/component-props/MESH_PROPS"
 import MaterialAPI from "../../services/MaterialAPI"
 import GPU from "../../core/GPU"
 import FileSystemAPI from "../../services/FileSystemAPI"
@@ -18,7 +17,6 @@ export default class MeshComponent extends Component {
 	get componentKey(): string {
 		return MeshComponent.componentKey
 	}
-	_props = MESH_PROPS
 
 	castsShadows = true
 	_meshID?: string

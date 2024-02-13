@@ -3,14 +3,14 @@
     import Icon from "@lib/components/icon/Icon.svelte";
     import ToolTip from "@lib/components/tooltip/ToolTip.svelte";
     import LocalizationEN from "@enums/LocalizationEN";
-    import {EntityDTO} from "../hierarchy-definitions";
+    import {HierarchyEntityDTO} from "../hierarchy-definitions";
     import EngineService from "../../../services/EngineService";
     import ComponentNode from "./ComponentNode.svelte";
 
-    export let testSearch: GenericNonVoidFunctionWithP<EntityDTO, boolean>
+    export let testSearch: GenericNonVoidFunctionWithP<HierarchyEntityDTO, boolean>
     export let depth: number
     export let isOnSearch: boolean
-    export let entity: EntityDTO
+    export let entity: HierarchyEntityDTO
     export let open: Record<number, boolean>
     export let updateOpen: GenericVoidFunction
     export let selectedList: number[]
@@ -27,7 +27,7 @@
         }
     }
 
-    function closeHierarchy(entity: EntityDTO) {
+    function closeHierarchy(entity: HierarchyEntityDTO) {
         entity.children.forEach(c => {
             delete open[c.entityID]
             closeHierarchy(c)

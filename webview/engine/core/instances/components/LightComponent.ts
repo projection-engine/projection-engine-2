@@ -1,5 +1,4 @@
 import Component from "./Component"
-import LIGHT_PROPS from "../../static/component-props/LIGHT_PROPS"
 import LIGHT_TYPES from "../../static/LIGHT_TYPES"
 import WorldLights from "../../core/WorldLights"
 import {mat4} from "gl-matrix"
@@ -16,8 +15,6 @@ export default class LightComponent extends Component {
 	get componentKey(): string {
 		return LightComponent.componentKey
 	}
-
-	_props = LIGHT_PROPS
 
 
 	get type() {

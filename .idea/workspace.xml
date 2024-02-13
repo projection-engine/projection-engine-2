@@ -19,49 +19,14 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-86] C++ engine ui: hierarchy&#10;- Fixing bugs&#10;- Implementing core methods">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-65] c++ entity and engine inspector&#10;- Removing unused stores&#10;- Creating engine service methods&#10;- Refactoring InspectorView">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/Engine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/Engine.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/Engine.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/Engine.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/ComponentFactory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/ComponentFactory.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/HierarchyService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/EngineService.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/HierarchyService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/EngineService.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/JSON.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/core/JSONTest.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/core/JSONTest.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/engine/EngineTest.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/engine/WorldServiceTest.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/engine/EngineTest.h" beforeDir="false" afterPath="$PROJECT_DIR$/test/engine/WorldServiceTest.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/main_test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/main_test.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/Roboto/LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-Black.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-BlackItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-Bold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-BoldItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-Italic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-Light.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-LightItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-Medium.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-MediumItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-Regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-Thin.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/Roboto/Roboto-ThinItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/material-icons/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIcons-Regular.codepoints" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIcons-Regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIconsOutlined-Regular.codepoints" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIconsOutlined-Regular.otf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIconsRound-Regular.codepoints" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIconsRound-Regular.otf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIconsSharp-Regular.codepoints" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIconsSharp-Regular.otf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIconsTwoTone-Regular.codepoints" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/material-icons/MaterialIconsTwoTone-Regular.otf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendors/material-icons/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/EngineService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/EngineService.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/EngineService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/EngineService.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/services/EngineService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/EngineService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/services/engine-definitions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/engine-definitions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/InspectorView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/InspectorView.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,15 +49,18 @@
         <option value="WorldEntity" />
         <option value="WorldOptions" />
         <option value="shader-template" />
-        <option value="TypeScript File" />
         <option value="Node" />
+        <option value="Form" />
+        <option value="FormField" />
+        <option value="TypeScript File" />
+        <option value="InspectorTabs" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="86-engine-hierarchy" />
+        <entry key="$PROJECT_DIR$" value="68-engine-world-tests" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -134,83 +102,85 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "C/C++ File.main.cpp.executor": "Run",
-    "CMake Application.Projection.executor": "Run",
-    "CMake Application.projection.executor": "Debug",
-    "CMake Debug.projection.executor": "Debug",
-    "CMake Debug.projectioncmake.executor": "Debug",
-    "Catch.Engine test.executor": "Debug",
-    "Catch.File-system test.executor": "Debug",
-    "Catch.JSON test.executor": "Run",
-    "Catch.Run all.executor": "Run",
-    "Catch.String util test.executor": "Debug",
-    "Catch.main_test.executor": "Run",
-    "Jest.Should be lazily obtained.executor": "Run",
-    "Jest.Should be the same instance (1).executor": "Run",
-    "Jest.Should be the same instance.executor": "Run",
-    "Jest.Should dump cycle.executor": "Run",
-    "Jest.Should dump data.executor": "Run",
-    "Jest.Should inject into non-static property.executor": "Run",
-    "Jest.Should not inject not @Injectable.executor": "Run",
-    "Jest.Should parse nested.executor": "Run",
-    "Jest.Should parse serializable.executor": "Run",
-    "Jest.Should parse.executor": "Run",
-    "Jest.Should prepare ID.executor": "Run",
-    "Jest.Should restore circular dependency.executor": "Run",
-    "Jest.Should restore data.executor": "Run",
-    "Jest.Should serialize nested.executor": "Run",
-    "Jest.Should serialize.executor": "Run",
-    "Jest.Should stringify Serializable.executor": "Run",
-    "Jest.Should stringify.executor": "Run",
-    "Jest.Should trigger global subscriber.executor": "Run",
-    "Jest.Should trigger subscriber with same value.executor": "Run",
-    "Jest.Should unsubscribe.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "Shell Script.copy-files.executor": "Run",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "68-engine-world-tests",
-    "js.last.introduce.type": "CONST",
-    "last_opened_file_path": "C:/Users/russi/WebstormProjects/projection-engine-2/src/engine/services/world/components",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs.jest.jest_package": "C:/Users/russi/WebstormProjects/projection-engine-2/webview/node_modules/jest",
-    "nodejs_package_manager_path": "npm",
-    "npm.bdev.executor": "Run",
-    "npm.build.executor": "Run",
-    "npm.dev-build.executor": "Run",
-    "npm.sdev.executor": "Run",
-    "npm.test.executor": "Run",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "CMakeSettings",
-    "structure.view.defaults.are.configured": "true",
-    "ts.external.directory.path": "C:\\Users\\russi\\WebstormProjects\\projection-engine-2\\webview\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;C/C++ File.main.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;CMake Application.Projection.executor&quot;: &quot;Run&quot;,
+    &quot;CMake Application.projection.executor&quot;: &quot;Debug&quot;,
+    &quot;CMake Debug.projection.executor&quot;: &quot;Debug&quot;,
+    &quot;CMake Debug.projectioncmake.executor&quot;: &quot;Debug&quot;,
+    &quot;Catch.Engine test.executor&quot;: &quot;Run&quot;,
+    &quot;Catch.File-system test.executor&quot;: &quot;Debug&quot;,
+    &quot;Catch.JSON test.executor&quot;: &quot;Run&quot;,
+    &quot;Catch.Run all.executor&quot;: &quot;Run&quot;,
+    &quot;Catch.String util test.executor&quot;: &quot;Debug&quot;,
+    &quot;Catch.main_test.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should be lazily obtained.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should be the same instance (1).executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should be the same instance.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should dump cycle.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should dump data.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should inject into non-static property.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should not inject not @Injectable.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should parse nested.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should parse serializable.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should parse.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should prepare ID.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should restore circular dependency.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should restore data.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should serialize nested.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should serialize.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should stringify Serializable.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should stringify.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should trigger global subscriber.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should trigger subscriber with same value.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should unsubscribe.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;Shell Script.copy-files.executor&quot;: &quot;Run&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;65-c-ui-inspector&quot;,
+    &quot;js.last.introduce.type&quot;: &quot;CONST&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/russi/WebstormProjects/projection-engine-2/webview/window/editor/views/inspector/forms&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs.jest.jest_package&quot;: &quot;C:/Users/russi/WebstormProjects/projection-engine-2/webview/node_modules/jest&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.bdev.executor&quot;: &quot;Run&quot;,
+    &quot;npm.build.executor&quot;: &quot;Run&quot;,
+    &quot;npm.dev-build.executor&quot;: &quot;Run&quot;,
+    &quot;npm.sdev.executor&quot;: &quot;Run&quot;,
+    &quot;npm.test.executor&quot;: &quot;Run&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;CMakeSettings&quot;,
+    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\russi\\WebstormProjects\\projection-engine-2\\webview\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "Glsl"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;Glsl&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\window\editor\views\inspector\forms" />
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\window\editor\views\inspector\component-props" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\engine\services\world\components" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\test\core" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\window\editor\views\inspector\components" />
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\window\editor\views\inspector\component-props" />
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\window\editor\views\inspector" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\engine\services\world" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\engine\enum" />
-      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\engine\services" />
-      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\engine\runtime" />
-      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\engine\shaders" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -226,7 +196,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Catch.Engine test">
+  <component name="RunManager" selected="CMake Application.Projection">
     <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="CLION.EXTERNAL.BUILD" enabled="true" />
@@ -413,39 +383,11 @@
       <workItem from="1707170120892" duration="7054000" />
       <workItem from="1707259872759" duration="2605000" />
       <workItem from="1707565609411" duration="16181000" />
-      <workItem from="1707600497348" duration="2229000" />
-    </task>
-    <task id="LOCAL-00034" summary="[STD-26] Tabs&#10;- Adding types and enums&#10;- Removing unused code&#10;- Reworking views to be simpler&#10;- Removing TabsStore">
-      <option name="closed" value="true" />
-      <created>1704656142360</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1704656142360</updated>
-    </task>
-    <task id="LOCAL-00035" summary="[STD-34] Stores&#10;- Creating DTOs&#10;- Creating new subscribe method&#10;- Removing old objects">
-      <option name="closed" value="true" />
-      <created>1704668806461</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1704668806461</updated>
-    </task>
-    <task id="LOCAL-00036" summary="[STD-34] Stores&#10;- Fixing subscribe and unsubscribe&#10;- Creating test for store">
-      <option name="closed" value="true" />
-      <created>1704753409489</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1704753409489</updated>
-    </task>
-    <task id="LOCAL-00037" summary="[STD-34] Stores&#10;- Completing change to subscribe&#10;- Creating test for Injection &#10;- Improving store update method">
-      <option name="closed" value="true" />
-      <created>1705158109312</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1705158109312</updated>
+      <workItem from="1707600497348" duration="3126000" />
+      <workItem from="1707646660954" duration="15951000" />
+      <workItem from="1707685550190" duration="3072000" />
+      <workItem from="1707733448289" duration="1481000" />
+      <workItem from="1707822731739" duration="2251000" />
     </task>
     <task id="LOCAL-00038" summary="[STD-34] Stores&#10;- Merging Visuals and Engine stores into Settings store">
       <option name="closed" value="true" />
@@ -807,7 +749,39 @@
       <option name="project" value="LOCAL" />
       <updated>1707589758765</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="[STD-68] engine world tests&#10;- Removing unused files&#10;- Removing JSON class&#10;- Fixing tests">
+      <option name="closed" value="true" />
+      <created>1707602790570</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1707602790571</updated>
+    </task>
+    <task id="LOCAL-00084" summary="[STD-65] c++ entity and engine inspector&#10;- Removing unused files&#10;- Rewriting property definition&#10;- Creating new form declaration system&#10;- Refactoring inspector view&#10;- Adding components to component type enum">
+      <option name="closed" value="true" />
+      <created>1707661795767</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1707661795768</updated>
+    </task>
+    <task id="LOCAL-00085" summary="[STD-65] c++ entity and engine inspector&#10;- Creating form &#10;- Form for MovementComponent">
+      <option name="closed" value="true" />
+      <created>1707668906200</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1707668906200</updated>
+    </task>
+    <task id="LOCAL-00086" summary="[STD-65] c++ entity and engine inspector&#10;- Removing unused stores&#10;- Creating engine service methods&#10;- Refactoring InspectorView">
+      <option name="closed" value="true" />
+      <created>1707688408461</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1707688408462</updated>
+    </task>
+    <option name="localTasksCounter" value="87" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -831,10 +805,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-52] Engine refactoring&#10;- Refactoring files&#10;- Creating core systems&#10;- Removing unused files" />
-    <MESSAGE value="[STD-52] Engine refactoring&#10;- Fixing camera" />
-    <MESSAGE value="[STD-63] Starting new hierarchy&#10;- Creating WorldOutlineView&#10;- Creating service for view&#10;- Fixing LightsService" />
-    <MESSAGE value="[STD-16] Engine refactoring: Shaders&#10;- Moving shaders to CPP side&#10;- Creating new service for shader processing&#10;- Creating new interface for engine: ResourceLoader&#10;- Improving WindowRepository to only initialize when needed&#10;- Fixing tests&#10;- Creating new tests for StringUtils&#10;- Implementing new shader initialization architecture" />
     <MESSAGE value="[STD-16] Engine refactoring: Shaders&#10;- adding rebuild button" />
     <MESSAGE value="[STD-75] Adding transparency support for webview2 context" />
     <MESSAGE value="[STD-78] C++ render loop&#10;- Creating new core services&#10;- Refactoring files" />
@@ -856,7 +826,11 @@
     <MESSAGE value="[STD-86] C++ engine ui: hierarchy&#10;- Continuing hierarchy changes" />
     <MESSAGE value="[STD-86] C++ engine ui: hierarchy&#10;- EngineService" />
     <MESSAGE value="[STD-86] C++ engine ui: hierarchy&#10;- Fixing bugs&#10;- Implementing core methods" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-86] C++ engine ui: hierarchy&#10;- Fixing bugs&#10;- Implementing core methods" />
+    <MESSAGE value="[STD-68] engine world tests&#10;- Removing unused files&#10;- Removing JSON class&#10;- Fixing tests" />
+    <MESSAGE value="[STD-65] c++ entity and engine inspector&#10;- Removing unused files&#10;- Rewriting property definition&#10;- Creating new form declaration system&#10;- Refactoring inspector view&#10;- Adding components to component type enum" />
+    <MESSAGE value="[STD-65] c++ entity and engine inspector&#10;- Creating form &#10;- Form for MovementComponent" />
+    <MESSAGE value="[STD-65] c++ entity and engine inspector&#10;- Removing unused stores&#10;- Creating engine service methods&#10;- Refactoring InspectorView" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-65] c++ entity and engine inspector&#10;- Removing unused stores&#10;- Creating engine service methods&#10;- Refactoring InspectorView" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -898,7 +872,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/webview/window/editor/services/EngineService.ts</url>
-          <line>51</line>
+          <line>58</line>
           <option name="timeStamp" value="79" />
         </line-breakpoint>
       </breakpoints>

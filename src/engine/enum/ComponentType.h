@@ -3,7 +3,17 @@
 
 namespace PEngine{
     enum ComponentType{
-        MOVEMENT
+        MOVEMENT,
+        ATMOSPHERE,
+        CAMERA,
+        CULLING,
+        COLLIDER,
+        DECAL,
+        LIGHT,
+        LIGHT_PROBE,
+        MESH,
+        TERRAIN,
+        SPRITE,
     };
 }
 #endif

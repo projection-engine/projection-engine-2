@@ -1,5 +1,4 @@
 import Component from "./Component"
-import CAMERA_PROPS from "../../static/component-props/CAMERA_PROPS"
 import COMPONENTS from "../../static/Components"
 import RepositoryService from "@engine-core/services/serialization/RepositoryService";
 
@@ -10,8 +9,6 @@ export default class CameraComponent extends Component {
 	get componentKey(): string {
 		return CameraComponent.componentKey
 	}
-
-	_props = CAMERA_PROPS
 
 	fov = 45
 
