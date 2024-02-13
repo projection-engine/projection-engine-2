@@ -27,13 +27,22 @@ set(COMMON_LIBRARIES
 )
 
 set(FILE_PATHS
-       src/engine/services/world/WorldRegistry.cpp
-       src/engine/services/world/WorldRegistry.h
+
+
+        src/engine/enum/EngineEvents.cpp
+        src/engine/enum/EngineEvents.h
+        src/engine/listeners/WorldHierarchyListener.cpp
+        src/engine/listeners/WorldHierarchyListener.h
+        src/engine/listeners/WorldChangeListener.cpp
+        src/engine/listeners/WorldChangeListener.h
+
+        src/engine/services/world/WorldRegistry.cpp
+        src/engine/services/world/WorldRegistry.h
 
         src/engine/services/RuntimeState.h
         src/services/EngineService.cpp
         src/services/EngineService.h
-        
+
         src/engine/services/world/components/MeshComponent.h
         src/engine/services/world/components/LightComponent.h
         src/engine/services/world/components/AtmosphereComponent.h

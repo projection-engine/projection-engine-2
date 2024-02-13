@@ -50,7 +50,7 @@
                 selectedEntity = e;
             });
              EngineService.getEntityComponents(payload).then(e => {
-                 selectedEntity = e;
+                 components = e;
              });
             tabIndex = 3;
             componentDefinitions = components.map(c => COMPONENT_DEFINITIONS[c.componentType]);
@@ -88,7 +88,7 @@
                 selectedEntity = selectedEntity;
                 break;
             default:
-                EngineService.postComponentChange(selectedEntity.entityID, components);
+                EngineService.postComponentChange(selectedEntity.entityID, components[tabIndex - 3]);
                 components = components;
                 break;
         }
@@ -113,8 +113,8 @@
             <Form {postResponse} definition={RenderingPreferencesForm} data={engineState}/>
         {:else if tabIndex === 3}
             <Form {postResponse} definition={EntityMetadataForm} data={selectedEntity}/>
-        {:else if componentDefinitions[tabIndex] != null}
-            <Form {postResponse} definition={componentDefinitions[tabIndex]} data={components[tabIndex]}/>
+        {:else if componentDefinitions[tabIndex - 3] != null}
+            <Form {postResponse} definition={componentDefinitions[tabIndex - 3]} data={components[tabIndex - 3]}/>
         {/if}
     </div>
 </div>

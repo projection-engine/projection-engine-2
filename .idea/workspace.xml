@@ -19,25 +19,14 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-65] c++ entity and engine inspector&#10;- Creating form &#10;- Form for MovementComponent">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-65] c++ entity and engine inspector&#10;- Removing unused stores&#10;- Creating engine service methods&#10;- Refactoring InspectorView">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/ProjectionEngine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/ProjectionEngine.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/stores/HierarchyStore.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/stores/state/HierarchyDTO.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/services/EngineStateService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/EngineStateService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/services/ProjectService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/ProjectService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/EngineService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/EngineService.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/EngineService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/EngineService.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/services/EngineService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/EngineService.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/services/engine-definitions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/engine-definitions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/InspectorUtil.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/HierarchyView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/HierarchyView.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/EntityNode.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/EntityNode.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/HierarchyHeader.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/HierarchyHeader.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/HierarchyNode.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/HierarchyNode.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/hierarchy-definitions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/hierarchy-definitions.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/InspectorView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/InspectorView.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/inspector-definition.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/inspector-definition.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/CameraSettings.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/scene-editor/components/CameraSettings.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/ui/UIEditorView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/ui/UIEditorView.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -208,6 +197,11 @@
     </option>
   </component>
   <component name="RunManager" selected="CMake Application.Projection">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Engine test" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="build" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_CLASS="[engine-test]" TEST_METHOD="Engine test" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -391,15 +385,9 @@
       <workItem from="1707565609411" duration="16181000" />
       <workItem from="1707600497348" duration="3126000" />
       <workItem from="1707646660954" duration="15951000" />
-      <workItem from="1707685550190" duration="2774000" />
-    </task>
-    <task id="LOCAL-00037" summary="[STD-34] Stores&#10;- Completing change to subscribe&#10;- Creating test for Injection &#10;- Improving store update method">
-      <option name="closed" value="true" />
-      <created>1705158109312</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1705158109312</updated>
+      <workItem from="1707685550190" duration="3072000" />
+      <workItem from="1707733448289" duration="1481000" />
+      <workItem from="1707822731739" duration="2251000" />
     </task>
     <task id="LOCAL-00038" summary="[STD-34] Stores&#10;- Merging Visuals and Engine stores into Settings store">
       <option name="closed" value="true" />
@@ -785,7 +773,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707668906200</updated>
     </task>
-    <option name="localTasksCounter" value="86" />
+    <task id="LOCAL-00086" summary="[STD-65] c++ entity and engine inspector&#10;- Removing unused stores&#10;- Creating engine service methods&#10;- Refactoring InspectorView">
+      <option name="closed" value="true" />
+      <created>1707688408461</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1707688408462</updated>
+    </task>
+    <option name="localTasksCounter" value="87" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -809,7 +805,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-16] Engine refactoring: Shaders&#10;- Moving shaders to CPP side&#10;- Creating new service for shader processing&#10;- Creating new interface for engine: ResourceLoader&#10;- Improving WindowRepository to only initialize when needed&#10;- Fixing tests&#10;- Creating new tests for StringUtils&#10;- Implementing new shader initialization architecture" />
     <MESSAGE value="[STD-16] Engine refactoring: Shaders&#10;- adding rebuild button" />
     <MESSAGE value="[STD-75] Adding transparency support for webview2 context" />
     <MESSAGE value="[STD-78] C++ render loop&#10;- Creating new core services&#10;- Refactoring files" />
@@ -834,7 +829,8 @@
     <MESSAGE value="[STD-68] engine world tests&#10;- Removing unused files&#10;- Removing JSON class&#10;- Fixing tests" />
     <MESSAGE value="[STD-65] c++ entity and engine inspector&#10;- Removing unused files&#10;- Rewriting property definition&#10;- Creating new form declaration system&#10;- Refactoring inspector view&#10;- Adding components to component type enum" />
     <MESSAGE value="[STD-65] c++ entity and engine inspector&#10;- Creating form &#10;- Form for MovementComponent" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-65] c++ entity and engine inspector&#10;- Creating form &#10;- Form for MovementComponent" />
+    <MESSAGE value="[STD-65] c++ entity and engine inspector&#10;- Removing unused stores&#10;- Creating engine service methods&#10;- Refactoring InspectorView" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-65] c++ entity and engine inspector&#10;- Removing unused stores&#10;- Creating engine service methods&#10;- Refactoring InspectorView" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

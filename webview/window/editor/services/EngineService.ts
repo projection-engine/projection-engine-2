@@ -113,7 +113,7 @@ export default class EngineService extends IInjectable {
         EngineService.webViewService.beam(EngineEvents.UPDATE_ENTITY, JSON.stringify(selectedEntity));
     }
 
-    static postComponentChange(entityID: number, components: ComponentDTO[]) {
-        EngineService.webViewService.beam(EngineEvents.UPDATE_COMPONENT, JSON.stringify(components));
+    static postComponentChange(entityID: number, component: ComponentDTO) {
+        EngineService.webViewService.beam(EngineEvents.UPDATE_COMPONENT, JSON.stringify(component));
     }
 }

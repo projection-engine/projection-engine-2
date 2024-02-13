@@ -8,7 +8,14 @@ enum EngineEvents {
     GET_LOCKED_ENTITY = "GET_LOCKED_ENTITY",
     TOGGLE_ACTIVE = "TOGGLE_ACTIVE",
     RENAME_ENTITY = "RENAME_ENTITY",
-    MAKE_PARENT = "MAKE_PARENT"
+    MAKE_PARENT = "MAKE_PARENT",
+    UPDATE_ENGINE_STATE = "UPDATE_ENGINE_STATE",
+    UPDATE_ENTITY = "UPDATE_ENTITY",
+    UPDATE_COMPONENT = "UPDATE_COMPONENT",
+    GET_ENTITY_COMPONENTS = "GET_ENTITY_COMPONENTS",
+    GET_ENTITY = "GET_ENTITY",
+    ADD_COMPONENT = "ADD_COMPONENT",
+    GET_ENGINE_STATE = "GET_ENGINE_STATE"
 }
 
 interface EngineStateDTO {
@@ -46,7 +53,7 @@ enum RotationType {
 }
 
 interface EntityDTO {
-    entityID: number
+    entityID: number;
 }
 
 export {EngineEvents, EngineStateDTO, SettingsDTO, ComponentType, RotationType, EntityDTO, ComponentDTO};
