@@ -28,6 +28,8 @@ set(COMMON_LIBRARIES
 
 set(FILE_PATHS
 
+        src/engine/enum/LightType.cpp
+        src/engine/enum/ColliderType.cpp
         src/engine/AbstractSerializable.cpp
         src/engine/AbstractSerializable.h
         src/engine/SerializableRepository.cpp

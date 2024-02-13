@@ -7,18 +7,34 @@
 
 namespace PEngine {
 
-    struct ColliderComponent  : public AbstractComponent {
-        ColliderType collisionType = ColliderType::BOX;
+    struct ColliderComponent : public AbstractComponent {
         glm::vec3 center = glm::vec3(0, 0, 0);
-        glm::vec3 size = glm::vec3(1, 1,1);
+        glm::vec3 size = glm::vec3(1, 1, 1);
+        std::string collisionType = ColliderType::BOX;
         float height = 1;
         float radius = 1;
-        bool initialized =false;
+        bool initialized = false;
 
         explicit ColliderComponent() : AbstractComponent(ComponentType::COLLIDER) {}
 
         nlohmann::json serialize() override {
+            nlohmann::json json;
+            json["collisionType"] = collisionType;
+            json["height"] = height;
+            json["radius"] = radius;
+            json["initialized"] = initialized;
+            json["center"] = Dump(center);
+            json["size"] = Dump(size);
+            return json;
+        }
 
+        void parse(nlohmann::json &data) override {
+            collisionType = data["collisionType"];
+            height = data["height"];
+            radius = data["radius"];
+            initialized = data["initialized"];
+            ParseInto(data["center"], center);
+            ParseInto(data["size"], size);
         }
     };
 

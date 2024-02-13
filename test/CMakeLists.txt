@@ -5,6 +5,10 @@ set(SOURCES
 
         engine/WorldServiceTest.cpp
         engine/WorldServiceTest.h
+
+        engine/SerializationTest.h
+        engine/SerializationTest.cpp
+
         Tester.cpp
         Tester.h
         core/ListTest.cpp

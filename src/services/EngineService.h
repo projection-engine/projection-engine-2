@@ -7,7 +7,7 @@
 namespace PEngine {
     class WorldService;
 
-    class Entity;
+    struct Entity;
 
     class Engine;
 
