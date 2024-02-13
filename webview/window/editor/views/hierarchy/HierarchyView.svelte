@@ -20,15 +20,10 @@
     let selectedList: number[] = []
     let lockedEntity: number
 
-    const webViewService = InjectVar(WebViewService)
     const draggable = dragDrop()
     const unsubSelection = EngineService.listenToSelectionChanges(payload => selectedList = payload)
     const unsubHierarchy = EngineService.listenToHierarchyChanges(payload => rootEntity = payload)
     const unsubLockedEntity = EngineService.listenToLockedEntityChanges(payload => lockedEntity = payload)
-
-    onMount(() => {
-        webViewService.beam(EngineEvents.GET_HIERARCHY)
-    })
 
     onDestroy(() => {
         HotKeysController.unbindAction(ref)

@@ -59,7 +59,7 @@ namespace PEngine {
         } else if (payload.id == EngineEvents::UPDATE_ENTITY) {
             WorldChangeListener::UpdateEntity(payload, world);
         } else if (payload.id == EngineEvents::UPDATE_COMPONENT) {
-            WorldChangeListener::UpdateComponent(payload, engine, world);
+            WorldChangeListener::UpdateComponent(payload, world);
         } else if (payload.id == EngineEvents::GET_ENTITY_COMPONENTS) {
             WorldChangeListener::GetEntityComponents(payload, world);
         } else if (payload.id == EngineEvents::GET_ENTITY) {

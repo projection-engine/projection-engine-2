@@ -25,9 +25,7 @@
 
     const unsubSelection = EngineService.listenToSelectionChanges(selection => updateSelection(selection[0]));
     const unsubLockedEntity = EngineService.listenToLockedEntityChanges(updateSelection);
-    const unsubEngineState = EngineService.listenToEngineState(payload => {
-        engineState = payload;
-    });
+    const unsubEngineState = EngineService.listenToEngineState(payload => engineState = payload);
 
     function getEntityTabs(components: ComponentDTO[]): TabDTO[] {
         return [
@@ -93,7 +91,6 @@
                 break;
         }
     }
-
 </script>
 
 <div class="wrapper">

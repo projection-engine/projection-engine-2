@@ -15,7 +15,7 @@
     export let property: AbstractFormType;
     export let postResponse: VoidFunction;
 
-    $: value = data[property.key];
+    $: value = property.key != null ? data[property.key] : null;
 
     let selectorType: string;
 
@@ -32,12 +32,17 @@
     }
 
     function submit(newValue: any) {
-        data[property.key] = newValue
+        if(property.key != null) {
+            data[property.key] = newValue;
+        }
         postResponse()
     }
 
     function isDisabled(): boolean {
-        return property.disabledIf(data)
+        if(property.disabledIf != null) {
+            return property.disabledIf(data);
+        }
+        return false;
     }
 
 </script>

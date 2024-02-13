@@ -19,8 +19,18 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-92] Inspector methods and serialization&#10;- Creating basic test for serialization&#10;- Implementing serialize and parse methods for components&#10;- Creating TerrainComponent&#10;- Adding components to ComponentFactory.cpp">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-92] Inspector methods and serialization&#10;- Fixing startup&#10;- Fixing root entity id returning nullptr">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/RuntimeState.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/RuntimeState.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/listeners/WorldChangeListener.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/listeners/WorldChangeListener.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/listeners/WorldChangeListener.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/listeners/WorldChangeListener.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/EngineService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/EngineService.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/services/EngineService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/EngineService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/HierarchyView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/HierarchyView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/InspectorView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/InspectorView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/Form.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/Form.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/FormField.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/FormField.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/AbstractFormType.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/AbstractFormType.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,7 +202,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="CMake Application.Projection">
+  <component name="RunManager" selected="npm.dev-build">
     <configuration name="Engine test" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="build" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_CLASS="[engine-test]" TEST_METHOD="Engine test" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -378,15 +388,7 @@
       <workItem from="1707685550190" duration="3072000" />
       <workItem from="1707733448289" duration="1481000" />
       <workItem from="1707822731739" duration="5143000" />
-      <workItem from="1707845602300" duration="5754000" />
-    </task>
-    <task id="LOCAL-00042" summary="[STD-3]  Starting refactoring&#10;- Fixing texture initialization">
-      <option name="closed" value="true" />
-      <created>1705260478098</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1705260478098</updated>
+      <workItem from="1707845602300" duration="7317000" />
     </task>
     <task id="LOCAL-00043" summary="[STD-3]  Starting refactoring&#10;- Fixing texture initialization">
       <option name="closed" value="true" />
@@ -772,7 +774,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707852238627</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="[STD-92] Inspector methods and serialization&#10;- Fixing startup&#10;- Fixing root entity id returning nullptr">
+      <option name="closed" value="true" />
+      <created>1707852620142</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1707852620142</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -796,7 +806,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-78] C++ render loop&#10;- Creating camera class&#10;- Creating camera system" />
     <MESSAGE value="[STD-78] C++ render loop&#10;- Components" />
     <MESSAGE value="[STD-78] C++ engine structure&#10;- Refactoring resources &#10;- Implementing request shader in Shader class&#10;- Implementing FS&#10;- Refactoring ComponentFactory&#10;- Creating util classes" />
     <MESSAGE value="[STD-80] C++ engine static resources&#10;- Implementing shader initialzation&#10;- FBO initialization&#10;- Generation of noise texture" />
@@ -821,7 +830,8 @@
     <MESSAGE value="[STD-65] c++ entity and engine inspector&#10;- Creating listener classes&#10;- Refactoring EngineService" />
     <MESSAGE value="[STD-92] Inspector methods and serialization&#10;- Creating missing methods for inspector&#10;- Starting implementation of serialization for entity and other classes" />
     <MESSAGE value="[STD-92] Inspector methods and serialization&#10;- Creating basic test for serialization&#10;- Implementing serialize and parse methods for components&#10;- Creating TerrainComponent&#10;- Adding components to ComponentFactory.cpp" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-92] Inspector methods and serialization&#10;- Creating basic test for serialization&#10;- Implementing serialize and parse methods for components&#10;- Creating TerrainComponent&#10;- Adding components to ComponentFactory.cpp" />
+    <MESSAGE value="[STD-92] Inspector methods and serialization&#10;- Fixing startup&#10;- Fixing root entity id returning nullptr" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-92] Inspector methods and serialization&#10;- Fixing startup&#10;- Fixing root entity id returning nullptr" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -860,11 +870,6 @@
           <url>file://$PROJECT_DIR$/webview/services/ExecutionService.ts</url>
           <line>28</line>
           <option name="timeStamp" value="54" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/webview/window/editor/services/EngineService.ts</url>
-          <line>58</line>
-          <option name="timeStamp" value="79" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -9,6 +9,10 @@ export default class AbstractFormType {
     settings?: PropertySettings = {};
     disabledIf?: DisabledIf;
 
+    constructor() {
+        this.initialize();
+    }
+
     addProperty(label: string | null, type: PropertyType, objectKey?: string, settings?: PropertySettings, disabledIf?: DisabledIf) {
         const instance = new AbstractFormType;
         instance.settings = settings ?? {};
@@ -50,7 +54,7 @@ export default class AbstractFormType {
     }
 
     string(label: string, key: string, disabledIf?: DisabledIf): AbstractFormType {
-        return this.addProperty(label, PropertyType.STRING, key,null, disabledIf);
+        return this.addProperty(label, PropertyType.STRING, key, null, disabledIf);
     }
 
     options(key: string, options?: {
