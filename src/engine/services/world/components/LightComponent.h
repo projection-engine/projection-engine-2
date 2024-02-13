@@ -32,8 +32,13 @@ namespace PEngine {
         float planeAreaWidth = 1;
         float planeAreaHeight = 1;
         float intensity = 1;
-    }
 
+        explicit LightComponent() : AbstractComponent(ComponentType::LIGHT) {}
+
+        nlohmann::json serialize() override {
+
+        }
+    };
 }
 
 #endif

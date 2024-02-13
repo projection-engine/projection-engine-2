@@ -20,6 +20,12 @@ namespace PEngine {
         glm::vec3 betaRayleigh = glm::vec3(1, 1, 1);
         glm::vec3 betaMie = glm::vec3(1, 1, 1);
         float threshold = 0;
+
+        explicit AtmosphereComponent() : AbstractComponent(ComponentType::ATMOSPHERE) {}
+
+        nlohmann::json serialize() override {
+
+        }
     };
 
 }

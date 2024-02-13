@@ -41,6 +41,12 @@ namespace PEngine {
         float focusDistanceDOF = 100;
         float samplesDOF = 100;
         bool enabledDOF = false;
+
+        explicit CameraComponent() : AbstractComponent(ComponentType::CAMERA) {}
+
+        nlohmann::json serialize() override {
+
+        }
     };
 
 }

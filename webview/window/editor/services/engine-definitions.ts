@@ -25,17 +25,18 @@ interface SettingsDTO {
 }
 
 enum ComponentType {
-    MOVEMENT,
-    ATMOSPHERE,
-    CAMERA,
-    CULLING,
-    COLLIDER,
-    DECAL,
-    LIGHT,
-    LIGHT_PROBE,
-    MESH,
-    TERRAIN,
-    SPRITE,
+    MOVEMENT = "MOVEMENT",
+    ATMOSPHERE = "ATMOSPHERE",
+    CAMERA = "CAMERA",
+    CULLING = "CULLING",
+    COLLIDER = "COLLIDER",
+    DECAL = "DECAL",
+    LIGHT = "LIGHT",
+    LIGHT_PROBE = "LIGHT_PROBE",
+    MESH_MATERIAL = "MESH_MATERIAL",
+    TERRAIN = "TERRAIN",
+    SPRITE = "SPRITE",
+    RIGID_BODY = "RIGID_BODY",
 }
 
 interface ComponentDTO {
@@ -53,7 +54,13 @@ enum RotationType {
 }
 
 interface EntityDTO {
-    entityID: number;
+    name: string,
+    entityID: number,
+    active: boolean
+
+    // ONLY PRESENT ON HIERARCHY CALLS
+    children?: EntityDTO[]
+    components?: number[]
 }
 
 export {EngineEvents, EngineStateDTO, SettingsDTO, ComponentType, RotationType, EntityDTO, ComponentDTO};

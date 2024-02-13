@@ -28,6 +28,11 @@ set(COMMON_LIBRARIES
 
 set(FILE_PATHS
 
+        src/engine/AbstractSerializable.cpp
+        src/engine/AbstractSerializable.h
+        src/engine/SerializableRepository.cpp
+        src/engine/SerializableRepository.h
+        src/engine/enum/ComponentType.cpp
 
         src/engine/enum/EngineEvents.cpp
         src/engine/enum/EngineEvents.h

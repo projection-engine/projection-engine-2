@@ -14,6 +14,12 @@ namespace PEngine {
         float height = 1;
         float radius = 1;
         bool initialized =false;
+
+        explicit ColliderComponent() : AbstractComponent(ComponentType::COLLIDER) {}
+
+        nlohmann::json serialize() override {
+
+        }
     };
 
 }

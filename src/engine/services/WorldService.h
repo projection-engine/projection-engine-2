@@ -28,13 +28,13 @@ namespace PEngine {
 
         void removeEntity(std::uint32_t id);
 
-        void addComponent(ComponentType name, Entity *ent);
+        void addComponent(ComponentType &name, Entity *ent);
 
-        void removeComponent(ComponentType name, Entity *ent);
+        void removeComponent(ComponentType &name, Entity *ent);
 
-        AbstractComponent &getComponent(ComponentType name, Entity *ent);
+        AbstractComponent &getComponent(ComponentType &name, Entity *ent);
 
-        bool hasComponent(ComponentType name, Entity *ent);
+        bool hasComponent(ComponentType &name, Entity *ent);
 
         bool hasEntity(std::uint32_t id);
 
@@ -44,7 +44,7 @@ namespace PEngine {
 
         Entity &getRoot();
 
-        std::vector<ComponentType> getComponentList(Entity *ent);
+        std::vector<std::string> &getComponentList(Entity *ent);
     };
 }
 

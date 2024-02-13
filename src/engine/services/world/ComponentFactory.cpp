@@ -5,31 +5,27 @@
 #include "../world/WorldRegistry.h"
 
 namespace PEngine {
-    void ComponentFactory::addComponent(ComponentType name, Entity *ent) {
+    void ComponentFactory::addComponent(ComponentType &name, Entity *ent) {
         entt::registry &reg = service->getRegistry()->getWorldReg();
         entt::entity entity = ent->getEntity();
         if (!entityComponents.count(ent->getEntityId())) {
             entityComponents[ent->getEntityId()] = {};
         }
         entityComponents[ent->getEntityId()].push_back(name);
-        switch (name) {
-            case MOVEMENT: {
-                reg.emplace<MovementComponent>(entity);
-                break;
-            }
+        if (name.name == ComponentType::MOVEMENT.name) {
+            reg.emplace<MovementComponent>(entity);
         }
+
         AbstractComponent &component = getComponent(name, ent);
         component.entity = ent;
     }
 
-    AbstractComponent &ComponentFactory::getComponent(ComponentType name, Entity *ent) {
+    AbstractComponent &ComponentFactory::getComponent(ComponentType &name, Entity *ent) {
         entt::registry &reg = service->getRegistry()->getWorldReg();
         entt::entity entity = ent->getEntity();
 
-        switch (name) {
-            case MOVEMENT: {
-                return (AbstractComponent &) reg.get<MovementComponent>(entity);
-            }
+        if (name.name == ComponentType::MOVEMENT.name) {
+            return (AbstractComponent &) reg.get<MovementComponent>(entity);
         }
         throw std::invalid_argument("Component not present on entity");
     }
@@ -38,32 +34,30 @@ namespace PEngine {
         this->service = s;
     }
 
-    void ComponentFactory::removeComponent(ComponentType name, Entity *ent) {
+    void ComponentFactory::removeComponent(ComponentType &name, Entity *ent) {
         entt::registry &reg = service->getRegistry()->getWorldReg();
         entt::entity entity = ent->getEntity();
 
         if (entityComponents.count(ent->getEntityId())) {
-            std::vector<ComponentType> &list = entityComponents[ent->getEntityId()];
-            list.erase(std::remove(list.begin(), list.end(), name), list.end());
+            std::vector<std::string> &list = entityComponents[ent->getEntityId()];
+            list.erase(std::remove(list.begin(), list.end(), name.name), list.end());
         }
 
-        switch (name) {
-            case MOVEMENT: {
-                reg.erase<MovementComponent>(entity);
-                break;
-            }
+        if (name.name == ComponentType::MOVEMENT.name) {
+            reg.erase<MovementComponent>(entity);
         }
+
     }
 
-        bool ComponentFactory::hasComponent(ComponentType name, Entity *ent) {
-        std::vector<ComponentType> vec = entityComponents[ent->getEntityId()];
-        return std::find(vec.begin(), vec.end(), name) != vec.end();
+    bool ComponentFactory::hasComponent(ComponentType &name, Entity *ent) {
+        std::vector<std::string> vec = entityComponents[ent->getEntityId()];
+        return std::find(vec.begin(), vec.end(), name.name) != vec.end();
     }
 
-    std::vector<ComponentType> ComponentFactory::getComponentList(Entity *ent) {
-        if (entityComponents.count(ent->getEntityId())) {
-            return entityComponents[ent->getEntityId()];
+    std::vector<std::string> &ComponentFactory::getComponentList(Entity *ent) {
+        if (!entityComponents.count(ent->getEntityId())) {
+            entityComponents[ent->getEntityId()] = {};
         }
-        return {};
+        return entityComponents[ent->getEntityId()];
     }
 }

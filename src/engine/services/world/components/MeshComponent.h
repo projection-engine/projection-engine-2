@@ -12,6 +12,11 @@ namespace PEngine {
         bool castsShadows = true;
         bool contributeToProbes = true;
         bool overrideMaterialUniforms = false;
+        explicit MeshComponent() : AbstractComponent(ComponentType::MESH_MATERIAL) {}
+
+        nlohmann::json serialize() override {
+
+        }
     };
 
 }

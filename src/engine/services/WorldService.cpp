@@ -7,7 +7,7 @@
 
 namespace PEngine {
     void WorldService::removeEntity(std::uint32_t id) {
-         worldRegistry->removeEntity(id);
+        worldRegistry->removeEntity(id);
     }
 
     Entity *WorldService::addEntity() {
@@ -23,7 +23,7 @@ namespace PEngine {
         return worldRegistry;
     }
 
-    void WorldService::addComponent(ComponentType name, Entity *ent) {
+    void WorldService::addComponent(ComponentType &name, Entity *ent) {
         componentFactory.addComponent(name, ent);
     }
 
@@ -32,15 +32,15 @@ namespace PEngine {
         componentFactory.setService(this);
     }
 
-    AbstractComponent &WorldService::getComponent(ComponentType name, Entity *ent) {
+    AbstractComponent &WorldService::getComponent(ComponentType &name, Entity *ent) {
         return componentFactory.getComponent(name, ent);
     }
 
-    bool WorldService::hasComponent(ComponentType name, Entity *ent) {
+    bool WorldService::hasComponent(ComponentType &name, Entity *ent) {
         return componentFactory.hasComponent(name, ent);
     }
 
-    void WorldService::removeComponent(ComponentType name, Entity *ent) {
+    void WorldService::removeComponent(ComponentType &name, Entity *ent) {
         componentFactory.removeComponent(name, ent);
     }
 
@@ -56,7 +56,7 @@ namespace PEngine {
         return worldRegistry->getRoot();
     }
 
-    std::vector<ComponentType> WorldService::getComponentList(Entity *ent) {
+    std::vector<std::string> &WorldService::getComponentList(Entity *ent) {
         return componentFactory.getComponentList(ent);
     }
 

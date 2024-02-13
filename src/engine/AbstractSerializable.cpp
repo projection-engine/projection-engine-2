@@ -7,10 +7,11 @@ namespace PEngine {
     }
 
     nlohmann::json AbstractSerializable::serialize() {
-        return nlohmann::json();
+        throw std::invalid_argument("Method not implemented");
+
     }
 
     void AbstractSerializable::parse(nlohmann::json &data) {
-
+        throw std::invalid_argument("Method not implemented");
     }
 }

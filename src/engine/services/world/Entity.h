@@ -10,9 +10,9 @@
 namespace PEngine {
     struct Entity : public AbstractSerializable {
         std::string name = "New Entity";
+        bool active = true;
         glm::vec3 pickID;
         long pickIndex = -1;
-        bool active = true;
 
         void initialize(entt::entity entity);
 
@@ -20,6 +20,9 @@ namespace PEngine {
 
         std::uint32_t getEntityId();
 
+        nlohmann::json serialize() override;
+
+        void parse(nlohmann::json &data) override;
     private:
         bool initialized = false;
         entt::entity entity;

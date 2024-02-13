@@ -3,14 +3,14 @@
     import Icon from "@lib/components/icon/Icon.svelte";
     import ToolTip from "@lib/components/tooltip/ToolTip.svelte";
     import LocalizationEN from "@enums/LocalizationEN";
-    import {HierarchyEntityDTO} from "../hierarchy-definitions";
     import EngineService from "../../../services/EngineService";
     import ComponentNode from "./ComponentNode.svelte";
+    import {EntityDTO} from "../../../services/engine-definitions";
 
-    export let testSearch: GenericNonVoidFunctionWithP<HierarchyEntityDTO, boolean>
+    export let testSearch: GenericNonVoidFunctionWithP<EntityDTO, boolean>
     export let depth: number
     export let isOnSearch: boolean
-    export let entity: HierarchyEntityDTO
+    export let entity: EntityDTO
     export let open: Record<number, boolean>
     export let updateOpen: GenericVoidFunction
     export let selectedList: number[]
@@ -27,7 +27,7 @@
         }
     }
 
-    function closeHierarchy(entity: HierarchyEntityDTO) {
+    function closeHierarchy(entity: EntityDTO) {
         entity.children.forEach(c => {
             delete open[c.entityID]
             closeHierarchy(c)
@@ -77,7 +77,7 @@
     >
         <ToolTip content={LocalizationEN.DEACTIVATE}/>
         <Icon styles="font-size: .8rem">
-            {#if entity.isActive}
+            {#if entity.active}
                 visibility
             {:else}
                 visibility_off
@@ -89,7 +89,7 @@
     {#each entity.components as component}
         <ComponentNode
                 entityID={entity.entityID}
-                isEntityActive={entity.isActive}
+                isEntityActive={entity.active}
                 componentType={component}
                 depth={depth + 1}
         />

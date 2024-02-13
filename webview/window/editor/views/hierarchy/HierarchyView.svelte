@@ -10,15 +10,13 @@
     import {HierarchyEntityDTO} from "./hierarchy-definitions";
     import WebViewService from "@lib/webview/WebViewService";
     import EngineService from "../../services/EngineService";
-    import {EngineEvents} from "../../services/engine-definitions";
-
-
+    import {EngineEvents, EntityDTO} from "../../services/engine-definitions";
 
     let ref: HTMLElement
     let search = ""
     let filteredComponent: number = undefined
     let openTree = {}
-    let rootEntity: HierarchyEntityDTO = null
+    let rootEntity: EntityDTO = null
     let selectedList: number[] = []
     let lockedEntity: number
 
@@ -50,7 +48,7 @@
         filteredComponent = v;
     }
 
-    function testSearch(search: string, filteredComponent: number, node: HierarchyEntityDTO) {
+    function testSearch(search: string, filteredComponent: number, node: EntityDTO) {
         return (!search || search && node.name.includes(search)) && (!filteredComponent || filteredComponent && node.components.includes(filteredComponent))
     }
 </script>

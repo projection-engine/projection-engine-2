@@ -26,6 +26,12 @@ namespace PEngine {
         bool lockedRotation = false;
         bool lockedTranslation = false;
         bool lockedScaling = false;
+
+        explicit MovementComponent() : AbstractComponent(ComponentType::MOVEMENT) {}
+
+        nlohmann::json serialize() override {
+
+        }
     };
 
 }

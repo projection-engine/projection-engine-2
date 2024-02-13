@@ -8,10 +8,15 @@
 namespace PEngine {
 
     struct RigidBodyComponent : public AbstractComponent {
+        glm::vec3 inertia = glm::vec3(0, 0, 0);
         float mass = 1;
         float drag = 0;
-        glm::vec3 inertia = glm::vec3(0, 0, 0);
         bool initialized = false;
+        explicit RigidBodyComponent() : AbstractComponent(ComponentType::RIGID_BODY) {}
+
+        nlohmann::json serialize() override {
+
+        }
     };
 
 }

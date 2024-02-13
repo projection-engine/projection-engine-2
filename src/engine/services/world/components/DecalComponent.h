@@ -10,20 +10,23 @@ namespace PEngine {
 
     struct DecalComponent : public AbstractComponent {
         MaterialRenderingType renderingMode = MaterialRenderingType::ISOTROPIC;
-
-        const char *albedoID;
-        const char *roughnessID;
-        const char *metallicID;
-        const char *normalID;
-        const char *occlusionID;
-
+        const char *albedoID = nullptr;
+        const char *roughnessID = nullptr;
+        const char *metallicID = nullptr;
+        const char *normalID = nullptr;
+        const char *occlusionID = nullptr;
         bool useSSR = false;
-
         float anisotropicRotation = 0;
         float anisotropy = 0;
         float clearCoat = 0;
         float sheen = 0;
         float sheenTint = 0;
+
+        explicit DecalComponent() : AbstractComponent(ComponentType::DECAL) {}
+
+        nlohmann::json serialize() override {
+
+        }
     };
 
 }

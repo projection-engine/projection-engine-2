@@ -7,8 +7,14 @@
 namespace PEngine {
 
     struct SpriteComponent : public AbstractComponent {
-        const char *imageID;
-        glm::vec2 attributes;
+        const char *imageID = nullptr;
+        glm::vec2 attributes{};
+
+        explicit SpriteComponent() : AbstractComponent(ComponentType::SPRITE) {}
+
+        nlohmann::json serialize() override {
+
+        }
     };
 
 }

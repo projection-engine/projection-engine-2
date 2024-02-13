@@ -57,27 +57,30 @@ namespace PEngine {
         } else if (payload.id == EngineEvents::UPDATE_ENGINE_STATE) {
             UpdateEngineState(payload, engine);
         } else if (payload.id == EngineEvents::UPDATE_ENTITY) {
-            WorldChangeListener::UpdateEntity(payload, engine, world);
+            WorldChangeListener::UpdateEntity(payload, world);
         } else if (payload.id == EngineEvents::UPDATE_COMPONENT) {
             WorldChangeListener::UpdateComponent(payload, engine, world);
         } else if (payload.id == EngineEvents::GET_ENTITY_COMPONENTS) {
-            WorldChangeListener::GetEntityComponents(payload, engine, world);
+            WorldChangeListener::GetEntityComponents(payload, world);
         } else if (payload.id == EngineEvents::GET_ENTITY) {
-            WorldChangeListener::GetEntity(payload, engine, world);
+            WorldChangeListener::GetEntity(payload, world);
         } else if (payload.id == EngineEvents::ADD_COMPONENT) {
-            WorldChangeListener::AddComponent(payload, engine, world);
+            WorldChangeListener::AddComponent(payload, world);
         } else if (payload.id == EngineEvents::GET_ENGINE_STATE) {
             GetEngineState(payload, engine);
-
         }
     }
 
     void EngineService::UpdateEngineState(WebViewPayload &payload, Engine &engine) {
-        // TODO
+        nlohmann::json parsed = nlohmann::json::parse(payload.payload);
+        RuntimeState &state = engine.getState();
+        state.parse(parsed);
+
+        GetEngineState(payload, engine);
     }
 
     void EngineService::GetEngineState(WebViewPayload &payload, Engine &engine) {
-// TODO
+        payload.webview->postMessage(engine.getState().serialize().dump(), EngineEvents::GET_ENGINE_STATE);
     }
 
 }

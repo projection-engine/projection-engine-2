@@ -44,7 +44,7 @@ export default [
 
     {
         label: LocalizationEN.MESH,
-        value: ComponentType.MESH,
+        value: ComponentType.MESH_MATERIAL,
     },
 
     {

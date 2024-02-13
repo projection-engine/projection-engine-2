@@ -11,6 +11,12 @@ namespace PEngine {
         float distance = 100;
         bool distanceCulling = false;
         bool occlusionCulling = false;
+
+        explicit CullingComponent() : AbstractComponent(ComponentType::CULLING) {}
+
+        nlohmann::json serialize() override {
+
+        }
     };
 
 }

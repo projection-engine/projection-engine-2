@@ -84,7 +84,7 @@ export default class EngineService extends IInjectable {
 
     static addComponent(entityID: number, value: ComponentType) {
         EngineService.webViewService.beam(EngineEvents.ADD_COMPONENT, JSON.stringify({
-            entityID,
+            id: entityID,
             value
         }));
     }
@@ -114,6 +114,10 @@ export default class EngineService extends IInjectable {
     }
 
     static postComponentChange(entityID: number, component: ComponentDTO) {
-        EngineService.webViewService.beam(EngineEvents.UPDATE_COMPONENT, JSON.stringify(component));
+        EngineService.webViewService.beam(EngineEvents.UPDATE_COMPONENT, JSON.stringify({
+            id: entityID,
+            componentType: component.componentType,
+            component
+        }));
     }
 }
