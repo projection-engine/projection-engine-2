@@ -48,7 +48,7 @@
                 <ToolTip content={button.label}/>
             </button>
         {/each}
-        <Dropdown>
+        <Dropdown hideArrow={true}>
             <button data-sveltebuttondefault="-"
                     slot="button"
                     class="tab-button shared"

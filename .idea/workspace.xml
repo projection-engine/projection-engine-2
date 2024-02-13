@@ -19,29 +19,8 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-92] Inspector methods and serialization&#10;- Creating missing methods for inspector&#10;- Starting implementation of serialization for entity and other classes">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-92] Inspector methods and serialization&#10;- Creating basic test for serialization&#10;- Implementing serialize and parse methods for components&#10;- Creating TerrainComponent&#10;- Adding components to ComponentFactory.cpp">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/enum/ColliderType.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/enum/ColliderType.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/enum/LightType.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/enum/LightType.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/listeners/WorldHierarchyListener.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/listeners/WorldHierarchyListener.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/AbstractComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/AbstractComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/AbstractComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/AbstractComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/ComponentFactory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/ComponentFactory.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/AtmosphereComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/AtmosphereComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/CameraComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/CameraComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/ColliderComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/ColliderComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/CullingComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/CullingComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/DecalComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/DecalComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/LightComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/LightComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/LightProbeComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/LightProbeComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/MeshComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/MeshComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/MovementComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/MovementComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/RigidBodyComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/RigidBodyComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/SpriteComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/SpriteComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/EngineService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/EngineService.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/main_test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/main_test.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +99,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "C/C++ File.main.cpp.executor": "Run",
-    "CMake Application.Projection.executor": "Run",
+    "CMake Application.Projection.executor": "Debug",
     "CMake Application.projection.executor": "Debug",
     "CMake Debug.projection.executor": "Debug",
     "CMake Debug.projectioncmake.executor": "Debug",
@@ -213,7 +192,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Catch.Serialization test">
+  <component name="RunManager" selected="CMake Application.Projection">
     <configuration name="Engine test" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="build" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_CLASS="[engine-test]" TEST_METHOD="Engine test" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -399,15 +378,7 @@
       <workItem from="1707685550190" duration="3072000" />
       <workItem from="1707733448289" duration="1481000" />
       <workItem from="1707822731739" duration="5143000" />
-      <workItem from="1707845602300" duration="5430000" />
-    </task>
-    <task id="LOCAL-00041" summary="[STD-21]  New project architecture&#10;- Finishing new file browser">
-      <option name="closed" value="true" />
-      <created>1705236708959</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1705236708959</updated>
+      <workItem from="1707845602300" duration="5754000" />
     </task>
     <task id="LOCAL-00042" summary="[STD-3]  Starting refactoring&#10;- Fixing texture initialization">
       <option name="closed" value="true" />
@@ -793,7 +764,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707833802274</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="[STD-92] Inspector methods and serialization&#10;- Creating basic test for serialization&#10;- Implementing serialize and parse methods for components&#10;- Creating TerrainComponent&#10;- Adding components to ComponentFactory.cpp">
+      <option name="closed" value="true" />
+      <created>1707852238627</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1707852238627</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -817,7 +796,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-78] C++ render loop&#10;- Creating new core services&#10;- Refactoring files" />
     <MESSAGE value="[STD-78] C++ render loop&#10;- Creating camera class&#10;- Creating camera system" />
     <MESSAGE value="[STD-78] C++ render loop&#10;- Components" />
     <MESSAGE value="[STD-78] C++ engine structure&#10;- Refactoring resources &#10;- Implementing request shader in Shader class&#10;- Implementing FS&#10;- Refactoring ComponentFactory&#10;- Creating util classes" />
@@ -842,7 +820,8 @@
     <MESSAGE value="[STD-65] c++ entity and engine inspector&#10;- Removing unused stores&#10;- Creating engine service methods&#10;- Refactoring InspectorView" />
     <MESSAGE value="[STD-65] c++ entity and engine inspector&#10;- Creating listener classes&#10;- Refactoring EngineService" />
     <MESSAGE value="[STD-92] Inspector methods and serialization&#10;- Creating missing methods for inspector&#10;- Starting implementation of serialization for entity and other classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-92] Inspector methods and serialization&#10;- Creating missing methods for inspector&#10;- Starting implementation of serialization for entity and other classes" />
+    <MESSAGE value="[STD-92] Inspector methods and serialization&#10;- Creating basic test for serialization&#10;- Implementing serialize and parse methods for components&#10;- Creating TerrainComponent&#10;- Adding components to ComponentFactory.cpp" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-92] Inspector methods and serialization&#10;- Creating basic test for serialization&#10;- Implementing serialize and parse methods for components&#10;- Creating TerrainComponent&#10;- Adding components to ComponentFactory.cpp" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

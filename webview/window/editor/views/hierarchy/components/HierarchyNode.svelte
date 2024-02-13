@@ -49,7 +49,7 @@
         data-svelteselected={isNodeSelected || isMatchToSearch? "-" : ""}
         data-sveltenode={entity.entityID}
         class="wrapper hierarchy-branch"
-        style={(isMatchToSearch && !isNodeSelected ? "--pj-accent-color-light: var(--pj-accent-color-tertiary);" : "")+ "padding-left:" +  (depth * 18 + "px;") + (entity.isActive ? "" : "opacity: .5") }
+        style={(isMatchToSearch && !isNodeSelected ? "--pj-accent-color-light: var(--pj-accent-color-tertiary);" : "")+ "padding-left:" +  (depth * 18 + "px;") + (entity.active ? "" : "opacity: .5") }
 >
 
     {#if hasChildren}
