@@ -3,10 +3,11 @@
 
 #include <cstdint>
 #include <vector>
+#include "AbstractSerializable.h"
 
 namespace PEngine {
 
-    struct RuntimeState {
+    struct RuntimeState : public AbstractSerializable {
         int viewportWidth = 0;
         int viewportHeight = 0;
         long long int elapsed = 0;

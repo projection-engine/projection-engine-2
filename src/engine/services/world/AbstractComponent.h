@@ -5,7 +5,7 @@
 #include "Entity.h"
 
 namespace PEngine {
-    struct AbstractComponent {
+    struct AbstractComponent : public AbstractSerializable {
         Entity *entity = nullptr;
     };
 }

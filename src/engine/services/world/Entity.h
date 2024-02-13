@@ -5,9 +5,10 @@
 #include "entt/entity/entity.hpp"
 #include "glm/fwd.hpp"
 #include "glm/detail/type_vec3.hpp"
+#include "../../AbstractSerializable.h"
 
 namespace PEngine {
-    struct Entity {
+    struct Entity : public AbstractSerializable {
         std::string name = "New Entity";
         glm::vec3 pickID;
         long pickIndex = -1;

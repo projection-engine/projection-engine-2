@@ -7,7 +7,7 @@
 #include "services/ResourceService.h"
 #include "services/SystemService.h"
 #include "services/WorldLightsService.h"
-#include "services/RuntimeState.h"
+#include "RuntimeState.h"
 
 namespace PEngine {
     class AbstractIOService;

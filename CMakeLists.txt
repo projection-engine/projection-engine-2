@@ -39,7 +39,7 @@ set(FILE_PATHS
         src/engine/services/world/WorldRegistry.cpp
         src/engine/services/world/WorldRegistry.h
 
-        src/engine/services/RuntimeState.h
+        src/engine/RuntimeState.h
         src/services/EngineService.cpp
         src/services/EngineService.h
 
