@@ -54,7 +54,7 @@ export default {
     NEW_COLLECTION: "New collection",
     OPENING_ASSET: "Opening asset",
     PROJECT_NAME: "My project",
-    SSAO: "AOSystem (Ambient occlusion)",
+    SSAO: "Ambient occlusion",
     DECAL_RENDERER: "Decal renderer",
     MOVEMENT: "Movement",
     NO_VERSION_INSTALLED: "No editor installation found, please download one.",
@@ -785,5 +785,7 @@ export default {
     ROTATION_TYPE: "Rotation type",
     LOCKED_TRANSLATION: "Locked translation",
     LOCKED_SCALING: "Locked scaling",
-    LOCKED_ROTATION: "Locked rotation"
+    LOCKED_ROTATION: "Locked rotation",
+    LOD: "Level of detail",
+    OFFSET: "Offset"
 }

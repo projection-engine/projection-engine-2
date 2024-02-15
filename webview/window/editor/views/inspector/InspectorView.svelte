@@ -16,8 +16,8 @@
     import EditorUtil from "../../util/EditorUtil";
 
     let selectedEntity: EntityDTO;
-    let components: ComponentDTO[];
-    let engineState: EngineStateDTO;
+    let components: ComponentDTO[] = [];
+    let engineState: EngineStateDTO = {};
     let componentDefinitions: typeof AbstractFormType[];
     let componentMap: ComponentType[] = [];
     let tabIndex = 0;
@@ -42,29 +42,19 @@
         ];
     }
 
-    function updateSelection(payload: number | undefined) {
-        if (payload != null) {
-            EngineService.getEntityByID(payload).then(e => {
-                selectedEntity = e;
-            });
-             EngineService.getEntityComponents(payload).then(e => {
-                 components = e;
-             });
-            tabIndex = 3;
-            componentDefinitions = components.map(c => COMPONENT_DEFINITIONS[c.componentType]);
-            componentMap = components.map(c => {
-                return c.componentType as unknown as ComponentType;
-            });
-            if (selectedEntity) {
-                tabs = getEntityTabs(components);
-            } else {
-                tabs = [];
-            }
+    async function updateSelection(payload: number | undefined) {
+        selectedEntity = !payload ? undefined : await EngineService.getEntityByID(payload);
+        if (selectedEntity == null) {
+            tabIndex = 0;
+            selectedEntity = undefined;
+            components = [];
             return;
         }
-        tabIndex = 0;
-        selectedEntity = undefined;
-        components = [];
+        tabIndex = 3;
+        components = await EngineService.getEntityComponents(payload);
+        componentDefinitions = components.map(c => COMPONENT_DEFINITIONS[c.componentType]);
+        componentMap = components.map(c => c.componentType as unknown as ComponentType);
+        tabs = selectedEntity ? getEntityTabs(components) : [];
     }
 
     onDestroy(() => {

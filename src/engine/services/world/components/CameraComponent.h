@@ -41,7 +41,7 @@ namespace PEngine {
         explicit CameraComponent() : AbstractComponent(ComponentType::CAMERA) {}
 
         nlohmann::json serialize() override {
-            nlohmann::json json;
+            nlohmann::json json = AbstractComponent::serialize();
             json["fov"] = fov;
             json["dynamicAspectRatio"] = dynamicAspectRatio;
             json["aspectRatio"] = aspectRatio;

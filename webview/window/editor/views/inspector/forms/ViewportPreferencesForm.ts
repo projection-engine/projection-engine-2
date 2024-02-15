@@ -2,8 +2,8 @@ import AbstractFormType from "./AbstractFormType";
 import LocalizationEN from "@enums/LocalizationEN";
 
 export default class ViewportPreferencesForm extends AbstractFormType {
-    initialize() {
-        super.initialize();
+    constructor() {
+        super();
         this.group(LocalizationEN.VIEWPORT, t => {
             t.group(LocalizationEN.ICONS, st => {
                 st.number(LocalizationEN.SIZE, "iconScale", undefined, .01);

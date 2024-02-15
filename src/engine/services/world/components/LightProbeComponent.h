@@ -12,7 +12,7 @@ namespace PEngine {
         explicit LightProbeComponent() : AbstractComponent(ComponentType::LIGHT_PROBE) {}
 
         nlohmann::json serialize() override {
-            nlohmann::json json;
+            nlohmann::json json = AbstractComponent::serialize();
             json["mipmaps"] = mipmaps;
             json["maxDistance"] = maxDistance;
             return json;

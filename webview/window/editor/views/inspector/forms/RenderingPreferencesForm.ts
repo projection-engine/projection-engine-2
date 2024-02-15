@@ -2,8 +2,8 @@ import AbstractFormType from "./AbstractFormType";
 import LocalizationEN from "@enums/LocalizationEN";
 
 export default class RenderingPreferencesForm extends AbstractFormType{
-    initialize() {
-        super.initialize();
+    constructor() {
+        super();
         this.group(LocalizationEN.RENDERING, t => {
             t.group(LocalizationEN.RESOLUTION, st => {
                 st.number(LocalizationEN.WIDTH, "resolutionX" , undefined, 1, 1)

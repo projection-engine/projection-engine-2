@@ -4,8 +4,8 @@ import {RotationType} from "../../../services/engine-definitions";
 
 export default class MovementForm extends AbstractFormType {
 
-    initialize() {
-        super.initialize();
+    constructor() {
+        super();
 
         this.group(LocalizationEN.TRANSLATION, t => {
             t.array(["X", "Y", "Z"], "translation");

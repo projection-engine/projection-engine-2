@@ -63,4 +63,10 @@ interface EntityDTO {
     components?: number[]
 }
 
-export {EngineEvents, EngineStateDTO, SettingsDTO, ComponentType, RotationType, EntityDTO, ComponentDTO};
+enum AtmosphereRenderingType {
+    MIE,
+    RAYLEIGH,
+    COMBINED
+}
+
+export {EngineEvents, EngineStateDTO, SettingsDTO, ComponentType, RotationType, EntityDTO, ComponentDTO, AtmosphereRenderingType};

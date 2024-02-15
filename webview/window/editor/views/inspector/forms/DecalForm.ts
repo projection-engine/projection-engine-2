@@ -1,11 +1,12 @@
 import AbstractFormType from "./AbstractFormType";
 import MATERIAL_RENDERING_TYPES from "@engine-core/static/MATERIAL_RENDERING_TYPES";
+import LocalizationEN from "@enums/LocalizationEN";
 
 export default class DecalForm extends AbstractFormType {
-    initialize() {
-        super.initialize();
+    constructor() {
+        super();
 
-        this.group("RENDERING_MODE", t => [
+        this.group(LocalizationEN.RENDERING_MODE, t => [
             t.options("renderingMode", [
                 {
                     label: "Isotropic",
@@ -26,37 +27,37 @@ export default class DecalForm extends AbstractFormType {
             ])
         ]);
 
-        this.group("SHEEN_PARAMS", t => [
-            t.number("SHEEN", "sheen"),
-            t.number("TINT", "sheenTint"),
+        this.group(LocalizationEN.SHEEN_PARAMS, t => [
+            t.number(LocalizationEN.SHEEN, "sheen"),
+            t.number(LocalizationEN.TINT, "sheenTint"),
         ], comp => comp["renderingMode"] !== MATERIAL_RENDERING_TYPES.SHEEN);
 
-        this.group("CLEAR_COAT_PARAMS", t => [
-            t.number("CLEAR_COAT", "clearCoat"),
+        this.group(LocalizationEN.CLEAR_COAT_PARAMS, t => [
+            t.number(LocalizationEN.CLEAR_COAT, "clearCoat"),
         ], comp => comp["renderingMode"] !== MATERIAL_RENDERING_TYPES.CLEAR_COAT);
 
-        this.group("ANISOTROPIC_PARAMS", t => [
-            t.number("ROTATION", "anisotropicRotation"),
-            t.number("ANISOTROPY", "anisotropy", 1, 0)
+        this.group(LocalizationEN.ANISOTROPIC_PARAMS, t => [
+            t.number(LocalizationEN.ROTATION, "anisotropicRotation"),
+            t.number(LocalizationEN.ANISOTROPY, "anisotropy", 1, 0)
         ], comp => comp["renderingMode"] !== MATERIAL_RENDERING_TYPES.ANISOTROPIC);
 
-        this.group("ALBEDO", t => [
-            t.imageTexture("ALBEDO", "albedoID"),
+        this.group(LocalizationEN.ALBEDO, t => [
+            t.imageTexture(LocalizationEN.ALBEDO, "albedoID"),
         ]);
-        this.group("METALLIC", t => [
-            t.imageTexture("METALLIC", "metallicID"),
+        this.group(LocalizationEN.METALLIC, t => [
+            t.imageTexture(LocalizationEN.METALLIC, "metallicID"),
         ]);
-        this.group("ROUGHNESS", t => [
-            t.imageTexture("ROUGHNESS", "roughnessID"),
+        this.group(LocalizationEN.ROUGHNESS, t => [
+            t.imageTexture(LocalizationEN.ROUGHNESS, "roughnessID"),
         ]);
-        this.group("AO", t => [
-            t.imageTexture("AO", "occlusionID"),
+        this.group(LocalizationEN.AO, t => [
+            t.imageTexture(LocalizationEN.AO, "occlusionID"),
         ]);
-        this.group("NORMAL", t => [
-            t.imageTexture("NORMAL", "normalID"),
+        this.group(LocalizationEN.NORMAL, t => [
+            t.imageTexture(LocalizationEN.NORMAL, "normalID"),
         ]);
-        this.group("SSR", t => [
-            t.boolean("ENABLED", "useSSR"),
+        this.group(LocalizationEN.SSR, t => [
+            t.boolean(LocalizationEN.ENABLED, "useSSR"),
         ]);
 
     }

@@ -30,7 +30,7 @@ namespace PEngine {
         explicit MovementComponent() : AbstractComponent(ComponentType::MOVEMENT) {}
 
         nlohmann::json serialize() override {
-            nlohmann::json json;
+            nlohmann::json json = AbstractComponent::serialize();
             json["rotationType"] = rotationType;
             json["lockedRotation"] = lockedRotation;
             json["lockedTranslation"] = lockedTranslation;

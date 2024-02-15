@@ -18,7 +18,7 @@ namespace PEngine {
         explicit ColliderComponent() : AbstractComponent(ComponentType::COLLIDER) {}
 
         nlohmann::json serialize() override {
-            nlohmann::json json;
+            nlohmann::json json = AbstractComponent::serialize();
             json["collisionType"] = collisionType;
             json["height"] = height;
             json["radius"] = radius;

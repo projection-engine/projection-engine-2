@@ -13,7 +13,7 @@ namespace PEngine {
         explicit SpriteComponent() : AbstractComponent(ComponentType::SPRITE) {}
 
         nlohmann::json serialize() override {
-            nlohmann::json json;
+            nlohmann::json json = AbstractComponent::serialize();
             json["imageID"] = imageID;
             json["attributes"] = Dump(attributes);
             return json;

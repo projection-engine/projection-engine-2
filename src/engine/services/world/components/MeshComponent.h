@@ -16,7 +16,7 @@ namespace PEngine {
         explicit MeshComponent() : AbstractComponent(ComponentType::MESH_MATERIAL) {}
 
         nlohmann::json serialize() override {
-            nlohmann::json json;
+            nlohmann::json json = AbstractComponent::serialize();
             json["castsShadows"] = castsShadows;
             json["contributeToProbes"] = contributeToProbes;
             json["overrideMaterialUniforms"] = overrideMaterialUniforms;

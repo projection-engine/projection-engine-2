@@ -25,7 +25,7 @@ namespace PEngine {
         explicit AtmosphereComponent() : AbstractComponent(ComponentType::ATMOSPHERE) {}
 
         nlohmann::json serialize() override {
-            nlohmann::json json;
+            nlohmann::json json = AbstractComponent::serialize();
             json["elapsedTime"] = elapsedTime;
             json["maxSamples"] = maxSamples;
             json["mieHeight"] = mieHeight;

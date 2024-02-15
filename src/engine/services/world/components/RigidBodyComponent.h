@@ -15,7 +15,7 @@ namespace PEngine {
         explicit RigidBodyComponent() : AbstractComponent(ComponentType::RIGID_BODY) {}
 
         nlohmann::json serialize() override {
-            nlohmann::json json;
+            nlohmann::json json = AbstractComponent::serialize();
             json["mass"] = mass;
             json["drag"] = drag;
             json["inertia"] = Dump(inertia);

@@ -3,24 +3,24 @@
     import FormField from "./FormField.svelte";
     import {PropertyType} from "../inspector-definition";
 
-    export let definition: typeof AbstractFormType;
+    export let definition: typeof AbstractFormType = null;
+    export let instance: AbstractFormType = null;
     export let data: MutableObject;
     export let postResponse: VoidFunction;
 
-    const instance = new definition;
+    $: container = (instance ?? new definition);
 </script>
 
-{#if data != null}
-    {#each instance.listProperties() as property}
-        {#if property.type === PropertyType.GROUP}
-            <div>
-                <h3>{property.label}</h3>
-            </div>
-            {#each property.listProperties() as child}
-                <FormField property={child} {data} {postResponse}/>
-            {/each}
-        {:else}
-            <FormField {property} {data} {postResponse}/>
-        {/if}
+<div class="wrapper">
+    {#each container.listProperties() as property}
+        <FormField {property} {data} {postResponse}/>
     {/each}
-{/if}
+</div>
+
+<style>
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+</style>

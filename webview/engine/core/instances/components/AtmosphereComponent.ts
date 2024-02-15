@@ -1,9 +1,9 @@
 import Component from "./Component"
-import ATMOSPHERE_TYPES from "../../../../window/editor/views/inspector/forms/AtmosphereType"
 import {mat4, vec3} from "gl-matrix"
 import WorldLights from "../../core/WorldLights"
 import COMPONENTS from "../../static/Components"
 import RepositoryService from "@engine-core/services/serialization/RepositoryService";
+import {AtmosphereRenderingType} from "../../../../window/editor/services/engine-definitions";
 
 
 export default class AtmosphereComponent extends Component {
@@ -29,7 +29,7 @@ export default class AtmosphereComponent extends Component {
 	atmosphereRadius = 1
 	planetRadius = 1
 	intensity = 20
-	renderingType = ATMOSPHERE_TYPES.COMBINED
+	renderingType = AtmosphereRenderingType.COMBINED
 	betaRayleigh = [1., 1, 1]
 	betaMie = [1, 1, 1]
 	threshold = 0

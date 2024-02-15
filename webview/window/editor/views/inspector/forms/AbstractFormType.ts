@@ -9,10 +9,6 @@ export default class AbstractFormType {
     settings?: PropertySettings = {};
     disabledIf?: DisabledIf;
 
-    constructor() {
-        this.initialize();
-    }
-
     addProperty(label: string | null, type: PropertyType, objectKey?: string, settings?: PropertySettings, disabledIf?: DisabledIf) {
         const instance = new AbstractFormType;
         instance.settings = settings ?? {};
@@ -22,10 +18,6 @@ export default class AbstractFormType {
         instance.disabledIf = disabledIf;
         this.#properties.push(instance);
         return instance;
-    }
-
-    initialize() {
-
     }
 
     group(label: string, children: GenericVoidFunctionWithP<AbstractFormType>, disabledIf?: DisabledIf): AbstractFormType {

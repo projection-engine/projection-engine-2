@@ -36,7 +36,7 @@ namespace PEngine {
         explicit LightComponent() : AbstractComponent(ComponentType::LIGHT) {}
 
         nlohmann::json serialize() override {
-            nlohmann::json json;
+            nlohmann::json json = AbstractComponent::serialize();
             json["hasSSS"] = hasSSS;
             json["shadowMap"] = shadowMap;
             json["type"] = type;

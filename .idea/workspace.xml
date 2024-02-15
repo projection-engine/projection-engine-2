@@ -19,18 +19,44 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-92] Inspector methods and serialization&#10;- Fixing startup&#10;- Fixing root entity id returning nullptr">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-92] Inspector methods and serialization&#10;- Fixing form rendering&#10;- Fixing nullptr in WorldChangeListener.cpp">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/RuntimeState.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/RuntimeState.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/listeners/WorldChangeListener.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/listeners/WorldChangeListener.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/listeners/WorldChangeListener.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/listeners/WorldChangeListener.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/EngineService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/EngineService.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/services/EngineService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/EngineService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/HierarchyView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/HierarchyView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/AtmosphereComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/AtmosphereComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/CameraComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/CameraComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/ColliderComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/ColliderComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/CullingComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/CullingComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/DecalComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/DecalComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/LightComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/LightComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/LightProbeComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/LightProbeComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/MeshComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/MeshComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/MovementComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/MovementComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/RigidBodyComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/RigidBodyComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/SpriteComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/SpriteComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/TerrainComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/TerrainComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/AtmosphereComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/AtmosphereComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/enums/LocalizationEN.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/enums/LocalizationEN.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/services/engine-definitions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/engine-definitions.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/InspectorView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/InspectorView.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/Form.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/Form.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/FormField.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/FormField.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/AbstractFormType.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/AbstractFormType.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/AtmosphereForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/AtmosphereForm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/AtmosphereType.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/CameraForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/CameraForm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/CameraPreferencesForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/CameraPreferencesForm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/ColliderForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/ColliderForm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/CullingForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/CullingForm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/DecalForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/DecalForm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/EntityMetadataForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/EntityMetadataForm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/LightForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/LightForm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/LightProbeForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/LightProbeForm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/MeshForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/MeshForm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/MovementForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/MovementForm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/RenderingPreferencesForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/RenderingPreferencesForm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/RigidBodyForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/RigidBodyForm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/SpriteForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/SpriteForm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/TerrainForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/TerrainForm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/ViewportPreferencesForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/ViewportPreferencesForm.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +135,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "C/C++ File.main.cpp.executor": "Run",
-    "CMake Application.Projection.executor": "Debug",
+    "CMake Application.Projection.executor": "Run",
     "CMake Application.projection.executor": "Debug",
     "CMake Debug.projection.executor": "Debug",
     "CMake Debug.projectioncmake.executor": "Debug",
@@ -213,11 +239,6 @@
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="Should inject into non-static property" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
@@ -388,15 +409,8 @@
       <workItem from="1707685550190" duration="3072000" />
       <workItem from="1707733448289" duration="1481000" />
       <workItem from="1707822731739" duration="5143000" />
-      <workItem from="1707845602300" duration="7317000" />
-    </task>
-    <task id="LOCAL-00043" summary="[STD-3]  Starting refactoring&#10;- Fixing texture initialization">
-      <option name="closed" value="true" />
-      <created>1705260492870</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1705260492870</updated>
+      <workItem from="1707845602300" duration="7409000" />
+      <workItem from="1708035848953" duration="3500000" />
     </task>
     <task id="LOCAL-00044" summary="[STD-33]  Starting refactoring&#10;- Initiating systems refactoring">
       <option name="closed" value="true" />
@@ -782,7 +796,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707852620142</updated>
     </task>
-    <option name="localTasksCounter" value="92" />
+    <task id="LOCAL-00092" summary="[STD-92] Inspector methods and serialization&#10;- Fixing form rendering&#10;- Fixing nullptr in WorldChangeListener.cpp">
+      <option name="closed" value="true" />
+      <created>1707854076208</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1707854076208</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -806,7 +828,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-78] C++ render loop&#10;- Components" />
     <MESSAGE value="[STD-78] C++ engine structure&#10;- Refactoring resources &#10;- Implementing request shader in Shader class&#10;- Implementing FS&#10;- Refactoring ComponentFactory&#10;- Creating util classes" />
     <MESSAGE value="[STD-80] C++ engine static resources&#10;- Implementing shader initialzation&#10;- FBO initialization&#10;- Generation of noise texture" />
     <MESSAGE value="[STD-80] C++ engine static resources&#10;- UBOs&#10;- fixing UBO class" />
@@ -831,7 +852,8 @@
     <MESSAGE value="[STD-92] Inspector methods and serialization&#10;- Creating missing methods for inspector&#10;- Starting implementation of serialization for entity and other classes" />
     <MESSAGE value="[STD-92] Inspector methods and serialization&#10;- Creating basic test for serialization&#10;- Implementing serialize and parse methods for components&#10;- Creating TerrainComponent&#10;- Adding components to ComponentFactory.cpp" />
     <MESSAGE value="[STD-92] Inspector methods and serialization&#10;- Fixing startup&#10;- Fixing root entity id returning nullptr" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-92] Inspector methods and serialization&#10;- Fixing startup&#10;- Fixing root entity id returning nullptr" />
+    <MESSAGE value="[STD-92] Inspector methods and serialization&#10;- Fixing form rendering&#10;- Fixing nullptr in WorldChangeListener.cpp" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-92] Inspector methods and serialization&#10;- Fixing form rendering&#10;- Fixing nullptr in WorldChangeListener.cpp" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -12,7 +12,7 @@ namespace PEngine {
         explicit TerrainComponent() : AbstractComponent(ComponentType::TERRAIN) {}
 
         nlohmann::json serialize() override {
-            nlohmann::json json;
+            nlohmann::json json = AbstractComponent::serialize();
             json["heightMapID"] = heightMapID;
             return json;
         }

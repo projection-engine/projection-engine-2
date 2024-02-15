@@ -15,7 +15,7 @@ namespace PEngine {
         explicit CullingComponent() : AbstractComponent(ComponentType::CULLING) {}
 
         nlohmann::json serialize() override {
-            nlohmann::json json;
+            nlohmann::json json = AbstractComponent::serialize();
             json["screenDoorEffect"] = screenDoorEffect;
             json["screenDoorEffectDistanceMultiplier"] = screenDoorEffectDistanceMultiplier;
             json["distance"] = distance;

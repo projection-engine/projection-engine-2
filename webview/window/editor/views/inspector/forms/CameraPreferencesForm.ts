@@ -2,8 +2,8 @@ import AbstractFormType from "./AbstractFormType";
 import LocalizationEN from "@enums/LocalizationEN";
 
 export default class CameraPreferencesForm extends AbstractFormType {
-    initialize() {
-        super.initialize();
+    constructor() {
+        super();
         this.group(LocalizationEN.CAMERA, t => {
             t.number(LocalizationEN.SCREEN_GRABBING_SPEED, "cameraScreenSpaceMovementSpeed", undefined, .01, .1);
             t.number(LocalizationEN.TRANSLATION, "cameraMovementSpeed", undefined, .01, .1);

@@ -25,7 +25,7 @@ namespace PEngine {
         explicit DecalComponent() : AbstractComponent(ComponentType::DECAL) {}
 
         nlohmann::json serialize() override {
-            nlohmann::json json;
+            nlohmann::json json = AbstractComponent::serialize();
             json["renderingMode"] = renderingMode;
             json["albedoID"] = albedoID;
             json["roughnessID"] = roughnessID;
