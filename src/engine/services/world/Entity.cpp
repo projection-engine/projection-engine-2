@@ -6,7 +6,7 @@ namespace PEngine {
     }
 
     void Entity::initialize(entt::entity e) {
-        if(initialized){
+        if (initialized) {
             return;
         }
         initialized = true;
@@ -15,5 +15,20 @@ namespace PEngine {
 
     std::uint32_t Entity::getEntityId() {
         return static_cast<uint32_t>(entity);
+    }
+
+    nlohmann::json Entity::serialize() {
+        nlohmann::json json;
+
+        json["name"] = name;
+        json["active"] = active;
+        json["id"] = getEntityId();
+
+        return json;
+    }
+
+    void Entity::parse(nlohmann::json &data) {
+        name = data["name"];
+        active = data["active"];
     }
 }

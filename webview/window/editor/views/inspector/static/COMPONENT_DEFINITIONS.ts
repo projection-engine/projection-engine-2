@@ -10,6 +10,7 @@ import MeshForm from "../forms/MeshForm";
 import TerrainForm from "../forms/TerrainForm";
 import SpriteForm from "../forms/SpriteForm";
 import MovementForm from "../forms/MovementForm";
+import RigidBodyForm from "../forms/RigidBodyForm";
 
 export default {
     [ComponentType.MOVEMENT]: MovementForm,
@@ -20,7 +21,8 @@ export default {
     [ComponentType.DECAL]: DecalForm,
     [ComponentType.LIGHT]: LightForm,
     [ComponentType.LIGHT_PROBE]: LightProbeForm,
-    [ComponentType.MESH]: MeshForm,
+    [ComponentType.MESH_MATERIAL]: MeshForm,
     [ComponentType.TERRAIN]: TerrainForm,
     [ComponentType.SPRITE]: SpriteForm,
+    [ComponentType.RIGID_BODY]: RigidBodyForm,
 }

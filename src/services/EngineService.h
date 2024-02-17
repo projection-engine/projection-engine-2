@@ -1,21 +1,24 @@
 #ifndef PROJECTION_ENGINESERVICE_H
 #define PROJECTION_ENGINESERVICE_H
 
-#include "AbstractService.h"
 #include "nlohmann/json.hpp"
 
 namespace PEngine {
     class WorldService;
 
-    class Entity;
+    struct Entity;
+
+    class WebViewPayload;
+
+    class WebViewWindow;
 
     class Engine;
 
-    class EngineService : public AbstractService {
+    class EngineService {
         static void HandleEvent(WebViewPayload &payload);
 
     public:
-        void BindEvents(PEngine::WebViewWindow *pWindow) override;
+        static void BindEvents(PEngine::WebViewWindow *pWindow);
 
         static void UpdateEngineState(WebViewPayload &payload, Engine &engine);
 

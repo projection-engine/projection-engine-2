@@ -3,11 +3,13 @@
 
 #include <string>
 #include <vector>
-#include "AbstractService.h"
 
 namespace PEngine {
+    class WebViewPayload;
 
-    class FileSystemService : public AbstractService {
+    class WebViewWindow;
+
+    class FileSystemService {
     private:
         static void HandleEvent(WebViewPayload &payload);
 
@@ -30,7 +32,7 @@ namespace PEngine {
 
         static std::string GetRootDir();
 
-        void BindEvents(WebViewWindow *pWindow) override;
+        static void BindEvents(WebViewWindow *pWindow);
     };
 }
 

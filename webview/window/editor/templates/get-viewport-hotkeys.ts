@@ -28,16 +28,16 @@ export default function getViewportHotkeys(): { [key: string]: ContextMenuOption
             require: viewportHotkeys.DUPLICATE,
         },
 
-        FOCUS_ON_CAMERA: {
-            label: LocalizationEN.FOCUS_ON_CAMERA,
-            callback: EditorUtil.focusOnCamera,
-            require: viewportHotkeys.FOCUS_ON_CAMERA,
-        },
-        SHOW_SELECTED: {
-            label: LocalizationEN.SHOW_SELECTED,
-            callback: () => ProjectionEngine.EntityHierarchyService.openTree(),
-            require: viewportHotkeys.SHOW_SELECTED,
-        },
+        // FOCUS_ON_CAMERA: {
+        //     label: LocalizationEN.FOCUS_ON_CAMERA,
+        //     callback: EditorUtil.focusOnCamera,
+        //     require: viewportHotkeys.FOCUS_ON_CAMERA,
+        // },
+        // SHOW_SELECTED: {
+        //     label: LocalizationEN.SHOW_SELECTED,
+        //     callback: () => ProjectionEngine.EntityHierarchyService.openTree(),
+        //     require: viewportHotkeys.SHOW_SELECTED,
+        // },
 
         SAVE: {
             label: "Save",
@@ -78,16 +78,16 @@ export default function getViewportHotkeys(): { [key: string]: ContextMenuOption
             },
 
         },
-        HIDE_ACTIVE: {
-            label: "Hide active",
-            callback: () => {
-                const selected = SelectionStore.getEntitiesSelected()
-                for (let i = 0; i < selected.length; i++)
-                    EntityFactoryService.toggleEntityVisibility(selected[i], true)
-                ProjectionEngine.EntityHierarchyService.updateHierarchy()
-            },
-            require: viewportHotkeys.HIDE_ACTIVE,
-        },
+        // HIDE_ACTIVE: {
+        //     label: "Hide active",
+        //     callback: () => {
+        //         const selected = SelectionStore.getEntitiesSelected()
+        //         for (let i = 0; i < selected.length; i++)
+        //             EntityFactoryService.toggleEntityVisibility(selected[i], true)
+        //         ProjectionEngine.EntityHierarchyService.updateHierarchy()
+        //     },
+        //     require: viewportHotkeys.HIDE_ACTIVE,
+        // },
         SNAP_TO_ORIGIN: {
             label: "Snap to origin",
             callback: () => {

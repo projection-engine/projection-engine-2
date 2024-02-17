@@ -51,13 +51,12 @@ namespace PEngine::LoggerTest {
     }
 
     void loggerDestroy() {
-        size_t initialSize = ILoggable::activeLoggersSize();
         {
             Example c;
             c.log();
-            REQUIRE(ILoggable::activeLoggersSize() == initialSize+1);
+            REQUIRE(ILoggable::activeLoggersSize() == 1);
         }
-        REQUIRE(ILoggable::activeLoggersSize() == initialSize);
+        REQUIRE(ILoggable::activeLoggersSize() == 0);
     }
 
     Tester *createTester() {

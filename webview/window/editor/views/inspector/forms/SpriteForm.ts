@@ -1,14 +1,16 @@
 import AbstractFormType from "./AbstractFormType";
+import LocalizationEN from "@enums/LocalizationEN";
 
 export default class SpriteForm extends AbstractFormType {
-    initialize() {
-        super.initialize();
-        this.group("TEXTURE", t => [
-            t.imageTexture("IMAGE", "imageID"),
+    label = LocalizationEN.SPRITE
+    constructor() {
+        super();
+        this.group(LocalizationEN.TEXTURE, t => [
+            t.imageTexture(LocalizationEN.IMAGE, "imageID"),
         ]);
-        this.group("TRANSFORMATION", t => [
-            t.boolean("ALWAYS_FACE_CAMERA", "alwaysFaceCamera"),
-            t.boolean("KEEP_SAME_SIZE", "keepSameSize"),
+        this.group(LocalizationEN.TRANSFORMATION, t => [
+            t.boolean(LocalizationEN.ALWAYS_FACE_CAMERA, "alwaysFaceCamera"),
+            t.boolean(LocalizationEN.KEEP_SAME_SIZE, "keepSameSize"),
         ]);
     }
 }

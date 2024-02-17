@@ -4,8 +4,8 @@
     import ToolTip from "@lib/components/tooltip/ToolTip.svelte"
     import Input from "@lib/components/input/Input.svelte"
     import LocalizationEN from "@enums/LocalizationEN"
-    import {HierarchyEntityDTO} from "../hierarchy-definitions";
     import EngineService from "../../../services/EngineService";
+    import {EntityDTO} from "../../../services/engine-definitions";
 
     export let filteredComponent: number
     export let setFilteredComponent: GenericVoidFunctionWithP<number>
@@ -13,7 +13,7 @@
     export let setSearch: GenericVoidFunctionWithP<string>
     export let lockedEntity: number
     export let selected: number[]
-    export let root: HierarchyEntityDTO
+    export let root: EntityDTO
     export let open: Record<number, boolean>
     export let updateOpen: VoidFunction
 
@@ -25,14 +25,14 @@
         }
     }
 
-    function loopHierarchy(entity: HierarchyEntityDTO, target: number): boolean {
-        if (entity.entityID === target) {
-            open[entity.entityID] = true
+    function loopHierarchy(entity: EntityDTO, target: number): boolean {
+        if (entity.id === target) {
+            open[entity.id] = true
             return true;
         }
         for (const child of entity.children) {
             if (loopHierarchy(child, target)) {
-                open[child.entityID] = true
+                open[child.id] = true
                 return true
             }
         }

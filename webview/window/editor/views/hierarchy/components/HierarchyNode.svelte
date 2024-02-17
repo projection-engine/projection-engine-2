@@ -3,53 +3,54 @@
     import Icon from "@lib/components/icon/Icon.svelte";
     import ToolTip from "@lib/components/tooltip/ToolTip.svelte";
     import LocalizationEN from "@enums/LocalizationEN";
-    import {HierarchyEntityDTO} from "../hierarchy-definitions";
     import EngineService from "../../../services/EngineService";
     import ComponentNode from "./ComponentNode.svelte";
+    import {EntityDTO} from "../../../services/engine-definitions";
 
-    export let testSearch: GenericNonVoidFunctionWithP<HierarchyEntityDTO, boolean>
+    export let testSearch: GenericNonVoidFunctionWithP<EntityDTO, boolean>
     export let depth: number
     export let isOnSearch: boolean
-    export let entity: HierarchyEntityDTO
+    export let entity: EntityDTO
     export let open: Record<number, boolean>
     export let updateOpen: GenericVoidFunction
     export let selectedList: number[]
     export let lockedEntity: number
 
     function onExpand() {
-        if (!open[entity.entityID]) {
-            open[entity.entityID] = true
+        if (!open[entity.id]) {
+            open[entity.id] = true
             updateOpen()
         } else {
-            delete open[entity.entityID]
+            delete open[entity.id]
             closeHierarchy(entity)
             updateOpen()
         }
     }
 
-    function closeHierarchy(entity: HierarchyEntityDTO) {
+    function closeHierarchy(entity: EntityDTO) {
         entity.children.forEach(c => {
-            delete open[c.entityID]
+            delete open[c.id]
             closeHierarchy(c)
         })
     }
 
-    $: isOpen = open[entity.entityID]
-    $: isNodeSelected = selectedList.includes(entity.entityID)
+    $: isOpen = open[entity.id]
+    $: isNodeSelected = selectedList.includes(entity.id)
     $: childQuantity = Math.max(entity.children.length, entity.components.length)
     $: hasChildren = childQuantity > 0
     $: isMatchToSearch = isOnSearch && testSearch(entity)
 
     function toggleVisibility() {
-        EngineService.toggleEntityVisibility(entity.entityID)
+        EngineService.toggleEntityVisibility(entity.id)
     }
+
 </script>
 
 <div
         data-svelteselected={isNodeSelected || isMatchToSearch? "-" : ""}
-        data-sveltenode={entity.entityID}
+        data-sveltenode={entity.id}
         class="wrapper hierarchy-branch"
-        style={(isMatchToSearch && !isNodeSelected ? "--pj-accent-color-light: var(--pj-accent-color-tertiary);" : "")+ "padding-left:" +  (depth * 18 + "px;") + (entity.isActive ? "" : "opacity: .5") }
+        style={(isMatchToSearch && !isNodeSelected ? "--pj-accent-color-light: var(--pj-accent-color-tertiary);" : "")+ "padding-left:" +  (depth * 18 + "px;") + (entity.active ? "" : "opacity: .5") }
 >
 
     {#if hasChildren}
@@ -77,7 +78,7 @@
     >
         <ToolTip content={LocalizationEN.DEACTIVATE}/>
         <Icon styles="font-size: .8rem">
-            {#if entity.isActive}
+            {#if entity.active}
                 visibility
             {:else}
                 visibility_off
@@ -88,8 +89,8 @@
 {#if isOpen}
     {#each entity.components as component}
         <ComponentNode
-                entityID={entity.entityID}
-                isEntityActive={entity.isActive}
+                entityID={entity.id}
+                isEntityActive={entity.active}
                 componentType={component}
                 depth={depth + 1}
         />

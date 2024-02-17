@@ -1,3 +1,5 @@
+import LocalizationEN from "@enums/LocalizationEN";
+
 enum EngineEvents {
     CREATE_ENTITY = "CREATE_ENTITY",
     DELETE_ENTITY = "DELETE_ENTITY",
@@ -19,27 +21,73 @@ enum EngineEvents {
 }
 
 interface EngineStateDTO {
-}
+    cameraScreenSpaceMovementSpeed: number,
+    cameraMovementSpeed: number,
+    cameraTurnSpeed: number,
+    cameraSmoothing: number,
+    viewportWidth: number
+    viewportHeight: number
+    FXAA: boolean
+    TAA: boolean
+    physicsSimulationStep: number
+    physicsSubSteps: number
+    SSRMaxSteps: number
+    SSRStepSize: number
+    SSRFalloff: number
+    SSGIEnabled: boolean
+    SSGIStrength: number
+    SSGIBlurSamples: number
+    SSGIBlurRadius: number
+    SSGIMaxSteps: number
+    SSGIStepSize: number
+    SSSMaxSteps: number
+    SSSMaxDistance: number
+    SSSDepthThickness: number
+    SSSEdgeFalloff: number
+    SSSDepthDelta: number
+    shadowAtlasQuantity: number
+    SSAOEnabled: boolean
+    SSAOBlurSamples: number
+    SSAOMaxSamples: number
+    SSAORadius: number
+    SSAOPower: number
+    SSAOBias: number
+    SSAOFalloffDistance: number
+    iconScale: number
+    maxDistanceIcon: number
+    showGrid: boolean
+    showIcons: boolean
+    showLines: boolean
+    showOutline: boolean
+    outlineColor: [number, number, number]
+    outlineWidth: number
+    gridColor: number
+    gridOpacity: number
+    gridThreshold: number
+    gridScale: number
+    cameraGizmoSize: number
+    gizmoSensitivity: number
 
-interface SettingsDTO {
 }
 
 enum ComponentType {
-    MOVEMENT,
-    ATMOSPHERE,
-    CAMERA,
-    CULLING,
-    COLLIDER,
-    DECAL,
-    LIGHT,
-    LIGHT_PROBE,
-    MESH,
-    TERRAIN,
-    SPRITE,
+    MOVEMENT = "MOVEMENT",
+    ATMOSPHERE = "ATMOSPHERE",
+    CAMERA = "CAMERA",
+    CULLING = "CULLING",
+    COLLIDER = "COLLIDER",
+    DECAL = "DECAL",
+    LIGHT = "LIGHT",
+    LIGHT_PROBE = "LIGHT_PROBE",
+    MESH_MATERIAL = "MESH_MATERIAL",
+    TERRAIN = "TERRAIN",
+    SPRITE = "SPRITE",
+    RIGID_BODY = "RIGID_BODY",
 }
 
 interface ComponentDTO {
-    componentType: number;
+    id: number;
+    componentType: ComponentType;
 }
 
 enum RotationType {
@@ -53,7 +101,19 @@ enum RotationType {
 }
 
 interface EntityDTO {
-    entityID: number;
+    name: string,
+    id: number,
+    active: boolean
+
+    // ONLY PRESENT ON HIERARCHY CALLS
+    children?: EntityDTO[]
+    components?: ComponentType[]
 }
 
-export {EngineEvents, EngineStateDTO, SettingsDTO, ComponentType, RotationType, EntityDTO, ComponentDTO};
+enum AtmosphereRenderingType {
+    MIE,
+    RAYLEIGH,
+    COMBINED
+}
+
+export {EngineEvents, EngineStateDTO, ComponentType, RotationType, EntityDTO, ComponentDTO, AtmosphereRenderingType};

@@ -14,13 +14,15 @@ export default class EngineService extends IInjectable {
     static selectionCache: number[] = [];
 
     static listenToSelectionChanges(cb: GenericVoidFunctionWithP<number[]>): VoidFunction {
+        EngineService.webViewService.beam(EngineEvents.GET_SELECTED_ENTITIES);
         return EngineService.webViewService.listen(
             EngineEvents.GET_SELECTED_ENTITIES,
             payload => cb(JSON.parse(payload.getPayload()))
         );
     }
 
-    static listenToHierarchyChanges(cb: GenericVoidFunctionWithP<HierarchyEntityDTO>): VoidFunction {
+    static listenToHierarchyChanges(cb: GenericVoidFunctionWithP<EntityDTO>): VoidFunction {
+        EngineService.webViewService.beam(EngineEvents.GET_HIERARCHY);
         return EngineService.webViewService.listen(
             EngineEvents.GET_HIERARCHY,
             payload => cb(JSON.parse(payload.getPayload()))
@@ -28,6 +30,7 @@ export default class EngineService extends IInjectable {
     }
 
     static listenToLockedEntityChanges(cb: GenericVoidFunctionWithP<number>): VoidFunction {
+        EngineService.webViewService.beam(EngineEvents.GET_LOCKED_ENTITY);
         return EngineService.webViewService.listen(
             EngineEvents.GET_LOCKED_ENTITY,
             payload => cb(JSON.parse(payload.getPayload()).id)
@@ -35,6 +38,7 @@ export default class EngineService extends IInjectable {
     }
 
     static listenToEngineState(cb: GenericVoidFunctionWithP<EngineStateDTO>): VoidFunction {
+        EngineService.webViewService.beam(EngineEvents.GET_ENGINE_STATE);
         return EngineService.webViewService.listen(
             EngineEvents.GET_ENGINE_STATE,
             payload => cb(JSON.parse(payload.getPayload()))
@@ -84,7 +88,7 @@ export default class EngineService extends IInjectable {
 
     static addComponent(entityID: number, value: ComponentType) {
         EngineService.webViewService.beam(EngineEvents.ADD_COMPONENT, JSON.stringify({
-            entityID,
+            id: entityID,
             value
         }));
     }
@@ -114,6 +118,10 @@ export default class EngineService extends IInjectable {
     }
 
     static postComponentChange(entityID: number, component: ComponentDTO) {
-        EngineService.webViewService.beam(EngineEvents.UPDATE_COMPONENT, JSON.stringify(component));
+        EngineService.webViewService.beam(EngineEvents.UPDATE_COMPONENT, JSON.stringify({
+            id: entityID,
+            componentType: component.componentType,
+            component
+        }));
     }
 }

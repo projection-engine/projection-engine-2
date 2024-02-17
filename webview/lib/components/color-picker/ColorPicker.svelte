@@ -1,91 +1,86 @@
-<script>
-    import Dropdown from "../dropdown/Dropdown.svelte"
-    import ToolTip from "../tooltip/ToolTip.svelte"
-    import HsvPicker from "./HsvPicker.svelte"
+<script lang="ts">
+    import ToolTip from "../tooltip/ToolTip.svelte";
 
+    export let submit: GenericVoidFunctionWith2P<{ r: number, g: number, b: number }, [number, number, number]>;
+    export let height: string = "25px";
+    export let value: [number, number, number];
+    export let timeout: number = 250;
+    export let label: string;
+    export let disabled: boolean = false;
 
-    /** @type {function}*/
-    export let submit
-    /** @type {string}*/
-    export let height = "25px"
-    /** @type {number[]}*/
-    export let value
-    /** @type {number}*/
-    export let timeout = 250
-    /** @type {string}*/
-    export let label
-    /** @type {boolean}*/
-    export let disabled
+    let submitTimeout;
 
-    let submitTimeout
-    let startColor = [0, 0, 0]
+    function rgbToHex(r: number, g: number, b: number): string {
+        return "#" + (1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1);
+    }
 
-    $: if (value) startColor = [value[0], value[1], value[2]]
+    function hexToRgb(hex: string): { r: number, g: number, b: number } {
+        const replaced = hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (_, r, g, b) => {
+            return r + r + g + g + b + b;
+        });
 
+        const result = replaced.match(/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : null;
+    }
 </script>
 
-
-<Dropdown
-        hideArrow="true"
-        width="100%"
-        styles="width: fit-content; overflow: hidden; box-shadow: var(--pj-boxshadow);"
-        disabled={disabled}
->
-    <div
-            slot="button"
-            style={(disabled ? "cursor: default;" : "") + `min-height: ${height};max-height: ${height}; background: ${!disabled ? `rgb(${startColor[0]}, ${startColor[1]}, ${startColor[2]})` : "transparent"};`}
-            class="dropdown"
-    >
-        {#if label}
-            <div class="label">{label}</div>
-            <ToolTip content={label}/>
-        {/if}
-    </div>
-    <HsvPicker
-            startColor={startColor}
-            submit={({r,g,b}) => {
+<div class="wrapper" >
+    {#if label}
+        <div class="label">{label}</div>
+        <ToolTip content={label}/>
+    {/if}
+    <input disabled={disabled}
+           style={"height: " +height}
+           type="color"
+           value={value ? rgbToHex(value[0], value[1], value[2]) : null}
+           on:change={event => {
+                const inputValue = hexToRgb(event.currentTarget.value)
+                if(!inputValue)
+                    return
                 if(timeout === 0){
-                    startColor = [r,g,b]
-                    submit({r,g,b}, startColor)
+                    submit(inputValue,[inputValue.r,inputValue.g,inputValue.b])
                 }else{
                     clearTimeout(submitTimeout)
                     submitTimeout = setTimeout(() => {
-                        startColor = [r,g,b]
-                        submit({r,g,b}, startColor)
+                        submit(inputValue, [inputValue.r,inputValue.g,inputValue.b])
                     }, timeout)
                 }
             }}
     />
-</Dropdown>
+</div>
+
 <style>
-
-
-    .dropdown {
-        border-radius: 3px;
-        overflow: hidden;
+    .wrapper {
         width: 100%;
-        cursor: pointer;
-        transition: 150ms linear;
-        position: relative;
-        border: var(--pj-border-primary) 1px solid;
     }
 
-    .dropdown:hover {
-        opacity: .9;
+    input {
+        width: 100%;
+        height: 100%;
+        outline: none;
+        border: none;
+        padding: 0;
+        border-radius: 3px;
+        overflow: hidden;
+    }
+
+
+    input[type="color"]::-webkit-color-swatch-wrapper {
+        padding: 0;
+        border-radius: 0;
+    }
+
+    input[type="color"]::-webkit-color-swatch {
+        border: none;
     }
 
     .label {
-        background: rgba(0,0,0,.65);
-
         font-size: .7rem;
-        position: absolute;
-        padding: 0 8px 0 2px;
-        width: fit-content;
-
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
+        margin-bottom: 2px;
     }
 </style>
 

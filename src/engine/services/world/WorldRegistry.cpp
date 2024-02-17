@@ -5,11 +5,11 @@ namespace PEngine {
         root.initialize(worldReg.create());
     }
 
-     entt::registry &WorldRegistry::getWorldReg()  {
+    entt::registry &WorldRegistry::getWorldReg() {
         return worldReg;
     }
 
-     Entity &WorldRegistry::getRoot()  {
+    Entity &WorldRegistry::getRoot() {
         return root;
     }
 
@@ -43,8 +43,11 @@ namespace PEngine {
     }
 
     Entity *WorldRegistry::getEntity(uint32_t id) {
-        if(hasEntity(id)) {
+        if (hasEntity(id)) {
             return &entities[id];
+        }
+        if (id == root.getEntityId()) {
+            return &root;
         }
         return nullptr;
     }

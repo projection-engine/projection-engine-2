@@ -38,7 +38,7 @@ namespace PEngine {
     void WorldHierarchyListener::PostHierarchy(WebViewPayload &payload, Engine &engine) {
         WorldService *world = engine.getWorldService();
         std::unordered_map<uint32_t, std::vector<uint32_t>> hierarchy = world->getParentChildren();
-        nlohmann::json json;
+        nlohmann::json json = world->getRoot().serialize();
         GetHierarchy(json, world, hierarchy, &world->getRoot());
         payload.webview->postMessage(json.dump(), EngineEvents::GET_HIERARCHY);
     }
@@ -48,13 +48,10 @@ namespace PEngine {
                                               std::unordered_map<std::uint32_t, std::vector<std::uint32_t>> &hierarchy,
                                               Entity *entity) {
         std::vector<nlohmann::json> children;
-        json["name"] = entity->name;
-        json["entityID"] = entity->getEntityId();
         json["components"] = world->getComponentList(entity);
-        json["isActive"] = entity->active;
         if (hierarchy.count(entity->getEntityId())) {
             for (auto child: hierarchy[entity->getEntityId()]) {
-                nlohmann::json childJson;
+                nlohmann::json childJson = world->getEntity(child)->serialize();
                 GetHierarchy(childJson, world, hierarchy, world->getEntity(child));
                 children.push_back(childJson);
             }

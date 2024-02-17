@@ -6,11 +6,11 @@
 namespace PEngine {
     class WorldService;
 
-    class Entity;
+    struct Entity;
 
     class Engine;
 
-    class WebViewPayload;
+    struct WebViewPayload;
 
     struct WorldHierarchyListener {
         static void GetHierarchy(nlohmann::json &json,

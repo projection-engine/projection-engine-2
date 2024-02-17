@@ -10,27 +10,20 @@
     import {HierarchyEntityDTO} from "./hierarchy-definitions";
     import WebViewService from "@lib/webview/WebViewService";
     import EngineService from "../../services/EngineService";
-    import {EngineEvents} from "../../services/engine-definitions";
-
-
+    import {EngineEvents, EntityDTO} from "../../services/engine-definitions";
 
     let ref: HTMLElement
     let search = ""
     let filteredComponent: number = undefined
     let openTree = {}
-    let rootEntity: HierarchyEntityDTO = null
+    let rootEntity: EntityDTO = null
     let selectedList: number[] = []
     let lockedEntity: number
 
-    const webViewService = InjectVar(WebViewService)
     const draggable = dragDrop()
     const unsubSelection = EngineService.listenToSelectionChanges(payload => selectedList = payload)
     const unsubHierarchy = EngineService.listenToHierarchyChanges(payload => rootEntity = payload)
     const unsubLockedEntity = EngineService.listenToLockedEntityChanges(payload => lockedEntity = payload)
-
-    onMount(() => {
-        webViewService.beam(EngineEvents.GET_HIERARCHY)
-    })
 
     onDestroy(() => {
         HotKeysController.unbindAction(ref)
@@ -50,7 +43,7 @@
         filteredComponent = v;
     }
 
-    function testSearch(search: string, filteredComponent: number, node: HierarchyEntityDTO) {
+    function testSearch(search: string, filteredComponent: number, node: EntityDTO) {
         return (!search || search && node.name.includes(search)) && (!filteredComponent || filteredComponent && node.components.includes(filteredComponent))
     }
 </script>

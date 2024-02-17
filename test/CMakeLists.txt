@@ -5,6 +5,10 @@ set(SOURCES
 
         engine/WorldServiceTest.cpp
         engine/WorldServiceTest.h
+
+        engine/SerializationTest.h
+        engine/SerializationTest.cpp
+
         Tester.cpp
         Tester.h
         core/ListTest.cpp
@@ -27,6 +31,7 @@ set(SOURCES
         core/FileSystemTest.h
         core/StringUtilTest.cpp
         core/StringUtilTest.h
+        engine/Sample.h
 )
 
 include_directories(../src/ui/editor)

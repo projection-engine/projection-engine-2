@@ -28,6 +28,13 @@ set(COMMON_LIBRARIES
 
 set(FILE_PATHS
 
+        src/engine/enum/LightType.cpp
+        src/engine/enum/ColliderType.cpp
+        src/engine/AbstractSerializable.cpp
+        src/engine/AbstractSerializable.h
+        src/engine/SerializableRepository.cpp
+        src/engine/SerializableRepository.h
+        src/engine/enum/ComponentType.cpp
 
         src/engine/enum/EngineEvents.cpp
         src/engine/enum/EngineEvents.h
@@ -39,7 +46,7 @@ set(FILE_PATHS
         src/engine/services/world/WorldRegistry.cpp
         src/engine/services/world/WorldRegistry.h
 
-        src/engine/services/RuntimeState.h
+        src/engine/RuntimeState.h
         src/services/EngineService.cpp
         src/services/EngineService.h
 
@@ -117,8 +124,6 @@ set(FILE_PATHS
 
         src/services/ShaderService.cpp
         src/services/ShaderService.h
-
-        src/services/AbstractService.h
 
         src/engine/services/resource/dto/FBOTextureDTO.h
 

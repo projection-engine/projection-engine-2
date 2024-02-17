@@ -1,16 +1,18 @@
 import AbstractFormType from "./AbstractFormType";
+import LocalizationEN from "@enums/LocalizationEN";
 
 export default class MeshForm extends AbstractFormType {
-    initialize() {
-        super.initialize();
+    label = LocalizationEN.MESH
+    constructor() {
+        super();
 
-        this.group("RENDERING", t => [
-            t.meshInstance("MESH", "meshID"),
-            t.materialInstance("MATERIAL", "materialID"),
+        this.group(LocalizationEN.RENDERING, t => [
+            t.meshInstance(LocalizationEN.MESH, "meshID"),
+            t.materialInstance(LocalizationEN.MATERIAL, "materialID"),
         ]);
-        this.group("CONTRIBUTION", t => [
-            t.boolean("CASTS_SHADOWS", "castsShadows"),
-            t.boolean("CONTRIBUTE_TO_PROBES", "contributeToProbes"),
+        this.group(LocalizationEN.CONTRIBUTION, t => [
+            t.boolean(LocalizationEN.CASTS_SHADOWS, "castsShadows"),
+            t.boolean(LocalizationEN.CONTRIBUTE_TO_PROBES, "contributeToProbes"),
         ]);
     }
 }

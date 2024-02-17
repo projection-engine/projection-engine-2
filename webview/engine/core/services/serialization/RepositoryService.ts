@@ -50,8 +50,4 @@ export default class RepositoryService {
     static hasSingleton(name: string) {
         return Object.hasOwn(RepositoryService.get().instanced, name);
     }
-
-    static getInstanceFor(value: SerializableClass) {
-        return Serializable.getInstanceFor(value)
-    }
 }

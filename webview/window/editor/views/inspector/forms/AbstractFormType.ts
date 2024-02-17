@@ -20,10 +20,6 @@ export default class AbstractFormType {
         return instance;
     }
 
-    initialize() {
-
-    }
-
     group(label: string, children: GenericVoidFunctionWithP<AbstractFormType>, disabledIf?: DisabledIf): AbstractFormType {
         const instance = this.addProperty(label, PropertyType.GROUP, null, null, disabledIf);
         children(instance);
@@ -50,7 +46,7 @@ export default class AbstractFormType {
     }
 
     string(label: string, key: string, disabledIf?: DisabledIf): AbstractFormType {
-        return this.addProperty(label, PropertyType.STRING, key,null, disabledIf);
+        return this.addProperty(label, PropertyType.STRING, key, null, disabledIf);
     }
 
     options(key: string, options?: {

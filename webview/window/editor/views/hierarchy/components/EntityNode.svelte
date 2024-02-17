@@ -4,11 +4,11 @@
     import Icon from "@lib/components/icon/Icon.svelte";
     import ModalInput from "../../../components/modal-input/ModalInput.svelte";
     import LocalizationEN from "@enums/LocalizationEN";
-    import {HierarchyEntityDTO} from "../hierarchy-definitions";
     import EngineService from "../../../services/EngineService";
     import EditorUtil from "../../../util/EditorUtil";
+    import {EntityDTO} from "../../../services/engine-definitions";
 
-    export let entity: HierarchyEntityDTO
+    export let entity: EntityDTO
     export let lockedEntity: number
     export let isOpen: boolean
     export let isOnSearch: boolean
@@ -19,26 +19,26 @@
 
 
     onMount(() => {
-        containerRef.addEventListener("click", e => EngineService.updateSelection(entity.entityID, e.ctrlKey))
+        containerRef.addEventListener("click", e => EngineService.updateSelection(entity.id, e.ctrlKey))
         ref.addEventListener("dblclick", () => isOnEdit = true)
     })
 
     function handleRename(value: string) {
         entity.name = value
 
-        EngineService.renameEntity(entity.entityID, entity.name);
+        EngineService.renameEntity(entity.id, entity.name);
         isOnEdit = false
     }
 
-    $: isLocked = lockedEntity === entity.entityID
+    $: isLocked = lockedEntity === entity.id
 </script>
 
-<div class="info hierarchy-branch" data-sveltenode={entity.entityID} bind:this={containerRef}>
+<div class="info hierarchy-branch" data-sveltenode={entity.id} bind:this={containerRef}>
     <button
             data-sveltelocked={isLocked ? "-" : ""}
             class="button-icon hierarchy-branch"
             style={`--button-color: ${!isLocked ? "var(--folder-color-darker)" : "var(--folder-color)" }`}
-            on:click={() => EngineService.setLockedEntity(entity.entityID)}
+            on:click={() => EngineService.setLockedEntity(entity.id)}
     >
         <Icon styles="font-size: 1rem">
                 view_in_ar

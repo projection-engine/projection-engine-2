@@ -33,22 +33,22 @@
         <button data-sveltebuttondefault="-"
                 data-sveltehighlight={tabIndex === 3 ? "-" : undefined}
                 class="tab-button shared"
-                on:click={() => tabIndex = 3}
+                on:click={() => setTabIndex(3)}
         >
             <Icon styles="font-size: .9rem">settings</Icon>
             <ToolTip content={LocalizationEN.ENTITY}/>
         </button>
         {#each tabs as button, index}
             <button data-sveltebuttondefault="-"
-                    data-sveltehighlight={tabIndex === index ? "-" : undefined}
+                    data-sveltehighlight={tabIndex === index + 4? "-" : undefined}
                     class="tab-button shared"
-                    on:click={() => setTabIndex(index)}
+                    on:click={() => setTabIndex(index + 4)}
             >
                 <Icon styles="font-size: .9rem">{button.icon}</Icon>
                 <ToolTip content={button.label}/>
             </button>
         {/each}
-        <Dropdown>
+        <Dropdown hideArrow={true}>
             <button data-sveltebuttondefault="-"
                     slot="button"
                     class="tab-button shared"
@@ -61,7 +61,7 @@
                     <button
                             data-sveltebuttondefault="-"
                             class="tab-button shared"
-                            on:click={() => EngineService.addComponent(selectedEntity.entityID, component.value)}
+                            on:click={() => EngineService.addComponent(selectedEntity.id, component.value)}
                     >
                         {component.label}
                     </button>

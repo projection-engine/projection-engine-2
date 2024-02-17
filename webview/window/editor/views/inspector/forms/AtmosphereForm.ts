@@ -1,42 +1,45 @@
 import AbstractFormType from "./AbstractFormType";
-import AtmosphereType from "./AtmosphereType";
+import {AtmosphereRenderingType} from "../../../services/engine-definitions";
+import LocalizationEN from "@enums/LocalizationEN";
 
 export default class AtmosphereForm extends AbstractFormType {
-    initialize() {
-        super.initialize();
+    label = LocalizationEN.ATMOSPHERE
 
-        this.group("GLOBAL", t => [
-            t.number("ELAPSED_TIME", "elapsedTime", undefined, 0),
-            t.number("RAYLEIGH_HEIGHT", "rayleighHeight", undefined, 0, 1),
-            t.number("MIE_HEIGHT", "mieHeight", undefined, 0, 1),
-            t.number("SAMPLES", "maxSamples", undefined, 1, 1),
-            t.number("INTENSITY", "intensity", undefined, 1, 1),
-            t.number("THRESHOLD", "threshold", 0, undefined),
+    constructor() {
+        super();
+
+        this.group(LocalizationEN.GLOBAL, t => [
+            t.number(LocalizationEN.ELAPSED_TIME, "elapsedTime", undefined, 0),
+            t.number(LocalizationEN.RAYLEIGH_HEIGHT, "rayleighHeight", undefined, 0, 1),
+            t.number(LocalizationEN.MIE_HEIGHT, "mieHeight", undefined, 0, 1),
+            t.number(LocalizationEN.SAMPLES, "maxSamples", undefined, 1, 1),
+            t.number(LocalizationEN.INTENSITY, "intensity", undefined, 1, 1),
+            t.number(LocalizationEN.THRESHOLD, "threshold", 0, undefined),
         ]);
-        this.group("RAYLEIGH_BETA_VALUES", t => [
+        this.group(LocalizationEN.RAYLEIGH_BETA_VALUES, t => [
             t.array(["R", "G", "B"], "betaRayleigh", .01, undefined, .01),
         ]);
-        this.group("MIE_BETA_VALUES", t => [
+        this.group(LocalizationEN.MIE_BETA_VALUES, t => [
             t.array(["R", "G", "B"], "betaMie", .01, undefined, .01),
         ]);
-        this.group("RADII", t => [
-            t.number("ATMOSPHERE", "atmosphereRadius", undefined, 0),
-            t.number("PLANET", "planetRadius", undefined, 0),
+        this.group(LocalizationEN.RADII, t => [
+            t.number(LocalizationEN.ATMOSPHERE, "atmosphereRadius", undefined, 0),
+            t.number(LocalizationEN.PLANET, "planetRadius", undefined, 0),
         ]);
 
-        this.group("SCATTERING_FUNCTION", t => [
+        this.group(LocalizationEN.SCATTERING_FUNCTION, t => [
             t.options("renderingType", [
                 {
-                    label: "MIE",
-                    value: AtmosphereType.MIE
+                    label: LocalizationEN.MIE,
+                    value: AtmosphereRenderingType.MIE
                 },
                 {
-                    label: "RAYLEIGH",
-                    value: AtmosphereType.RAYLEIGH
+                    label: LocalizationEN.RAYLEIGH,
+                    value: AtmosphereRenderingType.RAYLEIGH
                 },
                 {
-                    label: "COMBINED",
-                    value: AtmosphereType.COMBINED
+                    label: LocalizationEN.COMBINED,
+                    value: AtmosphereRenderingType.COMBINED
                 }
             ]),
         ]);

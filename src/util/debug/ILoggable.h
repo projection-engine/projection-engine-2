@@ -8,13 +8,13 @@
 #include "spdlog/spdlog.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
 #include "spdlog/fmt/ostr.h"
-#include "../structures/List.h"
+#include <unordered_map>
 
 namespace PEngine {
     class ILoggable {
     private:
-        static List<std::shared_ptr<spdlog::logger>> loggers;
-
+        static std::unordered_map<std::string, std::shared_ptr<spdlog::logger>> loggers;
+        std::string uuid;
         std::shared_ptr<spdlog::logger> logger;
 
         void init(const std::string &name);

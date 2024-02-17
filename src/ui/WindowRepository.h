@@ -19,7 +19,7 @@ namespace PEngine {
 
     class WindowRepository : public ILoggable {
     private:
-        static WindowRepository singleton;
+        static WindowRepository *singleton;
         GLFWwindow *window = nullptr;
         WebViewWindow *webView = nullptr;
         IRunner *runner = nullptr;

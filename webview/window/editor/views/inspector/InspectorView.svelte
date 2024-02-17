@@ -16,7 +16,7 @@
     import EditorUtil from "../../util/EditorUtil";
 
     let selectedEntity: EntityDTO;
-    let components: ComponentDTO[];
+    let components: ComponentDTO[] = [];
     let engineState: EngineStateDTO;
     let componentDefinitions: typeof AbstractFormType[];
     let componentMap: ComponentType[] = [];
@@ -25,48 +25,28 @@
 
     const unsubSelection = EngineService.listenToSelectionChanges(selection => updateSelection(selection[0]));
     const unsubLockedEntity = EngineService.listenToLockedEntityChanges(updateSelection);
-    const unsubEngineState = EngineService.listenToEngineState(payload => {
-        engineState = payload;
-    });
+    const unsubEngineState = EngineService.listenToEngineState(payload => engineState = payload);
 
     function getEntityTabs(components: ComponentDTO[]): TabDTO[] {
-        return [
-            {
-                icon: "settings",
-                label: LocalizationEN.ENTITY_PROPERTIES
-            },
-            {divider: true},
-            ...components.map((c, i) => ({
-                icon: EditorUtil.getComponentIcon(c.componentType),
-                label: EditorUtil.getComponentLabel(c.componentType),
-                index: i
-            }))
-        ];
+        return components.map(c => ({
+            icon: EditorUtil.getComponentIcon(c.componentType),
+            label: EditorUtil.getComponentLabel(c.componentType)
+        }));
     }
 
-    function updateSelection(payload: number | undefined) {
-        if (payload != null) {
-            EngineService.getEntityByID(payload).then(e => {
-                selectedEntity = e;
-            });
-             EngineService.getEntityComponents(payload).then(e => {
-                 components = e;
-             });
-            tabIndex = 3;
-            componentDefinitions = components.map(c => COMPONENT_DEFINITIONS[c.componentType]);
-            componentMap = components.map(c => {
-                return c.componentType as unknown as ComponentType;
-            });
-            if (selectedEntity) {
-                tabs = getEntityTabs(components);
-            } else {
-                tabs = [];
-            }
+    async function updateSelection(payload: number | undefined) {
+        selectedEntity = payload == null ? undefined : await EngineService.getEntityByID(payload);
+        if (selectedEntity == null) {
+            tabIndex = 0;
+            selectedEntity = undefined;
+            components = [];
             return;
         }
-        tabIndex = 0;
-        selectedEntity = undefined;
-        components = [];
+        tabIndex = 3;
+        components = await EngineService.getEntityComponents(payload);
+        componentDefinitions = components.map(c => COMPONENT_DEFINITIONS[c.componentType]);
+        componentMap = components.map(c => c.componentType as unknown as ComponentType);
+        tabs = selectedEntity ? getEntityTabs(components) : [];
     }
 
     onDestroy(() => {
@@ -88,12 +68,11 @@
                 selectedEntity = selectedEntity;
                 break;
             default:
-                EngineService.postComponentChange(selectedEntity.entityID, components[tabIndex - 3]);
+                EngineService.postComponentChange(selectedEntity.id, components[tabIndex - 4]);
                 components = components;
                 break;
         }
     }
-
 </script>
 
 <div class="wrapper">
@@ -113,8 +92,8 @@
             <Form {postResponse} definition={RenderingPreferencesForm} data={engineState}/>
         {:else if tabIndex === 3}
             <Form {postResponse} definition={EntityMetadataForm} data={selectedEntity}/>
-        {:else if componentDefinitions[tabIndex - 3] != null}
-            <Form {postResponse} definition={componentDefinitions[tabIndex - 3]} data={components[tabIndex - 3]}/>
+        {:else if componentDefinitions[tabIndex - 4] != null}
+            <Form {postResponse} definition={componentDefinitions[tabIndex - 4]} data={components[tabIndex - 4]}/>
         {/if}
     </div>
 </div>

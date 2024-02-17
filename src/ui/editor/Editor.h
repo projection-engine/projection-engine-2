@@ -2,10 +2,7 @@
 #define PROJECTION_EDITOR_H
 
 #include "../shared/AbstractWindow.h"
-#include "../../services/FileSystemService.h"
-#include "../../services/ShaderService.h"
 #include "../../engine/Engine.h"
-#include "../../services/EngineService.h"
 
 namespace PEngine {
     class WebViewWindow;
@@ -16,9 +13,6 @@ namespace PEngine {
     private:
         static void onMessage(WebViewPayload &payload);
         static std::string projectPath;
-        FileSystemService fileSystemService;
-        EngineService hierarchyService;
-        ShaderService shaderService;
         Engine engine;
     public:
 

@@ -8,19 +8,19 @@ import SelectionStore from "@lib/stores/SelectionStore";
 
 export function getViewportOptionsForDropdown() {
 	const result = []
-	const options = getViewportContext(true)
-	for (let i = 0; i < options.length; i++) {
-		const v = options[i]
-		if (i >= options.length - 1)
-			continue
-		if (v.children) {
-			result.push({divider: true, label: v.label})
-			v.children.forEach(v => {
-				result.push(v)
-			})
-		} else
-			result.push(v)
-	}
+	// const options = getViewportContext(true)
+	// for (let i = 0; i < options.length; i++) {
+	// 	const v = options[i]
+	// 	if (i >= options.length - 1)
+	// 		continue
+	// 	if (v.children) {
+	// 		result.push({divider: true, label: v.label})
+	// 		v.children.forEach(v => {
+	// 			result.push(v)
+	// 		})
+	// 	} else
+	// 		result.push(v)
+	// }
 	return result
 }
 
