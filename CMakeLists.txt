@@ -125,8 +125,6 @@ set(FILE_PATHS
         src/services/ShaderService.cpp
         src/services/ShaderService.h
 
-        src/services/AbstractService.h
-
         src/engine/services/resource/dto/FBOTextureDTO.h
 
         src/engine/services/resource/core/UniformBuffer.cpp

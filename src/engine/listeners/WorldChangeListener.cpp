@@ -18,14 +18,15 @@ namespace PEngine {
 
     void WorldChangeListener::DeleteEntity(WebViewPayload &payload, Engine &engine, WorldService *world) {
         nlohmann::json parsed = nlohmann::json::parse(payload.payload);
-        uint32_t value = parsed.at("id").get<uint32_t>();
-        world->removeEntity(value);
+        std::uint32_t entityID = parsed.at("id").get<std::uint32_t>();
+        world->removeEntity(entityID);
         WorldHierarchyListener::PostHierarchy(payload, engine);
     }
 
     void WorldChangeListener::ToggleActive(WebViewPayload &payload, Engine &engine, WorldService *world) {
         nlohmann::json parsed = nlohmann::json::parse(payload.payload);
-        Entity *entity = world->getEntity(parsed.at("id").get<uint32_t>());
+        std::uint32_t entityID = parsed.at("id").get<std::uint32_t>();
+        Entity *entity = world->getEntity(entityID);
         if (entity != nullptr) {
             entity->active = !entity->active;
             WorldHierarchyListener::PostHierarchy(payload, engine);
@@ -34,7 +35,8 @@ namespace PEngine {
 
     void WorldChangeListener::RenameEntity(WebViewPayload &payload, Engine &engine, WorldService *world) {
         nlohmann::json parsed = nlohmann::json::parse(payload.payload);
-        Entity *entity = world->getEntity(parsed.at("id").get<uint32_t>());
+        std::uint32_t entityID = parsed.at("id").get<std::uint32_t>();
+        Entity *entity = world->getEntity(entityID);
         if (entity != nullptr) {
             entity->name = parsed.at("name").get<std::string>();
             WorldHierarchyListener::PostHierarchy(payload, engine);
@@ -43,7 +45,8 @@ namespace PEngine {
 
     void WorldChangeListener::UpdateEntity(WebViewPayload &payload, WorldService *world) {
         nlohmann::json parsed = nlohmann::json::parse(payload.payload);
-        Entity *entity = world->getEntity(parsed.at("entityID").get<uint32_t>());
+        std::uint32_t entityID = parsed.at("id").get<std::uint32_t>();
+        Entity *entity = world->getEntity(entityID);
         if (entity != nullptr) {
             entity->parse(parsed);
             GetEntity(payload, world);
@@ -52,7 +55,8 @@ namespace PEngine {
 
     void WorldChangeListener::UpdateComponent(WebViewPayload &payload, WorldService *world) {
         nlohmann::json parsed = nlohmann::json::parse(payload.payload);
-        Entity *entity = world->getEntity(parsed.at("id").get<uint32_t>());
+        std::uint32_t entityID = parsed.at("id").get<std::uint32_t>();
+        Entity *entity = world->getEntity(entityID);
         if (entity != nullptr) {
             ComponentType componentType = ComponentType::Of(parsed.at("componentType").get<std::string>());
             AbstractComponent &component = world->getComponent(componentType, entity);
@@ -63,7 +67,8 @@ namespace PEngine {
 
     void WorldChangeListener::GetEntityComponents(WebViewPayload &payload, WorldService *world) {
         nlohmann::json parsed = nlohmann::json::parse(payload.payload);
-        Entity *entity = world->getEntity(parsed.at("id").get<uint32_t>());
+        std::uint32_t entityID = parsed.at("id").get<std::uint32_t>();
+        Entity *entity = world->getEntity(entityID);
         if (entity != nullptr) {
 
             std::vector<std::string> &components = world->getComponentList(entity);
@@ -80,19 +85,21 @@ namespace PEngine {
 
     void WorldChangeListener::GetEntity(WebViewPayload &payload, WorldService *world) {
         nlohmann::json parsed = nlohmann::json::parse(payload.payload);
-        Entity *entity = world->getEntity(parsed.at("id").get<uint32_t>());
+        std::uint32_t entityID = parsed.at("id").get<std::uint32_t>();
+        Entity *entity = world->getEntity(entityID);
         if (entity != nullptr) {
             payload.webview->postMessage(entity->serialize().dump(), EngineEvents::GET_ENTITY);
         }
     }
 
-    void WorldChangeListener::AddComponent(WebViewPayload &payload, WorldService *world) {
+    void WorldChangeListener::AddComponent(WebViewPayload &payload, Engine &engine, WorldService *world) {
         nlohmann::json parsed = nlohmann::json::parse(payload.payload);
-        Entity *entity = world->getEntity(parsed.at("id").get<uint32_t>());
+        std::uint32_t entityID = parsed.at("id").get<std::uint32_t>();
+        Entity *entity = world->getEntity(entityID);
         if (entity != nullptr) {
             ComponentType componentType = ComponentType::Of(parsed.at("value").get<std::string>());
             world->addComponent(componentType, entity);
-            GetEntityComponents(payload, world);
+            WorldHierarchyListener::PostSelectedEntities(payload, engine);
         }
     }
 }

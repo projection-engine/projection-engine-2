@@ -26,13 +26,13 @@
     }
 
     function loopHierarchy(entity: EntityDTO, target: number): boolean {
-        if (entity.entityID === target) {
-            open[entity.entityID] = true
+        if (entity.id === target) {
+            open[entity.id] = true
             return true;
         }
         for (const child of entity.children) {
             if (loopHierarchy(child, target)) {
-                open[child.entityID] = true
+                open[child.id] = true
                 return true
             }
         }

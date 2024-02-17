@@ -17,7 +17,7 @@
 
     let selectedEntity: EntityDTO;
     let components: ComponentDTO[] = [];
-    let engineState: EngineStateDTO = {};
+    let engineState: EngineStateDTO;
     let componentDefinitions: typeof AbstractFormType[];
     let componentMap: ComponentType[] = [];
     let tabIndex = 0;
@@ -28,22 +28,14 @@
     const unsubEngineState = EngineService.listenToEngineState(payload => engineState = payload);
 
     function getEntityTabs(components: ComponentDTO[]): TabDTO[] {
-        return [
-            {
-                icon: "settings",
-                label: LocalizationEN.ENTITY_PROPERTIES
-            },
-            {divider: true},
-            ...components.map((c, i) => ({
-                icon: EditorUtil.getComponentIcon(c.componentType),
-                label: EditorUtil.getComponentLabel(c.componentType),
-                index: i
-            }))
-        ];
+        return components.map(c => ({
+            icon: EditorUtil.getComponentIcon(c.componentType),
+            label: EditorUtil.getComponentLabel(c.componentType)
+        }));
     }
 
     async function updateSelection(payload: number | undefined) {
-        selectedEntity = !payload ? undefined : await EngineService.getEntityByID(payload);
+        selectedEntity = payload == null ? undefined : await EngineService.getEntityByID(payload);
         if (selectedEntity == null) {
             tabIndex = 0;
             selectedEntity = undefined;
@@ -76,7 +68,7 @@
                 selectedEntity = selectedEntity;
                 break;
             default:
-                EngineService.postComponentChange(selectedEntity.entityID, components[tabIndex - 3]);
+                EngineService.postComponentChange(selectedEntity.id, components[tabIndex - 4]);
                 components = components;
                 break;
         }
@@ -100,8 +92,8 @@
             <Form {postResponse} definition={RenderingPreferencesForm} data={engineState}/>
         {:else if tabIndex === 3}
             <Form {postResponse} definition={EntityMetadataForm} data={selectedEntity}/>
-        {:else if componentDefinitions[tabIndex - 3] != null}
-            <Form {postResponse} definition={componentDefinitions[tabIndex - 3]} data={components[tabIndex - 3]}/>
+        {:else if componentDefinitions[tabIndex - 4] != null}
+            <Form {postResponse} definition={componentDefinitions[tabIndex - 4]} data={components[tabIndex - 4]}/>
         {/if}
     </div>
 </div>

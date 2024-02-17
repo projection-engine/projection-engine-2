@@ -3,6 +3,7 @@ import LIGHT_TYPES from "@engine-core/static/LIGHT_TYPES";
 import LocalizationEN from "@enums/LocalizationEN";
 
 export default class LightForm extends AbstractFormType {
+    label = LocalizationEN.LIGHT
     constructor() {
         super();
 

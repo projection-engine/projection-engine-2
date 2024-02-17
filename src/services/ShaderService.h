@@ -1,16 +1,16 @@
 #ifndef PROJECTION_SHADERSERVICE_H
 #define PROJECTION_SHADERSERVICE_H
 
-#include "AbstractService.h"
-
 namespace PEngine {
+    class WebViewPayload;
 
-    class ShaderService : public AbstractService {
+    class WebViewWindow;
+
+    class ShaderService {
         static void HandleEvent(WebViewPayload &payload);
 
     public:
-
-        void BindEvents(PEngine::WebViewWindow *pWindow) override;
+        static void BindEvents(PEngine::WebViewWindow *pWindow);
     };
 
 }

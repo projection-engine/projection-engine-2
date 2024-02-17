@@ -19,7 +19,7 @@ namespace PEngine {
 
         static void AddEntity(WebViewPayload &payload, Engine &engine, WorldService *world);
 
-        static void AddComponent(WebViewPayload &payload, WorldService *world);
+        static void AddComponent(WebViewPayload &payload, Engine &engine, WorldService *world);
 
         static void GetEntity(WebViewPayload &payload, WorldService *world);
 

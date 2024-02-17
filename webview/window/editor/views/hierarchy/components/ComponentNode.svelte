@@ -3,10 +3,11 @@
     import EditorUtil from "../../../util/EditorUtil";
     import {onMount} from "svelte";
     import EngineService from "../../../services/EngineService";
+    import {ComponentType} from "../../../services/engine-definitions";
 
     export let depth: number
     export let isEntityActive: boolean
-    export let componentType: number
+    export let componentType: ComponentType
     export let entityID: number
 
     let ref: HTMLElement

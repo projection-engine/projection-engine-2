@@ -1,26 +1,28 @@
 #include "entt/entt.hpp"
 #include "../Tester.h"
-#include "../../src/engine/services/world/components/MovementComponent.h"
 #include "catch2/catch_test_macros.hpp"
+#include "../../src/engine/AbstractSerializable.h"
+#include "Sample.h"
 
 namespace PEngine::SerializationTest {
+
     void shouldSerializeComponent() {
-        MovementComponent sample;
-        MovementComponent sampleRestored;
+        Sample sample;
+        Sample sampleRestored;
         float value = 3.f;
-        sample.pivotPoint.z = sample.pivotPoint.y = sample.pivotPoint.x = value;
+        sample.vector.z = sample.vector.y = sample.vector.x = value;
         sample.matrix[0][0] = sample.matrix[1][1] = sample.matrix[2][2] = sample.matrix[3][3] = value;
 
         nlohmann::json json = sample.serialize();
         sampleRestored.parse(json);
 
-        REQUIRE(json["pivotPoint"]["x"] == value);
-        REQUIRE(json["pivotPoint"]["z"] == value);
-        REQUIRE(json["pivotPoint"]["y"] == value);
+        REQUIRE(json["vector"][0] == value);
+        REQUIRE(json["vector"][2] == value);
+        REQUIRE(json["vector"][1] == value);
 
-        REQUIRE(sampleRestored.pivotPoint.x == value);
-        REQUIRE(sampleRestored.pivotPoint.y == value);
-        REQUIRE(sampleRestored.pivotPoint.z == value);
+        REQUIRE(sampleRestored.vector.x == value);
+        REQUIRE(sampleRestored.vector.y == value);
+        REQUIRE(sampleRestored.vector.z == value);
 
         REQUIRE(sample.matrix[0][0] == value);
         REQUIRE(sample.matrix[1][1] == value);

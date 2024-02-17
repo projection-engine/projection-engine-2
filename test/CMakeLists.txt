@@ -31,6 +31,7 @@ set(SOURCES
         core/FileSystemTest.h
         core/StringUtilTest.cpp
         core/StringUtilTest.h
+        engine/Sample.h
 )
 
 include_directories(../src/ui/editor)

@@ -787,5 +787,6 @@ export default {
     LOCKED_SCALING: "Locked scaling",
     LOCKED_ROTATION: "Locked rotation",
     LOD: "Level of detail",
-    OFFSET: "Offset"
+    OFFSET: "Offset",
+    ROTATION_QUATERNION: "Rotation Quaternion"
 }

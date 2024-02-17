@@ -6,7 +6,7 @@
 #include "../engine/definitions.h"
 
 namespace PEngine {
-    WindowRepository WindowRepository::singleton;
+    WindowRepository *WindowRepository::singleton = nullptr;
 
     void WindowRepository::createWindowInternal(const std::string &id, AbstractWindow *window) {
         windows[id] = window;
@@ -116,7 +116,10 @@ namespace PEngine {
     }
 
     WindowRepository &WindowRepository::Get() {
-        return singleton;
+        if(singleton == nullptr){
+            singleton = new WindowRepository;
+        }
+        return *singleton;
     }
 
     GLFWwindow *WindowRepository::getWindow() const {

@@ -35,6 +35,7 @@ export default class WebViewService extends IInjectable implements Communication
     }
 
     beam(id: string, message?: string) {
+        console.log(message)
         // @ts-ignore
         window.chrome.webview.postMessage(JSON.stringify(new WebViewPayload(id, message)))
     }

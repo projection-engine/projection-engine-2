@@ -2,19 +2,15 @@
 #include "../UUID.h"
 
 namespace PEngine {
-    List<std::shared_ptr<spdlog::logger>> ILoggable::loggers;
+    std::unordered_map<std::string, std::shared_ptr<spdlog::logger>>  ILoggable::loggers{};
 
     ILoggable::ILoggable(const char *name) {
         init(name);
     }
 
     void ILoggable::setLoggingLevel(spdlog::level::level_enum level) {
-        loggers.iterate();
-        while (loggers.hasNext()) {
-            auto logger = *loggers.next();
-            if(logger != nullptr) {
-                logger->set_level(level);
-            }
+        for (const auto &logger: loggers) {
+            logger.second->set_level(level);
         }
     }
 
@@ -28,6 +24,7 @@ namespace PEngine {
 
     void ILoggable::init(const std::string &name) {
         logger = spdlog::stdout_color_mt(name + UUID::v4());
+        loggers[uuid] = logger;
         spdlog::set_pattern("%^[%T - %v%$");
     }
 
@@ -45,14 +42,16 @@ namespace PEngine {
     }
 
     ILoggable::~ILoggable() {
-        loggers.remove(&logger);
+        if (loggers.count(uuid)) {
+            loggers.erase(uuid);
+        }
     }
 
     ILoggable::ILoggable() {
-        loggers.push(&logger);
+        uuid = UUID::v4();
     }
 
     size_t ILoggable::activeLoggersSize() {
-        return loggers.getLength();
+        return loggers.size();
     }
 }

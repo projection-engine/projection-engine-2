@@ -3,6 +3,7 @@ import MATERIAL_RENDERING_TYPES from "@engine-core/static/MATERIAL_RENDERING_TYP
 import LocalizationEN from "@enums/LocalizationEN";
 
 export default class DecalForm extends AbstractFormType {
+    label = LocalizationEN.DECAL
     constructor() {
         super();
 

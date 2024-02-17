@@ -3,6 +3,8 @@ import {AtmosphereRenderingType} from "../../../services/engine-definitions";
 import LocalizationEN from "@enums/LocalizationEN";
 
 export default class AtmosphereForm extends AbstractFormType {
+    label = LocalizationEN.ATMOSPHERE
+
     constructor() {
         super();
 

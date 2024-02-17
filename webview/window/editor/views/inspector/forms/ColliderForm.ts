@@ -3,6 +3,7 @@ import COLLISION_TYPES from "@engine-core/static/COLLISION_TYPES";
 import LocalizationEN from "@enums/LocalizationEN";
 
 export default class ColliderForm extends AbstractFormType {
+    label = LocalizationEN.PHYSICS_COLLIDER
     constructor() {
         super();
         this.group(LocalizationEN.COLLISION_TYPE, t => [

@@ -7,9 +7,9 @@
 #include "../../src/engine/services/world/WorldRegistry.h"
 
 namespace PEngine::EngineTest {
-    static Engine engine;
-    static WorldService *world; 
-    
+    Engine *engine = nullptr;
+    WorldService *world = nullptr;
+
     void shouldAddEntity() {
         Entity *entity = world->addEntity();
         REQUIRE(world->hasEntity(entity->getEntityId()) == true);
@@ -62,8 +62,9 @@ namespace PEngine::EngineTest {
 
 
     Tester *createTester() {
-        world = engine.getWorldService();
-        
+        engine = new Engine;
+        world = engine->getWorldService();
+
         auto tester = new Tester("EngineTest");
         tester->registerTest("Should add entity", shouldAddEntity);
         tester->registerTest("Should remove entity", shouldRemoveEntity);

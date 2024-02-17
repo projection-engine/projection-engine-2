@@ -2,6 +2,7 @@ import AbstractFormType from "./AbstractFormType";
 import LocalizationEN from "@enums/LocalizationEN";
 
 export default class MeshForm extends AbstractFormType {
+    label = LocalizationEN.MESH
     constructor() {
         super();
 

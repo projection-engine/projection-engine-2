@@ -2,6 +2,7 @@ import AbstractFormType from "./AbstractFormType";
 import LocalizationEN from "@enums/LocalizationEN";
 
 export default class CullingForm extends AbstractFormType {
+    label = LocalizationEN.CULLING
     constructor() {
         super();
         this.group(LocalizationEN.DISTANCE_CULLING , t => [

@@ -2,6 +2,7 @@ import AbstractFormType from "./AbstractFormType";
 import LocalizationEN from "@enums/LocalizationEN";
 
 export default class CameraForm extends AbstractFormType {
+    label = LocalizationEN.CAMERA
     constructor() {
         super();
         this.group(LocalizationEN.PROJECTION, t => [

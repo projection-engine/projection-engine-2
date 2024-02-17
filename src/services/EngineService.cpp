@@ -65,7 +65,7 @@ namespace PEngine {
         } else if (payload.id == EngineEvents::GET_ENTITY) {
             WorldChangeListener::GetEntity(payload, world);
         } else if (payload.id == EngineEvents::ADD_COMPONENT) {
-            WorldChangeListener::AddComponent(payload, world);
+            WorldChangeListener::AddComponent(payload, engine, world);
         } else if (payload.id == EngineEvents::GET_ENGINE_STATE) {
             GetEngineState(payload, engine);
         }

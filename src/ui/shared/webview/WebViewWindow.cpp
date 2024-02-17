@@ -81,6 +81,7 @@ namespace PEngine {
             if (payloadJson.find("payload") != payloadJson.end()) {
                 payload.payload = payloadJson.at("payload").get<std::string>();
             }
+            CONSOLE_LOG("Content: {0}", payload.payload)
             payload.webview = this;
         } catch (nlohmann::json::parse_error &ex) {
             CONSOLE_ERROR("Error parsing payload")

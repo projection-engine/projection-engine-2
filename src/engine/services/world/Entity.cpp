@@ -22,7 +22,7 @@ namespace PEngine {
 
         json["name"] = name;
         json["active"] = active;
-        json["entityID"] = getEntityId();
+        json["id"] = getEntityId();
 
         return json;
     }

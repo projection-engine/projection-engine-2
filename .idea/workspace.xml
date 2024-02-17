@@ -19,29 +19,55 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-92] Inspector methods and serialization&#10;- Fixing form rendering&#10;- Fixing nullptr in WorldChangeListener.cpp">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-92] Inspector methods and serialization&#10;- Fixing form rendering&#10;- Fixing serialization of components">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/AtmosphereComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/AtmosphereComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/CameraComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/CameraComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/ColliderComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/ColliderComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/CullingComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/CullingComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/DecalComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/DecalComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/LightComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/LightComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/LightProbeComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/LightProbeComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/MeshComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/MeshComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/MovementComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/MovementComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/RigidBodyComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/RigidBodyComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/SpriteComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/SpriteComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/services/world/components/TerrainComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/components/TerrainComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/engine/core/instances/components/AtmosphereComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/instances/components/AtmosphereComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/AbstractSerializable.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/AbstractSerializable.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/AbstractSerializable.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/AbstractSerializable.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/RuntimeState.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/RuntimeState.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/listeners/WorldChangeListener.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/listeners/WorldChangeListener.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/listeners/WorldChangeListener.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/listeners/WorldChangeListener.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/world/AbstractComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/AbstractComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/world/AbstractComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/AbstractComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/services/world/Entity.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/services/world/Entity.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/AbstractService.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/EngineService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/EngineService.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/EngineService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/EngineService.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/FileSystemService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/FileSystemService.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/ShaderService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/ShaderService.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/WindowRepository.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/WindowRepository.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/WindowRepository.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/WindowRepository.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/debug/ILoggable.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/debug/ILoggable.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/debug/ILoggable.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/debug/ILoggable.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/core/LoggerTest.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/core/LoggerTest.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/engine/SerializationTest.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/engine/SerializationTest.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/engine/WorldServiceTest.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/engine/WorldServiceTest.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/enums/LocalizationEN.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/enums/LocalizationEN.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/components/color-picker/ColorPicker.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/components/color-picker/ColorPicker.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/components/color-picker/HsvPicker.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/components/color-picker/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/components/color-picker/utils/hsv-2-hsl.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/components/color-picker/utils/hsv-2-rgb.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/components/color-picker/utils/rgb-2-hsv.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/webview/WebViewService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/webview/WebViewService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/services/ContextMenuService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/ContextMenuService.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/services/engine-definitions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/services/engine-definitions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/templates/get-viewport-context.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/templates/get-viewport-context.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/templates/get-viewport-hotkeys.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/templates/get-viewport-hotkeys.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/util/EditorUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/util/EditorUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/ComponentNode.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/ComponentNode.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/EntityNode.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/EntityNode.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/HierarchyHeader.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/HierarchyHeader.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/HierarchyNode.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/hierarchy/components/HierarchyNode.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/InspectorTabs.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/InspectorTabs.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/InspectorView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/InspectorView.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/Form.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/Form.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/FormField.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/components/FormField.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/AbstractFormType.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/AbstractFormType.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/AtmosphereForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/AtmosphereForm.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/AtmosphereType.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/CameraForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/CameraForm.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/CameraPreferencesForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/CameraPreferencesForm.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/ColliderForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/views/inspector/forms/ColliderForm.ts" afterDir="false" />
@@ -142,8 +168,9 @@
     "Catch.Engine test.executor": "Run",
     "Catch.File-system test.executor": "Debug",
     "Catch.JSON test.executor": "Run",
+    "Catch.Logger test.executor": "Run",
     "Catch.Run all.executor": "Run",
-    "Catch.Serialization test.executor": "Run",
+    "Catch.Serialization test.executor": "Debug",
     "Catch.String util test.executor": "Debug",
     "Catch.main_test.executor": "Run",
     "Jest.Should be lazily obtained.executor": "Run",
@@ -171,6 +198,7 @@
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "Shell Script.copy-files.executor": "Run",
+    "cf.advertisement.text.has.clang-format": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "92-implement-c-inspector-methods",
@@ -228,8 +256,25 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="npm.dev-build">
+  <component name="RunManager" selected="CMake Application.Projection">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Engine test" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="build" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_CLASS="[engine-test]" TEST_METHOD="Engine test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Logger test" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="build" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_CLASS="[logger-test]" TEST_METHOD="Logger test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Run all" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="build" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_CLASS="[RUN_ALL]" TEST_METHOD="Run all" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
@@ -240,30 +285,6 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
       </method>
-    </configuration>
-    <configuration name="Should inject into non-static property" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <jest-package value="$PROJECT_DIR$/webview/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$/webview" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/webview/tests/injection/Injection.test.ts" />
-      <test-names>
-        <test-name value="Should inject into non-static property" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="Should not inject not @Injectable" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <jest-package value="$PROJECT_DIR$/webview/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$/webview" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/webview/tests/injection/Injection.test.ts" />
-      <test-names>
-        <test-name value="Should not inject not @Injectable" />
-      </test-names>
-      <method v="2" />
     </configuration>
     <configuration name="copy-files" type="ShConfigurationType">
       <option name="SCRIPT_TEXT" value="cp -r -Force &quot;src/ui/webview/build&quot; &quot;cmake-build-debug-visual-studio/src&quot;" />
@@ -302,12 +323,12 @@
     </configuration>
     <list>
       <item itemvalue="Catch.main_test" />
+      <item itemvalue="Catch.Logger test" />
+      <item itemvalue="Catch.Run all" />
       <item itemvalue="Catch.Serialization test" />
       <item itemvalue="Catch.Engine test" />
       <item itemvalue="CMake Application.Projection" />
       <item itemvalue="CMake Debug.projectioncmake" />
-      <item itemvalue="Jest.Should inject into non-static property" />
-      <item itemvalue="Jest.Should not inject not @Injectable" />
       <item itemvalue="npm.bdev" />
       <item itemvalue="npm.dev-build" />
       <item itemvalue="npm.build" />
@@ -315,11 +336,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Catch.Run all" />
+        <item itemvalue="Catch.Logger test" />
         <item itemvalue="Catch.Serialization test" />
         <item itemvalue="Catch.Engine test" />
         <item itemvalue="npm.build" />
-        <item itemvalue="Jest.Should inject into non-static property" />
-        <item itemvalue="Jest.Should not inject not @Injectable" />
       </list>
     </recent_temporary>
   </component>
@@ -410,15 +431,8 @@
       <workItem from="1707733448289" duration="1481000" />
       <workItem from="1707822731739" duration="5143000" />
       <workItem from="1707845602300" duration="7409000" />
-      <workItem from="1708035848953" duration="3500000" />
-    </task>
-    <task id="LOCAL-00044" summary="[STD-33]  Starting refactoring&#10;- Initiating systems refactoring">
-      <option name="closed" value="true" />
-      <created>1705266958233</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1705266958233</updated>
+      <workItem from="1708035848953" duration="3749000" />
+      <workItem from="1708168955352" duration="9819000" />
     </task>
     <task id="LOCAL-00045" summary="[STD-33]  Starting refactoring&#10;- Engine refactoring&#10;- Improving systems&#10;- Creating IManageable class&#10;- Creating structure for managing classes with async initialization&#10;- Removing footer component&#10;- Removing unused classes &#10;- Refactoring worker methods into normal functions">
       <option name="closed" value="true" />
@@ -804,7 +818,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707854076208</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="[STD-92] Inspector methods and serialization&#10;- Fixing form rendering&#10;- Fixing serialization of components">
+      <option name="closed" value="true" />
+      <created>1708039519747</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1708039519748</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -828,7 +850,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-78] C++ engine structure&#10;- Refactoring resources &#10;- Implementing request shader in Shader class&#10;- Implementing FS&#10;- Refactoring ComponentFactory&#10;- Creating util classes" />
     <MESSAGE value="[STD-80] C++ engine static resources&#10;- Implementing shader initialzation&#10;- FBO initialization&#10;- Generation of noise texture" />
     <MESSAGE value="[STD-80] C++ engine static resources&#10;- UBOs&#10;- fixing UBO class" />
     <MESSAGE value="[STD-80] C++ engine static resources&#10;- Refactoring files&#10;- Initializing static meshes" />
@@ -853,7 +874,8 @@
     <MESSAGE value="[STD-92] Inspector methods and serialization&#10;- Creating basic test for serialization&#10;- Implementing serialize and parse methods for components&#10;- Creating TerrainComponent&#10;- Adding components to ComponentFactory.cpp" />
     <MESSAGE value="[STD-92] Inspector methods and serialization&#10;- Fixing startup&#10;- Fixing root entity id returning nullptr" />
     <MESSAGE value="[STD-92] Inspector methods and serialization&#10;- Fixing form rendering&#10;- Fixing nullptr in WorldChangeListener.cpp" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-92] Inspector methods and serialization&#10;- Fixing form rendering&#10;- Fixing nullptr in WorldChangeListener.cpp" />
+    <MESSAGE value="[STD-92] Inspector methods and serialization&#10;- Fixing form rendering&#10;- Fixing serialization of components" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-92] Inspector methods and serialization&#10;- Fixing form rendering&#10;- Fixing serialization of components" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -875,13 +897,48 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/test/engine/WorldServiceTest.cpp</url>
-          <line>66</line>
+          <line>67</line>
           <option name="timeStamp" value="83" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/test/engine/WorldServiceTest.cpp</url>
           <line>48</line>
           <option name="timeStamp" value="84" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/engine/RuntimeState.h</url>
+          <line>153</line>
+          <option name="timeStamp" value="86" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/test/engine/SerializationTest.cpp</url>
+          <line>18</line>
+          <option name="timeStamp" value="87" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/test/core/LoggerTest.cpp</url>
+          <line>56</line>
+          <option name="timeStamp" value="91" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/ui/editor/Editor.cpp</url>
+          <line>22</line>
+          <option name="timeStamp" value="94" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/services/FileSystemService.cpp</url>
+          <line>161</line>
+          <option name="timeStamp" value="95" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/services/FileSystemService.cpp</url>
+          <line>162</line>
+          <option name="timeStamp" value="96" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/engine/listeners/WorldChangeListener.cpp</url>
+          <line>48</line>
+          <option name="timeStamp" value="97" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/webview/lib/FSService.ts</url>

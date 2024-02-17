@@ -38,18 +38,11 @@
         }
         postResponse();
     }
-
-    function isDisabled(): boolean {
-        if (property.disabledIf != null) {
-            return property.disabledIf(data);
-        }
-        return false;
-    }
-
+    $: disabled = property.disabledIf?.(data)
 </script>
 
 {#if property.type === PropertyType.GROUP}
-    <div><h4>{property.label}</h4></div>
+    <h4>{property.label}</h4>
     {#each property.listProperties() as child}
         <svelte:self {data} property={child} {postResponse}/>
     {/each}
@@ -63,12 +56,12 @@
             label={property.label}
             value={value}
             isAngle={property.settings.isAngle}
-            disabled={isDisabled()}
+            {disabled}
     />
 {:else if property.type === PropertyType.ARRAY}
     {#each property.settings.labels as partial, index}
         <Range
-                disabled={isDisabled()}
+                {disabled}
                 isAngle={property.settings.isAngle}
                 onFinish={v => submit(v)}
                 minValue={property.settings.min}
@@ -82,11 +75,14 @@
             handleCheck={() => submit(!value)}
             label={property.label}
             checked={value}
-            disabled={isDisabled()}
+            {disabled}
     />
 {:else if property.type === PropertyType.OPTIONS}
-    <Dropdown disabled={isDisabled()} width="100%"
+    <Dropdown {disabled} width="100%"
               buttonStyles="border-radius: 3px; border: var(--pj-border-primary) 1px solid">
+        <button data-sveltebuttondefault="-"  style="border: none; width: 100%; text-align: left" slot="button">
+            {property.settings.options.find(o => o.value === value)?.label }
+        </button>
         {#each property.settings.options as option}
             <button data-sveltebuttondefault="-" on:click={() =>  submit(option.value)}>
                 {#if value === option.value}
@@ -104,18 +100,18 @@
             onEnter={v => submit(v)}
             onBlur={(_,v) => submit(v)}
             placeholder={property.label}
-            disabled={isDisabled()}
+            {disabled}
     />
 {:else if property.type === PropertyType.COLOR}
     <ColorPicker
-            disabled={isDisabled()}
+            {disabled}
             submit={({r,g,b}) => submit([r, g, b])}
             label={property.label}
             value={value}
     />
 {:else}
     <Selector
-            disabled={isDisabled()}
+            {disabled}
             handleChange={src => submit(src)}
             type={selectorType}
             selected={value}
@@ -125,8 +121,7 @@
 
 <style>
     h4{
-        margin-top: 4px;
+        font-size: .9rem;
         margin-bottom: 4px;
-        border-bottom: var(--pj-border-primary) 1px solid;
     }
 </style>

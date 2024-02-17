@@ -2,6 +2,7 @@ import AbstractFormType from "./AbstractFormType";
 import LocalizationEN from "@enums/LocalizationEN";
 
 export default class SpriteForm extends AbstractFormType {
+    label = LocalizationEN.SPRITE
     constructor() {
         super();
         this.group(LocalizationEN.TEXTURE, t => [

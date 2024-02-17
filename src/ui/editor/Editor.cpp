@@ -3,6 +3,9 @@
 #include "../shared/webview/WebViewPayload.h"
 #include "basic/Runner.h"
 #include "../WindowRepository.h"
+#include "../../services/FileSystemService.h"
+#include "../../services/ShaderService.h"
+#include "../../services/EngineService.h"
 
 #define RELOAD "RELOAD"
 #define GET_PROJECT_PATH "GET_PROJECT_PATH"
@@ -16,12 +19,13 @@ namespace PEngine {
             CONSOLE_ERROR("Failed to initialize GLAD")
             return nullptr;
         }
-        WindowRepository::Get().getWebView()->addMessageListener(RELOAD, onMessage);
-        WindowRepository::Get().getWebView()->addMessageListener(GET_PROJECT_PATH, onMessage);
-        WindowRepository::Get().getWebView()->addMessageListener(SET_PROJECT_PATH, onMessage);
-        fileSystemService.BindEvents(WindowRepository::Get().getWebView());
-        shaderService.BindEvents(WindowRepository::Get().getWebView());
-        hierarchyService.BindEvents(WindowRepository::Get().getWebView());
+        WebViewWindow *webView = WindowRepository::Get().getWebView();
+        webView->addMessageListener(RELOAD, onMessage);
+        webView->addMessageListener(GET_PROJECT_PATH, onMessage);
+        webView->addMessageListener(SET_PROJECT_PATH, onMessage);
+        FileSystemService::BindEvents(webView);
+        EngineService::BindEvents(webView);
+        ShaderService::BindEvents(webView);
         return new Runner(engine);
     }
 
