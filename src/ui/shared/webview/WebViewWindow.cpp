@@ -8,59 +8,55 @@
 #include <nlohmann/json.hpp>
 #include "GLFW/glfw3native.h"
 #include "WebViewPayload.h"
-#include "../WindowRepository.h"
 #include "WebView2EnvironmentOptions.h"
 
 namespace PEngine {
     HWND__ *WebViewWindow::getNativeWindow() const {
-        return glfwGetWin32Window(WindowRepository::Get().getWindow());
+        return glfwGetWin32Window(windowWrapper.getWindow());
     }
 
     void WebViewWindow::prepareView(ICoreWebView2Controller *controller) {
         CONSOLE_WARN("Initializing WebView2 context")
         webviewController = controller;
-        webviewController->get_CoreWebView2(
-                &webview);
-
+        webviewController->get_CoreWebView2(&webview);
         wil::com_ptr<ICoreWebView2Controller2> controller2 = webviewController.try_query<ICoreWebView2Controller2>();
         if (controller2) {
             COREWEBVIEW2_COLOR transparentColor = {0, 255, 255, 255};
             controller2->put_DefaultBackgroundColor(transparentColor);
         }
-        wil::com_ptr<ICoreWebView2Settings> settings;
-        webview->get_Settings(
-                &settings);
-        settings->put_IsScriptEnabled(
-                TRUE);
-        settings->put_AreDefaultScriptDialogsEnabled(
-                TRUE);
-        settings->put_IsWebMessageEnabled(
-                TRUE);
+        configureSettings();
+        configureWindowBounds();
+        configureMessageListener();
+        CONSOLE_LOG("WebView2 context successfully initialized")
+        configureHtmlContent();
+    }
 
+    void WebViewWindow::configureSettings() {
+        wil::com_ptr<ICoreWebView2Settings> settings;
+        webview->get_Settings(&settings);
+        settings->put_IsScriptEnabled(TRUE);
+        settings->put_AreDefaultScriptDialogsEnabled(TRUE);
+        settings->put_IsWebMessageEnabled(TRUE);
+    }
+
+    void WebViewWindow::configureWindowBounds() {
         RECT bounds;
         GetClientRect(getNativeWindow(), &bounds);
 
         bounds.left = bounds.left / 2;
         webviewController->put_Bounds(bounds);
-        CONSOLE_LOG("WebView2 context successfully initialized")
+    }
+
+    void WebViewWindow::configureMessageListener() {
         webview->add_WebMessageReceived(
                 Microsoft::WRL::Callback<MSG_RECEIVED_HANDLER>(
                         [this](ICoreWebView2 *wv, MSG_RECEIVED_ARGS *args) -> HRESULT {
                             return onMessage(args);
                         }).Get(),
                 &token);
-        ready = true;
-        loadHtml();
     }
 
-    void WebViewWindow::setHTMLFile(const std::string &path) {
-        pathToFile = "file:///" + std::filesystem::current_path().string() + "/" + path;
-        if (ready) {
-            loadHtml();
-        }
-    }
-
-    void WebViewWindow::loadHtml() {
+    void WebViewWindow::configureHtmlContent() {
         if (!pathToFile.empty()) {
             std::wstring pathToFileW = std::wstring(pathToFile.begin(), pathToFile.end());
             CONSOLE_WARN("Navigating to: {0}", pathToFile)
@@ -73,22 +69,25 @@ namespace PEngine {
         args->TryGetWebMessageAsString(&message);
         std::wstring msg(message.get());
 
-        WebViewPayload payload;
         try {
             nlohmann::json payloadJson = nlohmann::json::parse(msg);
-            payload.id = payloadJson.at("id").get<std::string>();
+            WebViewPayload payload{
+                    payloadJson.at("id").get<std::string>(),
+                    windowWrapper,
+                    this
+            };
             CONSOLE_LOG("WebView message received with ID: {0}", payload.id)
             if (payloadJson.find("payload") != payloadJson.end()) {
                 payload.payload = payloadJson.at("payload").get<std::string>();
             }
             CONSOLE_LOG("Content: {0}", payload.payload)
-            payload.webview = this;
+            if (listeners.count(payload.id)) {
+                listeners[payload.id]->action(payload);
+            }
         } catch (nlohmann::json::parse_error &ex) {
             CONSOLE_ERROR("Error parsing payload")
         }
-        if (listeners.count(payload.id)) {
-            listeners[payload.id]->action(payload);
-        }
+
         return S_OK;
     }
 
@@ -101,7 +100,24 @@ namespace PEngine {
         webview->PostWebMessageAsString(std::wstring(messagePayload.begin(), messagePayload.end()).c_str());
     }
 
-    WebViewWindow::WebViewWindow() {
+    void WebViewWindow::addMessageListener(const std::string &listenerId, void (*action)(WebViewPayload &)) {
+        listeners[listenerId] = new ListenerDTO(action);
+    }
+
+    wil::com_ptr<ICoreWebView2> WebViewWindow::getWebView() {
+        return webview;
+    }
+
+    void WebViewWindow::resize() {
+        if (webviewController != nullptr) {
+            RECT bounds;
+            GetClientRect(getNativeWindow(), &bounds);
+            webviewController->put_Bounds(bounds);
+        }
+    }
+
+    void WebViewWindow::init(const std::string &path) {
+        pathToFile = "file:///" + std::filesystem::current_path().string() + "/" + path;
         CONSOLE_WARN("Creating WebView2 window")
         const Microsoft::WRL::ComPtr<ICoreWebView2CreateCoreWebView2EnvironmentCompletedHandler> &callback = Microsoft::WRL::Callback<ENV_HANDLER>(
                 [this](HRESULT r, ICoreWebView2Environment *env) -> HRESULT {
@@ -124,26 +140,6 @@ namespace PEngine {
                 options.Get(),
                 callback.Get()
         );
-    }
-
-    void WebViewWindow::addMessageListener(const std::string &listenerId, void (*action)(WebViewPayload &)) {
-        listeners[listenerId] = new ListenerDTO(action);
-    }
-
-    wil::com_ptr<ICoreWebView2> WebViewWindow::getWebView() {
-        return webview;
-    }
-
-    void WebViewWindow::setWindow(AbstractWindow *window) {
-        WebViewWindow::window = window;
-    }
-
-    void WebViewWindow::resize() {
-        if (webviewController != nullptr) {
-            RECT bounds;
-            GetClientRect(getNativeWindow(), &bounds);
-            webviewController->put_Bounds(bounds);
-        }
     }
 
 }

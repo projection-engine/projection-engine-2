@@ -3,37 +3,35 @@
 #include "../ui/shared/webview/WebViewWindow.h"
 #include "../ui/editor/Editor.h"
 #include "../engine/services/world/Entity.h"
-#include "../ui/WindowRepository.h"
 #include "nlohmann/json.hpp"
 #include "../engine/enum/EngineEvents.h"
 #include "../engine/listeners/WorldHierarchyListener.h"
 #include "../engine/listeners/WorldChangeListener.h"
 
 namespace PEngine {
-    void EngineService::BindEvents(PEngine::WebViewWindow *pWindow) {
-        pWindow->addMessageListener(EngineEvents::CREATE_ENTITY, HandleEvent);
-        pWindow->addMessageListener(EngineEvents::DELETE_ENTITY, HandleEvent);
-        pWindow->addMessageListener(EngineEvents::GET_HIERARCHY, HandleEvent);
-        pWindow->addMessageListener(EngineEvents::SELECT_ENTITIES, HandleEvent);
-        pWindow->addMessageListener(EngineEvents::GET_SELECTED_ENTITIES, HandleEvent);
-        pWindow->addMessageListener(EngineEvents::LOCK_ENTITY, HandleEvent);
-        pWindow->addMessageListener(EngineEvents::GET_LOCKED_ENTITY, HandleEvent);
-        pWindow->addMessageListener(EngineEvents::MAKE_PARENT, HandleEvent);
-        pWindow->addMessageListener(EngineEvents::RENAME_ENTITY, HandleEvent);
-        pWindow->addMessageListener(EngineEvents::TOGGLE_ACTIVE, HandleEvent);
+    void EngineService::BindEvents(PEngine::WebViewWindow &pWindow) {
+        pWindow.addMessageListener(EngineEvents::CREATE_ENTITY, HandleEvent);
+        pWindow.addMessageListener(EngineEvents::DELETE_ENTITY, HandleEvent);
+        pWindow.addMessageListener(EngineEvents::GET_HIERARCHY, HandleEvent);
+        pWindow.addMessageListener(EngineEvents::SELECT_ENTITIES, HandleEvent);
+        pWindow.addMessageListener(EngineEvents::GET_SELECTED_ENTITIES, HandleEvent);
+        pWindow.addMessageListener(EngineEvents::LOCK_ENTITY, HandleEvent);
+        pWindow.addMessageListener(EngineEvents::GET_LOCKED_ENTITY, HandleEvent);
+        pWindow.addMessageListener(EngineEvents::MAKE_PARENT, HandleEvent);
+        pWindow.addMessageListener(EngineEvents::RENAME_ENTITY, HandleEvent);
+        pWindow.addMessageListener(EngineEvents::TOGGLE_ACTIVE, HandleEvent);
 
-        pWindow->addMessageListener(EngineEvents::UPDATE_ENGINE_STATE, HandleEvent);
-        pWindow->addMessageListener(EngineEvents::UPDATE_ENTITY, HandleEvent);
-        pWindow->addMessageListener(EngineEvents::UPDATE_COMPONENT, HandleEvent);
-        pWindow->addMessageListener(EngineEvents::GET_ENTITY_COMPONENTS, HandleEvent);
-        pWindow->addMessageListener(EngineEvents::GET_ENTITY, HandleEvent);
-        pWindow->addMessageListener(EngineEvents::ADD_COMPONENT, HandleEvent);
-        pWindow->addMessageListener(EngineEvents::GET_ENGINE_STATE, HandleEvent);
+        pWindow.addMessageListener(EngineEvents::UPDATE_ENGINE_STATE, HandleEvent);
+        pWindow.addMessageListener(EngineEvents::UPDATE_ENTITY, HandleEvent);
+        pWindow.addMessageListener(EngineEvents::UPDATE_COMPONENT, HandleEvent);
+        pWindow.addMessageListener(EngineEvents::GET_ENTITY_COMPONENTS, HandleEvent);
+        pWindow.addMessageListener(EngineEvents::GET_ENTITY, HandleEvent);
+        pWindow.addMessageListener(EngineEvents::ADD_COMPONENT, HandleEvent);
+        pWindow.addMessageListener(EngineEvents::GET_ENGINE_STATE, HandleEvent);
     }
 
     void EngineService::HandleEvent(WebViewPayload &payload) {
-        Editor *window = (Editor *) WindowRepository::Get().getWindowById(EDITOR_WINDOW);
-        Engine &engine = window->getEngine();
+        Engine &engine = ((Editor &) payload.window).getEngine();
         WorldService *world = engine.getWorldService();
 
         if (payload.id == EngineEvents::CREATE_ENTITY) {

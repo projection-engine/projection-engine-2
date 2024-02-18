@@ -14,7 +14,7 @@ namespace PEngine {
         }
     }
 
-    void ShaderService::BindEvents(WebViewWindow *pWindow) {
-        pWindow->addMessageListener(REQUEST_SHADER, HandleEvent);
+    void ShaderService::BindEvents(WebViewWindow &pWindow) {
+        pWindow.addMessageListener(REQUEST_SHADER, HandleEvent);
     }
 }
