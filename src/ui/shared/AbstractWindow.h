@@ -1,14 +1,14 @@
-#pragma once
 #ifndef PROJECTION_ABSTRACTWINDOW_H
 #define PROJECTION_ABSTRACTWINDOW_H
 
-#include "../../util/debug/ILoggable.h"
-#include "../../util/Definitions.h"
-#include "webview/WebViewWindow.h"
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include "imgui_impl_opengl3.h"
 #include "imgui_impl_glfw.h"
+
+#include "../../util/debug/ILoggable.h"
+#include "../../util/Definitions.h"
+#include "webview/WebViewWindow.h"
 #include <unordered_map>
 #include <string>
 
@@ -21,9 +21,10 @@ namespace PEngine {
     class AbstractWindow : public ILoggable {
     protected:
         std::unordered_map<std::string, WebViewWindow> webViews;
-        GLFWwindow *window = nullptr;
         int windowWidth;
         int windowHeight;
+        GLFWwindow *window = nullptr;
+        HWND__ *nativeWindow = nullptr;
 
         virtual void runInternal() {}
 
@@ -31,13 +32,15 @@ namespace PEngine {
 
         explicit AbstractWindow(const char *name, float scaleX, float scaleY);
 
-        void createWebView(const std::string &pathToHTML, const std::vector<AbstractService*>& servicesToBind);
+        void createWebView(const std::string &path, std::function<void(WebViewWindow *webView)> callback);
 
         GLFWwindow *getWindow();
 
-        void run();
+        void run() const;
 
         virtual void onResize();
+
+        HWND__ *getNativeWindow();
     };
 }
 #endif

@@ -18,13 +18,9 @@ namespace PEngine {
     class EngineService : public AbstractService {
         static void HandleEvent(WebViewPayload &payload);
 
-        static void BindEvents(PEngine::WebViewWindow &pWindow);
-
     public:
+        static void BindEvents(WebViewWindow *pWindow);
 
-        void bindEvents(PEngine::WebViewWindow &webView) override {
-            BindEvents(webView);
-        }
 
         static void UpdateEngineState(WebViewPayload &payload, Engine &engine);
 

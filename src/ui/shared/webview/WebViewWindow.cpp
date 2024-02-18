@@ -6,58 +6,44 @@
 #define GLFW_EXPOSE_NATIVE_WIN32
 
 #include <nlohmann/json.hpp>
+#include <utility>
 #include "GLFW/glfw3native.h"
 #include "WebViewPayload.h"
 #include "WebView2EnvironmentOptions.h"
 
 namespace PEngine {
-    HWND__ *WebViewWindow::getNativeWindow() const {
-        return glfwGetWin32Window(windowWrapper.getWindow());
-    }
-
     void WebViewWindow::prepareView(ICoreWebView2Controller *controller) {
-        CONSOLE_WARN("Initializing WebView2 context")
         webviewController = controller;
-        webviewController->get_CoreWebView2(&webview);
+        webviewController->get_CoreWebView2(
+                &webview);
+
         wil::com_ptr<ICoreWebView2Controller2> controller2 = webviewController.try_query<ICoreWebView2Controller2>();
         if (controller2) {
             COREWEBVIEW2_COLOR transparentColor = {0, 255, 255, 255};
             controller2->put_DefaultBackgroundColor(transparentColor);
         }
-        configureSettings();
-        configureWindowBounds();
-        configureMessageListener();
-        CONSOLE_LOG("WebView2 context successfully initialized")
-        configureHtmlContent();
-    }
-
-    void WebViewWindow::configureSettings() {
         wil::com_ptr<ICoreWebView2Settings> settings;
-        webview->get_Settings(&settings);
-        settings->put_IsScriptEnabled(TRUE);
-        settings->put_AreDefaultScriptDialogsEnabled(TRUE);
-        settings->put_IsWebMessageEnabled(TRUE);
-    }
+        webview->get_Settings(
+                &settings);
+        settings->put_IsScriptEnabled(
+                TRUE);
+        settings->put_AreDefaultScriptDialogsEnabled(
+                TRUE);
+        settings->put_IsWebMessageEnabled(
+                TRUE);
 
-    void WebViewWindow::configureWindowBounds() {
-        RECT bounds;
-        GetClientRect(getNativeWindow(), &bounds);
-
-        bounds.left = bounds.left / 2;
-        webviewController->put_Bounds(bounds);
-    }
-
-    void WebViewWindow::configureMessageListener() {
+        resize();
+        EventRegistrationToken token;
         webview->add_WebMessageReceived(
                 Microsoft::WRL::Callback<MSG_RECEIVED_HANDLER>(
                         [this](ICoreWebView2 *wv, MSG_RECEIVED_ARGS *args) -> HRESULT {
                             return onMessage(args);
                         }).Get(),
                 &token);
-    }
 
-    void WebViewWindow::configureHtmlContent() {
+
         if (!pathToFile.empty()) {
+            callback(this);
             std::wstring pathToFileW = std::wstring(pathToFile.begin(), pathToFile.end());
             CONSOLE_WARN("Navigating to: {0}", pathToFile)
             webview->Navigate(pathToFileW.c_str());
@@ -73,7 +59,7 @@ namespace PEngine {
             nlohmann::json payloadJson = nlohmann::json::parse(msg);
             WebViewPayload payload{
                     payloadJson.at("id").get<std::string>(),
-                    windowWrapper,
+                    window,
                     this
             };
             CONSOLE_LOG("WebView message received with ID: {0}", payload.id)
@@ -100,33 +86,24 @@ namespace PEngine {
         webview->PostWebMessageAsString(std::wstring(messagePayload.begin(), messagePayload.end()).c_str());
     }
 
-    void WebViewWindow::addMessageListener(const std::string &listenerId, void (*action)(WebViewPayload &)) {
-        listeners[listenerId] = new ListenerDTO(action);
-    }
-
-    wil::com_ptr<ICoreWebView2> WebViewWindow::getWebView() {
-        return webview;
-    }
-
-    void WebViewWindow::resize() {
-        if (webviewController != nullptr) {
-            RECT bounds;
-            GetClientRect(getNativeWindow(), &bounds);
-            webviewController->put_Bounds(bounds);
-        }
-    }
-
-    void WebViewWindow::init(const std::string &path) {
+    WebViewWindow::WebViewWindow(AbstractWindow *window, const std::string &path, std::function<void(WebViewWindow *webView)> callback) {
         pathToFile = "file:///" + std::filesystem::current_path().string() + "/" + path;
+        this->callback = std::move(callback);
+        this->window = window;
+    }
+
+    void WebViewWindow::init() {
         CONSOLE_WARN("Creating WebView2 window")
-        const Microsoft::WRL::ComPtr<ICoreWebView2CreateCoreWebView2EnvironmentCompletedHandler> &callback = Microsoft::WRL::Callback<ENV_HANDLER>(
+        const auto &evCallback = Microsoft::WRL::Callback<ENV_HANDLER>(
                 [this](HRESULT r, ICoreWebView2Environment *env) -> HRESULT {
-                    const Microsoft::WRL::ComPtr<CONTROLLER_HANDLER> &handler = Microsoft::WRL::Callback<CONTROLLER_HANDLER>(
-                            [this](HRESULT r, ICoreWebView2Controller *controller) -> HRESULT {
-                                prepareView(controller);
-                                return S_OK;
-                            });
-                    env->CreateCoreWebView2Controller(getNativeWindow(), handler.Get());
+                    env->CreateCoreWebView2Controller(
+                            window->getNativeWindow(),
+                            Microsoft::WRL::Callback<CONTROLLER_HANDLER>(
+                                    [this](HRESULT r, ICoreWebView2Controller *controller) -> HRESULT {
+                                        prepareView(controller);
+                                        return S_OK;
+                                    }).Get()
+                    );
                     return S_OK;
                 });
 
@@ -138,8 +115,24 @@ namespace PEngine {
                 nullptr,
                 nullptr,
                 options.Get(),
-                callback.Get()
+                evCallback.Get()
         );
+    }
+
+    void WebViewWindow::addMessageListener(const std::string &listenerId, void (*action)(WebViewPayload &)) {
+        listeners[listenerId] = new ListenerDTO(action);
+    }
+
+    wil::com_ptr<ICoreWebView2> WebViewWindow::getWebView() {
+        return webview;
+    }
+
+    void WebViewWindow::resize() {
+        if (webviewController != nullptr) {
+            RECT bounds;
+            GetClientRect(window->getNativeWindow(), &bounds);
+            webviewController->put_Bounds(bounds);
+        }
     }
 
 }

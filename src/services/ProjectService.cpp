@@ -15,15 +15,15 @@ namespace PEngine {
         if (payload.id == RELOAD) {
             payload.webview->getWebView()->Reload();
         } else if (payload.id == GET_PROJECT_PATH) {
-            payload.resolve(((Editor &)payload.window).projectPath);
+            payload.resolve(((Editor *)payload.window)->projectPath);
         } else if (payload.id == SET_PROJECT_PATH) {
-            ((Editor &)payload.window).projectPath = payload.payload;
+            ((Editor *)payload.window)->projectPath = payload.payload;
         }
     }
 
-    void ProjectService::BindEvents(WebViewWindow &pWindow) {
-        pWindow.addMessageListener(RELOAD, HandleEvent);
-        pWindow.addMessageListener(GET_PROJECT_PATH, HandleEvent);
-        pWindow.addMessageListener(SET_PROJECT_PATH, HandleEvent);
+    void ProjectService::BindEvents(WebViewWindow *pWindow) {
+        pWindow->addMessageListener(RELOAD, HandleEvent);
+        pWindow->addMessageListener(GET_PROJECT_PATH, HandleEvent);
+        pWindow->addMessageListener(SET_PROJECT_PATH, HandleEvent);
     }
 }

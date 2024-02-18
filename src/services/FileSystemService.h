@@ -14,12 +14,8 @@ namespace PEngine {
     private:
         static void HandleEvent(WebViewPayload &payload);
 
-        static void BindEvents(WebViewWindow &pWindow);
-
     public:
-        void bindEvents(PEngine::WebViewWindow &webView) override {
-            BindEvents(webView);
-        }
+        static void BindEvents(WebViewWindow *pWindow);
 
         static std::string SEP;
 

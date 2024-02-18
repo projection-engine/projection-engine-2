@@ -4,9 +4,15 @@
 #include "../WindowUtil.h"
 #include "../AbstractService.h"
 
+#define GLFW_EXPOSE_NATIVE_WGL
+#define GLFW_EXPOSE_NATIVE_WIN32
+
+#include "GLFW/glfw3native.h"
+
 namespace PEngine {
     AbstractWindow::AbstractWindow(const char *name, float scaleX, float scaleY) {
         window = WindowUtil::createWindow(scaleX, scaleY);
+        nativeWindow = glfwGetWin32Window(window);
         glfwSetWindowTitle(window, name);
         auto resizeCallback = [](GLFWwindow *w, int width, int height) {
             auto self = static_cast<AbstractWindow *>(glfwGetWindowUserPointer(w));
@@ -23,10 +29,10 @@ namespace PEngine {
         glfwGetFramebufferSize(window, &windowWidth, &windowHeight);
     }
 
-    void AbstractWindow::run() {
+    void AbstractWindow::run() const {
         while (!glfwWindowShouldClose(window)) {
             glfwPollEvents();
-            runInternal();
+//            runInternal();
             glfwMakeContextCurrent(glfwGetCurrentContext());
             glfwSwapBuffers(window);
         }
@@ -39,20 +45,24 @@ namespace PEngine {
         ImGui::DestroyContext();
     }
 
-    void
-    AbstractWindow::createWebView(const std::string &pathToHTML, const std::vector<AbstractService *> &servicesToBind) {
-        webViews.emplace(pathToHTML, WebViewWindow(pathToHTML, *this));
-
-        for (auto *service: servicesToBind) {
-            service->bindEvents(webViews.at(pathToHTML));
-        }
-    }
-
-    GLFWwindow *AbstractWindow::getWindow() {
-        return window;
+    void AbstractWindow::createWebView(const std::string &path, std::function<void(WebViewWindow *webView)> callback) {
+        webViews.emplace(path, WebViewWindow(
+                this,
+                path,
+                callback)
+        );
+        webViews.at(path).init();
     }
 
     void AbstractWindow::onResize() {
 
+    }
+
+    HWND__ *AbstractWindow::getNativeWindow() {
+        return nativeWindow;
+    }
+
+    GLFWwindow *AbstractWindow::getWindow() {
+        return window;
     }
 }

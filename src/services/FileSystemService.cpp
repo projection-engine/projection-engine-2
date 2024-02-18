@@ -158,9 +158,9 @@ namespace PEngine {
         }
     }
 
-    void FileSystemService::BindEvents(WebViewWindow &pWindow) {
-        pWindow.addMessageListener(GET_ROOT_DIRECTORY, HandleEvent);
-        pWindow.addMessageListener(GET_SEPARATOR, HandleEvent);
-        pWindow.addMessageListener(READ_DIRECTORY, HandleEvent);
+    void FileSystemService::BindEvents(WebViewWindow *pWindow) {
+        pWindow->addMessageListener(GET_ROOT_DIRECTORY, HandleEvent);
+        pWindow->addMessageListener(GET_SEPARATOR, HandleEvent);
+        pWindow->addMessageListener(READ_DIRECTORY, HandleEvent);
     }
 }

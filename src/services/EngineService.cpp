@@ -9,29 +9,29 @@
 #include "../engine/listeners/WorldChangeListener.h"
 
 namespace PEngine {
-    void EngineService::BindEvents(PEngine::WebViewWindow &pWindow) {
-        pWindow.addMessageListener(EngineEvents::CREATE_ENTITY, HandleEvent);
-        pWindow.addMessageListener(EngineEvents::DELETE_ENTITY, HandleEvent);
-        pWindow.addMessageListener(EngineEvents::GET_HIERARCHY, HandleEvent);
-        pWindow.addMessageListener(EngineEvents::SELECT_ENTITIES, HandleEvent);
-        pWindow.addMessageListener(EngineEvents::GET_SELECTED_ENTITIES, HandleEvent);
-        pWindow.addMessageListener(EngineEvents::LOCK_ENTITY, HandleEvent);
-        pWindow.addMessageListener(EngineEvents::GET_LOCKED_ENTITY, HandleEvent);
-        pWindow.addMessageListener(EngineEvents::MAKE_PARENT, HandleEvent);
-        pWindow.addMessageListener(EngineEvents::RENAME_ENTITY, HandleEvent);
-        pWindow.addMessageListener(EngineEvents::TOGGLE_ACTIVE, HandleEvent);
+    void EngineService::BindEvents(PEngine::WebViewWindow *pWindow) {
+        pWindow->addMessageListener(EngineEvents::CREATE_ENTITY, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::DELETE_ENTITY, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::GET_HIERARCHY, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::SELECT_ENTITIES, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::GET_SELECTED_ENTITIES, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::LOCK_ENTITY, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::GET_LOCKED_ENTITY, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::MAKE_PARENT, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::RENAME_ENTITY, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::TOGGLE_ACTIVE, HandleEvent);
 
-        pWindow.addMessageListener(EngineEvents::UPDATE_ENGINE_STATE, HandleEvent);
-        pWindow.addMessageListener(EngineEvents::UPDATE_ENTITY, HandleEvent);
-        pWindow.addMessageListener(EngineEvents::UPDATE_COMPONENT, HandleEvent);
-        pWindow.addMessageListener(EngineEvents::GET_ENTITY_COMPONENTS, HandleEvent);
-        pWindow.addMessageListener(EngineEvents::GET_ENTITY, HandleEvent);
-        pWindow.addMessageListener(EngineEvents::ADD_COMPONENT, HandleEvent);
-        pWindow.addMessageListener(EngineEvents::GET_ENGINE_STATE, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::UPDATE_ENGINE_STATE, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::UPDATE_ENTITY, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::UPDATE_COMPONENT, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::GET_ENTITY_COMPONENTS, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::GET_ENTITY, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::ADD_COMPONENT, HandleEvent);
+        pWindow->addMessageListener(EngineEvents::GET_ENGINE_STATE, HandleEvent);
     }
 
     void EngineService::HandleEvent(WebViewPayload &payload) {
-        Engine &engine = ((Editor &) payload.window).getEngine();
+        Engine &engine = ((Editor *) payload.window)->getEngine();
         WorldService *world = engine.getWorldService();
 
         if (payload.id == EngineEvents::CREATE_ENTITY) {

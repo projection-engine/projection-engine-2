@@ -2,8 +2,10 @@
 #define PROJECTION_WEBVIEWWINDOW_H
 
 #include "WebView2.h"
+#include "glad/glad.h"
+#include "GLFW/glfw3.h"
 #include <wrl.h>
-#include "string"
+#include <string>
 #include "../../../util/debug/ILoggable.h"
 #include <wil/com.h>
 #include <vector>
@@ -24,24 +26,17 @@ namespace PEngine {
 
     class WebViewWindow : public ILoggable {
     private:
-        AbstractWindow &windowWrapper;
         std::string pathToFile;
-        EventRegistrationToken token;
         wil::com_ptr<ICoreWebView2Controller> webviewController = nullptr;
         wil::com_ptr<ICoreWebView2> webview = nullptr;
+        AbstractWindow *window = nullptr;
         std::unordered_map<std::string, ListenerDTO *> listeners;
+        std::function<void(WebViewWindow *webView)> callback = nullptr;
         void prepareView(ICoreWebView2Controller *controller);
 
-        HWND__ *getNativeWindow() const;
-
-        void configureHtmlContent();
-
-        void init(const std::string &path);
     public:
 
-        explicit WebViewWindow(const std::string &path, AbstractWindow &window) : windowWrapper(window){
-            init(path);
-        }
+        explicit WebViewWindow(AbstractWindow *window, const std::string &path, std::function<void(WebViewWindow *webView)> callback);
 
         void addMessageListener(const std::string &listenerId, void (*action)(WebViewPayload &));
 
@@ -53,13 +48,7 @@ namespace PEngine {
 
         void resize();
 
-        void configureMessageListener();
-
-        void configureWindowBounds();
-
-        void configureSettings();
-
-
+        void init();
     };
 
 }

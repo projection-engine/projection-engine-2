@@ -5,7 +5,7 @@ namespace PEngine {
     class WebViewWindow;
 
     struct AbstractService {
-        virtual void bindEvents(WebViewWindow &webView) {}
+        virtual void bindEvents(WebViewWindow *webView) {}
     };
 }
 

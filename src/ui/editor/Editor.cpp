@@ -3,12 +3,7 @@
 #include "../../services/FileSystemService.h"
 #include "../../services/ShaderService.h"
 #include "../../services/EngineService.h"
-
 #include "../../services/ProjectService.h"
-
-#define RELOAD "RELOAD"
-#define GET_PROJECT_PATH "GET_PROJECT_PATH"
-#define SET_PROJECT_PATH "SET_PROJECT_PATH"
 
 namespace PEngine {
 
@@ -34,15 +29,15 @@ namespace PEngine {
     }
 
     void Editor::init() {
-        auto F = FileSystemService{};
-        auto E = EngineService{};
-        auto S = ShaderService{};
-        auto P = ProjectService{};
-        createWebView("editor-window.html", {
-                &F,
-                &E,
-                &S,
-                &P
-        });
+
+        createWebView(
+                "editor-window.html",
+                [](WebViewWindow *webView) {
+                    FileSystemService::BindEvents(webView);
+                    EngineService::BindEvents(webView);
+                    ShaderService::BindEvents(webView);
+                    ProjectService::BindEvents(webView);
+                }
+        );
     }
 }

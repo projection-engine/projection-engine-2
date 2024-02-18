@@ -19,28 +19,22 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-92] Inspector methods and serialization&#10;- Fixing matrix/vector serialization&#10;- Fixing logger &#10;- Fixing WindowRepository initialization&#10;- Adding fields to RuntimeState&#10;- Reworking color picker to be simpler&#10;- Fixing component tabs&#10;- Fixing component update&#10;- Adding labels to forms&#10;- Improving styling of inspector fields">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-94] Multi-webview support&#10;- Refactoring classes&#10;- Removing old structure">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/EngineService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/EngineService.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/EngineService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/EngineService.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/FileSystemService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/FileSystemService.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/FileSystemService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/FileSystemService.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/ProjectService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/ProjectService.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/ProjectService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/ProjectService.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/ShaderService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/ShaderService.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/ShaderService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/ShaderService.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/WindowRepository.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/WindowRepository.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/AbstractService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AbstractService.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/WindowUtil.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/WindowUtil.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/editor/basic/Runner.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/editor/basic/Runner.h" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/shared/AbstractWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/AbstractWindow.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/shared/AbstractWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/AbstractWindow.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/Schema.xsd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/runners/IRunner.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/runners/imgui_demo.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/imgui_demo.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewPayload.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewPayload.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewPayload.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewPayload.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.h" afterDir="false" />
@@ -218,11 +212,6 @@
     </option>
   </component>
   <component name="RunManager" selected="CMake Application.Projection">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Engine test" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="build" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_CLASS="[engine-test]" TEST_METHOD="Engine test" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -396,15 +385,10 @@
       <workItem from="1708168955352" duration="10280000" />
       <workItem from="1708205579116" duration="275000" />
       <workItem from="1708266459166" duration="92000" />
-      <workItem from="1708272822605" duration="5719000" />
-    </task>
-    <task id="LOCAL-00046" summary="[STD-33]  Starting refactoring&#10;- Fixing camera decoder&#10;- Introducing Engine resource class&#10;- Fixing initialization problems&#10;- Creating new system pipeline&#10;- Fixing engine rendering">
-      <option name="closed" value="true" />
-      <created>1705445561953</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1705445561953</updated>
+      <workItem from="1708272822605" duration="7145000" />
+      <workItem from="1708280043204" duration="2596000" />
+      <workItem from="1708291525592" duration="908000" />
+      <workItem from="1708292451497" duration="2354000" />
     </task>
     <task id="LOCAL-00047" summary="[STD-33] Engine refactoring: systems&#10;- Moving to service things related to systems&#10;- Organizing engine&#10;- Optimizing imports">
       <option name="closed" value="true" />
@@ -790,7 +774,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708178880003</updated>
     </task>
-    <option name="localTasksCounter" value="95" />
+    <task id="LOCAL-00095" summary="[STD-94] Multi-webview support&#10;- Refactoring classes&#10;- Removing old structure">
+      <option name="closed" value="true" />
+      <created>1708278596852</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1708278596852</updated>
+    </task>
+    <option name="localTasksCounter" value="96" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -814,7 +806,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-80] C++ engine static resources&#10;- UBOs&#10;- fixing UBO class" />
     <MESSAGE value="[STD-80] C++ engine static resources&#10;- Refactoring files&#10;- Initializing static meshes" />
     <MESSAGE value="[STD-80] C++ engine static resources&#10;- Using service for registration of resources" />
     <MESSAGE value="[STD-80] C++ engine static resources&#10;- Primitive util" />
@@ -839,7 +830,8 @@
     <MESSAGE value="[STD-92] Inspector methods and serialization&#10;- Fixing form rendering&#10;- Fixing nullptr in WorldChangeListener.cpp" />
     <MESSAGE value="[STD-92] Inspector methods and serialization&#10;- Fixing form rendering&#10;- Fixing serialization of components" />
     <MESSAGE value="[STD-92] Inspector methods and serialization&#10;- Fixing matrix/vector serialization&#10;- Fixing logger &#10;- Fixing WindowRepository initialization&#10;- Adding fields to RuntimeState&#10;- Reworking color picker to be simpler&#10;- Fixing component tabs&#10;- Fixing component update&#10;- Adding labels to forms&#10;- Improving styling of inspector fields" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-92] Inspector methods and serialization&#10;- Fixing matrix/vector serialization&#10;- Fixing logger &#10;- Fixing WindowRepository initialization&#10;- Adding fields to RuntimeState&#10;- Reworking color picker to be simpler&#10;- Fixing component tabs&#10;- Fixing component update&#10;- Adding labels to forms&#10;- Improving styling of inspector fields" />
+    <MESSAGE value="[STD-94] Multi-webview support&#10;- Refactoring classes&#10;- Removing old structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-94] Multi-webview support&#10;- Refactoring classes&#10;- Removing old structure" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -886,7 +878,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/src/ui/WindowUtil.cpp</url>
-          <line>24</line>
+          <line>23</line>
           <option name="timeStamp" value="99" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">

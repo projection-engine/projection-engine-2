@@ -8,8 +8,6 @@
 #define BACKGROUND_B .5
 #define BACKGROUND_A 1
 namespace PEngine {
-    class WebViewWindow;
-
     class Editor : public AbstractWindow {
     private:
         Engine engine;

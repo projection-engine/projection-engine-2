@@ -11,12 +11,9 @@ namespace PEngine {
     class ShaderService : public AbstractService {
         static void HandleEvent(WebViewPayload &payload);
 
-        static void BindEvents(PEngine::WebViewWindow &pWindow);
-
     public:
-        void bindEvents(PEngine::WebViewWindow &webView) override {
-            BindEvents(webView);
-        }
+        static void BindEvents(WebViewWindow *pWindow);
+
     };
 
 }
