@@ -28,6 +28,12 @@ set(COMMON_LIBRARIES
 
 set(FILE_PATHS
 
+        src/ui/WindowUtil.cpp
+        src/ui/WindowUtil.h
+        src/ui/AbstractService.h
+        src/services/ProjectService.h
+        src/services/ProjectService.cpp
+
         src/engine/enum/LightType.cpp
         src/engine/enum/ColliderType.cpp
         src/engine/AbstractSerializable.cpp
@@ -110,11 +116,6 @@ set(FILE_PATHS
         src/ui/shared/AbstractWindow.h
         src/ui/editor/Editor.cpp
         src/ui/editor/Editor.h
-        src/ui/editor/basic/Runner.cpp
-        src/ui/editor/basic/Runner.h
-
-        src/ui/WindowRepository.cpp
-        src/ui/WindowRepository.h
 
         src/ui/shared/webview/WebViewPayload.cpp
         src/ui/shared/webview/WebViewPayload.h
@@ -190,7 +191,7 @@ set(FILE_PATHS
         src/engine/Engine.cpp
         src/engine/Engine.h
         src/util/UUID.h
-        src/ui/shared/runners/imgui_demo.cpp
+        src/ui/imgui_demo.cpp
         src/util/StringUtils.h
         src/util/event/EventController.cpp
         src/util/event/EventController.h

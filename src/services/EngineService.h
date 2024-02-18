@@ -2,6 +2,7 @@
 #define PROJECTION_ENGINESERVICE_H
 
 #include "nlohmann/json.hpp"
+#include "../ui/AbstractService.h"
 
 namespace PEngine {
     class WorldService;
@@ -14,11 +15,12 @@ namespace PEngine {
 
     class Engine;
 
-    class EngineService {
+    class EngineService : public AbstractService {
         static void HandleEvent(WebViewPayload &payload);
 
     public:
-        static void BindEvents(PEngine::WebViewWindow *pWindow);
+        static void BindEvents(WebViewWindow *pWindow);
+
 
         static void UpdateEngineState(WebViewPayload &payload, Engine &engine);
 

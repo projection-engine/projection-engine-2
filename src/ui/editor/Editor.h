@@ -1,26 +1,25 @@
 #ifndef PROJECTION_EDITOR_H
 #define PROJECTION_EDITOR_H
-
 #include "../shared/AbstractWindow.h"
 #include "../../engine/Engine.h"
 
+#define BACKGROUND_R .5
+#define BACKGROUND_G .5
+#define BACKGROUND_B .5
+#define BACKGROUND_A 1
 namespace PEngine {
-    class WebViewWindow;
-
-    class IRunner;
-
     class Editor : public AbstractWindow {
     private:
-        static void onMessage(WebViewPayload &payload);
-        static std::string projectPath;
         Engine engine;
+        void init();
     public:
+        std::string projectPath;
 
-        explicit Editor() : AbstractWindow("Project Editor") {}
+        explicit Editor() : AbstractWindow("Project Editor", .5, .5) {
+            init();
+        }
 
-        IRunner *initialize() override;
-
-        const char *getWebViewHTML() override;
+        void runInternal() override;
 
         Engine &getEngine();
     };

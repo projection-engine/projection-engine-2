@@ -3,7 +3,6 @@
 #include "../ui/shared/webview/WebViewWindow.h"
 #include "../ui/editor/Editor.h"
 #include "../engine/services/world/Entity.h"
-#include "../ui/WindowRepository.h"
 #include "nlohmann/json.hpp"
 #include "../engine/enum/EngineEvents.h"
 #include "../engine/listeners/WorldHierarchyListener.h"
@@ -32,8 +31,7 @@ namespace PEngine {
     }
 
     void EngineService::HandleEvent(WebViewPayload &payload) {
-        Editor *window = (Editor *) WindowRepository::Get().getWindowById(EDITOR_WINDOW);
-        Engine &engine = window->getEngine();
+        Engine &engine = ((Editor *) payload.window)->getEngine();
         WorldService *world = engine.getWorldService();
 
         if (payload.id == EngineEvents::CREATE_ENTITY) {

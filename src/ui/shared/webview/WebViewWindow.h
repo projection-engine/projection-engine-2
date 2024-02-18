@@ -5,7 +5,7 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include <wrl.h>
-#include "string"
+#include <string>
 #include "../../../util/debug/ILoggable.h"
 #include <wil/com.h>
 #include <vector>
@@ -27,22 +27,16 @@ namespace PEngine {
     class WebViewWindow : public ILoggable {
     private:
         std::string pathToFile;
-        bool ready = false;
-        EventRegistrationToken token;
         wil::com_ptr<ICoreWebView2Controller> webviewController = nullptr;
         wil::com_ptr<ICoreWebView2> webview = nullptr;
-        AbstractWindow *window;
+        AbstractWindow *window = nullptr;
         std::unordered_map<std::string, ListenerDTO *> listeners;
-
+        std::function<void(WebViewWindow *webView)> callback = nullptr;
         void prepareView(ICoreWebView2Controller *controller);
-
-        HWND__ *getNativeWindow() const;
-
-        void loadHtml();
 
     public:
 
-        explicit WebViewWindow();
+        explicit WebViewWindow(AbstractWindow *window, const std::string &path, std::function<void(WebViewWindow *webView)> callback);
 
         void addMessageListener(const std::string &listenerId, void (*action)(WebViewPayload &));
 
@@ -52,11 +46,9 @@ namespace PEngine {
 
         void postMessage(const std::string &message, const std::string &id);
 
-        void setHTMLFile(const std::string &path);
-
-        void setWindow(AbstractWindow *window);
-
         void resize();
+
+        void init();
     };
 
 }

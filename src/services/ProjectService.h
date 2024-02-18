@@ -1,5 +1,5 @@
-#ifndef PROJECTION_SHADERSERVICE_H
-#define PROJECTION_SHADERSERVICE_H
+#ifndef PROJECTION_PROJECTSERVICE_H
+#define PROJECTION_PROJECTSERVICE_H
 
 #include "../ui/AbstractService.h"
 
@@ -8,7 +8,7 @@ namespace PEngine {
 
     class WebViewWindow;
 
-    class ShaderService : public AbstractService {
+    class ProjectService : public AbstractService {
         static void HandleEvent(WebViewPayload &payload);
 
     public:
