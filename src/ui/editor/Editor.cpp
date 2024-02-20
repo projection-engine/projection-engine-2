@@ -28,16 +28,17 @@ namespace PEngine {
         ImGui::RenderPlatformWindowsDefault();
     }
 
-    void Editor::init() {
+    void Editor::BindServices(WebViewWindow *webView) {
+        FileSystemService::BindEvents(webView);
+        EngineService::BindEvents(webView);
+        ShaderService::BindEvents(webView);
+        ProjectService::BindEvents(webView);
+    }
 
-        createWebView(
-                "editor-window.html",
-                [](WebViewWindow *webView) {
-                    FileSystemService::BindEvents(webView);
-                    EngineService::BindEvents(webView);
-                    ShaderService::BindEvents(webView);
-                    ProjectService::BindEvents(webView);
-                }
-        );
+    void Editor::init() {
+        createWebView("header-bar", "header-window.html", Editor::BindServices);
+        createWebView("left-view", "view-window.html", Editor::BindServices);
+        createWebView("bottom-view", "view-window.html", Editor::BindServices);
+        createWebView("right-view", "view-window.html", Editor::BindServices);
     }
 }

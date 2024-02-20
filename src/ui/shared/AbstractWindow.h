@@ -28,19 +28,20 @@ namespace PEngine {
 
         virtual void runInternal() {}
 
+        void createWebView(const std::string &id, const std::string &path,
+                           std::function<void(WebViewWindow *webView)> callback);
+
     public:
 
         explicit AbstractWindow(const char *name, float scaleX, float scaleY);
-
-        void createWebView(const std::string &path, std::function<void(WebViewWindow *webView)> callback);
-
-        GLFWwindow *getWindow();
 
         void run() const;
 
         virtual void onResize();
 
         HWND__ *getNativeWindow();
+
+        WebViewWindow &getWebView(const std::string &id);
     };
 }
 #endif

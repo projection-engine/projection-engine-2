@@ -1,5 +1,6 @@
 #ifndef PROJECTION_EDITOR_H
 #define PROJECTION_EDITOR_H
+
 #include "../shared/AbstractWindow.h"
 #include "../../engine/Engine.h"
 
@@ -11,17 +12,21 @@ namespace PEngine {
     class Editor : public AbstractWindow {
     private:
         Engine engine;
+
         void init();
+
+        static void BindServices(WebViewWindow *webView);
     public:
         std::string projectPath;
 
-        explicit Editor() : AbstractWindow("Project Editor", .5, .5) {
+        explicit Editor() : AbstractWindow("Projection Engine", .5, .5) {
             init();
         }
 
         void runInternal() override;
 
         Engine &getEngine();
+
     };
 }
 

@@ -19,25 +19,15 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-94] Multi-webview support&#10;- Refactoring classes&#10;- Removing old structure">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-94] Multi-webview support&#10;- Finishing implementation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/EngineService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/EngineService.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/EngineService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/EngineService.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/FileSystemService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/FileSystemService.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/FileSystemService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/FileSystemService.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/ProjectService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/ProjectService.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/ProjectService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/ProjectService.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/ShaderService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/ShaderService.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/ShaderService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/ShaderService.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/AbstractService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AbstractService.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/WindowUtil.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/WindowUtil.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/shared/AbstractWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/AbstractWindow.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/shared/AbstractWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/AbstractWindow.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewPayload.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewPayload.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/esbuild.js" beforeDir="false" afterPath="$PROJECT_DIR$/webview/esbuild.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/static/editor-window.html" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/view-window.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/static/projects-card.css" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,15 +53,16 @@
         <option value="Node" />
         <option value="Form" />
         <option value="FormField" />
-        <option value="TypeScript File" />
         <option value="InspectorTabs" />
+        <option value="TypeScript File" />
+        <option value="HeaderView" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="92-implement-c-inspector-methods" />
+        <entry key="$PROJECT_DIR$" value="94-multiple-webviews-support2" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -156,9 +147,9 @@
     "cf.advertisement.text.has.clang-format": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "94-multiple-webviews-support2",
+    "git-widget-placeholder": "97-new-view-architecture",
     "js.last.introduce.type": "CONST",
-    "last_opened_file_path": "C:/Users/russi/WebstormProjects/projection-engine-2/src/services",
+    "last_opened_file_path": "C:/Users/russi/WebstormProjects/projection-engine-2/webview/static",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -184,11 +175,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\static" />
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\views" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\services" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\test\engine" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\engine\services\world\components" />
-      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\window\editor\views\inspector\forms" />
-      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\window\editor\views\inspector\component-props" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\ui" />
@@ -212,6 +203,11 @@
     </option>
   </component>
   <component name="RunManager" selected="CMake Application.Projection">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Engine test" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="projection" TARGET_NAME="main_test" CONFIG_NAME="build" RUN_TARGET_PROJECT_NAME="projection" RUN_TARGET_NAME="main_test" TEST_CLASS="[engine-test]" TEST_METHOD="Engine test" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -388,15 +384,8 @@
       <workItem from="1708272822605" duration="7145000" />
       <workItem from="1708280043204" duration="2596000" />
       <workItem from="1708291525592" duration="908000" />
-      <workItem from="1708292451497" duration="2354000" />
-    </task>
-    <task id="LOCAL-00047" summary="[STD-33] Engine refactoring: systems&#10;- Moving to service things related to systems&#10;- Organizing engine&#10;- Optimizing imports">
-      <option name="closed" value="true" />
-      <created>1705446355163</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1705446355163</updated>
+      <workItem from="1708292451497" duration="2733000" />
+      <workItem from="1708460711379" duration="2515000" />
     </task>
     <task id="LOCAL-00048" summary="[STD-33] Engine refactoring: systems&#10;- Removing console.log&#10;- changing singletons map to reference class name instead of class type">
       <option name="closed" value="true" />
@@ -782,7 +771,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708278596852</updated>
     </task>
-    <option name="localTasksCounter" value="96" />
+    <task id="LOCAL-00096" summary="[STD-94] Multi-webview support&#10;- Finishing implementation">
+      <option name="closed" value="true" />
+      <created>1708294949404</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1708294949404</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -806,7 +803,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-80] C++ engine static resources&#10;- Refactoring files&#10;- Initializing static meshes" />
     <MESSAGE value="[STD-80] C++ engine static resources&#10;- Using service for registration of resources" />
     <MESSAGE value="[STD-80] C++ engine static resources&#10;- Primitive util" />
     <MESSAGE value="[STD-80] C++ engine static resources&#10;- Fixing FBO&#10;- Adding editor tools shaders&#10;- Fixing static shader initialization" />
@@ -831,7 +827,8 @@
     <MESSAGE value="[STD-92] Inspector methods and serialization&#10;- Fixing form rendering&#10;- Fixing serialization of components" />
     <MESSAGE value="[STD-92] Inspector methods and serialization&#10;- Fixing matrix/vector serialization&#10;- Fixing logger &#10;- Fixing WindowRepository initialization&#10;- Adding fields to RuntimeState&#10;- Reworking color picker to be simpler&#10;- Fixing component tabs&#10;- Fixing component update&#10;- Adding labels to forms&#10;- Improving styling of inspector fields" />
     <MESSAGE value="[STD-94] Multi-webview support&#10;- Refactoring classes&#10;- Removing old structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-94] Multi-webview support&#10;- Refactoring classes&#10;- Removing old structure" />
+    <MESSAGE value="[STD-94] Multi-webview support&#10;- Finishing implementation" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-94] Multi-webview support&#10;- Finishing implementation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
