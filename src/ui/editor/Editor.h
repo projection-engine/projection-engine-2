@@ -9,15 +9,18 @@
 #define BACKGROUND_B .5
 #define BACKGROUND_A 1
 namespace PEngine {
-    class Editor : public AbstractWindow {
+    struct Editor : public AbstractWindow {
     private:
-        Engine engine;
-
         void init();
 
-        static void BindServices(WebViewWindow *webView);
     public:
+        Engine engine;
+        long bottomViewHeight = 250;
+        long rightViewWidth = 250;
+        long leftViewWidth = 250;
         std::string projectPath;
+
+        static void BindServices(WebViewWindow *webView);
 
         explicit Editor() : AbstractWindow("Projection Engine", .5, .5) {
             init();
@@ -26,6 +29,11 @@ namespace PEngine {
         void runInternal() override;
 
         Engine &getEngine();
+
+        void onResize() override;
+
+        void setWindowSize(const std::string &windowId, long top, long bottom, long left, long right);
+
 
     };
 }

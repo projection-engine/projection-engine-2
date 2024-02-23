@@ -5,6 +5,13 @@
 #include "../../services/EngineService.h"
 #include "../../services/ProjectService.h"
 
+#define HEADER_HEIGHT 32
+#define HEADER "header-bar"
+#define LEFT "left-view"
+#define BOTTOM "bottom-view"
+#define RIGHT "right-view"
+#define VIEW_HTML "view-window.html"
+
 namespace PEngine {
 
     Engine &Editor::getEngine() {
@@ -36,9 +43,31 @@ namespace PEngine {
     }
 
     void Editor::init() {
-        createWebView("header-bar", "header-window.html", Editor::BindServices);
-        createWebView("left-view", "view-window.html", Editor::BindServices);
-        createWebView("bottom-view", "view-window.html", Editor::BindServices);
-        createWebView("right-view", "view-window.html", Editor::BindServices);
+        createWebView(HEADER, "header-window.html", Editor::BindServices);
+        createWebView(LEFT, VIEW_HTML, Editor::BindServices);
+        createWebView(BOTTOM, VIEW_HTML, Editor::BindServices);
+        createWebView(RIGHT, VIEW_HTML, Editor::BindServices);
+    }
+
+    void Editor::setWindowSize(const std::string &windowId, long top, long bottom, long left, long right) {
+        RECT bounds;
+        bounds.top = top;
+        bounds.bottom = bottom;
+        bounds.left = left;
+        bounds.right = right;
+        WebViewWindow &window = getWebView(windowId);
+        window.setBounds(bounds);
+    }
+
+    void Editor::onResize() {
+        RECT bounds;
+        GetClientRect(getNativeWindow(), &bounds);
+        long height = bounds.bottom;
+        long width = bounds.right;
+
+        setWindowSize(HEADER, 0, HEADER_HEIGHT, 0, width);
+        setWindowSize(BOTTOM, height - bottomViewHeight, height, 0, width);
+        setWindowSize(LEFT, HEADER_HEIGHT, height - bottomViewHeight, 0, leftViewWidth);
+        setWindowSize(RIGHT, HEADER_HEIGHT, height - bottomViewHeight, width - rightViewWidth, width);
     }
 }

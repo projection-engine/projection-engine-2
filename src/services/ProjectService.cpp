@@ -8,6 +8,7 @@
 #define RELOAD "RELOAD"
 #define GET_PROJECT_PATH "GET_PROJECT_PATH"
 #define SET_PROJECT_PATH "SET_PROJECT_PATH"
+#define GET_VIEW_METADATA "GET_VIEW_METADATA"
 
 
 namespace PEngine {
@@ -18,6 +19,8 @@ namespace PEngine {
             payload.resolve(((Editor *)payload.window)->projectPath);
         } else if (payload.id == SET_PROJECT_PATH) {
             ((Editor *)payload.window)->projectPath = payload.payload;
+        } else if (payload.id == GET_VIEW_METADATA) {
+            payload.resolve(payload.webview->getId());
         }
     }
 
@@ -25,5 +28,6 @@ namespace PEngine {
         pWindow->addMessageListener(RELOAD, HandleEvent);
         pWindow->addMessageListener(GET_PROJECT_PATH, HandleEvent);
         pWindow->addMessageListener(SET_PROJECT_PATH, HandleEvent);
+        pWindow->addMessageListener(GET_VIEW_METADATA, HandleEvent);
     }
 }

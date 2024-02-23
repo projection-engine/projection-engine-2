@@ -1,85 +1,20 @@
-wat
+<script>
 
-<!--<script lang="ts">-->
-<!--    import {onDestroy, onMount} from "svelte"-->
-<!--    import Viewport from "./components/view/CentralView.svelte"-->
-<!--    import ViewsContainer from "./components/view/SideView.svelte"-->
-<!--    import HotKeysController from "@lib/HotKeysController"-->
-<!--    import MenuBar from "@lib/components/frame/MenuBar.svelte";-->
-<!--    import {InjectVar} from "@lib/Injection";-->
-<!--    import Canvas from "./components/view/Canvas.svelte";-->
-<!--    import ToasterService from "@services/ToasterService";-->
-<!--    import SettingsStore from "@lib/stores/SettingsStore";-->
-<!--    import {ViewPlacement} from "./components/view/ViewDefinitions";-->
-<!--    import ViewTabDTO from "./components/view/ViewTabDTO";-->
+    import {InjectVar} from "@lib/Injection";
+    import WebViewService from "@lib/webview/WebViewService";
+    import {onMount} from "svelte";
+    import {ViewEvents} from "./definitions";
 
-<!--    let view: ViewTabDTO-->
-<!--    let cameraGizmoSize: number-->
-<!--    let ready = false-->
-
-<!--    const toasterService = InjectVar(ToasterService)-->
-<!--    const settingsStore = InjectVar(SettingsStore)-->
-<!--    const unsubSettings = settingsStore.subscribe(-->
-<!--        data => {-->
-<!--            view = data.views[data.currentView]-->
-<!--            cameraGizmoSize = data.cameraGizmoSize-->
-<!--            HotKeysController.blockActions = data.executingAnimation-->
-<!--        },-->
-<!--        ["views", "currentView", "cameraGizmoSize", "executingAnimation"]-->
-<!--    );-->
-
-<!--    onMount(() => toasterService.initialize())-->
-<!--    onDestroy(unsubSettings)-->
-<!--</script>-->
-
-<!--<MenuBar/>-->
-<!--{#if view !== undefined}-->
-<!--    <div class="wrapper" style={`&#45;&#45;cube-size: ${cameraGizmoSize}px;`}>-->
-<!--        <div class="middle">-->
-<!--            {#if ready}-->
-<!--                <ViewsContainer placement={ViewPlacement.LEFT} tabs={view.getLeft()}/>-->
-<!--            {/if}-->
-<!--            <div class="content">-->
-<!--                <Viewport {ready} view={view.getCenter()}>-->
-<!--                    <Canvas onReady={() => ready = true}/>-->
-<!--                </Viewport>-->
-<!--                {#if ready}-->
-<!--                    <ViewsContainer placement={ViewPlacement.BOTTOM} tabs={view.getBottom()}/>-->
-<!--                {/if}-->
-<!--            </div>-->
-<!--            {#if ready}-->
-
-<!--                <ViewsContainer placement={ViewPlacement.RIGHT} tabs={view.getRight()}/>-->
-<!--            {/if}-->
-<!--        </div>-->
-<!--    </div>-->
-<!--{/if}-->
+    const webView = InjectVar(WebViewService);
+    let res = "";
+    onMount(() => {
+        webView.wire(ViewEvents.GET_VIEW_METADATA).then(response => {
+            res = JSON.stringify(response);
+        });
+    });
+</script>
 
 
-<!--<style>-->
-<!--    .wrapper {-->
-<!--        width: 100vw;-->
-<!--        height: 100vh;-->
-<!--        overflow: hidden;-->
-<!--        display: flex;-->
-<!--        flex-direction: column;-->
-<!--        position: relative;-->
-<!--    }-->
-
-<!--    .content {-->
-<!--        width: 100%;-->
-<!--        height: 100%;-->
-<!--        overflow: hidden;-->
-<!--        display: flex;-->
-<!--        flex-direction: column;-->
-<!--        user-select: none;-->
-<!--    }-->
-
-<!--    .middle {-->
-<!--        width: 100%;-->
-<!--        height: 100%;-->
-<!--        overflow: hidden;-->
-<!--        display: flex;-->
-
-<!--    }-->
-<!--</style>-->
+<div style="background: blue; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <span>{res}</span>
+</div>

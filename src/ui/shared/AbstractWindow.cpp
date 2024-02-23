@@ -51,7 +51,7 @@ namespace PEngine {
                                        std::function<void(WebViewWindow *webView)> callback) {
         webViews.emplace(
                 id,
-                WebViewWindow(this, path, std::move(callback))
+                WebViewWindow(id, this, path, std::move(callback))
         );
         webViews.at(id).init();
     }
