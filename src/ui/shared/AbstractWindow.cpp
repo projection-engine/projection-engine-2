@@ -31,7 +31,7 @@ namespace PEngine {
         glfwGetFramebufferSize(window, &windowWidth, &windowHeight);
     }
 
-    void AbstractWindow::run() const {
+    void AbstractWindow::run()  {
         while (!glfwWindowShouldClose(window)) {
             glfwPollEvents();
 //            runInternal();

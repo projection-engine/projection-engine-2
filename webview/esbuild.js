@@ -39,15 +39,18 @@ function frontend(fileName, outputName, withCopy = false) {
         outfile: "../build/src/" + outputName + ".js",
         plugins
     };
-};
-
-start().catch(console.error);
-
-async function start() {
-    (await esbuild.context(frontend("./views/view-window.ts", "view-window", true)))
-        .watch(console.log)
-        .catch(console.error);
-    (await esbuild.context(frontend("./views/header-window.ts", "header-window")))
-        .watch(console.log)
-        .catch(console.error);
 }
+
+esbuild.context(frontend("./views/view-window.ts", "view-window", true))
+    .then(c => {
+        console.log("BUILDING DONE FOR VIEW WINDOW");
+        c.watch().then(() => console.log("VIEW WINDOW OK")).catch(() => console.error("VIEW WINDOW ERROR"));
+    })
+    .catch(() => console.error("VIEW WINDOW ERROR"));
+
+esbuild.context(frontend("./views/header-window.ts", "header-window"))
+    .then(async c => {
+        console.log("BUILDING DONE FOR HEADER WINDOW");
+        c.watch().then(() => console.log("HEADER WINDOW OK")).catch(() => console.error("HEADER WINDOW ERROR"));
+    })
+    .catch(() => console.error("HEADER WINDOW ERROR"));

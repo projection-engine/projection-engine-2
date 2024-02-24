@@ -19,16 +19,17 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-97] New view architecture&#10;- Adding new web-views&#10;- Creating new HTML entry points">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-97] New view architecture&#10;- Implementing view sizing&#10;- Adding event for view metadata">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/ProjectService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/ProjectService.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/shared/AbstractWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/AbstractWindow.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/shared/AbstractWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/AbstractWindow.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/engine/core/services/serialization/RepositoryService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/engine/core/services/serialization/RepositoryService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/esbuild.js" beforeDir="false" afterPath="$PROJECT_DIR$/webview/esbuild.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/components/frame/MenuBar.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/services/EngineStateService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/services/EngineStateService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/static/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/global.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/views/HeaderView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/views/HeaderView.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/views/View.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/views/View.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -228,11 +229,6 @@
         <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="copy-files" type="ShConfigurationType">
       <option name="SCRIPT_TEXT" value="cp -r -Force &quot;src/ui/webview/build&quot; &quot;cmake-build-debug-visual-studio/src&quot;" />
       <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
@@ -387,15 +383,9 @@
       <workItem from="1708291525592" duration="908000" />
       <workItem from="1708292451497" duration="2733000" />
       <workItem from="1708460711379" duration="2689000" />
-      <workItem from="1708643034190" duration="3453000" />
-    </task>
-    <task id="LOCAL-00049" summary="[STD-53] Camera refactoring&#10;- Removing camera notification decoder">
-      <option name="closed" value="true" />
-      <created>1705746153785</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1705746153786</updated>
+      <workItem from="1708643034190" duration="3741000" />
+      <workItem from="1708726852071" duration="458000" />
+      <workItem from="1708796287632" duration="1001000" />
     </task>
     <task id="LOCAL-00050" summary="[STD-53] Camera refactoring&#10;- Finishing camera refactoring&#10;- Refactoring engine files">
       <option name="closed" value="true" />
@@ -781,7 +771,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708469572875</updated>
     </task>
-    <option name="localTasksCounter" value="98" />
+    <task id="LOCAL-00098" summary="[STD-97] New view architecture&#10;- Implementing view sizing&#10;- Adding event for view metadata">
+      <option name="closed" value="true" />
+      <created>1708646557509</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1708646557509</updated>
+    </task>
+    <option name="localTasksCounter" value="99" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -805,7 +803,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-80] C++ engine static resources&#10;- Primitive util" />
     <MESSAGE value="[STD-80] C++ engine static resources&#10;- Fixing FBO&#10;- Adding editor tools shaders&#10;- Fixing static shader initialization" />
     <MESSAGE value="[STD-80] C++ engine static resources&#10;-Fixing  shader compilation&#10;- Changing opengl version to 330 core" />
     <MESSAGE value="[STD-81] C++ engine: camera system" />
@@ -830,7 +827,8 @@
     <MESSAGE value="[STD-94] Multi-webview support&#10;- Refactoring classes&#10;- Removing old structure" />
     <MESSAGE value="[STD-94] Multi-webview support&#10;- Finishing implementation" />
     <MESSAGE value="[STD-97] New view architecture&#10;- Adding new web-views&#10;- Creating new HTML entry points" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-97] New view architecture&#10;- Adding new web-views&#10;- Creating new HTML entry points" />
+    <MESSAGE value="[STD-97] New view architecture&#10;- Implementing view sizing&#10;- Adding event for view metadata" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-97] New view architecture&#10;- Implementing view sizing&#10;- Adding event for view metadata" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -879,11 +877,6 @@
           <url>file://$PROJECT_DIR$/src/ui/WindowUtil.cpp</url>
           <line>23</line>
           <option name="timeStamp" value="99" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/ui/editor/Editor.cpp</url>
-          <line>52</line>
-          <option name="timeStamp" value="105" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/webview/lib/FSService.ts</url>

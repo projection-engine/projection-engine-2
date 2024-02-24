@@ -46,7 +46,10 @@ namespace PEngine {
         createWebView(HEADER, "header-window.html", Editor::BindServices);
         createWebView(LEFT, VIEW_HTML, Editor::BindServices);
         createWebView(BOTTOM, VIEW_HTML, Editor::BindServices);
-        createWebView(RIGHT, VIEW_HTML, Editor::BindServices);
+        createWebView(RIGHT, VIEW_HTML, [this](WebViewWindow *webView) {
+            Editor::BindServices(webView);
+            onResize();
+        });
     }
 
     void Editor::setWindowSize(const std::string &windowId, long top, long bottom, long left, long right) {
@@ -70,4 +73,5 @@ namespace PEngine {
         setWindowSize(LEFT, HEADER_HEIGHT, height - bottomViewHeight, 0, leftViewWidth);
         setWindowSize(RIGHT, HEADER_HEIGHT, height - bottomViewHeight, width - rightViewWidth, width);
     }
+
 }
