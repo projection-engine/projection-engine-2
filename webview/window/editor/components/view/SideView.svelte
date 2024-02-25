@@ -1,64 +1,43 @@
 <script lang="ts">
-    import ResizableBar from "@lib/components/resizable/ResizableBar.svelte"
-    import {onDestroy} from "svelte"
+    import ResizableBar from "@lib/components/resizable/ResizableBar.svelte";
+    import {onDestroy} from "svelte";
     import View from "./View.svelte";
-    import {ViewOrientation, ViewPlacement, ViewPlacementMetadata, ViewResizePosition} from "./ViewDefinitions";
+    import {
+        ViewOrientation,
+        ViewPlacement,
+        ViewPlacementMetadata,
+        ViewResizePosition,
+        ViewType
+    } from "./ViewDefinitions";
     import {InjectVar} from "@lib/Injection";
     import SettingsStore from "@lib/stores/SettingsStore";
 
-    export let tabs
-    export let placement: ViewPlacement
-    let reducedOpacity = false
+    export let tabs: ViewType[];
+    export let placement: ViewPlacement;
+    let reducedOpacity = false;
 
     const unsubSettings = InjectVar(SettingsStore).subscribe(data => {
-        reducedOpacity = data.executingAnimation
-    }, ["executingAnimation"])
+        reducedOpacity = data.executingAnimation;
+    }, ["executingAnimation"]);
 
-    let resizePosition: ViewResizePosition
-    let orientation: ViewOrientation
-
-    $: {
-        resizePosition = ViewPlacementMetadata[placement].resizePosition
-        orientation = ViewPlacementMetadata[placement].orientation
-    }
-
-    let ref: HTMLElement
-    $: orientationNameMin = orientation === ViewOrientation.HORIZONTAL ? "minHeight" : "minWidth"
-    $: orientationName = orientation === ViewOrientation.HORIZONTAL ? "height" : "width"
-    $: invOrientation = orientation === ViewOrientation.HORIZONTAL ? "width" : "height"
-
-    function onResizeStart(isWindowResize) {
-        let obj = {}
-        if (!isWindowResize || tabs.length === 0) {
-            obj[orientationNameMin] = "unset"
-            obj[orientationNameMin.replace("min", "max")] = tabs.length === 0 ? "0px" : "unset"
-        } else if (tabs.length > 0) {
-            obj[orientationNameMin] = "250px"
-            obj[orientationNameMin.replace("min", "max")] = "250px"
-        }
-
-        Object.assign(ref.style, obj)
-    }
+    let orientation: ViewOrientation;
 
     $: {
-        if (tabs.length === 0 && ref) {
-            const obj = {}
-            obj[orientationNameMin] = "unset"
-            obj[orientationNameMin.replace("min", "max")] = "0"
-            Object.assign(ref.style, obj)
-        }
+        orientation = ViewPlacementMetadata[placement].orientation;
     }
 
+    let ref: HTMLElement;
 
-    onDestroy(unsubSettings)
+    onDestroy(unsubSettings);
+
+    function onResize(){
+        ref.
+    }
 </script>
 
 
-{#if resizePosition !== ViewResizePosition.BOTTOM && tabs.length > 0 && resizePosition !== ViewResizePosition.LEFT}
-    <ResizableBar
-            type={orientationName}
-            onResizeStart={onResizeStart}
-    />
+{#if placement !== ViewPlacement.LEFT}
+    <ResizableBar {onResize}/>
 {/if}
 <div
         bind:this={ref}
@@ -74,12 +53,12 @@
     {#each tabs as view, groupIndex}
         <View {view} index={groupIndex} {placement}/>
         {#if groupIndex < tabs.length - 1 && tabs.length > 1}
-            <ResizableBar type={invOrientation}/>
+            <ResizableBar type={placement === ViewPlacement.BOTTOM ? "width": "height"}/>
         {/if}
     {/each}
 </div>
-{#if resizePosition !== ViewResizePosition.TOP && (orientation === ViewOrientation.VERTICAL && tabs.length > 1 || orientation === ViewOrientation.HORIZONTAL && tabs.length > 0) || resizePosition === ViewResizePosition.LEFT && tabs.length > 0}
-    <ResizableBar type={orientationName} onResizeStart={onResizeStart}/>
+{#if placement === ViewPlacement.LEFT}
+    <ResizableBar {onResize}/>
 {/if}
 
 
@@ -89,5 +68,7 @@
         display: flex;
         flex-direction: column;
         gap: 0;
+        width: 100%;
+        height: 100%;
     }
 </style>

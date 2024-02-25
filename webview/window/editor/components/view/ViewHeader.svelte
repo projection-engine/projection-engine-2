@@ -15,7 +15,7 @@
 
     const unsubSettings = settings.subscribe(data => {
         const currentView = data.views[data.currentView];
-        isActive = (currentView.getActiveViewIndex() === index || currentView.getActiveViewPlacement() === ViewPlacement.CENTER) && currentView.getActiveViewPlacement() === placement
+        isActive = currentView.getActiveViewIndex() === index && currentView.getActiveViewPlacement() === placement
     }, ["views", "currentView"])
 
     $: {

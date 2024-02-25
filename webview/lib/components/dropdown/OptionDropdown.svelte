@@ -5,49 +5,55 @@
     import Icon from "../icon/Icon.svelte";
     import Option from "@lib/components/dropdown/Option.svelte";
     import {DropdownOption} from "@lib/components/dropdown/DropdownDefinitions";
+    import LocalizationEN from "@enums/LocalizationEN";
 
-    export let label: string = null
-    export let labelAsIcon: boolean = false
-    export let options: DropdownOption[]
-    export let cleanLayout: boolean = false
-    export let tooltip: string = null
-    export let disabled: boolean = false
-    export let buttonStyles: string = null
-    export let highlightElementWithId: any = null
+    export let label: string = null;
+    export let options: DropdownOption[];
+    export let cleanLayout: boolean = false;
+    export let disabled: boolean = false;
+    export let highlightElementWithId: string = null;
 
+    let ref: HTMLSelectElement;
+
+    function onChange() {
+        const optionFound = options.map(o => o.children ?? o).flat().find(o => (o.id ?? o.label) === ref.value);
+        if (optionFound != null) {
+            optionFound.onClick();
+            ref.value = "";
+        }
+    }
 </script>
 
-<Dropdown buttonStyles={cleanLayout ? undefined : getDropdownHeaderStyles()} hideArrow={cleanLayout}
-          disabled={disabled}>
-    <button
-            disabled={disabled}
-            data-sveltebuttondefault="-"
-            slot="button"
-            data-svelteview-header-dropdown={cleanLayout? "" : "-"}
-            style={buttonStyles + (cleanLayout ? "border: none; display: flex; align-items: center" : undefined)}
-    >
-        {#if labelAsIcon}
-            <Icon>{label}</Icon>
-            {#if tooltip}
-                <ToolTip content={tooltip}/>
-            {/if}
-        {:else}
-            {label}
-            <ToolTip content={label}/>
-        {/if}
-    </button>
-
+<select
+        style={cleanLayout ? "appearance: none;" : undefined}
+        on:change={onChange} bind:this={ref} disabled={disabled}
+>
+    <option value="">{label}</option>
     {#each options as option}
-        {#if option.divider}
-            <div class="group dropdown-list">
-                {#if option.label != null}
-                    <strong style="white-space: nowrap; padding-left: 4px">{option.label}</strong>
-                {/if}
-                <div data-sveltedivider="-"></div>
-            </div>
-        {:else}
-            <Option {option} {highlightElementWithId}/>
-        {/if}
+        <Option {option} {highlightElementWithId}/>
     {/each}
-</Dropdown>
+</select>
+
+<style>
+    select {
+        border: none;
+        outline: none;
+        cursor: pointer;
+        height: 25px;
+        width: fit-content;
+        padding: 4px;
+        border-radius: 3px;
+        background: var(--pj-background-primary);
+        color: var(--pj-color-secondary);
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        justify-items: center;
+        align-items: center;
+    }
+
+    select:hover {
+        background: var(--pj-background-secondary);
+    }
+</style>
 

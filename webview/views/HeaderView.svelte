@@ -8,32 +8,64 @@
     import WebViewService from "@lib/webview/WebViewService";
     import OptionDropdown from "@lib/components/dropdown/OptionDropdown.svelte";
 
-    const webView = InjectVar(WebViewService)
-    const projectService = InjectVar(ProjectService)
-    const toasterService = InjectVar(ToasterService)
-    const engine = InjectVar(Engine)
+    const webView = InjectVar(WebViewService);
+    const projectService = InjectVar(ProjectService);
+    const toasterService = InjectVar(ToasterService);
+    const engine = InjectVar(Engine);
 
-    const OPTIONS: {label: string, disabled?: boolean, options: DropdownOption[]}[] = [
+    const OPTIONS: { label: string, disabled?: boolean, options: DropdownOption[] }[] = [
         {
             label: "File",
             options: [
-                {label: "Open", onClick: () => projectService.open()},
-                {divider: true},
-                {label: "Save", icon: "save", onClick: () => projectService.save(), noPadding: true},
-                {label: "Save as", onClick: () => projectService.saveAs()},
+                {
+                    label: "Project",
+                    divider: true,
+                    children: [
+                        {
+                            label: "Open",
+                            onClick: () => projectService.open()
+                        },
+                        {
+                            label: "Save",
+                            onClick: () => projectService.save(),
+                        },
+                        {
+                            label: "Save as",
+                            onClick: () => projectService.saveAs()
+                        },
+                    ]
+                },
+                {
+                    divider: true,
+                    label: "Edit",
+                    disabled: true,
+                    children: []
+                },
+                {
+                    divider: true,
+                    label: "Window",
+                    children: [
+                        {
+                            label: "Recompile shaders",
+                            onClick: () => engine.buildShaders().then(() => toasterService.success(LocalizationEN.SHADERS_REBUILT))
+                        },
+                        {
+                            label: "Reload",
+                            onClick: () => webView.beam("RELOAD")
+                        }
+                    ]
+                },
+                {
+                    divider: true,
+                    label: "Help",
+                    disabled: true,
+                    children: []
+                },
+
             ]
         },
-        {label: "Edit", disabled: true, options: []},
-        {
-            label: "Window",
-            options: [
-                {label: "Recompile shaders", onClick: () => engine.buildShaders().then(() => toasterService.success(LocalizationEN.SHADERS_REBUILT))},
-                {label: "Reload", onClick: () => webView.beam("RELOAD")}
-            ]
-        },
-        {label: "Help", disabled: true, options: []},
-    ]
-    console.trace(OPTIONS)
+
+    ];
 </script>
 
 
@@ -51,14 +83,13 @@
 
 <style>
     .container {
-        background: var(--pj-background-secondary);
         display: flex;
         gap: 4px;
         justify-content: flex-start;
         align-items: center;
         width: 100vw;
-        height: 25px;
-        padding: 0 4px;
+        height: 32px;
+        padding: 4px;
     }
 
 </style>

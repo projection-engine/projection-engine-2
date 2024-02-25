@@ -3,6 +3,7 @@ type DropdownOption = {
     label?: string,
     icon?: string,
     divider?: boolean,
+    children?: DropdownOption[]
     disabled?: boolean,
     noPadding?: boolean,
     onClick?: GenericVoidFunction

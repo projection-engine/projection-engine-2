@@ -2,26 +2,33 @@
     import Icon from "@lib/components/icon/Icon.svelte";
     import EmptyIcon from "@lib/components/icon/EmptyIcon.svelte";
     import {DropdownOption} from "@lib/components/dropdown/DropdownDefinitions";
+    import LocalizationEN from "@enums/LocalizationEN";
 
     export let highlightElementWithId: string = null
     export let option: DropdownOption
 </script>
-<button data-sveltebuttondefault="-"
-        disabled={option.disabled}
+{#if option.divider}
+    {#if option.children}
+        <optgroup label={option.label}>
+            <hr/>
 
-        on:click={() => option.onClick()}
-        style={option.noPadding ? undefined : "padding-left: 25px;"}
->
-    {#if highlightElementWithId !== undefined && highlightElementWithId === option.id}
-        <Icon>check</Icon>
-    {:else}
-        {#if option.icon}
-            {#if option.icon === "empty"}
-                <EmptyIcon/>
-            {:else}
-                <Icon>{option.icon}</Icon>
-            {/if}
-        {/if}
+            {#each option.children as child}
+                <svelte:self option={child} {highlightElementWithId}/>
+            {/each}
+        </optgroup>
     {/if}
-    {option.label}
-</button>
+{:else}
+    <option
+            disabled={option.disabled}
+            value={option.id ?? option.label}
+            selected={highlightElementWithId != null && highlightElementWithId === option.id}
+    >
+        {option.label}
+    </option>
+{/if}
+
+<style>
+    optgroup {
+        font-weight: 500;
+    }
+</style>
