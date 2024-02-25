@@ -5,7 +5,7 @@
 #include "../../services/EngineService.h"
 #include "../../services/ProjectService.h"
 
-#define HEADER_HEIGHT 32
+#define HEADER_HEIGHT 50
 #define HEADER "header-bar"
 #define LEFT "left-view"
 #define BOTTOM "bottom-view"

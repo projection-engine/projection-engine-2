@@ -19,26 +19,16 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-97] New view architecture&#10;- Implementing view sizing">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-97] New view architecture&#10;- Changing OptionDropdown.svelte&#10;- Adding views to View window&#10;- Fixing css">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/enums/LocalizationEN.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/enums/LocalizationEN.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/esbuild.js" beforeDir="false" afterPath="$PROJECT_DIR$/webview/esbuild.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/components/dropdown/DropdownDefinitions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/components/dropdown/DropdownDefinitions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/components/dropdown/Option.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/components/dropdown/Option.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/lib/components/dropdown/OptionDropdown.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/components/dropdown/OptionDropdown.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/lib/components/resizable/ResizableBar.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/components/resizable/ResizableBar.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/static/frame-module.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/static/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/global.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/static/header-window.html" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/header-window.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/static/view-window.html" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/view-window.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/views/HeaderView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/views/HeaderView.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/views/View.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/views/View.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/CentralView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/CentralView.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/SideView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/SideView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/SideView.svelte" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/View.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/View.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/ViewDefinitions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/ViewDefinitions.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/ViewHeader.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/ViewHeader.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/ViewTabDTO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/ViewTabDTO.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -395,15 +385,8 @@
       <workItem from="1708643034190" duration="3741000" />
       <workItem from="1708726852071" duration="458000" />
       <workItem from="1708796287632" duration="1064000" />
-      <workItem from="1708863294161" duration="4473000" />
-    </task>
-    <task id="LOCAL-00051" summary="[STD-56] Creating serialization architecture">
-      <option name="closed" value="true" />
-      <created>1705780016504</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1705780016504</updated>
+      <workItem from="1708863294161" duration="4545000" />
+      <workItem from="1708870279526" duration="2153000" />
     </task>
     <task id="LOCAL-00052" summary="[STD-56] Improving serialization architecture&#10;- Added support for circular dependencies&#10;- Improved tests for serialization">
       <option name="closed" value="true" />
@@ -789,7 +772,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708797349462</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="[STD-97] New view architecture&#10;- Changing OptionDropdown.svelte&#10;- Adding views to View window&#10;- Fixing css">
+      <option name="closed" value="true" />
+      <created>1708867870819</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1708867870819</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -813,7 +804,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-80] C++ engine static resources&#10;-Fixing  shader compilation&#10;- Changing opengl version to 330 core" />
     <MESSAGE value="[STD-81] C++ engine: camera system" />
     <MESSAGE value="[STD-84] C++ engine: components" />
     <MESSAGE value="[STD-86] C++ engine ui: hierarchy&#10;- Adding engine state&#10;- Removing pointers from World&#10;- Adding new fields to Entity" />
@@ -838,7 +828,8 @@
     <MESSAGE value="[STD-97] New view architecture&#10;- Adding new web-views&#10;- Creating new HTML entry points" />
     <MESSAGE value="[STD-97] New view architecture&#10;- Implementing view sizing&#10;- Adding event for view metadata" />
     <MESSAGE value="[STD-97] New view architecture&#10;- Implementing view sizing" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-97] New view architecture&#10;- Implementing view sizing" />
+    <MESSAGE value="[STD-97] New view architecture&#10;- Changing OptionDropdown.svelte&#10;- Adding views to View window&#10;- Fixing css" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-97] New view architecture&#10;- Changing OptionDropdown.svelte&#10;- Adding views to View window&#10;- Fixing css" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

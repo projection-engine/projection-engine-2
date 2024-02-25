@@ -76,7 +76,6 @@
                 cleanLayout={true}
                 options={option.options}
                 label={option.label}
-                buttonStyles="border: none !important; height: 25px !important;"
         />
     {/each}
 </div>
@@ -87,9 +86,12 @@
         gap: 4px;
         justify-content: flex-start;
         align-items: center;
+
         width: 100vw;
-        height: 32px;
+        max-height: 40px;
+        min-height: 40px;
         padding: 4px;
+        border-bottom: 1px var(--pj-border-primary) solid;
     }
 
 </style>

@@ -39,17 +39,16 @@
         border: none;
         outline: none;
         cursor: pointer;
-        height: 25px;
+
+        max-height: 25px;
+        min-height: 25px;
         width: fit-content;
-        padding: 4px;
+        padding: 0 4px;
         border-radius: 3px;
-        background: var(--pj-background-primary);
+        background: var(--pj-background-quaternary);
+
         color: var(--pj-color-secondary);
-        display: flex;
-        align-content: center;
-        justify-content: center;
-        justify-items: center;
-        align-items: center;
+        font-size: .7rem;
     }
 
     select:hover {

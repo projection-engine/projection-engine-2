@@ -75,6 +75,5 @@
         flex-direction: column;
         align-items: flex-start;
         align-content: flex-start;
-        background: var(--pj-background-quaternary);
     }
 </style>
