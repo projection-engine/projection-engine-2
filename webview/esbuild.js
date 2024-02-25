@@ -1,62 +1,60 @@
-const esbuild = require("esbuild")
-const sveltePreprocess = require("svelte-preprocess")
-const sveltePlugin = require("esbuild-svelte")
-const {copy} = require("esbuild-plugin-copy")
+const esbuild = require("esbuild");
+const sveltePreprocess = require("svelte-preprocess");
+const sveltePlugin = require("esbuild-svelte");
+const {copy} = require("esbuild-plugin-copy");
 
-const OUTPUT = "../build/src/"
-const production = process.argv[2] === "prod"
-const COMMON = {
-    tsconfig: "tsconfig.json",
-    bundle: true,
-    target: ["es2022"],
-    minify: production,
-    sourcemap: !production,
-    ignoreAnnotations: true,
-    loader: {".glsl": "text", ".frag": "text", ".vert": "text", ".svg": "text"}
-}
+const production = process.argv[2] === "prod";
 
-const worker = (fileName, outputFile) => ({
-    ...COMMON,
-    platform: "browser",
-    entryPoints: [fileName],
-    format: "iife",
-    outfile: OUTPUT + outputFile + ".js",
-    plugins: []
-})
-
-const frontend = (fileName, outputName) => ({
-    ...COMMON,
-    platform: "browser",
-    entryPoints: ["./window" + fileName],
-    format: "iife",
-    outfile: OUTPUT + outputName + ".js",
-    plugins: [
+function frontend(fileName, outputName, withCopy = false) {
+    const plugins = [
         sveltePlugin({
             preprocess: sveltePreprocess({typescript: {tsconfigFile: "tsconfig.json"}}),
             filterWarnings: () => false
         })
-    ],
-})
-
-start().catch(console.error)
-
-async function start() {
-    const contexts = []
-    contexts.push(esbuild.context({
-        ...frontend("/editor/editor-window.ts", "editor-window"),
-        plugins: [
-            sveltePlugin({
-                preprocess: sveltePreprocess({typescript: {tsconfigFile: "tsconfig.json"}}),
-                filterWarnings: () => false
-            }),
-            copy({assets: [{from: ["./static/*"], to: ["./"]}]})]
-    }))
-
-
-    const resolvedContexts = await Promise.all(contexts)
-    resolvedContexts.forEach((context, i) => {
-        console.log("CONTEXT " + i)
-        context.watch()
-    })
-
+    ];
+    if (withCopy) {
+        plugins.push(copy({
+            assets: [{
+                from: ["./static/*"],
+                to: ["./"]
+            }]
+        }));
+    }
+    return {
+        tsconfig: "tsconfig.json",
+        bundle: true,
+        target: ["es2022"],
+        minify: false,
+        sourcemap: true,
+        ignoreAnnotations: true,
+        loader: {
+            ".glsl": "text",
+            ".frag": "text",
+            ".vert": "text",
+            ".svg": "text"
+        },
+        platform: "browser",
+        entryPoints: [fileName],
+        format: "iife",
+        outfile: "../build/src/" + outputName + ".js",
+        plugins
+    };
 }
+
+esbuild.context(frontend("./views/view-window.ts", "view-window", true))
+    .then(c => {
+        console.log("BUILDING DONE FOR VIEW WINDOW");
+        c.watch()
+            .then(() => console.log("VIEW WINDOW OK"))
+            .catch(() => console.error("VIEW WINDOW ERROR"));
+    })
+    .catch(() => console.error("VIEW WINDOW ERROR"));
+
+esbuild.context(frontend("./views/header-window.ts", "header-window"))
+    .then(async c => {
+        console.log("BUILDING DONE FOR HEADER WINDOW");
+        c.watch()
+            .then(() => console.log("HEADER WINDOW OK"))
+            .catch(() => console.error("HEADER WINDOW ERROR"));
+    })
+    .catch(() => console.error("HEADER WINDOW ERROR"));

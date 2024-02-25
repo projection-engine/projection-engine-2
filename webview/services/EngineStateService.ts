@@ -13,7 +13,6 @@ import EntityNamingService from "@services/EntityNamingService";
 
 
 // TODO - REMOVE STATIC MEMBERS
-@Injectable
 export default class EngineStateService extends IInjectable {
 
     @Inject(SelectionStore)

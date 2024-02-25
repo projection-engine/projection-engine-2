@@ -97,9 +97,6 @@ export default class ViewTabDTO extends Serializable{
             case ViewPlacement.BOTTOM:
                 this._bottom[index] = type
                 break
-            case ViewPlacement.CENTER:
-                this._center = type
-                break
             case ViewPlacement.LEFT:
                 this._left[index] = type
                 break

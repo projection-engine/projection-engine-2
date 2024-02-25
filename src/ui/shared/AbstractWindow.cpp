@@ -1,4 +1,6 @@
 #include "AbstractWindow.h"
+
+#include <utility>
 #include "webview/WebViewWindow.h"
 #include "webview/WebViewPayload.h"
 #include "../WindowUtil.h"
@@ -29,7 +31,7 @@ namespace PEngine {
         glfwGetFramebufferSize(window, &windowWidth, &windowHeight);
     }
 
-    void AbstractWindow::run() const {
+    void AbstractWindow::run()  {
         while (!glfwWindowShouldClose(window)) {
             glfwPollEvents();
 //            runInternal();
@@ -45,24 +47,24 @@ namespace PEngine {
         ImGui::DestroyContext();
     }
 
-    void AbstractWindow::createWebView(const std::string &path, std::function<void(WebViewWindow *webView)> callback) {
-        webViews.emplace(path, WebViewWindow(
-                this,
-                path,
-                callback)
+    void AbstractWindow::createWebView(const std::string &id, const std::string &path,
+                                       std::function<void(WebViewWindow *webView)> callback) {
+        webViews.emplace(
+                id,
+                WebViewWindow(id, this, path, std::move(callback))
         );
-        webViews.at(path).init();
+        webViews.at(id).init();
     }
 
     void AbstractWindow::onResize() {
 
     }
 
-    HWND__ *AbstractWindow::getNativeWindow() {
-        return nativeWindow;
+    WebViewWindow &AbstractWindow::getWebView(const std::string &id) {
+        return webViews.at(id);
     }
 
-    GLFWwindow *AbstractWindow::getWindow() {
-        return window;
+    HWND__ *AbstractWindow::getNativeWindow() {
+        return nativeWindow;
     }
 }

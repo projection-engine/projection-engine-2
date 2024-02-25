@@ -45,13 +45,12 @@ const ViewTypeMetadata = Object.seal({
         icon: "bar_chart",
         label: LocalizationEN.METRICS
     }
-})
+});
 
 enum ViewPlacement {
-    CENTER,
-    LEFT,
-    RIGHT,
-    BOTTOM
+    LEFT = "left-view",
+    RIGHT = "right-view",
+    BOTTOM = "bottom-view"
 }
 
 enum ViewOrientation {
@@ -79,7 +78,15 @@ const ViewPlacementMetadata = Object.seal({
         orientation: ViewOrientation.VERTICAL,
         resizePosition: ViewResizePosition.TOP
     }
-})
-const ViewContextPath = "ViewContextPath"
+});
+const ViewContextPath = "ViewContextPath";
 
-export {ViewType, ViewPlacement, ViewPlacementMetadata, ViewOrientation, ViewResizePosition, ViewTypeMetadata, ViewContextPath}
+export {
+    ViewType,
+    ViewPlacement,
+    ViewPlacementMetadata,
+    ViewOrientation,
+    ViewResizePosition,
+    ViewTypeMetadata,
+    ViewContextPath
+};

@@ -19,25 +19,16 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-94] Multi-webview support&#10;- Refactoring classes&#10;- Removing old structure">
+    <list default="true" id="52b54261-6d42-44d3-bea1-0700fc36f718" name="Changes" comment="[STD-97] New view architecture&#10;- Changing OptionDropdown.svelte&#10;- Adding views to View window&#10;- Fixing css">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/EngineService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/EngineService.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/EngineService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/EngineService.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/FileSystemService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/FileSystemService.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/FileSystemService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/FileSystemService.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/ProjectService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/ProjectService.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/ProjectService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/ProjectService.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/ShaderService.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/ShaderService.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/ShaderService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/ShaderService.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/AbstractService.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AbstractService.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/WindowUtil.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/WindowUtil.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/editor/Editor.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/editor/Editor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/AbstractWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/AbstractWindow.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/AbstractWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/AbstractWindow.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewPayload.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewPayload.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/shared/webview/WebViewWindow.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/lib/components/dropdown/OptionDropdown.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/lib/components/dropdown/OptionDropdown.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/static/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/webview/static/global.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/views/HeaderView.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/views/HeaderView.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/views/View.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/views/View.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/SideView.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/View.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/View.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webview/window/editor/components/view/ViewHeader.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/webview/window/editor/components/view/ViewHeader.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,15 +54,16 @@
         <option value="Node" />
         <option value="Form" />
         <option value="FormField" />
-        <option value="TypeScript File" />
         <option value="InspectorTabs" />
+        <option value="HeaderView" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="92-implement-c-inspector-methods" />
+        <entry key="$PROJECT_DIR$" value="94-multiple-webviews-support2" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -113,82 +105,82 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "C/C++ File.main.cpp.executor": "Run",
-    "CMake Application.Projection.executor": "Debug",
-    "CMake Application.projection.executor": "Debug",
-    "CMake Debug.projection.executor": "Debug",
-    "CMake Debug.projectioncmake.executor": "Debug",
-    "Catch.Engine test.executor": "Run",
-    "Catch.File-system test.executor": "Debug",
-    "Catch.JSON test.executor": "Run",
-    "Catch.Logger test.executor": "Run",
-    "Catch.Run all.executor": "Run",
-    "Catch.Serialization test.executor": "Debug",
-    "Catch.String util test.executor": "Debug",
-    "Catch.main_test.executor": "Run",
-    "Jest.Should be lazily obtained.executor": "Run",
-    "Jest.Should be the same instance (1).executor": "Run",
-    "Jest.Should be the same instance.executor": "Run",
-    "Jest.Should dump cycle.executor": "Run",
-    "Jest.Should dump data.executor": "Run",
-    "Jest.Should inject into non-static property.executor": "Run",
-    "Jest.Should not inject not @Injectable.executor": "Run",
-    "Jest.Should parse nested.executor": "Run",
-    "Jest.Should parse serializable.executor": "Run",
-    "Jest.Should parse.executor": "Run",
-    "Jest.Should prepare ID.executor": "Run",
-    "Jest.Should restore circular dependency.executor": "Run",
-    "Jest.Should restore data.executor": "Run",
-    "Jest.Should serialize nested.executor": "Run",
-    "Jest.Should serialize.executor": "Run",
-    "Jest.Should stringify Serializable.executor": "Run",
-    "Jest.Should stringify.executor": "Run",
-    "Jest.Should trigger global subscriber.executor": "Run",
-    "Jest.Should trigger subscriber with same value.executor": "Run",
-    "Jest.Should unsubscribe.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "Shell Script.copy-files.executor": "Run",
-    "cf.advertisement.text.has.clang-format": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "94-multiple-webviews-support2",
-    "js.last.introduce.type": "CONST",
-    "last_opened_file_path": "C:/Users/russi/WebstormProjects/projection-engine-2/src/services",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs.jest.jest_package": "C:/Users/russi/WebstormProjects/projection-engine-2/webview/node_modules/jest",
-    "nodejs_package_manager_path": "npm",
-    "npm.bdev.executor": "Run",
-    "npm.build.executor": "Run",
-    "npm.dev-build.executor": "Run",
-    "npm.sdev.executor": "Run",
-    "npm.test.executor": "Run",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "CMakeSettings",
-    "structure.view.defaults.are.configured": "true",
-    "ts.external.directory.path": "C:\\Users\\russi\\WebstormProjects\\projection-engine-2\\webview\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;C/C++ File.main.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;CMake Application.Projection.executor&quot;: &quot;Run&quot;,
+    &quot;CMake Application.projection.executor&quot;: &quot;Debug&quot;,
+    &quot;CMake Debug.projection.executor&quot;: &quot;Debug&quot;,
+    &quot;CMake Debug.projectioncmake.executor&quot;: &quot;Debug&quot;,
+    &quot;Catch.Engine test.executor&quot;: &quot;Run&quot;,
+    &quot;Catch.File-system test.executor&quot;: &quot;Debug&quot;,
+    &quot;Catch.JSON test.executor&quot;: &quot;Run&quot;,
+    &quot;Catch.Logger test.executor&quot;: &quot;Run&quot;,
+    &quot;Catch.Run all.executor&quot;: &quot;Run&quot;,
+    &quot;Catch.Serialization test.executor&quot;: &quot;Debug&quot;,
+    &quot;Catch.String util test.executor&quot;: &quot;Debug&quot;,
+    &quot;Catch.main_test.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should be lazily obtained.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should be the same instance (1).executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should be the same instance.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should dump cycle.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should dump data.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should inject into non-static property.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should not inject not @Injectable.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should parse nested.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should parse serializable.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should parse.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should prepare ID.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should restore circular dependency.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should restore data.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should serialize nested.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should serialize.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should stringify Serializable.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should stringify.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should trigger global subscriber.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should trigger subscriber with same value.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Should unsubscribe.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;Shell Script.copy-files.executor&quot;: &quot;Run&quot;,
+    &quot;cf.advertisement.text.has.clang-format&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;97-new-view-architecture&quot;,
+    &quot;js.last.introduce.type&quot;: &quot;CONST&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/russi/WebstormProjects/projection-engine-2/webview/static&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs.jest.jest_package&quot;: &quot;C:/Users/russi/WebstormProjects/projection-engine-2/webview/node_modules/jest&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.bdev.executor&quot;: &quot;Run&quot;,
+    &quot;npm.build.executor&quot;: &quot;Run&quot;,
+    &quot;npm.dev-build.executor&quot;: &quot;Run&quot;,
+    &quot;npm.sdev.executor&quot;: &quot;Run&quot;,
+    &quot;npm.test.executor&quot;: &quot;Run&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;CMakeSettings&quot;,
+    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\russi\\WebstormProjects\\projection-engine-2\\webview\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "Glsl"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;Glsl&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\static" />
+      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\views" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\services" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\test\engine" />
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\engine\services\world\components" />
-      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\window\editor\views\inspector\forms" />
-      <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\webview\window\editor\views\inspector\component-props" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\russi\WebstormProjects\projection-engine-2\src\ui" />
@@ -388,47 +380,13 @@
       <workItem from="1708272822605" duration="7145000" />
       <workItem from="1708280043204" duration="2596000" />
       <workItem from="1708291525592" duration="908000" />
-      <workItem from="1708292451497" duration="2354000" />
-    </task>
-    <task id="LOCAL-00047" summary="[STD-33] Engine refactoring: systems&#10;- Moving to service things related to systems&#10;- Organizing engine&#10;- Optimizing imports">
-      <option name="closed" value="true" />
-      <created>1705446355163</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1705446355163</updated>
-    </task>
-    <task id="LOCAL-00048" summary="[STD-33] Engine refactoring: systems&#10;- Removing console.log&#10;- changing singletons map to reference class name instead of class type">
-      <option name="closed" value="true" />
-      <created>1705446534345</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1705446534345</updated>
-    </task>
-    <task id="LOCAL-00049" summary="[STD-53] Camera refactoring&#10;- Removing camera notification decoder">
-      <option name="closed" value="true" />
-      <created>1705746153785</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1705746153786</updated>
-    </task>
-    <task id="LOCAL-00050" summary="[STD-53] Camera refactoring&#10;- Finishing camera refactoring&#10;- Refactoring engine files">
-      <option name="closed" value="true" />
-      <created>1705752337014</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1705752337014</updated>
-    </task>
-    <task id="LOCAL-00051" summary="[STD-56] Creating serialization architecture">
-      <option name="closed" value="true" />
-      <created>1705780016504</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1705780016504</updated>
+      <workItem from="1708292451497" duration="2733000" />
+      <workItem from="1708460711379" duration="2689000" />
+      <workItem from="1708643034190" duration="3741000" />
+      <workItem from="1708726852071" duration="458000" />
+      <workItem from="1708796287632" duration="1064000" />
+      <workItem from="1708863294161" duration="4545000" />
+      <workItem from="1708870279526" duration="2153000" />
     </task>
     <task id="LOCAL-00052" summary="[STD-56] Improving serialization architecture&#10;- Added support for circular dependencies&#10;- Improved tests for serialization">
       <option name="closed" value="true" />
@@ -782,7 +740,47 @@
       <option name="project" value="LOCAL" />
       <updated>1708278596852</updated>
     </task>
-    <option name="localTasksCounter" value="96" />
+    <task id="LOCAL-00096" summary="[STD-94] Multi-webview support&#10;- Finishing implementation">
+      <option name="closed" value="true" />
+      <created>1708294949404</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1708294949404</updated>
+    </task>
+    <task id="LOCAL-00097" summary="[STD-97] New view architecture&#10;- Adding new web-views&#10;- Creating new HTML entry points">
+      <option name="closed" value="true" />
+      <created>1708469572874</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1708469572875</updated>
+    </task>
+    <task id="LOCAL-00098" summary="[STD-97] New view architecture&#10;- Implementing view sizing&#10;- Adding event for view metadata">
+      <option name="closed" value="true" />
+      <created>1708646557509</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1708646557509</updated>
+    </task>
+    <task id="LOCAL-00099" summary="[STD-97] New view architecture&#10;- Implementing view sizing">
+      <option name="closed" value="true" />
+      <created>1708797349462</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1708797349462</updated>
+    </task>
+    <task id="LOCAL-00100" summary="[STD-97] New view architecture&#10;- Changing OptionDropdown.svelte&#10;- Adding views to View window&#10;- Fixing css">
+      <option name="closed" value="true" />
+      <created>1708867870819</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1708867870819</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -806,11 +804,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[STD-80] C++ engine static resources&#10;- Refactoring files&#10;- Initializing static meshes" />
-    <MESSAGE value="[STD-80] C++ engine static resources&#10;- Using service for registration of resources" />
-    <MESSAGE value="[STD-80] C++ engine static resources&#10;- Primitive util" />
-    <MESSAGE value="[STD-80] C++ engine static resources&#10;- Fixing FBO&#10;- Adding editor tools shaders&#10;- Fixing static shader initialization" />
-    <MESSAGE value="[STD-80] C++ engine static resources&#10;-Fixing  shader compilation&#10;- Changing opengl version to 330 core" />
     <MESSAGE value="[STD-81] C++ engine: camera system" />
     <MESSAGE value="[STD-84] C++ engine: components" />
     <MESSAGE value="[STD-86] C++ engine ui: hierarchy&#10;- Adding engine state&#10;- Removing pointers from World&#10;- Adding new fields to Entity" />
@@ -831,7 +824,12 @@
     <MESSAGE value="[STD-92] Inspector methods and serialization&#10;- Fixing form rendering&#10;- Fixing serialization of components" />
     <MESSAGE value="[STD-92] Inspector methods and serialization&#10;- Fixing matrix/vector serialization&#10;- Fixing logger &#10;- Fixing WindowRepository initialization&#10;- Adding fields to RuntimeState&#10;- Reworking color picker to be simpler&#10;- Fixing component tabs&#10;- Fixing component update&#10;- Adding labels to forms&#10;- Improving styling of inspector fields" />
     <MESSAGE value="[STD-94] Multi-webview support&#10;- Refactoring classes&#10;- Removing old structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="[STD-94] Multi-webview support&#10;- Refactoring classes&#10;- Removing old structure" />
+    <MESSAGE value="[STD-94] Multi-webview support&#10;- Finishing implementation" />
+    <MESSAGE value="[STD-97] New view architecture&#10;- Adding new web-views&#10;- Creating new HTML entry points" />
+    <MESSAGE value="[STD-97] New view architecture&#10;- Implementing view sizing&#10;- Adding event for view metadata" />
+    <MESSAGE value="[STD-97] New view architecture&#10;- Implementing view sizing" />
+    <MESSAGE value="[STD-97] New view architecture&#10;- Changing OptionDropdown.svelte&#10;- Adding views to View window&#10;- Fixing css" />
+    <option name="LAST_COMMIT_MESSAGE" value="[STD-97] New view architecture&#10;- Changing OptionDropdown.svelte&#10;- Adding views to View window&#10;- Fixing css" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

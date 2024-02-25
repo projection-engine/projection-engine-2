@@ -26,17 +26,28 @@ namespace PEngine {
 
     class WebViewWindow : public ILoggable {
     private:
+        std::string id;
         std::string pathToFile;
         wil::com_ptr<ICoreWebView2Controller> webviewController = nullptr;
         wil::com_ptr<ICoreWebView2> webview = nullptr;
         AbstractWindow *window = nullptr;
         std::unordered_map<std::string, ListenerDTO *> listeners;
         std::function<void(WebViewWindow *webView)> callback = nullptr;
-        void prepareView(ICoreWebView2Controller *controller);
+
+        void configureWebView();
+
+        void configureMessageListener();
+
+        void configureHTML();
 
     public:
 
-        explicit WebViewWindow(AbstractWindow *window, const std::string &path, std::function<void(WebViewWindow *webView)> callback);
+        explicit WebViewWindow(
+                const std::string &id,
+                AbstractWindow *window,
+                const std::string &path,
+                std::function<void(WebViewWindow *webView)> callback
+        );
 
         void addMessageListener(const std::string &listenerId, void (*action)(WebViewPayload &));
 
@@ -46,9 +57,11 @@ namespace PEngine {
 
         void postMessage(const std::string &message, const std::string &id);
 
-        void resize();
-
         void init();
+
+        void setBounds(RECT bounds);
+
+        const std::string &getId();
     };
 
 }
